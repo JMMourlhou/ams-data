@@ -1,8 +1,16 @@
+dependencies: []
+services:
+- source: /runtime/services/tables.yml
+  client_config: {}
+  server_config: {}
+package_name: AMS_Inscription
 allow_embedding: false
-package_name: M3_App_1
-name: M3 App 1
+name: AMS_Inscription
+runtime_options:
+  version: 2
+  client_version: '3'
+  server_version: python3-full
+  server_spec: {base: python310-standard}
+metadata: {title: Inscription Stage, logo_img: 'asset:Logo F S small_transparent.png'}
 startup_form: Form1
 renamed: true
-runtime_options: {version: 2, client_version: '3', server_version: python3-full, server_spec: null}
-dependencies: []
-services: []
