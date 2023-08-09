@@ -1,4 +1,7 @@
-dependencies: []
+dependencies:
+- dep_id: dep_dcvll6vcje54tm
+  version: {dev: false}
+  resolution_hints: {app_id: EQQMHT4ZPNVIAT2X, name: 'Sign_In ', package_name: fr_custom_signup}
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
