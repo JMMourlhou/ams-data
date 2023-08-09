@@ -7,7 +7,7 @@ import anvil.users
 
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
-from fr_custom_signup.Form1 import Form1
+from 
 
 class Main(MainTemplate):
     def __init__(self, **properties):

@@ -1,7 +1,7 @@
 dependencies:
-- dep_id: dep_jucvo18ojw6mb
+- dep_id: dep_ld3272iojm8u
   version: {dev: false}
-  resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: fr_custom_signup}
+  resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: signup_for_AMS_Data}
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
