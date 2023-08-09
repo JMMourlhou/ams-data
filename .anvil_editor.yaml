@@ -1,9 +1,10 @@
 unique_ids:
   forms:
-    Form1: UXXFIM5TE6HLHAVFCCK3P6SJOKAZUKLA
+    Main: UXXFIM5TE6HLHAVFCCK3P6SJOKAZUKLA
   modules: {}
   server_modules: {}
   assets:
+    Fond bleu1.jpg: '169159358991969422571765.827'
     Logo F S small_transparent.png: '1691589860898236301758950.72702'
     Services Web_large.png: '1691589794909987284454426.3625'
     standard-page.html: W2YI4TO57DLK26JJC55QQPVTVFGSGYDA

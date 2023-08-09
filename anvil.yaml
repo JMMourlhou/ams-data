@@ -10,16 +10,17 @@ services:
   client_config: {allow_signup: false, enable_automatically: true, use_email: true,
     confirm_email: true}
   server_config: {user_table: users}
-package_name: AMS_Inscription
+startup: {type: form, module: Main}
+package_name: AMS_Data
 allow_embedding: false
-name: AMS_Inscription
+name: AMS_Data
 runtime_options:
   version: 2
   client_version: '3'
   server_version: python3-full
   server_spec: {base: python310-standard}
 metadata: {title: Inscription Stage, logo_img: 'asset:Logo F S small_transparent.png'}
-startup_form: Form1
+startup_form: null
 db_schema:
   users:
     client: none

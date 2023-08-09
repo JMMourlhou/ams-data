@@ -1042,3 +1042,58 @@ div.plot-container.plotly svg.main-svg {
   box-shadow: 0px 0px 100px 100px %color:Surface Variant%;
 }
 
+
+/* Shadow values taken from 
+https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-material-design-elevations
+*/
+
+/*
+.anvil-role-home-header {
+/*  background-image: linear-gradient(180deg, %color:Primary 500% 0%, #5396BC00 150%), url(_/theme/home-img.jpg);  */
+/*
+  background-image: linear-gradient(90deg, %color:Primary 500% 0%, #5396BC00 150%), url(_/theme/home-img.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 40em;
+}
+*/
+
+.anvil-role-start-header {
+  background-image: linear-gradient(10deg, %color:Primary 500% 0%, #5396BC00 100%), url(_/theme/start-img.jpg);
+/*   background-size: 100% auto; */
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 40em;
+}
+
+.anvil-role-top-border {
+  border-top: 2px solid %color:Primary 500%;
+}
+
+.anvil-role-rounded-border {
+  border: 2px solid %color:Primary 500% !important;
+  border-radius: 10px !important;
+}
+
+
+
+/* test jm  */
+
+@media screen and (max-width: 1000px) { /* only on phones*/
+   .anvil-role-home-header {
+  background-image: linear-gradient(80deg, %color:Primary 500% 0%, #5396BC00 120%), url(_/theme/home-img0.jpg);
+  background-size: 165% auto; 
+  min-height: 10em;
+}  
+}
+
+
+@media screen and (min-width: 1000px) { /* Tablets and above*/
+  .anvil-role-home-header {
+  background-image: linear-gradient(90deg, %color:Primary 500% 0%, #5396BC00 150%), url(_/theme/home-img0.jpg);
+/*   background-size: 100% auto; */
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 40em;
+}  
+}
