@@ -16,7 +16,7 @@ services:
 - source: /runtime/services/anvil/email.yml
   client_config: {}
   server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmarc@jmm-formation-et-services.fr,
-    smtp_encryption: '', test_mode: false}
+    smtp_encryption: '', test_mode: false, smtp_password: C8Pnky/MNPTKRob7YPc+cO7k/JYjAqYXA6cLFaEPnlbufJBHR+6tlGHy4nI3cEZau1tbptjUd7HxO53ATC0OiaG2Pzp3qRRU/wDEa1YQIxshPGrdy78aK64zE9liHmLYwKuIG347zJ9wRytm6E0n6UjEpuWON6ex08eKwQzRBTgu8uE4cafsGA4r5y+d5inw6Mg=}
 startup: {type: module, module: Module1}
 package_name: AMS_Data
 allow_embedding: false
