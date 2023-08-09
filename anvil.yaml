@@ -3,6 +3,10 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {}
+- source: /runtime/services/anvil/users.yml
+  client_config: {allow_signup: false, enable_automatically: true, use_email: true,
+    confirm_email: true}
+  server_config: {user_table: users}
 package_name: AMS_Inscription
 allow_embedding: false
 name: AMS_Inscription
@@ -13,4 +17,28 @@ runtime_options:
   server_spec: {base: python310-standard}
 metadata: {title: Inscription Stage, logo_img: 'asset:Logo F S small_transparent.png'}
 startup_form: Form1
+db_schema:
+  users:
+    client: none
+    server: full
+    columns:
+    - name: email
+      type: string
+      admin_ui: {order: 0, width: 200}
+    - name: enabled
+      type: bool
+      admin_ui: {order: 1, width: 200}
+    - name: last_login
+      type: datetime
+      admin_ui: {order: 2, width: 200}
+    - name: password_hash
+      type: string
+      admin_ui: {order: 3, width: 200}
+    - name: n_password_failures
+      type: number
+      admin_ui: {order: 4, width: 200}
+    - name: confirmed_email
+      type: bool
+      admin_ui: {order: 5, width: 200}
+    title: Users
 renamed: true
