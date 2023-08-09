@@ -1,7 +1,7 @@
 dependencies:
-- dep_id: dep_dcvll6vcje54tm
+- dep_id: dep_jucvo18ojw6mb
   version: {dev: false}
-  resolution_hints: {app_id: EQQMHT4ZPNVIAT2X, name: 'Sign_In ', package_name: fr_custom_signup}
+  resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: fr_custom_signup}
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
@@ -10,6 +10,9 @@ services:
   client_config: {allow_signup: false, enable_automatically: true, use_email: true,
     confirm_email: true}
   server_config: {user_table: users}
+- source: /runtime/services/google.yml
+  client_config: {}
+  server_config: {enc_delegation_refresh_token: hpOFXpFvivlCtjXrhtAWx4r0B41C+gLgl7cGOjQhndVAlL+qXXey8uW2EQLRIunkYvBVpT4JxxeYiLwgUMPL9toRFzWNJBJQA0+J60ztN8XdPYr8qTHm8MxzjTwyJhA+V0e1CNA5Yy4BI0t+5mWzhbF/jJFrSPAAe59p1yZD9R1Vn4GYV3iXmsdxrO+MRZ+Oi0ePYr/0IGihj+F4UbaVwJTcg3d8+4YthD43Ycju27LD2b6hSrjb3OVRkt7o4FWbEiHR+m0tlKWriCGeUVnqPjyBl76NCtKqSGQnbE8nm88UjFBMDV/B8T3sjl//MA==}
 startup: {type: form, module: Main}
 package_name: AMS_Data
 allow_embedding: false

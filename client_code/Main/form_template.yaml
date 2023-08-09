@@ -13,7 +13,9 @@ components:
   name: navbar_links
   layout_properties: {slot: nav-right}
 - type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {role: elevated-card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: 'theme:Primary'}
   name: column_panel_1
   layout_properties: {slot: left-nav}
   components:
@@ -21,6 +23,18 @@ components:
     properties: {role: null, vertical_align: center, height: '200', tooltip: '', border: '',
       foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: small,
       source: _/theme/Logo%20F%20S%20small_transparent.png, spacing_below: small,
-      background: '', horizontal_align: center}
+      background: 'theme:On Primary Container', horizontal_align: center}
     name: image_1
     layout_properties: {grid_position: 'EQXXXV,ROFSQP'}
+  - type: Spacer
+    properties: {height: 41}
+    name: spacer_1
+    layout_properties: {grid_position: 'CCVBSX,YVIJOA'}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: Se Connecter, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_se_connecter
+    layout_properties: {grid_position: 'YDMYAU,FORCRS'}
+    event_bindings: {click: button_se_connecter_click}
