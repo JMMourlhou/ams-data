@@ -18,6 +18,8 @@ class Main(MainTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.bt_se_deconnecter.visible = False
+        self.bt_user_mail.text = "Déconnecté"
         self.nb=nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
@@ -38,7 +40,7 @@ class Main(MainTemplate):
                     calling_signing_up.calling_form1(h)
                 else:
                     alert("Ce lien n'est plus actif")
-
+        self.affiche_bt_mail()
 
     
     def button_se_connecter_click(self, **event_args):
@@ -51,4 +53,21 @@ class Main(MainTemplate):
         self.content_panel.clear()
         self.content_panel.add_component(Form1(), full_width_row=True)
 
+    def affiche_bt_mail(self, **event_args):
+        user=anvil.users.get_user()
+        if user:
+             self.bt_user_mail.text = user['email']
+             self.bt_se_connecter.visible = False
+             self.bt_se_deconnecter.visible = True
+        else:
+             self.bt_user_mail.text = "Déconnecté"
+             self.bt_se_deconnecter.visible = False 
+             self.bt_se_connecter.visible = True
 
+    def bt_se_deconnecter_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        anvil.users.logout()       #logging out the user
+        user= None
+        self.affiche_bt_mail()
+
+        

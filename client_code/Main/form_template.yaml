@@ -1,7 +1,8 @@
 is_package: true
 container:
   type: HtmlTemplate
-  properties: {html: '@theme:standard-page.html'}
+  properties: {tooltip: '', background: '', foreground: 'theme:On Primary Container',
+    border: '', visible: true, role: null, html: '@theme:standard-page.html'}
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
@@ -12,6 +13,14 @@ components:
   properties: {}
   name: navbar_links
   layout_properties: {slot: nav-right}
+  components:
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary Container', visible: true, text: '', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: bt_user_mail
+    layout_properties: {}
 - type: ColumnPanel
   properties: {role: elevated-card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
@@ -35,6 +44,14 @@ components:
       foreground: 'theme:On Primary', visible: true, text: Se Connecter, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '', bold: false, underline: false, icon: ''}
-    name: button_se_connecter
+    name: bt_se_connecter
     layout_properties: {grid_position: 'YDMYAU,FORCRS'}
     event_bindings: {click: button_se_connecter_click}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: Se déconnecter, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: bt_se_deconnecter
+    layout_properties: {grid_position: 'IJKLFX,SZIZOL'}
+    event_bindings: {click: bt_se_deconnecter_click}
