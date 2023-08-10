@@ -17,8 +17,29 @@ class Main(MainTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        anvil.server.call("send_email")
-   
+        self.nb=nb
+        """ Incrémentation de nb """
+        self.nb = self.nb + 1
+
+        """ cas 2: soit ouverture de l'app """
+        """        ou retour par URL suite à SignIn ou PW reset"""
+        if self.nb == 2:   
+            h={}
+            h = anvil.get_url_hash()
+            #print(f"h ds init: {h}")
+            if len(h)!=0 :  # a URL has openned this app
+                #self.link_login.visible = True
+                #alert(h)
+                url_time_str=""
+                url_time=h["t"]
+                url_time_over=French_zone.time_over(url_time)
+                if not url_time_over: 
+                    calling_signing_up.calling_form1(h)
+                else:
+                    alert("Ce lien n'est plus actif")
+
+
+    
     def button_se_connecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""

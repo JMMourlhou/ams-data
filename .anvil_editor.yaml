@@ -2,9 +2,10 @@ unique_ids:
   forms:
     Main: UXXFIM5TE6HLHAVFCCK3P6SJOKAZUKLA
   modules:
+    French_zone: '1691671501083357021825904.42487'
     Module1: '1691594660337479770203140.08344'
-  server_modules:
-    ServerModule1: '1691665740979556741400046.2117'
+    calling_signing_up: '1691671896707767216648662.1632'
+  server_modules: {}
   assets:
     Fond bleu1.jpg: '169159358991969422571765.827'
     Logo F S small_transparent.png: '1691589860898236301758950.72702'
