@@ -1,8 +1,3 @@
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
 import anvil.server
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
@@ -23,5 +18,7 @@ def starting_app(x=1):
     open_form('Main',x) 
     
 # quand ouverture normale de l'app ou par URL
+
+# ds main app 2+1 donc pas de retour ds Sign In
+
 starting_app(1)
-#alert(x,title="ouverture normale ou par URL module1 Fitness'd")

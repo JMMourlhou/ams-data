@@ -6,9 +6,7 @@ import anvil.tables as tables
 from anvil import *  #pour les alertes
 import anvil.tz
 from datetime import datetime
-#import fr_custom_signup
-#from fr_custom_signup import var_globales
-from fr_custom_signup.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
+from sign_up_for_AMS_Data.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
 
 
 #Get the time now, local time.
