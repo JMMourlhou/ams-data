@@ -2,9 +2,6 @@ dependencies:
 - dep_id: dep_d0gxjeewfzhpm
   version: {dev: false}
   resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_up_for_AMS_Data}
-- dep_id: dep_0301qyi6kp6a9
-  version: {dev: false}
-  resolution_hints: {app_id: EQQMHT4ZPNVIAT2X, name: Sign_In for Fitness'd, package_name: fr_custom_signup}
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
@@ -18,7 +15,7 @@ services:
   server_config: {enc_delegation_refresh_token: hpOFXpFvivlCtjXrhtAWx4r0B41C+gLgl7cGOjQhndVAlL+qXXey8uW2EQLRIunkYvBVpT4JxxeYiLwgUMPL9toRFzWNJBJQA0+J60ztN8XdPYr8qTHm8MxzjTwyJhA+V0e1CNA5Yy4BI0t+5mWzhbF/jJFrSPAAe59p1yZD9R1Vn4GYV3iXmsdxrO+MRZ+Oi0ePYr/0IGihj+F4UbaVwJTcg3d8+4YthD43Ycju27LD2b6hSrjb3OVRkt7o4FWbEiHR+m0tlKWriCGeUVnqPjyBl76NCtKqSGQnbE8nm88UjFBMDV/B8T3sjl//MA==}
 - source: /runtime/services/anvil/email.yml
   client_config: {}
-  server_config: {custom_smtp: false, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com,
+  server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com,
     smtp_encryption: '', test_mode: false, smtp_password: Q8PCL4BquOXDAniWLFrmkkKbLLp0o8yAWZHfuqOPqtG5ADMWwiU7Lbi+BEQycLyPCoep7/f2fSYBzaEqptVcnjDzitidY3oC31xsXhbG25WSkI2XbFj7ENP9Ad+Zd+7lpYUcEd5wVncPXFgOLLa5oiucNR74sjfLp062JuE0YFUH9Tmdpmc2F1+0fNwKCYxpWA==}
 startup: {type: module, module: Module1}
 package_name: AMS_Data

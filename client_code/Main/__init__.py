@@ -26,7 +26,7 @@ class Main(MainTemplate):
         #import sign_up_for_AMS_Data
         #from sign_up_for_AMS_Data.Form1 import Form1
         import fr_custom_signup
-        from        
+        from fr_custom_signup.Form1 import Form1   
         self.content_panel.clear()
         self.content_panel.add_component(Form1(), full_width_row=True)
 
