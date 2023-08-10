@@ -1,7 +1,7 @@
 dependencies:
-- dep_id: dep_ld3272iojm8u
+- dep_id: dep_d0gxjeewfzhpm
   version: {dev: false}
-  resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: signup_for_AMS_Data}
+  resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_up_for_AMS_Data}
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
@@ -54,15 +54,15 @@ db_schema:
     - name: first_name
       admin_ui: {order: 6, width: 200}
       type: string
-    - name: sign_up
-      admin_ui: {order: 7, width: 200}
-      type: datetime
     - name: api_key
       admin_ui: {order: 8, width: 200}
       type: string
+    - name: signed_up
+      admin_ui: {width: 200}
+      type: datetime
     title: Users
   files:
-    client: none
+    client: search
     server: full
     columns:
     - name: path
