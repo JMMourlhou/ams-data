@@ -75,4 +75,84 @@ db_schema:
       admin_ui: {order: 2, width: 200}
       type: string
     title: Files
+  codes_stages:
+    client: none
+    server: full
+    columns:
+    - name: code
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: intitulé
+      admin_ui: {order: 1, width: 200}
+      type: string
+    title: Codes_stages
+  cpt_stages:
+    client: none
+    server: full
+    columns:
+    - name: compteur
+      admin_ui: {order: 0, width: 200}
+      type: number
+    title: Cpt_stages
+  stages:
+    client: none
+    server: full
+    columns:
+    - name: numero
+      admin_ui: {order: 1, width: 200}
+      type: number
+    - name: date_debut
+      admin_ui: {order: 2, width: 200}
+      type: date
+    - name: date_fin
+      admin_ui: {order: 3, width: 200}
+      type: date
+    - name: nb_stagiaires_deb
+      admin_ui: {order: 5, width: 200}
+      type: number
+    - name: type
+      admin_ui: {width: 200}
+      type: link_single
+      target: codes_stages
+    - name: nb_stagiaires_fin
+      admin_ui: {order: 6, width: 200}
+      type: number
+    - name: nb_stagiaires_diplomes
+      admin_ui: {order: 7, width: 200}
+      type: number
+    - name: Column7
+      admin_ui: {order: 7, width: 200}
+      type: link_single
+      target: lieux
+    title: Stages
+  lieux:
+    client: none
+    server: full
+    columns:
+    - name: lieu
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: adresse
+      admin_ui: {order: 1, width: 200}
+      type: string
+    - name: remarques
+      admin_ui: {order: 2, width: 200}
+      type: string
+    title: Lieux
+  stagiaires_inscrits:
+    client: none
+    server: full
+    columns:
+    - name: stage
+      admin_ui: {order: 0, width: 200}
+      type: link_single
+      target: stages
+    - name: mail
+      admin_ui: {order: 1, width: 200}
+      type: link_single
+      target: users
+    - name: financt
+      admin_ui: {order: 2, width: 200}
+      type: string
+    title: Stagiaires_inscrits
 renamed: true
