@@ -4,16 +4,16 @@ import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+
 from .. import French_zone
 from .. import calling_signing_up
-
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
 #import signup_for_AMS_Data
 #from signup_for_AMS_Data.Form1 import Form1
 
 class Main(MainTemplate):
-    def __init__(self, nb=2, **properties):
+    def __init__(self, nb=1, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 

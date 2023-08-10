@@ -7,7 +7,7 @@ mais seulement d'un module !
 """ ************************************************************************"""  
 """               Calling SIGN UP app                                       """
 """ ************************************************************************"""  
-import sign_up_for_AMS_Data
+#import sign_up_for_AMS_Data
 from sign_up_for_AMS_Data.Form1 import Form1
 
 def calling_form1(h={}):
