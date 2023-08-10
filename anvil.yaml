@@ -2,6 +2,9 @@ dependencies:
 - dep_id: dep_d0gxjeewfzhpm
   version: {dev: false}
   resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_up_for_AMS_Data}
+- dep_id: dep_0301qyi6kp6a9
+  version: {dev: false}
+  resolution_hints: {app_id: EQQMHT4ZPNVIAT2X, name: Sign_In for Fitness'd, package_name: fr_custom_signup}
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
