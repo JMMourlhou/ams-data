@@ -72,16 +72,16 @@ db_schema:
     - name: ville_naissance
       admin_ui: {order: 12, width: 200}
       type: string
-    - name: lieu_naissance
+    - name: pays_naissance
       admin_ui: {order: 13, width: 200}
       type: string
-    - name: rue
+    - name: adresse_rue
       admin_ui: {order: 14, width: 200}
       type: string
-    - name: ville
+    - name: adresse_ville
       admin_ui: {order: 15, width: 200}
       type: string
-    - name: code_postal
+    - name: adresse_code_postal
       admin_ui: {order: 16, width: 200}
       type: number
     - name: tel
@@ -95,6 +95,9 @@ db_schema:
       type: string
     - name: email2
       admin_ui: {order: 20, width: 200}
+      type: string
+    - name: code_postal_naissance
+      admin_ui: {order: 21, width: 200}
       type: string
     title: Users
   files:

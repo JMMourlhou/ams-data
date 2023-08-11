@@ -1,5 +1,6 @@
 from ._anvil_designer import Menu_inscriptionTemplate
 from anvil import *
+import anvil.server
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
 import anvil.users
@@ -12,7 +13,8 @@ class Menu_inscription(Menu_inscriptionTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        self.title.text = "Bienvenue !"
+        
         # Any code you write here will run before the form opens.
 
     def button_1_click(self, **event_args):
@@ -21,8 +23,7 @@ class Menu_inscription(Menu_inscriptionTemplate):
                 
         import sign_up_for_AMS_Data
         from sign_up_for_AMS_Data.Form1 import Form1
-        self.column_panel_header.visible = False
+        #self.column_panel_header.visible = False
         self.content_panel.clear()
-       
         self.content_panel.add_component(Form1(), full_width_row=True)
 

@@ -3,27 +3,47 @@ container:
   properties: {col_widths: '{}'}
 components:
 - type: ColumnPanel
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: 'theme:Primary'}
+  name: column_panel_header
+  layout_properties:
+    col_widths: {}
+    grid_position: CZKWQK,YBFOHD
+  components:
+  - type: Image
+    properties: {role: null, vertical_align: top, height: 74, tooltip: '', border: '',
+      foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: none,
+      source: _/theme/Logo%20AMS.JPG, spacing_below: none, background: '', horizontal_align: center}
+    name: image_1
+    layout_properties: {grid_position: 'RXYYKH,ZTDIRA'}
+  - type: Spacer
+    properties: {height: 0}
+    name: spacer_2_copy
+    layout_properties: {grid_position: 'RXYYKH,DYWBSS VUFTXE,JIDYVY'}
+  - type: Spacer
+    properties: {height: 0}
+    name: spacer_4
+    layout_properties: {grid_position: 'RXYYKH,DYWBSS MHNKEA,XXFLNQ'}
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
+        Tertiary', visible: true, text: Bienvenue à AMSport !, font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: true,
+      background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+    name: title
+    layout_properties: {grid_position: 'RXYYKH,DYWBSS GNHIIR,XASXWV'}
+- type: ColumnPanel
   properties: {col_widths: '{}'}
   name: column_panel_4
-  layout_properties: {grid_position: 'ZCFAPB,KYYUAW'}
+  layout_properties: {grid_position: 'ZCFAPB,YBQJSZ'}
   components:
   - type: Spacer
-    properties: {height: 32}
-    name: spacer_5
-    layout_properties: {grid_position: 'NVNEPZ,EHLHTI'}
-  - type: Image
-    properties: {role: null, vertical_align: center, height: 132, tooltip: '', border: '',
-      foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: small,
-      source: '', spacing_below: small, background: '', horizontal_align: center}
-    name: image_photo
-    layout_properties: {grid_position: 'NVNEPZ,QBVNLE'}
-  - type: Spacer
-    properties: {height: 32}
-    name: spacer_4
-    layout_properties: {grid_position: 'NVNEPZ,ISDPEX GOFMXG,GMHYVT'}
+    properties: {height: 0}
+    name: spacer_3
+    layout_properties: {grid_position: 'KUPOYQ,MRDKZD'}
   - type: FileLoader
     properties:
-      role: null
+      role: elevated-button
       show_state: true
       align: center
       tooltip: ''
@@ -31,27 +51,77 @@ components:
       file_types: null
       enabled: true
       files: []
-      foreground: ''
+      foreground: theme:On Primary
       visible: true
-      text: Charger de l'appareil
+      text: Prenez votre photo !
       font_size: null
       font: ''
-      spacing_above: small
+      spacing_above: none
       icon_align: left
-      spacing_below: small
+      spacing_below: none
       italic: false
       file: null
-      background: ''
+      background: theme:Primary
       bold: false
       underline: false
       multiple: false
       icon: fa:upload
     name: file_loader_photo
-    layout_properties: {grid_position: 'NVNEPZ,ISDPEX GJNADK,IGAVWP'}
-- type: Spacer
-  properties: {height: 19}
-  name: spacer_3
-  layout_properties: {grid_position: 'WPWXFP,BAXWXV'}
+    layout_properties: {grid_position: 'OCRPOO,ZIAOLR VURQJZ,ALKDPA'}
+    event_bindings: {change: file_loader_photo_change}
+  - type: Image
+    properties: {role: null, vertical_align: top, height: 272, tooltip: '', border: '',
+      foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: small,
+      source: '', spacing_below: small, background: 'theme:Primary', horizontal_align: center}
+    name: image_photo
+    layout_properties: {grid_position: 'OCRPOO,ZIAOLR PAOQSS,IRRSGG'}
+  - type: TextBox
+    properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Nom,
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      font_size: 14, font: '', spacing_above: small, type: text, spacing_below: none,
+      italic: false, background: 'theme:Primary', bold: true, underline: false}
+    name: text_box_nom
+    layout_properties: {grid_position: 'OCRPOO,BNSADO NGLDDP,SSRGNC'}
+  - type: TextBox
+    properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Prénom(s),
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      font_size: null, font: '', spacing_above: none, type: text, spacing_below: small,
+      italic: false, background: 'theme:Primary', bold: true, underline: false}
+    name: text_box_prenom
+    layout_properties: {grid_position: 'OCRPOO,BNSADO JTKQWC,ZPIUKM'}
+  - type: Spacer
+    properties: {height: 29}
+    name: spacer_5
+    layout_properties: {grid_position: 'OCRPOO,BNSADO FWEZML,GYHXSB'}
+  - type: DatePicker
+    properties: {role: outlined, align: left, max_date: '', pick_time: false, tooltip: '',
+      placeholder: Date Naissance, border: '', enabled: true, foreground: 'theme:On
+        Primary', visible: true, font_size: null, font: '', spacing_above: small,
+      spacing_below: none, italic: false, date: '', min_date: '', background: 'theme:Primary',
+      bold: true, underline: false, format: '%d %m %Y"'}
+    name: date_naissance
+    layout_properties: {grid_position: 'OCRPOO,BNSADO RMUWJH,XVURWU'}
+  - type: TextBox
+    properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Ville naissance,
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
+      italic: false, background: 'theme:Primary', bold: true, underline: false}
+    name: text_box_ville_naissance
+    layout_properties: {grid_position: 'OCRPOO,BNSADO FWWRZO,AYXUXQ'}
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
+      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    name: text_box_cp_naissance
+    layout_properties: {grid_position: 'OCRPOO,BNSADO EKFCUD,RHURQU'}
+  - type: TextBox
+    properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Pays naissance,
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      font_size: null, font: '', spacing_above: none, type: text, spacing_below: small,
+      italic: false, background: 'theme:Primary', bold: true, underline: false}
+    name: text_box_lieu_naissance
+    layout_properties: {grid_position: 'OCRPOO,BNSADO ESPQYC,ECOCIS'}
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: none,
@@ -61,50 +131,10 @@ components:
     col_widths: {}
     grid_position: ZCMJQB,VMOVTH
   components:
-  - type: TextBox
-    properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Nom,
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-      background: '', bold: false, underline: false}
-    name: text_box_nom
-    layout_properties: {grid_position: 'SHUVIK,ASWAAC'}
-  - type: TextBox
-    properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Prénom(s),
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-      font: '', spacing_above: none, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: text_box_prenom
-    layout_properties: {grid_position: 'SHUVIK,DQTTZN'}
   - type: Spacer
     properties: {height: 1}
     name: spacer_1
     layout_properties: {grid_position: 'JQUTFR,ZDMVXP'}
-  - type: ColumnPanel
-    properties: {col_widths: '{}'}
-    name: column_panel_2
-    layout_properties: {grid_position: 'NQOHSL,HTHGDN'}
-    components:
-    - type: TextBox
-      properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Date naissance,
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '', bold: false, underline: false}
-      name: text_box_date_naissance
-      layout_properties: {grid_position: 'SBFRDM,SJYGXL'}
-    - type: TextBox
-      properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Ville naissance,
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '', bold: false, underline: false}
-      name: text_box_ville_naissance
-      layout_properties: {grid_position: 'SBFRDM,WHPVBT'}
-    - type: TextBox
-      properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Lieu naissance,
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        font: '', spacing_above: none, type: text, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false}
-      name: text_box_lieu_naissance
-      layout_properties: {grid_position: 'SBFRDM,KFTMAK'}
   - type: Spacer
     properties: {height: 2}
     name: spacer_2
@@ -117,35 +147,36 @@ components:
     layout_properties: {grid_position: 'RHYMQR,HBWZSF'}
     components:
     - type: TextArea
-      properties: {role: outlined, align: left, height: 133.9083, tooltip: '', placeholder: Rue,
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        auto_expand: true, font: '', spacing_above: none, spacing_below: none, italic: false,
-        background: '', bold: false, underline: false}
+      properties: {role: outlined, align: left, height: 133.9083, tooltip: '', placeholder: Adresse/ Rue,
+        border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+        text: '', font_size: null, auto_expand: true, font: '', spacing_above: small,
+        spacing_below: none, italic: false, background: 'theme:Primary', bold: true,
+        underline: false}
       name: text_area_rue
       layout_properties: {grid_position: 'NLWKPP,QKHWGP'}
     - type: TextBox
       properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Ville,
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        font: '', spacing_above: small, type: text, spacing_below: none, italic: false,
-        background: '', bold: false, underline: false}
+        border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+        text: '', font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
+        italic: false, background: 'theme:Primary', bold: true, underline: false}
       name: text_box_ville
       layout_properties: {grid_position: 'NLWKPP,HJIUXO KWQGRX,YEAAYE'}
     - type: TextBox
       properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Code Postal,
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '', bold: false, underline: false}
+        border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+        text: '', font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
+        italic: false, background: 'theme:Primary', bold: true, underline: false}
       name: text_box_code_postal
       layout_properties: {grid_position: 'NLWKPP,HJIUXO BVAHHT,GJJHXI'}
     - type: TextBox
       properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Tel,
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        font: '', spacing_above: none, type: text, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false}
+        border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+        text: '', font_size: null, font: '', spacing_above: none, type: tel, spacing_below: small,
+        italic: false, background: 'theme:Primary', bold: true, underline: false}
       name: text_box_tel
       layout_properties: {grid_position: 'NLWKPP,HJIUXO HGFOCM,AIKPOV'}
 - type: ColumnPanel
-  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: false,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
     spacing_below: small, background: ''}
   name: column_panel_mail2_comments
@@ -153,16 +184,37 @@ components:
   components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: 2eme mail,
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      font_size: null, font: '', spacing_above: none, type: email, spacing_below: none,
+      italic: false, background: 'theme:Primary', bold: true, underline: false}
     name: text_box_email2
     layout_properties: {grid_position: 'ZGNCKH,ZFRPTW'}
   - type: TextArea
     properties: {role: null, align: left, height: '', tooltip: '', placeholder: Commentaires,
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: none,
+      italic: false, background: 'theme:Primary', bold: true, underline: false}
     name: text_area_commentaires
     layout_properties: {grid_position: 'DJXAYC,NLJVZN'}
+- type: ColumnPanel
+  properties: {col_widths: '{}'}
+  name: column_panel_2
+  layout_properties: {grid_position: 'RLRBJD,FHRZOY'}
+  components:
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: Valider, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: button_validation
+    layout_properties: {grid_position: 'EJAXQC,ZETIZK'}
+    event_bindings: {click: button_validation_click}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: Annuler, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: button_annuler
+    layout_properties: {grid_position: 'EJAXQC,JUVZFO'}
+    event_bindings: {click: button_annuler_click}
 is_package: true
