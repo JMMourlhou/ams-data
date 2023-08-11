@@ -9,8 +9,7 @@ from .. import French_zone
 from .. import calling_signing_up
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
-#import signup_for_AMS_Data
-#from signup_for_AMS_Data.Form1 import Form1
+from ..Menu_inscription import Menu_inscription
 
 class Main(MainTemplate):
     def __init__(self, nb=1, **properties):
@@ -39,10 +38,22 @@ class Main(MainTemplate):
                 if not url_time_over: 
                     calling_signing_up.calling_form1(h)
                 else:
-                    alert("Ce lien n'est plus actif")
-        self.affiche_bt_mail()
+                    alert("Ce lien n'est plus actif, renvoyer un mail")
+        
+        user=anvil.users.get_user()
+        if not user:   # no user: go to insription/connection
+            self.content_panel.clear()
+            self.content_panel.add_component(Menu_inscription(), full_width_row=True)
+        else:   #user connected but no data completed
+            if user["prenom"] == None :
+                alert("menu infos de base")
+                self.content_panel.clear()
+                #self.content_panel.add_component(Menu_inscription(), full_width_row=True)
+        # handling buttons display        
+        self.display_bt_mail()
+        self.display_admin_or_other_buttons()
 
-    
+    """ *********************************************************"""
     def button_se_connecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""
@@ -53,7 +64,7 @@ class Main(MainTemplate):
         self.content_panel.clear()
         self.content_panel.add_component(Form1(), full_width_row=True)
 
-    def affiche_bt_mail(self, **event_args):
+    def display_bt_mail(self, **event_args):
         user=anvil.users.get_user()
         if user:
              self.bt_user_mail.text = user['email']
@@ -68,6 +79,19 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         anvil.users.logout()       #logging out the user
         user= None
-        self.affiche_bt_mail()
+        self.display_bt_mail()
 
-        
+    def display_admin_or_other_buttons(self, **event_args):
+        user=anvil.users.get_user()
+        if user:
+            if user["admin"] == True:  # Administrator
+                self.column_panel_admin.visible = True
+                self.column_panel_others.visible = False
+            else:                      # no admin
+                self.column_panel_admin.visible = False
+                self.column_panel_others.visible = True
+        else:                          # deconnected
+            self.column_panel_admin.visible = False
+            self.column_panel_others.visible = False
+           
+            

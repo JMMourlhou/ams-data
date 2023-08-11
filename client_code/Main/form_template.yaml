@@ -5,7 +5,9 @@ container:
     border: '', visible: true, role: null, html: '@theme:standard-page.html'}
 components:
 - type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: ''}
   name: content_panel
   layout_properties: {slot: default}
   components: []
@@ -29,29 +31,65 @@ components:
   layout_properties: {slot: left-nav}
   components:
   - type: Image
-    properties: {role: null, vertical_align: center, height: '200', tooltip: '', border: '',
+    properties: {role: null, vertical_align: center, height: 84, tooltip: '', border: '',
       foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: small,
-      source: _/theme/Logo%20F%20S%20small_transparent.png, spacing_below: small,
-      background: 'theme:On Primary Container', horizontal_align: center}
-    name: image_1
-    layout_properties: {grid_position: 'EQXXXV,ROFSQP'}
+      source: _/theme/Logo%20AMS.JPG, spacing_below: small, background: '', horizontal_align: center}
+    name: image_2
+    layout_properties: {grid_position: 'CVYCAT,VVFGRC'}
   - type: Spacer
-    properties: {height: 41}
-    name: spacer_1
-    layout_properties: {grid_position: 'CCVBSX,YVIJOA'}
+    properties: {height: 83}
+    name: spacer_2
+    layout_properties: {grid_position: 'USUFJH,BGEOTV'}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary', visible: true, text: Se Connecter, font_size: null,
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Tertiary', visible: true, text: Se Connecter, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
+      background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: bt_se_connecter
-    layout_properties: {grid_position: 'YDMYAU,FORCRS'}
+    layout_properties: {grid_position: 'GLHCSK,ZPYVVE'}
     event_bindings: {click: button_se_connecter_click}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary', visible: true, text: Se déconnecter, font_size: null,
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Tertiary', visible: true, text: Se déconnecter, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
+      background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: bt_se_deconnecter
     layout_properties: {grid_position: 'IJKLFX,SZIZOL'}
     event_bindings: {click: bt_se_deconnecter_click}
+  - type: ColumnPanel
+    properties: {col_widths: '{}'}
+    name: column_panel_admin
+    layout_properties: {grid_position: 'YKBFYO,PRPYYJ'}
+    components:
+    - type: Button
+      properties: {role: elevated-button, align: center, tooltip: '', border: '',
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: admin,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
+      name: button_admin
+      layout_properties: {grid_position: 'MWRKSA,XOWXMQ'}
+  - type: ColumnPanel
+    properties: {col_widths: '{}'}
+    name: column_panel_others
+    layout_properties: {grid_position: 'VYOYXK,KPECFZ'}
+    components:
+    - type: Button
+      properties: {role: elevated-button, align: center, tooltip: '', border: '',
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: others,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
+      name: button_1
+      layout_properties: {grid_position: 'BHTVRW,POEHDB'}
+  - type: Spacer
+    properties: {height: 279.30274963378906}
+    name: spacer_1
+    layout_properties: {grid_position: 'TVLGPZ,ZESTCK'}
+  - type: Image
+    properties: {role: null, vertical_align: center, height: 139, tooltip: '', border: '',
+      foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: small,
+      source: _/theme/Logo%20F%20S%20small_transparent.png, spacing_below: small,
+      background: '#33a1b8', horizontal_align: center}
+    name: image_1
+    layout_properties: {grid_position: 'RYRAEE,ZHGKFU'}
