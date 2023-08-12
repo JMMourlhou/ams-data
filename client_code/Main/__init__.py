@@ -52,7 +52,6 @@ class Main(MainTemplate):
         else:   #user connected but no data completed
             if nb != 99: # retour d'annulation en saisie de la fiche de renseignements de base
                 if user["prenom"] == None :
-                    print("avt d'ouvrir la saisie", nb)
                     self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
                 
         

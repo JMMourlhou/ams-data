@@ -26,6 +26,9 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_pays_naissance.text =   user["pays_naissance"]
             if user["pays_naissance"] == None :
                 self.text_box_pays_naissance.text = "France"
+            self.text_area_rue.text =             user["adresse_rue"]
+            self.text_box_ville.text =            user["adresse_ville"]
+            self.text_box_code_postal.text =      user["adresse_code_postal"]
         else:
             self.content_panel.clear()
             self.content_panel.add_component(Main(), full_width_row=True)
@@ -44,8 +47,10 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                   self.text_box_ville_naissance.text,
                                                   self.text_box_cp_naissance.text,
                                                   self.date_naissance.date,
-                                                  self.text_box_pays_naissance.text
-                                                 
+                                                  self.text_box_pays_naissance.text,
+                                                  self.text_area_rue.text,
+                                                  self.text_box_ville.text,
+                                                  self.text_box_code_postal.text
                                                  )
         if result == True :
             alert("Renseignements enregistés")

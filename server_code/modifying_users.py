@@ -15,7 +15,10 @@ def modify_users(user_to_be_modified,
                      ville_naissance,
                      cp_naissance,
                      date_naissance,
-                     pays_naissance   ):
+                     pays_naissance,
+                     rue,
+                     ville,
+                     cp ):
     # finding the user's row 
     row=anvil.users.get_user(user_to_be_modified)
     
@@ -29,11 +32,10 @@ def modify_users(user_to_be_modified,
                    ville_naissance = ville_naissance,
                    code_postal_naissance = cp_naissance,
                    date_naissance = date_naissance,
-                   pays_naissance = pays_naissance
+                   pays_naissance = pays_naissance,
+                   adresse_rue = rue,
+                   adresse_ville = ville,
+                   adresse_code_postal= cp
 
-
-
-
-                   
-                             )
+                            )
         return True

@@ -81,9 +81,6 @@ db_schema:
     - name: adresse_ville
       admin_ui: {order: 15, width: 200}
       type: string
-    - name: adresse_code_postal
-      admin_ui: {order: 16, width: 200}
-      type: number
     - name: tel
       admin_ui: {order: 17, width: 200}
       type: string
@@ -99,6 +96,12 @@ db_schema:
     - name: code_postal_naissance
       admin_ui: {order: 21, width: 200}
       type: string
+    - name: adresse_code_postal
+      admin_ui: {order: 21, width: 200}
+      type: string
+    - name: accept_data
+      admin_ui: {order: 22, width: 200}
+      type: bool
     title: Users
   files:
     client: search
