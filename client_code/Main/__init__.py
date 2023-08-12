@@ -83,6 +83,7 @@ class Main(MainTemplate):
 
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
+        self.content_panel.clear()
         anvil.users.logout()       #logging out the user
         user= None
         self.display_bt_mail()

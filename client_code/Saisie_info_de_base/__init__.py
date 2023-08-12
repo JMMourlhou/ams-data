@@ -16,10 +16,16 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         self.init_components(**properties)
         self.title.text = "Fiche de renseignements"
         user=anvil.users.get_user()
-        if user:
-            self.text_box_nom.text = user["nom"]
-            self.text_box_prenom.text = user["prenom"]
-            self.text_area_rue.text = user["adresse_rue"]
+        if user:              
+            self.text_box_nom.text =              user["nom"]
+            self.text_box_prenom.text =           user["prenom"]
+            self.image_photo.source =             user["photo"]
+            self.text_box_ville_naissance.text =  user["ville_naissance"]
+            self.text_box_cp_naissance.text =     user["code_postal_naissance"]
+            self.date_naissance.date =            user["date_naissance"]
+            self.text_box_pays_naissance.text =   user["pays_naissance"]
+            if user["pays_naissance"] == None :
+                self.text_box_pays_naissance.text = "France"
         else:
             self.content_panel.clear()
             self.content_panel.add_component(Main(), full_width_row=True)
@@ -33,15 +39,19 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         """This method is called when the button is clicked"""
         result = anvil.server.call("modify_users", user,
                                                   self.text_box_nom.text,
-                                                  self.text_box_prenom.text
-                                                  #self.image_photo.source
-                                                
-                                   
-                                  )
+                                                  self.text_box_prenom.text,
+                                                  self.image_photo.source,
+                                                  self.text_box_ville_naissance.text,
+                                                  self.text_box_cp_naissance.text,
+                                                  self.date_naissance.date,
+                                                  self.text_box_pays_naissance.text
+                                                 
+                                                 )
         if result == True :
-            alert("Renseignements validés")
+            alert("Renseignements enregistés")
         else :
-            alert("Renseignements non validés")
+            alert("Renseignements non enregistés !")
+        self.button_annuler_click()
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

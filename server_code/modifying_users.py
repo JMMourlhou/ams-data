@@ -11,7 +11,11 @@ import anvil.server
 def modify_users(user_to_be_modified,
                      nom,
                      prenom,
-                     ):
+                     photo,
+                     ville_naissance,
+                     cp_naissance,
+                     date_naissance,
+                     pays_naissance   ):
     # finding the user's row 
     row=anvil.users.get_user(user_to_be_modified)
     
@@ -20,6 +24,16 @@ def modify_users(user_to_be_modified,
         return False
     else:           
         row.update(nom=nom,
-                              prenom=prenom
+                   prenom=prenom,
+                   photo = photo,
+                   ville_naissance = ville_naissance,
+                   code_postal_naissance = cp_naissance,
+                   date_naissance = date_naissance,
+                   pays_naissance = pays_naissance
+
+
+
+
+                   
                              )
         return True
