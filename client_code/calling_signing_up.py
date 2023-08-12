@@ -12,10 +12,6 @@ mais seulement d'un module !
 from sign_up_for_AMS_Data.Form1 import Form1
 
 def calling_form1(h={}):
-    #component=Form1() # I create the object 
-    #form=navigation.get_form()
-    #form.load_component(component)
-    #alert(h)
-    open_form('sign_up_for_AMS_Data.Form1',h)
+   open_form('sign_up_for_AMS_Data.Form1',h)
 
 

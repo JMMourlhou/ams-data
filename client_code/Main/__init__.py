@@ -54,12 +54,14 @@ class Main(MainTemplate):
                 if user["prenom"] == None :
                     print("avt d'ouvrir la saisie", nb)
                     self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
+                
         
         # handling buttons display        
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
 
-    """ *********************************************************"""
+    """ ****************************************************************************"""
+    
     def button_se_connecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""
