@@ -31,7 +31,13 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
-        result = anvil.server.call("modify_users", user, self.text_box_nom.text, self.text_box_prenom.text)
+        result = anvil.server.call("modify_users", user,
+                                                  self.text_box_nom.text,
+                                                  self.text_box_prenom.text
+                                                  #self.image_photo.source
+                                                
+                                   
+                                  )
         if result == True :
             alert("Renseignements validés")
         else :

@@ -86,7 +86,8 @@ class Main(MainTemplate):
         anvil.users.logout()       #logging out the user
         user= None
         self.display_bt_mail()
-
+        self.display_admin_or_other_buttons()
+    
     def display_admin_or_other_buttons(self, **event_args):
         user=anvil.users.get_user()
         if user:
@@ -99,6 +100,7 @@ class Main(MainTemplate):
         else:                          # deconnected
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
+            
 
     
     def button_renseignements_click(self, **event_args):

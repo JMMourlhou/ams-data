@@ -17,8 +17,8 @@ components:
   layout_properties: {slot: nav-right}
   components:
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary Container', visible: true, text: '', font_size: null,
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+      foreground: 'theme:On Primary Container', visible: true, text: '', font_size: 12,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '', bold: false, underline: false, icon: ''}
     name: bt_user_mail
@@ -54,7 +54,7 @@ components:
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: bt_se_deconnecter
-    layout_properties: {grid_position: 'IJKLFX,SZIZOL'}
+    layout_properties: {grid_position: 'IJKLFX,DFAFSV'}
     event_bindings: {click: bt_se_deconnecter_click}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
