@@ -58,4 +58,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         from ..Main import Main
         open_form('Main',99)
 
+        import anvil.js
+        self.call_js("showSidebar")
+
 
