@@ -57,7 +57,9 @@ components:
     layout_properties: {grid_position: 'IJKLFX,DFAFSV'}
     event_bindings: {click: bt_se_deconnecter_click}
   - type: ColumnPanel
-    properties: {col_widths: '{}'}
+    properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+      spacing_below: small, background: 'theme:On Primary Container'}
     name: column_panel_admin
     layout_properties: {grid_position: 'YKBFYO,PRPYYJ'}
     components:
@@ -69,6 +71,14 @@ components:
         icon: ''}
       name: button_admin
       layout_properties: {grid_position: 'MWRKSA,XOWXMQ'}
+    - type: Button
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+        foreground: '', visible: true, text: Qr code generator, font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: ''}
+      name: button_1
+      layout_properties: {grid_position: 'RLIQPQ,OCQMXQ'}
+      event_bindings: {click: button_1_click}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_others

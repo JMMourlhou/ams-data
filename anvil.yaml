@@ -197,4 +197,21 @@ db_schema:
       admin_ui: {order: 2, width: 200}
       type: string
     title: Stagiaires_inscrits
+  qr_codes:
+    client: search
+    server: full
+    columns:
+    - name: qr_code
+      admin_ui: {order: 0, width: 200}
+      type: media
+    - name: description
+      admin_ui: {order: 1, width: 200}
+      type: string
+    - name: time
+      admin_ui: {order: 2, width: 200}
+      type: datetime
+    - name: Column3
+      admin_ui: {order: 3, width: 200}
+      type: simpleObject
+    title: Qr_codes
 renamed: true

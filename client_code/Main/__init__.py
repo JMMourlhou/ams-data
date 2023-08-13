@@ -12,6 +12,7 @@ from anvil.google.drive import app_files
 from ..Menu_inscription import Menu_inscription
 from ..Saisie_info_de_base import Saisie_info_de_base
 
+
 class Main(MainTemplate):
     def __init__(self, nb=1, **properties):
         # Set Form properties and Data Bindings.
@@ -30,7 +31,7 @@ class Main(MainTemplate):
         if self.nb == 2:   
             h={}
             h = anvil.get_url_hash()
-            #print(f"h ds init: {h}")
+            print(f"h ds init d'AMS_Data: {h}")
             if len(h)!=0 :  # a URL has openned this app
                 #self.link_login.visible = True
                 #alert(h)
@@ -111,6 +112,12 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
         self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
+
+    def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        data=None
+        anvil.server.call("qr_generator", data)
+
 
 
            
