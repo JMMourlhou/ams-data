@@ -42,8 +42,9 @@ class Main(MainTemplate):
                 else:
                     alert("Ce lien n'est plus actif, renvoyer un mail")
                     
-        if self.nb == 99: #suite à fermeture / saisie des users
+        if self.nb == 99: #suite à fermeture / saisie fiche renseignements users
             self.content_panel.clear()
+            
             
         user=anvil.users.get_user()
         if not user:   # no user: go to insription/connection
@@ -51,7 +52,8 @@ class Main(MainTemplate):
             self.content_panel.add_component(Menu_inscription(), full_width_row=True)
         else:   #user connected but no data completed
             if nb != 99: # retour d'annulation en saisie de la fiche de renseignements de base
-                if user["prenom"] == None :
+                if user["prenom"] == None :   # fiche vide  
+                    self.content_panel.clear()
                     self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
                 
         
@@ -95,7 +97,7 @@ class Main(MainTemplate):
         if user:
             if user["admin"] == True:  # Administrator
                 self.column_panel_admin.visible = True
-                self.column_panel_others.visible = False
+                self.column_panel_others.visible = True
             else:                      # no admin
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
@@ -107,7 +109,7 @@ class Main(MainTemplate):
     
     def button_renseignements_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.content_panel.clear
+        self.content_panel.clear()
         self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
 
 

@@ -14,25 +14,33 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        # Any code you write here will run before the form opens.
         self.title.text = "Fiche de renseignements"
         user=anvil.users.get_user()
-        if user:              
-            self.text_box_nom.text =              user["nom"]
-            self.text_box_prenom.text =           user["prenom"]
-            self.image_photo.source =             user["photo"]
-            self.text_box_ville_naissance.text =  user["ville_naissance"]
-            self.text_box_cp_naissance.text =     user["code_postal_naissance"]
-            self.date_naissance.date =            user["date_naissance"]
-            self.text_box_pays_naissance.text =   user["pays_naissance"]
+        if user:
+            self.text_box_mail.text =                     user['email']
+            self.text_box_nom.text =                 user["nom"]
+            self.text_box_prenom.text =              user["prenom"]
+            self.image_photo.source =                user["photo"]
+            self.text_box_ville_naissance.text =     user["ville_naissance"]
+            self.text_box_cp_naissance.text =        user["code_postal_naissance"]
+            self.date_naissance.date =               user["date_naissance"]
+            self.text_box_pays_naissance.text =      user["pays_naissance"]
             if user["pays_naissance"] == None :
                 self.text_box_pays_naissance.text = "France"
-            self.text_area_rue.text =             user["adresse_rue"]
-            self.text_box_ville.text =            user["adresse_ville"]
-            self.text_box_code_postal.text =      user["adresse_code_postal"]
+            self.text_area_rue.text =                user["adresse_rue"]
+            self.text_box_ville.text =               user["adresse_ville"]
+            self.text_box_code_postal.text =         user["adresse_code_postal"]
+            self.text_box_tel.text =                 user['tel']
+            self.text_box_email2.text =              user['email2']
+            self.check_box_accept_data_use.checked = user['accept_data']
+            self.text_area_commentaires.text =       user['commentaires']
+            if user['admin'] == True:
+               self.text_box_email2.visible = True
+               self.text_area_commentaires.visible = True
         else:
-            self.content_panel.clear()
-            self.content_panel.add_component(Main(), full_width_row=True)
-        # Any code you write here will run before the form opens.
+            self.button_annuler_click()
+       
 
     def file_loader_photo_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
@@ -50,7 +58,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                   self.text_box_pays_naissance.text,
                                                   self.text_area_rue.text,
                                                   self.text_box_ville.text,
-                                                  self.text_box_code_postal.text
+                                                  self.text_box_code_postal.text,
+                                                  self.text_box_tel.text,
+                                                  self.text_box_email2.text,
+                                                  self.check_box_accept_data_use.checked,
+                                                  self.text_area_commentaires.text
                                                  )
         if result == True :
             alert("Renseignements enregistés")
