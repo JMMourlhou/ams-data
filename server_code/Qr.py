@@ -31,6 +31,6 @@ def qr_generator(data="https://sxgqveyu3c2nj5kr.anvil.app/BBDLB54NWHHYKEE3YYGJGU
     return img
         
     # saving the image in my table 'Qr_codes'
-    app_tables.qr_codes.add_row(time= French_zone.french_zone_time(),
-                          description="essai",
-                          qr_code=img)
+    #app_tables.qr_codes.add_row(time= French_zone.french_zone_time(),
+    #                     description="essai",
+    #                      qr_code=img)
