@@ -210,8 +210,5 @@ db_schema:
     - name: time
       admin_ui: {order: 2, width: 200}
       type: datetime
-    - name: Column3
-      admin_ui: {order: 3, width: 200}
-      type: simpleObject
     title: Qr_codes
 renamed: true
