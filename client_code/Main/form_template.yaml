@@ -10,7 +10,15 @@ components:
     spacing_below: small, background: ''}
   name: content_panel
   layout_properties: {slot: default}
-  components: []
+  components:
+  - type: Image
+    properties: {}
+    name: image_qr_code
+    layout_properties: {grid_position: 'DHVXPC,TDOHMR'}
+  - type: Canvas
+    properties: {height: 100}
+    name: canvas_1
+    layout_properties: {grid_position: 'IHLGGD,BAEVYJ'}
 - type: FlowPanel
   properties: {}
   name: navbar_links

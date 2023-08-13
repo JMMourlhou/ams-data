@@ -116,8 +116,8 @@ class Main(MainTemplate):
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         data=None
-        anvil.server.call("qr_generator", data)
-
+        img=anvil.server.call("qr_generator", data)
+        self.image_qr_code.source
 
 
            

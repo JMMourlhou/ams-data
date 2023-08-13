@@ -20,11 +20,15 @@ from . import French_zone # importation du module pour le calcul du jour / heure
 
 @anvil.server.callable   
 def qr_generator(data="https://sxgqveyu3c2nj5kr.anvil.app/BBDLB54NWHHYKEE3YYGJGU4G"):
-    img1 = qrcode.make(data)
-    b=base64.b64decode(img1)
-    print(b)
-    img = Image.open(io.BytesIO(b))
-      
+    img0 = qrcode.make(data)
+    
+    print(type(img0))
+    #cp.response.headers['Content-Type'] = "image/png"
+    #buffer = Stringio.StringIO()
+    buffer = io.BytesIO()
+    img0.save(buffer, 'PNG')
+    img = buffer.getvalue()
+    return img
         
     # saving the image in my table 'Qr_codes'
     app_tables.qr_codes.add_row(time= French_zone.french_zone_time(),
