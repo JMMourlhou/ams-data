@@ -21,8 +21,8 @@ class Stage_creation(Stage_creationTemplate):
         print (list)
         self.drop_down_code_stage.items = []
         for code in list:
-            self.drop_down_code_stage.items.append(code[1])
-            print(code[1])
+            self.drop_down_code_stage.items.append(code['code'])
+            print(code['code'])
 
         # Drop down codes lieux
         list2=[]
