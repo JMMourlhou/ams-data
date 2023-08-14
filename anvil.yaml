@@ -17,7 +17,7 @@ services:
   client_config: {}
   server_config: {custom_smtp: false, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com,
     smtp_encryption: '', test_mode: false, smtp_password: Q8PCL4BquOXDAniWLFrmkkKbLLp0o8yAWZHfuqOPqtG5ADMWwiU7Lbi+BEQycLyPCoep7/f2fSYBzaEqptVcnjDzitidY3oC31xsXhbG25WSkI2XbFj7ENP9Ad+Zd+7lpYUcEd5wVncPXFgOLLa5oiucNR74sjfLp062JuE0YFUH9Tmdpmc2F1+0fNwKCYxpWA==}
-startup: {type: form, module: Main}
+startup: {type: form, module: Main2}
 package_name: AMS_Data
 allow_embedding: false
 name: AMS_Data

@@ -11,14 +11,46 @@ components:
   name: content_panel
   layout_properties: {slot: default}
   components:
-  - type: Image
-    properties: {}
-    name: image_qr_code
-    layout_properties: {grid_position: 'DHVXPC,TDOHMR'}
-  - type: Canvas
-    properties: {height: 100}
-    name: canvas_1
-    layout_properties: {grid_position: 'IHLGGD,BAEVYJ'}
+  - type: ColumnPanel
+    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+      spacing_below: small, background: 'theme:Primary'}
+    name: column_panel_header
+    layout_properties:
+      col_widths: {}
+      grid_position: MPUSDP,CPUAJZ
+    components:
+    - type: Spacer
+      properties: {height: 10}
+      name: spacer_2_copy
+      layout_properties: {grid_position: 'RXYYKH,DYWBSS VUFTXE,JIDYVY'}
+    - type: Label
+      properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
+          Tertiary', visible: true, text: Bienvenue à AMSport !, font_size: 20, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: true,
+        background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+      name: title
+      layout_properties: {grid_position: 'RXYYKH,DYWBSS GNHIIR,XASXWV'}
+    - type: Image
+      properties: {role: null, vertical_align: center, height: 87, tooltip: '', border: '',
+        foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: small,
+        source: _/theme/Logo%20AMS.JPG, spacing_below: small, background: '', horizontal_align: center}
+      name: image_1_copy
+      layout_properties: {grid_position: 'RXYYKH,FTVRSI'}
+    - type: ColumnPanel
+      properties: {col_widths: '{}'}
+      name: column_panel_others
+      layout_properties: {grid_position: 'QWDVHI,OBZPUT'}
+      components:
+      - type: Button
+        properties: {role: elevated-button, align: center, tooltip: '', border: '',
+          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Renseignements,
+          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+          icon: ''}
+        name: button_renseignements
+        layout_properties: {grid_position: 'ALZVQV,MCXOCF'}
+        event_bindings: {click: button_renseignements_click}
 - type: FlowPanel
   properties: {}
   name: navbar_links
@@ -87,20 +119,6 @@ components:
       name: button_1
       layout_properties: {grid_position: 'RLIQPQ,OCQMXQ'}
       event_bindings: {click: button_1_click}
-  - type: ColumnPanel
-    properties: {col_widths: '{}'}
-    name: column_panel_others
-    layout_properties: {grid_position: 'VYOYXK,KPECFZ'}
-    components:
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Renseignements,
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-        icon: ''}
-      name: button_renseignements
-      layout_properties: {grid_position: 'BHTVRW,POEHDB'}
-      event_bindings: {click: button_renseignements_click}
   - type: Spacer
     properties: {height: 279.30274963378906}
     name: spacer_1
