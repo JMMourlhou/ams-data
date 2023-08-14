@@ -17,7 +17,7 @@ services:
   client_config: {}
   server_config: {custom_smtp: false, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com,
     smtp_encryption: '', test_mode: false, smtp_password: Q8PCL4BquOXDAniWLFrmkkKbLLp0o8yAWZHfuqOPqtG5ADMWwiU7Lbi+BEQycLyPCoep7/f2fSYBzaEqptVcnjDzitidY3oC31xsXhbG25WSkI2XbFj7ENP9Ad+Zd+7lpYUcEd5wVncPXFgOLLa5oiucNR74sjfLp062JuE0YFUH9Tmdpmc2F1+0fNwKCYxpWA==}
-startup: {type: form, module: Main2}
+startup: {type: form, module: Main}
 package_name: AMS_Data
 allow_embedding: false
 name: AMS_Data
@@ -118,7 +118,7 @@ db_schema:
       type: string
     title: Files
   codes_stages:
-    client: none
+    client: search
     server: full
     columns:
     - name: code
@@ -129,7 +129,7 @@ db_schema:
       type: string
     title: Codes_stages
   cpt_stages:
-    client: none
+    client: search
     server: full
     columns:
     - name: compteur
@@ -137,7 +137,7 @@ db_schema:
       type: number
     title: Cpt_stages
   stages:
-    client: none
+    client: search
     server: full
     columns:
     - name: numero
@@ -166,9 +166,12 @@ db_schema:
       admin_ui: {order: 7, width: 200}
       type: link_single
       target: lieux
+    - name: commentaires
+      admin_ui: {order: 8, width: 200}
+      type: string
     title: Stages
   lieux:
-    client: none
+    client: search
     server: full
     columns:
     - name: lieu
@@ -182,7 +185,7 @@ db_schema:
       type: string
     title: Lieux
   stagiaires_inscrits:
-    client: none
+    client: full
     server: full
     columns:
     - name: stage
@@ -197,18 +200,4 @@ db_schema:
       admin_ui: {order: 2, width: 200}
       type: string
     title: Stagiaires_inscrits
-  qr_codes:
-    client: search
-    server: full
-    columns:
-    - name: qr_code
-      admin_ui: {order: 0, width: 200}
-      type: media
-    - name: description
-      admin_ui: {order: 1, width: 200}
-      type: string
-    - name: time
-      admin_ui: {order: 2, width: 200}
-      type: datetime
-    title: Qr_codes
 renamed: true

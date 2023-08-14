@@ -9,8 +9,8 @@ from .. import French_zone
 from .. import calling_signing_up
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
-from ..Menu_inscription import Menu_inscription
 from ..Saisie_info_de_base import Saisie_info_de_base
+from ..Stage_creation import Stage_creation
 
 
 class Main(MainTemplate):
@@ -50,7 +50,6 @@ class Main(MainTemplate):
         user=anvil.users.get_user()
         if not user:   # no user: go to insription/connection
             self.content_panel.clear()
-            self.content_panel.add_component(Menu_inscription(), full_width_row=True)
         else:   #user connected but no data completed
             if nb != 99: # retour d'annulation en saisie de la fiche de renseignements de base
                 if user["prenom"] == None :   # fiche vide  
@@ -63,7 +62,14 @@ class Main(MainTemplate):
         self.display_admin_or_other_buttons()
 
     """ ****************************************************************************"""
-    
+    def bt_se_deconnecter_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.content_panel.clear()
+        anvil.users.logout()       #logging out the user
+        user= None
+        self.display_bt_mail()
+        self.display_admin_or_other_buttons()
+            
     def button_se_connecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""
@@ -85,14 +91,6 @@ class Main(MainTemplate):
              self.bt_se_deconnecter.visible = False 
              self.bt_se_connecter.visible = True
 
-    def bt_se_deconnecter_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        self.content_panel.clear()
-        anvil.users.logout()       #logging out the user
-        user= None
-        self.display_bt_mail()
-        self.display_admin_or_other_buttons()
-    
     def display_admin_or_other_buttons(self, **event_args):
         user=anvil.users.get_user()
         if user:
@@ -105,20 +103,15 @@ class Main(MainTemplate):
         else:                          # deconnected
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
-            
-
     
     def button_renseignements_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
         self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
 
-    def button_1_click(self, **event_args):
+    def button_stage_click(self, **event_args):
         """This method is called when the button is clicked"""
-        data=None
-        img=anvil.server.call("qr_generator", data)
-        self.image_qr_code.source = img
-
-
+        self.content_panel.clear()
+        self.content_panel.add_component(Stage_creation(), full_width_row=True)
            
             
