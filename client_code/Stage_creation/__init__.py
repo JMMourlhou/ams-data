@@ -14,19 +14,18 @@ class Stage_creation(Stage_creationTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
+        # Numéro de stage
+        num = app_tables.cpt_stages.search()[0]
+        cpt=int(num['compteur'])+1
+        self.label_code_stage.text=cpt
         # Drop down codes stages
-        list=[]
-        list=app_tables.codes_stages.search()
-        print (list)
-        self.drop_down_code_stage.items = []
-        for code in list:
-            self.drop_down_code_stage.items.append(code['code'])
-            print(code['code'])
+        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
 
         # Drop down codes lieux
-        list2=[]
-        list2=app_tables.lieux.search()
-        self.drop_down_lieux.items = []
-        for lieu in list2:
-            self.drop_down_lieux.items.append(lieu)
+        self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
+
+    def drop_down_code_stage_change(self, **event_args):
+        """This method is called when an item is selected"""
+        row = self.drop_down_code_stage.selected_value
+        self.label_intitule.text=row['intitulé']
+

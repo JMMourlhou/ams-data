@@ -28,7 +28,7 @@ components:
   - type: DropDown
     properties:
       role: null
-      align: left
+      align: full
       tooltip: ''
       placeholder: Code stage
       border: ''
@@ -47,6 +47,7 @@ components:
       include_placeholder: true
     name: drop_down_code_stage
     layout_properties: {grid_position: 'YZUQOI,ZBDZNC'}
+    event_bindings: {change: drop_down_code_stage_change}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
         Primary', visible: true, text: Intitulé, font_size: null, font: '', spacing_above: small,
@@ -114,7 +115,7 @@ components:
     name: text_box_nb_stagiaires_fin
     layout_properties: {grid_position: 'PNQOFK,MAKWWD'}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stgiaires diplômés,
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires diplômés,
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
