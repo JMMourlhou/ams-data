@@ -322,7 +322,7 @@ color_scheme:
   - {name: Surface Variant, color: '#E7E0EC'}
   - {name: On Surface Variant, color: '#49454E'}
   - {name: Outline, color: '#79747E'}
-  - {name: On Disabled, color: 'rgba(28, 27, 31, 0.38)'}
+  - {name: On Disabled, color: '#E7E0EC'}
   - {name: Disabled Container, color: 'rgba(28, 27, 31, 0.12)'}
   - {name: Light Overlay 1, color: 'rgba(255, 255, 255, 0.08)'}
   - {name: Light Overlay 2, color: 'rgba(255, 255, 255, 0.12)'}

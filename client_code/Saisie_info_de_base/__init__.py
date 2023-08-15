@@ -17,7 +17,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         # Any code you write here will run before the form opens.
         user=anvil.users.get_user()
         if user:
-            self.text_box_mail.text =                     user['email']
+            self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"]
             self.text_box_prenom.text =              user["prenom"]
             self.image_photo.source =                user["photo"]
@@ -72,7 +72,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-        open_form('Main',99)
+        #open_form('Main',99)
+        open_form('Main')
 
         #js.call_js('showSidebar')
         

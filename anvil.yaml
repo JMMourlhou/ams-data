@@ -162,7 +162,7 @@ db_schema:
     - name: nb_stagiaires_diplomes
       admin_ui: {order: 7, width: 200}
       type: number
-    - name: Column7
+    - name: lieu
       admin_ui: {order: 7, width: 200}
       type: link_single
       target: lieux

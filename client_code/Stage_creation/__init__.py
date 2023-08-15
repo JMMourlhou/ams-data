@@ -29,3 +29,32 @@ class Stage_creation(Stage_creationTemplate):
         row = self.drop_down_code_stage.selected_value
         self.label_intitule.text=row['intitulé']
 
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form('Main')
+
+    def button_validation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        row = self.drop_down_code_stage.selected_value                      # Récupération de la ligne stage sélectionnée
+        
+        # Test si numero stage code existant
+        stage = num = app_tables.stages.search(numero=int(self.label_code_stage))
+        if stage:
+            alert("Le numéro de stage existe déjà !")
+            self.button_annuler_click()
+            
+        result = anvil.server.call("add_stage", row['code'],                # extraction du type de stga de la ligne dropdown    
+                                                self.label_code_stage,      # num du stage  de la ligne            
+                                                
+                                                 
+                                                self.text_area_commentaires.text
+                                                 )
+        if result == True :
+            alert("Renseignements enregistés")
+        else :
+            alert("Renseignements non enregistés !")
+        self.button_annuler_click()
+
+
+

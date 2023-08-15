@@ -42,20 +42,11 @@ class Main(MainTemplate):
                     calling_signing_up.calling_form1(h)
                 else:
                     alert("Ce lien n'est plus actif, renvoyer un mail")
-                    
-        if self.nb == 99: #suite à fermeture / saisie fiche renseignements users
-            self.content_panel.clear()
-            
+     
             
         user=anvil.users.get_user()
-        if not user:   # no user: go to insription/connection
+        if not user:  
             self.content_panel.clear()
-        else:   #user connected but no data completed
-            if nb != 99: # retour d'annulation en saisie de la fiche de renseignements de base
-                if user["prenom"] == None :   # fiche vide  
-                    self.content_panel.clear()
-                    self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
-                
         
         # handling buttons display        
         self.display_bt_mail()
