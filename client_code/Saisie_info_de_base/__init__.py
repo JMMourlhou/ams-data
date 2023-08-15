@@ -65,6 +65,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                  )
         if result == True :
             alert("Renseignements enregistés")
+            # sélection du stage 
+            
         else :
             alert("Renseignements non enregistés !")
         self.button_annuler_click()
@@ -76,5 +78,10 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         open_form('Main')
 
         #js.call_js('showSidebar')
+
+
+         
+            
+
         
 

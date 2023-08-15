@@ -32,6 +32,7 @@ class Stage_creation(Stage_creationTemplate):
         if row == None :
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
+            return
         self.label_intitule.text=row['intitulé']
 
     def date_picker_to_change(self, **event_args):
@@ -50,12 +51,24 @@ class Stage_creation(Stage_creationTemplate):
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
         """ Tests avant validation """     
-        self.entry_validation()
-                    
+               
         row = self.drop_down_code_stage.selected_value    # Récupération de la ligne stage sélectionnée
+        if row == None:
+            alert("Entrez le code du stage")
+            return
         row2 = self.drop_down_lieux.selected_value         # Récupération du lieu sélectionné
-        print(row2['lieu'])
-        
+        if row2 == None:
+            alert("Entrez le lieu du stage")
+            return
+            
+        if self.date_picker_to.date == None :           # dates vides ?
+            alert("Entrez la date de fin du stage")
+            return
+        if self.date_picker_from.date == None :     
+            alert("Entrez la date de début du stage")
+            return
+        self.drop_down_code_stage_change()      #test si date fin > date début
+       
         # Test si numero stage code existant
         stage=None
         stage = app_tables.stages.search(numero=int(self.label_num_stage.text))
@@ -78,26 +91,7 @@ class Stage_creation(Stage_creationTemplate):
         else :
             alert("Stage non enregisté !")
         self.button_annuler_click()
+      
 
-    
-    def entry_validation(self, **event_args):
-               
-        row = self.drop_down_code_stage.selected_value    # code stage vide ?
-        if row == None :                                
-            alert("Vous devez sélectionner un stage !")
-            self.text_area_commentaires.focus()
-            
-        if self.date_picker_to.date == None :           # dates vides ?
-            error="Choisir la date de fin de stage"
-            self.date_picker_to.focus()
-        if self.date_picker_from.date == None :     
-            error="Choisir la date de fin de stage"
-            self.date_picker_from.focus()
-        self.drop_down_code_stage_change()      #test si date fin > date début
 
-        row2 = self.drop_down_lieux.selected_value         # Récupération du lieu sélectionné
-        if row2 == None :                                
-            answer = alert("Voulez-vous entrer un lieu ?")
-            if answer == True:
-                self.date_picker_to.focus()
-        return
+
