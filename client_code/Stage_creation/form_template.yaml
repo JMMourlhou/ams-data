@@ -60,7 +60,7 @@ components:
         Primary', visible: true, text: num, font_size: null, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
       bold: false, underline: false, icon: ''}
-    name: label_code_stage
+    name: label_num_stage
     layout_properties: {grid_position: 'YZUQOI,ALWNUG'}
   - type: DatePicker
     properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',

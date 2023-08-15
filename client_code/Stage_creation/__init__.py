@@ -17,7 +17,7 @@ class Stage_creation(Stage_creationTemplate):
         # Numéro de stage
         num = app_tables.cpt_stages.search()[0]
         cpt=int(num['compteur'])+1
-        self.label_code_stage.text=cpt
+        self.label_num_stage.text=cpt
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
 
@@ -36,24 +36,30 @@ class Stage_creation(Stage_creationTemplate):
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
-        row = self.drop_down_code_stage.selected_value                      # Récupération de la ligne stage sélectionnée
-        
+        row = self.drop_down_code_stage.selected_value          # Récupération de la ligne stage sélectionnée
+        row2 = self.drop_down_lieux.selected_value
+        print(row2['lieu'])
         # Test si numero stage code existant
-        stage = num = app_tables.stages.search(numero=int(self.label_code_stage))
-        if stage:
+        stage=None
+        stage = app_tables.stages.search(numero=int(self.label_num_stage.text))
+        if len(stage)>0:
             alert("Le numéro de stage existe déjà !")
             self.button_annuler_click()
             
         result = anvil.server.call("add_stage", row['code'],                # extraction du type de stga de la ligne dropdown    
-                                                self.label_code_stage,      # num du stage  de la ligne            
-                                                
-                                                 
+                                                self.label_num_stage.text,  # num du stage  de la ligne            
+                                                row2['lieu'],
+                                                self.date_picker_from.date,
+                                                self.text_box_nb_stagiaires_deb.text,
+                                                self.date_picker_to.date,
+                                                self.text_box_nb_stagiaires_fin.text,
+                                                self.text_box_nb_stagiaires_diplom.text,
                                                 self.text_area_commentaires.text
                                                  )
         if result == True :
-            alert("Renseignements enregistés")
+            alert("Stage enregisté !")
         else :
-            alert("Renseignements non enregistés !")
+            alert("Stage non enregisté !")
         self.button_annuler_click()
 
 

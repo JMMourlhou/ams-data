@@ -20,9 +20,16 @@ def add_stage(type,
               commentaires
              ):
     numero=int(numero)
-                
-    new_row=app_tables.people.add_row(type = type,
+
+    # lecture fichier père code stages
+    code_stage = app_tables.codes_stages.get(code=type)
+    # lecture fichier père lieux
+    lieu_stage = app_tables.lieux.get(lieu=lieu)    
+                 
+    new_row=app_tables.stages.add_row(
+                              type = code_stage,
                               numero = numero,
+                              lieu = lieu_stage,
                               date_debut = date_debut,
                               nb_stagiaires_deb = nb_stagiaires_deb,
                               date_fin = date_fin,
@@ -32,9 +39,14 @@ def add_stage(type,
                              )
     print("Création du stage", new_row['type'])
     
-    stage = app_tables.stages.get(numero=new_row[numero])
-    if stage:
+                 
+    stage = app_tables.stages.search(numero=new_row['numero'])
+    if len(stage)>0:
         valid=True
+        #incrément du compteur de stages
+        num = app_tables.cpt_stages.search()[0]
+        cpt=int(num['compteur'])+1 
+        num.update(compteur=cpt)
     else:
         valid=False
-    return
+    return valid
