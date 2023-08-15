@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from datetime import datetime
 
 class Stage_creation(Stage_creationTemplate):
     def __init__(self, **properties):
@@ -61,6 +62,18 @@ class Stage_creation(Stage_creationTemplate):
         else :
             alert("Stage non enregisté !")
         self.button_annuler_click()
+
+    def date_picker_to_change(self, **event_args):
+        """This method is called when the selected date changes"""
+        date1 = datetime(self.date_picker_to.date)
+        date2 = datetime(self.date_picker_from.date)
+        if date1 < date2:
+            alert("erreur")
+            self.date_picker_from.focus()
+            
+        
+            
+
 
 
 

@@ -78,6 +78,7 @@ components:
       underline: false, format: '%d %m %Y'}
     name: date_picker_to
     layout_properties: {grid_position: 'NCHHTY,HWRLON'}
+    event_bindings: {change: date_picker_to_change}
   - type: DropDown
     properties:
       role: null

@@ -37,8 +37,7 @@ def add_stage(type,
                               nb_stagiaires_diplomes = nb_stagiaires_diplomes,
                               commentaires = commentaires
                              )
-    print("Création du stage", new_row['type'])
-    
+        
                  
     stage = app_tables.stages.search(numero=new_row['numero'])
     if len(stage)>0:
