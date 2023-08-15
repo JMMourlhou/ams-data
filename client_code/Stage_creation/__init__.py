@@ -65,8 +65,8 @@ class Stage_creation(Stage_creationTemplate):
 
     def date_picker_to_change(self, **event_args):
         """This method is called when the selected date changes"""
-        date1 = datetime(self.date_picker_to.date)
-        date2 = datetime(self.date_picker_from.date)
+        date1 = datetime.day(self.date_picker_to.date)
+        date2 = datetime.day(self.date_picker_from.date)
         if date1 < date2:
             alert("erreur")
             self.date_picker_from.focus()
