@@ -14,11 +14,23 @@ class ItemTemplate1(ItemTemplate1Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.button_1.text = self.item['type']['code']
-        self.date_picker_1.date = self.item['date_debut']
-        self.date_picker_2.date = self.item['date_fin']
+        self.button_1.text = self.item['numero']
+        self.button_2.text = self.item['type']['code']
+        self.label_1.text = self.item['date_debut']
+        #self.date_picker_2.date = self.item['date_fin']
         #self.button_3.text = self.item['date_fin'].strftime("%d %m %Y")
 
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        num_stage = self.button_1.text
+        alert("Vous entrez dans le stage",num_stage)
+
+    def button_2_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_1_click()
+
+    def link_date_debut_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        self.button_1_click()
+
+
