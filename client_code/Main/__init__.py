@@ -11,8 +11,8 @@ import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
 from ..Saisie_info_de_base import Saisie_info_de_base
 from ..Stage_creation import Stage_creation
-from ..Repeating_stage import Repeating_stage
-from ..Repeating_stage.ItemTemplate1 import ItemTemplate1
+from ..Visu_stages import Visu_stages
+from ..Visu_stages.ItemTemplate1 import ItemTemplate1
 class Main(MainTemplate):
     def __init__(self, nb=1, **properties):
         # Set Form properties and Data Bindings.
@@ -98,6 +98,7 @@ class Main(MainTemplate):
     def button_renseignements_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
+        self.button_renseignements.visible = False
         self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
 
     def button_stage_click(self, **event_args):
@@ -108,7 +109,7 @@ class Main(MainTemplate):
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
-        self.content_panel.add_component(Repeating_stage(), full_width_row=True)
+        self.content_panel.add_component(Visu_stages(), full_width_row=True)
 
            
             

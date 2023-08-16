@@ -15,16 +15,16 @@ class ItemTemplate1(ItemTemplate1Template):
 
         # Any code you write here will run before the form opens.
         self.button_1.text = self.item['numero']
-        self.button_2.text = self.item['type']['code']
-        self.label_1.text = self.item['date_debut']
-        #self.date_picker_2.date = self.item['date_fin']
-        #self.button_3.text = self.item['date_fin'].strftime("%d %m %Y")
+        self.button_2.text = self.item['type']['code']                     # link key
+        self.label_1.text = self.item['date_debut'].strftime("%d %m %Y")   # format date française avec fonction Python strftime
 
+    # J'ai mis la variable date ds un link, ce qui la rend clikable ! 
+    # et récupération par l'event:
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = self.button_1.text
-        msg = f("Inscrition {self.button_2.text})
-        alert("",self.button_2.text,num_stage)
+        msg = "Inscription au stage "+ self.button_2.text 
+        alert(msg)
 
     def button_2_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -33,5 +33,3 @@ class ItemTemplate1(ItemTemplate1Template):
     def link_date_debut_click(self, **event_args):
         """This method is called when the link is clicked"""
         self.button_1_click()
-
-

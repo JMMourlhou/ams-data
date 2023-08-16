@@ -1,4 +1,4 @@
-from ._anvil_designer import Repeating_stageTemplate
+from ._anvil_designer import Visu_stagesTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -8,10 +8,12 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class Repeating_stage(Repeating_stageTemplate):
+class Visu_stages(Visu_stagesTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        # Initilisation de la liste à afficher
+        # Je prend tous les stages, triés de la derniere date de début à la première
         self.repeating_panel_1.items = app_tables.stages.search(tables.order_by("date_debut", ascending=False))
