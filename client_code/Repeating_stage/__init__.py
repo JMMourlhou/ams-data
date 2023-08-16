@@ -1,4 +1,4 @@
-from ._anvil_designer import Repeating_stagesTemplate
+from ._anvil_designer import Repeating_stageTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -8,7 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class Repeating_stages(Repeating_stagesTemplate):
+class Repeating_stage(Repeating_stageTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
