@@ -12,8 +12,7 @@ from anvil.google.drive import app_files
 from ..Saisie_info_de_base import Saisie_info_de_base
 from ..Stage_creation import Stage_creation
 from ..Repeating_stages import Repeating_stages
-from ..Repeating_stages.ItemTemplate1 import ItemTemplate1
-
+from ..Repeating_stages.RowTemplate1 import RowTemplate1
 class Main(MainTemplate):
     def __init__(self, nb=1, **properties):
         # Set Form properties and Data Bindings.

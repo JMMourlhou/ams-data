@@ -1,51 +1,46 @@
 container:
   type: ColumnPanel
-  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
+  properties: {col_widths: '{}'}
 components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"NUCIEB":40,"UGSSAY":20}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
     spacing_below: small, background: ''}
-  name: column_panel_5
+  name: column_panel_header
   layout_properties:
     col_widths: {}
-    grid_position: GSICPZ,KFRYOD
+    grid_position: UWPKWC,WXPPBE
   components:
-  - type: ColumnPanel
-    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-      spacing_below: small, background: ''}
-    name: column_panel_1
-    layout_properties: {grid_position: 'KSFDAW,TQGJCV'}
-    components:
-    - type: Label
-      properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
-          Tertiary', visible: true, text: Sélection du stage, font_size: 16, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
-      name: label_3
-      layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
-  - type: ColumnPanel
-    properties: {col_widths: '{}'}
-    name: column_panel_2
-    layout_properties: {grid_position: 'UHHWVH,NUCIEB'}
-    components:
-    - type: TextBox
-      properties: {}
-      name: text_box_1
-      layout_properties: {grid_position: 'LWKBFI,JFFUHR'}
-    - type: TextBox
-      properties: {}
-      name: text_box_2
-      layout_properties: {grid_position: 'LWKBFI,SAAVAX'}
-  - type: TextBox
-    properties: {}
-    name: text_box_3
-    layout_properties: {grid_position: 'UHHWVH,UGSSAY'}
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
+        Tertiary', visible: true, text: Choix du stage, font_size: 16, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary',
+      bold: true, underline: false, icon: ''}
+    name: label_3
+    layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+- type: DataGrid
+  properties:
+    role: null
+    columns:
+    - {id: YQPJBG, title: Code, data_key: column_1, $$hashKey: 'object:4817', width: ''}
+    - {id: GIAMGQ, title: Du ..., data_key: column_2, $$hashKey: 'object:4818', width: '150'}
+    - {id: ROVLEC, title: Au ..., data_key: column_3, $$hashKey: 'object:4819', width: '150'}
+    auto_header: true
+    tooltip: ''
+    border: ''
+    foreground: ''
+    rows_per_page: 20
+    visible: true
+    wrap_on: never
+    show_page_controls: true
+    spacing_above: small
+    spacing_below: small
+    background: ''
+  name: data_grid_1
+  layout_properties: {grid_position: 'HJRLTQ,PMQDVY'}
+  components:
   - type: RepeatingPanel
-    properties: {item_template: Repeating_stages.ItemTemplate1}
-    name: repeating_panel_stages
-    layout_properties: {grid_position: 'PAKBHW,VISRBO'}
+    properties: {spacing_above: none, spacing_below: none, item_template: Repeating_stages.RowTemplate1}
+    name: repeating_panel_1
+    layout_properties: {}
 is_package: true
