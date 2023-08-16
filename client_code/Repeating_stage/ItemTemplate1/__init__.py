@@ -15,6 +15,10 @@ class ItemTemplate1(ItemTemplate1Template):
 
         # Any code you write here will run before the form opens.
         self.button_1.text = self.item['type']['code']
-        self.button_2.text = self.item['date_debut']
-        self.button_3.text = self.item['date_fin']
+        self.date_picker_1.date = self.item['date_debut']
+        self.date_picker_2.date = self.item['date_fin']
         #self.button_3.text = self.item['date_fin'].strftime("%d %m %Y")
+
+    def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
