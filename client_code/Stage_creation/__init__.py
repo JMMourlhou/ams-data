@@ -60,7 +60,7 @@ class Stage_creation(Stage_creationTemplate):
         if row2 == None:
             alert("Entrez le lieu du stage")
             return
-            
+
         if self.date_picker_to.date == None :           # dates vides ?
             alert("Entrez la date de fin du stage")
             return

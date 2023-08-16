@@ -29,6 +29,85 @@ runtime_options:
 metadata: {title: Inscription Stage, logo_img: 'asset:Logo F S small_transparent.png'}
 startup_form: null
 db_schema:
+  pre_requis:
+    title: Pre_Requis
+    client: search
+    server: full
+    columns:
+    - name: requis
+      admin_ui: {width: 232.166666}
+      type: string
+    - name: commentaires
+      admin_ui: {width: 200}
+      type: string
+  pre_requis_stage:
+    title: Pre_Requis_stage
+    client: search
+    server: full
+    columns:
+    - name: requis_stage
+      admin_ui: {width: 200}
+      type: link_single
+      target: codes_stages
+    - name: requis_item
+      admin_ui: {width: 200}
+      type: link_single
+      target: pre_requis
+  lieux:
+    client: search
+    server: full
+    columns:
+    - name: lieu
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: adresse
+      admin_ui: {order: 1, width: 200}
+      type: string
+    - name: remarques
+      admin_ui: {order: 2, width: 200}
+      type: string
+    title: Lieux
+  stagiaires_inscrits:
+    client: full
+    server: full
+    columns:
+    - name: stage
+      admin_ui: {order: 0, width: 200}
+      type: link_single
+      target: stages
+    - name: mail
+      admin_ui: {order: 1, width: 200}
+      type: link_single
+      target: users
+    - name: financt
+      admin_ui: {order: 2, width: 200}
+      type: string
+    title: Stagiaires_inscrits
+  files:
+    client: search
+    server: full
+    columns:
+    - name: path
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: file
+      admin_ui: {order: 1, width: 200}
+      type: media
+    - name: file_version
+      admin_ui: {order: 2, width: 200}
+      type: string
+    title: Files
+  codes_stages:
+    client: search
+    server: full
+    columns:
+    - name: code
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: intitulé
+      admin_ui: {order: 1, width: 200}
+      type: string
+    title: Codes_stages
   users:
     client: search
     server: full
@@ -103,39 +182,6 @@ db_schema:
       admin_ui: {order: 22, width: 200}
       type: bool
     title: Users
-  files:
-    client: search
-    server: full
-    columns:
-    - name: path
-      admin_ui: {order: 0, width: 200}
-      type: string
-    - name: file
-      admin_ui: {order: 1, width: 200}
-      type: media
-    - name: file_version
-      admin_ui: {order: 2, width: 200}
-      type: string
-    title: Files
-  codes_stages:
-    client: search
-    server: full
-    columns:
-    - name: code
-      admin_ui: {order: 0, width: 200}
-      type: string
-    - name: intitulé
-      admin_ui: {order: 1, width: 200}
-      type: string
-    title: Codes_stages
-  cpt_stages:
-    client: search
-    server: full
-    columns:
-    - name: compteur
-      admin_ui: {order: 0, width: 200}
-      type: number
-    title: Cpt_stages
   stages:
     client: search
     server: full
@@ -170,34 +216,12 @@ db_schema:
       admin_ui: {order: 8, width: 200}
       type: string
     title: Stages
-  lieux:
+  cpt_stages:
     client: search
     server: full
     columns:
-    - name: lieu
+    - name: compteur
       admin_ui: {order: 0, width: 200}
-      type: string
-    - name: adresse
-      admin_ui: {order: 1, width: 200}
-      type: string
-    - name: remarques
-      admin_ui: {order: 2, width: 200}
-      type: string
-    title: Lieux
-  stagiaires_inscrits:
-    client: full
-    server: full
-    columns:
-    - name: stage
-      admin_ui: {order: 0, width: 200}
-      type: link_single
-      target: stages
-    - name: mail
-      admin_ui: {order: 1, width: 200}
-      type: link_single
-      target: users
-    - name: financt
-      admin_ui: {order: 2, width: 200}
-      type: string
-    title: Stagiaires_inscrits
+      type: number
+    title: Cpt_stages
 renamed: true

@@ -47,6 +47,11 @@ class Main(MainTemplate):
         user=anvil.users.get_user()
         if not user:  
             self.content_panel.clear()
+        else:
+            # renseignements du user pour savoir si on est en 1ere utilisation (on n'affiche pas liste stages)
+            if user['prenom'] == "":
+                self.liste_stages.visible = False
+                self.button_renseignements_click()
         
         # handling buttons display        
         self.display_bt_mail()

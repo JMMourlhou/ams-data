@@ -47,6 +47,22 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
+        if self.text_box_prenom.text == "" :           # dates vides ?
+            alert("Entrez le prénom")
+            return
+        if self.text_box_nom.text == "" :           # dates vides ?
+            alert("Entrez le nom")
+            return
+        if self.text_box_ville_naissance.text == "" :           # dates vides ?
+            alert("Entrez la ville de Naissance")
+            return   
+        if self.text_box_tel.text == "" :           # dates vides ?
+            alert("Entrez le teléphone")
+            return    
+        if self.date_naissance.date == None :           # dates vides ?
+            alert("Entrez la date de naissance")
+            return   
+             
         result = anvil.server.call("modify_users", user,
                                                   self.text_box_nom.text,
                                                   self.text_box_prenom.text,
