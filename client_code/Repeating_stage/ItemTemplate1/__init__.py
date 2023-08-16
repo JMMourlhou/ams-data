@@ -23,7 +23,8 @@ class ItemTemplate1(ItemTemplate1Template):
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = self.button_1.text
-        alert("Vous entrez dans le stage",num_stage)
+        msg = f("Inscrition {self.button_2.text})
+        alert("",self.button_2.text,num_stage)
 
     def button_2_click(self, **event_args):
         """This method is called when the button is clicked"""
