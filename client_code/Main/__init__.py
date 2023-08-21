@@ -39,7 +39,13 @@ class Main(MainTemplate):
                 url_time=h["t"]
                 url_time_over=French_zone.time_over(url_time)
                 if not url_time_over: 
-                    calling_signing_up.calling_form1(h)
+                    # stage number in URL's Hash ? (le user vient de flacher le Qr code)
+                    num_stage=h["stage"]
+                    if num_stage != "" :
+                        #self.content_panel.add_component(QrCode_display(num_stage), full_width_row=True)                        
+                        alert("réception en création de stage ", num_stage)
+                    else : # l'url est sign in or reset pw    
+                        calling_signing_up.calling_form1(h)
                 else:
                     alert("Ce lien n'est plus actif, renvoyer un mail")
      
