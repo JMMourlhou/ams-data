@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..
 
 class ItemTemplate1(ItemTemplate1Template):
     def __init__(self, **properties):
@@ -23,9 +24,12 @@ class ItemTemplate1(ItemTemplate1Template):
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = self.button_1.text
-        msg = "Inscription au stage "+ self.button_2.text 
+        msg = "Affichage du stage "+ self.button_2.text 
         alert(msg)
+        self.content_panel.clear()
+        self.content_panel.add_component(Stage_visu_modif(num_stage), full_width_row=True)
 
+    
     def button_2_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.button_1_click()
