@@ -7,7 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..
+from .. import Visu_stages
+from anvil import open_form
 
 class ItemTemplate1(ItemTemplate1Template):
     def __init__(self, **properties):
@@ -23,12 +24,13 @@ class ItemTemplate1(ItemTemplate1Template):
     # et récupération par l'event:
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        num_stage = self.button_1.text
+       
+        num_stage = int(self.button_1.text)
         msg = "Affichage du stage "+ self.button_2.text 
         alert(msg)
-        self.content_panel.clear()
-        self.content_panel.add_component(Stage_visu_modif(num_stage), full_width_row=True)
-
+        #self.content_panel.clear()
+        #self.content_panel.add_component(Stage_visu_modif(num_stage), full_width_row=True)
+        open_form('Stage_visu_modif',num_stage)    #x=3 si login normal
     
     def button_2_click(self, **event_args):
         """This method is called when the button is clicked"""

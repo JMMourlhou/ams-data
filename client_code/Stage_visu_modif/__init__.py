@@ -24,18 +24,30 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
+
         
         # Lecture du stage
         stage_row = app_tables.stages.get(numero=num_stage)
+        #lecture intitulé stage
+        intitul = stage_row['type']['code']
+        alert(intitul)
+        type_row = app_tables.codes_stages.get(code=intitul)
+        if type_row:
+            intit = type_row['intitulé']
+        else:
+            alert("intitulé du stage non trouvé !")
+        
         if stage_row:
             self.label_num_stage.text = stage_row['numero']
-            #self.label_intitule.text = 
+            self.drop_down_code_stage.selected_value = stage_row['type']
+            self.label_intitule.text = intit
             self.date_picker_from.date = stage_row['date_debut']
             self.text_box_nb_stagiaires_deb.text = stage_row['nb_stagiaires_deb']
             self.date_picker_to.date = stage_row['date_fin']
             self.text_box_nb_stagiaires_fin.text = stage_row['nb_stagiaires_fin']
             self.text_box_nb_stagiaires_diplom.text = stage_row['nb_stagiaires_diplomes']
             self.text_area_commentaires.text = stage_row['commentaires']
+            self.drop_down_lieux.selected_value = stage_row['lieu']
 
 
         

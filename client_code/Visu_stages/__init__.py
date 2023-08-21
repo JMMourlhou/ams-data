@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from .. import Stage_visu_modif
 
 class Visu_stages(Visu_stagesTemplate):
     def __init__(self, **properties):
