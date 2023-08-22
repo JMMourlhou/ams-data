@@ -30,17 +30,17 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         stage_row = app_tables.stages.get(numero=num_stage)
         #lecture intitulé stage
         intitul = stage_row['type']['code']
-        alert(intitul)
         type_row = app_tables.codes_stages.get(code=intitul)
         if type_row:
             intit = type_row['intitulé']
         else:
             alert("intitulé du stage non trouvé !")
+            return
         
         if stage_row:
-            self.label_num_stage.text = stage_row['numero']
+            self.text_box_num_stage.text = stage_row['numero']
             self.drop_down_code_stage.selected_value = stage_row['type']
-            self.label_intitule.text = intit
+            self.text_box_intitule.text = intit
             self.date_picker_from.date = stage_row['date_debut']
             self.text_box_nb_stagiaires_deb.text = stage_row['nb_stagiaires_deb']
             self.date_picker_to.date = stage_row['date_fin']
@@ -48,13 +48,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.text_box_nb_stagiaires_diplom.text = stage_row['nb_stagiaires_diplomes']
             self.text_area_commentaires.text = stage_row['commentaires']
             self.drop_down_lieux.selected_value = stage_row['lieu']
-
-
-        
         else:
             alert("Stage non trouvé")
             return
-
         
 
     def drop_down_code_stage_change(self, **event_args):
@@ -64,7 +60,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
-        self.label_intitule.text=row['intitulé']
+        self.text_box_intitule.text=row['intitulé']
 
     def date_picker_to_change(self, **event_args):
         """This method is called when the selected date changes"""
@@ -100,15 +96,15 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             return
         self.drop_down_code_stage_change()      #test si date fin > date début
 
-        # Test si numero stage code existant
+        # Test si numero stage code existant pour permettre la modif
         stage=None
-        stage = app_tables.stages.search(numero=int(self.label_num_stage.text))
-        if len(stage)>0:
-            alert("Le numéro de stage existe déjà !")
+        stage = app_tables.stages.search(numero=int(self.text_box_num_stage.text))
+        if len(stage) == 0:
+            alert("Le numéro de stage n'existe pas !")
             self.button_annuler_click()
 
-        result = anvil.server.call("add_stage", row['code'],                # extraction du type de stga de la ligne dropdown
-                                                self.label_num_stage.text,  # num du stage  de la ligne
+        result = anvil.server.call("modif_stage", row['code'],                # extraction du type de stga de la ligne dropdown
+                                                self.text_box_num_stage.text,  # num du stage  de la ligne
                                                 row2['lieu'],
                                                 self.date_picker_from.date,
                                                 self.text_box_nb_stagiaires_deb.text,
@@ -123,7 +119,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.button_validation.visible = False
         else :
             alert("Stage non enregisté !")
-        self.button_annuler_click()
+            self.button_annuler_click()
 
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""

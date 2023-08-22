@@ -27,9 +27,6 @@ class ItemTemplate1(ItemTemplate1Template):
        
         num_stage = int(self.button_1.text)
         msg = "Affichage du stage "+ self.button_2.text 
-        alert(msg)
-        #self.content_panel.clear()
-        #self.content_panel.add_component(Stage_visu_modif(num_stage), full_width_row=True)
         open_form('Stage_visu_modif',num_stage)    #x=3 si login normal
     
     def button_2_click(self, **event_args):

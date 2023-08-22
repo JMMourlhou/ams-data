@@ -13,7 +13,7 @@ components:
   components:
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
-        Tertiary', visible: true, text: Création d'un stage, font_size: 16, font: '',
+        Tertiary', visible: true, text: Modif stage / QR code, font_size: 16, font: '',
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
@@ -33,7 +33,7 @@ components:
       placeholder: Code stage
       border: ''
       enabled: true
-      foreground: theme:On Primary
+      foreground: theme:Tertiary
       items: []
       visible: true
       font_size: null
@@ -48,20 +48,20 @@ components:
     name: drop_down_code_stage
     layout_properties: {grid_position: 'YZUQOI,ZBDZNC'}
     event_bindings: {change: drop_down_code_stage_change}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
-        Primary', visible: true, text: Intitulé, font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
-      bold: false, underline: false, icon: ''}
-    name: label_intitule
-    layout_properties: {grid_position: 'YZUQOI,MLPMWL'}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
-        Primary', visible: true, text: num, font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
-      bold: false, underline: false, icon: ''}
-    name: label_num_stage
-    layout_properties: {grid_position: 'YZUQOI,ALWNUG'}
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Intitulé,
+      border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: '',
+      font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
+      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    name: text_box_intitule
+    layout_properties: {grid_position: 'YZUQOI,QMUKZS'}
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: num,
+      border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: '',
+      font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
+      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    name: text_box_num_stage
+    layout_properties: {grid_position: 'YZUQOI,WOBQLI'}
   - type: DatePicker
     properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',
       placeholder: 'Du ', border: '', enabled: true, foreground: 'theme:On Primary',

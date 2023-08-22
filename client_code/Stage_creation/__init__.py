@@ -18,7 +18,7 @@ class Stage_creation(Stage_creationTemplate):
         # Numéro de stage
         num = app_tables.cpt_stages.search()[0]
         cpt=int(num['compteur'])+1
-        self.label_num_stage.text=cpt
+        self.text_box_num_stage.text=cpt
         
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
@@ -33,7 +33,7 @@ class Stage_creation(Stage_creationTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
-        self.label_intitule.text=row['intitulé']
+        self.text_box_intitule.text=row['intitulé']
 
     def date_picker_to_change(self, **event_args):
         """This method is called when the selected date changes"""
@@ -71,13 +71,13 @@ class Stage_creation(Stage_creationTemplate):
        
         # Test si numero stage code existant
         stage=None
-        stage = app_tables.stages.search(numero=int(self.label_num_stage.text))
+        stage = app_tables.stages.search(numero=int(self.text_box_num_stage.text))
         if len(stage)>0:
             alert("Le numéro de stage existe déjà !")
             self.button_annuler_click()
             
         result = anvil.server.call("add_stage", row['code'],                # extraction du type de stga de la ligne dropdown    
-                                                self.label_num_stage.text,  # num du stage  de la ligne            
+                                                self.text_box_num_stage.text,  # num du stage  de la ligne            
                                                 row2['lieu'],
                                                 self.date_picker_from.date,
                                                 self.text_box_nb_stagiaires_deb.text,
@@ -92,7 +92,7 @@ class Stage_creation(Stage_creationTemplate):
             self.button_validation.visible = False
         else :
             alert("Stage non enregisté !")
-        self.button_annuler_click()
+            self.button_annuler_click()
 
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""

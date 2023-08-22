@@ -9,7 +9,7 @@ import anvil.server
 from anvil import *  #pour les alertes
 
 @anvil.server.callable           #Création d'un nouveau stage
-def add_stage(type,
+def modif_stage(type,
               numero,   # attention numero est txt
               lieu,
               date_debut,
@@ -23,37 +23,33 @@ def add_stage(type,
 
     # lecture fichier père code stages
     code_stage = app_tables.codes_stages.get(code=type)
-    if len(code_stage)==0 :
+    if len(code_stage) == 0:   
         alert("Code stage non trouvé ds fichier param Code_stages")
         valid=False
-        return valid
+        return valid             
     # lecture fichier père lieux
     lieu_stage = app_tables.lieux.get(lieu=lieu)    
     if len(lieu_stage)==0 :
         alert("Lieu stage non trouvé ds fichier param lieux")
         valid=False
-        return valid   
-        
-    new_row=app_tables.stages.add_row(
-                              type = code_stage,
-                              numero = numero,
-                              lieu = lieu_stage,
-                              date_debut = date_debut,
-                              nb_stagiaires_deb = nb_stagiaires_deb,
-                              date_fin = date_fin,
-                              nb_stagiaires_fin = nb_stagiaires_fin,
-                              nb_stagiaires_diplomes = nb_stagiaires_diplomes,
-                              commentaires = commentaires
-                             )
-        
-                 
-    stage = app_tables.stages.search(numero=new_row['numero'])
-    if len(stage)>0:
-        valid=True
-        #incrément du compteur de stages
-        num = app_tables.cpt_stages.search()[0]
-        cpt=int(num['compteur'])+1 
-        num.update(compteur=cpt)
-    else:
+        return valid    
+
+    # lecture du stage à modifier par son numéro             
+    stage = app_tables.stages.get(numero=numero) 
+    if not stage:
+        alert("Lieu stage non trouvé ds fichier param lieux")
         valid=False
+    else:   
+        stage.update(
+                    #type = code_stage,           Pas de modif du type et numéro du stage
+                    #numero = numero,
+                    lieu = lieu_stage,
+                    date_debut = date_debut,
+                    nb_stagiaires_deb = nb_stagiaires_deb,
+                    date_fin = date_fin,
+                    nb_stagiaires_fin = nb_stagiaires_fin,
+                    nb_stagiaires_diplomes = nb_stagiaires_diplomes,
+                    commentaires = commentaires
+                    )
+        valid=True
     return valid
