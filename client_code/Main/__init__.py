@@ -16,18 +16,29 @@ from ..Visu_stages.ItemTemplate1 import ItemTemplate1
 from anvil import open_form
 
 class Main(MainTemplate):
-    def __init__(self, nb=1, **properties):
+    def __init__(self, nb=1, stage_nb=0, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
         # Any code you write here will run before the form opens.
+        
+        """ cas nb=5      après flash code """
+        if nb == 5:
+            alert("test flash")
+            user=anvil.users.get_user()
+            if not user:  
+                self.content_panel.clear()
+                self.button_renseignements_click(stage_nb)
+            
+        
         print("nb: ", nb)
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.text = "Déconnecté"
         self.nb=nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
-
+       
+        
+        
         """ cas 2: soit ouverture de l'app """
         """        ou retour par URL suite à SignIn ou PW reset"""
         if self.nb == 2:   
@@ -45,7 +56,8 @@ class Main(MainTemplate):
                     num_stage=h["stage"]
                     if len(num_stage) != 0 :
                         alert("réception en création de stage " + str(num_stage))
-                        self.button_renseignements_click(int(num_stage))
+                        #self.button_renseignements_click(int(num_stage))
+                        open_form('Main',5,num_stage)
                     else : # l'url est sign in or reset pw    
                         calling_signing_up.calling_form1(h)
                 else:
