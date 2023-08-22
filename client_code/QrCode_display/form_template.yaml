@@ -23,7 +23,7 @@ components:
           Tertiary', visible: true, text: Flachez ce Qr Code, font_size: 16, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
-      name: label_3
+      name: label_titre
       layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
   - type: Image
     properties: {}

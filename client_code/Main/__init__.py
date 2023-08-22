@@ -13,6 +13,8 @@ from ..Saisie_info_de_base import Saisie_info_de_base
 from ..Stage_creation import Stage_creation
 from ..Visu_stages import Visu_stages
 from ..Visu_stages.ItemTemplate1 import ItemTemplate1
+from anvil import open_form
+
 class Main(MainTemplate):
     def __init__(self, nb=1, **properties):
         # Set Form properties and Data Bindings.
@@ -39,11 +41,11 @@ class Main(MainTemplate):
                 url_time=h["t"]
                 url_time_over=French_zone.time_over(url_time)
                 if not url_time_over: 
-                    # stage number in URL's Hash ? (le user vient de flacher le Qr code)
+                    # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
                     num_stage=h["stage"]
-                    if num_stage != "" :
-                        #self.content_panel.add_component(QrCode_display(num_stage), full_width_row=True)                        
-                        alert("réception en création de stage ", num_stage)
+                    if len(num_stage) != 0 :
+                        alert("réception en création de stage " + str(num_stage))
+                        self.button_renseignements_click(int(num_stage))
                     else : # l'url est sign in or reset pw    
                         calling_signing_up.calling_form1(h)
                 else:
@@ -106,12 +108,14 @@ class Main(MainTemplate):
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
     
-    def button_renseignements_click(self, **event_args):
+    def button_renseignements_click(self, num_stage=0,**event_args):
         """This method is called when the button is clicked"""
+        alert("bt renseignements click" + str(num_stage))
         self.content_panel.clear()
         self.button_renseignements.visible = False
         self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
-
+        
+        
     def button_stage_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.content_panel.clear()

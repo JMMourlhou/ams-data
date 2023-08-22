@@ -8,6 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime
+from anvil import open_form
 
 class Stage_creation(Stage_creationTemplate):
     def __init__(self, **properties):
@@ -96,9 +97,9 @@ class Stage_creation(Stage_creationTemplate):
 
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""
-        alert("bouton qr")
+        open_form('QrCode_display', self.text_box_num_stage.text)
+                                   
 
       
-
 
 

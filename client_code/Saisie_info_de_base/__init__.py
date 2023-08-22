@@ -11,7 +11,7 @@ global user
 user = None
 
 class Saisie_info_de_base(Saisie_info_de_baseTemplate):
-    def __init__(self, **properties):
+    def __init__(self, num_stage=0, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
@@ -81,8 +81,9 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                  )
         if result == True :
             alert("Renseignements enregistés")
-            # sélection du stage 
-            
+            # insertion du stagiaire automatiqt si num_stage != 0
+            if self.num_stage != 0:
+                self.insertion_du_stagiaire()
         else :
             alert("Renseignements non enregistés !")
         self.button_annuler_click()
@@ -95,8 +96,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
         #js.call_js('showSidebar')
 
-
-         
+    def insertion_du_stagiaire(self, **event_args):
+         alert(insertion)
             
 
         
