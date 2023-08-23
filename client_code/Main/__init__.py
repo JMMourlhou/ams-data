@@ -60,12 +60,14 @@ class Main(MainTemplate):
                     alert("Ce lien n'est plus actif !")
                     
                 # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
-                num_stage=h["stage"]
-                if len(num_stage) != 0 :        #oui le user vient de flacher le Qr code
-                    alert("réception en création de stage " + str(num_stage))
-                                  
-                calling_signing_up.calling_form1(h, num_stage)  #c'sst sign in qui fait le sign in, je passe num stage
-
+                try:
+                    num_stage=h["stage"]
+                    if len(num_stage) != 0 :        #oui le user vient de flacher le Qr code
+                        alert("réception en création de stage " + str(num_stage))
+                        calling_signing_up.calling_form1(h, num_stage)  #c'est sign in, je passe num stage
+                except:
+                        calling_signing_up.calling_form1(h)  # pas url venant du qr code, je ne passe pas le num stage
+        
         user=anvil.users.get_user()
         if not user:  
             self.content_panel.clear()
