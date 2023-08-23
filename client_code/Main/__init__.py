@@ -24,7 +24,7 @@ class Main(MainTemplate):
         """ cas nb=5      après flash code """
         if nb == 5:
             alert("test flash")
-            anvil.get_url_hash().delete()
+            #anvil.get_url_hash().delete()
             user=anvil.users.get_user()
             if not user:  
                 self.content_panel.clear()

@@ -15,6 +15,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        alert("arrivée en saisie info de base")
         user=anvil.users.get_user()
         if user:
             self.text_box_mail.text =                user['email']
