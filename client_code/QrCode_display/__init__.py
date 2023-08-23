@@ -22,14 +22,14 @@ class QrCode_display(QrCode_displayTemplate):
             return
         txt_stage=stage['type']['code']
         txt_stage=txt_stage.replace("_","")
-        self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'])
+        self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d %m %Y"))
         if num_stage==0 :
             alert("Numéro de stage non valide")
             return
         else:
             app = constant_parameters.code_app1
             time = self.recup_time()
-            param="/#?stage=" + str(num_stage) + "&t=" + time
+            param="/#?a=qrcode" + "&stage=" + str(num_stage) + "&t=" + time
             code_app1 = app + param  # App "AMS Data"  + code stage
             media=anvil.server.call('mk_qr_code',code_app1)
             self.image_1.source=media

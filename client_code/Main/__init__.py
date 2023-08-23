@@ -64,7 +64,7 @@ class Main(MainTemplate):
                 if len(num_stage) != 0 :        #oui le user vient de flacher le Qr code
                     alert("réception en création de stage " + str(num_stage))
                                   
-                calling_signing_up.calling_form1(h, num_stage)
+                calling_signing_up.calling_form1(h, num_stage)  #c'sst sign in qui fait le sign in, je passe num stage
 
         user=anvil.users.get_user()
         if not user:  
