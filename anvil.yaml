@@ -181,6 +181,9 @@ db_schema:
     - name: accept_data
       admin_ui: {order: 22, width: 200}
       type: bool
+    - name: stage_num_temp
+      type: number
+      admin_ui: {width: 200, order: 23}
     title: Users
   stages:
     client: search

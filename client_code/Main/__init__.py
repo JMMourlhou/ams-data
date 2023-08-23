@@ -21,15 +21,6 @@ class Main(MainTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         
-        """ cas nb=5      après flash code """
-        if nb == 5:
-            alert("test flash")
-            #anvil.get_url_hash().delete()
-            user=anvil.users.get_user()
-            if not user:  
-                self.content_panel.clear()
-                self.button_renseignements_click(stage_nb)
-        
         print("nb: ", nb)
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.text = "Déconnecté"
@@ -61,24 +52,20 @@ class Main(MainTemplate):
             h = anvil.get_url_hash()
             print(f"h ds init d'AMS_Data: {h}")
             if len(h)!=0 :  # a URL has openned this app
-                #self.link_login.visible = True
-                #alert(h)
+                # lien actif < à 10 min ?
                 url_time_str=""
                 url_time=h["t"]
                 url_time_over=French_zone.time_over(url_time)
-                if not url_time_over: 
-                    # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
-                    num_stage=h["stage"]
-                    if len(num_stage) != 0 :
-                        alert("réception en création de stage " + str(num_stage))
-                        #self.button_renseignements_click(int(num_stage))
-                        open_form('Main',5,num_stage)
-                    else : # l'url est sign in or reset pw    
-                        calling_signing_up.calling_form1(h)
-                else:
-                    alert("Ce lien n'est plus actif, renvoyer un mail")
-     
-            
+                if url_time_over: 
+                    alert("Ce lien n'est plus actif !")
+                    
+                # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
+                num_stage=h["stage"]
+                if len(num_stage) != 0 :        #oui le user vient de flacher le Qr code
+                    alert("réception en création de stage " + str(num_stage))
+                                  
+                calling_signing_up.calling_form1(h, num_stage)
+
         user=anvil.users.get_user()
         if not user:  
             self.content_panel.clear()
