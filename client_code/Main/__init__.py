@@ -28,7 +28,6 @@ class Main(MainTemplate):
             if not user:  
                 self.content_panel.clear()
                 self.button_renseignements_click(stage_nb)
-            
         
         print("nb: ", nb)
         self.bt_se_deconnecter.visible = False
@@ -42,6 +41,21 @@ class Main(MainTemplate):
         """ cas 2: soit ouverture de l'app """
         """        ou retour par URL suite à SignIn ou PW reset"""
         if self.nb == 2:   
+            """ get_url_hash() gets the decoded hash (the part after the ‘#’ character) of the URL used to open this app.
+
+                If the first character of the hash is a question mark (e.g., https://myapp.anvil.app/#?a=foo&b=bar),
+                it will be interpreted as query-string-type parameters and returned as a dictionary
+                (e.g., {'a': 'foo', 'b': 'bar'} ).
+
+                get_url_hash() is available in Form code only.
+
+                I don’t use extra arguments on forms loaded by the routing module.
+                Using extra arguments kind of defeats the purpose of using the routing module.
+
+                I pass all the arguments on the URL, then I use self.url_dict['items'].
+                
+                """
+            
             h={}
             h = anvil.get_url_hash()
             print(f"h ds init d'AMS_Data: {h}")
