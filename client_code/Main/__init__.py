@@ -73,7 +73,7 @@ class Main(MainTemplate):
             self.content_panel.clear()
         else:
             # renseignements du user pour savoir si on est en 1ere utilisation (on n'affiche pas liste stages)
-            if user['prenom'] == "":
+            if user['prenom'] == None:
                 self.liste_stages.visible = False
                 self.button_renseignements_click()
         
