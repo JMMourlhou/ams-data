@@ -40,10 +40,7 @@ def modif_stage(type,
         alert("Lieu stage non trouvé ds fichier param lieux")
         valid=False
     else:   
-        stage.update(
-                    #type = code_stage,           # modif du type et numéro du stage : préférable non
-                    #numero = numero,             # (les conditions changeraient)
-                    lieu = lieu_stage,
+        stage.update(lieu = lieu_stage,
                     date_debut = date_debut,
                     nb_stagiaires_deb = nb_stagiaires_deb,
                     date_fin = date_fin,

@@ -97,7 +97,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if self.date_picker_from.date == None :
             alert("Entrez la date de début du stage")
             return
-        self.drop_down_code_stage_change()      #test si date fin > date début
+        
 
         # Test si numero stage code existant pour permettre la modif
         stage=None
@@ -105,11 +105,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if len(stage) == 0:
             alert("Le numéro de stage n'existe pas !")
             self.button_annuler_click()
-
+        #pas de modif du type et num de stage
         result = anvil.server.call("modif_stage",
-                                                #row['code'],                # extraction du type de stga de la ligne dropdown
-                                                #self.text_box_num_stage.text,  # num du stage  de la ligne
-                                                row2['lieu'],
+                                                row2['lieu'],                                               row2['lieu'],
                                                 self.date_picker_from.date,
                                                 self.text_box_nb_stagiaires_deb.text,
                                                 self.date_picker_to.date,
