@@ -9,6 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import French_zone
 from .. import constant_parameters
+from anvil import open_form 
 
 class QrCode_display(QrCode_displayTemplate):
     def __init__(self, num_stage=0, **properties):
@@ -43,6 +44,7 @@ class QrCode_display(QrCode_displayTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        return
+        from ..Main import Main
+        open_form('Main')
 
 

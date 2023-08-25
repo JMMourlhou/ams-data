@@ -54,18 +54,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             return
         
 
-    def drop_down_code_stage_change(self, **event_args):
-        """This method is called when an item is selected"""
-        row = self.drop_down_code_stage.selected_value
-        if row == None :
-            alert("Vous devez sélectionner un stage !")
-            self.drop_down_code_stage.focus()
-            return
-        r=alert("Etes vous sûr de modifier le type de stage ?", buttons=[("Oui",True),("Non",False)], dismissible=True)
-        if r:
-            self.text_box_intitule.text=row['intitulé']
-            self.button_validation.visible = True   
-
     def date_picker_to_change(self, **event_args):
         """This method is called when the selected date changes"""
         self.button_validation.visible = True   
@@ -73,9 +61,17 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         date2 = self.date_picker_from.date
         if date1 < date2:
             alert("La date de fin est inférieure à la date de début !")
-            self.date_picker_from.focus()
+            self.date_picker_to.focus()
         
-
+    def date_picker_from_change(self, **event_args):
+        """This method is called when the selected date changes"""
+        self.button_validation.visible = True   
+        date1 = self.date_picker_to.date
+        date2 = self.date_picker_from.date
+        if date1 < date2:
+            alert("La date de fin est inférieure à la date de début !")
+            self.date_picker_to.focus()
+        
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -110,8 +106,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             alert("Le numéro de stage n'existe pas !")
             self.button_annuler_click()
 
-        result = anvil.server.call("modif_stage", row['code'],                # extraction du type de stga de la ligne dropdown
-                                                self.text_box_num_stage.text,  # num du stage  de la ligne
+        result = anvil.server.call("modif_stage",
+                                                #row['code'],                # extraction du type de stga de la ligne dropdown
+                                                #self.text_box_num_stage.text,  # num du stage  de la ligne
                                                 row2['lieu'],
                                                 self.date_picker_from.date,
                                                 self.text_box_nb_stagiaires_deb.text,
@@ -132,9 +129,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         """This method is called when the button is clicked"""
         open_form('QrCode_display', self.text_box_num_stage.text)
 
-    def date_picker_from_change(self, **event_args):
-        """This method is called when the selected date changes"""
-        self.button_validation.visible = True
 
     def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
