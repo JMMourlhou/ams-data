@@ -42,7 +42,7 @@ class Stage_creation(Stage_creationTemplate):
         date2 = self.date_picker_from.date
         if date1 < date2:
             alert("La date de fin est inférieure à la date de début !")
-            self.date_picker_from.focus()
+            self.date_picker_to.focus()
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -98,6 +98,36 @@ class Stage_creation(Stage_creationTemplate):
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""
         open_form('QrCode_display', self.text_box_num_stage.text)
+
+    def date_picker_from_change(self, **event_args):
+        """This method is called when the selected date changes"""
+        self.button_validation.visible = True
+
+    def drop_down_lieux_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.button_validation.visible = True
+
+    def text_box_nb_stagiaires_deb_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_validation.visible = True
+
+    def text_box_nb_stagiaires_fin_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_validation.visible = True
+
+    def text_box_nb_stagiaires_diplom_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_validation.visible = True
+
+    def text_area_commentaires_change(self, **event_args):
+        """This method is called when the text in this text area is edited"""
+        self.button_validation.visible = True
+
+
+
+
+
+
                                    
 
       

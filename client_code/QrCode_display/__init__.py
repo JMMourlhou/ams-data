@@ -41,3 +41,8 @@ class QrCode_display(QrCode_displayTemplate):
         time_str=time_str.replace(" ","_")
         return(time_str)
 
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        return
+
+
