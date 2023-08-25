@@ -18,10 +18,10 @@ components:
     name: Logo
     layout_properties: {grid_position: 'YMEUZM,OGGYPZ'}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: 'theme:Tertiary', visible: true, text: '', font_size: 12, font: '',
+    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: false,
+      foreground: 'theme:Tertiary', visible: true, text: '', font_size: 14, font: '',
       spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '',
-      bold: false, underline: false, icon: ''}
+      bold: true, underline: false, icon: 'fa:user'}
     name: bt_user_mail
     layout_properties:
       col_widths: {}
@@ -65,7 +65,7 @@ components:
       components:
       - type: Button
         properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Renseignements,
+          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Mes renseignements,
           font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
           italic: false, background: 'theme:Tertiary', bold: true, underline: false,
           icon: ''}
@@ -74,20 +74,20 @@ components:
           col_widths: {}
           grid_position: MNGNVP,FNWMGJ
         event_bindings: {click: button_renseignements_click}
-      - type: Button
-        properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-          foreground: 'theme:On Primary Container', visible: true, text: Liste Stages,
-          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-          icon: ''}
-        name: liste_stages
-        layout_properties: {grid_position: 'GDCCLP,DLCAYE'}
-        event_bindings: {click: button_1_click}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_admin
     layout_properties: {grid_position: 'CWEFOY,ECORVD'}
     components:
+    - type: Button
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:On Primary Container', visible: true, text: Liste des stages / Qr code,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
+      name: liste_stages
+      layout_properties: {grid_position: 'JKULHH,FQNSKM'}
+      event_bindings: {click: button_1_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
         enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Création d'1 stage,
