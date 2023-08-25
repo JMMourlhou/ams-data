@@ -9,6 +9,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Visu_stages
 from anvil import open_form
+global cpt  # compteur
+cpt = 0
 
 class ItemTemplate1(ItemTemplate1Template):
     def __init__(self, **properties):
@@ -36,3 +38,10 @@ class ItemTemplate1(ItemTemplate1Template):
     def link_date_debut_click(self, **event_args):
         """This method is called when the link is clicked"""
         self.button_1_click()
+
+    def button_1_show(self, **event_args):
+        """This method is called when the Button is shown on the screen"""
+        global cpt
+        cpt += 1
+        if cpt == 3:
+            
