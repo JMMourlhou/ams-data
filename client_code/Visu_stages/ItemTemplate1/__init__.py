@@ -43,5 +43,4 @@ class ItemTemplate1(ItemTemplate1Template):
         """This method is called when the Button is shown on the screen"""
         global cpt
         cpt += 1
-        if cpt == 3:
-            
+        
