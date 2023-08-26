@@ -11,13 +11,16 @@ global user
 user = None
 
 class Saisie_info_de_base(Saisie_info_de_baseTemplate):
-    def __init__(self, num_stage=0, **properties):
+    def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        alert("arrivée en saisie info de base")
+        
         user=anvil.users.get_user()
         if user:
+            #stage = str(int(user['stage_num_temp']))
+            #alert("Après lecture user row pour num_stage : ",stage)
+            #alert(len(stage))
             self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"]
             self.text_box_prenom.text =              user["prenom"]
@@ -49,20 +52,25 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
         if self.text_box_prenom.text == "" :           # dates vides ?
-            alert("Entrez le prénom")
+            alert("Entrez le prénom !")
             return
         if self.text_box_nom.text == "" :           # dates vides ?
-            alert("Entrez le nom")
+            alert("Entrez le nom !")
             return
-        if self.text_box_ville_naissance.text == "" :           # dates vides ?
-            alert("Entrez la ville de Naissance")
-            return   
-        if self.text_box_tel.text == "" :           # dates vides ?
+        if self.text_box_tel.text == "" :              # tel vides ?
             alert("Entrez le teléphone")
             return    
-        if self.date_naissance.date == None :           # dates vides ?
+        if self.date_naissance.date == None :           # dateN vide ?
             alert("Entrez la date de naissance")
             return   
+        if self.text_box_ville_naissance.text == "" :    # ville N vide ?
+            alert("Entrez la ville de Naissance")
+            return   
+        if self.check_box_accept_data_use.checked != True:
+            r=alert("Voulez-vous valider l'utilisation de vos données par AMsport ?",buttons=[("oui",True),("non",False)])
+            if r :   #Non, nom pas correct
+                self.check_box_accept_data_use.checked = True
+                return
              
         result = anvil.server.call("modify_users", user,
                                                   self.text_box_nom.text,
@@ -81,9 +89,9 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                   self.text_area_commentaires.text
                                                  )
         if result == True :
-            alert("Renseignements enregistés")
+            alert("Renseignements enregistés !")
             # insertion du stagiaire automatiqt si num_stage != 0
-            if self.num_stage != 0:
+            if  user['stage_num_temp'] != 0:
                 self.insertion_du_stagiaire()
         else :
             alert("Renseignements non enregistés !")
@@ -98,7 +106,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         #js.call_js('showSidebar')
 
     def insertion_du_stagiaire(self, **event_args):
-         alert(insertion)
+         alert("insertion stagiaire, ds stage num")
             
 
         

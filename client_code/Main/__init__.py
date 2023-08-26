@@ -124,9 +124,9 @@ class Main(MainTemplate):
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
     
-    def button_renseignements_click(self, num_stage=0,**event_args):
+    def button_renseignements_click(self,**event_args):
         """This method is called when the button is clicked"""
-        alert("bt renseignements click" + str(num_stage))
+        
         self.content_panel.clear()
         self.button_renseignements.visible = False
         self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
