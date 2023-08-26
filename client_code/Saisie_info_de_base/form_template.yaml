@@ -180,41 +180,49 @@ components:
     event_bindings: {change: text_box_code_postal_change}
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"EGUOOZ":76}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
     spacing_below: small, background: ''}
   name: column_panel_mail2_comments
-  layout_properties: {grid_position: 'CNYPRC,KASQFW'}
+  layout_properties: {grid_position: 'AQGHOT,ACFXDI'}
   components:
-  - type: DropDown
-    properties:
-      role: null
-      align: full
-      tooltip: ''
-      placeholder: Mode de Financement
-      border: ''
-      enabled: true
-      foreground: theme:On Primary
-      items: []
-      visible: true
-      font_size: null
-      font: ''
-      spacing_above: small
-      spacing_below: small
-      italic: false
-      background: theme:Primary
-      bold: false
-      underline: false
-      include_placeholder: true
-    name: drop_down_fi
-    layout_properties: {grid_position: 'VOALGS,GVNEEB'}
-    event_bindings: {change: drop_down_fi_change}
-  - type: CheckBox
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary', allow_indeterminate: false, visible: true, text: J'accepte que AMSport conserve mes données pour son administration,
-      font_size: null, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, checked: false, underline: false}
-    name: check_box_accept_data_use
-    layout_properties: {grid_position: 'AUVJXJ,EGUOOZ'}
+  - type: ColumnPanel
+    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+      spacing_below: small, background: ''}
+    name: column_panel_3
+    layout_properties: {grid_position: 'TFUPZM,BTRCYP'}
+    components:
+    - type: DropDown
+      properties:
+        role: null
+        align: full
+        tooltip: ''
+        placeholder: Mode de Financement
+        border: ''
+        enabled: true
+        foreground: theme:On Primary
+        items: []
+        visible: true
+        font_size: null
+        font: ''
+        spacing_above: small
+        spacing_below: small
+        italic: false
+        background: theme:Primary
+        bold: false
+        underline: false
+        include_placeholder: true
+      name: drop_down_fi
+      layout_properties: {grid_position: 'HJTZMH,IGZZGK'}
+      event_bindings: {change: drop_down_fi_change}
+    - type: CheckBox
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:On Primary', allow_indeterminate: false, visible: true,
+        text: J'accepte que AMSport conserve mes données pour son administration,
+        font_size: null, font: '', spacing_above: small, spacing_below: small, italic: false,
+        background: 'theme:Primary', bold: false, checked: false, underline: false}
+      name: check_box_accept_data_use
+      layout_properties: {grid_position: 'TEDLAG,EHPYAA'}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: 2eme mail,
       border: '', enabled: true, foreground: 'theme:On Primary', visible: false, text: '',

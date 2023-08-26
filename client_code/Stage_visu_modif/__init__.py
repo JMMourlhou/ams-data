@@ -9,6 +9,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime
 from anvil import open_form
+global typ
+typ=""
 
 class Stage_visu_modif(Stage_visu_modifTemplate):
     def __init__(self, num_stage=0, **properties):
@@ -41,6 +43,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if stage_row:
             self.text_box_num_stage.text = stage_row['numero']
             self.drop_down_code_stage.selected_value = stage_row['type']
+            typ = stage_row['type']
             self.text_box_intitule.text = intit
             self.date_picker_from.date = stage_row['date_debut']
             self.text_box_nb_stagiaires_deb.text = stage_row['nb_stagiaires_deb']
@@ -126,8 +129,13 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""
         open_form('QrCode_display', self.text_box_num_stage.text)
+        
+    def button_display_stagiaires_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        global typ
+        open_form('Visu_1_stage', self.text_box_num_stage.text, typ)
 
-
+    
     def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
         self.button_validation.visible = True
@@ -147,6 +155,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
+
+    
+
 
 
 
