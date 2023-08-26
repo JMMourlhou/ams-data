@@ -50,7 +50,7 @@ db_schema:
       type: link_single
       target: codes_stages
     - name: requis_item
-      admin_ui: {width: 200}
+      admin_ui: {order: 1, width: 247}
       type: link_single
       target: pre_requis
   lieux:
@@ -75,14 +75,14 @@ db_schema:
       admin_ui: {order: 0, width: 200}
       type: link_single
       target: stages
-    - name: stagiaire
-      admin_ui: {order: 1, width: 310.165138}
-      type: link_single
-      target: users
     - name: financement
       admin_ui: {width: 251}
       type: link_single
       target: mode_financement
+    - name: user_email
+      admin_ui: {width: 200}
+      type: link_single
+      target: users
     title: Stagiaires_inscrits
   files:
     client: search
@@ -197,6 +197,16 @@ db_schema:
       type: number
       admin_ui: {width: 200, order: 23}
     title: Users
+  pre_requis_stagiaire:
+    client: none
+    server: full
+    columns:
+    - name: stagiaire
+      type: liveObject
+      admin_ui: {width: 200, order: 0}
+      table_id: 490919
+      backend: anvil.tables.Row
+    title: Pre_Requis_stagiaire
   stages:
     client: search
     server: full

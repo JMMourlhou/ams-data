@@ -34,7 +34,7 @@ def add_stagiaire(stagiaire, stage, mode_fi):
         
     new_row=app_tables.stagiaires_inscrits.add_row(
                               stage = code_stage,  
-                              stagiaire = user,
+                              stagiaire = user["email"],
                               financement = mode_fin,
                               )
              
