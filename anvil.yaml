@@ -75,13 +75,14 @@ db_schema:
       admin_ui: {order: 0, width: 200}
       type: link_single
       target: stages
-    - name: mail
-      admin_ui: {order: 1, width: 200}
+    - name: stagiaire
+      admin_ui: {order: 1, width: 310.165138}
       type: link_single
       target: users
-    - name: financt
-      admin_ui: {order: 2, width: 200}
-      type: string
+    - name: financement
+      admin_ui: {width: 251}
+      type: link_single
+      target: mode_financement
     title: Stagiaires_inscrits
   files:
     client: search
@@ -97,6 +98,17 @@ db_schema:
       admin_ui: {order: 2, width: 200}
       type: string
     title: Files
+  mode_financement:
+    client: search
+    server: full
+    columns:
+    - name: code_fi
+      admin_ui: {order: 0, width: 121}
+      type: string
+    - name: intitule_fi
+      admin_ui: {order: 1, width: 249}
+      type: string
+    title: Mode_Financement
   codes_stages:
     client: search
     server: full

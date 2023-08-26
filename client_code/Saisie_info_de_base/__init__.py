@@ -16,11 +16,13 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         
+        # Drop down mode de financemnt
+        
+        self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
+        
         user=anvil.users.get_user()
         if user:
-            #stage = str(int(user['stage_num_temp']))
-            #alert("Après lecture user row pour num_stage : ",stage)
-            #alert(len(stage))
+            #self.drop_down_fi.selected_value = à faire ?
             self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"]
             self.text_box_prenom.text =              user["prenom"]
@@ -66,36 +68,52 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if self.text_box_ville_naissance.text == "" :    # ville N vide ?
             alert("Entrez la ville de Naissance")
             return   
+        if self.drop_down_fi.selected_value == None :
+            alert("Vous devez sélectionner un mode de financement !")
+            return
         if self.check_box_accept_data_use.checked != True:
             r=alert("Voulez-vous valider l'utilisation de vos données par AMsport ?",buttons=[("oui",True),("non",False)])
             if r :   #Non, nom pas correct
                 self.check_box_accept_data_use.checked = True
                 return
-             
-        result = anvil.server.call("modify_users", user,
-                                                  self.text_box_nom.text,
-                                                  self.text_box_prenom.text,
-                                                  self.image_photo.source,
-                                                  self.text_box_ville_naissance.text,
-                                                  self.text_box_cp_naissance.text,
-                                                  self.date_naissance.date,
-                                                  self.text_box_pays_naissance.text,
-                                                  self.text_area_rue.text,
-                                                  self.text_box_ville.text,
-                                                  self.text_box_code_postal.text,
-                                                  self.text_box_tel.text,
-                                                  self.text_box_email2.text,
-                                                  self.check_box_accept_data_use.checked,
-                                                  self.text_area_commentaires.text
-                                                 )
-        if result == True :
-            alert("Renseignements enregistés !")
-            # insertion du stagiaire automatiqt si num_stage != 0
-            if  user['stage_num_temp'] != 0:
-                self.insertion_du_stagiaire()
-        else :
-            alert("Renseignements non enregistés !")
-        self.button_annuler_click()
+    
+        user=anvil.users.get_user()
+        if user:
+            result = anvil.server.call("modify_users", user,
+                                                    self.text_box_nom.text,
+                                                    self.text_box_prenom.text,
+                                                    self.image_photo.source,
+                                                    self.text_box_ville_naissance.text,
+                                                    self.text_box_cp_naissance.text,
+                                                    self.date_naissance.date,
+                                                    self.text_box_pays_naissance.text,
+                                                    self.text_area_rue.text,
+                                                    self.text_box_ville.text,
+                                                    self.text_box_code_postal.text,
+                                                    self.text_box_tel.text,
+                                                    self.text_box_email2.text,
+                                                    self.check_box_accept_data_use.checked,
+                                                    self.text_area_commentaires.text
+                                                    )
+            if result == True :
+                alert("Renseignements enregistés !")    # *************************************
+                # insertion du stagiaire automatiqt si num_stage != 0
+                user=anvil.users.get_user()
+                if user:
+                    stage = str(user['stage_num_temp'])
+                    if  len(stage)> 0:
+                        row = self.drop_down_fi.selected_value
+                        code_fi=row['code_fi']
+                        alert(code_fi)
+                        self.insertion_du_stagiaire(user, code_fi, stage)
+                    else:
+                        self.button_annuler_click()
+            else :
+                alert("Renseignements non enregistés !")
+            self.button_annuler_click()
+        else:
+            alert("utilisateur non trouvé !")
+            self.button_annuler_click()
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -104,9 +122,87 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         open_form('Main')
 
         #js.call_js('showSidebar')
+        
+    """ INSERTION DU STAGIAIRE **********************************************"""
+    def insertion_du_stagiaire(self, user, code_fi, stage, **event_args):
+        alert("insertion du stagiaire")
+        alert(code_fi)
+        #result = anvil.server.call("add_stgiaire", user,)
 
-    def insertion_du_stagiaire(self, **event_args):
-         alert("insertion stagiaire, ds stage num")
+
+
+        # effacer le code stage ds user
+    
+    def text_box_nom_change(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_validation.visible = True
+
+    def text_box_prenom_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_box_tel_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_box_mail_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def date_naissance_change(self, **event_args):
+        """This method is called when the selected date changes"""
+        self.text_box_nom_change()
+
+    def text_box_ville_naissance_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_box_cp_naissance_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_box_pays_naissance_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_area_rue_change(self, **event_args):
+        """This method is called when the text in this text area is edited"""
+        self.text_box_nom_change()
+
+    def text_box_ville_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_box_code_postal_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_box_email2_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
+
+    def text_area_commentaires_change(self, **event_args):
+        """This method is called when the text in this text area is edited"""
+        self.text_box_nom_change()
+
+    def drop_down_fi_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.text_box_nom_change()
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
 
         
