@@ -106,8 +106,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                         code_fi=row['code_fi']
                         alert(code_fi)
                         self.insertion_du_stagiaire(user, code_fi, stage)
-                    else:
-                        self.button_annuler_click()
+                    self.button_annuler_click()
             else :
                 alert("Renseignements non enregistés !")
             self.button_annuler_click()
@@ -127,11 +126,13 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def insertion_du_stagiaire(self, user, code_fi, stage, **event_args):
         alert("insertion du stagiaire")
         alert(code_fi)
-        #result = anvil.server.call("add_stgiaire", user,)
+        result = anvil.server.call("add_stagiaire", user, stage, code_fi)
+        if result:
+            alert("Vous avez été inscrit au stage")
+        else:
+            alert("Inscription non effectuée !")
 
-
-
-        # effacer le code stage ds user
+        # le code stage ds user a été effacé au server module add_stagiaire
     
     def text_box_nom_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""

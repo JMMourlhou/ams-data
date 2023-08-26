@@ -167,7 +167,7 @@ db_schema:
       admin_ui: {order: 13, width: 200}
       type: string
     - name: adresse_rue
-      admin_ui: {order: 14, width: 200}
+      admin_ui: {order: 14, width: 279}
       type: string
     - name: adresse_ville
       admin_ui: {order: 15, width: 200}
