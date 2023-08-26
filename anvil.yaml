@@ -201,11 +201,17 @@ db_schema:
     client: none
     server: full
     columns:
-    - name: stagiaire
-      type: liveObject
-      admin_ui: {width: 200, order: 0}
-      table_id: 490919
-      backend: anvil.tables.Row
+    - name: stage_num
+      admin_ui: {width: 200}
+      type: link_single
+      target: stages
+    - name: stagiaire_email
+      admin_ui: {width: 200}
+      type: link_single
+      target: users
+    - name: item_requis
+      admin_ui: {width: 200}
+      type: string
     title: Pre_Requis_stagiaire
   stages:
     client: search

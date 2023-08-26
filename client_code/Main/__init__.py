@@ -27,9 +27,7 @@ class Main(MainTemplate):
         self.nb=nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
-       
-        
-        
+         
         """ cas 2: soit ouverture de l'app """
         """        ou retour par URL suite à SignIn ou PW reset"""
         if self.nb == 2:   
