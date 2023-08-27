@@ -130,15 +130,13 @@ class Main(MainTemplate):
         self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
         
         
-    def button_stage_click(self, **event_args):
+    def liste_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.content_panel.clear()
-        self.content_panel.add_component(Stage_creation(), full_width_row=True)
+        from ..Visu_stages import Visu_stages
+        open_form('Visu_stages')
 
-    def button_1_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        self.content_panel.clear()
-        self.content_panel.add_component(Visu_stages(), full_width_row=True)
+
+    
 
            
             

@@ -13,11 +13,21 @@ components:
   components:
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
-        Tertiary', visible: true, text: Choix du stage, font_size: 16, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary',
-      bold: true, underline: false, icon: ''}
+        Tertiary', visible: true, text: Liste des stages, font_size: 16, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+- type: Button
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
+    bold: true, underline: false, icon: ''}
+  name: button_annuler2
+  layout_properties:
+    col_widths: {}
+    grid_position: MVIKPE,DWEURV
+  event_bindings: {click: button_annuler2_click}
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: tiny, spacing_above: small, col_widths: '{}', spacing_below: small,
@@ -29,4 +39,24 @@ components:
     properties: {item_template: Visu_stages.ItemTemplate1}
     name: repeating_panel_1
     layout_properties: {grid_position: 'EKPEKF,YDGUDK'}
+- type: Button
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
+    bold: true, underline: false, icon: ''}
+  name: button_annuler
+  layout_properties:
+    col_widths: {}
+    grid_position: FQSHFB,IYWSWY
+  event_bindings: {click: button_annuler_click}
+- type: Button
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:On Tertiary', visible: true, text: Création d'1 stage, font_size: null,
+    font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+    background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+  name: admin_creation_stage
+  layout_properties:
+    col_widths: {}
+    grid_position: DURYFP,DDFKDE
+  event_bindings: {click: admin_creation_stage_click}
 is_package: true

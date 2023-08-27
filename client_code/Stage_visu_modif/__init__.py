@@ -9,8 +9,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime
 from anvil import open_form
-global typ
-typ=""
+global intitul
+intitul=""
 
 class Stage_visu_modif(Stage_visu_modifTemplate):
     def __init__(self, num_stage=0, **properties):
@@ -32,9 +32,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         # Lecture du stage
         stage_row = app_tables.stages.get(numero=num_stage)
         #lecture intitulé stage
+        global intitul
         intitul = stage_row['type']['code']
         type_row = app_tables.codes_stages.get(code=intitul)
         if type_row:
+            
             intit = type_row['intitulé']
         else:
             alert("intitulé du stage non trouvé !")
@@ -78,8 +80,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main')
+        from ..Visu_stages import Visu_stages
+        #from ..Main import Main
+        #open_form('Main')
+        open_form('Visu_stages')
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -132,8 +136,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         
     def button_display_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        global typ
-        open_form('Visu_1_stage', self.text_box_num_stage.text, typ)
+        global intitul
+        open_form('Visu_1_stage', self.text_box_num_stage.text, intitul)
 
     
     def drop_down_lieux_change(self, **event_args):

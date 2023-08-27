@@ -81,24 +81,13 @@ components:
     components:
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary Container', visible: true, text: Liste des stages / Qr code,
+        foreground: 'theme:On Primary Container', visible: true, text: Gestion des stages,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}
       name: liste_stages
       layout_properties: {grid_position: 'JKULHH,FQNSKM'}
-      event_bindings: {click: button_1_click}
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Création d'1 stage,
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-        icon: ''}
-      name: admin_creation_stage
-      layout_properties:
-        col_widths: {}
-        grid_position: UQDJHI,XSXDRD
-      event_bindings: {click: button_stage_click}
+      event_bindings: {click: liste_stages_click}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: content_panel

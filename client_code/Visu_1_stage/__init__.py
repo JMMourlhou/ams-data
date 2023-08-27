@@ -23,6 +23,18 @@ class Visu_1_stage(Visu_1_stageTemplate):
         
         
         self.label_titre.text = "Stagiaires, stage " +intitule+" (" +num_stage+ ")"
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_stages import Visu_stages
+        #from ..Main import Main
+        #open_form('Main')
+        open_form('Visu_stages')
+
+    def button_annuler_2_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_annuler_click()
+
        
         
                                                                         

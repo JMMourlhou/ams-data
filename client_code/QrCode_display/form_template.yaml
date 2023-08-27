@@ -11,7 +11,7 @@ components:
   components:
   - type: ColumnPanel
     properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"MCGGHR":52}',
       spacing_below: small, background: ''}
     name: column_panel_1
     layout_properties:

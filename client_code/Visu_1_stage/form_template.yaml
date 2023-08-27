@@ -18,6 +18,16 @@ components:
       bold: true, underline: false, icon: ''}
     name: label_titre
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+- type: Button
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
+    bold: true, underline: false, icon: ''}
+  name: button_annuler
+  layout_properties:
+    col_widths: {}
+    grid_position: VDBPZA,CJZHNU
+  event_bindings: {click: button_annuler_click}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: column_panel_1
@@ -29,4 +39,14 @@ components:
       background: ''}
     name: repeating_panel_1
     layout_properties: {grid_position: 'RPOSFV,NYGVHN'}
+- type: Button
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
+    bold: true, underline: false, icon: ''}
+  name: button_annuler_2
+  layout_properties:
+    col_widths: {}
+    grid_position: TTDFGX,RKIVMD
+  event_bindings: {click: button_annuler_2_click}
 is_package: true

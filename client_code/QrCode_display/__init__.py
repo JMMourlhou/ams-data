@@ -44,7 +44,9 @@ class QrCode_display(QrCode_displayTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main')
+        from ..Visu_stages import Visu_stages
+        #from ..Main import Main
+        #open_form('Main')
+        open_form('Visu_stages')
 
 

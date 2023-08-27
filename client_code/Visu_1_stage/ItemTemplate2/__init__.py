@@ -23,8 +23,13 @@ class ItemTemplate2(ItemTemplate2Template):
             self.text_box_2.text = stagiaire['prenom']      #prénom
             self.text_box_3.text = stagiaire['email']
             self.text_box_4.text = stagiaire['tel']
-            self.image_1.source = stagiaire['photo']      #photo
+            
+            #self.image_1.source = stagiaire['photo']      #photo
+            orig_pic = stagiaire['photo']
+            thumb_pic = anvil.image.generate_thumbnail(orig_pic, 640)
+            self.image_1.source = thumb_pic
 
+            
             # self.text_box_5.text
             fi = self.item["financement"]["code_fi"]
             finance = app_tables.mode_financement.get(code_fi=fi)
