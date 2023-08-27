@@ -113,8 +113,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             alert("Le numéro de stage n'existe pas !")
             self.button_annuler_click()
         #pas de modif du type et num de stage
-        result = anvil.server.call("modif_stage",
-                                                row2['lieu'],                                               row2['lieu'],
+        result = anvil.server.call("modif_stage", row['code'],
+                                                self.text_box_num_stage.text,  # num du stage  de la ligne  
+                                                row2['lieu'],                                              
                                                 self.date_picker_from.date,
                                                 self.text_box_nb_stagiaires_deb.text,
                                                 self.date_picker_to.date,

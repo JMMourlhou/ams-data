@@ -23,13 +23,13 @@ def modif_stage(type,
 
     # lecture fichier père code stages
     code_stage = app_tables.codes_stages.get(code=type)
-    if len(code_stage) == 0:   
+    if not code_stage:   
         alert("Code stage non trouvé ds fichier param Code_stages")
         valid=False
         return valid             
     # lecture fichier père lieux
     lieu_stage = app_tables.lieux.get(lieu=lieu)    
-    if len(lieu_stage)==0 :
+    if not lieu_stage :
         alert("Lieu stage non trouvé ds fichier param lieux")
         valid=False
         return valid    
