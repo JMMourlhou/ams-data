@@ -16,7 +16,7 @@ class Visu_stages(Visu_stagesTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
-        # Any code you write here will run before the form opens.
+        
         # Initilisation de la liste à afficher
         # Je prend les 10 derniers stages, triés de la derniere date de début à la première
         nb_stages_max = constant_parameters.nb_stages_a_montrer
