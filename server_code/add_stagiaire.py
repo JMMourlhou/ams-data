@@ -8,6 +8,7 @@ from anvil.tables import app_tables
 import anvil.server
 
 @anvil.server.callable           #Création d'un nouveau stage
+@anvil.tables.in_transaction
 def add_stagiaire(stagiaire, stage, mode_fi):
 
     # lecture fichier père stages
