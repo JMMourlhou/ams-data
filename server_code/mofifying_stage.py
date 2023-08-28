@@ -8,7 +8,8 @@ from anvil.tables import app_tables
 import anvil.server
 from anvil import *  #pour les alertes
 
-@anvil.server.callable           #Création d'un nouveau stage
+@anvil.server.callable           #modif d'un stage
+@anvil.tables.in_transaction
 def modif_stage(type,
               numero,   # attention numero est txt
               lieu,

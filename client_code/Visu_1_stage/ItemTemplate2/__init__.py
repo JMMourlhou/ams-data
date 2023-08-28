@@ -27,7 +27,7 @@ class ItemTemplate2(ItemTemplate2Template):
             #self.image_1.source = stagiaire['photo']      #photo
             orig_pic = stagiaire['photo']
             if orig_pic != None:
-                thumb_pic = anvil.image.generate_thumbnail(orig_pic, 320)
+                thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
                 self.image_1.source = thumb_pic
 
             

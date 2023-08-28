@@ -7,26 +7,37 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+
 global user
 user = None
 
 class Saisie_info_de_base(Saisie_info_de_baseTemplate):
-    def __init__(self, **properties):
+    def __init__(self, first_entry=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        self.first_entry = first_entry
         # Any code you write here will run before the form opens.
         
         # Drop down mode de financemnt
-        
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
-        
+        if self.first_entry:  # si 1ere entrée ds fiche d'info
+            self.drop_down_fi.visible = True
+
         user=anvil.users.get_user()
+
         if user:
-            #self.drop_down_fi.selected_value = à faire ?
+
             self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"]
             self.text_box_prenom.text =              user["prenom"]
-            self.image_photo.source =                user["photo"]
+
+            #self.image_photo.source =                user["photo"]
+            if user["photo"] != None:
+                thumb_pic = anvil.image.generate_thumbnail(user["photo"], 320)
+                self.image_photo.source = thumb_pic
+            else:
+                self.image_photo.source =            user["photo"]
+
             self.text_box_ville_naissance.text =     user["ville_naissance"]
             self.text_box_cp_naissance.text =        user["code_postal_naissance"]
             self.date_naissance.date =               user["date_naissance"]
@@ -43,13 +54,17 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if user['admin'] == True:
                self.text_box_email2.visible = True
                self.text_area_commentaires.visible = True
+
         else:
             self.button_annuler_click()
        
 
     def file_loader_photo_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
-        self.image_photo.source = file
+        #self.image_photo.source = file
+        thumb_pic = anvil.image.generate_thumbnail(file, 640)
+        self.image_photo.source = thumb_pic
+        self.button_validation.visible = True
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -68,9 +83,12 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if self.text_box_ville_naissance.text == "" :    # ville N vide ?
             alert("Entrez la ville de Naissance")
             return   
-        if self.drop_down_fi.selected_value == None :
+            
+        # Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
+        if self.drop_down_fi.selected_value == None and self.first_entry==True: 
             alert("Vous devez sélectionner un mode de financement !")
             return
+            
         if self.check_box_accept_data_use.checked != True:
             r=alert("Voulez-vous valider l'utilisation de vos données par AMsport ?",buttons=[("oui",True),("non",False)])
             if r :   #Non, nom pas correct
@@ -99,12 +117,13 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 alert("Renseignements enregistés !")    # *************************************
                 # insertion du stagiaire automatiqt si num_stage != 0
                 user=anvil.users.get_user()
-                if user:
-                    stage = str(user['stage_num_temp'])
-                    if  stage :
+                if user and self.first_entry: # 1ere entrée en fiche de renseignement
+                    stage=str(user['stage_num_temp'])
+                                        
+                    if  user['stage_num_temp']>0:
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
-                        alert(code_fi)
+                        
                         self.insertion_du_stagiaire(user, code_fi, stage)
                     self.button_annuler_click()
             else :
@@ -125,10 +144,10 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     """ INSERTION DU STAGIAIRE **********************************************"""
     def insertion_du_stagiaire(self, user, code_fi, stage, **event_args):
         #alert("insertion du stagiaire")
-        alert(code_fi)
+        #alert(code_fi)
         result = anvil.server.call("add_stagiaire", user, stage, code_fi)
         if result:
-            alert("Vous avez été inscrit au stage")
+            alert("Vous avez été inscrit au stage !")
         else:
             alert("Inscription non effectuée !")
 

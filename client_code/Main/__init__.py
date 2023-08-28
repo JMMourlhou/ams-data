@@ -73,7 +73,8 @@ class Main(MainTemplate):
             # renseignements du user pour savoir si on est en 1ere utilisation (on n'affiche pas liste stages)
             if user['prenom'] == None:
                 self.liste_stages.visible = False
-                self.button_renseignements_click()
+                self.button_renseignements_click(True)   # 1ere utilisation True
+                
         
         # handling buttons display        
         self.display_bt_mail()
@@ -122,12 +123,14 @@ class Main(MainTemplate):
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
     
-    def button_renseignements_click(self,**event_args):
+    def button_renseignements_click(self, prem_passage=False, **event_args):   #prem passage=True si er remplissage fiche renseignement
         """This method is called when the button is clicked"""
-        
         self.content_panel.clear()
         self.button_renseignements.visible = False
-        self.content_panel.add_component(Saisie_info_de_base(), full_width_row=True)
+        self.bt_se_deconnecter.visible = False
+        # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
+
+        self.content_panel.add_component(Saisie_info_de_base(prem_passage), full_width_row=True)
         
         
     def liste_stages_click(self, **event_args):

@@ -202,7 +202,7 @@ components:
         enabled: true
         foreground: theme:On Primary
         items: []
-        visible: true
+        visible: false
         font_size: null
         font: ''
         spacing_above: small
@@ -254,7 +254,7 @@ components:
     event_bindings: {click: button_validation_click}
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Annuler, font_size: null,
+      foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Primary', bold: true, underline: false, icon: ''}
     name: button_annuler
