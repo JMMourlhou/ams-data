@@ -61,7 +61,7 @@ class Main(MainTemplate):
                 try:
                     num_stage=h["stage"]
                     if len(num_stage) != 0 :        #oui le user vient de flacher le Qr code
-                        alert("réception en création de stage " + str(num_stage))
+                        #alert("réception en création de stage " + str(num_stage))
                         calling_signing_up.calling_form1(h, num_stage)  #c'est sign in, je passe num stage
                 except:
                         calling_signing_up.calling_form1(h)  # pas url venant du qr code, je ne passe pas le num stage

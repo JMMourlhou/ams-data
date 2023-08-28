@@ -101,7 +101,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 user=anvil.users.get_user()
                 if user:
                     stage = str(user['stage_num_temp'])
-                    if  len(stage)> 0:
+                    if  stage :
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
                         alert(code_fi)
@@ -124,7 +124,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         
     """ INSERTION DU STAGIAIRE **********************************************"""
     def insertion_du_stagiaire(self, user, code_fi, stage, **event_args):
-        alert("insertion du stagiaire")
+        #alert("insertion du stagiaire")
         alert(code_fi)
         result = anvil.server.call("add_stagiaire", user, stage, code_fi)
         if result:
