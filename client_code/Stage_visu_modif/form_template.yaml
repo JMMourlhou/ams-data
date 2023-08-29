@@ -33,7 +33,7 @@ components:
     name: button_annuler
     layout_properties:
       col_widths: {}
-      grid_position: WUNUVF,WUVEAP
+      grid_position: CUXSWV,BPXIVZ
     event_bindings: {click: button_annuler_click}
   - type: Button
     properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true,
@@ -55,11 +55,11 @@ components:
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Tertiary', visible: false, text: Valider, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+      background: 'theme:Error', bold: true, underline: false, icon: ''}
     name: button_validation
     layout_properties:
       col_widths: {}
-      grid_position: EZTMGA,SFTENG
+      grid_position: CUXSWV,SGDEID
     event_bindings: {click: button_validation_click}
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
