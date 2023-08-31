@@ -7,8 +7,9 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import anvil.media                      # pour le pdf
-from ..templates import order_pdf,simple_pdf     #fast pdf
+import anvil.media                               # pour le pdf standard
+#from ..templates import order_pdf,simple_pdf     # fast pdf
+import order_pdf,simple_pdf
 
 class Visu_1_stage(Visu_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
@@ -39,7 +40,8 @@ class Visu_1_stage(Visu_1_stageTemplate):
 
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        order_doc = order_pdf.get_doc()
+        order_doc.preview()
 
 
 
