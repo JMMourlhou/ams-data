@@ -8,7 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.media                      # pour le pdf
-
+from ..templates import order_pdf,simple_pdf     #fast pdf
 
 class Visu_1_stage(Visu_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
@@ -36,6 +36,11 @@ class Visu_1_stage(Visu_1_stageTemplate):
         """This method is called when the button is clicked"""
         media_object = anvil.server.call('create_pdf',self.num_stage, self.intitule)
         anvil.media.download(media_object)
+
+    def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
+
 
 
        
