@@ -36,7 +36,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         intitul = stage_row['type']['code']
         type_row = app_tables.codes_stages.get(code=intitul)
         if type_row:
-            
             intit = type_row['intitulé']
         else:
             alert("intitulé du stage non trouvé !")
