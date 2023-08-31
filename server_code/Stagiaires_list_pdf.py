@@ -10,6 +10,6 @@ import anvil.server
 import anvil.pdf
 
 @anvil.server.callable
-def create_pdf():
-  media_object = anvil.pdf.render_form('Visu_1_stage')
+def create_pdf(num_stage, intitule):
+  media_object = anvil.pdf.render_form('Visu_1_stage',num_stage, intitule, True)  
   return media_object
