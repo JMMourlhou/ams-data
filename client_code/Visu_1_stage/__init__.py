@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.media                               # pour le pdf standard
 #from ..templates import order_pdf,simple_pdf     # fast pdf
-import order_pdf,simple_pdf
+#from fast_pdf import order_pdf,simple_pdf
 
 class Visu_1_stage(Visu_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
