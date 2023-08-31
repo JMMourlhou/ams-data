@@ -42,8 +42,8 @@ class ItemTemplate2(ItemTemplate2Template):
             self.rich_text_1.italic=False
             self.rich_text_1.align="center"
             self.rich_text_1.font="Noto"
-            self.rich_text_1.background="theme:Primary"
-            self.rich_text_1.foreground="theme:On Primary"
+            #self.rich_text_1.background="theme:Primary"
+            #self.rich_text_1.foreground="theme:On Primary"
             self.rich_text_1.content=f"{stagiaire['nom']} {stagiaire['prenom']} ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']}"
 
                                     
