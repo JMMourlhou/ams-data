@@ -10,7 +10,7 @@ import anvil.server
 import anvil.pdf
 from anvil.pdf import PDFRenderer
 
-@anvil.server.background_task
+@anvil.server.callable
 def create_pdf(num_stage, intitule):
     media_object = PDFRenderer(page_size ='A4',
                                filename = f"{intitule}/{num_stage}",
@@ -28,8 +28,9 @@ def create_pdf(num_stage, intitule):
     "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
     """
     return media_object
-
+"""
 @anvil.server.callable
 def run_bg_task(num_stage, intitule):
     task = anvil.server.launch_background_task('create_pdf',num_stage, intitule)
     return media_object
+"""
