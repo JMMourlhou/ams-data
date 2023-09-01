@@ -38,7 +38,7 @@ class Visu_1_stage(Visu_1_stageTemplate):
         """This method is called when the button is clicked"""
         with anvil.server.no_loading_indicator:
             media_object = anvil.server.call('run_bg_task',self.num_stage, self.intitule)
-            anvil.media.download(media_object)
+        anvil.media.download(media_object)
     
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""

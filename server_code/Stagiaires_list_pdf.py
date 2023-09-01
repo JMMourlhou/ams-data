@@ -31,5 +31,5 @@ def create_pdf(num_stage, intitule):
 
 @anvil.server.callable
 def run_bg_task(num_stage, intitule):
-    media_object = anvil.server.launch_background_task('create_pdf',num_stage, intitule)
+    task = anvil.server.launch_background_task('create_pdf',num_stage, intitule)
     return media_object
