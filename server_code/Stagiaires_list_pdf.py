@@ -27,7 +27,6 @@ def create_pdf(num_stage, intitule):
     "prepress": Output similar to Acrobat Distiller “Prepress Optimized” setting.
     "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
     """
-    
     return media_object
 
 @anvil.server.callable
