@@ -29,7 +29,6 @@ class ItemTemplate2(ItemTemplate2Template):
             if orig_pic != None:
                 thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
                 self.image_1.source = thumb_pic
-
             
             # self.text_box_5.text
             fi = self.item["financement"]["code_fi"]

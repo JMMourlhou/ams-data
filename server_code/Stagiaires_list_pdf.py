@@ -26,7 +26,7 @@ def create_pdf(num_stage, intitule):
         print("stage non trouvé à partir de num_stageds server module: Stagiaires_list_pdf")
     else:
         stage_row.update(list_media = media_object) # sauvegarde de la liste pdf ds le stage_row
-        print("liste du stage stockée")
+        print("liste pdf du stage stockée")
     return media_object
     """
     quality :
