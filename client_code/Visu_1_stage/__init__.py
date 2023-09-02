@@ -24,10 +24,13 @@ class Visu_1_stage(Visu_1_stageTemplate):
         
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
-        self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(stage=stage_row)
+        self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(
+            tables.order_by("name", ascending=True),
+            stage=stage_row
+        )
         
         self.label_titre.text = "Stagiaires, stage " +intitule+" (" +num_stage+ ")"
-        self.task = anvil.server.call('run_bg_task1',num_stage, intitule)
+
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

@@ -21,8 +21,7 @@ class ItemTemplate1(ItemTemplate1Template):
         self.button_1.text = self.item['numero']
         self.button_2.text = self.item['type']['code']                     # link key
         self.label_1.text = self.item['date_debut'].strftime("%d %m %Y")   # format date française avec fonction Python strftime
-        # création de la liste à l'avance et sauvegarde ds row du stage
-        self.task = anvil.server.call('run_bg_task1',self.button_1.text, self.button_2.text)  
+        
     # J'ai mis la variable date ds un link, ce qui la rend clikable ! 
     # et récupération par l'event:
     def button_1_click(self, **event_args):

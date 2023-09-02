@@ -22,7 +22,6 @@ class Visu_stages(Visu_stagesTemplate):
         num = app_tables.cpt_stages.search()[0]
         num_max = int(num['compteur'])+1
         num_min = num_max-10
-        #self.repeating_panel_1.items = app_tables.stages.search(tables.order_by("date_debut", ascending=False))
         self.repeating_panel_1.items = app_tables.stages.search(
                                                                 tables.order_by("date_debut", ascending=False),
                                                                 numero = q.between(
