@@ -7,6 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+global cpt  # compteur
+cpt = 0
 
 class ItemTemplate2(ItemTemplate2Template):
     def __init__(self, **properties):
@@ -44,5 +46,16 @@ class ItemTemplate2(ItemTemplate2Template):
             #self.rich_text_1.background="theme:Primary"
             #self.rich_text_1.foreground="theme:On Primary"
             self.rich_text_1.content=f"{stagiaire['nom']} {stagiaire['prenom']} ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']}"
+
+    def image_1_show(self, **event_args):
+        """This method is called when the Image is shown on the screen"""
+        global cpt
+        cpt += 1
+        print(cpt)
+        if cpt == 3 or cpt == 5:
+           print("saut")
+           self.page_break_1.visible = True
+        else:
+           self.page_break_1.visible = False
 
                                     

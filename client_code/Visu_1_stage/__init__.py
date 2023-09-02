@@ -8,8 +8,9 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.media                               # pour le pdf standard
-#from ..templates import order_pdf,simple_pdf     # fast pdf
-#from fast_pdf import order_pdf,simple_pdf
+
+global pdf_mode
+pdf_mode=False
 
 class Visu_1_stage(Visu_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
@@ -18,7 +19,8 @@ class Visu_1_stage(Visu_1_stageTemplate):
         # Any code you write here will run before the form opens.
         self.num_stage = num_stage
         self.intitule = intitule
-        if pdf_mode == True:
+        self.pdf_mode = pdf_mode
+        if self.pdf_mode == True:
             self.button_annuler.visible = False
             self.button_pdf.visible = False
         

@@ -15,6 +15,7 @@ components:
       source: '', spacing_below: none, background: '', horizontal_align: center}
     name: image_1
     layout_properties: {width: 139, grid_position: 'FJUWCR,CRTCYO'}
+    event_bindings: {show: image_1_show}
   - type: RichText
     properties: {role: null, align: center, tooltip: '', enable_slots: true, border: '',
       foreground: black, visible: true, font_size: null, content: '', font: '', spacing_above: small,
@@ -22,4 +23,8 @@ components:
     name: rich_text_1
     layout_properties: {grid_position: 'FJUWCR,XDUOCP', full_width_row: true}
     components: []
+- type: form:dep_tf2fn0r0pqdpmc:PageBreak
+  properties: {margin_top: 0, border: 1px solid gray}
+  name: page_break_1
+  layout_properties: {grid_position: 'GBTIOS,YZJOEK', row_background: '', full_width_row: false}
 is_package: true
