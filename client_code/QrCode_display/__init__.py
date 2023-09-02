@@ -23,7 +23,7 @@ class QrCode_display(QrCode_displayTemplate):
             return
         txt_stage=stage['type']['code']
         txt_stage=txt_stage.replace("_","")
-        self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d %m %Y"))
+        self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
         if num_stage==0 :
             alert("Numéro de stage non valide")
             return

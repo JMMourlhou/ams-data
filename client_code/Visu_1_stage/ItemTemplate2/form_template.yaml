@@ -10,7 +10,7 @@ components:
   layout_properties: {grid_position: 'VKPLTC,PCNLBJ'}
   components:
   - type: Image
-    properties: {role: null, vertical_align: center, height: 146, tooltip: '', border: '',
+    properties: {role: null, vertical_align: center, height: 99, tooltip: '', border: '',
       foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: small,
       source: '', spacing_below: none, background: '', horizontal_align: center}
     name: image_1

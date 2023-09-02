@@ -28,8 +28,8 @@ class Visu_1_stage(Visu_1_stageTemplate):
             tables.order_by("name", ascending=True),
             stage=stage_row
         )
-        
-        self.label_titre.text = "Stagiaires, stage " +intitule+" (" +num_stage+ ")"
+        date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
+        self.label_titre.text = "Stagiaires du stage" +intitule + " du " + date + ", numéro " +num_stage+"."
 
 
     def button_annuler_click(self, **event_args):

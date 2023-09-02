@@ -20,7 +20,7 @@ class ItemTemplate1(ItemTemplate1Template):
         # Any code you write here will run before the form opens.
         self.button_1.text = self.item['numero']
         self.button_2.text = self.item['type']['code']                     # link key
-        self.label_1.text = self.item['date_debut'].strftime("%d %m %Y")   # format date française avec fonction Python strftime
+        self.label_1.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
         
     # J'ai mis la variable date ds un link, ce qui la rend clikable ! 
     # et récupération par l'event:
