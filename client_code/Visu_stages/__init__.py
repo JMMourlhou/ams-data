@@ -15,8 +15,7 @@ class Visu_stages(Visu_stagesTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
-        
+     
         # Initilisation de la liste à afficher
         # Je prend les 10 derniers stages, triés de la derniere date de début à la première
         nb_stages_max = constant_parameters.nb_stages_a_montrer
@@ -31,7 +30,8 @@ class Visu_stages(Visu_stagesTemplate):
                                                                 max=num_max,
                                                                 min_inclusive=False)
                                                                 )
-
+       
+        
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main

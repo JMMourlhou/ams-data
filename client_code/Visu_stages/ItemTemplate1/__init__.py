@@ -21,7 +21,8 @@ class ItemTemplate1(ItemTemplate1Template):
         self.button_1.text = self.item['numero']
         self.button_2.text = self.item['type']['code']                     # link key
         self.label_1.text = self.item['date_debut'].strftime("%d %m %Y")   # format date française avec fonction Python strftime
-
+        # création de la liste à l'avance et sauvegarde ds row du stage
+        self.task = anvil.server.call('run_bg_task1',self.button_1.text, self.button_2.text)  
     # J'ai mis la variable date ds un link, ce qui la rend clikable ! 
     # et récupération par l'event:
     def button_1_click(self, **event_args):
@@ -29,7 +30,7 @@ class ItemTemplate1(ItemTemplate1Template):
        
         num_stage = int(self.button_1.text)
         msg = "Affichage du stage "+ self.button_2.text 
-        open_form('Stage_visu_modif',num_stage)    #x=3 si login normal
+        open_form('Stage_visu_modif',num_stage)   
     
     def button_2_click(self, **event_args):
         """This method is called when the button is clicked"""
