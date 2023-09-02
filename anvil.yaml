@@ -252,6 +252,9 @@ db_schema:
     - name: commentaires
       admin_ui: {order: 8, width: 200}
       type: string
+    - name: list_media
+      type: media
+      admin_ui: {width: 200, order: 9}
     title: Stages
   cpt_stages:
     client: search

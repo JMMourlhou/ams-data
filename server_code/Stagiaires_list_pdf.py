@@ -10,15 +10,24 @@ import anvil.server
 import anvil.pdf
 from anvil.pdf import PDFRenderer
 
-@anvil.server.callable
+@anvil.server.background_task
 def create_pdf(num_stage, intitule):
     media_object = PDFRenderer(page_size ='A4',
-                               filename = f"{intitule}/{num_stage}",
+                               filename = f"{intitule}/{num_stage}.pdf",
                                landscape = False,
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1.0,
                                quality =  "printer"
-                              ).render_form('Visu_1_stage',num_stage, intitule, True)  
+                              ).render_form('Visu_1_stage',num_stage, intitule, True)
+    " sauvegarde du media_object ds la table "
+    #lecture du fichier stages sur le num de stage
+    stage_row = app_tables.stages.get(numero=int(num_stage))
+    if not stage_row:   
+        print("stage non trouvé à partir de num_stageds server module: Stagiaires_list_pdf")
+    else:
+        stage_row.update(list_media = media_object) # sauvegarde de la liste pdf ds le stage_row
+        print("liste du stage stockée")
+    return media_object
     """
     quality :
     "original": All images will be embedded at original resolution. Output file can be very large.
@@ -27,10 +36,10 @@ def create_pdf(num_stage, intitule):
     "prepress": Output similar to Acrobat Distiller “Prepress Optimized” setting.
     "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
     """
-    return media_object
-"""
+    
+
 @anvil.server.callable
 def run_bg_task(num_stage, intitule):
     task = anvil.server.launch_background_task('create_pdf',num_stage, intitule)
-    return media_object
-"""
+    print ("task", task)
+    return task

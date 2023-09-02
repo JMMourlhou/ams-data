@@ -27,7 +27,7 @@ class Visu_1_stage(Visu_1_stageTemplate):
         self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(stage=stage_row)
         
         self.label_titre.text = "Stagiaires, stage " +intitule+" (" +num_stage+ ")"
-        #self.task = anvil.server.call('run_bg_task',num_stage, intitule)
+        self.task = anvil.server.call('run_bg_task',num_stage, intitule)
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -37,8 +37,13 @@ class Visu_1_stage(Visu_1_stageTemplate):
     def button_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
         with anvil.server.no_loading_indicator:
-            media_object = anvil.server.call('create_pdf',self.num_stage, self.intitule)
-        anvil.media.download(media_object)
+            media_object = anvil.server.call('run_bg_task',self.num_stage, self.intitule)
+        "lecture du media object que j'ai stocké en server module"
+        stage_row = app_tables.stages.get(numero=int(self.num_stage))
+        if not stage_row:   
+            print("stage non trouvé à partir de num_stageds server module: Stagiaires_list_pdf")
+        else:
+            anvil.media.download(stage_row["list_media"])
     
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
