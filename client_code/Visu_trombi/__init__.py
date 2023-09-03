@@ -56,7 +56,8 @@ class Visu_trombi(Visu_trombiTemplate):
                                 display_mode="shrink_to_fit",
                                 width = 160,
                                 height = 160,
-                                source = thumb_pic
+                                source = thumb_pic,
+                                horizontal_align = "center"
                                )
                     self.column_panel_1.add_component(im1)
                 if cpt_stagiaire == 2:
@@ -64,7 +65,8 @@ class Visu_trombi(Visu_trombiTemplate):
                                 display_mode="shrink_to_fit",
                                 width = 160,
                                 height = 160,
-                                source = thumb_pic
+                                source = thumb_pic,
+                                horizontal_align = "center"
                                )
                     self.column_panel_1.add_component(im2)
                    
