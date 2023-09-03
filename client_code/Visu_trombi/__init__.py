@@ -59,7 +59,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                 source = thumb_pic,
                                 horizontal_align = "center"
                                )
-                    self.column_panel_1.add_component(im1)
+                    self.xy_panel.add_component(im1, x=10, y=100)
                 if cpt_stagiaire == 2:
                     im2 = Image(background="white",
                                 display_mode="shrink_to_fit",
@@ -68,7 +68,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                 source = thumb_pic,
                                 horizontal_align = "center"
                                )
-                    self.column_panel_1.add_component(im2)
+                    self.xy_panel.add_component(im2, x=180, y=100)
                    
                 
 
