@@ -31,12 +31,22 @@ components:
     layout_properties: {grid_position: 'RPOSFV,NYGVHN'}
 - type: Button
   properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-    foreground: 'theme:Tertiary', visible: true, text: Pdf, font_size: null, font: '',
+    foreground: 'theme:Tertiary', visible: true, text: 'Pdf ', font_size: null, font: '',
     spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
     bold: true, underline: false, icon: ''}
   name: button_pdf
   layout_properties: {grid_position: 'HAURNC,AGERSI'}
   event_bindings: {click: button_pdf_click}
+- type: Button
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: true, text: Trombi, font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
+    bold: true, underline: false, icon: ''}
+  name: button_trombi
+  layout_properties:
+    col_widths: {}
+    grid_position: LLDJDW,HRASIB
+  event_bindings: {click: button_trombi_click}
 - type: Button
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',

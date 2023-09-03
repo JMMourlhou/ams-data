@@ -7,7 +7,9 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-global cpt  # compteur
+from anvil_extras.PageBreak import PageBreak
+
+global cpt  # compteur des lignes
 cpt = 0
 
 class ItemTemplate2(ItemTemplate2Template):
@@ -21,11 +23,7 @@ class ItemTemplate2(ItemTemplate2Template):
         mel=self.item["user_email"]['email']
         stagiaire = app_tables.users.get(email=mel)    
         if stagiaire :
-            #self.text_box_1.text = stagiaire['nom']        #nom
-            #self.text_box_2.text = stagiaire['prenom']      #prénom
-            #self.text_box_3.text = stagiaire['email']
-            #self.text_box_4.text = stagiaire['tel']
-            
+                        
             #Photo
             orig_pic = stagiaire['photo']
             if orig_pic != None:
@@ -49,13 +47,15 @@ class ItemTemplate2(ItemTemplate2Template):
 
     def image_1_show(self, **event_args):
         """This method is called when the Image is shown on the screen"""
-        global cpt
+        
+        global cpt  # Cpt le nb de form imprimée
         cpt += 1
         print(cpt)
-        if cpt == 3 or cpt == 5:
-           print("saut")
-           self.page_break_1.visible = True
-        else:
-           self.page_break_1.visible = False
+        if (cpt // 6) * 6 == cpt:          # ts les 6 stagiaires, 
+           #print("saut")
+           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 6 stagiares
+       
+           
+        
 
                                     

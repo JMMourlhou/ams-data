@@ -30,6 +30,19 @@ class Visu_1_stage(Visu_1_stageTemplate):
             tables.order_by("name", ascending=True),
             stage=stage_row
         )
+        """ Je peux créer une liste à partir de l'objet créé par search ( avec list() )
+             et accéder ensuite à chaque row et column:
+             
+        list1=list(app_tables.stagiaires_inscrits.search(
+            tables.order_by("name", ascending=True),
+            stage=stage_row
+        ))
+        
+        print(list1)
+        print(list1[0]['name'])     row 1, column 'nom'
+        """
+
+        
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
         self.label_titre.text = "Stagiaires du stage" +intitule + " du " + date + ", numéro " +num_stage+"."
 
@@ -50,10 +63,13 @@ class Visu_1_stage(Visu_1_stageTemplate):
         else:
             anvil.media.download(stage_row["list_media"])
     
-    def button_1_click(self, **event_args):
+    
+
+    def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""
-        order_doc = order_pdf.get_doc()
-        order_doc.preview()
+        from ..Visu_trombi import Visu_trombi
+        open_form('Visu_trombi',self.num_stage, self.intitule)
+
 
 
 
