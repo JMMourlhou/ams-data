@@ -18,9 +18,10 @@ class Visu_trombi(Visu_trombiTemplate):
         self.intitule = intitule
         self.pdf_mode = pdf_mode
         if self.pdf_mode == True:
-            self.button_annuler.visible = False
-            self.button_pdf.visible = False
-        
+            #self.button_annuler.visible = False
+            #self.button_pdf.visible = False
+            pass
+            
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
         
@@ -31,7 +32,11 @@ class Visu_trombi(Visu_trombiTemplate):
         ))     
         nb_stagiaires = len(rows)                      # nb de stagiaires
         
-        xy_panel = XYPanel(width=400, height=400, background='red', role='outlined-card', visible=True)
+        alert("point0")
+        #xy_panel = XYPanel(width=400, height=400, background='red', role='outlined-card', visible=True)
+        btn = Button(text="Click me!", background="white", foreground="black")
+        self.xy_panel.add_component(btn, x=1, y=1)
+        
         cpt_stagiaire = 0
         cpt_ligne = 0
         
@@ -40,37 +45,58 @@ class Visu_trombi(Visu_trombiTemplate):
             mel=row["user_email"]['email']
             stagiaire = app_tables.users.get(email=mel)    
             if stagiaire :
+                alert(stagiaire['nom'])
                 #Photo
                 orig_pic = stagiaire['photo']
                 if orig_pic != None:
                     thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
 
-            
-            cpt_stagiaire += 1                                    # compteur 
-            if (cpt_ligne // 4) * 4 == cpt_ligne:                 # chgt de ligne
-                cpt_ligne += 1
-                
-            if cpt_ligne == 1:
-                if cpt_stagiaire == 1:
                     im1 = Image(background="white",
-                                display_mode="shrink_to_fit",
-                                width = 160,
-                                height = 160,
-                                source = thumb_pic,
-                                horizontal_align = "center"
-                               )
-                    alert("point1")
-                    xy_panel.add_component(im1, x=10, y=100)
-                if cpt_stagiaire == 2:
-                    im2 = Image(background="white",
-                                display_mode="shrink_to_fit",
-                                width = 160,
-                                height = 160,
-                                source = thumb_pic,
-                                horizontal_align = "center"
-                               )
-                    xy_panel.add_component(im2, x=180, y=100)
-                   
+                                    display_mode="shrink_to_fit",
+                                    width = 160,
+                                    height = 160,
+                                    source = thumb_pic,
+                                    horizontal_align = "center",
+                                    visible = True
+                                )
+                    alert("test")
+                    self.xy_panel.add_component(im1, x=10, y=100)
+
+
+
+                
+                cpt_stagiaire += 1                                    # compteur 
+                if (cpt_ligne // 4) * 4 == cpt_ligne:                 # chgt de ligne
+                    cpt_ligne += 1
+                    
+                if cpt_ligne == 1:
+                    if cpt_stagiaire == 1:
+                        im1 = Image(background="white",
+                                    display_mode="shrink_to_fit",
+                                    width = 160,
+                                    height = 160,
+                                    source = thumb_pic,
+                                    horizontal_align = "center",
+                                    visible = True
+                                )
+                        alert("point1")
+                        self.xy_panel.add_component(im1, x=10, y=100)
+                    if cpt_stagiaire == 2:
+                        im2 = Image(background="white",
+                                    display_mode="shrink_to_fit",
+                                    width = 160,
+                                    height = 160,
+                                    source = thumb_pic,
+                                    horizontal_align = "center",
+                                    visible = True
+                                )
+                        self.xy_panel.add_component(im2, x=180, y=100)
+                else:
+                    " pas premiere ligne "
+                    pass
+            else:
+                " si pas de stagiaire "
+                pass
                 
 
             

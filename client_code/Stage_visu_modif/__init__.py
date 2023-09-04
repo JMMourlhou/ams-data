@@ -163,9 +163,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_trombi import Visu_trombi
-        open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
-
-
+        open_form('Visu_trombi_copy',self.text_box_num_stage.text, self.text_box_intitule.text)
+        #from ..Form1 import Form1
+        #open_form('Form1')
     
 
 
