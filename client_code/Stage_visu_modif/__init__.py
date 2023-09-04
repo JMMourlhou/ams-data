@@ -160,6 +160,12 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
 
+    def button_trombi_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_trombi import Visu_trombi
+        open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
+
+
     
 
 

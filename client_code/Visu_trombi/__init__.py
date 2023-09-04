@@ -31,7 +31,7 @@ class Visu_trombi(Visu_trombiTemplate):
         ))     
         nb_stagiaires = len(rows)                      # nb de stagiaires
         
-        cp1 = ColumnPanel(background='white')
+        xy_panel = XYPanel(width=400, height=400, background='red', role='outlined-card', visible=True)
         cpt_stagiaire = 0
         cpt_ligne = 0
         
@@ -59,7 +59,8 @@ class Visu_trombi(Visu_trombiTemplate):
                                 source = thumb_pic,
                                 horizontal_align = "center"
                                )
-                    self.xy_panel.add_component(im1, x=10, y=100)
+                    alert("point1")
+                    xy_panel.add_component(im1, x=10, y=100)
                 if cpt_stagiaire == 2:
                     im2 = Image(background="white",
                                 display_mode="shrink_to_fit",
@@ -68,10 +69,10 @@ class Visu_trombi(Visu_trombiTemplate):
                                 source = thumb_pic,
                                 horizontal_align = "center"
                                )
-                    self.xy_panel.add_component(im2, x=180, y=100)
+                    xy_panel.add_component(im2, x=180, y=100)
                    
                 
 
             
                     
-            c = Image(source=thumb_pic)     #Image
+            
