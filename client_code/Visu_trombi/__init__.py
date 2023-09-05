@@ -51,44 +51,97 @@ class Visu_trombi(Visu_trombiTemplate):
                 cpt_stagiaire += 1                                    # compteur 
                 if (cpt_ligne // 4) * 4 == cpt_ligne:                 # chgt de ligne
                     cpt_ligne += 1
-                    
+
+                esp = 150 # espace en pixel
+                
                 if cpt_ligne == 1:
                     if cpt_stagiaire == 1:
                         im1 = Image(background="white", 
                                     display_mode="shrink_to_fit",
-                                    height = 160,
+                                    height = esp,
                                     source = thumb_pic,
                                     horizontal_align = "center",
                                    )
-                        self.xy_panel.add_component(im1, x=1, y=1, width= 160)
+                        self.xy_panel.add_component(im1, x=1, y=1, width= esp)
                         # création du lien pour cliquer dessus
-                        #bt_1 = Button(width=160, background="red")
-                        #self.xy_panel.add_component(bt_1, x=1, y=1, width= 160)
-                        #self.bt_1.set_event_handler('click', bt_1)
-
+                        bt_1 = Button(text="    ", background="", foreground="black", font_size=100)
+                        self.xy_panel.add_component(bt_1, x=1, y=1)
+                        bt_1.set_event_handler('click',self.bt_1_click)
+                        
                     if cpt_stagiaire == 2:
                         im2 = Image(background="white",
                                     display_mode="shrink_to_fit",
-                                    width = 160,
-                                    height = 160,
+                                    
+                                    height = esp,
                                     source = thumb_pic,
                                     horizontal_align = "center",
                                     visible = True
                                 )
-                        self.xy_panel.add_component(im2, x=180*1, y=1, width = 160)
-
+                        self.xy_panel.add_component(im2, x=esp*1, y=1, width = esp)
+                        # création du lien pour cliquer dessus
+                        bt_2 = Button(text="    ", background="", foreground="black", font_size=100)
+                        self.xy_panel.add_component(bt_2, x=esp*1, y=1)
+                        bt_2.set_event_handler('click',self.bt_2_click)
+                        
                     if cpt_stagiaire == 3:
                         im3 = Image(background="white",
                                     display_mode="shrink_to_fit",
-                                    width = 160,
-                                    height = 160,
+                                    
+                                    height = esp,
                                     source = thumb_pic,
                                     horizontal_align = "center",
                                     visible = True
                                 )
-                        self.xy_panel.add_component(im3, x=180*2, y=1, width = 160)
+                        self.xy_panel.add_component(im3, x=esp*2, y=1, width = esp)
+                        # création du lien pour cliquer dessus
+                        bt_3 = Button(text="    ", background="", foreground="black", font_size=100)
+                        self.xy_panel.add_component(bt_3, x=esp*2, y=1)
+                        bt_3.set_event_handler('click',self.bt_3_click)
 
-                        self.bt_1.visible = True
+                    if cpt_stagiaire == 4:
+                        im4 = Image(background="white",
+                                    display_mode="shrink_to_fit",
+                                    
+                                    height = esp,
+                                    source = thumb_pic,
+                                    horizontal_align = "center",
+                                    visible = True
+                                )
+                        self.xy_panel.add_component(im4, x=esp*3, y=1, width = esp)
+                        # création du lien pour cliquer dessus
+                        bt_4 = Button(text="    ", background="", foreground="black", font_size=100)
+                        self.xy_panel.add_component(bt_4, x=esp*3, y=1)
+                        bt_4.set_event_handler('click',self.bt_4_click)
+
+                    if cpt_stagiaire == 5:
+                        im5 = Image(background="white",
+                                    display_mode="shrink_to_fit",
+                                    
+                                    height = esp,
+                                    source = thumb_pic,
+                                    horizontal_align = "center",
+                                    visible = True
+                                )
+                        self.xy_panel.add_component(im5, x=esp*4, y=1, width = esp)
+                        # création du lien pour cliquer dessus
+                        bt_5 = Button(text="    ", background="", foreground="black", font_size=100)
+                        self.xy_panel.add_component(bt_5, x=esp*4, y=1)
+                        bt_5.set_event_handler('click',self.bt_5_click)
+
+                    if cpt_stagiaire == 6:
+                        im6 = Image(background="white",
+                                    display_mode="shrink_to_fit",
+                                    
+                                    height = esp,
+                                    source = thumb_pic,
+                                    horizontal_align = "center",
+                                    visible = True
+                                )
+                        self.xy_panel.add_component(im6, x=esp*5, y=1, width = esp)
+                        # création du lien pour cliquer dessus
+                        bt_6 = Button(text="    ", background="", foreground="black", font_size=100)
+                        self.xy_panel.add_component(bt_6, x=esp*5, y=1)
+                        bt_6.set_event_handler('click',self.bt_6_click)
                 else:
                     " pas premiere ligne "
                     pass
@@ -102,11 +155,35 @@ class Visu_trombi(Visu_trombiTemplate):
         position = 1
         print("position", position)
 
+    def bt_2_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 2
+        print("position", position)
 
+    def bt_3_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 3
+        print("position", position)
+
+    def bt_4_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 4
+        print("position", position)
         
-
+    def bt_5_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 5
+        print("position", position)
                 
-
+    def bt_6_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 6
+        print("position", position)
             
                     
             
