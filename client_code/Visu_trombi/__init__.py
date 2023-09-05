@@ -7,6 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+global position
+position = 0
 
 class Visu_trombi(Visu_trombiTemplate):
     def __init__(self,num_stage, intitule, pdf_mode=False, **properties):
@@ -32,11 +34,7 @@ class Visu_trombi(Visu_trombiTemplate):
         ))     
         nb_stagiaires = len(rows)                      # nb de stagiaires
         
-        alert("point0")
-        #xy_panel = XYPanel(width=400, height=400, background='red', role='outlined-card', visible=True)
-        btn = Button(text="Click me!", background="white", foreground="black")
-        self.xy_panel.add_component(btn, x=1, y=1)
-        
+             
         cpt_stagiaire = 0
         cpt_ligne = 0
         
@@ -45,42 +43,29 @@ class Visu_trombi(Visu_trombiTemplate):
             mel=row["user_email"]['email']
             stagiaire = app_tables.users.get(email=mel)    
             if stagiaire :
-                alert(stagiaire['nom'])
                 #Photo
                 orig_pic = stagiaire['photo']
                 if orig_pic != None:
                     thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
 
-                    im1 = Image(background="white",
-                                    display_mode="shrink_to_fit",
-                                    width = 160,
-                                    height = 160,
-                                    source = thumb_pic,
-                                    horizontal_align = "center",
-                                    visible = True
-                                )
-                    alert("test")
-                    self.xy_panel.add_component(im1, x=10, y=100)
-
-
-
-                
                 cpt_stagiaire += 1                                    # compteur 
                 if (cpt_ligne // 4) * 4 == cpt_ligne:                 # chgt de ligne
                     cpt_ligne += 1
                     
                 if cpt_ligne == 1:
                     if cpt_stagiaire == 1:
-                        im1 = Image(background="white",
+                        im1 = Image(background="white", 
                                     display_mode="shrink_to_fit",
-                                    width = 160,
                                     height = 160,
                                     source = thumb_pic,
                                     horizontal_align = "center",
-                                    visible = True
-                                )
-                        alert("point1")
-                        self.xy_panel.add_component(im1, x=10, y=100)
+                                   )
+                        self.xy_panel.add_component(im1, x=1, y=1, width= 160)
+                        # création du lien pour cliquer dessus
+                        #bt_1 = Button(width=160, background="red")
+                        #self.xy_panel.add_component(bt_1, x=1, y=1, width= 160)
+                        #self.bt_1.set_event_handler('click', bt_1)
+
                     if cpt_stagiaire == 2:
                         im2 = Image(background="white",
                                     display_mode="shrink_to_fit",
@@ -90,13 +75,36 @@ class Visu_trombi(Visu_trombiTemplate):
                                     horizontal_align = "center",
                                     visible = True
                                 )
-                        self.xy_panel.add_component(im2, x=180, y=100)
+                        self.xy_panel.add_component(im2, x=180*1, y=1, width = 160)
+
+                    if cpt_stagiaire == 3:
+                        im3 = Image(background="white",
+                                    display_mode="shrink_to_fit",
+                                    width = 160,
+                                    height = 160,
+                                    source = thumb_pic,
+                                    horizontal_align = "center",
+                                    visible = True
+                                )
+                        self.xy_panel.add_component(im3, x=180*2, y=1, width = 160)
+
+                        self.bt_1.visible = True
                 else:
                     " pas premiere ligne "
                     pass
             else:
                 " si pas de stagiaire "
                 pass
+
+    def bt_1_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 1
+        print("position", position)
+
+
+        
+
                 
 
             

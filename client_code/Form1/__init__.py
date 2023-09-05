@@ -19,3 +19,6 @@ class Form1(Form1Template):
 
         btn = Button(text="Click me!", background="white", foreground="black")
         self.xy_panel.add_component(btn, x=1, y=1)
+        
+        img = Image(source="_/theme/Logo%20F%20S%20small_transparent.png")
+        self.xy_panel.add_component(img, x=1, y=100, width=200)

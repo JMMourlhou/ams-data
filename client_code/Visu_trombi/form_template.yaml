@@ -19,9 +19,18 @@ components:
     name: label_titre
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - type: XYPanel
-  properties: {role: elevated-card, width: 800, align: left, height: 100, tooltip: '',
+  properties: {role: elevated-card, width: 800, align: left, height: 579, tooltip: '',
     border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
     background: 'theme:Primary'}
   name: xy_panel
-  layout_properties: {grid_position: 'VCHZQE,KCGNFG'}
+  layout_properties: {grid_position: 'VCHZQE,UAAMOV'}
+  components:
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: button_1, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: 'theme:On
+        Primary Container', bold: false, underline: false, icon: ''}
+    name: bt_1
+    layout_properties: {x: 45.979949951171875, y: 144.51087951660156, width: 100}
+    event_bindings: {click: bt_1_click}
 is_package: true
