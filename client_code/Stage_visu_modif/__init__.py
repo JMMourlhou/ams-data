@@ -53,6 +53,21 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.text_box_nb_stagiaires_diplom.text = stage_row['nb_stagiaires_diplomes']
             self.text_area_commentaires.text = stage_row['commentaires']
             self.drop_down_lieux.selected_value = stage_row['lieu']
+            
+            """ ***********************************************"""
+            """       Appel du trombi en back round task       """
+            """ ***********************************************"""            
+            with anvil.server.no_loading_indicator:
+                media_object = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
+            "lecture du media object que j'ai stocké en server module"
+            stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))
+            if not stage_row:   
+                print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
+            else:
+                anvil.media.download(stage_row["list_media"])
+                """ ***********************************************  """
+                """       Fin de l'Appel du trombi en back round task       """                
+                """ ***********************************************  """        
         else:
             alert("Stage non trouvé")
             return

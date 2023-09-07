@@ -28,7 +28,6 @@ class ItemTemplate1(ItemTemplate1Template):
         """This method is called when the button is clicked"""
        
         num_stage = int(self.button_1.text)
-        msg = "Affichage du stage "+ self.button_2.text 
         open_form('Stage_visu_modif',num_stage)   
     
     def button_2_click(self, **event_args):
