@@ -8,6 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime
+from .. import French_zone
 from anvil import open_form
 global intitul
 intitul=""
@@ -55,18 +56,13 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.drop_down_lieux.selected_value = stage_row['lieu']
             
             """ ***********************************************"""
-            """       Appel du trombi en back round task       """
+            """       Création du trombi en back ground task       """
             """ ***********************************************"""            
             with anvil.server.no_loading_indicator:
-                media_object = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
-            "lecture du media object que j'ai stocké en server module"
-            stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))
-            if not stage_row:   
-                print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
-            else:
-                anvil.media.download(stage_row["list_media"])
+                task = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
+            
                 """ ***********************************************  """
-                """       Fin de l'Appel du trombi en back round task       """                
+                """       Fin de l'Appel du trombi en back ground task       """                
                 """ ***********************************************  """        
         else:
             alert("Stage non trouvé")
@@ -145,16 +141,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             alert("Stage non enregisté !")
             self.button_annuler_click()
 
-    def button_qr_code_display_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        open_form('QrCode_display', self.text_box_num_stage.text)
-        
-    def button_display_stagiaires_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        global intitul
-        open_form('Visu_1_stage', self.text_box_num_stage.text, intitul)
 
-    
+   
     def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
         self.button_validation.visible = True
@@ -178,8 +166,26 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_trombi import Visu_trombi
-        open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
+        open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text, False)
+
+    def button_trombi_pdf_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
+        stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))
+        if not stage_row:   
+            print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
+        else:
+            anvil.media.download(stage_row["trombi_media"])
+            alert("Trombinoscope téléchargé")
+
+    def button_qr_code_display_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        open_form('QrCode_display', self.text_box_num_stage.text)
         
+    def button_display_stagiaires_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        global intitul
+        open_form('Visu_1_stage', self.text_box_num_stage.text, intitul, False)    
     
 
 

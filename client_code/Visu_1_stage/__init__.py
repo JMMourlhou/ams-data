@@ -23,6 +23,7 @@ class Visu_1_stage(Visu_1_stageTemplate):
         if self.pdf_mode == True:
             self.button_annuler.visible = False
             self.button_pdf.visible = False
+            self.button_trombi.visible = False
         
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
@@ -42,9 +43,9 @@ class Visu_1_stage(Visu_1_stageTemplate):
         print(list1[0]['name'])     row 1, column 'nom'
         """
 
-        
+        cod = stage_row["type"]['code']
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
-        self.label_titre.text = "Stagiaires du stage" +intitule + " du " + date + ", numéro " +num_stage+"."
+        self.label_titre.text = "Fiches stagiaires" + cod + " du " + date + "   (num " +num_stage+")"
 
 
     def button_annuler_click(self, **event_args):
@@ -55,7 +56,7 @@ class Visu_1_stage(Visu_1_stageTemplate):
     def button_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
         with anvil.server.no_loading_indicator:
-            media_object = anvil.server.call('run_bg_task2',self.num_stage, self.intitule)
+            media_object = anvil.server.call('run_bg_task',self.num_stage, self.intitule)
         "lecture du media object que j'ai stocké en server module"
         stage_row = app_tables.stages.get(numero=int(self.num_stage))
         if not stage_row:   

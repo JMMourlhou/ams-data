@@ -177,7 +177,7 @@ components:
   components:
   - type: Button
     properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Liste stagiaires, font_size: null,
+      foreground: 'theme:Tertiary', visible: true, text: Pdf Fiches stagiaires, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Primary', bold: false, underline: false, icon: ''}
     name: button_display_stagiaires
@@ -185,7 +185,17 @@ components:
     event_bindings: {click: button_display_stagiaires_click}
   - type: Button
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Trombinoscope, font_size: null,
+      foreground: 'theme:Tertiary', visible: true, text: Trombi_pdf, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+    name: button_trombi_pdf
+    layout_properties:
+      col_widths: {}
+      grid_position: YGLAJE,DXPHQQ
+    event_bindings: {click: button_trombi_pdf_click}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Tertiary', visible: true, text: Trombi, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Primary', bold: true, underline: false, icon: ''}
     name: button_trombi

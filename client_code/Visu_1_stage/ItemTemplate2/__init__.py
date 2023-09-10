@@ -8,6 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.PageBreak import PageBreak
+from ... import constant_parameters
 
 global cpt  # compteur des lignes
 cpt = 0
@@ -51,7 +52,9 @@ class ItemTemplate2(ItemTemplate2Template):
         global cpt  # Cpt le nb de form imprimée
         cpt += 1
         print(cpt)
-        if (cpt // 6) * 6 == cpt:          # ts les 6 stagiaires, 
+        #récup du param 
+        nb_stag_par_page = constant_parameters.nb_fiche_stagiaire_pdf
+        if (cpt // nb_stag_par_page) * nb_stag_par_page == cpt:          # ts les 1 ou 6 stagiaires, selon param global
            #print("saut")
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 6 stagiares
        

@@ -261,9 +261,15 @@ db_schema:
     - name: list_media
       type: media
       admin_ui: {width: 200, order: 9}
-    - name: list_display
-      admin_ui: {order: 10, width: 200}
-      type: simpleObject
+    - name: trombi_media
+      type: media
+      admin_ui: {width: 200, order: 10}
+    - name: trombi_time
+      type: datetime
+      admin_ui: {width: 200, order: 11}
+    - name: trombi_task_id
+      type: string
+      admin_ui: {width: 200, order: 12}
     title: Stages
   cpt_stages:
     client: search
