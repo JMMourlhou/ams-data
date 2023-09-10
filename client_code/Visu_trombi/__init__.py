@@ -27,7 +27,8 @@ class Visu_trombi(Visu_trombiTemplate):
         
         
         if self.pdf_mode == True:
-            #self.button_annuler.visible = False
+            self.button_annuler.visible = False
+            self.button_annuler2.visible = False
             #self.button_pdf.visible = False
             pass
             
@@ -205,3 +206,14 @@ class Visu_trombi(Visu_trombiTemplate):
         global position
         position = 8
         print("position", position)  
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_stages import Visu_stages
+        open_form('Visu_stages')
+
+    def button_annuler2_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_annuler_click()
+
+

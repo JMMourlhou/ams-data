@@ -39,10 +39,10 @@ def add_stage(type,
                               numero = numero,
                               lieu = lieu_stage,
                               date_debut = date_debut,
-                              nb_stagiaires_deb = nb_stagiaires_deb,
+                              nb_stagiaires_deb = 0,
                               date_fin = date_fin,
-                              nb_stagiaires_fin = nb_stagiaires_fin,
-                              nb_stagiaires_diplomes = nb_stagiaires_diplomes,
+                              nb_stagiaires_fin = 0,
+                              nb_stagiaires_diplomes = 0,
                               commentaires = commentaires
                              )
         

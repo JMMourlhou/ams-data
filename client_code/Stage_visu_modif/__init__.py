@@ -55,15 +55,22 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.text_area_commentaires.text = stage_row['commentaires']
             self.drop_down_lieux.selected_value = stage_row['lieu']
             
-            """ ***********************************************"""
-            """       Création du trombi en back ground task       """
-            """ ***********************************************"""            
-            with anvil.server.no_loading_indicator:
-                task = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
+            """ *************************************************************************"""
+            """       Création de liste et trombi en back ground task si stagiaires ds stage     """
+            """ ***********************************************************************"""            
+            students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
+            alert(len(students_rows))
+            if students_rows:    # stagiaires existants
+                with anvil.server.no_loading_indicator:
+                    task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
+                
+                with anvil.server.no_loading_indicator:
+                    task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
             
-                """ ***********************************************  """
-                """       Fin de l'Appel du trombi en back ground task       """                
-                """ ***********************************************  """        
+            else:     # pas de stagiares
+                self.button_trombi_pdf.visible = False
+                self.button_display_stagiaires.visible  = False
+                self.button_trombi.visible = False
         else:
             alert("Stage non trouvé")
             return
@@ -167,6 +174,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         """This method is called when the button is clicked"""
         from ..Visu_trombi import Visu_trombi
         open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text, False)
+        
 
     def button_trombi_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -182,10 +190,18 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         """This method is called when the button is clicked"""
         open_form('QrCode_display', self.text_box_num_stage.text)
         
-    def button_display_stagiaires_click(self, **event_args):
+    def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        global intitul
-        open_form('Visu_1_stage', self.text_box_num_stage.text, intitul, False)    
+        #global intitul
+        #open_form('Visu_1_stage', self.text_box_num_stage.text, intitul, False) 
+
+        "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
+        stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))
+        if not stage_row:   
+            print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
+        else:
+            anvil.media.download(stage_row["list_media"])
+            alert("Liste téléchargée")
     
 
 

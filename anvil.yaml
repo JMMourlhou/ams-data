@@ -270,6 +270,12 @@ db_schema:
     - name: trombi_task_id
       type: string
       admin_ui: {width: 200, order: 12}
+    - name: list_time
+      admin_ui: {order: 9.5, width: 200}
+      type: datetime
+    - name: list_task_id
+      admin_ui: {order: 9.75, width: 200}
+      type: string
     title: Stages
   cpt_stages:
     client: search

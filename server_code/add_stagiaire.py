@@ -17,6 +17,11 @@ def add_stagiaire(stagiaire, stage, mode_fi):
         print("Stage non trouvé ds fichier stages !")
         valid=False
         return valid
+    else:
+        # Incrément nb se stagiaires début stage 
+        nb = int(code_stage['nb_stagiaires_deb'])
+        nb =+ 1
+        code_stage.update(nb_stagiaires_deb=nb)
 
     # lecture fichier père user
     user=anvil.users.get_user()
@@ -43,16 +48,8 @@ def add_stagiaire(stagiaire, stage, mode_fi):
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
     if stagiaire_row:
         valid=True
-        #effacemnt du code stage ds user:
-        user.update(stage_num_temp=None)
-        
-        #incrément du nb de stagiaires en début de stage
-        """
-        nb_stagiaire_au_dbt=code_stage["nb_stagiaires_deb"]
-        nb=int(nb_stagiaire_au_dbt)
-        nb= nb + 1
-        code_stage.update(nb_stagiaires_deb=nb)
-        """
+        #effacemnt du code stage ds user et incrément du nb de stgiaires ds le stage:
+        user.update(stage_num_temp = None)
     else:
         valid=False
     return valid
