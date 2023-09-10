@@ -67,66 +67,86 @@ class Visu_trombi(Visu_trombiTemplate):
                 print("stagiaire", cpt_stagiaire)
                 if cpt_ligne == 1:
                     if cpt_stagiaire == 1:
-                        
-                        self.xy_panel.add_component(im, x=xx, y=1, width = larg)
+                        yy = 1
+                        xx = 1
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_1 = Button(text="    ", background="red", foreground="black", font_size = size_bt)
-                        self.xy_panel.add_component(bt_1, x=xx, y=1)
+                        self.xy_panel.add_component(bt_1, x=xx, y=yy)
                         bt_1.set_event_handler('click',self.bt_1_click)
 
                     
                     if cpt_stagiaire == 2:
                         xx = xx + inter + larg
                         print(xx)   
-                        self.xy_panel.add_component(im, x=xx, y=1, width = larg)
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_2 = Button(text="    ", background="red", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_2, x=xx, y=1)
+                        self.xy_panel.add_component(bt_2, x=xx, y=yy)
                         bt_2.set_event_handler('click',self.bt_2_click)
                         
                     
                     if cpt_stagiaire == 3:
                         xx = xx + inter + larg  
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=1, width = larg)
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_3 = Button(text="    ", background="red", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_3, x=xx, y=1)
+                        self.xy_panel.add_component(bt_3, x=xx, y=yy)
                         bt_3.set_event_handler('click',self.bt_3_click)
                     
                     if cpt_stagiaire == 4:
                         xx = xx + inter + larg
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=1, width = larg)
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_4 = Button(text="    ", background="red", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_4, x=xx, y=1)
+                        self.xy_panel.add_component(bt_4, x=xx, y=yy)
                         bt_4.set_event_handler('click',self.bt_4_click)
                         
                         cpt_ligne += 1
                  
                 if cpt_ligne == 2:
+                    yy = 220
                     xx = 1
                     if cpt_stagiaire == 5: 
                         xx = 1
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=220, width = larg)
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_5 = Button(text="    ", background="red", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_5, x=xx, y=220)
+                        self.xy_panel.add_component(bt_5, x=xx, y=yy)
                         bt_5.set_event_handler('click',self.bt_5_click)
                         
                     if cpt_stagiaire == 6: 
                         xx = xx + inter + larg
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=220, width = larg)
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_6 = Button(text="    ", background="red", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_6, x=xx, y=220)
+                        self.xy_panel.add_component(bt_6, x=xx, y=yy)
                         bt_6.set_event_handler('click',self.bt_6_click)
+
+                    if cpt_stagiaire == 7: 
+                        xx = xx + inter + larg
+                        print(xx)
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        # création du lien pour cliquer dessus
+                        bt_7 = Button(text="    ", background="red", foreground="black", font_size=size_bt)
+                        self.xy_panel.add_component(bt_7, x=xx, y=yy)
+                        bt_7.set_event_handler('click',self.bt_7_click)
+
+                    if cpt_stagiaire == 8: 
+                        xx = xx + inter + larg
+                        print(xx)
+                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        # création du lien pour cliquer dessus
+                        bt_8 = Button(text="    ", background="red", foreground="black", font_size=size_bt)
+                        self.xy_panel.add_component(bt_8, x=xx, y=yy)
+                        bt_8.set_event_handler('click',self.bt_8_click)
             else:
                 " si pas de stagiaire "
-                pass
+                print("pas de stagiaire")
 
     
         
@@ -161,8 +181,21 @@ class Visu_trombi(Visu_trombiTemplate):
         position = 5
         print("position", position)        
                     
+    
     def bt_6_click(self, **event_args):
         """This method is called when the link is clicked"""
         global position
         position = 6
-        print("position", position)        
+        print("position", position)
+
+    def bt_7_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 7
+        print("position", position)  
+
+    def bt_8_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 8
+        print("position", position)  
