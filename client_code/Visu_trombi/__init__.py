@@ -62,7 +62,7 @@ class Visu_trombi(Visu_trombiTemplate):
                 if orig_pic != None:
                     thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
            
-                self.im = Image(background="white", 
+                self.im[cpt_stagiaire] = Image(background="white", 
                                     display_mode="shrink_to_fit",
                                     height = larg,
                                     source = thumb_pic,
@@ -72,7 +72,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                     visible = True,
                                     tag = mel
                                    )
-                self.im.set_event_handler('mouse_down',self.im_mouse_down)
+                self.im[cpt_stagiaire].set_event_handler('mouse_down',self.im_mouse_down)
                 
                 txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
@@ -223,6 +223,6 @@ class Visu_trombi(Visu_trombiTemplate):
   
     def im_mouse_down(self, x, y, **event_args):
         """This method is called when the mouse cursor enters this component"""
-        email_stagiaire= self.im.tag
+        email_stagiaire= self.im.tag[self]
         print(email_stagiaire)
-        print(event_args['sender'].parent.tag.answertextbox)
+        
