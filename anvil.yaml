@@ -78,7 +78,7 @@ db_schema:
     server: full
     columns:
     - name: stage
-      admin_ui: {order: 0, width: 200}
+      admin_ui: {order: 0, width: 92}
       type: link_single
       target: stages
     - name: financement
@@ -158,7 +158,7 @@ db_schema:
       admin_ui: {order: 8, width: 200}
       type: string
     - name: signed_up
-      admin_ui: {width: 200}
+      admin_ui: {order: 1.5, width: 253}
       type: datetime
     - name: admin
       admin_ui: {order: 9, width: 200}

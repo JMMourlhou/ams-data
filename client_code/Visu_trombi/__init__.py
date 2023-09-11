@@ -64,12 +64,14 @@ class Visu_trombi(Visu_trombiTemplate):
                                     display_mode="shrink_to_fit",
                                     height = larg,
                                     source = thumb_pic,
+                                    spacing_below = None,
                                     horizontal_align = "center",
                                     border = "1px solid black",
                                     visible = True
                                    )
-
-                
+                txt = stagiaire['nom'] + " " + stagiaire['prenom']
+                bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enable = True)
+                bt.set_event_handler('click',self.bt_click)
                 
                 print("ligne ", cpt_ligne) 
                 print("stagiaire", cpt_stagiaire)
@@ -78,11 +80,12 @@ class Visu_trombi(Visu_trombiTemplate):
                     if cpt_stagiaire == 1:
                         xx = 1
                         self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
                         # création du lien pour cliquer dessus
                         bt_1 = Button(text="    ", background="", foreground="black", font_size = size_bt)
                         self.xy_panel.add_component(bt_1, x=xx, y=yy)
                         bt_1.set_event_handler('click',self.bt_1_click)
-
+                        
                     
                     if cpt_stagiaire == 2:
                         xx = xx + inter + larg
@@ -115,7 +118,7 @@ class Visu_trombi(Visu_trombiTemplate):
                         cpt_ligne += 1
                  
                 if cpt_ligne == 2:
-                    yy = 220
+                    yy = 240
                    
                     if cpt_stagiaire == 5: 
                         xx = 1
@@ -137,6 +140,7 @@ class Visu_trombi(Visu_trombiTemplate):
 
                     if cpt_stagiaire == 7: 
                         xx = xx + inter + larg
+                        print(xx)
                         self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_7 = Button(text="    ", background="", foreground="black", font_size=size_bt)
@@ -216,4 +220,8 @@ class Visu_trombi(Visu_trombiTemplate):
         """This method is called when the button is clicked"""
         self.button_annuler_click()
 
-
+def bt_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        global position
+        position = 8
+        print("position", position)  

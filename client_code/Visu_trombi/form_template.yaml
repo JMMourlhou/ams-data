@@ -13,7 +13,7 @@ components:
   components:
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
-        Tertiary', visible: true, text: Choix du stage, font_size: 16, font: '', spacing_above: small,
+        Tertiary', visible: true, text: '', font_size: 16, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: 'theme:On
         Primary', bold: true, underline: false, icon: ''}
     name: label_titre
@@ -29,12 +29,16 @@ components:
     grid_position: GBIDKZ,MRHCGT
   event_bindings: {click: button_annuler2_click}
 - type: XYPanel
-  properties: {role: elevated-card, width: 720.011, align: left, height: 874, tooltip: '',
+  properties: {role: outlined-card, width: 720.011, align: left, height: 874, tooltip: '',
     border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
     background: ''}
   name: xy_panel
   layout_properties: {grid_position: 'XJQNSR,OTEJTD'}
-  components: []
+  components:
+  - type: Button
+    properties: {text: button_1}
+    name: button_1
+    layout_properties: {x: 183.49942016601562, y: 163.6594009399414, width: 100}
 - type: Button
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
