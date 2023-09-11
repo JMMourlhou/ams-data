@@ -35,10 +35,10 @@ components:
   name: xy_panel
   layout_properties: {grid_position: 'XJQNSR,OTEJTD'}
   components:
-  - type: Button
-    properties: {text: button_1}
-    name: button_1
-    layout_properties: {x: 183.49942016601562, y: 163.6594009399414, width: 100}
+  - type: Image
+    properties: {}
+    name: image_1
+    layout_properties: {x: 380.4994201660156, y: 53.65940856933594, width: 200}
 - type: Button
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',

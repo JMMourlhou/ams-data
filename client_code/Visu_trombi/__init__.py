@@ -10,6 +10,8 @@ from anvil.tables import app_tables
 
 global position
 position = 0
+global tag_email
+tag_email = ""
 
 class Visu_trombi(Visu_trombiTemplate):
     def __init__(self,num_stage, intitule, pdf_mode=False, **properties):
@@ -60,18 +62,22 @@ class Visu_trombi(Visu_trombiTemplate):
                 if orig_pic != None:
                     thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
            
-                im = Image(background="white", 
+                self.im = Image(background="white", 
                                     display_mode="shrink_to_fit",
                                     height = larg,
                                     source = thumb_pic,
                                     spacing_below = None,
                                     horizontal_align = "center",
                                     border = "1px solid black",
-                                    visible = True
+                                    visible = True,
+                                    tag = mel
                                    )
+                self.im.set_event_handler('click',self.im_click)
+                
                 txt = stagiaire['nom'] + " " + stagiaire['prenom']
-                bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
-                bt.set_event_handler('click',self.bt_click)
+                self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
+                self.bt.set_event_handler('click',self.bt_click)
+                
                 
                 print("ligne ", cpt_ligne) 
                 print("stagiaire", cpt_stagiaire)
@@ -79,12 +85,9 @@ class Visu_trombi(Visu_trombiTemplate):
                     yy = 1
                     if cpt_stagiaire == 1:
                         xx = 1
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
-                        self.xy_panel.add_component(bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
-                        # création du lien pour cliquer dessus
-                        bt_1 = Button(text="    ", background="", foreground="black", font_size = size_bt)
-                        self.xy_panel.add_component(bt_1, x=xx, y=yy)
-                        bt_1.set_event_handler('click',self.bt_1_click)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
+                        
                         
                     
                     if cpt_stagiaire == 2:
@@ -162,11 +165,6 @@ class Visu_trombi(Visu_trombiTemplate):
     
         
         
-    def bt_1_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 1
-        print("position", position)
 
     def bt_2_click(self, **event_args):
         """This method is called when the link is clicked"""
@@ -222,5 +220,10 @@ class Visu_trombi(Visu_trombiTemplate):
 
     def bt_click(self, **event_args):
         """This method is called when the link is clicked"""
-        email_stagiaire= self.bt_click.tag.text
+        email_stagiaire= self.bt.tag
+        print(email_stagiaire)
+
+    def im_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        email_stagiaire= self.im.tag
         print(email_stagiaire)
