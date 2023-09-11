@@ -38,7 +38,7 @@ components:
   - type: Image
     properties: {}
     name: image_1
-    layout_properties: {x: 380.4994201660156, y: 53.65940856933594, width: 200}
+    layout_properties: {x: 417.4994201660156, y: 364.3841724395752, width: 200}
 - type: Button
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',

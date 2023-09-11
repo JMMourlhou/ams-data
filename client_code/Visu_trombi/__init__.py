@@ -72,7 +72,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                     visible = True,
                                     tag = mel
                                    )
-                self.im.set_event_handler('click',self.im_click)
+                self.im.set_event_handler('mouse_down',self.im_mouse_down)
                 
                 txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
@@ -93,17 +93,14 @@ class Visu_trombi(Visu_trombiTemplate):
                     if cpt_stagiaire == 2:
                         xx = xx + inter + larg
                         print(xx)   
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
-                        # création du lien pour cliquer dessus
-                        bt_2 = Button(text="    ", background="", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_2, x=xx, y=yy)
-                        bt_2.set_event_handler('click',self.bt_2_click)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
                         
                     
                     if cpt_stagiaire == 3:
                         xx = xx + inter + larg  
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_3 = Button(text="    ", background="", foreground="black", font_size=size_bt)
                         self.xy_panel.add_component(bt_3, x=xx, y=yy)
@@ -112,7 +109,7 @@ class Visu_trombi(Visu_trombiTemplate):
                     if cpt_stagiaire == 4:
                         xx = xx + inter + larg
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_4 = Button(text="    ", background="", foreground="black", font_size=size_bt)
                         self.xy_panel.add_component(bt_4, x=xx, y=yy)
@@ -126,7 +123,7 @@ class Visu_trombi(Visu_trombiTemplate):
                     if cpt_stagiaire == 5: 
                         xx = 1
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_5 = Button(text="    ", background="", foreground="black", font_size=size_bt)
                         self.xy_panel.add_component(bt_5, x=xx, y=yy)
@@ -135,7 +132,7 @@ class Visu_trombi(Visu_trombiTemplate):
                     if cpt_stagiaire == 6: 
                         xx = xx + inter + larg
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_6 = Button(text="    ", background="", foreground="black", font_size=size_bt)
                         self.xy_panel.add_component(bt_6, x=xx, y=yy)
@@ -144,7 +141,7 @@ class Visu_trombi(Visu_trombiTemplate):
                     if cpt_stagiaire == 7: 
                         xx = xx + inter + larg
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_7 = Button(text="    ", background="", foreground="black", font_size=size_bt)
                         self.xy_panel.add_component(bt_7, x=xx, y=yy)
@@ -153,7 +150,7 @@ class Visu_trombi(Visu_trombiTemplate):
                     if cpt_stagiaire == 8: 
                         xx = xx + inter + larg
                         print(xx)
-                        self.xy_panel.add_component(im, x=xx, y=yy, width = larg)
+                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                         # création du lien pour cliquer dessus
                         bt_8 = Button(text="    ", background="", foreground="black", font_size=size_bt)
                         self.xy_panel.add_component(bt_8, x=xx, y=yy)
@@ -223,7 +220,8 @@ class Visu_trombi(Visu_trombiTemplate):
         email_stagiaire= self.bt.tag
         print(email_stagiaire)
 
-    def im_click(self, **event_args):
-        """This method is called when the link is clicked"""
+  
+    def im_mouse_down(self, x, y, **event_args):
+        """This method is called when the mouse cursor enters this component"""
         email_stagiaire= self.im.tag
         print(email_stagiaire)
