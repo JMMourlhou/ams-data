@@ -225,3 +225,4 @@ class Visu_trombi(Visu_trombiTemplate):
         """This method is called when the mouse cursor enters this component"""
         email_stagiaire= self.im.tag
         print(email_stagiaire)
+        print(event_args['sender'].parent.tag.answertextbox)
