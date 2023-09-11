@@ -70,7 +70,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                     visible = True
                                    )
                 txt = stagiaire['nom'] + " " + stagiaire['prenom']
-                bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enable = True)
+                bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
                 bt.set_event_handler('click',self.bt_click)
                 
                 print("ligne ", cpt_ligne) 
@@ -220,8 +220,7 @@ class Visu_trombi(Visu_trombiTemplate):
         """This method is called when the button is clicked"""
         self.button_annuler_click()
 
-def bt_click(self, **event_args):
+    def bt_click(self, **event_args):
         """This method is called when the link is clicked"""
-        global position
-        position = 8
-        print("position", position)  
+        email_stagiaire= self.bt_click.tag.text
+        print(email_stagiaire)
