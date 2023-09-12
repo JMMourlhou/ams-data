@@ -221,8 +221,8 @@ class Visu_trombi(Visu_trombiTemplate):
         print(email_stagiaire)
 
   
-    def im_mouse_down(self, x, y, **event_args):
+    def im_mouse_down(self, x, y, sender, **event_args):
         """This method is called when the mouse cursor enters this component"""
-        email_stagiaire= self.im.tag[self]
+        email_stagiaire= sender.tag
         print(email_stagiaire)
         
