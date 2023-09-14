@@ -8,10 +8,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-global position
-position = 0
-global tag_email
-tag_email = ""
 
 class Visu_trombi(Visu_trombiTemplate):
     def __init__(self,num_stage, intitule, pdf_mode=False, **properties):
@@ -24,7 +20,7 @@ class Visu_trombi(Visu_trombiTemplate):
         self.pdf_mode = pdf_mode
         larg = 175 # largeur image en pixel
         inter = 4  # Interval entre image
-        size_bt = 100 # largeur du bt transparent pour permettre le click
+        
         
         
         
@@ -62,7 +58,7 @@ class Visu_trombi(Visu_trombiTemplate):
                 if orig_pic != None:
                     thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
            
-                self.im[cpt_stagiaire] = Image(background="white", 
+                self.im = Image(background="white", 
                                     display_mode="shrink_to_fit",
                                     height = larg,
                                     source = thumb_pic,
@@ -72,7 +68,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                     visible = True,
                                     tag = mel
                                    )
-                self.im[cpt_stagiaire].set_event_handler('mouse_down',self.im_mouse_down)
+                self.im.set_event_handler('mouse_down',self.im_mouse_down)
                 
                 txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
@@ -81,6 +77,7 @@ class Visu_trombi(Visu_trombiTemplate):
                 
                 print("ligne ", cpt_ligne) 
                 print("stagiaire", cpt_stagiaire)
+                
                 if cpt_ligne == 1:
                     yy = 1
                     if cpt_stagiaire == 1:
@@ -101,19 +98,13 @@ class Visu_trombi(Visu_trombiTemplate):
                         xx = xx + inter + larg  
                         print(xx)
                         self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        # création du lien pour cliquer dessus
-                        bt_3 = Button(text="    ", background="", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_3, x=xx, y=yy)
-                        bt_3.set_event_handler('click',self.bt_3_click)
+                        
                     
                     if cpt_stagiaire == 4:
                         xx = xx + inter + larg
                         print(xx)
                         self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        # création du lien pour cliquer dessus
-                        bt_4 = Button(text="    ", background="", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_4, x=xx, y=yy)
-                        bt_4.set_event_handler('click',self.bt_4_click)
+                        
                         
                         cpt_ligne += 1
                  
@@ -124,87 +115,29 @@ class Visu_trombi(Visu_trombiTemplate):
                         xx = 1
                         print(xx)
                         self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        # création du lien pour cliquer dessus
-                        bt_5 = Button(text="    ", background="", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_5, x=xx, y=yy)
-                        bt_5.set_event_handler('click',self.bt_5_click)
+                        
                         
                     if cpt_stagiaire == 6: 
                         xx = xx + inter + larg
                         print(xx)
                         self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        # création du lien pour cliquer dessus
-                        bt_6 = Button(text="    ", background="", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_6, x=xx, y=yy)
-                        bt_6.set_event_handler('click',self.bt_6_click)
+                       
 
                     if cpt_stagiaire == 7: 
                         xx = xx + inter + larg
                         print(xx)
                         self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        # création du lien pour cliquer dessus
-                        bt_7 = Button(text="    ", background="", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_7, x=xx, y=yy)
-                        bt_7.set_event_handler('click',self.bt_7_click)
+                        
 
                     if cpt_stagiaire == 8: 
                         xx = xx + inter + larg
                         print(xx)
                         self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        # création du lien pour cliquer dessus
-                        bt_8 = Button(text="    ", background="", foreground="black", font_size=size_bt)
-                        self.xy_panel.add_component(bt_8, x=xx, y=yy)
-                        bt_8.set_event_handler('click',self.bt_8_click)
+                        
             else:
                 " si pas de stagiaire "
                 print("pas de stagiaire")
 
-    
-        
-        
-
-    def bt_2_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 2
-        print("position", position)
-
-    def bt_3_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 3
-        print("position", position)
-
-    def bt_4_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 4
-        print("position", position)
-
-    def bt_5_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 5
-        print("position", position)        
-                    
-    
-    def bt_6_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 6
-        print("position", position)
-
-    def bt_7_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 7
-        print("position", position)  
-
-    def bt_8_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        global position
-        position = 8
-        print("position", position)  
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -217,13 +150,19 @@ class Visu_trombi(Visu_trombiTemplate):
 
     def bt_click(self, **event_args):
         """This method is called when the link is clicked"""
-        email_stagiaire= self.bt.tag
-        print(email_stagiaire)
+        """ contenu du dictionaire event_args 
+        {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
+        print(event_args) # c'est un dictionnaire contenant les infos de lévenement
+        mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
+        print("mail",mel)
 
   
     def im_mouse_down(self, x, y, **event_args):
         """This method is called when the mouse cursor enters this component"""
-        print(event_args) # c'est un dictionnaire (voir 'events' ds le doc)
-        email_stagiaire= sender.tag
-        print(email_stagiaire)
+        """ contenu du dictionaire event_args 
+        {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
+        print(event_args) #c'est un dictionnaire contenant les infos de lévenement
+        mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
+        print("mail",mel)
+
         
