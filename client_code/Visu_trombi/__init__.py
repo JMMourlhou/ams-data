@@ -39,7 +39,7 @@ class Visu_trombi(Visu_trombiTemplate):
             stage=stage_row
         ))     
         nb_stagiaires = len(rows)                      # nb de stagiaires
-        print("nb-stagiaires", nb_stagiaires)
+        #print("nb-stagiaires", nb_stagiaires)
 
         """ ***************** BOUCLE sur nb stgiaires ds liste *************"""
         xx = 1   # position (x=1, y=1)
@@ -53,7 +53,6 @@ class Visu_trombi(Visu_trombiTemplate):
             mel=row["user_email"]['email']
             stagiaire = app_tables.users.get(email=mel)    
             if stagiaire :
-
                 #Photo
                 orig_pic = stagiaire['photo']
                 if orig_pic != None:
@@ -90,8 +89,8 @@ class Visu_trombi(Visu_trombiTemplate):
                 else :                      # pas 4eme image, je décalle à la prochaine image
                     xx = xx + larg + inter
 
-                print("ligne ", cpt_ligne) 
-                print("stagiaire", cpt_stagiaire)     
+                #print("ligne ", cpt_ligne) 
+                #print("stagiaire", cpt_stagiaire)     
             else:
                 """ si pas de stagiaire """
                 print("pas de stagiaire")
@@ -102,26 +101,26 @@ class Visu_trombi(Visu_trombiTemplate):
         """This method is called when the link is clicked"""
         """ contenu du dictionaire event_args 
         {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
-        print(event_args) # c'est un dictionnaire contenant les infos de lévenement
+        #print(event_args) # c'est un dictionnaire contenant les infos de lévenement
         mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
-        print("mail",mel)
+        #print("mail",mel)
   
     def im_mouse_down(self, x, y, **event_args):
         """This method is called when the mouse cursor enters this component"""
         """ contenu du dictionaire event_args 
         {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
-        print(event_args) #c'est un dictionnaire contenant les infos de lévenement
+        #print(event_args) #c'est un dictionnaire contenant les infos de lévenement
         mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
-        print("mail",mel)
+        #print("mail",mel)
         from ..Saisie_info_apres_trombi import Saisie_info_apres_trombi
         open_form('Saisie_info_apres_trombi', self.num_stage, self.intitule, mel)
     
-    def button_annuler_click(self, **event_args):
+    def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        open_form('Visu_stages')
+        from ..Stage_visu_modif import Stage_visu_modif
+        open_form('Stage_visu_modif',int(self.num_stage)) 
 
-    def button_annuler2_click(self, **event_args):
+    def button_retour2_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.button_annuler_click()
+        self.button_retour_click()
 

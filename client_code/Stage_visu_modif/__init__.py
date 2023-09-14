@@ -28,7 +28,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
-
         
         # Lecture du stage
         stage_row = app_tables.stages.get(numero=num_stage)
@@ -74,7 +73,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         else:
             alert("Stage non trouvé")
             return
-        
 
     def date_picker_to_change(self, **event_args):
         """This method is called when the selected date changes"""
@@ -93,7 +91,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if date1 < date2:
             alert("La date de fin est inférieure à la date de début !")
             self.date_picker_to.focus()
-        
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -121,7 +118,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if self.date_picker_from.date == None :
             alert("Entrez la date de début du stage")
             return
-        
 
         # Test si numero stage code existant pour permettre la modif
         stage=None
@@ -148,7 +144,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             alert("Stage non enregisté !")
             self.button_annuler_click()
 
-
    
     def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -174,7 +169,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         """This method is called when the button is clicked"""
         from ..Visu_trombi import Visu_trombi
         open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text, False)
-        
 
     def button_trombi_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -185,11 +179,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         else:
             anvil.media.download(stage_row["trombi_media"])
             alert("Trombinoscope téléchargé")
-
-    def button_qr_code_display_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        open_form('QrCode_display', self.text_box_num_stage.text)
-        
+       
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
         #global intitul
@@ -202,6 +192,19 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         else:
             anvil.media.download(stage_row["list_media"])
             alert("Liste téléchargée")
+
+    def button_qr_code_display_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # False indique que ce n'est pas une invitation à log in normal
+        # mais une invitation à s'inscrire au stage
+        open_form('QrCode_display', False, self.text_box_num_stage.text)
+    
+    def connection_par_qr_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # True indique que c'est une invitation à log in normal
+        # après l'inscription au stage
+        open_form('QrCode_display', True, self.text_box_num_stage.text)
+
     
 
 

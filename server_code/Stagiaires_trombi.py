@@ -6,8 +6,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-
-
 from . import French_zone_server_side
 import anvil.pdf
 from anvil.pdf import PDFRenderer
@@ -47,8 +45,6 @@ def create_trombi_pdf(num_stage, intitule):
     # get_return_value(): returns the return value of the task, or None if the task has not yet returned.
 
     return media_object
-    
-    
 
 @anvil.server.callable
 def run_bg_task2(num_stage, intitule):

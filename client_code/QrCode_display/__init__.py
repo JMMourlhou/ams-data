@@ -12,28 +12,35 @@ from .. import constant_parameters
 from anvil import open_form 
 
 class QrCode_display(QrCode_displayTemplate):
-    def __init__(self, num_stage=0, **properties):
+    def __init__(self, log_in=False, num_stage=0, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens
-        # lecture du stage à modifier par son numéro             
-        stage = app_tables.stages.get(numero=int(num_stage)) 
-        if not stage:
-            alert("Code du stage non trouvé")
-            return
-        txt_stage=stage['type']['code']
-        txt_stage=txt_stage.replace("_","")
-        self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
-        if num_stage==0 :
-            alert("Numéro de stage non valide")
-            return
+        # si log_in =False, appel du qr_code pour que les stagiaires s'inscrive au stage
+        if log_in == False:
+            # lecture du stage par son numéro si pas de log_in normal
+            stage = app_tables.stages.get(numero=int(num_stage)) 
+            if not stage:
+                alert("Code du stage non trouvé")
+                return
+            txt_stage=stage['type']['code']
+            txt_stage=txt_stage.replace("_","")
+            self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
+            if num_stage==0 :
+                alert("Numéro de stage non valide")
+                return
+            else:
+                time = self.recup_time()
+                param="/#?a=qrcode" + "&stage=" + str(num_stage) + "&t=" + time
         else:
-            app = constant_parameters.code_app1
-            time = self.recup_time()
-            param="/#?a=qrcode" + "&stage=" + str(num_stage) + "&t=" + time
-            code_app1 = app + param  # App "AMS Data"  + code stage
-            media=anvil.server.call('mk_qr_code',code_app1)
-            self.image_1.source=media
+            # si log_in =True, appel du qr_code pour que les stagiaires log in ds l'appli, donc pas de num stage
+            param = ""
+            self.label_titre.text = "Flachez pour vous connecter à l'appli AMSdata "
+            
+        app = constant_parameters.code_app1
+        code_app1 = app + param  # App "AMS Data"  + code stage
+        media=anvil.server.call('mk_qr_code',code_app1)
+        self.image_1.source=media
 
     def recup_time(self, **event_args): 
         time=French_zone.french_zone_time()

@@ -47,7 +47,6 @@ class Visu_1_stage(Visu_1_stageTemplate):
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
         self.label_titre.text = "Fiches stagiaires" + cod + " du " + date + "   (num " +num_stage+")"
 
-
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_stages import Visu_stages
@@ -63,8 +62,6 @@ class Visu_1_stage(Visu_1_stageTemplate):
             print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
         else:
             anvil.media.download(stage_row["list_media"])
-    
-    
 
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""

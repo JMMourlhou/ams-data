@@ -16,7 +16,7 @@ class Visu_stages(Visu_stagesTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
      
-        # Initilisation de la liste à afficher
+        # Initilisation de la liste des stages à afficher
         # Je prend les 10 derniers stages, triés de la derniere date de début à la première
         nb_stages_max = constant_parameters.nb_stages_a_montrer
         num = app_tables.cpt_stages.search()[0]
@@ -44,6 +44,9 @@ class Visu_stages(Visu_stagesTemplate):
         """This method is called when the button is clicked"""
         from ..Stage_creation import Stage_creation
         open_form('Stage_creation')
+
+    
+
 
 
 

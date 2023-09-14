@@ -27,7 +27,7 @@ components:
   layout_properties:
     col_widths: {}
     grid_position: GBIDKZ,MRHCGT
-  event_bindings: {click: button_annuler2_click}
+  event_bindings: {click: button_retour2_click}
 - type: XYPanel
   properties: {role: outlined-card, width: 720.011, align: left, height: 874, tooltip: '',
     border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
@@ -44,5 +44,5 @@ components:
   layout_properties:
     col_widths: {}
     grid_position: YXUIHE,QVKDQV
-  event_bindings: {click: button_annuler_click}
+  event_bindings: {click: button_retour_click}
 is_package: true
