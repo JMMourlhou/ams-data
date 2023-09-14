@@ -7,8 +7,8 @@ from anvil.tables import app_tables
 
 from .. import French_zone
 from .. import calling_signing_up
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+#import anvil.google.auth, anvil.google.drive
+#from anvil.google.drive import app_files
 from ..Saisie_info_de_base import Saisie_info_de_base
 from ..Stage_creation import Stage_creation
 from ..Visu_stages import Visu_stages
