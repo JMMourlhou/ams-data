@@ -23,6 +23,16 @@ components:
         background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
       name: label_3
       layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Tertiary', visible: false, text: Valider, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Error', bold: true, underline: false, icon: ''}
+    name: button_validation_copy
+    layout_properties:
+      col_widths: {}
+      grid_position: WZZKXS,VOOVGF
+    event_bindings: {click: button_validation_click}
   - type: TextBox
     properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Nom,
       border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: '',

@@ -74,9 +74,12 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if self.text_box_nom.text == "" :           # dates vides ?
             alert("Entrez le nom !")
             return
-        if self.text_box_tel.text == "" :              # tel vides ?
+        if self.text_box_tel.text == "":    # tel vides ou inf à 10 caract ?
             alert("Entrez le teléphone")
-            return    
+            return
+        if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
+            alert("Le numéro de teléphone n'est pas valide")
+            return   
         if self.date_naissance.date == None :           # dateN vide ?
             alert("Entrez la date de naissance")
             return   
@@ -158,6 +161,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def text_box_nom_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_validation.visible = True
+        self.button_validation_copy.visible = True
 
     def text_box_prenom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""

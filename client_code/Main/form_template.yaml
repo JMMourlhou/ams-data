@@ -49,7 +49,7 @@ components:
         event_bindings: {click: bt_se_deconnecter_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Se Connecter,
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Connection,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}

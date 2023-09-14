@@ -73,6 +73,23 @@ db_schema:
       admin_ui: {order: 2, width: 200}
       type: string
     title: Lieux
+  qcm:
+    client: none
+    server: full
+    columns:
+    - name: reponse
+      type: bool
+      admin_ui: {width: 200, order: 1}
+    - name: bareme
+      type: number
+      admin_ui: {width: 200, order: 2}
+    - name: Photo
+      admin_ui: {order: 0, width: 200}
+      type: media
+    - name: question
+      type: simpleObject
+      admin_ui: {width: 200, order: 3}
+    title: Qcm
   stagiaires_inscrits:
     client: full
     server: full

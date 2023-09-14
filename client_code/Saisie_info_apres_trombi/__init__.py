@@ -12,10 +12,13 @@ global user
 user = None
 
 class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
-    def __init__(self, mel, first_entry=False, **properties):
+    def __init__(self, num_stage, intitule, mel, first_entry=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.first_entry = first_entry
+        self.num_stage = num_stage
+        self.intitule = intitule
+        self.mel = mel
         # Any code you write here will run before the form opens.
 
         # Drop down mode de financemnt
@@ -24,8 +27,7 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
             self.drop_down_fi.visible = True
             
         # lecture sur le mail du stgiaire après click sur trombi
-        
-        user=app_tables.users.get(email=mel)
+        user=app_tables.users.get(email=self.mel)
 
         if user:
 
@@ -79,6 +81,9 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
         if self.text_box_tel.text == "" :              # tel vides ?
             alert("Entrez le teléphone")
             return
+        if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
+            alert("Le numéro de teléphone n'est pas valide")
+            return   
         if self.date_naissance.date == None :           # dateN vide ?
             alert("Entrez la date de naissance")
             return
@@ -97,9 +102,10 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
                 self.check_box_accept_data_use.checked = True
                 return
 
-        user=anvil.users.get_user()
+        # lecture sur le mail du stgiaire après click sur trombi
+        user=app_tables.users.get(email=self.mel)
         if user:
-            result = anvil.server.call("modify_users", user,
+            result = anvil.server.call("modify_users_after_trombi", self.mel,
                                                     self.text_box_nom.text,
                                                     self.text_box_prenom.text,
                                                     self.image_photo.source,
@@ -116,30 +122,20 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
                                                     self.text_area_commentaires.text
                                                     )
             if result == True :
-                alert("Renseignements enregistés !")    # *************************************
-                # insertion du stagiaire automatiqt si num_stage != 0
-                user=anvil.users.get_user()
-                if user and self.first_entry: # 1ere entrée en fiche de renseignement
-                    stage=str(user['stage_num_temp'])
-
-                    if  user['stage_num_temp']>0:
-                        row = self.drop_down_fi.selected_value
-                        code_fi=row['code_fi']
-
-                        self.insertion_du_stagiaire(user, code_fi, stage)
-                    self.button_annuler_click()
+                alert("Renseignements enregistés !")   
+                from ..Visu_trombi import Visu_trombi
+                open_form('Visu_trombi',self.num_stage, self.intitule, False)
             else :
                 alert("Renseignements non enregistés !")
-            self.button_annuler_click()
+            self.button_retour_click()
         else:
             alert("utilisateur non trouvé !")
-            self.button_annuler_click()
+            self.button_retour_click()
 
-    def button_annuler_click(self, **event_args):
+    def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
-        #open_form('Main',99)
-        open_form('Main')
+        from ..Visu_trombi import Visu_trombi
+        open_form('Visu_trombi',self.num_stage, self.intitule, False)
 
         #js.call_js('showSidebar')
 
@@ -160,7 +156,8 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
     def text_box_nom_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_validation.visible = True
-
+        self.button_validation_copy.visible = True
+        
     def text_box_prenom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
         self.text_box_nom_change()
