@@ -63,8 +63,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 with anvil.server.no_loading_indicator:
                     task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
                 
-                with anvil.server.no_loading_indicator:
-                    task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
+                #with anvil.server.no_loading_indicator:
+                    #task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
             
             else:     # pas de stagiares
                 self.button_trombi_pdf.visible = False
