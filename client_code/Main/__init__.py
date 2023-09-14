@@ -138,6 +138,12 @@ class Main(MainTemplate):
         from ..Visu_stages import Visu_stages
         open_form('Visu_stages')
 
+    def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Qcm_test import Qcm_test
+        open_form('Qcm_test')
+
+
 
     
 
