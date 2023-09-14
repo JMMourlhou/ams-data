@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from anvil_extras.PageBreak import PageBreak
 
 
 class Visu_trombi(Visu_trombiTemplate):
@@ -20,15 +21,10 @@ class Visu_trombi(Visu_trombiTemplate):
         self.pdf_mode = pdf_mode
         larg = 175 # largeur image en pixel
         inter = 4  # Interval entre image
-        
-        
-        
-        
+       
         if self.pdf_mode == True:
             self.button_annuler.visible = False
             self.button_annuler2.visible = False
-            #self.button_pdf.visible = False
-            pass
             
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
@@ -44,20 +40,27 @@ class Visu_trombi(Visu_trombiTemplate):
         ))     
         nb_stagiaires = len(rows)                      # nb de stagiaires
         print("nb-stagiaires", nb_stagiaires)
-        
+
+        """ ***************** BOUCLE sur nb stgiaires ds liste *************"""
+        xx = 1   # position (x=1, y=1)
+        yy = 1
         cpt_stagiaire = 0
         cpt_ligne = 1
-        for row in rows:
+        for row in rows :
+            cpt_stagiaire += 1  # compteur
+       
             #lecture fichier users à partir du mail
             mel=row["user_email"]['email']
             stagiaire = app_tables.users.get(email=mel)    
             if stagiaire :
-                cpt_stagiaire += 1                 # compteur 
+
                 #Photo
                 orig_pic = stagiaire['photo']
                 if orig_pic != None:
                     thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
-           
+                else:
+                    thumb_pic = None
+            
                 self.im = Image(background="white", 
                                     display_mode="shrink_to_fit",
                                     height = larg,
@@ -67,78 +70,52 @@ class Visu_trombi(Visu_trombiTemplate):
                                     border = "1px solid black",
                                     visible = True,
                                     tag = mel
-                                   )
+                                    )
                 self.im.set_event_handler('mouse_down',self.im_mouse_down)
                 
                 txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
                 self.bt.set_event_handler('click',self.bt_click)
                 
-                
+                self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
+                self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
+
+                if cpt_stagiaire % 4 == 0 : # (modulo 4) si 4eme image de la ligne affichée, j'initialise à 1ere image et saute la ligne
+                    if cpt_ligne == 4:      # si 4eme image de la 4eme ligne, page break
+                        cpt_ligne == 0
+                        self.add_component(PageBreak())      # si en création de pdf, je saute une page après 4 lignes
+                    xx = 1
+                    yy += 239
+                    cpt_ligne += 1
+                else :                      # pas 4eme image, je décalle à la prochaine image
+                    xx = xx + larg + inter
+
                 print("ligne ", cpt_ligne) 
-                print("stagiaire", cpt_stagiaire)
-                
-                if cpt_ligne == 1:
-                    yy = 1
-                    if cpt_stagiaire == 1:
-                        xx = 1
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
-                        
-                        
-                    
-                    if cpt_stagiaire == 2:
-                        xx = xx + inter + larg
-                        print(xx)   
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
-                        
-                    
-                    if cpt_stagiaire == 3:
-                        xx = xx + inter + larg  
-                        print(xx)
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        
-                    
-                    if cpt_stagiaire == 4:
-                        xx = xx + inter + larg
-                        print(xx)
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        
-                        
-                        cpt_ligne += 1
-                 
-                if cpt_ligne == 2:
-                    yy = 240
-                   
-                    if cpt_stagiaire == 5: 
-                        xx = 1
-                        print(xx)
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        
-                        
-                    if cpt_stagiaire == 6: 
-                        xx = xx + inter + larg
-                        print(xx)
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                       
-
-                    if cpt_stagiaire == 7: 
-                        xx = xx + inter + larg
-                        print(xx)
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        
-
-                    if cpt_stagiaire == 8: 
-                        xx = xx + inter + larg
-                        print(xx)
-                        self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
-                        
+                print("stagiaire", cpt_stagiaire)     
             else:
-                " si pas de stagiaire "
+                """ si pas de stagiaire """
                 print("pas de stagiaire")
 
-
+    """ Gestion des évenements click sur image ou nom, extraction grace au TAG de l'image ou nom """
+    
+    def bt_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        """ contenu du dictionaire event_args 
+        {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
+        print(event_args) # c'est un dictionnaire contenant les infos de lévenement
+        mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
+        print("mail",mel)
+  
+    def im_mouse_down(self, x, y, **event_args):
+        """This method is called when the mouse cursor enters this component"""
+        """ contenu du dictionaire event_args 
+        {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
+        print(event_args) #c'est un dictionnaire contenant les infos de lévenement
+        mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
+        print("mail",mel)
+        from ..Saisie_info_apres_trombi import Saisie_info_apres_trombi
+        open_form('Saisie_info_apres_trombi', mel)
+    
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_stages import Visu_stages
@@ -148,21 +125,3 @@ class Visu_trombi(Visu_trombiTemplate):
         """This method is called when the button is clicked"""
         self.button_annuler_click()
 
-    def bt_click(self, **event_args):
-        """This method is called when the link is clicked"""
-        """ contenu du dictionaire event_args 
-        {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
-        print(event_args) # c'est un dictionnaire contenant les infos de lévenement
-        mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
-        print("mail",mel)
-
-  
-    def im_mouse_down(self, x, y, **event_args):
-        """This method is called when the mouse cursor enters this component"""
-        """ contenu du dictionaire event_args 
-        {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
-        print(event_args) #c'est un dictionnaire contenant les infos de lévenement
-        mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
-        print("mail",mel)
-
-        

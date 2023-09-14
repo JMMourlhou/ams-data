@@ -59,7 +59,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
             """ ***********************************************************************"""            
             students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
-            alert(len(students_rows))
+            #alert(len(students_rows))
             if students_rows:    # stagiaires existants
                 with anvil.server.no_loading_indicator:
                     task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)

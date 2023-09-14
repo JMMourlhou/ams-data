@@ -56,7 +56,7 @@ class ItemTemplate2(ItemTemplate2Template):
         nb_stag_par_page = constant_parameters.nb_fiche_stagiaire_pdf
         if (cpt // nb_stag_par_page) * nb_stag_par_page == cpt:          # ts les 1 ou 6 stagiaires, selon param global
            #print("saut")
-           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 6 stagiares
+           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 6 stagiares 
        
            
         
