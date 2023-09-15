@@ -49,6 +49,17 @@ components:
         event_bindings: {click: bt_se_deconnecter_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Créez votre compte,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
+      name: bt_se_connecter_copy
+      layout_properties:
+        col_widths: {}
+        grid_position: LRXJXA,CUVIXY
+      event_bindings: {click: bt_sign_in_click}
+    - type: Button
+      properties: {role: elevated-button, align: center, tooltip: '', border: '',
         enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Connection,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,

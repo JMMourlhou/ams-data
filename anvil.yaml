@@ -1,13 +1,13 @@
 dependencies:
-- dep_id: dep_d0gxjeewfzhpm
-  version: {dev: false}
-  resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_up_for_AMS_Data}
 - dep_id: dep_cox2zpj6dyx4w
   version: {dev: false}
   resolution_hints: {app_id: NRVII2QKUF7NSGEP, name: FastPDF, package_name: fast_pdf}
 - dep_id: dep_tf2fn0r0pqdpmc
   version: {dev: false}
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
+- dep_id: dep_vrw0j6n3aio36a
+  version: {dev: false}
+  resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_up_for_AMS_Data}
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}

@@ -54,16 +54,17 @@ class Visu_trombi(Visu_trombiTemplate):
             stagiaire = app_tables.users.get(email=mel)    
             if stagiaire :
                 #Photo
-                orig_pic = stagiaire['photo']
+                table_pic = stagiaire['photo']
+                """
                 if orig_pic != None:
                     thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
                 else:
                     thumb_pic = None
-            
+                """
                 self.im = Image(background="white", 
                                     display_mode="shrink_to_fit",
                                     height = larg,
-                                    source = thumb_pic,
+                                    source = table_pic,
                                     spacing_below = None,
                                     horizontal_align = "center",
                                     border = "1px solid black",
