@@ -6,7 +6,7 @@ import anvil.server
 #from anvil.tables import app_tables
 
 from .. import French_zone
-#from .. import calling_signing_up
+from .. import calling_signing_up
 #import anvil.google.auth, anvil.google.drive
 #from anvil.google.drive import app_files
 from ..Saisie_info_de_base import Saisie_info_de_base
@@ -130,7 +130,7 @@ class Main(MainTemplate):
     def bt_sign_in_click(self, **event_args):
         """This method is called when the button is clicked"""
         import sign_up_for_AMS_Data
-        from sign_up_for_AMS_Data import Form1
+        from sign_up_for_AMS_Data.Form1 import Form1
         self.content_panel.clear()
         self.content_panel.add_component(Form1(), full_width_row=True)
 
@@ -146,10 +146,10 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""
         
-        import sign_up_for_AMS_Data
-        from sign_up_for_AMS_Data import Form1
+        #import sign_in_for_AMS_Data
+        from sign_in_for_AMS_Data.LoginDialog import LoginDialog
         self.content_panel.clear()
-        self.content_panel.add_component(Form1(), full_width_row=True)
+        self.content_panel.add_component(LoginDialog(), full_width_row=False)
         
         #calling_signing_up.calling_form1() 
 

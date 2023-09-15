@@ -12,7 +12,7 @@ from datetime import datetime
 
 
 
-from sign_up_for_AMS_Data.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
+from sign_in_for_AMS_Data.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
 
 
 #Get the time now, local time FOR CLIENT SIDE (date from browser)
