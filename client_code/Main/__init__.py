@@ -23,7 +23,7 @@ class Main(MainTemplate):
         
         print("nb: ", nb)
         self.bt_se_deconnecter.visible = False
-        self.bt_user_mail.text = "Déconnecté"
+        self.bt_user_mail.text = "Vous êtes déconnecté"
         self.nb=nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
@@ -90,13 +90,14 @@ class Main(MainTemplate):
              self.bt_se_connecter.visible = False
              self.bt_se_deconnecter.visible = True
         else:
-             self.bt_user_mail.text = "Déconnecté"
+             self.bt_user_mail.text = "Vous êtes déconnecté."
              self.bt_se_deconnecter.visible = False 
              self.bt_se_connecter.visible = True
 
     def display_admin_or_other_buttons(self, **event_args):
         user=anvil.users.get_user()
         if user:
+            self.bt_sign_in.visible = False
             if user["admin"] == True:  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
@@ -104,6 +105,7 @@ class Main(MainTemplate):
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
         else:                          # deconnected
+            self.bt_sign_in.visible = True
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
     
@@ -112,6 +114,7 @@ class Main(MainTemplate):
         self.content_panel.clear()
         self.button_renseignements.visible = False
         self.bt_se_deconnecter.visible = False
+        self.bt_sign_in.visible = False
         # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
 
         self.content_panel.add_component(Saisie_info_de_base(prem_passage), full_width_row=True)
@@ -129,8 +132,10 @@ class Main(MainTemplate):
 
     def bt_sign_in_click(self, **event_args):
         """This method is called when the button is clicked"""
-        import sign_up_for_AMS_Data
-        from sign_up_for_AMS_Data.Form1 import Form1
+        import sign_in_for_AMS_Data
+        from sign_in_for_AMS_Data.Form1 import Form1
+        self.bt_se_connecter.visible = False
+        self.bt_sign_in.visible = False
         self.content_panel.clear()
         self.content_panel.add_component(Form1(), full_width_row=True)
 
@@ -145,7 +150,8 @@ class Main(MainTemplate):
     def button_se_connecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""
-        
+        self.bt_se_connecter.visible = False
+        self.bt_sign_in.visible = False
         #import sign_in_for_AMS_Data
         from sign_in_for_AMS_Data.LoginDialog_V2 import LoginDialog_V2
         self.content_panel.clear()

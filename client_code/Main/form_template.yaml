@@ -53,7 +53,7 @@ components:
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}
-      name: bt_se_connecter_copy
+      name: bt_sign_in
       layout_properties:
         col_widths: {}
         grid_position: LRXJXA,CUVIXY
