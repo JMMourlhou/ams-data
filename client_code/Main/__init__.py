@@ -147,9 +147,9 @@ class Main(MainTemplate):
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""
         
         #import sign_in_for_AMS_Data
-        from sign_in_for_AMS_Data.LoginDialog import LoginDialog
+        from sign_in_for_AMS_Data.LoginDialog_V2 import LoginDialog_V2
         self.content_panel.clear()
-        self.content_panel.add_component(LoginDialog(), full_width_row=False)
+        self.content_panel.add_component(LoginDialog_V2(), full_width_row=False)
         
         #calling_signing_up.calling_form1() 
 
