@@ -199,11 +199,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         # mais une invitation à s'inscrire au stage
         open_form('QrCode_display', False, self.text_box_num_stage.text)
     
-    def connection_par_qr_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        # True indique que c'est une invitation à log in normal
-        # après l'inscription au stage
-        open_form('QrCode_display', True, self.text_box_num_stage.text)
+  
 
     
 
