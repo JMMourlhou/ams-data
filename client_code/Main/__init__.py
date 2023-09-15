@@ -159,6 +159,11 @@ class Main(MainTemplate):
         
         #calling_signing_up.calling_form1() 
 
+    def button_qr_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        open_form('QrCode_display', True)
+
+
     
 
            

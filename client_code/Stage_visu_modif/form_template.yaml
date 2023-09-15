@@ -47,9 +47,9 @@ components:
     event_bindings: {click: button_validation_click}
   - type: Button
     properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Qr code, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+      foreground: 'theme:Tertiary', visible: true, text: Inscription par Qr code,
+      font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+      italic: false, background: 'theme:Primary', bold: true, underline: false, icon: ''}
     name: button_qr_code_display
     layout_properties: {grid_position: 'CUXSWV,CERSES'}
     event_bindings: {click: button_qr_code_display_click}
