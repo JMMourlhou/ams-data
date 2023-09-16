@@ -38,6 +38,7 @@ components:
     layout_properties:
       col_widths: {}
       grid_position: HCKSCV,STXCHM
+    event_bindings: {click: bt_user_mail_click}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_2
@@ -61,7 +62,7 @@ components:
         event_bindings: {click: bt_se_deconnecter_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Créez votre compte,
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Créer son compte,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}
@@ -72,7 +73,7 @@ components:
       event_bindings: {click: bt_sign_in_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Connection,
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Se connecter,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}
@@ -81,22 +82,6 @@ components:
         col_widths: {}
         grid_position: MNOCWR,BIAQGF
       event_bindings: {click: button_se_connecter_click}
-    - type: ColumnPanel
-      properties: {col_widths: '{}'}
-      name: column_panel_others
-      layout_properties: {grid_position: 'LWHMEL,OIBGBJ'}
-      components:
-      - type: Button
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Mes renseignements,
-          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-          icon: ''}
-        name: button_renseignements
-        layout_properties:
-          col_widths: {}
-          grid_position: MNGNVP,FNWMGJ
-        event_bindings: {click: button_renseignements_click}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_admin
@@ -111,6 +96,10 @@ components:
       name: liste_stages
       layout_properties: {grid_position: 'JKULHH,FQNSKM'}
       event_bindings: {click: liste_stages_click}
+  - type: ColumnPanel
+    properties: {}
+    name: column_panel_others
+    layout_properties: {grid_position: 'RTTJYF,ASKDYA'}
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Tertiary', visible: true, text: qcm, font_size: null, font: '',

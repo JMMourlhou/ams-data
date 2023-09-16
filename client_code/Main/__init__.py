@@ -98,6 +98,7 @@ class Main(MainTemplate):
         user=anvil.users.get_user()
         if user:
             self.bt_sign_in.visible = False
+            self.bt_user_mail.enabled = True
             if user["admin"] == True:  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
@@ -108,16 +109,6 @@ class Main(MainTemplate):
             self.bt_sign_in.visible = True
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
-    
-    def button_renseignements_click(self, prem_passage=False, **event_args):   #prem passage=True si er remplissage fiche renseignement
-        """This method is called when the button is clicked"""
-        self.content_panel.clear()
-        self.button_renseignements.visible = False
-        self.bt_se_deconnecter.visible = False
-        self.bt_sign_in.visible = False
-        # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
-
-        self.content_panel.add_component(Saisie_info_de_base(prem_passage), full_width_row=True)
         
         
     def liste_stages_click(self, **event_args):
@@ -162,6 +153,16 @@ class Main(MainTemplate):
     def button_qr_click(self, **event_args):
         """This method is called when the button is clicked"""
         open_form('QrCode_display', True)
+
+    def bt_user_mail_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.content_panel.clear()
+        
+        self.bt_se_deconnecter.visible = False
+        self.bt_sign_in.visible = False
+        # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
+        self.content_panel.add_component(Saisie_info_de_base(False), full_width_row=True)
+
 
 
     
