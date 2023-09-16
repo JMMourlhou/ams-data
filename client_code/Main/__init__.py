@@ -123,12 +123,12 @@ class Main(MainTemplate):
 
     def bt_sign_in_click(self, **event_args):
         """This method is called when the button is clicked"""
-        import sign_in_for_AMS_Data
-        from sign_in_for_AMS_Data.Form1 import Form1
+        #import sign_in_for_AMS_Data
+        from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
         self.bt_se_connecter.visible = False
         self.bt_sign_in.visible = False
         self.content_panel.clear()
-        self.content_panel.add_component(Form1(), full_width_row=True)
+        self.content_panel.add_component(SignupDialog_V2(), full_width_row=False)
 
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -148,7 +148,6 @@ class Main(MainTemplate):
         self.content_panel.clear()
         self.content_panel.add_component(LoginDialog_V2(), full_width_row=False)
         
-        #calling_signing_up.calling_form1() 
 
     def button_qr_click(self, **event_args):
         """This method is called when the button is clicked"""
