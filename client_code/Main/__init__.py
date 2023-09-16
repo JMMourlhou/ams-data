@@ -48,7 +48,8 @@ class Main(MainTemplate):
             
             h={}
             h = anvil.get_url_hash()
-            if self.nb == 99:  #retour de création de renseignement, j'efface l'url pour arrêter la boucle
+            print(f"h ds init d'AMS_Data: {h}")
+            if self.nb == 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
                 h={}
             print(f"h ds init d'AMS_Data: {h}")
             if len(h)!=0 :  # a URL has openned this app
@@ -60,13 +61,16 @@ class Main(MainTemplate):
                     alert("Ce lien n'est plus actif !")
                     
                 # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
+                # j'utilise try pour ne pas créer une erreur si pas param "stage" ds l'url 
                 try:
+                    alert(h["stage"])
                     num_stage=h["stage"]
-                    if len(num_stage) != 0 :        #oui le user vient de flacher le Qr code
-                        #alert("réception en création de stage " + str(num_stage))
-                        calling_signing_up.calling_form1(h, num_stage)  #c'est sign in, je passe num stage
+                    if len(num_stage) != 0 :        #le user vient de flacher le Qr code
+                        self.bt_sign_in_click(h)
+                        
+                        #calling_signing_up.calling_form1(h, num_stage)  #c'est sign in, je passe num stage
                 except:
-                        calling_signing_up.calling_form1(h)  # pas url venant du qr code, je ne passe pas le num stage
+                        calling_signing_up.calling_form1()  # pas url venant du qr code, je ne passe pas le num stage
         
         user=anvil.users.get_user()
         if not user:  
@@ -123,14 +127,14 @@ class Main(MainTemplate):
         from ..Qcm_test import Qcm_test
         open_form('Qcm_test')
 
-    def bt_sign_in_click(self, **event_args):
+    def bt_sign_in_click(self, h={},**event_args):      # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""
-        #import sign_in_for_AMS_Data
+        alert("button sign in")
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
         self.bt_se_connecter.visible = False
         self.bt_sign_in.visible = False
         self.content_panel.clear()
-        self.content_panel.add_component(SignupDialog_V2(), full_width_row=False)
+        self.content_panel.add_component(SignupDialog_V2(h), full_width_row=False)
 
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
