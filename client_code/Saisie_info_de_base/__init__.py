@@ -123,15 +123,17 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 if user and self.first_entry: # 1ere entrée en fiche de renseignement
                     stage=str(user['stage_num_temp'])
                                         
-                    if  user['stage_num_temp']>0:
+                    if  user['stage_num_temp']==0:
+                        self.button_annuler_click()
+                    else:
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
-                        
                         self.insertion_du_stagiaire(user, code_fi, stage)
-                    self.button_annuler_click()
+                        alert(f"Enregistrement au stage {stage} ok")
+                        self.button_annuler_click()
             else :
                 alert("Renseignements non enregistés !")
-            self.button_annuler_click()
+                self.button_annuler_click()
         else:
             alert("utilisateur non trouvé !")
             self.button_annuler_click()
@@ -139,8 +141,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-        #open_form('Main',99)
-        open_form('Main')
+        open_form('Main',99)
+        #open_form('Main')
 
         #js.call_js('showSidebar')
         

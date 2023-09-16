@@ -48,6 +48,8 @@ class Main(MainTemplate):
             
             h={}
             h = anvil.get_url_hash()
+            if self.nb == 99:  #retour de création de renseignement, j'efface l'url pour arrêter la boucle
+                h={}
             print(f"h ds init d'AMS_Data: {h}")
             if len(h)!=0 :  # a URL has openned this app
                 # lien actif < à 10 min ?
