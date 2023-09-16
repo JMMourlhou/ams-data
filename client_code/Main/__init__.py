@@ -73,7 +73,7 @@ class Main(MainTemplate):
             # renseignements du user pour savoir si on est en 1ere utilisation (on n'affiche pas liste stages)
             if user['prenom'] == None:
                 self.liste_stages.visible = False
-                self.button_renseignements_click(True)   # 1ere utilisation True
+                self.bt_user_mail_click(True)   # 1ere utilisation True
                 
         
         # handling buttons display        
@@ -153,14 +153,14 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         open_form('QrCode_display', True)
 
-    def bt_user_mail_click(self, **event_args):
+    def bt_user_mail_click(self, prem_util=False, **event_args):    # True=1ere utilisation
         """This method is called when the button is clicked"""
         self.content_panel.clear()
         
         self.bt_se_deconnecter.visible = False
         self.bt_sign_in.visible = False
         # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
-        self.content_panel.add_component(Saisie_info_de_base(False), full_width_row=True)
+        self.content_panel.add_component(Saisie_info_de_base(prem_util), full_width_row=True)
 
 
 
