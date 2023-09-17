@@ -75,18 +75,26 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             alert("Entrez le nom !")
             return
         if self.text_box_tel.text == "":    # tel vides ou inf à 10 caract ?
-            alert("Entrez le teléphone")
+            alert("Entrez le teléphone !")
             return
         if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
-            alert("Le numéro de teléphone n'est pas valide")
+            alert("Le numéro de teléphone n'est pas valide !")
             return   
         if self.date_naissance.date == None :           # dateN vide ?
-            alert("Entrez la date de naissance")
+            alert("Entrez la date de naissance !")
             return   
         if self.text_box_ville_naissance.text == "" :    # ville N vide ?
-            alert("Entrez la ville de Naissance")
+            alert("Entrez la ville de naissance !")
             return   
-            
+        if self.text_area_rue.text == "":
+            alert("Entrez votre adresse (Rue) !")
+            return  
+        if self.text_box_ville.text == "":
+            alert("Entrez votre adresse (Ville) !")
+            return
+        if self.text_box_code_postal.text == "":
+            alert("Entrez votre adresse (Code Postal) !")
+            return
         # Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
         if self.drop_down_fi.selected_value == None and self.first_entry==True: 
             alert("Vous devez sélectionner un mode de financement !")

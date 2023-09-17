@@ -53,7 +53,7 @@ class QrCode_display(QrCode_displayTemplate):
         """This method is called when the button is clicked"""
         
         from ..Main import Main
-        open_form('Main')
+        open_form('Main',99)
         
 
 
