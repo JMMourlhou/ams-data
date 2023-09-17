@@ -13,7 +13,7 @@ from ..Stage_creation import Stage_creation
 from ..Visu_stages import Visu_stages
 from ..Visu_stages.ItemTemplate1 import ItemTemplate1
 from anvil import open_form
-from .. import sign_up_Qr
+
 
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):
@@ -75,8 +75,12 @@ class Main(MainTemplate):
                         if len(num_stage) != 0 :        
                             self.bt_sign_in_click(h, num_stage)
                             return
-                            #sign_up_Qr.signup_with_qr(h={}, num_stage=0)
-                            #return
+                    else:   # autres url: confirmation ou pwreset, envoi à url_from mail
+                        import sign_in_for_AMS_Data
+                        from sign_in_for_AMS_Data import url_from_mail
+                        sign_in_for_AMS_Data.url_from_mail()
+                        
+                        
                             
                             
         # handling buttons display        
