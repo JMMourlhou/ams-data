@@ -28,11 +28,7 @@ class Main(MainTemplate):
         self.nb=nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
-        
-
-        alert(f"nb: {self.nb}")
-        print("nb: ", self.nb)
-        
+               
         """ cas 2: soit ouverture de l'app """
         """        ou retour par URL suite à PW reset ou confirm mail"""
         if self.nb == 2:   
@@ -53,7 +49,7 @@ class Main(MainTemplate):
             
             h={}
             h = anvil.get_url_hash()
-            alert(f"h ds init d'AMS_Data: {h}") 
+            #alert(f"h ds init d'AMS_Data: {h}") 
            
             if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
                 h={}
@@ -71,15 +67,15 @@ class Main(MainTemplate):
                     # si oui je suis en sign in après flash du qr code par le stagiare
                     if "stage" in h:
                         num_stage=h["stage"]
-                        alert(f"num stage test {num_stage}")
+                        #alert(f"num stage test {num_stage}")
                         if len(num_stage) != 0 :        
                             self.bt_sign_in_click(h, num_stage)
                             return
-                    else:   # autres url: confirmation ou pwreset, envoi à url_from mail
-                        import sign_in_for_AMS_Data
-                        from sign_in_for_AMS_Data import url_from_mail
-                        sign_in_for_AMS_Data.url_from_mail()
+                    else:   # autres url: confirmation ou pwreset, envoi à la form 'url_from mail_calls'
                         
+                        from sign_in_for_AMS_Data.url_from_mail_calls import url_from_mail_calls
+                        self.content_panel.clear()
+                        self.content_panel.add_component(url_from_mail_calls(h, num_stage=0), full_width_row=True)
                         
                             
                             
@@ -96,8 +92,9 @@ class Main(MainTemplate):
                 self.liste_stages.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
 
-    """ ****************************************************************************"""
-   
+    """ ***********************************************************************************************"""
+    """ ****************************** Gestions  BOUTONS et leurs clicks ******************************"""
+    """ ***********************************************************************************************"""
 
     def display_bt_mail(self, **event_args):
         user=anvil.users.get_user()
@@ -139,7 +136,6 @@ class Main(MainTemplate):
 
     def bt_sign_in_click(self, h={}, num_stage=0,**event_args):      # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""
-        alert("button sign in")
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
         self.bt_se_connecter.visible = False
         self.bt_sign_in.visible = False
