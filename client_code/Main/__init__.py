@@ -4,7 +4,7 @@ import anvil.server
 #import anvil.tables as tables
 #import anvil.tables.query as q
 #from anvil.tables import app_tables
-
+from .. import Start
 from .. import French_zone
 from .. import calling_signing_up
 #import anvil.google.auth, anvil.google.drive
@@ -18,6 +18,7 @@ from anvil import open_form
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):
         # Set Form properties and Data Bindings.
+      
         self.init_components(**properties)
         
         # Any code you write here will run before the form opens.
@@ -67,30 +68,26 @@ class Main(MainTemplate):
                     alert("Ce lien n'est plus actif !")
                 else:    
                     # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
-                    # j'utilise try pour ne pas créer une erreur si pas param "stage" ds l'url 
-                    try:
-                        alert(h["stage"])
+                    # si oui je suis en sign in après flash du qr code par le stagiare
+                    if "stage" in h:
                         num_stage=h["stage"]
-                        if len(num_stage) != 0 :        #le user vient de flacher le Qr code
+                        alert(f"num stage test {num_stage}")
+                        if len(num_stage) != 0 :        
                             self.bt_sign_in_click(h, num_stage)
+                            alert("après appel bouton")
                             
-                            #calling_signing_up.calling_form1(h, num_stage)  #c'est sign in, je passe num stage
-                    except:
-                            calling_signing_up.calling_form1(h,num_stage=0)  # pas url venant du qr code, je ne passe pas le num stage
+        # handling buttons display        
+        self.display_bt_mail()
+        self.display_admin_or_other_buttons()
         
+        # renseignements du user pour savoir si on est en 1ere utilisation (on va en maj des renseignements)                    
         user=anvil.users.get_user()
         if not user:  
             self.content_panel.clear()
         else:
-            # renseignements du user pour savoir si on est en 1ere utilisation (on n'affiche pas liste stages)
             if user['prenom'] == None:
                 self.liste_stages.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
-                
-        
-        # handling buttons display        
-        self.display_bt_mail()
-        self.display_admin_or_other_buttons()
 
     """ ****************************************************************************"""
    
@@ -140,7 +137,7 @@ class Main(MainTemplate):
         self.bt_se_connecter.visible = False
         self.bt_sign_in.visible = False
         self.content_panel.clear()
-        self.content_panel.add_component(SignupDialog_V2(h, num_stage), full_width_row=False)
+        self.content_panel.add_component(SignupDialog_V2(h, num_stage), full_width_row=True)
 
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
