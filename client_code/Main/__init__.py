@@ -73,10 +73,11 @@ class Main(MainTemplate):
                         num_stage=h["stage"]
                         alert(f"num stage test {num_stage}")
                         if len(num_stage) != 0 :        
-                            #self.bt_sign_in_click(h, num_stage)
-                            sign_up_Qr.signup_with_qr(h={}, num_stage=0)
+                            self.bt_sign_in_click(h, num_stage)
+                            return
+                            #sign_up_Qr.signup_with_qr(h={}, num_stage=0)
+                            #return
                             
-                            alert("après appel bouton")
                             
         # handling buttons display        
         self.display_bt_mail()
