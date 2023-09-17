@@ -6,7 +6,6 @@ import anvil.server
 #from anvil.tables import app_tables
 
 from .. import French_zone
-from .. import calling_signing_up
 #import anvil.google.auth, anvil.google.drive
 #from anvil.google.drive import app_files
 from ..Saisie_info_de_base import Saisie_info_de_base
@@ -14,6 +13,7 @@ from ..Stage_creation import Stage_creation
 from ..Visu_stages import Visu_stages
 from ..Visu_stages.ItemTemplate1 import ItemTemplate1
 from anvil import open_form
+from .. import sign_up_Qr
 
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):
@@ -54,10 +54,10 @@ class Main(MainTemplate):
             h={}
             h = anvil.get_url_hash()
             alert(f"h ds init d'AMS_Data: {h}") 
-            print(f"h ds init d'AMS_Data: {h}")
+           
             if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
                 h={}
-            print(f"h ds init d'AMS_Data: {h}")
+            
             
             if len(h)!=0 :  # a URL has openned this app
                 # lien actif < à 10 min ?
@@ -73,7 +73,9 @@ class Main(MainTemplate):
                         num_stage=h["stage"]
                         alert(f"num stage test {num_stage}")
                         if len(num_stage) != 0 :        
-                            self.bt_sign_in_click(h, num_stage)
+                            #self.bt_sign_in_click(h, num_stage)
+                            sign_up_Qr.signup_with_qr(h={}, num_stage=0)
+                            
                             alert("après appel bouton")
                             
         # handling buttons display        
