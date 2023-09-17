@@ -49,11 +49,11 @@ class Main(MainTemplate):
             
             h={}
             h = anvil.get_url_hash()
-            #alert(f"h ds init d'AMS_Data: {h}") 
+            self.h = h
+            alert(f"h ds init d'AMS_Data: {h}") 
            
             if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
                 h={}
-            
             
             if len(h)!=0 :  # a URL has openned this app
                 # lien actif < à 10 min ?
@@ -66,19 +66,14 @@ class Main(MainTemplate):
                     # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
                     # si oui je suis en sign in après flash du qr code par le stagiare
                     if "stage" in h:
-                        num_stage=h["stage"]
-                        #alert(f"num stage test {num_stage}")
-                        if len(num_stage) != 0 :        
-                            self.bt_sign_in_click(h, num_stage)
-                            return
-                    else:   # autres url: confirmation ou pwreset, envoi à la form 'url_from mail_calls'
-                        
-                        from sign_in_for_AMS_Data.url_from_mail_calls import url_from_mail_calls
-                        self.content_panel.clear()
-                        self.content_panel.add_component(url_from_mail_calls(h, num_stage=0), full_width_row=True)
-                        
-                            
-                            
+                        self.qr_code()
+                        return
+                    if h["a"]=="pwreset" :
+                        self.pwreset()
+                        return
+                    if h["a"]=="confirm" :
+                        self.confirm()
+                        return
         # handling buttons display        
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
@@ -92,6 +87,26 @@ class Main(MainTemplate):
                 self.liste_stages.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
 
+    
+    def pwreset(self, **event_args):
+        alert("pwreset")
+        from sign_in_for_AMS_Data.url_from_mail_PW_reset import url_from_mail_PW_reset
+        self.content_panel.clear()
+        self.content_panel.add_component(url_from_mail_PW_reset(self.h["email"],self.h["api"]), full_width_row=True)
+        return  
+    def confirm(self, **event_args):
+        alert("confirm")
+        from sign_in_for_AMS_Data.url_from_mail_calls import url_from_mail_calls
+        self.content_panel.clear()
+        self.content_panel.add_component(url_from_mail_calls(self.h, num_stage=0), full_width_row=True)
+        return
+    def qr_code(self, **event_args):
+        num_stage=self.h["stage"]
+        #alert(f"num stage test {num_stage}")
+        if len(num_stage) != 0 :        
+            self.bt_sign_in_click(self.h, num_stage)
+            return
+    
     """ ***********************************************************************************************"""
     """ ****************************** Gestions  BOUTONS et leurs clicks ******************************"""
     """ ***********************************************************************************************"""
