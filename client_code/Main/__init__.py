@@ -50,7 +50,7 @@ class Main(MainTemplate):
             h={}
             h = anvil.get_url_hash()
             self.h = h
-            alert(f"h ds init d'AMS_Data: {h}") 
+            #alert(f"h ds init d'AMS_Data: {h}") 
            
             if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
                 h={}
@@ -74,6 +74,7 @@ class Main(MainTemplate):
                     if h["a"]=="confirm" :
                         self.confirm()
                         return
+                        
         # handling buttons display        
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
@@ -84,7 +85,7 @@ class Main(MainTemplate):
             self.content_panel.clear()
         else:
             if user['prenom'] == None:
-                self.liste_stages.visible = False
+                self.bt_gestion_stages.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
 
     
@@ -118,7 +119,7 @@ class Main(MainTemplate):
              self.bt_se_connecter.visible = False
              self.bt_se_deconnecter.visible = True
         else:
-             self.bt_user_mail.text = "Vous êtes déconnecté."
+             self.bt_user_mail.text = "Connectez-vous !"
              self.bt_se_deconnecter.visible = False 
              self.bt_se_connecter.visible = True
 
@@ -130,24 +131,26 @@ class Main(MainTemplate):
             if user["admin"] == True:  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
-            else:                      # no admin
+            else:                      # user connected,but no admin
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
         else:                          # deconnected
+            self.bt_user_mail.enabled = False
             self.bt_sign_in.visible = True
+            self.bt_gestion_stages.visible =False
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
         
         
-    def liste_stages_click(self, **event_args):
+    def bt_gestion_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_stages import Visu_stages
         open_form('Visu_stages')
 
-    def button_1_click(self, **event_args):
+    def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Qcm_test import Qcm_test
-        open_form('Qcm_test')
+        from ..Qcm import Qcm
+        open_form('Qcm')
 
     def bt_sign_in_click(self, h={}, num_stage=0,**event_args):      # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""

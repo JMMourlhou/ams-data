@@ -15,9 +15,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def __init__(self, first_entry=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        self.first_entry = first_entry
-        # Any code you write here will run before the form opens.
         
+        # Any code you write here will run before the form opens.
+        self.first_entry = first_entry
+        if first_entry == True:
+            self.button_retour.visible = False
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
         if self.first_entry:  # si 1ere entrée ds fiche d'info
@@ -38,8 +40,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             else:
                 self.image_photo.source =            user["photo"]
 
-            self.text_box_ville_naissance.text =     user["ville_naissance"]
-            self.text_box_cp_naissance.text =        user["code_postal_naissance"]
+            self.text_box_v_naissance.text =         user["ville_naissance"]
+            self.text_box_c_naissance.text =         user["code_postal_naissance"]
             self.date_naissance.date =               user["date_naissance"]
             self.text_box_pays_naissance.text =      user["pays_naissance"]
             if user["pays_naissance"] == None :
@@ -112,8 +114,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                     self.text_box_nom.text,
                                                     self.text_box_prenom.text,
                                                     self.image_photo.source,
-                                                    self.text_box_ville_naissance.text,
-                                                    self.text_box_cp_naissance.text,
+                                                    self.text_box_v_naissance.text,
+                                                    self.text_box_c_naissance.text,
                                                     self.date_naissance.date,
                                                     self.text_box_pays_naissance.text,
                                                     self.text_area_rue.text,
@@ -146,11 +148,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             alert("utilisateur non trouvé !")
             self.button_annuler_click()
             
-    def button_annuler_click(self, **event_args):
+    def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-        open_form('Main',99)
-        #open_form('Main')
+        open_form('Main',99) 
+        
 
         #js.call_js('showSidebar')
         

@@ -78,17 +78,24 @@ db_schema:
     server: full
     columns:
     - name: reponse
+      admin_ui: {order: 3, width: 200}
       type: bool
-      admin_ui: {width: 200, order: 1}
     - name: bareme
+      admin_ui: {order: 4, width: 200}
       type: number
-      admin_ui: {width: 200, order: 2}
     - name: Photo
       admin_ui: {order: 0, width: 200}
       type: media
     - name: question
-      admin_ui: {order: 0.5, width: 200}
+      admin_ui: {order: 0.5, width: 425}
       type: string
+    - name: pour_stage
+      admin_ui: {width: 200}
+      type: link_single
+      target: codes_stages
+    - name: num
+      admin_ui: {order: 0.375, width: 120}
+      type: number
     title: Qcm
   stagiaires_inscrits:
     client: full
@@ -109,6 +116,9 @@ db_schema:
     - name: name
       admin_ui: {order: 1.5, width: 200}
       type: string
+    - name: result_qcm
+      admin_ui: {width: 122}
+      type: number
     title: Stagiaires_inscrits
   files:
     client: none

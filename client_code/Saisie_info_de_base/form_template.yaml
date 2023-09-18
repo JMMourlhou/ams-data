@@ -118,10 +118,10 @@ components:
     name: label_1
     layout_properties: {grid_position: 'CPIMBI,LOWZYX'}
   - type: DatePicker
-    properties: {role: outlined, align: left, max_date: 01 01 2010, pick_time: false,
-      tooltip: '', placeholder: Né le, border: '', enabled: true, foreground: 'theme:On
-        Primary', visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
-      italic: false, date: '', min_date: 01 01 1950, background: 'theme:Primary',
+    properties: {role: outlined, align: left, max_date: '', pick_time: false, tooltip: '',
+      placeholder: Né le, border: '', enabled: true, foreground: 'theme:On Primary',
+      visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
+      italic: false, date: '', min_date: 01 01 1930, background: 'theme:Primary',
       bold: false, underline: false, format: '%d %m %Y'}
     name: date_naissance
     layout_properties: {grid_position: 'RMUWJH,XVURWU'}
@@ -131,7 +131,7 @@ components:
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
-    name: text_box_ville_naissance
+    name: text_box_v_naissance
     layout_properties: {grid_position: 'RMUWJH,FOAKZS'}
     event_bindings: {change: text_box_ville_naissance_change}
   - type: TextBox
@@ -139,7 +139,7 @@ components:
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
-    name: text_box_cp_naissance
+    name: text_box_c_naissance
     layout_properties: {grid_position: 'RMUWJH,RUJLLM'}
     event_bindings: {change: text_box_cp_naissance_change}
   - type: TextBox
@@ -267,7 +267,7 @@ components:
       foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Primary', bold: true, underline: false, icon: ''}
-    name: button_annuler
+    name: button_retour
     layout_properties: {grid_position: 'PYZSYJ,NZHZBB'}
-    event_bindings: {click: button_annuler_click}
+    event_bindings: {click: button_retour_click}
 is_package: true
