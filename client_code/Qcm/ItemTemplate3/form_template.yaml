@@ -1,9 +1,5 @@
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
-components:
-- type: CheckBox
-  properties: {text: check_box_1}
-  name: check_box_1
-  layout_properties: {grid_position: 'OWUJED,IURRJM'}
+components: []
 is_package: true

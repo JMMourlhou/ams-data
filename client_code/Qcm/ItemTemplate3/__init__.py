@@ -16,10 +16,14 @@ class ItemTemplate3(ItemTemplate3Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        self.quest=[]
+        self.quest=list(app_tables.qcm.search())
+        print(self.quest)
+        print(self.quest[0])
         # Any code you write here will run before the form opens.
         question = str(self.item["num"])+"-   "+self.item['question']
-        nb = self.item["num"]      
+        self.nb = self.item["num"] 
+        
         # Création du column panel de la question et check boxes
         cp = ColumnPanel(role="outlined-card",
                          background="theme:Primary",
@@ -90,17 +94,11 @@ class ItemTemplate3(ItemTemplate3Template):
         
         question_nb = event_args["sender"].tag   # j'extrais le tag du sender (le num de la question)
         print("question_nb: ",question_nb)
+        print(self.quest[question_nb-1])
         global etat_vrai
         etat_vrai = True
-        #global etat_faux
-        #etat_faux = False
-        print(etat_vrai, etat_faux)
-        if etat_faux == etat_vrai:
-            alert("Réponse ne peut pas être vrai et fausse")
-            #fp[question_nb].cb_true.checked=None
-            "fp[question_nb].cb_false.checked=None
-            
-            lp.tag.answertextbox = tb
+                    
+        fp.cb_false.checked = False
         # maj dico connaissant la ligne, l'état
 
     def check_box_false_change(self, **event_args):
@@ -112,8 +110,7 @@ class ItemTemplate3(ItemTemplate3Template):
         global etat_faux
         etat_faux = True
         print(etat_vrai, etat_faux)
-        if etat_faux == etat_vrai:
-            alert("Réponse ne peut pas être vrai et fausse")
+        fp.cb_false.checked = False
         # maj dico connaissant la ligne, l'état
         
 
