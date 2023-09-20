@@ -97,7 +97,20 @@ class ItemTemplate3(ItemTemplate3Template):
         print(self.quest[question_nb-1])
         global etat_vrai
         etat_vrai = True
-                    
+
+        """
+         for cb in self.cp.get_components():
+            if cb.tag == question_nb
+        """     
+        check_boxtrue = event_args['sender']
+        flowpanel = check_boxtrue.parent
+        flowpanel.children.cb_false.checked = False
+
+
+
+
+
+            
         fp.cb_false.checked = False
         # maj dico connaissant la ligne, l'état
 
