@@ -119,6 +119,9 @@ db_schema:
     - name: result_qcm
       admin_ui: {width: 122}
       type: number
+    - name: qcm_list
+      type: simpleObject
+      admin_ui: {width: 200, order: 4}
     title: Stagiaires_inscrits
   files:
     client: none

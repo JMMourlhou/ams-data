@@ -159,9 +159,11 @@ class Qcm_visu(Qcm_visuTemplate):
                         3- calculer le résultat en lisant le dico
                         4- sauver le dico ds la table stagiaire_inscrit
         """
-        reponses = []
+        
+        reponses = []   #liste de toutes des réponses du stagiaire
         # 1 Boucle sur les flow panels  ET cré le dictionaire
         for col_p in self.xy_panel.get_components():  #ds column panel
+            reponse = []    #liste de la réponse {"num":   , "vrai":   , "faux":   }
             print(col_p.tag.nom)
 
             for fl_p in col_p.get_components():   #ds flow panel
@@ -171,19 +173,37 @@ class Qcm_visu(Qcm_visuTemplate):
                     print(cpnt.tag.nom)
                     if cpnt.tag.nom == "cb_true":
                         numero_question = cpnt.tag.num_question
-                        print(numero_question)
-                        etat_vrai = cpnt.checked                #je sauve l'état du combo vrai
+                        #print(numero_question)
+                        etat_vrai = cpnt.checked     #je sauve l'état du combo vrai
+                        
+                        number=[]
+                        number=["num:",str(numero_question)]
+                        
+                        reponses.append(number)
+                        
+                        repv=[]
+                        repv=["vrai:",etat_vrai]
+                        
+                        reponses.append(repv)
                         
                     if cpnt.tag.nom == "cb_false":
-                        numero_question = cpnt.tag.num_question
-                        print(numero_question)
-                        etat_faux = cpnt.checked                 #je sauve l'état du combo faux
+                        #numero_question = cpnt.tag.num_question
+                        #print(numero_question)
+                        etat_faux = cpnt.checked   #je sauve l'état du combo faux
+                        repf=[]
+                        repf=["faux:",etat_faux]
+                        
+                        reponses.append(repf)
                         
                         if etat_faux==None and etat_vrai==None:
                             alert(f"La question {numero_question} n'a pas été répondue")
                             return
-
-                    #j'ai le num question, état des cobos vrai et faux
-                    reponses.append()
+                        alert(reponses)
+                        reponse=[]
         #sortie de boucle ds mes questions    
-            
+        
+        
+        print("rep2:",reponses[0+3])  
+        print("rep2V:",reponses[0+4])
+        print("rep2F:",reponses[0+5])
+        alert("sauvegarde du dico")
