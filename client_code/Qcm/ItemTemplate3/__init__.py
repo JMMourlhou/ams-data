@@ -50,7 +50,9 @@ class ItemTemplate3(ItemTemplate3Template):
         
         # Création de l'espace avant le Check box Vrai
         space1=Spacer(height=5, width=50, spacing_above=None, spacing_below=None)
+        space1.tag.nom = "space"
         fp.add_component(space1)
+       
         
         # Création Check box Vrai ds le flow panel pour créer le tag et reconnaitre quelle question est chekée 
         cb_true = CheckBox(text="Vrai",
@@ -58,25 +60,27 @@ class ItemTemplate3(ItemTemplate3Template):
                                  allow_indeterminate=True,
                                  spacing_above=None,
                                  spacing_below=None,
-                                 tag=self.item['num'],
                                  enabled=True
                                 )
+        cb_true.tag.nom = "cb_true"
+        cb_true.tag.num_question = self.item['num']
         fp.add_component(cb_true)
         cb_true.set_event_handler('change',self.check_box_true_change)
         
         # Création de l'espace après le Check box Vrai
         space2=Spacer(height=5, width=50, spacing_above=None, spacing_below=None)
+        space2.tag.nom = "space"
         fp.add_component(space2)
-        
         # Création Check box Faux ds le flow panel pour créer le tag et reconnaitre quelle question est chekée 
         cb_false = CheckBox(text="Faux",
                                  checked=None,
                                  allow_indeterminate=True,
                                  spacing_above=None,
                                  spacing_below=None,
-                                 tag=self.item['num'],
                                  enabled=True
                                 )
+        cb_false.tag.nom = "cb_false"
+        cb_false.tag.num_question = self.item['num']
         fp.add_component(cb_false)
         cb_false.set_event_handler('change',self.check_box_false_change)
         
@@ -92,38 +96,36 @@ class ItemTemplate3(ItemTemplate3Template):
         """ contenu du dictionaire event_args 
         {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
         
-        question_nb = event_args["sender"].tag   # j'extrais le tag du sender (le num de la question)
-        print("question_nb: ",question_nb)
-        print(self.quest[question_nb-1])
+        tag = event_args["sender"].tag   # j'extrais le tag du sender (le num de la question)
+        print("tag: ",tag, type(tag))
         global etat_vrai
         etat_vrai = True
-
-        """
-         for cb in self.cp.get_components():
-            if cb.tag == question_nb
-        """     
-        check_boxtrue = event_args['sender']
-        flowpanel = check_boxtrue.parent
-        flowpanel.children.cb_false.checked = False
-
-
-
-
-
-            
-        fp.cb_false.checked = False
+        
+        check_box_changed = event_args['sender']
+        #pour récupérer la check_bocx false et la mettre unchecked, je remonte au component parent (le flow panel)
+        flowpanel = check_box_changed.parent
+        for cpnt in flowpanel.get_components():
+            print(cpnt, cpnt.tag)
+            if cpnt.tag.nom =="cb_false":
+                cpnt.checked = False
         # maj dico connaissant la ligne, l'état
 
     def check_box_false_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        question_nb = event_args["sender"].tag   # j'extrais le tag du sender (le num de la question)
-        print("question_nb: ",question_nb)
-        #global etat_vrai
-        #etat_vrai = False
-        global etat_faux
-        etat_faux = True
-        print(etat_vrai, etat_faux)
-        fp.cb_false.checked = False
+        tag = event_args["sender"].tag   # j'extrais le tag du sender (le num de la question)
+        print("tag: ",tag)
+        """
+        global etat_vrai
+        etat_vrai = True
+        """
+        check_box_changed = event_args['sender']
+        #pour récupérer la check_bocx false et la mettre unchecked, je remonte au component parent (le flow panel)
+        flowpanel = check_box_changed.parent
+        for cpnt in flowpanel.get_components():
+            print(cpnt, cpnt.tag)
+            if cpnt.tag.nom =="cb_true":
+                cpnt.checked = False
         # maj dico connaissant la ligne, l'état
+
         
 

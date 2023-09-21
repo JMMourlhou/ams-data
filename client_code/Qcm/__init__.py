@@ -26,5 +26,11 @@ class Qcm(QcmTemplate):
 
     def button_validation_copy_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        """ Boucle pour 1- savoir si question non répondue
+                        2- ds la boucle créer un dictionnaire réponse
+                        
+                        3- calculer le résultat en lisant le dico
+                        4- sauver le dico ds la table stagiaire_inscrit
+        """
+        # 1 Boucle sur les flow panels
 

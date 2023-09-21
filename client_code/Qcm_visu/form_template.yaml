@@ -1,0 +1,47 @@
+container:
+  type: ColumnPanel
+  properties: {col_widths: '{}'}
+components:
+- type: ColumnPanel
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: ''}
+  name: column_panel_header
+  layout_properties:
+    col_widths: {}
+    grid_position: FGMIAO,XFJRAR
+  components:
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
+        Tertiary', visible: true, text: '', font_size: 16, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: 'theme:On
+        Primary', bold: true, underline: false, icon: ''}
+    name: label_titre
+    layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+- type: XYPanel
+  properties: {role: outlined-card, width: 720.011, align: left, height: 874, tooltip: '',
+    border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
+    background: ''}
+  name: xy_panel
+  layout_properties: {grid_position: 'XJQNSR,OTEJTD'}
+  components: []
+- type: Button
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
+    bold: true, underline: false, icon: ''}
+  name: button_annuler
+  layout_properties:
+    col_widths: {}
+    grid_position: YXUIHE,QVKDQV
+  event_bindings: {click: button_retour_click}
+- type: Button
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: false, text: Valider, font_size: null,
+    font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+    background: 'theme:Error', bold: true, underline: false, icon: ''}
+  name: button_validation_copy
+  layout_properties:
+    col_widths: {}
+    grid_position: UNQORI,GFMUKW
+is_package: true
