@@ -173,9 +173,7 @@ class Qcm_visu(Qcm_visuTemplate):
                         global etat_vrai
                         etat_vrai = cpnt.checked     #je sauve l'état du combo vrai
                        
-                        number=[]
-                        number=["num:",numero_question]                      
-                        reponses.append(number)                  # je mets à jour la liste  
+                                         # je mets à jour la liste  
                             
                     if cpnt.tag.nom == "cb_false":     #si je suis sur le cobo Faux...
                         global etat_faux
@@ -184,20 +182,19 @@ class Qcm_visu(Qcm_visuTemplate):
                         if etat_faux==None and etat_vrai==None:
                             alert(f"La question {numero_question} n'a pas été répondue")
                             return
-                            
-                        #liste de la réponse {"num":   , "reponse":   }
+                                                  
                         rep=[]
                         if etat_vrai == False:       # le stagiaire a répondu False
-                            rep=["reponse:",False]      
+                            rep=[numero_question,False]      
                         else:
-                            rep=["reponse:",True]    # le stagiaire a répondu True
+                            rep=[numero_question,True]    # le stagiaire a répondu True
                         reponses.append(rep)      # je mets à jour la liste    
                         
                         alert(reponses)
-                        reponse=[]
         #sortie de boucle ds mes questions    
         
         
-        print("num rep2:",reponses[0+2][1])  
-        print("réponse 2:",reponses[0+3][1])
+        print("num rep2:",reponses[2-1][0])  # (0=1ere,1=2eme) 
+        print("réponse 2:",reponses[2-1][1])  # 
+        print("num rep 3:",reponses[3-1][0])  # 
         alert("sauvegarde du dico")
