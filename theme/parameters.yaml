@@ -335,3 +335,5 @@ color_scheme:
   - {name: Primary 700, color: '#0097A7'}
   - {name: Secondary 500, color: '#fff905'}
   - {name: Secondary 700, color: '#AFB42B'}
+  - {name: transparent, color: '#FF000000'}
+  - {name: '', color: '#000000'}
