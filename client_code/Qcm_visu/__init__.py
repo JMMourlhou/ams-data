@@ -8,7 +8,10 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.PageBreak import PageBreak
-
+global etat_faux
+etat_faux = None
+global etat_vrai
+etat_vrai = None
 
 class Qcm_visu(Qcm_visuTemplate):
     def __init__(self,pdf_mode=False, **properties):
@@ -131,11 +134,7 @@ class Qcm_visu(Qcm_visuTemplate):
     def check_box_false_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         tag = event_args["sender"].tag   # j'extrais le tag du sender (le num de la question)
-        print("tag: ",tag)
-        """
-        global etat_vrai
-        etat_vrai = True
-        """
+
         check_box_changed = event_args['sender']
         #pour récupérer la check_bocx false et la mettre unchecked, je remonte au component parent (le flow panel)
         flowpanel = check_box_changed.parent
@@ -143,13 +142,11 @@ class Qcm_visu(Qcm_visuTemplate):
             print(cpnt, cpnt.tag)
             if cpnt.tag.nom =="cb_true":
                 cpnt.checked = False
-        # maj dico connaissant la ligne, l'état
-    
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        open_form('Visu_stages')
+        from ..Main import Main
+        open_form('Main',99)
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -160,10 +157,10 @@ class Qcm_visu(Qcm_visuTemplate):
                         4- sauver le dico ds la table stagiaire_inscrit
         """
         
-        reponses = []   #liste de toutes des réponses du stagiaire
+        reponses = []   #liste de toutes les réponses du stagiaire {"num":   , "reponse":   }
         # 1 Boucle sur les flow panels  ET cré le dictionaire
         for col_p in self.xy_panel.get_components():  #ds column panel
-            reponse = []    #liste de la réponse {"num":   , "vrai":   , "faux":   }
+            reponse = []    
             print(col_p.tag.nom)
 
             for fl_p in col_p.get_components():   #ds flow panel
@@ -173,37 +170,34 @@ class Qcm_visu(Qcm_visuTemplate):
                     print(cpnt.tag.nom)
                     if cpnt.tag.nom == "cb_true":
                         numero_question = cpnt.tag.num_question
-                        #print(numero_question)
+                        global etat_vrai
                         etat_vrai = cpnt.checked     #je sauve l'état du combo vrai
-                        
+                       
                         number=[]
-                        number=["num:",str(numero_question)]
-                        
-                        reponses.append(number)
-                        
-                        repv=[]
-                        repv=["vrai:",etat_vrai]
-                        
-                        reponses.append(repv)
-                        
-                    if cpnt.tag.nom == "cb_false":
-                        #numero_question = cpnt.tag.num_question
-                        #print(numero_question)
-                        etat_faux = cpnt.checked   #je sauve l'état du combo faux
-                        repf=[]
-                        repf=["faux:",etat_faux]
-                        
-                        reponses.append(repf)
+                        number=["num:",numero_question]                      
+                        reponses.append(number)                  # je mets à jour la liste  
+                            
+                    if cpnt.tag.nom == "cb_false":     #si je suis sur le cobo Faux...
+                        global etat_faux
+                        etat_faux = cpnt.checked   #je sauve l'état du combo faux                       
                         
                         if etat_faux==None and etat_vrai==None:
                             alert(f"La question {numero_question} n'a pas été répondue")
                             return
+                            
+                        #liste de la réponse {"num":   , "reponse":   }
+                        rep=[]
+                        if etat_vrai == False:       # le stagiaire a répondu False
+                            rep=["reponse:",False]      
+                        else:
+                            rep=["reponse:",True]    # le stagiaire a répondu True
+                        reponses.append(rep)      # je mets à jour la liste    
+                        
                         alert(reponses)
                         reponse=[]
         #sortie de boucle ds mes questions    
         
         
-        print("rep2:",reponses[0+3])  
-        print("rep2V:",reponses[0+4])
-        print("rep2F:",reponses[0+5])
+        print("num rep2:",reponses[0+2][1])  
+        print("réponse 2:",reponses[0+3][1])
         alert("sauvegarde du dico")
