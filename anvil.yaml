@@ -120,8 +120,8 @@ db_schema:
       admin_ui: {width: 122}
       type: number
     - name: qcm_list
+      admin_ui: {order: 4, width: 188}
       type: simpleObject
-      admin_ui: {width: 200, order: 4}
     title: Stagiaires_inscrits
   files:
     client: none

@@ -14,18 +14,19 @@ global etat_vrai
 etat_vrai = None
 
 class Qcm_visu(Qcm_visuTemplate):
-    def __init__(self,pdf_mode=False, **properties):
+    def __init__(self, pdf_mode=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        
         self.label_titre.text = "QCM PSE1"
         #lecture du fichier QCM    
         rows = list(app_tables.qcm.search())
             #tables.order_by("name", ascending=True),
             #stage=stage_row
         #))
-        nb_questions = len(rows)                    
+        self.nb_questions = len(rows)                    
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
         yy = 1
@@ -101,6 +102,9 @@ class Qcm_visu(Qcm_visuTemplate):
                                     )
             self.cb_false.tag.nom = "cb_false"
             self.cb_false.tag.num_question = row['num']
+            self.cb_false.tag.bareme = row['bareme']    # Je sauve le bareme de la question ds tag de combo false
+            self.cb_false.tag.bonne_rep = row['reponse']    # Je sauve le bareme de la question ds tag de combo false
+            
             self.fp.add_component(self.cb_false)
             self.cb_false.set_event_handler('change',self.check_box_false_change)
             
@@ -145,8 +149,7 @@ class Qcm_visu(Qcm_visuTemplate):
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main',99)
+        pass
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -156,17 +159,19 @@ class Qcm_visu(Qcm_visuTemplate):
                         3- calculer le résultat en lisant le dico
                         4- sauver le dico ds la table stagiaire_inscrit
         """
-        
+        nb_bonnes_rep = 0
+        max_points = 0
+        points = 0      # Je cumule les points en fonction de la réponse et du barême
         reponses = []   #liste de toutes les réponses du stagiaire {"num":   , "reponse":   }
         # 1 Boucle sur les flow panels  ET cré le dictionaire
         for col_p in self.xy_panel.get_components():  #ds column panel
-            reponse = []    
+              
             print(col_p.tag.nom)
 
             for fl_p in col_p.get_components():   #ds flow panel
                 print(fl_p.tag.nom)
 
-                for cpnt in fl_p.get_components():   # ds chaque cmpnt du flow panel
+                for cpnt in fl_p.get_components():   # ds chaque cpnt du flow panel
                     print(cpnt.tag.nom)
                     if cpnt.tag.nom == "cb_true":
                         numero_question = cpnt.tag.num_question
@@ -182,19 +187,49 @@ class Qcm_visu(Qcm_visuTemplate):
                         if etat_faux==None and etat_vrai==None:
                             alert(f"La question {numero_question} n'a pas été répondue")
                             return
-                                                  
-                        rep=[]
+
+                        rep_stagiaire = False
+                        rep=()
                         if etat_vrai == False:       # le stagiaire a répondu False
-                            rep=[numero_question,False]      
+                            rep=[numero_question,False]
+                            rep_stagiaire = False
                         else:
                             rep=[numero_question,True]    # le stagiaire a répondu True
+                            rep_stagiaire = True
                         reponses.append(rep)      # je mets à jour la liste    
-                        
-                        alert(reponses)
-        #sortie de boucle ds mes questions    
+                        #alert(reponses)
+
+                        #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
+                        max_points = max_points + cpnt.tag.bareme    # cumul du max de points possible
+                        if cpnt.tag.bonne_rep == rep_stagiaire:
+                            nb_bonnes_rep += 1
+                            points = points + cpnt.tag.bareme
+                            
         
+        #sortie de boucle ds mes questions, affichage du résultat
+        pour_cent = round(nb_bonnes_rep/self.nb_questions*100,2)
+        pour_cent_bareme = round(points/max_points*100,2)
+        alert(f"Vous avez eu {nb_bonnes_rep} bonnes réponses sur {self.nb_questions} soit {pour_cent} % ! ... ")
+        alert(f"... et {points} points sur {max_points} possibles, soit {pour_cent_bareme} % ! ")
         
-        print("num rep2:",reponses[2-1][0])  # (0=1ere,1=2eme) 
+        print("num question 2:",reponses[2-1][0])  # (0=1ere,1=2eme) 
         print("réponse 2:",reponses[2-1][1])  # 
-        print("num rep 3:",reponses[3-1][0])  # 
-        alert("sauvegarde du dico")
+        print("num question 3:",reponses[3-1][0])  # 
+        print("rep 3:",reponses[3-1][1])  # 
+        
+        # sauvegarde du dico à partir du user
+        user=anvil.users.get_user()
+        if user:
+            print(user['email'])
+            # envoi en serveur module pour sauver le qcm ds la table stgiaire inscrit (à partir du stage, user_email, list du qcm
+            result = anvil.server.call("save_qcm", user["email"], pour_cent_bareme, reponses)     
+            if result:
+                alert("liste QCM enregistrée dans votre fichier")
+                from ..Main import Main   #retour au menu
+                open_form('Main',99)
+            else:
+                alert("Erreur; liste QCM non sauvegardée")
+                return
+        else:
+            alert("Stagiaire non trouvé")
+            return

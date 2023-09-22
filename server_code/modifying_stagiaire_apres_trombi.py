@@ -29,7 +29,7 @@ def modify_users_after_trombi(mel,
     # finding the stgiaire's row 
     row = app_tables.users.get(email=mel)
     if not row:
-        raise Exception("Erreur: stgiaire not found !")
+        raise Exception("Erreur: stagiaire not found !")
         return False
     else:           
         row.update(nom=nom,

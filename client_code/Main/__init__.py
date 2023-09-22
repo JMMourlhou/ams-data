@@ -149,7 +149,7 @@ class Main(MainTemplate):
 
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Qcm_visu import Qcm_visu
+        from .. Qcm_visu import Qcm_visu
         open_form('Qcm_visu')
 
     def bt_sign_in_click(self, h={}, num_stage=0,**event_args):      # h qd vient de sign in par qr code
