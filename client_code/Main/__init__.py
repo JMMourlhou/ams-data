@@ -90,7 +90,10 @@ class Main(MainTemplate):
 
     
     def pwreset(self, **event_args):
-        alert("pwreset")
+        # handling buttons display        
+        self.display_admin_or_other_buttons()
+        self.bt_se_connecter.visible = False
+        self.bt_sign_in.visible = False
         from sign_in_for_AMS_Data.url_from_mail_PW_reset import url_from_mail_PW_reset
         self.content_panel.clear()
         self.content_panel.add_component(url_from_mail_PW_reset(self.h["email"],self.h["api"]), full_width_row=True)
@@ -119,7 +122,7 @@ class Main(MainTemplate):
              self.bt_se_connecter.visible = False
              self.bt_se_deconnecter.visible = True
         else:
-             self.bt_user_mail.text = "Connectez-vous !"
+             self.bt_user_mail.text = "Vous n'êtes pas connecté."
              self.bt_se_deconnecter.visible = False 
              self.bt_se_connecter.visible = True
 
