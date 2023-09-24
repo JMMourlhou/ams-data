@@ -4,7 +4,7 @@ roles:
 - name: selected
   components: [Link]
 - name: outlined-card
-  components: [ColumnPanel, LinearPanel, XYPanel, RepeatingPanel]
+  components: [ColumnPanel, LinearPanel, XYPanel, RepeatingPanel, CheckBox, DropDown]
   display_in_toolbox: true
   title: Outlined Card
 - name: elevated-card
@@ -32,9 +32,9 @@ roles:
   display_in_toolbox: false
   title: Tonal Button
 - name: outlined
-  components: [TextBox, TextArea, DatePicker, DropDown]
+  components: [TextBox, TextArea, DatePicker, DropDown, CheckBox]
   display_in_toolbox: true
-  title: Outlined TextBox
+  title: Outlined
 - name: display
   components: [Label, Link]
 - name: headline

@@ -50,6 +50,7 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cp.tag.nom = "column"
             #self.xy_panel.add_component(self.cp,x=xx, y=yy, width = 715)
             self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
+            #self.xy_panel.add_component(self.cp, y=yy, width="default")
             
             # Création de la question ds le column panel
             self.q = RichText(content=question,

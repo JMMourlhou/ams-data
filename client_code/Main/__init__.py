@@ -90,7 +90,8 @@ class Main(MainTemplate):
 
     
     def pwreset(self, **event_args):
-        # handling buttons display        
+        # handling buttons display  
+        self.bt_user_mail.text = "Réinitialisation du mot de passe !"
         self.display_admin_or_other_buttons()
         self.bt_se_connecter.visible = False
         self.bt_sign_in.visible = False
@@ -150,10 +151,7 @@ class Main(MainTemplate):
         from ..Visu_stages import Visu_stages
         open_form('Visu_stages')
 
-    def button_qcm_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from .. Qcm_visu import Qcm_visu
-        open_form('Qcm_visu')
+   
 
     def bt_sign_in_click(self, h={}, num_stage=0,**event_args):      # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""
@@ -194,6 +192,19 @@ class Main(MainTemplate):
         self.bt_sign_in.visible = False
         # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
         self.content_panel.add_component(Saisie_info_de_base(prem_util), full_width_row=True)
+
+    def button_create_qcm_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from .. QCM_visu_modif import QCM_visu_modif
+        open_form('QCM_visu_modif')
+        
+    def button_qcm_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from .. Qcm_visu import Qcm_visu
+        open_form('Qcm_visu')
+
+
+
 
 
 

@@ -88,6 +88,17 @@ components:
     layout_properties: {grid_position: 'CWEFOY,ECORVD'}
     components:
     - type: Button
+      properties: {role: elevated-button, align: center, tooltip: '', border: '',
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Créer 1 QCM,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
+      name: button_create_qcm
+      layout_properties:
+        col_widths: {}
+        grid_position: QNOURM,OKYBFP
+      event_bindings: {click: button_create_qcm_click}
+    - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: 'theme:On Primary Container', visible: true, text: Gestion des stages,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
@@ -103,11 +114,12 @@ components:
     components:
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:Tertiary', visible: true, text: qcm, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: 'theme:Primary', bold: false, underline: false, icon: ''}
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: QCM,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
       name: button_qcm
-      layout_properties: {grid_position: 'NJJOUR,EMLLIC'}
+      layout_properties: {grid_position: 'TKJBWP,DLVHJK'}
       event_bindings: {click: button_qcm_click}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
