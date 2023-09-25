@@ -19,36 +19,9 @@ class QCM_visu_modif(QCM_visu_modifTemplate):
         liste = list(app_tables.qcm.search())
         self.repeating_panel_1.items = liste
         nb_questions = len(liste)
-        self.text_box_num.text = nb_questions + 1
-        
-        # Drop down codes stages
-        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
-
-        # Barême = 1 par défaut
 
         
-
-    
-    def button_validation_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        """ Tests avant validation """  
-
-            
-        result = anvil.server.call("add_ligne_qcm", row['code'],         #num du stage  de la ligne            
-                                                
-                                                
-                                                self.text_box_nb_stagiaires_deb.text,
-                                                
-                                                )
-        
-
-    def button_annuler_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
-
-    def check_box_1_change(self, **event_args):
-        """This method is called when this checkbox is checked or unchecked"""
-        pass
+ 
 
     def file_loader_photo_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
@@ -57,6 +30,8 @@ class QCM_visu_modif(QCM_visu_modifTemplate):
         self.image_photo.source = thumb_pic
         self.button_validation.visible = True
 
+
+        
 
 
         

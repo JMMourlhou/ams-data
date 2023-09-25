@@ -26,7 +26,8 @@ class Qcm_visu(Qcm_visuTemplate):
             #tables.order_by("name", ascending=True),
             #stage=stage_row
         #))
-        self.nb_questions = len(rows)                    
+        self.nb_questions = len(rows) 
+        self.xy_panel.height = self.nb_questions *145    # hauteur de l'xy panel
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
         yy = 1
@@ -65,7 +66,7 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cp.add_component(self.q, x=xx+5, y=yy, width="default")
 
             # Création du flow panel ds le column panel
-            self.fp = FlowPanel(align="left")
+            self.fp = FlowPanel(align="center")
             self.fp.tag.nom = "flow_panel"
             self.cp.add_component(self.fp)
         
@@ -150,7 +151,8 @@ class Qcm_visu(Qcm_visuTemplate):
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        from ..Main import Main
+        open_form('Main',99)
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -166,7 +168,6 @@ class Qcm_visu(Qcm_visuTemplate):
         reponses = []   #liste de toutes les réponses du stagiaire {"num":   , "reponse":   }
         # 1 Boucle sur les flow panels  ET cré le dictionaire
         for col_p in self.xy_panel.get_components():  #ds column panel
-              
             print(col_p.tag.nom)
 
             for fl_p in col_p.get_components():   #ds flow panel
@@ -177,9 +178,7 @@ class Qcm_visu(Qcm_visuTemplate):
                     if cpnt.tag.nom == "cb_true":
                         numero_question = cpnt.tag.num_question
                         global etat_vrai
-                        etat_vrai = cpnt.checked     #je sauve l'état du combo vrai
-                       
-                                         # je mets à jour la liste  
+                        etat_vrai = cpnt.checked     #je sauve l'état du combo vrai                                        # je mets à jour la liste  
                             
                     if cpnt.tag.nom == "cb_false":     #si je suis sur le cobo Faux...
                         global etat_faux
@@ -201,10 +200,10 @@ class Qcm_visu(Qcm_visuTemplate):
                         #alert(reponses)
 
                         #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
-                        max_points = max_points + cpnt.tag.bareme    # cumul du max de points possible
+                        max_points = max_points + int(cpnt.tag.bareme)    # cumul du max de points possible
                         if cpnt.tag.bonne_rep == rep_stagiaire:
                             nb_bonnes_rep += 1
-                            points = points + cpnt.tag.bareme
+                            points = points + int(cpnt.tag.bareme)
                             
         
         #sortie de boucle ds mes questions, affichage du résultat

@@ -196,7 +196,7 @@ class Main(MainTemplate):
     def button_create_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
         from .. QCM_visu_modif import QCM_visu_modif
-        open_form('QCM_visu_modif')
+        open_form('QCM_visu_modif_Main')
         
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""

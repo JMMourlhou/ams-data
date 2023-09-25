@@ -80,9 +80,6 @@ db_schema:
     - name: reponse
       admin_ui: {order: 3, width: 200}
       type: bool
-    - name: bareme
-      admin_ui: {order: 4, width: 200}
-      type: number
     - name: photo
       admin_ui: {order: 0, width: 200}
       type: media
@@ -96,6 +93,9 @@ db_schema:
     - name: num
       admin_ui: {order: 0.375, width: 120}
       type: number
+    - name: bareme
+      admin_ui: {width: 200, order: 4}
+      type: string
     title: Qcm
   stagiaires_inscrits:
     client: full

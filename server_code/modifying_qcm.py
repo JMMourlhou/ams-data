@@ -26,7 +26,7 @@ def modif_qcm(num_question, question, reponse, bareme):
     else:   
         qcm_row.update(question = question,
                      reponse = reponse,
-                     bareme = int(bareme)
+                     bareme = str(bareme)
                     )
         return True
                      
