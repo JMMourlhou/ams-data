@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+
 from anvil_extras.PageBreak import PageBreak
 global etat_faux
 etat_faux = None
@@ -58,16 +59,14 @@ class Qcm_visu(Qcm_visuTemplate):
             # Création du column panel de la question et check boxes
             self.cp = ColumnPanel(role="outlined-card",
                             background="theme:Primary",
-                            wrap_on="mobile",
-                            spacing_above=None,
-                            spacing_below=None,
-                            width=360
-                            
+                            wrap_on="tablet",
+                            spacing_above="small",
+                            spacing_below="small",
                             )
             self.cp.tag.nom = "column"
-            #self.xy_panel.add_component(self.cp,x=xx, y=yy, width = 715)
-            self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
-            #self.xy_panel.add_component(self.cp, y=yy, width="default")
+            #self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
+            self.xy_panel.add_component(self.cp, x=xx, y=yy, width=360)
+            
             
             # Création de la question ds le column panel
             self.q = RichText(content=question,
@@ -106,7 +105,7 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cb_true.set_event_handler('change',self.check_box_true_change)
             # si mode PDF
             if pdf_mode == True and liste_rep_sauvée[cpt_ligne-1][1]==True :   # et si la reponse du stagiaire était Vraie
-                self.cb_true.checked=liste_rep_sauvée[cpt_ligne-1][1]
+                self.cb_true.checked=True
                 
         
             # Création de l'espace après le Check box Vrai
@@ -130,9 +129,14 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cb_false.set_event_handler('change',self.check_box_false_change)
             # si mode PDF
             if pdf_mode == True and liste_rep_sauvée[cpt_ligne-1][1]==False :   # et si la reponse du stagiaire était Vraie
-                self.cb_false.checked=liste_rep_sauvée[cpt_ligne-1][1]
-            #fin de boucle, j'incrémente le yy
+                self.cb_false.checked=True
+
+            # si ligne mutiple de 6, je saute une ligne, n'affecte pas l'affichage normal en mode non pdf
+            if pdf_mode == True and cpt_ligne % 6 == 0 : # (modulo 6) 
+                alert("ST")
+                self.xy_panel.add_component(PageBreak(), x=1, y=yy + 1)      # si en création de pdf, je saute une page ts les 6 stagiares 
             
+            #fin de boucle, j'incrémente le yy
             yy += 150
         else:
             """ si pas de questions """
