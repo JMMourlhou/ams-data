@@ -233,3 +233,13 @@ class Qcm_visu(Qcm_visuTemplate):
         else:
             alert("Stagiaire non trouvé")
             return
+
+    def button_pdf_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        media_object_pdf = anvil.server.call("print_pdf",self())
+   
+        anvil.media.download(media_object_pdf)
+        
+
+
+
