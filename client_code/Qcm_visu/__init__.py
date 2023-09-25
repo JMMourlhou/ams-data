@@ -19,7 +19,22 @@ class Qcm_visu(Qcm_visuTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
+        if pdf_mode == True:    # Efface les Bouttons
+            self.button_retour.visible = False
+            self.button_validation.visible = False
+            self.button_pdf.visible = False
+             # lecture de la liste que j'ai stocké à partir du user
+            user=anvil.users.get_user()
+            if not user:
+                alert("Pas d'utilisateur")
+                return
+            #print(user['email'])
+            stagiaire_row = app_tables.stagiaires_inscrits.get(user_email=user)
+            if not stagiaire_row:   
+                print("stagiaire inscrit non trouvé")
+            liste_rep_sauvées = stagiaire_row["qcm_list"]
+            #print(reponses)
+            
         self.label_titre.text = "QCM PSE1"
         #lecture du fichier QCM    
         rows = list(app_tables.qcm.search())
@@ -39,7 +54,7 @@ class Qcm_visu(Qcm_visuTemplate):
             question = str(row["num"])+"-   "+row['question']
             self.nb = row["num"] 
             cpt_ligne += 1  # compteur
-            
+                        
             # Création du column panel de la question et check boxes
             self.cp = ColumnPanel(role="outlined-card",
                             background="theme:Primary",
@@ -116,9 +131,11 @@ class Qcm_visu(Qcm_visuTemplate):
         else:
             """ si pas de questions """
             print("pas de question")
-
+            
+        
+           
+            
     """ Gestion des évenements click sur combo box, extraction grace au TAG """
-
     def check_box_true_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         """ contenu du dictionaire event_args 
@@ -234,11 +251,15 @@ class Qcm_visu(Qcm_visuTemplate):
             alert("Stagiaire non trouvé")
             return
 
+    
+
     def button_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-        media_object_pdf = anvil.server.call("print_pdf",self())
-   
+        media_object_pdf = anvil.server.call("print_pdf",True)  #pdf mode = True
         anvil.media.download(media_object_pdf)
+
+    def maj_liste_pdf(self):
+        pass
         
 
 

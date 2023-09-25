@@ -26,10 +26,10 @@ def print_pdf(form):
     "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
     """
     media_object_pdf = PDFRenderer(page_size ='A4',
-                            filename = f"{intitule}/{num_stage}.pdf",
+                            filename = "QCM_PSE1.pdf",
                             landscape = False,
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                             scale = 1.0,
                             quality =  "printer"
-                            ).render_form(form)
+                            ).render_form("Qcm_visu",True)
     return media_object_pdf
