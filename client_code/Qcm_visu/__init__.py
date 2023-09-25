@@ -32,7 +32,7 @@ class Qcm_visu(Qcm_visuTemplate):
             stagiaire_row = app_tables.stagiaires_inscrits.get(user_email=user)
             if not stagiaire_row:   
                 print("stagiaire inscrit non trouvé")
-            liste_rep_sauvées = stagiaire_row["qcm_list"]
+            liste_rep_sauvée = stagiaire_row["qcm_list"]
             #print(reponses)
             
         self.label_titre.text = "QCM PSE1"
@@ -104,6 +104,10 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cb_true.tag.num_question = row['num']
             self.fp.add_component(self.cb_true)
             self.cb_true.set_event_handler('change',self.check_box_true_change)
+            # si mode PDF
+            if pdf_mode == True and liste_rep_sauvée[cpt_ligne-1][1]==True :   # et si la reponse du stagiaire était Vraie
+                self.cb_true.checked=liste_rep_sauvée[cpt_ligne-1][1]
+                
         
             # Création de l'espace après le Check box Vrai
             self.space2=Spacer(height=5, width=50, spacing_above=None, spacing_below=None)
@@ -122,10 +126,11 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cb_false.tag.num_question = row['num']
             self.cb_false.tag.bareme = row['bareme']    # Je sauve le bareme de la question ds tag de combo false
             self.cb_false.tag.bonne_rep = row['reponse']    # Je sauve le bareme de la question ds tag de combo false
-            
             self.fp.add_component(self.cb_false)
             self.cb_false.set_event_handler('change',self.check_box_false_change)
-            
+            # si mode PDF
+            if pdf_mode == True and liste_rep_sauvée[cpt_ligne-1][1]==False :   # et si la reponse du stagiaire était Vraie
+                self.cb_false.checked=liste_rep_sauvée[cpt_ligne-1][1]
             #fin de boucle, j'incrémente le yy
             
             yy += 150
