@@ -42,7 +42,7 @@ class Qcm_visu(Qcm_visuTemplate):
             #stage=stage_row
         #))
         self.nb_questions = len(rows) 
-        self.xy_panel.height = self.nb_questions *145    # hauteur de l'xy panel
+        self.xy_panel.height = self.nb_questions *150    # hauteur de l'xy panel
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
         yy = 1
@@ -61,7 +61,8 @@ class Qcm_visu(Qcm_visuTemplate):
                             wrap_on="mobile",
                             spacing_above=None,
                             spacing_below=None,
-                            width="default",
+                            width=360
+                            
                             )
             self.cp.tag.nom = "column"
             #self.xy_panel.add_component(self.cp,x=xx, y=yy, width = 715)
@@ -127,7 +128,7 @@ class Qcm_visu(Qcm_visuTemplate):
             
             #fin de boucle, j'incrémente le yy
             
-            yy += 145
+            yy += 150
         else:
             """ si pas de questions """
             print("pas de question")

@@ -39,6 +39,12 @@ components:
     properties: {item_template: Visu_stages.ItemTemplate1}
     name: repeating_panel_1
     layout_properties: {grid_position: 'EKPEKF,YDGUDK'}
+  - type: FlowPanel
+    properties: {role: null, vertical_align: full, spacing: medium, align: left, tooltip: '',
+      border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
+      background: ''}
+    name: flow_panel_1
+    layout_properties: {grid_position: 'HXEIFW,ECODEI', full_width_row: false}
 - type: Button
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',

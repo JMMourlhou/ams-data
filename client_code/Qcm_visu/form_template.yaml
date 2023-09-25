@@ -27,12 +27,12 @@ components:
       name: label_titre
       layout_properties: {grid_position: 'KEOIST,DEZJEK'}
 - type: XYPanel
-  properties: {role: null, width: null, align: center, height: '', tooltip: '', border: '',
+  properties: {role: null, width: null, align: left, height: '', tooltip: '', border: '',
     foreground: '', visible: true, spacing_above: small, spacing_below: small, background: ''}
   name: xy_panel
   layout_properties:
     col_widths: {}
-    grid_position: AJIGCZ,ZWBWAE
+    grid_position: ZWVLSR,SABWVD
     full_width_row: false
   components: []
 - type: Button
