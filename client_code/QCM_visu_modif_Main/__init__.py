@@ -74,7 +74,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         question = self.text_box_question.text
         bareme = int(self.drop_down_bareme.selected_value)
         reponse = self.check_box_reponse.checked
-        reponse = reponse.capitalize()
+        
 
         #je connais le num de question à changer
         num = int(self.text_box_num.text)

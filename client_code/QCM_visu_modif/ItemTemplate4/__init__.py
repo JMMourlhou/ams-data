@@ -79,9 +79,7 @@ class ItemTemplate4(ItemTemplate4Template):
         
         #je connais le num de question à changer
         num = int(self.button_modif.tag.numero)
-        #from ... import test_qcm_modif
-        #result=test_qcm_modif.test_deux_lignes_qcm()
-        #alert(result)            
+        print("Ligne question n°: ", num)        
 
         # je récupère mes variables globales  question, reponse, bareme
         global question
