@@ -100,8 +100,10 @@ class ItemTemplate4(ItemTemplate4Template):
             alert("Ne modifier qu'1 ligne à la fois")
             
         # j'initialise la forme principale
+        dernier_num = 0
         from anvil import open_form       
-        open_form("QCM_visu_modif_Main")   
+        open_form("QCM_visu_modif_Main")
+        
 
    
         
