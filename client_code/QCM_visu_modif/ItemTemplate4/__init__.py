@@ -96,11 +96,12 @@ class ItemTemplate4(ItemTemplate4Template):
             if not result:
                 alert("erreur de création d'une question QCM")
                 return
-            
-            from anvil import open_form       # j'initialise la forme principale
-            open_form("QCM_visu_modif_Main")
         else:
-            alert(f"Derniere question modifiée: {dernier_num}")
+            alert("Ne modifier qu'1 ligne à la fois")
+            
+        # j'initialise la forme principale
+        from anvil import open_form       
+        open_form("QCM_visu_modif_Main")   
 
    
         
