@@ -14,6 +14,8 @@ global bareme
 bareme = 1      # bareme est numeric
 global reponse
 reponse = True   # reponse est booléen
+global dernier_num
+dernier_num = 0
 
 class ItemTemplate4(ItemTemplate4Template):
     def __init__(self, **properties):
@@ -44,19 +46,23 @@ class ItemTemplate4(ItemTemplate4Template):
     def text_box_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
         # je récupère le contenu du cpnt
+        global dernier_num
         global question
-        question = self.lecture_cpnt(event_args).capitalize()
-    
+        question, dernier_num = self.lecture_cpnt(event_args)
+        question = question.capitalize()
+        
     def drop_down_bareme_change(self, **event_args):     # Bareme a changé
         """This method is called when this checkbox is checked or unchecked"""
+        global dernier_num
         global bareme
-        bareme = self.lecture_cpnt(event_args)
+        bareme, dernier_num = self.lecture_cpnt(event_args)
         
     
     def check_box_reponse_change(self, **event_args):   # Reponse a changé: 
         """This method is called when this checkbox is checked or unchecked"""
+        global dernier_num
         global reponse
-        reponse = self.lecture_cpnt(event_args)
+        reponse, dernier_num = self.lecture_cpnt(event_args)
 
 
     def lecture_cpnt(self, event_args):
@@ -65,33 +71,36 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_modif.foregroundground = "yellow"
         
         cpnt=event_args['sender'] #quel component a été changé
-        # je récupère le contenu du cpnt en fonction du tag.nom et type du component
+        # je récupère le contenu du cpnt en fonction du tag.nom et type du component ET le num de question correspondant
         if  type(cpnt) is TextBox or type(cpnt) is TextArea:
-            return cpnt.text
+            return cpnt.text, cpnt.tag.numero 
         if type(cpnt) is CheckBox:
-            return cpnt.checked
+            return cpnt.checked, cpnt.tag.numero
         if type(cpnt) is DropDown:
-            return cpnt.selected_value
+            return cpnt.selected_value, cpnt.tag.numero
 
     
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
         """This method is called when the button is clicked"""
         
-        #je connais le num de question à changer
+        #num de question du bouton 
         num = int(self.button_modif.tag.numero)
-        print("Ligne question n°: ", num)        
-
-        # je récupère mes variables globales  question, reponse, bareme
-        global question
-        global reponse
-        global bareme
-        result = anvil.server.call('modif_qcm', num, question, reponse, bareme)
-        if not result:
-            alert("erreur de création d'une question QCM")
-            return
-        
-        from anvil import open_form       # j'initialise la forme principale
-        open_form("QCM_visu_modif_Main") 
+        print("Ligne question du bouton: ", num)
+        global dernier_num
+        if num == dernier_num :
+            # je récupère mes variables globales  question, reponse, bareme
+            global question
+            global reponse
+            global bareme
+            result = anvil.server.call('modif_qcm', num, question, reponse, bareme)
+            if not result:
+                alert("erreur de création d'une question QCM")
+                return
+            
+            from anvil import open_form       # j'initialise la forme principale
+            open_form("QCM_visu_modif_Main")
+        else:
+            alert(f"Derniere question modifiée: {dernier_num}")
 
    
         
