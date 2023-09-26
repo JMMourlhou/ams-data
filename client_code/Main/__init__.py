@@ -85,6 +85,7 @@ class Main(MainTemplate):
             self.content_panel.clear()
         else:
             if user['prenom'] == None:
+                self.button_qcm.visible = False
                 self.bt_gestion_stages.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
 
@@ -100,7 +101,7 @@ class Main(MainTemplate):
         self.content_panel.add_component(url_from_mail_PW_reset(self.h["email"],self.h["api"]), full_width_row=True)
         return  
     def confirm(self, **event_args):
-        #alert("confirm")
+        
         from sign_in_for_AMS_Data.url_from_mail_calls import url_from_mail_calls
         self.content_panel.clear()
         self.content_panel.add_component(url_from_mail_calls(self.h, num_stage=0), full_width_row=True)
@@ -158,6 +159,9 @@ class Main(MainTemplate):
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
         self.bt_se_connecter.visible = False
         self.bt_sign_in.visible = False
+        self.bt_gestion_stages.visible =False
+        self.column_panel_admin.visible = False
+        self.button_qcm.visible = False
         self.content_panel.clear()
         self.content_panel.add_component(SignupDialog_V2(h, num_stage), full_width_row=True)
 

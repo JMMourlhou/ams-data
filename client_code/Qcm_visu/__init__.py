@@ -43,7 +43,7 @@ class Qcm_visu(Qcm_visuTemplate):
             #stage=stage_row
         #))
         self.nb_questions = len(rows) 
-        self.xy_panel.height = self.nb_questions *170   # hauteur de l'xy panel
+        self.xy_panel.height = self.nb_questions *185   # hauteur de l'xy panel
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
         yy = 1
@@ -137,7 +137,7 @@ class Qcm_visu(Qcm_visuTemplate):
                 self.xy_panel.add_component(PageBreak(), x=1, y=yy + 1)      # si en création de pdf, je saute une page ts les 6 stagiares 
             
             #fin de boucle, j'incrémente le yy
-            yy += 170
+            yy += 185
         else:
             """ si pas de questions """
             print("pas de question")

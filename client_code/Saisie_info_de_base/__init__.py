@@ -162,7 +162,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         #alert(code_fi)
         result = anvil.server.call("add_stagiaire", user, stage, code_fi)
         if result:
-            alert("Vous avez été inscrit au stage !")
+            #alert("Vous avez été inscrit au stage !")
             open_form('Saisie_info_de_base')
             
         else:
