@@ -58,7 +58,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                self.text_area_commentaires.visible = True
 
         else:
-            self.button_annuler_click()
+            self.button_retour_click()
        
 
     def file_loader_photo_change(self, file, **event_args):
@@ -85,7 +85,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if self.date_naissance.date == None :           # dateN vide ?
             alert("Entrez la date de naissance !")
             return   
-        if self.text_box_ville_naissance.text == "" :    # ville N vide ?
+        if self.text_box_v_naissance.text == "" :    # ville N vide ?
             alert("Entrez la ville de naissance !")
             return   
         if self.text_area_rue.text == "":
@@ -134,19 +134,19 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                     stage=str(user['stage_num_temp'])
                                         
                     if  user['stage_num_temp']==0:
-                        self.button_annuler_click()
+                        self.button_retour_click()
                     else:
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
                         self.insertion_du_stagiaire(user, code_fi, stage)
                         alert(f"Enregistrement au stage {stage} ok")
-                        self.button_annuler_click()
+                        self.button_retour_click()
             else :
                 alert("Renseignements non enregistés !")
-                self.button_annuler_click()
+                self.button_retour_click()
         else:
             alert("utilisateur non trouvé !")
-            self.button_annuler_click()
+            self.button_retour_click()
             
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""

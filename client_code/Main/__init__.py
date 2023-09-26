@@ -100,7 +100,7 @@ class Main(MainTemplate):
         self.content_panel.add_component(url_from_mail_PW_reset(self.h["email"],self.h["api"]), full_width_row=True)
         return  
     def confirm(self, **event_args):
-        alert("confirm")
+        #alert("confirm")
         from sign_in_for_AMS_Data.url_from_mail_calls import url_from_mail_calls
         self.content_panel.clear()
         self.content_panel.add_component(url_from_mail_calls(self.h, num_stage=0), full_width_row=True)
