@@ -27,7 +27,7 @@ def create_trombi_pdf(num_stage, intitule):
                                landscape = False,
                                margins = {'top': 0.8, 'bottom': 0.5, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1.0,
-                               quality =  "printer"
+                               quality =  "prepress"
                               ).render_form('Visu_trombi',num_stage, intitule, True)
 
     " sauvegarde du media_object ds la table "

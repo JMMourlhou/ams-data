@@ -39,7 +39,7 @@ class Visu_trombi(Visu_trombiTemplate):
             stage=stage_row
         ))     
         nb_stagiaires = len(rows)                      # nb de stagiaires
-        #print("nb-stagiaires", nb_stagiaires)
+        print("nb-stagiaires", nb_stagiaires)
 
         """ ***************** BOUCLE sur nb stgiaires ds liste *************"""
         xx = 1   # position (x=1, y=1)

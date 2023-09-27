@@ -130,12 +130,12 @@ class Qcm_visu(Qcm_visuTemplate):
             # si mode PDF
             if pdf_mode == True and liste_rep_sauvée[cpt_ligne-1][1]==False :   # et si la reponse du stagiaire était Vraie
                 self.cb_false.checked=True
-
+            """
             # si ligne mutiple de 6, je saute une ligne, n'affecte pas l'affichage normal en mode non pdf
             if pdf_mode == True and cpt_ligne % 6 == 0 : # (modulo 6) 
-                alert("ST")
+                #alert("ST")
                 self.xy_panel.add_component(PageBreak(), x=1, y=yy + 1)      # si en création de pdf, je saute une page ts les 6 stagiares 
-            
+            """
             #fin de boucle, j'incrémente le yy
             yy += 185
         else:

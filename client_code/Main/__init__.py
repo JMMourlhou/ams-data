@@ -28,7 +28,8 @@ class Main(MainTemplate):
         self.nb=nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
-               
+        if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
+                h={}      
         """ cas 2: soit ouverture de l'app """
         """        ou retour par URL suite à PW reset ou confirm mail"""
         if self.nb == 2:   
@@ -52,8 +53,9 @@ class Main(MainTemplate):
             self.h = h
             #alert(f"h ds init d'AMS_Data: {h}") 
            
-            if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
-                h={}
+            #if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
+            #   h={}
+            #    alert(f"h ds init d'AMS_Data: {h}") 
             
             if len(h)!=0 :  # a URL has openned this app
                 # lien actif < à 10 min ?
