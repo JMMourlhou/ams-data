@@ -7,6 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
+ancien_num_ligne = 0
 
 class ItemTemplate4(ItemTemplate4Template):
     def __init__(self, **properties):
@@ -58,7 +60,19 @@ class ItemTemplate4(ItemTemplate4Template):
   
         # je récupère mes question, reponse, bareme de la ligne du bouton pressé
         # Je remonte au parent (le flow panel)
-        flowpanel = self.button_modif.parent
+        flowpanel = self.button_modif.parent    # conteneur d'1 ligne 
+        
+        repeat_item_panel = flowpanel.parent
+        print("**** repeat panel4 *****", type(repeat_item_panel))   # conteneur objet ligne (item)
+        
+        repeat_panel = repeat_item_panel.parent
+        print("**** repeating panel *****", type(repeat_panel))   # conteneur des lignes
+
+        col_panel = repeat_panel.parent
+        print("**** col panel *****", type(col_panel)) 
+        
+        
+        
         for cpnt in flowpanel.get_components():
             print(cpnt, cpnt.tag)
             if cpnt.tag.nom == "num":

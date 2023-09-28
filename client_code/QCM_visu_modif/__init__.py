@@ -30,6 +30,11 @@ class QCM_visu_modif(QCM_visu_modifTemplate):
         self.image_photo.source = thumb_pic
         self.button_validation.visible = True
 
+    def repeating_panel_1_show(self, **event_args):
+        """This method is called when the RepeatingPanel is shown on the screen"""
+        self.repeating_panel_1.tag = "repeat_panel"
+
+
 
         
 

@@ -15,4 +15,5 @@ components:
     properties: {item_template: QCM_visu_modif.ItemTemplate4}
     name: repeating_panel_1
     layout_properties: {grid_position: 'BNCDHJ,FXUAVM'}
+    event_bindings: {show: repeating_panel_1_show}
 is_package: true
