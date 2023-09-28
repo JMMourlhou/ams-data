@@ -47,6 +47,7 @@ class Qcm_visu(Qcm_visuTemplate):
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
         yy = 1
+        hauteur_entre_question = 10 
         largeur_espace = 50   #espace de l'espace entre combobox
         cpt_ligne = 0
 
@@ -136,14 +137,14 @@ class Qcm_visu(Qcm_visuTemplate):
                 #alert("ST")
                 self.xy_panel.add_component(PageBreak(), x=1, y=yy + 1)      # si en création de pdf, je saute une page ts les 6 stagiares 
             """
-            #fin de boucle, j'incrémente le yy
-            yy += 185
+            #fin de boucle, je calcule la hauteur du column panel qui vient d'être créé (evariable en fonction largeur écran et nb de lignes question)
+            flowpanel = self.cb_false.parent    # conteneur d'1 ligne 
+            col_panel = flowpanel.parent    # conteneur objet de la question (col panel)
+            hauteur_col_panel=col_panel.height
+            yy = yy + hauteur_col_panel + hauteur_entre_question
         else:
             """ si pas de questions """
             print("pas de question")
-            
-        
-           
             
     """ Gestion des évenements click sur combo box, extraction grace au TAG """
     def check_box_true_change(self, **event_args):

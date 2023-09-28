@@ -40,8 +40,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         #self.image_photo.source = file
         thumb_pic = anvil.image.generate_thumbnail(file, 320)
         self.image_photo.source = thumb_pic
-        self.button_validation.visible = True
-
+        self.button_creer.visible = True
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -78,7 +77,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
         #je connais le num de question à changer
         num = int(self.text_box_num.text)
-        image = self.image_photo.source
+        if self.image_photo.source == None:
+            image = None
+        else:
+            image = self.image_photo.source
         
         # je récupère mes variables globales  question, reponse, bareme
         result = anvil.server.call("add_ligne_qcm", num, question, reponse, bareme, image, code_stage="PSE1")         #num du stage  de la ligne

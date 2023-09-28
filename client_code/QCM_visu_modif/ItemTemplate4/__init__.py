@@ -63,28 +63,21 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the button is clicked"""
   
         # je récupère mes question, reponse, bareme de la ligne du bouton pressé
-        # Je remonte au parent (le flow panel)
+        # Je remonte au conteneur parent du bouton (le flow panel)
         flowpanel = self.button_modif.parent    # conteneur d'1 ligne 
-        
-        repeat_item_panel = flowpanel.parent
-        print("**** repeat panel4 *****", type(repeat_item_panel))   # conteneur objet ligne (item)
-        
-        repeat_panel = repeat_item_panel.parent
-        print("**** repeating panel *****", type(repeat_panel))   # conteneur des lignes
-
-        col_panel = repeat_panel.parent                 # conteneur du repeat panel (le column panel)
-        print("**** col panel *****", type(col_panel)) 
-        
-        
-        
         for cpnt in flowpanel.get_components():
             print(cpnt, cpnt.tag)
             if cpnt.tag.nom == "num":
                 num = int(cpnt.text)
             if cpnt.tag.nom =="question":
                 question = cpnt.text
-                prem_lettre = question[0].capitalize
-                # A FAIRE; mettre la 1ere lettre en maj mais laisser le reste comme tappé
+                # mettre la 1ere lettre en maj mais laisser le reste comme tappé
+                #je boucle à partir de la deuxieme lettre et cumul le text
+                txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
+                for x in range(1,len(question)):  # je pars de la position2 et boucle j'usquà la fin de la question
+                    txt = txt + question[x]
+                    print(txt)
+                question = txt   
             if cpnt.tag.nom =="reponse":
                 reponse = cpnt.checked
             if cpnt.tag.nom =="bareme":
@@ -107,11 +100,27 @@ class ItemTemplate4(ItemTemplate4Template):
     def text_box_question_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
         num = self.text_box_question.tag.numero
+        # Je recherche le bouton de l'ancienne ligne pour le désactiver
+        #Je remonte du component sur 3 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
+        global ancien_num_ligne
         if ancien_num_ligne != 0 and num != ancien_num_ligne:
             flowpanel = self.button_modif.parent    # conteneur d'1 ligne 
             repeat_item_panel = flowpanel.parent    # conteneur objet ligne (item)
-            repeat_panel = repeat_item_panel.parent  
-            #print("**** repeating panel *****", type(repeat_panel))  
+            repeat_panel = repeat_item_panel.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
+            #print("**** repeating panel *****", type(repeat_panel))
+           
+            for item_lignes in repeat_panel.get_components():
+                for ligne in item_lignes.get_components():
+                    for cpnt in ligne.get_components():
+                        if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:
+                            #c'est le bt de l'ancienne ligne
+                            self.button_modif.enabled = False
+                            self.button_modif.background = "theme:Tertiary"
+                            self.button_modif.foregroundground = "theme:Error"
+                            ancien_num_ligne = 0
+                                
+
+            
 
 
 
