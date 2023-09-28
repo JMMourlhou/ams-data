@@ -48,12 +48,16 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
+        global ancien_num_ligne
+        ancien_num_ligne = self.drop_down_bareme.tag.numero
     
     def check_box_reponse_change(self, **event_args):   # Reponse a changé: 
         """This method is called when this checkbox is checked or unchecked"""
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
+        global ancien_num_ligne
+        ancien_num_ligne = self.check_box_reponse.tag.numero
   
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
         """This method is called when the button is clicked"""
@@ -68,7 +72,7 @@ class ItemTemplate4(ItemTemplate4Template):
         repeat_panel = repeat_item_panel.parent
         print("**** repeating panel *****", type(repeat_panel))   # conteneur des lignes
 
-        col_panel = repeat_panel.parent
+        col_panel = repeat_panel.parent                 # conteneur du repeat panel (le column panel)
         print("**** col panel *****", type(col_panel)) 
         
         
@@ -94,6 +98,24 @@ class ItemTemplate4(ItemTemplate4Template):
         # j'initialise la forme principale
         from anvil import open_form       
         open_form("QCM_visu_modif_Main")
+
+    def text_box_question_lost_focus(self, **event_args):
+        """This method is called when the TextBox loses focus"""
+        global ancien_num_ligne
+        ancien_num_ligne = self.text_box_question.tag.numero
+        
+    def text_box_question_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        num = self.text_box_question.tag.numero
+        if ancien_num_ligne != 0 and num != ancien_num_ligne:
+            flowpanel = self.button_modif.parent    # conteneur d'1 ligne 
+            repeat_item_panel = flowpanel.parent    # conteneur objet ligne (item)
+            repeat_panel = repeat_item_panel.parent  
+            #print("**** repeating panel *****", type(repeat_panel))  
+
+
+
+
         
 
    

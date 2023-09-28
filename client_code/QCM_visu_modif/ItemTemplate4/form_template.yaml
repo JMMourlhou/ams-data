@@ -27,7 +27,8 @@ components:
       italic: false, background: 'theme:Tertiary', bold: false, underline: false}
     name: text_box_question
     layout_properties: {width: null, expand: true}
-    event_bindings: {change: text_box_question_change}
+    event_bindings: {change: text_box_question_change, lost_focus: text_box_question_lost_focus,
+      focus: text_box_question_focus}
   - type: DropDown
     properties:
       role: null
