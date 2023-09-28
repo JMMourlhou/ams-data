@@ -8,15 +8,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-global question  # sauvegarde de la question
-question = ""
-global bareme 
-bareme = 1      # bareme est numeric
-global reponse
-reponse = True   # reponse est booléen
-global dernier_num
-dernier_num = 0
-
 class ItemTemplate4(ItemTemplate4Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -46,61 +37,47 @@ class ItemTemplate4(ItemTemplate4Template):
     def text_box_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
         # je récupère le contenu du cpnt
-        global dernier_num
-        global question
-        question, dernier_num = self.lecture_cpnt(event_args)
-        question = question.capitalize()
-        
-    def drop_down_bareme_change(self, **event_args):     # Bareme a changé
-        """This method is called when this checkbox is checked or unchecked"""
-        global dernier_num
-        global bareme
-        bareme, dernier_num = self.lecture_cpnt(event_args)
-        
-    
-    def check_box_reponse_change(self, **event_args):   # Reponse a changé: 
-        """This method is called when this checkbox is checked or unchecked"""
-        global dernier_num
-        global reponse
-        reponse, dernier_num = self.lecture_cpnt(event_args)
-
-
-    def lecture_cpnt(self, event_args):
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
-        
-        cpnt=event_args['sender'] #quel component a été changé
-        # je récupère le contenu du cpnt en fonction du tag.nom et type du component ET le num de question correspondant
-        if  type(cpnt) is TextBox or type(cpnt) is TextArea:
-            return cpnt.text, cpnt.tag.numero 
-        if type(cpnt) is CheckBox:
-            return cpnt.checked, cpnt.tag.numero
-        if type(cpnt) is DropDown:
-            return cpnt.selected_value, cpnt.tag.numero
-
+       
+    def drop_down_bareme_change(self, **event_args):     # Bareme a changé
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foregroundground = "yellow"
     
+    def check_box_reponse_change(self, **event_args):   # Reponse a changé: 
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foregroundground = "yellow"
+  
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
         """This method is called when the button is clicked"""
+  
+        # je récupère mes question, reponse, bareme de la ligne du bouton pressé
+        # Je remonte au parent (le flow panel)
+        flowpanel = self.button_modif.parent
+        for cpnt in flowpanel.get_components():
+            print(cpnt, cpnt.tag)
+            if cpnt.tag.nom == "num":
+                num = int(cpnt.text)
+            if cpnt.tag.nom =="question":
+                question = cpnt.text
+                prem_lettre = question[0].capitalize
+                # A FAIRE; mettre la 1ere lettre en maj mais laisser le reste comme tappé
+            if cpnt.tag.nom =="reponse":
+                reponse = cpnt.checked
+            if cpnt.tag.nom =="bareme":
+                bareme = cpnt.selected_value
         
-        #num de question du bouton 
-        num = int(self.button_modif.tag.numero)
-        print("Ligne question du bouton: ", num)
-        global dernier_num
-        if num == dernier_num :
-            # je récupère mes variables globales  question, reponse, bareme
-            global question
-            global reponse
-            global bareme
-            result = anvil.server.call('modif_qcm', num, question, reponse, bareme)
-            if not result:
-                alert("erreur de création d'une question QCM")
-                return
-        else:
-            alert("Ne modifier qu'1 ligne à la fois")
+        result = anvil.server.call('modif_qcm', num, question, reponse, bareme)
+        if not result:
+            alert("erreur de création d'une question QCM")
+            return
             
         # j'initialise la forme principale
-        dernier_num = 0
         from anvil import open_form       
         open_form("QCM_visu_modif_Main")
         

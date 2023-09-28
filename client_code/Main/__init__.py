@@ -29,7 +29,8 @@ class Main(MainTemplate):
         """ Incrémentation de nb """
         self.nb = self.nb + 1
         if self.nb >= 99:  #retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
-                h={}      
+                h={}  
+            
         """ cas 2: soit ouverture de l'app """
         """        ou retour par URL suite à PW reset ou confirm mail"""
         if self.nb == 2:   
