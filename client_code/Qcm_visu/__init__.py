@@ -65,26 +65,31 @@ class Qcm_visu(Qcm_visuTemplate):
                             spacing_below="small",
                             )
             self.cp.tag.nom = "column"
+
             #self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
-            self.xy_panel.add_component(self.cp, x=xx, y=yy, width=360)
+            #self.xy_panel.add_component(self.cp, x=xx, y=yy, full_width_row=True)
+            self.xy_panel.add_component(self.cp, x=xx, y=yy)
             
             
             # Création de la question ds le column panel
-            self.q = RichText(content=question,
-                        align="center",
+            self.quest = TextArea(text=question,
+                        enabled=False,
+                        align="left",
                         font_size=14,
+                        background="theme:Primary",     
                         foreground="theme:On Primary",
-                        role="markdown",
+                        auto_expand=True,
                         spacing_above=None,
                         spacing_below=None,
+                        height=120
                         )
-            self.q.tag.nom = "question"
-            self.cp.add_component(self.q, x=xx+5, y=yy, width="default")
+            self.quest.tag.nom = "question"
+            self.cp.add_component(self.quest, x=xx+5, y=yy, width="default")
 
             # Création du flow panel ds le column panel
             self.fp = FlowPanel(align="center")
             self.fp.tag.nom = "flow_panel"
-            self.cp.add_component(self.fp)
+            self.cp.add_component(self.fp, full_width_row=True)
         
             # Création de l'espace avant le Check box Vrai
             self.space1=Spacer(height=5, width=50, spacing_above=None, spacing_below=None)
@@ -109,7 +114,7 @@ class Qcm_visu(Qcm_visuTemplate):
                 self.cb_true.checked=True
                 
         
-            # Création de l'espace après le Check box Vrai
+            # Création de l'espace entre les 2 Check boxes
             self.space2=Spacer(height=5, width=50, spacing_above=None, spacing_below=None)
             self.space2.tag.nom = "space"
             self.fp.add_component(self.space2)
@@ -127,6 +132,7 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cb_false.tag.bareme = row['bareme']    # Je sauve le bareme de la question ds tag de combo false
             self.cb_false.tag.bonne_rep = row['reponse']    # Je sauve le bareme de la question ds tag de combo false
             self.fp.add_component(self.cb_false)
+            
             self.cb_false.set_event_handler('change',self.check_box_false_change)
             # si mode PDF
             if pdf_mode == True and liste_rep_sauvée[cpt_ligne-1][1]==False :   # et si la reponse du stagiaire était Vraie
@@ -140,8 +146,14 @@ class Qcm_visu(Qcm_visuTemplate):
             #fin de boucle, je calcule la hauteur du column panel qui vient d'être créé (evariable en fonction largeur écran et nb de lignes question)
             flowpanel = self.cb_false.parent    # conteneur d'1 ligne 
             col_panel = flowpanel.parent    # conteneur objet de la question (col panel)
-            hauteur_col_panel=col_panel.height
-            yy = yy + hauteur_col_panel + hauteur_entre_question
+            for cpnt in col_panel.get_components():
+                if cpnt.tag.nom == "question":
+                    hauteur_quest=cpnt.height
+                    hauteur_quest=int(hauteur_quest)
+                    print("hauteur", hauteur_quest)
+            yy = yy + hauteur_quest + 100 + hauteur_entre_question
+            
+            #yy += 170
         else:
             """ si pas de questions """
             print("pas de question")
