@@ -6,10 +6,14 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-
+import Pillow
+from Pillow import ImageGrab
 
 @anvil.server.callable
 def add_ligne_qcm(num_question, question, reponse, bareme, image, code_stage="PSE1",):
+    img = ImageGrab.grab()
+    print (img.size)
+    
     #lecture fichier père code stages
     code_stage = app_tables.codes_stages.get(code=code_stage)          # A MODIFIER QD RAJOUTE DIFFERENRS QCM
     if not code_stage:   
