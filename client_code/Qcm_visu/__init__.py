@@ -17,8 +17,7 @@ global etat_vrai
 etat_vrai = None
 global former_screen_size
 former_screen_size = window.innerWidth
-global timer
-timer = False
+
 
 class Qcm_visu(Qcm_visuTemplate):
     def __init__(self, pdf_mode=False, **properties):
@@ -57,13 +56,12 @@ class Qcm_visu(Qcm_visuTemplate):
         self.browser_width = window.innerWidth         
         self.browser_height = window.innerHeight
         self.label_browser_width.text = self.browser_width
-        
-        
+      
         if  self.screen_width < 800:
-            alert("inf 800")
+            #alert("inf 800")
             self.xy_panel.width =  self.screen_width          # largeur de l'xy panel 
         else:
-            alert("sup 800")
+            #alert("sup 800")
             self.xy_panel.width = 800
         
         self.xy_panel.height = self.nb_questions *185   # hauteur de l'xy panel
@@ -71,7 +69,7 @@ class Qcm_visu(Qcm_visuTemplate):
         xx = 1   # position (x=1, y=1)
         yy = 1
         hauteur_entre_question = 10 
-        largeur_espace = 50   #espace de l'espace entre combobox
+        #argeur_espace = 50   #espace de l'espace entre combobox
         cpt_ligne = 0
 
         "======================== BOUCLE sur le nb questions ds liste =========================================="
@@ -91,7 +89,7 @@ class Qcm_visu(Qcm_visuTemplate):
             self.xy_panel.add_component(self.cp, x=xx, y=yy, width=self.browser_width)
             
             
-            # Création de la question ds le column panel
+            # Création of the question in column panel
             self.quest = TextArea(text=question,
                         enabled=False,
                         align="left",
@@ -101,22 +99,19 @@ class Qcm_visu(Qcm_visuTemplate):
                         auto_expand=True,
                         spacing_above=None,
                         spacing_below=None,
-                        height=120
+                        #height=120
                         )
             self.quest.tag.nom = "question"
             self.cp.add_component(self.quest, x=xx+5, y=yy, width="default")
-
+            h = self.quest.height
+            print("h",h)
+            
             # Création du flow panel ds le column panel
             self.fp = FlowPanel(align="center")
             self.fp.tag.nom = "flow_panel"
             self.cp.add_component(self.fp, full_width_row=True)
-        
-            # Création de l'espace avant le Check box Vrai
-            self.space1=Spacer(height=5, width=50, spacing_above=None, spacing_below=None)
-            self.space1.tag.nom = "space"
-            self.fp.add_component(self.space1)
-        
-            
+
+                        
             # Création Check box Vrai ds le flow panel pour créer le tag et reconnaitre quelle question est chekée 
             self.cb_true = CheckBox(text="Vrai",
                                     checked=None,
@@ -135,9 +130,9 @@ class Qcm_visu(Qcm_visuTemplate):
                 
         
             # Création de l'espace entre les 2 Check boxes
-            self.space2=Spacer(height=5, width=50, spacing_above=None, spacing_below=None)
-            self.space2.tag.nom = "space"
-            self.fp.add_component(self.space2)
+            self.space=Spacer(height=5, width=30, spacing_above=None, spacing_below=None)
+            self.space.tag.nom = "space"
+            self.fp.add_component(self.space)
 
             # Création Check box Faux ds le flow panel pour créer le tag et reconnaitre quelle question est chekée 
             self.cb_false = CheckBox(text="Faux",
@@ -152,8 +147,8 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cb_false.tag.bareme = row['bareme']    # Je sauve le bareme de la question ds tag de combo false
             self.cb_false.tag.bonne_rep = row['reponse']    # Je sauve le bareme de la question ds tag de combo false
             self.fp.add_component(self.cb_false)
-            
             self.cb_false.set_event_handler('change',self.check_box_false_change)
+            
             # si mode PDF
             if pdf_mode == True and liste_rep_sauvée[cpt_ligne-1][1]==False :   # et si la reponse du stagiaire était Vraie
                 self.cb_false.checked=True
@@ -323,13 +318,6 @@ class Qcm_visu(Qcm_visuTemplate):
         """This method is called Every 0.5 seconds. Does not trigger if [interval] is 0."""
         self.innerWidth = window.innerWidth    #text
         
-        global timer
-        if timer == False:
-            self.label_browser_width.background = "yellow"
-            timer = True
-        else:
-            self.label_browser_width.background = "red"
-            timer = False
         
         global former_screen_size
         if former_screen_size != self.innerWidth:
