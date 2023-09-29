@@ -74,6 +74,9 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if self.text_box_prenom.text == "" :           # dates vides ?
             alert("Entrez le prénom !")
             return
+        p=self.text_box_prenom.text
+        p=p.capitalize()
+        self.text_box_prenom.text = p
         if self.text_box_nom.text == "" :           # dates vides ?
             alert("Entrez le nom !")
             return
@@ -138,13 +141,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                     else:
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
-                        r = self.insertion_du_stagiaire(user, code_fi, stage)
-                        test=r[0]
-                        err=r[1]
-                        if test == True:
-                            alert("ok: ",err)
-                        else:
-                            alert("Erreur: ",err)   
+                        valid_msg = self.insertion_du_stagiaire(user, code_fi, stage)
+                        alert(valid_msg)
                         self.button_retour_click()
             else :
                 alert("Fiche de renseignements non enregistée !")

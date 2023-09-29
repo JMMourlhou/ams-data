@@ -148,10 +148,11 @@ class Main(MainTemplate):
         if user:
             self.bt_sign_in.visible = False
             self.bt_user_mail.enabled = True
+            self.button_qcm.visible = True
             if user["admin"] == True:  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
-                self.button_qcm.visible = True
+                
                 self.bt_gestion_stages.visible = True
             else:                      # user connected,but no admin
                 self.column_panel_admin.visible = False
