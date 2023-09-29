@@ -8,6 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from Pillow import ImageGrab
 from anvil.js import window # to gain access to the window object
 from anvil_extras.PageBreak import PageBreak
 global etat_faux
@@ -25,7 +26,8 @@ class Qcm_visu(Qcm_visuTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
+        img = ImageGrab.grab()
+        alert(img)
         
         if pdf_mode == True:    # Efface les Bouttons
             self.button_retour.visible = False
