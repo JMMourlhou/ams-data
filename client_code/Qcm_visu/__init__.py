@@ -26,9 +26,7 @@ class Qcm_visu(Qcm_visuTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        img = ImageGrab.grab()
-        alert(img)
-        
+                
         if pdf_mode == True:    # Efface les Bouttons
             self.button_retour.visible = False
             self.button_validation.visible = False
@@ -54,13 +52,19 @@ class Qcm_visu(Qcm_visuTemplate):
         self.nb_questions = len(rows)
         """ ***********************************  SCREEN SIZING **********************************"""
         
-        self.screen_width = window.screen.width    #text
+        self.screen_width = window.screen.width    # int !
         self.screen_height = window.screen.height
         self.browser_width = window.innerWidth         
         self.browser_height = window.innerHeight
         self.label_browser_width.text = self.browser_width
-        window.onresize = self.screen_resize()
-        self.xy_panel.width =  self.screen_width             # largeur de l'xy panel           
+        
+        
+        if  self.screen_width < 800:
+            alert("inf 800")
+            self.xy_panel.width =  self.screen_width          # largeur de l'xy panel 
+        else:
+            alert("sup 800")
+            self.xy_panel.width = 800
         
         self.xy_panel.height = self.nb_questions *185   # hauteur de l'xy panel
         #print("nb-questions", nb_questions)

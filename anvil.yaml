@@ -30,8 +30,11 @@ name: AMS_Data
 runtime_options:
   version: 2
   client_version: '3'
-  server_version: python3-full
+  server_version: python3-sandbox
   server_spec: {base: python310-standard}
+  server_spec_disabled: {requirements: 'bcrypt==4.0.1
+
+      qrcode==7.4.2', base: python310-standard}
 metadata: {title: Inscription Stage, logo_img: 'asset:Logo F S small_transparent.png'}
 startup_form: null
 db_schema:
