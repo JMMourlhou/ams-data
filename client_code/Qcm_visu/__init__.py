@@ -8,11 +8,16 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from anvil.js import window # to gain access to the window object
 from anvil_extras.PageBreak import PageBreak
 global etat_faux
 etat_faux = None
 global etat_vrai
 etat_vrai = None
+global former_screen_size
+former_screen_size = window.innerWidth
+global timer
+timer = False
 
 class Qcm_visu(Qcm_visuTemplate):
     def __init__(self, pdf_mode=False, **properties):
@@ -20,6 +25,8 @@ class Qcm_visu(Qcm_visuTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        
+        
         if pdf_mode == True:    # Efface les Bouttons
             self.button_retour.visible = False
             self.button_validation.visible = False
@@ -42,7 +49,17 @@ class Qcm_visu(Qcm_visuTemplate):
             #tables.order_by("name", ascending=True),
             #stage=stage_row
         #))
-        self.nb_questions = len(rows) 
+        self.nb_questions = len(rows)
+        """ ***********************************  SCREEN SIZING **********************************"""
+        
+        self.screen_width = window.screen.width    #text
+        self.screen_height = window.screen.height
+        self.browser_width = window.innerWidth         
+        self.browser_height = window.innerHeight
+        self.label_browser_width.text = self.browser_width
+        window.onresize = self.screen_resize()
+        self.xy_panel.width =  self.screen_width             # largeur de l'xy panel           
+        
         self.xy_panel.height = self.nb_questions *185   # hauteur de l'xy panel
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
@@ -65,10 +82,7 @@ class Qcm_visu(Qcm_visuTemplate):
                             spacing_below="small",
                             )
             self.cp.tag.nom = "column"
-
-            #self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
-            #self.xy_panel.add_component(self.cp, x=xx, y=yy, full_width_row=True)
-            self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
+            self.xy_panel.add_component(self.cp, x=xx, y=yy, width=self.browser_width)
             
             
             # Création de la question ds le column panel
@@ -144,14 +158,19 @@ class Qcm_visu(Qcm_visuTemplate):
                 self.xy_panel.add_component(PageBreak(), x=1, y=yy + 1)      # si en création de pdf, je saute une page ts les 6 stagiares 
             """
             #fin de boucle, je calcule la hauteur du column panel qui vient d'être créé (evariable en fonction largeur écran et nb de lignes question)
+            #w = c.get_width()
+            #h = c.get_height()
             flowpanel = self.cb_false.parent    # conteneur d'1 ligne 
             col_panel = flowpanel.parent    # conteneur objet de la question (col panel)
+            """
             for cpnt in col_panel.get_components():
                 if cpnt.tag.nom == "question":
-                    hauteur_quest=cpnt.height
+                    hauteur_quest=cpnt.width                
                     hauteur_quest=int(hauteur_quest)
                     print("hauteur", hauteur_quest)
-            yy = yy + hauteur_quest + 100 + hauteur_entre_question
+            """
+            #yy = yy + hauteur_quest + 100 + hauteur_entre_question
+            yy = yy + 120 + 100 + hauteur_entre_question
             
             #yy += 170
         else:
@@ -163,11 +182,9 @@ class Qcm_visu(Qcm_visuTemplate):
         """This method is called when this checkbox is checked or unchecked"""
         """ contenu du dictionaire event_args 
         {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
-        
+       
         tag = event_args["sender"].tag   # j'extrais le tag du sender (le num de la question)
-        print("tag: ",tag, type(tag))
-        
-        
+        print("tag: ",tag, type(tag))       
         check_box_changed = event_args['sender']
         #pour récupérer la check_bocx false et la mettre unchecked, je remonte au component parent (le flow panel)
         flowpanel = check_box_changed.parent
@@ -283,7 +300,40 @@ class Qcm_visu(Qcm_visuTemplate):
 
     def maj_liste_pdf(self):
         pass
+
+    def screen_resize(self):
+        """This method is called when the screen is resizing"""
+        self.screen_width = window.screen.width    #text
+        #self.screen_height = window.screen.height
+        #self.browser_width = window.innerWidth         
+        #self.browser_height = window.innerHeight
+        self.label_browser_width.text = self.browser_width
+        global former_screen_size
+        if former_screen_size != self.screen_width:
+            self.xy_panel.width =  self.screen_width             # largeur de l'xy panel  
+            former_screen_size = self.screen_width 
+
+    def timer_1_tick(self, **event_args):
+        """This method is called Every 0.5 seconds. Does not trigger if [interval] is 0."""
+        self.innerWidth = window.innerWidth    #text
         
+        global timer
+        if timer == False:
+            self.label_browser_width.background = "yellow"
+            timer = True
+        else:
+            self.label_browser_width.background = "red"
+            timer = False
+        
+        global former_screen_size
+        if former_screen_size != self.innerWidth:
+            self.xy_panel.width =  self.screen_width             # largeur de l'xy panel se réadapte
+            self.label_browser_width.text = self.browser_width
+            former_screen_size = self.screen_width 
+
+
+
+
 
 
 

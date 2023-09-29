@@ -20,6 +20,16 @@ components:
       full_width_row: false
     components:
     - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
+          Primary Container', visible: true, text: '', font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: ''}
+      name: label_browser_width
+      layout_properties:
+        col_widths: {}
+        grid_position: KEOIST,UQCVPS
+        full_width_row: false
+    - type: Label
       properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
           Primary Container', visible: true, text: QCM, font_size: 16, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary',
@@ -33,8 +43,9 @@ components:
   layout_properties:
     col_widths: {}
     grid_position: ZWVLSR,SABWVD
-    full_width_row: true
+    full_width_row: false
   components: []
+  event_bindings: {}
 - type: Button
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
@@ -65,4 +76,8 @@ components:
     col_widths: {}
     grid_position: FOBZKS,MAIIHH
   event_bindings: {click: button_pdf_click}
+- type: Timer
+  properties: {}
+  name: timer_1
+  event_bindings: {tick: timer_1_tick}
 is_package: true
