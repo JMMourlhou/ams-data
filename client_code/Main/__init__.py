@@ -24,6 +24,13 @@ class Main(MainTemplate):
         # Any code you write here will run before the form opens.
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.text = "Vous êtes déconnecté"
+        self.bt_se_deconnecter.visible = False 
+        self.bt_user_mail.enabled = False
+        self.bt_gestion_stages.visible =False
+        self.column_panel_admin.visible = False
+        self.column_panel_others.visible = False
+        self.button_qcm.visible = False
+        self.bt_gestion_stages.visible = False
         
         self.nb=nb
         """ Incrémentation de nb """
@@ -77,10 +84,6 @@ class Main(MainTemplate):
                     if h["a"]=="confirm" :
                         self.confirm()
                         return
-                        
-        # handling buttons display        
-        self.display_bt_mail()
-        self.display_admin_or_other_buttons()
         
         # renseignements du user pour savoir si on est en 1ere utilisation (on va en maj des renseignements)                    
         user=anvil.users.get_user()
@@ -88,9 +91,14 @@ class Main(MainTemplate):
             self.content_panel.clear()
         else:
             if user['prenom'] == None:
+                self.bt_se_deconnecter.visible = False
                 self.button_qcm.visible = False
                 self.bt_gestion_stages.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
+
+        # handling buttons display        
+        self.display_bt_mail()
+        self.display_admin_or_other_buttons()
 
     
     def pwreset(self, **event_args):
@@ -104,7 +112,6 @@ class Main(MainTemplate):
         self.content_panel.add_component(url_from_mail_PW_reset(self.h["email"],self.h["api"]), full_width_row=True)
         return  
     def confirm(self, **event_args):
-        
         from sign_in_for_AMS_Data.url_from_mail_calls import url_from_mail_calls
         self.content_panel.clear()
         self.content_panel.add_component(url_from_mail_calls(self.h, num_stage=0), full_width_row=True)
@@ -128,8 +135,16 @@ class Main(MainTemplate):
              self.bt_se_deconnecter.visible = True
         else:
              self.bt_user_mail.text = "Vous n'êtes pas connecté."
-             self.bt_se_deconnecter.visible = False 
              self.bt_se_connecter.visible = True
+             self.bt_sign_in.visible = True
+            
+             self.bt_se_deconnecter.visible = False 
+             self.bt_user_mail.enabled = False
+             self.bt_gestion_stages.visible =False
+             self.column_panel_admin.visible = False
+             self.column_panel_others.visible = False
+             self.button_qcm.visible = False
+             self.bt_gestion_stages.visible = False
 
     def display_admin_or_other_buttons(self, **event_args):
         user=anvil.users.get_user()
@@ -142,12 +157,9 @@ class Main(MainTemplate):
             else:                      # user connected,but no admin
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
-        else:                          # deconnected
-            self.bt_user_mail.enabled = False
-            self.bt_sign_in.visible = True
-            self.bt_gestion_stages.visible =False
-            self.column_panel_admin.visible = False
-            self.column_panel_others.visible = False
+        
+            
+            
         
         
     def bt_gestion_stages_click(self, **event_args):

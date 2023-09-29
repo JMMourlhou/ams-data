@@ -19,6 +19,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         # Any code you write here will run before the form opens.
         self.first_entry = first_entry
         if first_entry == True:
+
             self.button_retour.visible = False
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]

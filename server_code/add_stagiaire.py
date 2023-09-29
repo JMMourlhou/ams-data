@@ -41,10 +41,11 @@ def add_stagiaire(stagiaire, stage, mode_fi):
         valid=False
         return valid   
 
-    #vérification si user pas déjà inscrit ds ce stage:
-    test = app_tables.stagiaires_inscrits.get(user_email=user)    
+    #vérification si user pas déjà inscrit ds fichier stagiaire inscrit, POUR CE STAGE:
+    test = app_tables.stagiaires_inscrits.search(user_email=user,                 # ce user
+                                                 stage=stage)                     # ET pour ce stage
     if test :
-        print("Vous ^tes déjà inscrit à ce stage !")
+        print("Vous êtes déjà inscrit à ce stage !")
         valid=False
         return valid   
         
