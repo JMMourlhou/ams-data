@@ -60,7 +60,7 @@ class Qcm_visu(Qcm_visuTemplate):
             # Création du column panel de la question et check boxes
             self.cp = ColumnPanel(role="outlined-card",
                             background="theme:Primary",
-                            wrap_on="tablet",
+                            wrap_on="mobile",
                             spacing_above="small",
                             spacing_below="small",
                             )
@@ -68,7 +68,7 @@ class Qcm_visu(Qcm_visuTemplate):
 
             #self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
             #self.xy_panel.add_component(self.cp, x=xx, y=yy, full_width_row=True)
-            self.xy_panel.add_component(self.cp, x=xx, y=yy)
+            self.xy_panel.add_component(self.cp, x=xx, y=yy, width="default")
             
             
             # Création de la question ds le column panel
