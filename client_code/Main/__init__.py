@@ -84,7 +84,9 @@ class Main(MainTemplate):
                     if h["a"]=="confirm" :
                         self.confirm()
                         return
-        
+        # handling buttons display        
+        self.display_bt_mail()
+        self.display_admin_or_other_buttons()
         # renseignements du user pour savoir si on est en 1ere utilisation (on va en maj des renseignements)                    
         user=anvil.users.get_user()
         if not user:  
@@ -95,12 +97,7 @@ class Main(MainTemplate):
                 self.button_qcm.visible = False
                 self.bt_gestion_stages.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
-
-        # handling buttons display        
-        self.display_bt_mail()
-        self.display_admin_or_other_buttons()
-
-    
+   
     def pwreset(self, **event_args):
         # handling buttons display  
         self.bt_user_mail.text = "Réinitialisation du mot de passe !"
@@ -140,10 +137,10 @@ class Main(MainTemplate):
             
              self.bt_se_deconnecter.visible = False 
              self.bt_user_mail.enabled = False
-             self.bt_gestion_stages.visible =False
+             #self.bt_gestion_stages.visible =False
              self.column_panel_admin.visible = False
              self.column_panel_others.visible = False
-             self.button_qcm.visible = False
+             #self.button_qcm.visible = False
              self.bt_gestion_stages.visible = False
 
     def display_admin_or_other_buttons(self, **event_args):
@@ -154,6 +151,8 @@ class Main(MainTemplate):
             if user["admin"] == True:  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
+                self.button_qcm.visible = True
+                self.bt_gestion_stages.visible = True
             else:                      # user connected,but no admin
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True

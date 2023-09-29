@@ -7,7 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
+import anvil.js
 
 from anvil.js import window # to gain access to the window object
 from anvil_extras.PageBreak import PageBreak
@@ -89,7 +89,7 @@ class Qcm_visu(Qcm_visuTemplate):
             self.xy_panel.add_component(self.cp, x=xx, y=yy, width=self.browser_width)
             
             
-            # Création of the question in column panel
+            # Creation of the question in column panel
             self.quest = TextArea(text=question,
                         enabled=False,
                         align="left",
@@ -103,8 +103,9 @@ class Qcm_visu(Qcm_visuTemplate):
                         )
             self.quest.tag.nom = "question"
             self.cp.add_component(self.quest, x=xx+5, y=yy, width="default")
-            h = self.quest.height
-            print("h",h)
+            node = anvil.js.get_dom_node(self.quest)
+            height = node.clientHeight
+            print("HEIGHT: ", height)
             
             # Création du flow panel ds le column panel
             self.fp = FlowPanel(align="center")

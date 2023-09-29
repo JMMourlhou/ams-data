@@ -133,17 +133,21 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 user=anvil.users.get_user()
                 if user and self.first_entry: # 1ere entrée en fiche de renseignement
                     stage=str(user['stage_num_temp'])
-                                        
                     if  user['stage_num_temp']==0:
                         self.button_retour_click()
                     else:
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
-                        self.insertion_du_stagiaire(user, code_fi, stage)
-                        alert(f"Enregistrement au stage {stage} ok")
+                        r = self.insertion_du_stagiaire(user, code_fi, stage)
+                        test=r[0]
+                        err=r[1]
+                        if test == True:
+                            alert("ok: ",err)
+                        else:
+                            alert("Erreur: ",err)   
                         self.button_retour_click()
             else :
-                alert("Renseignements non enregistés !")
+                alert("Fiche de renseignements non enregistée !")
                 self.button_retour_click()
         else:
             alert("utilisateur non trouvé !")
@@ -165,10 +169,9 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if result:
             #alert("Vous avez été inscrit au stage !")
             open_form('Saisie_info_de_base')
-            
         else:
             alert("Inscription non effectuée !")
-
+            return False
         # le code stage ds user a été effacé au server module add_stagiaire
     
     def text_box_nom_change(self, **event_args):
