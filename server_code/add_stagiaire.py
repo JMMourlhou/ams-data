@@ -51,12 +51,17 @@ def add_stagiaire(stagiaire, stage, mode_fi):
         user.update(stage_num_temp = 0)
         # Incrément nb de stagiaires début stage ds fichier père stage
         try:  # si nb à None il y aurait une erreur
-            if len(code_stage)>0:
+            if code_stage:
                 nb = int(code_stage['nb_stagiaires_deb'])+1
                 code_stage.update(nb_stagiaires_deb=nb)
+                print("passage ds try ok")
+            else:
+                valid="erreur: code_stage vide"
         except:        # nb à None,  
             nb=1
             code_stage.update(nb_stagiaires_deb=nb)
+            print("passage ds except ok")
+            
         valid="Vous êtes inscrit ! (" + str(nb) + ")"
     else:
         valid="Stagiaire non retrouvé dans fichier stagiaires inscrits"
