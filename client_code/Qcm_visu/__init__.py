@@ -64,7 +64,7 @@ class Qcm_visu(Qcm_visuTemplate):
             #alert("sup 800")
             self.xy_panel.width = 800
         
-        self.xy_panel.height = self.nb_questions *185   # hauteur de l'xy panel
+        self.xy_panel.height = self.nb_questions *185 + 10   # hauteur de l'xy panel (cp=110, )
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
         yy = 1
@@ -99,13 +99,10 @@ class Qcm_visu(Qcm_visuTemplate):
                         auto_expand=True,
                         spacing_above=None,
                         spacing_below=None,
-                        #height=120
+                        height=110           #hauteur fixe (contient au moins 4 ligne sur tel)pour faciliter l'espacement entre question et l'affichage des boutons valider /retour
                         )
             self.quest.tag.nom = "question"
             self.cp.add_component(self.quest, x=xx+5, y=yy, width="default")
-            node = anvil.js.get_dom_node(self.quest)
-            height = node.clientHeight
-            print("HEIGHT: ", height)
             
             # Création du flow panel ds le column panel
             self.fp = FlowPanel(align="center")
@@ -159,9 +156,7 @@ class Qcm_visu(Qcm_visuTemplate):
                 #alert("ST")
                 self.xy_panel.add_component(PageBreak(), x=1, y=yy + 1)      # si en création de pdf, je saute une page ts les 6 stagiares 
             """
-            #fin de boucle, je calcule la hauteur du column panel qui vient d'être créé (evariable en fonction largeur écran et nb de lignes question)
-            #w = c.get_width()
-            #h = c.get_height()
+            
             flowpanel = self.cb_false.parent    # conteneur d'1 ligne 
             col_panel = flowpanel.parent    # conteneur objet de la question (col panel)
             """
@@ -171,15 +166,10 @@ class Qcm_visu(Qcm_visuTemplate):
                     hauteur_quest=int(hauteur_quest)
                     print("hauteur", hauteur_quest)
             """
-            #yy = yy + hauteur_quest + 100 + hauteur_entre_question
-            yy = yy + 120 + 100 + hauteur_entre_question
+            #yy = yy + hauteur padding du col panel + hauteur_txt area fixe + hauteur flow p + hauteur_entre_question (10)
+            yy =  yy  +       10                      +   110             +      109        + hauteur_entre_question
             
-            #yy += 170
-        else:
-            """ si pas de questions """
-            print("pas de question")
-            
-    """ Gestion des évenements click sur combo box, extraction grace au TAG """
+    """ Gestion des évenements click sur combo box, extraction grace au TAG ********************** fin de boucle *****************"""
     def check_box_true_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         """ contenu du dictionaire event_args 
@@ -214,23 +204,30 @@ class Qcm_visu(Qcm_visuTemplate):
         open_form('Main',99)
 
     def button_validation_click(self, **event_args):
+        
         """This method is called when the button is clicked"""
         """ Boucle pour 1- savoir si question non répondue
                         2- ds la boucle créer un dictionnaire réponse
-                        
                         3- calculer le résultat en lisant le dico
                         4- sauver le dico ds la table stagiaire_inscrit
         """
         nb_bonnes_rep = 0
         max_points = 0
         points = 0      # Je cumule les points en fonction de la réponse et du barême
-        reponses = []   #liste de toutes les réponses du stagiaire {"num":   , "reponse":   }
+        reponses = []   #liste de toutes les réponses du stagiaire {num, reponseV/F}
         # 1 Boucle sur les flow panels  ET cré le dictionaire
         for col_p in self.xy_panel.get_components():  #ds column panel
+            # *********************************************************  CALCUL HAUTEUR du cpnt
+            node = anvil.js.get_dom_node(col_p)     
+            height = node.clientHeight
+            print("HEIGHT du Column Panel ", height)
             print(col_p.tag.nom)
 
-            for fl_p in col_p.get_components():   #ds flow panel
-                print(fl_p.tag.nom)
+            for fl_p in col_p.get_components():     #ds flow panel
+                node = anvil.js.get_dom_node(fl_p)     
+                height = node.clientHeight
+                print("HEIGHT du flow panel ", height)
+                print(fl_p.tag.nom)   #question
 
                 for cpnt in fl_p.get_components():   # ds chaque cpnt du flow panel
                     print(cpnt.tag.nom)
