@@ -64,11 +64,11 @@ class Qcm_visu(Qcm_visuTemplate):
             #alert("sup 800")
             self.xy_panel.width = 800
         
-        self.xy_panel.height = self.nb_questions *185 + 10   # hauteur de l'xy panel (cp=110, )
+        self.xy_panel.height = self.nb_questions * 200   # hauteur de l'xy panel (cp=110, )
         #print("nb-questions", nb_questions)
         xx = 1   # position (x=1, y=1)
         yy = 1
-        hauteur_entre_question = 10 
+        hauteur_entre_question = 0
         #argeur_espace = 50   #espace de l'espace entre combobox
         cpt_ligne = 0
 
@@ -82,8 +82,8 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cp = ColumnPanel(role="outlined-card",
                             background="theme:Primary",
                             wrap_on="mobile",
-                            spacing_above="small",
-                            spacing_below="small",
+                            spacing_above=None,
+                            spacing_below=None,
                             )
             self.cp.tag.nom = "column"
             self.xy_panel.add_component(self.cp, x=xx, y=yy, width=self.browser_width)
@@ -157,17 +157,9 @@ class Qcm_visu(Qcm_visuTemplate):
                 self.xy_panel.add_component(PageBreak(), x=1, y=yy + 1)      # si en création de pdf, je saute une page ts les 6 stagiares 
             """
             
-            flowpanel = self.cb_false.parent    # conteneur d'1 ligne 
-            col_panel = flowpanel.parent    # conteneur objet de la question (col panel)
-            """
-            for cpnt in col_panel.get_components():
-                if cpnt.tag.nom == "question":
-                    hauteur_quest=cpnt.width                
-                    hauteur_quest=int(hauteur_quest)
-                    print("hauteur", hauteur_quest)
-            """
+            
             #yy = yy + hauteur padding du col panel + hauteur_txt area fixe + hauteur flow p + hauteur_entre_question (10)
-            yy =  yy  +       10                      +   110             +      109        + hauteur_entre_question
+            yy =  yy  +       0                     +   110             +      90        + hauteur_entre_question
             
     """ Gestion des évenements click sur combo box, extraction grace au TAG ********************** fin de boucle *****************"""
     def check_box_true_change(self, **event_args):
