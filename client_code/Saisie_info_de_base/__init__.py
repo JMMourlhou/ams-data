@@ -134,15 +134,16 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 alert("Renseignements enregistés !")    # *************************************
                 # insertion du stagiaire automatiqt si num_stage != 0
                 user=anvil.users.get_user()
-                if user and self.first_entry: # 1ere entrée en fiche de renseignement
+                if user and self.first_entry:          # 1ERE ENTREE 
                     stage=str(user['stage_num_temp'])
                     if  user['stage_num_temp']==0:
+                        alert("User non trouvé en 1ere entrée !")
                         self.button_retour_click()
                     else:
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
-                        valid_msg = self.insertion_du_stagiaire(user, code_fi, stage)
-                        alert(valid_msg)
+                        txt_msg = anvil.server.call("add_stagiaire", user, stage, code_fi)
+                        alert(txt_msg)
                         self.button_retour_click()
             else :
                 alert("Fiche de renseignements non enregistée !")
@@ -159,7 +160,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
         #js.call_js('showSidebar')
         
-    """ INSERTION DU STAGIAIRE **********************************************"""
+    """ INSERTION DU STAGIAIRE **********************************************    A EFFACER SI OK  """
     def insertion_du_stagiaire(self, user, code_fi, stage, **event_args):
         #alert("insertion du stagiaire")
         #alert(code_fi)
@@ -173,7 +174,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         # le code stage ds user a été effacé au server module add_stagiaire
     
     def text_box_nom_change(self, **event_args):
-        """This method is called when the user presses Enter in this text box"""
+        """This method is called when the text in this text box is edited"""
         self.button_validation.visible = True
         self.button_validation_copy.visible = True
 
