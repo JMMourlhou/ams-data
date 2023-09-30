@@ -223,44 +223,45 @@ class Qcm_visu(Qcm_visuTemplate):
             print("HEIGHT du Column Panel ", height)
             print(col_p.tag.nom)
 
-            for fl_p in col_p.get_components():     #ds flow panel
-                node = anvil.js.get_dom_node(fl_p)     
-                height = node.clientHeight
-                print("HEIGHT du flow panel ", height)
-                print(fl_p.tag.nom)   #question
-
-                for cpnt in fl_p.get_components():   # ds chaque cpnt du flow panel
-                    print(cpnt.tag.nom)
-                    if cpnt.tag.nom == "cb_true":
-                        numero_question = cpnt.tag.num_question
-                        global etat_vrai
-                        etat_vrai = cpnt.checked     #je sauve l'état du combo vrai                                        # je mets à jour la liste  
+            for cpnt1 in col_p.get_components():     
+                if cpnt1.tag.nom == "question":
+                    node = anvil.js.get_dom_node(cpnt1)     
+                    height = node.clientHeight
+                    print("HEIGHT de text box question ", height)
+                    print(cpnt1.tag.nom)   # text box de la question
+                if cpnt1.tag.nom == "flow_panel":
+                    for cpnt in cpnt1.get_components():   # ds chaque cpnt du flow panel
+                        print(cpnt.tag.nom)
+                        if cpnt.tag.nom == "cb_true":
+                            numero_question = cpnt.tag.num_question
+                            global etat_vrai
+                            etat_vrai = cpnt.checked     #je sauve l'état du combo vrai                                        # je mets à jour la liste  
+                                
+                        if cpnt.tag.nom == "cb_false":     #si je suis sur le cobo Faux...
+                            global etat_faux
+                            etat_faux = cpnt.checked   #je sauve l'état du combo faux                       
                             
-                    if cpnt.tag.nom == "cb_false":     #si je suis sur le cobo Faux...
-                        global etat_faux
-                        etat_faux = cpnt.checked   #je sauve l'état du combo faux                       
-                        
-                        if etat_faux==None and etat_vrai==None:
-                            alert(f"La question {numero_question} n'a pas été répondue")
-                            return
-
-                        rep_stagiaire = False
-                        rep=()
-                        if etat_vrai == False:       # le stagiaire a répondu False
-                            rep=[numero_question,False]
+                            if etat_faux==None and etat_vrai==None:
+                                alert(f"La question {numero_question} n'a pas été répondue")
+                                return
+    
                             rep_stagiaire = False
-                        else:
-                            rep=[numero_question,True]    # le stagiaire a répondu True
-                            rep_stagiaire = True
-                        reponses.append(rep)      # je mets à jour la liste    
-                        #alert(reponses)
-
-                        #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
-                        max_points = max_points + int(cpnt.tag.bareme)    # cumul du max de points possible
-                        if cpnt.tag.bonne_rep == rep_stagiaire:
-                            nb_bonnes_rep += 1
-                            points = points + int(cpnt.tag.bareme)
-                            
+                            rep=()
+                            if etat_vrai == False:       # le stagiaire a répondu False
+                                rep=[numero_question,False]
+                                rep_stagiaire = False
+                            else:
+                                rep=[numero_question,True]    # le stagiaire a répondu True
+                                rep_stagiaire = True
+                            reponses.append(rep)      # je mets à jour la liste    
+                            #alert(reponses)
+    
+                            #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
+                            max_points = max_points + int(cpnt.tag.bareme)    # cumul du max de points possible
+                            if cpnt.tag.bonne_rep == rep_stagiaire:
+                                nb_bonnes_rep += 1
+                                points = points + int(cpnt.tag.bareme)
+                                
         
         #sortie de boucle ds mes questions, affichage du résultat
         pour_cent = round(nb_bonnes_rep/self.nb_questions*100,2)
