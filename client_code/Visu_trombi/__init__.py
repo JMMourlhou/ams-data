@@ -70,7 +70,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                     visible = True,
                                     tag = mel
                                     )
-                self.im.set_event_handler('mouse_down',self.im_mouse_down)
+                #self.im.set_event_handler('mouse_down',self.im_mouse_down)            #POUR RENDRE L'IMAGE CLICKABLE, REVALIDER CETTE LIGNE
                 try:  #au cas où prenom vide 
                     txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 except:
@@ -106,7 +106,8 @@ class Visu_trombi(Visu_trombiTemplate):
         {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
         #print(event_args) # c'est un dictionnaire contenant les infos de lévenement
         mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
-        #print("mail",mel)
+        from ..Saisie_info_apres_trombi import Saisie_info_apres_trombi
+        open_form('Saisie_info_apres_trombi', self.num_stage, self.intitule, mel)
   
     def im_mouse_down(self, x, y, **event_args):
         """This method is called when the mouse cursor enters this component"""

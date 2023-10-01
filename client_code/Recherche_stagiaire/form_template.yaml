@@ -1,0 +1,142 @@
+container:
+  type: ColumnPanel
+  properties: {col_widths: '{}'}
+components:
+- type: ColumnPanel
+  properties: {col_widths: '{}'}
+  name: column_panel_2
+  layout_properties: {grid_position: 'UWMZFM,BGONAC'}
+  components:
+  - type: ColumnPanel
+    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+      spacing_below: small, background: ''}
+    name: column_panel_1
+    layout_properties:
+      col_widths: {}
+      grid_position: GXKYQU,JIABHP
+    components:
+    - type: Label
+      properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
+          Tertiary', visible: true, text: Recherche stagiaires, font_size: 16, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+      name: label_3
+      layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+    - type: ColumnPanel
+      properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+        wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+        spacing_below: small, background: ''}
+      name: column_panel_criteres
+      layout_properties: {grid_position: 'IIIDWB,YLIPKG'}
+      components:
+      - type: TextBox
+        properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Nom,
+          border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+          text: '', font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
+          italic: false, background: 'theme:Primary', bold: false, underline: false}
+        name: text_box_nom
+        layout_properties: {grid_position: 'YLMZKA,LBTZUX'}
+        event_bindings: {change: text_box_nom_change}
+      - type: TextBox
+        properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Prenom,
+          border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+          text: '', font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
+          italic: false, background: 'theme:Primary', bold: false, underline: false}
+        name: text_box_prenom
+        layout_properties: {grid_position: 'YLMZKA,TVBGCU'}
+      - type: TextBox
+        properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Mail,
+          border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
+          font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
+          background: 'theme:Primary', bold: false, underline: false}
+        name: text_box_mail
+        layout_properties: {grid_position: 'YLMZKA,ACIMCA'}
+      - type: TextBox
+        properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Tel,
+          border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+          text: '', font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
+          italic: false, background: 'theme:Primary', bold: false, underline: false}
+        name: text_box_tel
+        layout_properties: {grid_position: 'YLMZKA,OGWFFD'}
+      - type: DropDown
+        properties:
+          role: null
+          align: full
+          tooltip: ''
+          placeholder: Stage
+          border: ''
+          enabled: true
+          foreground: theme:On Primary
+          items: []
+          visible: true
+          font_size: null
+          font: ''
+          spacing_above: small
+          spacing_below: small
+          italic: false
+          background: theme:Primary
+          bold: false
+          underline: false
+          include_placeholder: true
+        name: drop_down_1
+        layout_properties: {grid_position: 'YLMZKA,JEBECT'}
+      - type: DropDown
+        properties:
+          role: null
+          align: full
+          tooltip: ''
+          placeholder: N° Stage
+          border: ''
+          enabled: true
+          foreground: theme:On Primary
+          items: []
+          visible: true
+          font_size: null
+          font: ''
+          spacing_above: small
+          spacing_below: small
+          italic: false
+          background: theme:Primary
+          bold: false
+          underline: false
+          include_placeholder: true
+        name: drop_down_2
+        layout_properties: {grid_position: 'YLMZKA,ULPRIB'}
+    - type: ColumnPanel
+      properties: {col_widths: '{}'}
+      name: column_panel_4
+      layout_properties: {grid_position: 'RZGCCO,SGLSVW'}
+      components:
+      - type: DataGrid
+        properties:
+          role: null
+          columns:
+          - {id: GLLONF, title: Nom, data_key: column_1, $$hashKey: 'object:23327',
+            width: 177, expand: false}
+          - {id: DZRQQT, title: Prénom, data_key: column_2, $$hashKey: 'object:23328',
+            width: 182, expand: false}
+          - {id: EJHDPK, title: Tel, data_key: column_3, $$hashKey: 'object:23329',
+            width: 135, expand: false}
+          - {id: PQCWHJ, title: Mail, data_key: column_4, $$hashKey: 'object:23945'}
+          auto_header: true
+          tooltip: ''
+          border: ''
+          foreground: ''
+          rows_per_page: 20
+          visible: true
+          wrap_on: never
+          show_page_controls: true
+          spacing_above: small
+          spacing_below: small
+          background: ''
+        name: data_grid_1
+        layout_properties: {grid_position: 'VFJRDC,JLDEQO'}
+        components:
+        - type: RepeatingPanel
+          properties: {role: outlined-card, tooltip: '', border: '', foreground: 'theme:On
+              Primary', items: null, visible: true, spacing_above: none, spacing_below: none,
+            item_template: Recherche_stagiaire.RowTemplate1, background: 'theme:Primary'}
+          name: repeating_panel_1
+          layout_properties: {pinned: false}
+is_package: true
