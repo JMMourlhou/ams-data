@@ -218,6 +218,12 @@ class Main(MainTemplate):
         from .. Qcm_visu import Qcm_visu
         open_form('Qcm_visu')
 
+    def button_create_recherche_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Recherche_stagiaire import Recherche_stagiaire
+        open_form('Recherche_stagiaire')
+
+
 
 
 

@@ -24,7 +24,6 @@ class ItemTemplate2(ItemTemplate2Template):
         mel=self.item["user_email"]['email']
         stagiaire = app_tables.users.get(email=mel)    
         if stagiaire :
-                        
             #Photo
             orig_pic = stagiaire['photo']
             if orig_pic != None:

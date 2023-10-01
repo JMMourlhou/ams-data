@@ -112,20 +112,21 @@ components:
         properties:
           role: null
           columns:
-          - {id: GLLONF, title: Nom, data_key: column_1, $$hashKey: 'object:23327',
-            width: 177, expand: false}
-          - {id: DZRQQT, title: Prénom, data_key: column_2, $$hashKey: 'object:23328',
+          - {id: GLLONF, title: Nom, data_key: nom, $$hashKey: 'object:23327', width: 198,
+            expand: false}
+          - {id: DZRQQT, title: Prénom, data_key: prenom, $$hashKey: 'object:23328',
             width: 182, expand: false}
-          - {id: EJHDPK, title: Tel, data_key: column_3, $$hashKey: 'object:23329',
-            width: 135, expand: false}
-          - {id: PQCWHJ, title: Mail, data_key: column_4, $$hashKey: 'object:23945'}
+          - {id: EJHDPK, title: Tel, data_key: tel, $$hashKey: 'object:23329', width: 135,
+            expand: false}
+          - {id: PQCWHJ, title: Mail, data_key: email, $$hashKey: 'object:23945'}
+          - {id: MNXHAY, title: Stage, data_key: column_5, $$hashKey: 'object:480'}
           auto_header: true
           tooltip: ''
           border: ''
           foreground: ''
-          rows_per_page: 20
+          rows_per_page: 10
           visible: true
-          wrap_on: never
+          wrap_on: mobile
           show_page_controls: true
           spacing_above: small
           spacing_below: small
