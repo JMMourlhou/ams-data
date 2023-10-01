@@ -762,7 +762,7 @@ button.close > span, button.close {
 /*this affects dropdowns, text boxes and text areas:*/
 input.anvil-component, textarea.anvil-component, .anvil-component select, .anvil-datepicker input {
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.6;                         /* jm change de 1.5 à 1.6 (voir TextArea line spacin in Forum)  */
   border-radius: 4px 4px 0 0;
   background-color: %color:Surface Variant%;
   color: %color:On Surface Variant%;
