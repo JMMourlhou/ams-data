@@ -14,5 +14,7 @@ class RowTemplate1(RowTemplate1Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        #self.column_1.txt = self.item['nom']
+        # Normalement,dans un Data grid, j'initialise mes lignes en donnant data=nom de la colonne de mon fichier affiché
+        # Mais ici, je veux pouvoir clicker sur ma ligne, donc je rajoute des boutons
+        self.button_1.text = self.item['nom']
         
