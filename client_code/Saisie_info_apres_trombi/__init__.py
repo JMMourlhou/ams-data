@@ -26,7 +26,7 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
         if self.first_entry:  # si 1ere entrée ds fiche d'info
             self.drop_down_fi.visible = True
             
-        # lecture sur le mail du stgiaire après click sur trombi
+        # lecture sur le mail du stagiaire après click sur trombi
         user=app_tables.users.get(email=self.mel)
 
         if user:
@@ -102,7 +102,7 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
                 self.check_box_accept_data_use.checked = True
                 return
 
-        # lecture sur le mail du stgiaire après click sur trombi
+        # lecture sur le mail du stagiaire après click sur trombi
         user=app_tables.users.get(email=self.mel)
         if user:
             result = anvil.server.call("modify_users_after_trombi", self.mel,
@@ -209,3 +209,16 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
     def drop_down_fi_change(self, **event_args):
         """This method is called when an item is selected"""
         self.text_box_nom_change()
+
+    def button_download_photo_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
+        # lecture sur le mail du stagiaire après click sur trombi
+        user=app_tables.users.get(email=self.mel)
+        if not user: 
+            print("user non trouvé à partir de son mail en saisie après trombi")
+        else:
+            anvil.media.download(user['photo'])
+            alert("Photo téléchargée")
+
+

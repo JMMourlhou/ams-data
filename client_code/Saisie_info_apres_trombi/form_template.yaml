@@ -65,6 +65,14 @@ components:
     name: text_box_mail
     layout_properties: {grid_position: 'FDMGZB,AFDUFM POUMKS,VLAEPT'}
     event_bindings: {change: text_box_mail_change}
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: Photo, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: 'fa:download'}
+    name: button_download_photo
+    layout_properties: {grid_position: 'FDMGZB,AFDUFM YCLYGC,NSCDPO'}
+    event_bindings: {click: button_download_photo_click}
   - type: FileLoader
     properties:
       role: elevated-button
@@ -77,7 +85,7 @@ components:
       files: []
       foreground: theme:On Primary
       visible: true
-      text: Prenez votre photo !
+      text: ' photo '
       font_size: null
       font: ''
       spacing_above: none
@@ -235,7 +243,7 @@ components:
       layout_properties: {grid_position: 'TEDLAG,EHPYAA'}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: 2eme mail,
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: false, text: '',
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, font: '', spacing_above: none, type: email, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_email2
@@ -243,7 +251,7 @@ components:
     event_bindings: {change: text_box_email2_change}
   - type: TextArea
     properties: {role: null, align: left, height: 85.9083, tooltip: '', placeholder: Commentaires,
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: false, text: '',
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_area_commentaires

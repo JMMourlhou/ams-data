@@ -36,6 +36,8 @@ def add_stagiaire(stagiaire, stage, mode_fi):
                                                  stage=code_stage)                # ET pour ce stage
     if len(test)>0:
         valid="Vous êtes déjà inscrit à ce stage !"
+        # ******************************************************************* EFFACT code stage ds user avant retour
+        user.update(stage_num_temp = 0)
         return valid 
         
     new_row=app_tables.stagiaires_inscrits.add_row(
@@ -47,7 +49,7 @@ def add_stagiaire(stagiaire, stage, mode_fi):
              
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
     if stagiaire_row:
-        #effacemnt du code stage ds user et incrément du nb de stgiaires ds le stage:
+        # ******************************************************************* EFFACT code stage ds user et INCREMENT du nb de stgiaires ds le stage:
         user.update(stage_num_temp = 0)
         # Incrément nb de stagiaires début stage ds fichier père stage
         try:  # si nb à None il y aurait une erreur

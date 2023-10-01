@@ -28,7 +28,6 @@ class Visu_trombi(Visu_trombiTemplate):
             
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
-
         cod = stage_row["type"]['code']
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
         self.label_titre.text = "Trombi stagiaires" + cod + " du " + date + "   (num " +num_stage+")"
@@ -47,7 +46,7 @@ class Visu_trombi(Visu_trombiTemplate):
         cpt_stagiaire = 0
         cpt_ligne = 1
         for row in rows :
-            cpt_stagiaire += 1  # compteur
+            cpt_stagiaire += 1  # incrément compteur
        
             #lecture fichier users à partir du mail
             mel=row["user_email"]['email']
@@ -72,8 +71,11 @@ class Visu_trombi(Visu_trombiTemplate):
                                     tag = mel
                                     )
                 self.im.set_event_handler('mouse_down',self.im_mouse_down)
+                try:  #au cas où prenom vide 
+                    txt = stagiaire['nom'] + " " + stagiaire['prenom']
+                except:
+                    txt = stagiaire['nom']
                 
-                txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
                 self.bt.set_event_handler('click',self.bt_click)
                 
@@ -94,10 +96,10 @@ class Visu_trombi(Visu_trombiTemplate):
                 #print("stagiaire", cpt_stagiaire)     
             else:
                 """ si pas de stagiaire """
-                print("pas de stagiaire")
-
-    """ Gestion des évenements click sur image ou nom, extraction grace au TAG de l'image ou nom """
-    
+                print("stagiaire non trouvé par son mail")
+                
+    """ *************************************************************************************************************************************"""
+    """ ******************************              Gestion des évenements click sur image ou nom, extraction grace au TAG de l'image ou nom """
     def bt_click(self, **event_args):
         """This method is called when the link is clicked"""
         """ contenu du dictionaire event_args 

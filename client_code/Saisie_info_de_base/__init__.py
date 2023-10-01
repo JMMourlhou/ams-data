@@ -160,18 +160,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
         #js.call_js('showSidebar')
         
-    """ INSERTION DU STAGIAIRE **********************************************    A EFFACER SI OK  """
-    def insertion_du_stagiaire(self, user, code_fi, stage, **event_args):
-        #alert("insertion du stagiaire")
-        #alert(code_fi)
-        result = anvil.server.call("add_stagiaire", user, stage, code_fi)
-        if result:
-            #alert("Vous avez été inscrit au stage !")
-            open_form('Saisie_info_de_base')
-        else:
-            alert("Inscription non effectuée !")
-            return False
-        # le code stage ds user a été effacé au server module add_stagiaire
+    
     
     def text_box_nom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
