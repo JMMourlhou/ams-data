@@ -19,7 +19,6 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         # Any code you write here will run before the form opens.
         self.first_entry = first_entry
         if first_entry == True:
-
             self.button_retour.visible = False
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
@@ -36,7 +35,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
-                thumb_pic = anvil.image.generate_thumbnail(user["photo"], 320)
+                thumb_pic = anvil.image.generate_thumbnail(user["photo"], 640)
                 self.image_photo.source = thumb_pic
             else:
                 self.image_photo.source =            user["photo"]
@@ -57,10 +56,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if user['admin'] == True:
                self.text_box_email2.visible = True
                self.text_area_commentaires.visible = True
-
         else:
             self.button_retour_click()
-       
 
     def file_loader_photo_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""

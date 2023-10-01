@@ -47,6 +47,14 @@ components:
         layout_properties: {grid_position: 'YLMZKA,TVBGCU'}
         event_bindings: {change: text_box_prenom_change}
       - type: TextBox
+        properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Tel,
+          border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+          text: '', font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
+          italic: false, background: 'theme:Primary', bold: false, underline: false}
+        name: text_box_tel
+        layout_properties: {grid_position: 'YLMZKA,GKGVRI'}
+        event_bindings: {change: text_box_tel_change}
+      - type: TextBox
         properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Email,
           border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
           text: '', font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
@@ -54,17 +62,9 @@ components:
         name: text_box_email
         layout_properties: {grid_position: 'YLMZKA,ACIMCA'}
         event_bindings: {change: text_box_email_change}
-      - type: TextBox
-        properties: {role: outlined, align: left, hide_text: false, tooltip: '', placeholder: Tel,
-          border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
-          text: '', font_size: null, font: '', spacing_above: none, type: text, spacing_below: none,
-          italic: false, background: 'theme:Primary', bold: false, underline: false}
-        name: text_box_tel
-        layout_properties: {grid_position: 'YLMZKA,OGWFFD'}
-        event_bindings: {change: text_box_tel_change}
       - type: DropDown
         properties:
-          role: null
+          role: outlined
           align: full
           tooltip: ''
           placeholder: Stage
@@ -82,8 +82,9 @@ components:
           bold: false
           underline: false
           include_placeholder: true
-        name: drop_down_1
+        name: drop_down_code_stage
         layout_properties: {grid_position: 'YLMZKA,JEBECT'}
+        event_bindings: {change: drop_down_code_stage_change}
       - type: DropDown
         properties:
           role: null
@@ -94,7 +95,7 @@ components:
           enabled: true
           foreground: theme:On Primary
           items: []
-          visible: true
+          visible: false
           font_size: null
           font: ''
           spacing_above: small
@@ -104,75 +105,23 @@ components:
           bold: false
           underline: false
           include_placeholder: true
-        name: drop_down_2
+        name: drop_down_num_stages
         layout_properties: {grid_position: 'YLMZKA,ULPRIB'}
+        event_bindings: {change: drop_down_num_stages_change}
     - type: ColumnPanel
       properties: {col_widths: '{}'}
       name: column_panel_4
       layout_properties: {grid_position: 'RZGCCO,SGLSVW'}
       components:
-      - type: DataRowPanel
-        properties: {}
-        name: data_row_panel_1
-        layout_properties: {grid_position: 'XWIWPZ,YNZIZJ'}
-        components:
-        - type: ColumnPanel
-          properties: {col_widths: '{}'}
-          name: column_panel_3
-          layout_properties: {column: null}
-          components:
-          - type: Label
-            properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-              visible: true, text: Nom, font_size: null, font: '', spacing_above: small,
-              icon_align: left, spacing_below: small, italic: false, background: '',
-              bold: false, underline: false, icon: ''}
-            name: label_1
-            layout_properties: {column: null, grid_position: 'HQUNGF,HABTAS'}
-          - type: Label
-            properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-              visible: true, text: Prénom, font_size: null, font: '', spacing_above: small,
-              icon_align: left, spacing_below: small, italic: false, background: '',
-              bold: false, underline: false, icon: ''}
-            name: label_2
-            layout_properties: {column: null, grid_position: 'HQUNGF,BBNHUA'}
-          - type: Label
-            properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-              visible: true, text: Tel, font_size: null, font: '', spacing_above: small,
-              icon_align: left, spacing_below: small, italic: false, background: '',
-              bold: false, underline: false, icon: ''}
-            name: label_6
-            layout_properties: {grid_position: 'HQUNGF,VIMJPU'}
-          - type: Label
-            properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-              visible: true, text: Mail, font_size: null, font: '', spacing_above: small,
-              icon_align: left, spacing_below: small, italic: false, background: '',
-              bold: false, underline: false, icon: ''}
-            name: label_4
-            layout_properties: {grid_position: 'HQUNGF,AZLRDT'}
-          - type: Label
-            properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-              visible: true, text: Stage, font_size: null, font: '', spacing_above: small,
-              icon_align: left, spacing_below: small, italic: false, background: '',
-              bold: false, underline: false, icon: ''}
-            name: label_5
-            layout_properties: {grid_position: 'HQUNGF,TMEXEU'}
       - type: DataGrid
         properties:
           role: null
-          columns:
-          - {id: GLLONF, title: Nom, data_key: nom, $$hashKey: 'object:23327', width: 198,
-            expand: false}
-          - {id: DZRQQT, title: Prénom, data_key: prenom, $$hashKey: 'object:23328',
-            width: 182, expand: false}
-          - {id: EJHDPK, title: Tel, data_key: tel, $$hashKey: 'object:23329', width: 135,
-            expand: false}
-          - {id: PQCWHJ, title: Mail, data_key: email, $$hashKey: 'object:23945'}
-          - {id: MNXHAY, title: Stage, data_key: column_5, $$hashKey: 'object:480'}
+          columns: []
           auto_header: false
           tooltip: ''
           border: ''
           foreground: ''
-          rows_per_page: 10
+          rows_per_page: 6
           visible: true
           wrap_on: mobile
           show_page_controls: true
@@ -185,7 +134,7 @@ components:
         - type: RepeatingPanel
           properties: {role: outlined-card, tooltip: '', border: '', foreground: 'theme:On
               Primary', items: null, visible: true, spacing_above: none, spacing_below: none,
-            item_template: Recherche_stagiaire.RowTemplate1, background: 'theme:Primary'}
+            item_template: Recherche_stagiaire.RowTemplate1, background: ''}
           name: repeating_panel_1
           layout_properties: {pinned: false}
 is_package: true

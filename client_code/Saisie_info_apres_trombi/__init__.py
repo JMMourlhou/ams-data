@@ -12,7 +12,7 @@ global user
 user = None
 
 class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
-    def __init__(self, num_stage, intitule, mel, first_entry=False, **properties):
+    def __init__(self, num_stage=0, intitule="", mel="", first_entry=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.first_entry = first_entry

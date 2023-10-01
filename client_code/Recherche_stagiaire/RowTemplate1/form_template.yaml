@@ -4,11 +4,40 @@ container:
     visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: '', bold: false, underline: false}
 components:
-- type: Button
-  properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: 'theme:On
-      Primary', visible: true, text: button_1, font_size: null, font: '', spacing_above: small,
-    icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
-    bold: false, underline: false, icon: ''}
-  name: button_1
-  layout_properties: {column: GLLONF}
+- type: ColumnPanel
+  properties: {role: null, tooltip: '', border: '', foreground: 'theme:On Primary',
+    visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"EJHTQQ":9,"VJOTSH":13,"POUXQY":20,"VXXGLD":18}',
+    spacing_below: small, background: 'theme:Primary'}
+  name: column_panel_1
+  layout_properties: {column: null}
+  components:
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_1, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_1
+    layout_properties: {grid_position: 'SJPWGO,EJHTQQ'}
+    event_bindings: {click: button_1_click}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_3, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_3
+    layout_properties: {grid_position: 'SJPWGO,VJOTSH'}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_4, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_4
+    layout_properties: {grid_position: 'SJPWGO,POUXQY'}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_5, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_5
+    layout_properties: {grid_position: 'SJPWGO,VXXGLD'}
 is_package: true
