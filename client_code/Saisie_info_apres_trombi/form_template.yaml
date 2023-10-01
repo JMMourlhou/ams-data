@@ -25,6 +25,16 @@ components:
   components:
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+    name: button_annuler_copy
+    layout_properties:
+      col_widths: {}
+      grid_position: BFZRNX,ZJZGVH
+    event_bindings: {click: button_annuler_copy_click}
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Tertiary', visible: false, text: Valider, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Error', bold: true, underline: false, icon: ''}

@@ -221,4 +221,13 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
             anvil.media.download(user['photo'])
             alert("Photo téléchargée")
 
+    def button_annuler_copy_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_trombi import Visu_trombi
+        open_form('Visu_trombi',self.num_stage, self.intitule, False)
+    def button_retour_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_trombi import Visu_trombi
+        open_form('Visu_trombi',self.num_stage, self.intitule, False)
+
 
