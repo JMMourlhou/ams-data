@@ -80,13 +80,13 @@ class Stage_creation(Stage_creationTemplate):
             alert("Le numéro de stage existe déjà !")
             self.button_annuler_click()
             
-        result = anvil.server.call("add_stage", row['code'],         #num du stage  de la ligne            
+        result = anvil.server.call("add_stage", row['code'],         #num du stage  de la ligne 
+                                                self.text_box_num_stage.text,
                                                 row2['lieu'],
                                                 self.date_picker_from.date,
                                                 self.text_box_nb_stagiaires_deb.text,
                                                 self.date_picker_to.date,
                                                 self.text_box_nb_stagiaires_fin.text,               # extraction du type de stga de la ligne dropdown    
-                                                self.text_box_num_stage.text,  # ,
                                                 self.text_box_nb_stagiaires_diplom.text,
                                                 self.text_area_commentaires.text
                                                  )
