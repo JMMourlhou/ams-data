@@ -73,11 +73,16 @@ class ItemTemplate4(ItemTemplate4Template):
                 question = cpnt.text
                 # mettre la 1ere lettre en maj mais laisser le reste comme tappé
                 #je boucle à partir de la deuxieme lettre et cumul le text
+                
+                
                 txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
+                txt2 = question[1:len(question)]   #Slice je prends toute la question à partir de la position 2
+                #print(txt+txt2)
+                """
                 for x in range(1,len(question)):  # je pars de la position2 et boucle j'usquà la fin de la question
                     txt = txt + question[x]
-                    print(txt)
-                question = txt   
+                """
+                question = txt + txt2 
             if cpnt.tag.nom =="reponse":
                 reponse = cpnt.checked
             if cpnt.tag.nom =="bareme":

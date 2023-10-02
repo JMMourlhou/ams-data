@@ -96,6 +96,12 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """This method is called when an item is selected"""
         pass
 
+    def button_retour_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form('Main',99)
+
+
 
 
 
