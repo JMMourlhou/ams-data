@@ -19,7 +19,8 @@ def add_stage(type,
               nb_stagiaires_diplomes,
               commentaires
              ):
-    numero=int(numero)
+                 
+    #numero=int(numero)
 
     # lecture fichier père code stages
     code_stage = app_tables.codes_stages.get(code=type)
