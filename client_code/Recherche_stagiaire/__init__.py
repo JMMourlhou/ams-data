@@ -36,6 +36,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         self.drop_down_code_stage.tag.etat=True
+        self.text_box_nom.text=""       # critere nom
+        self.text_box_prenom.text=""  # critere prenom
+        self.text_box_email.text=""  # critere email
+        self.text_box_tel.text=""  # critere tel
         self.filtre_type_stage()   
     def filtre(self):
         # Récupération des critères
@@ -69,17 +73,16 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # Initialisation du Drop down num_stages
         self.drop_down_num_stages.items = [(str(r['date_debut']), r) for r in list1]
         self.drop_down_num_stages.visible = True
-        """
+        
         #affichage de tous les stagiaires de ces stages du type choisit
-        list = []
-        for stage in liste1:
+        temp = []
+        for s in list1:
             # lecture du contenu de chaque stage de ce type et sauvegarde de la liste
-            temp=app_tables.stagiaires_inscrits.search(
-                tables.order_by("nom", ascending=True),
-                stage=liste1
-            )
-            list.extend(temp)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
-           
+            # lecture du fichier stagiaires_inscrits sur le stage
+            list = app_tables.stagiaires_inscrits.search(stage=s)
+            #list.extend(temp)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
+        self.repeating_panel_1.items = list
+        """
         self.repeating_panel_1.items = app_tables.users.search(
             tables.order_by("nom", ascending=True),
             q.all_of                  # all of queries must match

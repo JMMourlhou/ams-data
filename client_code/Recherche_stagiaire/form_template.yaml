@@ -145,6 +145,6 @@ components:
   name: button_retour
   layout_properties:
     col_widths: {}
-    grid_position: AWFMMO,TFWYGJ
+    grid_position: VSXLLE,FMCKIE
   event_bindings: {click: button_retour_click}
 is_package: true
