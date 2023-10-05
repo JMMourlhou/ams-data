@@ -32,7 +32,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_1.text = self.item['name']
             
             #self.button_3.text = self.item['tel']
-            self.button_4.text = self.item['user_email']
+            self.button_4.text = self.item['user_email']['email']
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
