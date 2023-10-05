@@ -41,8 +41,8 @@ class RowTemplate1(RowTemplate1Template):
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         mel = self.item['email']   
-        from ...Saisie_info_de_base import Saisie_info_de_base
-        open_form('Saisie_info_de_base')
+        from ...Saisie_info_apres_visu import Saisie_info_apres_visu
+        open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
         
         
         

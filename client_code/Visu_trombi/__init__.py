@@ -117,7 +117,7 @@ class Visu_trombi(Visu_trombiTemplate):
         mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
         #print("mail",mel)
         from ..Saisie_info_apres_trombi import Saisie_info_apres_trombi
-        open_form('Saisie_info_apres_trombi', self.num_stage, self.intitule, mel)
+        open_form('Saisie_info_apres_trombi', self.num_stage, self.intitule, mel, provenance="trombi")
     
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""

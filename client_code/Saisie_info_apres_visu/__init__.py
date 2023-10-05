@@ -1,4 +1,4 @@
-from ._anvil_designer import Saisie_info_apres_trombiTemplate
+from ._anvil_designer import Saisie_info_apres_visuTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -11,26 +11,24 @@ from anvil.tables import app_tables
 global user
 user = None
 
-class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
-    def __init__(self, num_stage=0, intitule="", mel="", first_entry=False, **properties):
+class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
+    def __init__(self, mel, num_stage=0, intitule="", provenance="", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        self.first_entry = first_entry
         self.num_stage = num_stage
         self.intitule = intitule
         self.mel = mel
+        self.provenance=provenance
         # Any code you write here will run before the form opens.
 
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
-        if self.first_entry:  # si 1ere entrée ds fiche d'info
-            self.drop_down_fi.visible = True
-            
+ 
+
         # lecture sur le mail du stagiaire après click sur trombi
         user=app_tables.users.get(email=self.mel)
 
         if user:
-
             self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"]
             self.text_box_prenom.text =              user["prenom"]
@@ -58,7 +56,6 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
             if user['admin'] == True:
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
-
         else:
             self.button_annuler_click()
 
@@ -83,17 +80,12 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
             return
         if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
             alert("Le numéro de teléphone n'est pas valide")
-            return   
+            return
         if self.date_naissance.date == None :           # dateN vide ?
             alert("Entrez la date de naissance")
             return
         if self.text_box_ville_naissance.text == "" :    # ville N vide ?
             alert("Entrez la ville de Naissance")
-            return
-
-        # Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
-        if self.drop_down_fi.selected_value == None and self.first_entry==True:
-            alert("Vous devez sélectionner un mode de financement !")
             return
 
         if self.check_box_accept_data_use.checked != True:
@@ -122,7 +114,7 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
                                                     self.text_area_commentaires.text
                                                     )
             if result == True :
-                alert("Renseignements enregistés !")   
+                alert("Renseignements enregistés !")
                 from ..Visu_trombi import Visu_trombi
                 open_form('Visu_trombi',self.num_stage, self.intitule, False)
             else :
@@ -132,32 +124,15 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
             alert("utilisateur non trouvé !")
             self.button_retour_click()
 
-    def button_retour_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Visu_trombi import Visu_trombi
-        open_form('Visu_trombi',self.num_stage, self.intitule, False)
+
 
         #js.call_js('showSidebar')
-
-    """ INSERTION DU STAGIAIRE **********************************************"""
-    def insertion_du_stagiaire(self, user, code_fi, stage, **event_args):
-        #alert("insertion du stagiaire")
-        #alert(code_fi)
-        result = anvil.server.call("add_stagiaire", user, stage, code_fi)
-        if result:
-            alert("Vous avez été inscrit au stage !")
-            open_form('Saisie_info_de_base')
-
-        else:
-            alert("Inscription non effectuée !")
-
-        # le code stage ds user a été effacé au server module add_stagiaire
 
     def text_box_nom_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_validation.visible = True
         self.button_validation_copy.visible = True
-        
+
     def text_box_prenom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
         self.text_box_nom_change()
@@ -215,7 +190,7 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
         "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
         # lecture sur le mail du stagiaire après click sur trombi
         user=app_tables.users.get(email=self.mel)
-        if not user: 
+        if not user:
             print("user non trouvé à partir de son mail en saisie après trombi")
         else:
             anvil.media.download(user['photo'])
@@ -223,11 +198,13 @@ class Saisie_info_apres_trombi(Saisie_info_apres_trombiTemplate):
 
     def button_annuler_copy_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_trombi import Visu_trombi
-        open_form('Visu_trombi',self.num_stage, self.intitule, False)
-    def button_retour_click(self, **event_args):
+        self.button_annuler_click()
+        
+    def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_trombi import Visu_trombi
-        open_form('Visu_trombi',self.num_stage, self.intitule, False)
-
-
+        if self.provenance == "trombi":
+            from ..Visu_trombi import Visu_trombi
+            open_form('Visu_trombi',self.num_stage, self.intitule, False)
+        if self.provenance == "recherche":
+            from ..Recherche_stagiaire import Recherche_stagiaire
+            open_form('Recherche_stagiaire')
