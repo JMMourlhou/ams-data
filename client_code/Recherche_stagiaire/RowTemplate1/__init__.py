@@ -26,7 +26,13 @@ class RowTemplate1(RowTemplate1Template):
             self.button_1.text = self.item['nom']+" "+self.item['prenom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
-        except:
+        except:                                      # List à partir table Stagiaires inscrits
+            # lexture table users à partir du mail du stagiaire
+            
+            self.button_1.text = self.item['name']
+            
+            #self.button_3.text = self.item['tel']
+            self.button_4.text = self.item['user_email']
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
