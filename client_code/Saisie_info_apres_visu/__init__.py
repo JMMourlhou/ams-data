@@ -57,7 +57,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
         else:
-            self.button_annuler_click()
+            self.button_retour_click()
 
 
     def file_loader_photo_change(self, file, **event_args):
@@ -115,14 +115,12 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
                                                     )
             if result == True :
                 alert("Renseignements enregistés !")
-                from ..Visu_trombi import Visu_trombi
-                open_form('Visu_trombi',self.num_stage, self.intitule, False)
             else :
                 alert("Renseignements non enregistés !")
-            self.button_retour_click()
+            self.button_annuler_click()
         else:
             alert("utilisateur non trouvé !")
-            self.button_retour_click()
+            self.button_annuler_click()
 
 
 

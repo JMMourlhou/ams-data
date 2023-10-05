@@ -69,7 +69,7 @@ components:
     event_bindings: {change: text_box_tel_change}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Mail,
-      border: '', enabled: false, foreground: 'theme:Tertiary', visible: true, text: '',
+      border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: '',
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_mail

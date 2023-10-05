@@ -30,7 +30,7 @@ def modify_users(user_to_be_modified,
     row=anvil.users.get_user(user_to_be_modified)
     
     if not row:
-        raise Exception("Erreur: user not found !")
+        raise Exception("Erreur: stagiaire non trouvé (mail modifié?) !")
         return False
     else:           
         row.update(nom=nom,
