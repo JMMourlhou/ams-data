@@ -68,7 +68,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         #lecture du fichier stages et sélection des stages correspond au type choisit
         list1 = app_tables.stages.search(type=row_type)
         if len(list1)==0:
-            alert("pas de stage de ce type")
+            alert("Pas de stage de ce type enregistré")
 
         # Initialisation du Drop down num_stages
         self.drop_down_num_stages.items = [(str(r['date_debut']), r) for r in list1]
@@ -103,6 +103,11 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+    def text_box_nom_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        pass
+
 
 
 

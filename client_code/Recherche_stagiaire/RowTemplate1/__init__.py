@@ -22,17 +22,21 @@ class RowTemplate1(RowTemplate1Template):
  
         # Normalement,dans un Data grid, j'initialise mes lignes en donnant data=nom de la colonne de mon fichier affiché
         # Mais ici, je veux pouvoir clicker sur ma ligne, donc je rajoute des boutons
-        try:
+        try:          # List à partir table users
             self.button_1.text = self.item['nom']+" "+self.item['prenom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
         except:                                      # List à partir table Stagiaires inscrits
-            # lexture table users à partir du mail du stagiaire
-            
-            self.button_1.text = self.item['name']
-            
-            #self.button_3.text = self.item['tel']
-            self.button_4.text = self.item['user_email']['email']
+            # lecture table users à partir du mail du stagiaire
+            # lecture fichier père users
+            mel = self.item['user_email']['email']
+            user = app_tables.users.get(email=mel)
+            self.button_1.text = user['nom']+" "+user['prenom']
+            self.button_3.text = user['tel']
+            self.button_4.text = user['email']
+            # lecture fichier père stages pour obtenir le numero de stage
+            stage_row = app_tables.stages.get(numero=self.item['stage']['numero'])
+            self.button_5.text = stage_row['numero']
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
