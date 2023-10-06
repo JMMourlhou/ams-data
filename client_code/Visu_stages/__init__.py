@@ -17,6 +17,7 @@ class Visu_stages(Visu_stagesTemplate):
         self.init_components(**properties)
      
         # Initilisation de la liste des stages à afficher
+        """
         # Je prend les 10 derniers stages, triés de la derniere date de début à la première
         nb_stages_max = constant_parameters.nb_stages_a_montrer
         num = app_tables.cpt_stages.search()[0]
@@ -29,8 +30,9 @@ class Visu_stages(Visu_stagesTemplate):
                                                                 max=num_max,
                                                                 min_inclusive=False)
                                                                 )
-       
-        
+        """
+        self.repeating_panel_1.items = app_tables.stages.search(tables.order_by("date_debut", ascending=False),
+                                                                )
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main

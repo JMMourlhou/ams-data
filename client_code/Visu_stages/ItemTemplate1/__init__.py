@@ -21,13 +21,12 @@ class ItemTemplate1(ItemTemplate1Template):
         self.button_1.text = self.item['numero']
         self.button_2.text = self.item['type']['code']                     # link key
         if self.item['date_debut'] != None:
-            self.label_1.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
+            self.button_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
         
     # J'ai mis la variable date ds un link, ce qui la rend clikable ! 
     # et récupération par l'event:
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-       
         num_stage = int(self.button_1.text)
         open_form('Stage_visu_modif',num_stage)   
     
@@ -35,7 +34,7 @@ class ItemTemplate1(ItemTemplate1Template):
         """This method is called when the button is clicked"""
         self.button_1_click()
 
-    def link_date_debut_click(self, **event_args):
+    def button_3_click(self, **event_args):
         """This method is called when the link is clicked"""
         self.button_1_click()
 

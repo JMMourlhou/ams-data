@@ -10,7 +10,7 @@ components:
   layout_properties: {grid_position: 'ALWCKW,FLWLMW'}
   components:
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: 'theme:On Primary', visible: true, text: button_1, font_size: null,
       font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false,
       background: '', bold: false, underline: false, icon: ''}
@@ -18,24 +18,19 @@ components:
     layout_properties: {grid_position: 'ALWCKW,DUDISD'}
     event_bindings: {click: button_1_click, show: button_1_show}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: 'theme:On Primary', visible: true, text: button_2, font_size: null,
       font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false,
       background: '', bold: false, underline: false, icon: ''}
     name: button_2
-    layout_properties: {grid_position: 'ALWCKW,LOLCCU'}
+    layout_properties: {grid_position: 'ALWCKW,LOLCCU', expand: false, width: null}
     event_bindings: {click: button_2_click}
-  - type: Link
-    properties: {col_widths: '{}'}
-    name: link_1
-    layout_properties: {grid_position: 'ALWCKW,MNHXTO'}
-    components:
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
-          Primary', visible: true, text: '', font_size: null, font: '', spacing_above: none,
-        icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
-        underline: false, icon: ''}
-      name: label_1
-      layout_properties: {grid_position: 'ICLNGG,FCGYUQ'}
-    event_bindings: {click: link_date_debut_click}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_3, font_size: null,
+      font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_3
+    layout_properties: {width: null, expand: false}
+    event_bindings: {click: button_3_click}
 is_package: true

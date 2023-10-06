@@ -35,16 +35,32 @@ components:
   name: column_panel_1
   layout_properties: {grid_position: 'CEFOIA,GVGKOJ'}
   components:
-  - type: RepeatingPanel
-    properties: {item_template: Visu_stages.ItemTemplate1}
-    name: repeating_panel_1
-    layout_properties: {grid_position: 'EKPEKF,YDGUDK'}
-  - type: FlowPanel
-    properties: {role: null, vertical_align: full, spacing: medium, align: left, tooltip: '',
-      border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
-      background: ''}
-    name: flow_panel_1
-    layout_properties: {grid_position: 'HXEIFW,ECODEI', full_width_row: false}
+  - name: data_grid_1
+    properties:
+      role: null
+      columns:
+      - {id: JKSDUP, title: '...Numéro', data_key: column_1, width: 129, expand: false,
+        $$hashKey: 'object:8627'}
+      - {id: VJQQOR, title: Stage, data_key: column_2, width: 122, expand: false,
+        $$hashKey: 'object:8628'}
+      - {id: OJLQEN, title: Du ..., data_key: column_3, $$hashKey: 'object:8629'}
+      auto_header: false
+      tooltip: ''
+      border: ''
+      foreground: theme:On Primary
+      rows_per_page: 2
+      visible: true
+      wrap_on: mobile
+      show_page_controls: true
+      spacing_above: small
+      spacing_below: small
+      background: theme:Primary
+    type: DataGrid
+    components:
+    - type: RepeatingPanel
+      properties: {item_template: Visu_stages.ItemTemplate1}
+      name: repeating_panel_1
+    layout_properties: {grid_position: 'WWHOYA,VGRLGU'}
 - type: Button
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
