@@ -3,5 +3,33 @@ container:
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', auto_display_data: false,
     visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: 'theme:Primary', bold: false, underline: false}
-components: []
+components:
+- type: FlowPanel
+  properties: {role: null, vertical_align: full, spacing: tiny, align: left, tooltip: '',
+    border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
+    background: ''}
+  name: flow_panel_1
+  layout_properties: {column: null}
+  components:
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_3, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_3
+    layout_properties: {grid_position: 'ZOOYPG,HXRMSV'}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_1, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: button_1
+    layout_properties: {grid_position: 'ACBPIC,ITRALJ'}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: button_2, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Primary', bold: false, underline: false, icon: ''}
+    name: button_2
+    layout_properties: {grid_position: 'ACBPIC,LRLVLJ'}
 is_package: true

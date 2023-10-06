@@ -39,9 +39,6 @@ class Visu_stages(Visu_stagesTemplate):
         from ..Main import Main
         open_form('Main',99)
 
-    def button_annuler2_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        self.button_annuler_click()
 
     def admin_creation_stage_click(self, **event_args):
         """This method is called when the button is clicked"""
