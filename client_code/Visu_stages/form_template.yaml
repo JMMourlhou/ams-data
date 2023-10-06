@@ -9,7 +9,7 @@ components:
   name: column_panel_header
   layout_properties:
     col_widths: {}
-    grid_position: TPCTVN,TKLCBJ
+    grid_position: LGEBRQ,OQKUOL
   components:
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On

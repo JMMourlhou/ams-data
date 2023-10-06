@@ -60,6 +60,17 @@ components:
           col_widths: {}
           grid_position: GXBZDW,UYTBFE
         event_bindings: {click: bt_se_deconnecter_click}
+      - type: Button
+        properties: {role: elevated-button, align: center, tooltip: '', border: '',
+          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Se connecter,
+          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+          icon: ''}
+        name: bt_se_connecter
+        layout_properties:
+          col_widths: {}
+          grid_position: OPHTMO,HRACXZ
+        event_bindings: {click: button_se_connecter_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
         enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Créer son compte,
@@ -71,17 +82,6 @@ components:
         col_widths: {}
         grid_position: LRXJXA,CUVIXY
       event_bindings: {click: bt_sign_in_click}
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Se connecter,
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-        icon: ''}
-      name: bt_se_connecter
-      layout_properties:
-        col_widths: {}
-        grid_position: MNOCWR,BIAQGF
-      event_bindings: {click: button_se_connecter_click}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_admin
