@@ -1,4 +1,4 @@
-from ._anvil_designer import RowTemplate2Template
+from ._anvil_designer import RowTemplate4Template
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -8,9 +8,12 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class RowTemplate2(RowTemplate2Template):
+class RowTemplate4(RowTemplate4Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.text_box_1.text = self.item['name']
+        
+        self.text_box_2.text = self.item['user_email']['email']

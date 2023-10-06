@@ -45,3 +45,6 @@ class Visu_stages(Visu_stagesTemplate):
         from ..Stage_creation import Stage_creation
         open_form('Stage_creation')
 
+
+
+

@@ -18,25 +18,30 @@ components:
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
-- type: Button
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-    foreground: 'theme:On Tertiary', visible: true, text: Création d'1 stage, font_size: null,
-    font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-    background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
-  name: admin_creation_stage
-  layout_properties:
-    col_widths: {}
-    grid_position: XXFOWX,FVQTCT
-- type: Button
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
-    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary',
-    bold: true, underline: false, icon: ''}
-  name: button_annuler
-  layout_properties:
-    col_widths: {}
-    grid_position: RRJRCW,XWFOMV
-  event_bindings: {click: button_annuler_click}
+- type: ColumnPanel
+  properties: {col_widths: '{}'}
+  name: column_panel_2
+  layout_properties: {grid_position: 'HIAFAM,CGPGQU'}
+  components:
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Tertiary', visible: true, text: Création d'1 stage, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+    name: admin_creation_stage
+    layout_properties:
+      col_widths: {}
+      grid_position: SVCHXN,OCZXGM
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+    name: button_annuler
+    layout_properties:
+      col_widths: {}
+      grid_position: SVCHXN,LGPDPO
+    event_bindings: {click: button_annuler_click}
 - type: DataGrid
   properties:
     role: null
@@ -45,7 +50,7 @@ components:
     tooltip: ''
     border: ''
     foreground: ''
-    rows_per_page: 3
+    rows_per_page: 4
     visible: true
     wrap_on: mobile
     show_page_controls: true
@@ -55,6 +60,31 @@ components:
   name: data_grid_1
   layout_properties: {grid_position: 'DDRVAU,RHIHMA'}
   components:
+  - type: ColumnPanel
+    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+      spacing_below: small, background: ''}
+    name: column_panel_1
+    layout_properties: {}
+    components:
+    - type: FlowPanel
+      properties: {role: null, vertical_align: full, spacing: medium, align: left,
+        tooltip: '', border: '', foreground: '', visible: true, spacing_above: none,
+        spacing_below: none, background: 'theme:Primary'}
+      name: flow_panel_1
+      layout_properties: {grid_position: 'MQCVZT,MNLRJS'}
+      components:
+      - type: Spacer
+        properties: {height: 32}
+        name: spacer_1
+        layout_properties: {width: -1}
+      - type: Label
+        properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
+            Primary', visible: true, text: '   Stage du ...              Type                 N°',
+          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+          italic: false, background: '', bold: false, underline: false, icon: ''}
+        name: label_1
+        layout_properties: {}
   - type: RepeatingPanel
     properties: {role: outlined-card, tooltip: '', border: '', foreground: '', items: null,
       visible: true, spacing_above: none, spacing_below: none, item_template: Visu_stages.RowTemplate3,

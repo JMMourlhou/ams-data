@@ -9,8 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Visu_stages
 from anvil import open_form
-global cpt  # compteur
-cpt = 0
+
 
 class RowTemplate3(RowTemplate3Template):
     def __init__(self, **properties):
@@ -23,11 +22,12 @@ class RowTemplate3(RowTemplate3Template):
         if self.item['date_debut'] != None:
             self.button_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
         
-    # J'ai mis la variable date ds un link, ce qui la rend clikable ! 
-    # et récupération par l'event:
+
+    # récupération par l'event:
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = int(self.button_1.text)
+        
         open_form('Stage_visu_modif',num_stage)   
     
     def button_2_click(self, **event_args):
@@ -38,8 +38,4 @@ class RowTemplate3(RowTemplate3Template):
         """This method is called when the link is clicked"""
         self.button_1_click()
 
-    def button_1_show(self, **event_args):
-        """This method is called when the Button is shown on the screen"""
-        global cpt
-        cpt += 1
-        
+

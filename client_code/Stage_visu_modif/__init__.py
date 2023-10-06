@@ -28,9 +28,13 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
-        
-        # Lecture du stage
-        stage_row = app_tables.stages.get(numero=num_stage)
+        #lecture du stage
+        stage_row=app_tables.stages.get(numero=num_stage)
+        #lecture des stagiaires inscrits
+        self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(tables.order_by("name", ascending=True),
+                                                                            stage=stage_row
+                                                                           )
+       
         #lecture intitulé stage
         global intitul
         intitul = stage_row['type']['code']
@@ -60,12 +64,12 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
             #alert(len(students_rows))
             if students_rows:    # stagiaires existants
-                with anvil.server.no_loading_indicator:
-                    task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
+                #with anvil.server.no_loading_indicator:
+                #    task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
                 
-                with anvil.server.no_loading_indicator:
-                    task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
-            
+                #with anvil.server.no_loading_indicator:
+                #    task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
+                pass
             else:     # pas de stagiares
                 self.button_trombi_pdf.visible = False
                 self.button_display_stagiaires.visible  = False
