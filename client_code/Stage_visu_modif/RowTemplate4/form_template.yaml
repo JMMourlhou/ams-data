@@ -1,7 +1,7 @@
 container: {type: DataRowPanel}
 components:
 - type: FlowPanel
-  properties: {role: null, vertical_align: full, spacing: medium, align: left, tooltip: '',
+  properties: {role: null, vertical_align: full, spacing: medium, align: center, tooltip: '',
     border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
     background: 'theme:Tertiary'}
   name: flow_panel_1

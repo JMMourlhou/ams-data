@@ -7,6 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+global list                 # permet de garder la liste en mem pour le critère date de stage
+list = []
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def __init__(self, **properties):
@@ -62,42 +64,35 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def filtre_type_stage(self):
         # Récupération du critère stage
         row_type = self.drop_down_code_stage.selected_value
-        if row_type == None :
-            alert("Sélectionnez le type de stage !")
-            return
-        #lecture du fichier stages et sélection des stages correspond au type choisit
-        list1 = app_tables.stages.search(type=row_type)
+        #if row_type == None :
+        #    alert("Sélectionnez le type de stage !")
+        #    return
+        #lecture du fichier stages et sélection des stages correspond au type de stage choisit
+        list1 = app_tables.stages.search(code=row_type)
         if len(list1)==0:
             alert("Pas de stage de ce type enregistré")
-
+        print(len(list1))
+        
         # Initialisation du Drop down num_stages
         self.drop_down_num_stages.items = [(str(r['date_debut']), r) for r in list1]
         self.drop_down_num_stages.visible = True
         
         #affichage de tous les stagiaires de ces stages du type choisit
-        temp = []
+        global list
         for s in list1:
             # lecture du contenu de chaque stage de ce type et sauvegarde de la liste
             # lecture du fichier stagiaires_inscrits sur le stage
-            list = app_tables.stagiaires_inscrits.search(stage=s)
-            #list.extend(temp)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
+            temp = app_tables.stagiaires_inscrits.search(stage=s)
+            list.extend(temp)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
+
         self.repeating_panel_1.items = list
-        """
-        self.repeating_panel_1.items = app_tables.users.search(
-            tables.order_by("nom", ascending=True),
-            q.all_of                  # all of queries must match
-            (
-                nom=q.ilike(c_nom),       # ET
-                prenom=q.ilike(c_prenom),  # ET
-                email=q.ilike(c_email),    # ET
-                tel=q.ilike(c_tel),    # ET
-            )
-        )
-        """
+
 
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
-        pass
+        date=self.drop_down_num_stages.selected_value
+        global list
+        self.repeating_panel_1.items =[r for r in list if r["date_debut"]==date]
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""

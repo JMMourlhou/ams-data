@@ -28,6 +28,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_4.text = self.item['email']
         except:                                      # List à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
+            
             # lecture fichier père users
             mel = self.item['user_email']['email']
             user = app_tables.users.get(email=mel)
@@ -40,7 +41,10 @@ class RowTemplate1(RowTemplate1Template):
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        mel = self.item['email']   
+        try:
+            mel = self.item['email']   
+        except:
+            mel = self.item['user_email']['email']
         from ...Saisie_info_apres_visu import Saisie_info_apres_visu
         open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
         

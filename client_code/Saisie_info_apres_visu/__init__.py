@@ -206,3 +206,6 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         if self.provenance == "recherche":
             from ..Recherche_stagiaire import Recherche_stagiaire
             open_form('Recherche_stagiaire')
+        if self.provenance == "visu_stage":
+            from ..Stage_visu_modif import Stage_visu_modif
+            open_form('Stage_visu_modif',self.num_stage)

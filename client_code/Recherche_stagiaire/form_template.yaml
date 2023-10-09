@@ -90,7 +90,7 @@ components:
           role: null
           align: full
           tooltip: ''
-          placeholder: N° Stage
+          placeholder: Date
           border: ''
           enabled: true
           foreground: theme:On Primary

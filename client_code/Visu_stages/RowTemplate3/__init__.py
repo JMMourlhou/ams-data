@@ -17,25 +17,24 @@ class RowTemplate3(RowTemplate3Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.button_1.text = self.item['numero']
-        self.button_2.text = self.item['code']['code']                     # link key
+        self.text_box_1.text = self.item['numero']
+        self.text_box_2.text = self.item['code']['code']                     # link key
         if self.item['date_debut'] != None:
-            self.button_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
+            self.text_box_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
         
 
     # récupération par l'event:
-    def button_1_click(self, **event_args):
+    def text_box_1_focus(self, **event_args):
         """This method is called when the button is clicked"""
-        num_stage = int(self.button_1.text)
-        
+        num_stage = int(self.text_box_1.text)
         open_form('Stage_visu_modif',num_stage)   
     
-    def button_2_click(self, **event_args):
+    def text_box_2_focus(self, **event_args):
         """This method is called when the button is clicked"""
-        self.button_1_click()
+        self.text_box_1_focus()
 
-    def button_3_click(self, **event_args):
+    def text_box_3_focus(self, **event_args):
         """This method is called when the link is clicked"""
-        self.button_1_click()
+        self.text_box_1_focus()
 
 

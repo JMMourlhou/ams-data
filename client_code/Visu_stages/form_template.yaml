@@ -69,19 +69,15 @@ components:
     layout_properties: {}
     components:
     - type: FlowPanel
-      properties: {role: null, vertical_align: full, spacing: medium, align: left,
+      properties: {role: null, vertical_align: full, spacing: medium, align: center,
         tooltip: '', border: '', foreground: '', visible: true, spacing_above: none,
         spacing_below: none, background: 'theme:Primary'}
       name: flow_panel_1
       layout_properties: {grid_position: 'MQCVZT,MNLRJS'}
       components:
-      - type: Spacer
-        properties: {height: 32}
-        name: spacer_1
-        layout_properties: {width: -1}
       - type: Label
         properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
-            Primary', visible: true, text: '   Stage du ...              Type                 N°',
+            Primary', visible: true, text: Stage du ...              Type                 N°...,
           font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
           italic: false, background: '', bold: false, underline: false, icon: ''}
         name: label_1
