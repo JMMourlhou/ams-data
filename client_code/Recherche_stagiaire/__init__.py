@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from itertools import chain
 global list                 # permet de garder la liste en mem pour le critère date de stage
 list = []
 
@@ -79,27 +80,27 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.drop_down_num_stages.visible = True
         
         #affichage de tous les stagiaires de ces stages du type choisit
+        cumul1={}
         global list
         for st in list1:
-            date = st["date_debut"]
+            date = st["date_debut"]    #DATE DU STAGE
             # lecture du fichier stagiaires_inscrits sur le stage
             temp = app_tables.stagiaires_inscrits.search(stage=st)
 
             # Ajout de la date ds chq row de stagiaire inscrit au stage            
-            temp2 = []
-            date_a_ajouter = ("date_deb",date)
-            print(date_a_ajouter)
-
+            cumul_stage = {}
+            date_a_ajouter = {"date_deb":date}
+            #dict(chain(first.items(), second.items()))
             for row in temp:
-                list = []
-                list_row = row
-                list_row.append(date_a_ajouter)
-                temp2.append(list_row)
-                print(list_row)
-            #
-            list.extend(temp2)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
-
-        self.repeating_panel_1.items = list
+                row_dict = dict(row)
+                temp = {}
+                temp = dict(chain(row_dict.items(), date_a_ajouter.items()))
+                
+            cumul1 = dict(chain(cumul1.items(), temp.items()))
+            #   
+               #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
+        print(cumul1)
+        self.repeating_panel_1.items = cumul1
 
 
     def drop_down_num_stages_change(self, **event_args):
