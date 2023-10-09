@@ -28,7 +28,7 @@ class Visu_trombi(Visu_trombiTemplate):
             
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
-        cod = stage_row["type"]['code']
+        cod = stage_row["code"]['code']
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
         self.label_titre.text = "Trombi stagiaires, " + cod + " du " + date + ".   (Stage num " +num_stage+")"
         

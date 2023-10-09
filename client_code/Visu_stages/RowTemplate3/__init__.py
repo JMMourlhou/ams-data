@@ -18,7 +18,7 @@ class RowTemplate3(RowTemplate3Template):
 
         # Any code you write here will run before the form opens.
         self.button_1.text = self.item['numero']
-        self.button_2.text = self.item['type']['code']                     # link key
+        self.button_2.text = self.item['code']['code']                     # link key
         if self.item['date_debut'] != None:
             self.button_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
         

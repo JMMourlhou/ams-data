@@ -37,7 +37,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
        
         #lecture intitulé stage
         global intitul
-        intitul = stage_row['type']['code']
+        intitul = stage_row['code']['code']
         type_row = app_tables.codes_stages.get(code=intitul)
         if type_row:
             intit = type_row['intitulé']
@@ -47,8 +47,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         
         if stage_row:
             self.text_box_num_stage.text = stage_row['numero']
-            self.drop_down_code_stage.selected_value = stage_row['type']
-            typ = stage_row['type']
+            self.drop_down_code_stage.selected_value = stage_row['code']
+            typ = stage_row['code']
             self.text_box_intitule.text = intit
             self.date_picker_from.date = stage_row['date_debut']
             self.text_box_nb_stagiaires_deb.text = stage_row['nb_stagiaires_deb']

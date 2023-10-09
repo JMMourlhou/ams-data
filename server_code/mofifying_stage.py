@@ -10,7 +10,7 @@ from anvil import *  #pour les alertes
 
 @anvil.server.callable           #modif d'un stage
 @anvil.tables.in_transaction
-def modif_stage(type,
+def modif_stage(code,
               numero,   # attention numero est txt
               lieu,
               date_debut,
@@ -23,7 +23,7 @@ def modif_stage(type,
     numero=int(numero)
 
     # lecture fichier père code stages
-    code_stage = app_tables.codes_stages.get(code=type)
+    code_stage = app_tables.codes_stages.get(code=code)
     if not code_stage:   
         alert("Code stage non trouvé ds fichier param Code_stages")
         valid=False

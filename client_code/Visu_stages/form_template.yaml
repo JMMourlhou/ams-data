@@ -28,10 +28,11 @@ components:
       foreground: 'theme:Tertiary', visible: true, text: Création d'1 stage, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Primary', bold: true, underline: false, icon: ''}
-    name: admin_creation_stage
+    name: creation_stage
     layout_properties:
       col_widths: {}
       grid_position: SVCHXN,OCZXGM
+    event_bindings: {click: creation_stage_click}
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
@@ -50,7 +51,7 @@ components:
     tooltip: ''
     border: ''
     foreground: ''
-    rows_per_page: 4
+    rows_per_page: 8
     visible: true
     wrap_on: mobile
     show_page_controls: true

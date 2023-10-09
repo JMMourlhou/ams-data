@@ -40,7 +40,7 @@ class Visu_stages(Visu_stagesTemplate):
         open_form('Main',99)
 
 
-    def admin_creation_stage_click(self, **event_args):
+    def creation_stage_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_creation import Stage_creation
         open_form('Stage_creation')

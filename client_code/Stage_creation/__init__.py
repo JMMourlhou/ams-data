@@ -16,6 +16,7 @@ class Stage_creation(Stage_creationTemplate):
         self.init_components(**properties)
        
         # Any code you write here will run before the form opens.
+        
         self.button_qr_code_display.visible = False
         # Numéro de stage
         num = app_tables.cpt_stages.search()[0]

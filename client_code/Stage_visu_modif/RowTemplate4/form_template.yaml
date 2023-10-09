@@ -7,18 +7,29 @@ components:
   name: flow_panel_1
   layout_properties: {column: null}
   components:
+  - type: TextArea
+    properties: {role: null, align: left, height: 47.090599999999995, tooltip: '',
+      placeholder: '', border: '', enabled: true, foreground: 'theme:On Primary Container',
+      visible: true, text: '', font_size: null, auto_expand: true, font: '', spacing_above: none,
+      spacing_below: none, italic: false, background: 'theme:Tertiary', bold: true,
+      underline: false}
+    name: text_area_1
+    layout_properties: {width: 190.647}
+    event_bindings: {focus: text_area_1_focus}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary Container', visible: true,
-      text: '', font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
+      text: '', font_size: null, font: '', spacing_above: large, type: text, spacing_below: none,
       italic: false, background: 'theme:Tertiary', bold: false, underline: false}
     name: text_box_1
-    layout_properties: {width: 131.151}
+    layout_properties: {}
+    event_bindings: {focus: text_box_1_focus}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary Container', visible: true,
-      text: '', font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
+      text: '', font_size: null, font: '', spacing_above: large, type: text, spacing_below: medium,
       italic: false, background: 'theme:Tertiary', bold: false, underline: false}
     name: text_box_2
-    layout_properties: {width: 149.151}
+    layout_properties: {width: 214.151}
+    event_bindings: {focus: text_box_2_focus}
 is_package: true

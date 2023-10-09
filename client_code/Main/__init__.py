@@ -1,9 +1,6 @@
 from ._anvil_designer import MainTemplate
 from anvil import *
 import anvil.server
-#import anvil.tables as tables
-#import anvil.tables.query as q
-#from anvil.tables import app_tables
 
 from .. import French_zone
 #import anvil.google.auth, anvil.google.drive
@@ -20,7 +17,6 @@ class Main(MainTemplate):
         # Set Form properties and Data Bindings.
       
         self.init_components(**properties)
-        
         # Any code you write here will run before the form opens.
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.text = "Vous êtes déconnecté"
@@ -154,15 +150,11 @@ class Main(MainTemplate):
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
         
-            
-            
-        
         
     def bt_gestion_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_stages import Visu_stages
         open_form('Visu_stages')
-
    
 
     def bt_sign_in_click(self, h={}, num_stage=0,**event_args):      # h qd vient de sign in par qr code

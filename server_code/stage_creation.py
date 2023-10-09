@@ -9,7 +9,7 @@ import anvil.server
 from anvil import *  #pour les alertes
 
 @anvil.server.callable           #Création d'un nouveau stage
-def add_stage(type,
+def add_stage(code,
               numero,   # attention numero est txt
               lieu,
               date_debut,
@@ -23,7 +23,7 @@ def add_stage(type,
     numero=int(numero)
 
     # lecture fichier père code stages
-    code_stage = app_tables.codes_stages.get(code=type)
+    code_stage = app_tables.codes_stages.get(code=code)
     if not code_stage :
         alert("Code stage non trouvé ds fichier param Code_stages")
         valid=False
@@ -36,7 +36,7 @@ def add_stage(type,
         return valid   
         
     new_row=app_tables.stages.add_row(
-                              type = code_stage,
+                              code = code_stage,
                               numero = numero,
                               lieu = lieu_stage,
                               date_debut = date_debut,

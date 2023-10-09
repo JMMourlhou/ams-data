@@ -14,6 +14,24 @@ class RowTemplate4(RowTemplate4Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.text_box_1.text = self.item['name']
+        #lecture fichier users, à partir du mail, pour avoir le prénom
+        stagiaire_row=app_tables.users.get(email=self.item['user_email']['email'])
+        self.text_area_1.text = self.item['name'].capitalize()+" "+stagiaire_row["prenom"].capitalize()
+        self.text_box_1.text = self.item['user_email']['email']
+        self.text_box_2.text = stagiaire_row['tel']
+
+    def text_area_1_focus(self, **event_args):
+        """This method is called when the text area gets focus"""
+        pass
+
+    def text_box_1_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        pass
+
+    def text_box_2_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        pass
+
+
+
         
-        self.text_box_2.text = self.item['user_email']['email']
