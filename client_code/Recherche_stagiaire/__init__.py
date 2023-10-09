@@ -83,6 +83,18 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             # lecture du contenu de chaque stage de ce type et sauvegarde de la liste
             # lecture du fichier stagiaires_inscrits sur le stage
             temp = app_tables.stagiaires_inscrits.search(stage=s)
+            # Ajout de la date ds chq row de temp
+            
+            temp2 = []
+            for row in temp:
+                list0 
+                new_row = row
+                temp2.append()
+                
+                
+                
+
+            #
             list.extend(temp)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
 
         self.repeating_panel_1.items = list
