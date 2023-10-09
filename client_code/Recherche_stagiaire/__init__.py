@@ -68,6 +68,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         #    alert("Sélectionnez le type de stage !")
         #    return
         #lecture du fichier stages et sélection des stages correspond au type de stage choisit
+        
         list1 = app_tables.stages.search(code=row_type)
         if len(list1)==0:
             alert("Pas de stage de ce type enregistré")
@@ -79,23 +80,24 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         #affichage de tous les stagiaires de ces stages du type choisit
         global list
-        for s in list1:
-            # lecture du contenu de chaque stage de ce type et sauvegarde de la liste
+        for st in list1:
+            date = st["date_debut"]
             # lecture du fichier stagiaires_inscrits sur le stage
-            temp = app_tables.stagiaires_inscrits.search(stage=s)
-            # Ajout de la date ds chq row de temp
-            
-            temp2 = []
-            for row in temp:
-                list0 
-                new_row = row
-                temp2.append()
-                
-                
-                
+            temp = app_tables.stagiaires_inscrits.search(stage=st)
 
+            # Ajout de la date ds chq row de stagiaire inscrit au stage            
+            temp2 = []
+            date_a_ajouter = ("date_deb",date)
+            print(date_a_ajouter)
+
+            for row in temp:
+                list = []
+                list_row = row
+                list_row.append(date_a_ajouter)
+                temp2.append(list_row)
+                print(list_row)
             #
-            list.extend(temp)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
+            list.extend(temp2)   #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
 
         self.repeating_panel_1.items = list
 

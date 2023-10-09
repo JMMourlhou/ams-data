@@ -44,7 +44,7 @@ def add_stagiaire(stagiaire, stage, mode_fi):
                               stage = code_stage,  
                               user_email = user,
                               name = user['nom'].lower(),    # nom pour permettre le tri sur le nom
-                              financement = mode_fin,
+                              financement = mode_fin
                               )
              
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
