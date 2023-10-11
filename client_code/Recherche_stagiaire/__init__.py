@@ -81,6 +81,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         #affichage de tous les stagiaires de ces stages du type choisit
         cumul1={}
+        liste_finale=[]
         global list
         for st in list1:
             date = st["date_debut"]    #DATE DU STAGE
@@ -99,8 +100,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             cumul1 = dict(chain(cumul1.items(), temp.items()))
             #   
                #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
-        print(cumul1)
-        self.repeating_panel_1.items = cumul1
+        #liste_finale = list(cumul1.items())
+        liste_finale = list(zip(cumul1.keys(), cumul1.values()))
+        print(liste_finale)
+        self.repeating_panel_1.items = liste_finale
 
 
     def drop_down_num_stages_change(self, **event_args):
