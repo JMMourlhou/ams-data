@@ -26,6 +26,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_1.text = self.item['nom']+" "+self.item['prenom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
+            self.button_5.visible = False
         except:                                      # List à partir table Stagiaires inscrits
             
             # lecture table users à partir du mail du stagiaire
@@ -34,8 +35,10 @@ class RowTemplate1(RowTemplate1Template):
             self.button_1.text = user['nom']+" "+user['prenom']
             self.button_3.text = user['tel']
             self.button_4.text = user['email']
-            # lecture fichier père stages pour obtenir le numero de stage
-            #self.button_5.text = self.item['date_deb']
+            # lecture fichier père stage pour obtenir le num et date du stage
+            st = self.item['stage']['numero']
+            stg = app_tables.stages.get(numero=st)
+            self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""

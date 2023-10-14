@@ -2,7 +2,7 @@ container:
   type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
+    spacing_below: none, background: ''}
 components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
@@ -55,8 +55,8 @@ components:
     event_bindings: {click: button_qr_code_display_click}
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
+    wrap_on: mobile, col_spacing: tiny, spacing_above: none, col_widths: '{}', spacing_below: none,
+    background: 'theme:On Primary'}
   name: column_panel_bloc
   layout_properties: {grid_position: 'IWAHJZ,GMRZDC'}
   components:
@@ -71,10 +71,10 @@ components:
       foreground: theme:Tertiary
       items: []
       visible: true
-      font_size: null
+      font_size: 18
       font: ''
       spacing_above: small
-      spacing_below: small
+      spacing_below: none
       italic: false
       background: theme:Primary
       bold: false
@@ -100,7 +100,7 @@ components:
   - type: DatePicker
     properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',
       placeholder: 'Du ', border: '', enabled: true, foreground: 'theme:On Primary',
-      visible: true, font_size: null, font: '', spacing_above: small, spacing_below: small,
+      visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
       italic: false, date: '', min_date: '', background: 'theme:Primary', bold: true,
       underline: false, format: '%d %m %Y'}
     name: date_picker_from
@@ -109,7 +109,7 @@ components:
   - type: DatePicker
     properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',
       placeholder: Au, border: '', enabled: true, foreground: 'theme:On Primary',
-      visible: true, font_size: null, font: '', spacing_above: small, spacing_below: small,
+      visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
       italic: false, date: '', min_date: '', background: 'theme:Primary', bold: true,
       underline: false, format: '%d %m %Y'}
     name: date_picker_to
@@ -126,10 +126,10 @@ components:
       foreground: theme:On Primary
       items: []
       visible: true
-      font_size: null
+      font_size: 18
       font: ''
-      spacing_above: small
-      spacing_below: small
+      spacing_above: none
+      spacing_below: none
       italic: false
       background: theme:Primary
       bold: false
@@ -141,7 +141,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires début,
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: number, spacing_below: small,
+      font_size: null, font: '', spacing_above: none, type: number, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_nb_stagiaires_deb
     layout_properties: {grid_position: 'PNQOFK,VUQDOO'}
@@ -149,7 +149,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires fin,
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: number, spacing_below: small,
+      font_size: null, font: '', spacing_above: none, type: number, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_nb_stagiaires_fin
     layout_properties: {grid_position: 'PNQOFK,MAKWWD'}
@@ -157,15 +157,15 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires diplômés,
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: number, spacing_below: small,
+      font_size: null, font: '', spacing_above: none, type: number, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_nb_stagiaires_diplom
     layout_properties: {grid_position: 'PNQOFK,QFPUNN'}
     event_bindings: {change: text_box_nb_stagiaires_diplom_change}
   - type: TextArea
-    properties: {role: null, align: left, height: '', tooltip: '', placeholder: Commentaires,
+    properties: {role: null, align: left, height: 52, tooltip: '', placeholder: Commentaires,
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: small,
+      font_size: null, auto_expand: false, font: '', spacing_above: none, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_area_commentaires
     layout_properties: {grid_position: 'KVEZRN,ZQLFGM'}

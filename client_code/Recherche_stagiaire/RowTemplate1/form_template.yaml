@@ -6,7 +6,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: 'theme:On Primary',
-    visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"EJHTQQ":12,"VJOTSH":10,"POUXQY":20,"VXXGLD":18}',
+    visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"EJHTQQ":16,"VJOTSH":10,"POUXQY":16,"VXXGLD":18}',
     spacing_below: small, background: 'theme:Primary'}
   name: column_panel_1
   layout_properties: {column: null}

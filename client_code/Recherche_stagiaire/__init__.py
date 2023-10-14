@@ -8,8 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from itertools import chain
-global liste_finale                # permet de garder la liste générée qd dropbox type stage choisie (pour enuite affinée le critère date de stage
-list_finale = []
+
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def __init__(self, **properties):
@@ -26,19 +25,27 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                 )
     def text_box_nom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
+        self.drop_down_code_stage.selected_value = None
+        self.drop_down_num_stages.visible = False
         self.filtre()
     def text_box_prenom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
+        self.drop_down_code_stage.selected_value = None
+        self.drop_down_num_stages.visible = False
         self.filtre()
     def text_box_tel_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
+        self.drop_down_code_stage.selected_value = None
+        self.drop_down_num_stages.visible = False
         self.filtre()
     def text_box_email_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
+        self.drop_down_code_stage.selected_value = None
+        self.drop_down_num_stages.visible = False
         self.filtre()
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
-        self.drop_down_code_stage.tag.etat=True
+        
         self.text_box_nom.text=""       # critere nom
         self.text_box_prenom.text=""  # critere prenom
         self.text_box_email.text=""  # critere email
@@ -60,6 +67,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                     prenom=q.ilike(c_prenom),  # ET
                     email=q.ilike(c_email),    # ET
                     tel=q.ilike(c_tel),    # ET
+                    admin =q.not_(True)    # on n'affiche pas l'admin !
                 )
             )
     def filtre_type_stage(self):
@@ -76,7 +84,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         print("nb de stage de ce type: ",len(list1))
         
         # Initialisation du Drop down num_stages et dates
-        self.drop_down_num_stages.items = [(str(r['numero'])+" / "+str(r['date_debut']), r) for r in list1]
+        self.drop_down_num_stages.items = [(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list1]
         self.drop_down_num_stages.visible = True
         """
         for r in self.drop_down_num_stages.items:           # Je peux boucler ds ma dropdown
@@ -84,7 +92,6 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """    
         #affichage de tous les stagiaires de ces stages du type choisit
         liste_intermediaire1=[]
-        global list
         for st in list1:               # boucle sur les stages de même type (ex psc1)                
             date = st["date_debut"]    #DATE DU STAGE
             # lecture du fichier stagiaires_inscrits sur le stage et création d'1 liste par stage
@@ -97,23 +104,22 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         print("nb de listes créées: ",len(liste_intermediaire1))
         
         # Je crée 1 liste à partir de ttes les listes créées:
-        global list_finale
         liste_finale = []
         for l in liste_intermediaire1:    #pour chaque liste iterator object
             for row in l:                      # pour chaque stagiaire du stage
                 liste_finale.append(row)
-        print("lg",len(liste_finale))
-        print(liste_finale)       
         self.repeating_panel_1.items = liste_finale
 
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
-        num_et_date=self.drop_down_num_stages.selected_value
-        alert(num_et_date)
-        #extraction des 3 1ers caractères (num stage)
-        num = num_et_date[""]
-        global list_finale
-        self.repeating_panel_1.items =[r for r in list_finale if r["numero"]==num]
+        selection=self.drop_down_num_stages.selected_value
+        print("selection: ",selection)
+        #extraction du num stage
+        self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(
+                                        tables.order_by("name", ascending=True),
+                                        stage=selection
+                                      )
+
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
