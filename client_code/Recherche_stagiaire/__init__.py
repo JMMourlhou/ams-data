@@ -76,7 +76,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         print(len(list1))
         
         # Initialisation du Drop down num_stages
-        self.drop_down_num_stages.items = [(str(r['date_debut']), r) for r in list1]
+        self.drop_down_num_stages.items = [(str(r['numero'])+","+str(r['date_debut']), r) for r in list1]
         self.drop_down_num_stages.visible = True
         
         #affichage de tous les stagiaires de ces stages du type choisit
@@ -87,7 +87,8 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             date = st["date_debut"]    #DATE DU STAGE
             # lecture du fichier stagiaires_inscrits sur le stage
             temp = app_tables.stagiaires_inscrits.search(stage=st)
-
+            self.repeating_panel_1.items = temp
+            """
             # Ajout de la date ds chq row de stagiaire inscrit au stage            
             cumul_stage = {}
             date_a_ajouter = {"date_deb":date}
@@ -103,8 +104,9 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         #liste_finale = list(cumul1.items())
         liste_finale = list(zip(cumul1.keys(), cumul1.values()))
         print(liste_finale)
-        self.repeating_panel_1.items = liste_finale
-
+        
+        self.repeating_panel_1.items = temp
+        """
 
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""

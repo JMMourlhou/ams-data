@@ -36,7 +36,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_3.text = user['tel']
             self.button_4.text = user['email']
             # lecture fichier père stages pour obtenir le numero de stage
-            self.button_5.text = self.item['date_deb']
+            #self.button_5.text = self.item['date_deb']
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
