@@ -27,9 +27,8 @@ class RowTemplate1(RowTemplate1Template):
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
         except:                                      # List à partir table Stagiaires inscrits
-            # lecture table users à partir du mail du stagiaire
             
-            # lecture fichier père users
+            # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
             user = app_tables.users.get(email=mel)
             self.button_1.text = user['nom']+" "+user['prenom']

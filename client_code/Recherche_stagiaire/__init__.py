@@ -8,8 +8,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from itertools import chain
-global list                 # permet de garder la liste en mem pour le critère date de stage
-list = []
+global liste_finale                # permet de garder la liste générée qd dropbox type stage choisie (pour enuite affinée le critère date de stage
+list_finale = []
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def __init__(self, **properties):
@@ -70,49 +70,50 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         #    return
         #lecture du fichier stages et sélection des stages correspond au type de stage choisit
         
-        list1 = app_tables.stages.search(code=row_type)
+        list1 = app_tables.stages.search(code=row_type)     # recherche ds les stages
         if len(list1)==0:
             alert("Pas de stage de ce type enregistré")
-        print(len(list1))
+        print("nb de stage de ce type: ",len(list1))
         
-        # Initialisation du Drop down num_stages
-        self.drop_down_num_stages.items = [(str(r['numero'])+","+str(r['date_debut']), r) for r in list1]
+        # Initialisation du Drop down num_stages et dates
+        self.drop_down_num_stages.items = [(str(r['numero'])+" / "+str(r['date_debut']), r) for r in list1]
         self.drop_down_num_stages.visible = True
-        
-        #affichage de tous les stagiaires de ces stages du type choisit
-        cumul1={}
-        liste_finale=[]
-        global list
-        for st in list1:
-            date = st["date_debut"]    #DATE DU STAGE
-            # lecture du fichier stagiaires_inscrits sur le stage
-            temp = app_tables.stagiaires_inscrits.search(stage=st)
-            self.repeating_panel_1.items = temp
-            """
-            # Ajout de la date ds chq row de stagiaire inscrit au stage            
-            cumul_stage = {}
-            date_a_ajouter = {"date_deb":date}
-            #dict(chain(first.items(), second.items()))
-            for row in temp:
-                row_dict = dict(row)
-                temp = {}
-                temp = dict(chain(row_dict.items(), date_a_ajouter.items()))
-                
-            cumul1 = dict(chain(cumul1.items(), temp.items()))
-            #   
-               #pour chaque stage sélectionné, rajoute les stagiaires inscrits à la fin de list, 
-        #liste_finale = list(cumul1.items())
-        liste_finale = list(zip(cumul1.keys(), cumul1.values()))
-        print(liste_finale)
-        
-        self.repeating_panel_1.items = temp
         """
+        for r in self.drop_down_num_stages.items:           # Je peux boucler ds ma dropdown
+            print(r, r[0], r[1])                            # je peux extraire 0 ce qui est affiché, 1 row stage
+        """    
+        #affichage de tous les stagiaires de ces stages du type choisit
+        liste_intermediaire1=[]
+        global list
+        for st in list1:               # boucle sur les stages de même type (ex psc1)                
+            date = st["date_debut"]    #DATE DU STAGE
+            # lecture du fichier stagiaires_inscrits sur le stage et création d'1 liste par stage
+            temp =  app_tables.stagiaires_inscrits.search(
+                        tables.order_by("name", ascending=True),
+                        stage=st
+                    )
+            liste_intermediaire1.append(temp)   # ajout de la liste (iterator object)du stage
+            
+        print("nb de listes créées: ",len(liste_intermediaire1))
+        
+        # Je crée 1 liste à partir de ttes les listes créées:
+        global list_finale
+        liste_finale = []
+        for l in liste_intermediaire1:    #pour chaque liste iterator object
+            for row in l:                      # pour chaque stagiaire du stage
+                liste_finale.append(row)
+        print("lg",len(liste_finale))
+        print(liste_finale)       
+        self.repeating_panel_1.items = liste_finale
 
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
-        date=self.drop_down_num_stages.selected_value
-        global list
-        self.repeating_panel_1.items =[r for r in list if r["date_debut"]==date]
+        num_et_date=self.drop_down_num_stages.selected_value
+        alert(num_et_date)
+        #extraction des 3 1ers caractères (num stage)
+        num = num_et_date[""]
+        global list_finale
+        self.repeating_panel_1.items =[r for r in list_finale if r["numero"]==num]
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
