@@ -50,8 +50,21 @@ def add_stagiaire(stagiaire, stage, mode_fi):
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
     if stagiaire_row:
         # ******************************************************************* EFFACT code stage ds user et INCREMENT du nb de stgiaires ds le stage:
-        # ajouter le dico de l'historique du stagiare (ex; {psc1:28/08/2023} )
-        user.update(stage_num_temp = 0)
+        # ajouter le dico de l'historique du stagiare (ex; {"PSC1":(101,28/08/2023,True)} )
+        historique = {}
+        valeur = []        
+        historique = user["histo"]
+        print(type(historique))
+        print(historique)
+        st = code_stage["code"]["code"]
+        st=st.strip()
+        print(st)
+        clef = st + " du "+str(code_stage["date_debut"])
+        valeur = [code_stage["numero"],None]  # None sera remplacé par True si diplomé
+        historique[clef] = valeur              # ajout de la nouvelle clef ds l'historique
+        user.update(stage_num_temp = 0,
+                   histo=historique
+                   )
         # Incrément nb de stagiaires début stage ds fichier père stage
         try:  # si nb à None il y aurait une erreur
             if code_stage:

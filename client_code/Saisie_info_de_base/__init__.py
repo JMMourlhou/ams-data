@@ -53,6 +53,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_email2.text =              user['email2']
             self.check_box_accept_data_use.checked = user['accept_data']
             self.text_area_commentaires.text =       user['commentaires']
+            if self.first_entry:  # si 1ere entrée ds fiche d'info
+                self.histo = {}
+            else:
+                self.histo = user['histo']
+                
             if user['admin'] == True:
                self.text_box_email2.visible = True
                self.text_area_commentaires.visible = True
@@ -125,7 +130,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                     self.text_box_tel.text,
                                                     self.text_box_email2.text,
                                                     self.check_box_accept_data_use.checked,
-                                                    self.text_area_commentaires.text
+                                                    self.text_area_commentaires.text,
+                                                    self.histo
                                                     )
             if result == True :
                 alert("Renseignements enregistés !")    # *************************************

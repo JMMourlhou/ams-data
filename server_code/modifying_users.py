@@ -24,7 +24,8 @@ def modify_users(user_to_be_modified,
                      tel,
                      mail2,
                      accept_storage,
-                     comments
+                     comments,
+                     histo
                 ):
     # finding the user's row 
     row=anvil.users.get_user(user_to_be_modified)
@@ -46,6 +47,7 @@ def modify_users(user_to_be_modified,
                    tel = tel,
                    email2 = mail2,
                    accept_data = accept_storage,
-                   commentaires = comments
+                   commentaires = comments,
+                   histo=histo
                             )
         return True
