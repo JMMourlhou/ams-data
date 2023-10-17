@@ -22,13 +22,13 @@ class RowTemplate1(RowTemplate1Template):
  
         # Normalement,dans un Data grid, j'initialise mes lignes en donnant data=nom de la colonne de mon fichier affiché
         # Mais ici, je veux pouvoir clicker sur ma ligne, donc je rajoute des boutons
+        historique = {}
         try:          # List à partir table users
             self.button_1.text = self.item['nom']+" "+self.item['prenom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
-            self.button_5.visible = False
+            self.button_5.text = self.item['histo']
         except:                                      # List à partir table Stagiaires inscrits
-            
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
             user = app_tables.users.get(email=mel)
