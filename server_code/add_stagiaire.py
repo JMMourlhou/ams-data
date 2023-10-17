@@ -52,9 +52,10 @@ def add_stagiaire(stagiaire, stage, mode_fi):
         # ******************************************************************* EFFACT code stage ds user et INCREMENT du nb de stgiaires ds le stage:
         # ajouter le dico de l'historique du stagiare (ex; {"PSC1":(101,28/08/2023,True)} )
         historique = {}
-        valeur = []        
+        valeur = []     
+        print(type(user['histo']))
         historique = user["histo"]
-        print(type(historique))
+        print(historique['PSC1 du 2023-08-28'])
         print(historique)
         st = code_stage["code"]["code"]
         st=st.strip()
