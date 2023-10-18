@@ -22,12 +22,18 @@ class RowTemplate1(RowTemplate1Template):
  
         # Normalement,dans un Data grid, j'initialise mes lignes en donnant data=nom de la colonne de mon fichier affiché
         # Mais ici, je veux pouvoir clicker sur ma ligne, donc je rajoute des boutons
-        historique = {}
         try:          # List à partir table users
+            cumul_clefs_histo = ""
+            if self.item['histo'] != {} or self.item['histo'] != None:
+                historique = self.item['histo']
+                for clef,valeur in historique.items():
+                    print(clef)
+                    cumul_clefs_histo = cumul_clefs_histo + " " + clef
+
             self.button_1.text = self.item['nom']+" "+self.item['prenom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
-            self.button_5.text = self.item['histo']
+            self.button_5.text = cumul_clefs_histo
         except:                                      # List à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
@@ -48,6 +54,16 @@ class RowTemplate1(RowTemplate1Template):
             mel = self.item['user_email']['email']
         from ...Saisie_info_apres_visu import Saisie_info_apres_visu
         open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
+
+    def button_3_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_1_click()
+
+    def button_4_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_1_click()
+
+
         
         
         

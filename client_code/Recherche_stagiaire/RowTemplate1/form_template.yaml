@@ -6,7 +6,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: 'theme:On Primary',
-    visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"EJHTQQ":16,"VJOTSH":10,"POUXQY":20,"VXXGLD":14}',
+    visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"EJHTQQ":16,"VJOTSH":10,"POUXQY":18,"VXXGLD":16}',
     spacing_below: small, background: 'theme:Primary'}
   name: column_panel_1
   layout_properties: {column: null}
@@ -26,6 +26,7 @@ components:
       background: '', bold: false, underline: false, icon: ''}
     name: button_3
     layout_properties: {grid_position: 'SJPWGO,VJOTSH'}
+    event_bindings: {click: button_3_click}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: 'theme:On Primary', visible: true, text: button_4, font_size: null,
@@ -33,6 +34,7 @@ components:
       background: '', bold: false, underline: false, icon: ''}
     name: button_4
     layout_properties: {grid_position: 'SJPWGO,POUXQY'}
+    event_bindings: {click: button_4_click}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: 'theme:On Primary', visible: true, text: button_5, font_size: null,

@@ -20,7 +20,6 @@ def add_stagiaire(stagiaire, stage, mode_fi):
     # lecture fichier père user
     user=anvil.users.get_user()
     if user:
-        print(user['histo'])
         if user != stagiaire :
             valid="Stagiaire non trouvé ds fichier users !"
             return valid
@@ -59,7 +58,7 @@ def add_stagiaire(stagiaire, stage, mode_fi):
         valeur = []     
         print(type(user['histo']))
         historique = user["histo"]
-        print(historique['PSC1 du 2023-08-28'])
+        #print(historique['PSC1 du 2023-08-28'])
         print(historique)
         st = code_stage["code"]["code"]
         st=st.strip()

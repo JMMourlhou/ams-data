@@ -53,11 +53,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_email2.text =              user['email2']
             self.check_box_accept_data_use.checked = user['accept_data']
             self.text_area_commentaires.text =       user['commentaires']
-            if self.first_entry:  # si 1ere entrée ds fiche d'info
-                self.histo = user['histo']
-                #self.histo = {}
-            else:
-                self.histo = user['histo']
+            self.histo =                             user['histo']
                 
             if user['admin'] == True:
                self.text_box_email2.visible = True
