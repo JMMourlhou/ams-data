@@ -20,9 +20,13 @@ def add_stagiaire(stagiaire, stage, mode_fi):
     # lecture fichier père user
     user=anvil.users.get_user()
     if user:
+        print(user['histo'])
         if user != stagiaire :
             valid="Stagiaire non trouvé ds fichier users !"
             return valid
+    else:
+        valid="User non trouvé ds fichier users !"
+        return valid
 
     # lecture fichier père mode financemnt
     mode_fin = app_tables.mode_financement.get(code_fi=mode_fi)    
