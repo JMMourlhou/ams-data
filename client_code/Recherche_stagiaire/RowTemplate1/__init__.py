@@ -8,34 +8,28 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
+# pour passer des datas d'une forme à l'autre (recherche_stagiaire vers RowTemplate)
+from ...common import publisher
 
 global num_stage  # pour le click sur button_5 et envoie ds le stage
 num_stage = 0
 
+global message
+msg = "recherche"  # si vient du bt inscription de la forme Visu_stages, "inscription/num_stage" (passation par Anvil extra Messaging) 
+
 class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
+        """
+        Je ne peux pas remonter ds mes components pour savoir si je suis en mode "inscription",
+            à partir de la forme Visu_stages
+        Donc j'utilise l'Anvil extra 'Messaging' 
+        """
+        publisher.subscribe(channel="general", subscriber=self, handler=self.general_messages_handler)
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        """
-        Je remonte ds mes components pour tester le tag du repeating panel ("inscription" ?)
-        """
-        panel = self.button_1.parent
-        row = panel.parent
-        grid = row.parent
-        cp = grid.parent
-        print(panel, panel.tag)
-        print(row, row.tag)
-        #print(grid, grid.tag)
-        print(cp, cp.tag)
         
-        
-        
-        
-        # Normalement,dans un Data grid, j'initialise mes lignes en donnant data=nom de la colonne de mon fichier affiché
-        # Mais ici, je veux pouvoir clicker sur ma ligne, donc je rajoute des boutons
-        try:          # List à partir table users
+        try:          # Liste à partir table users
             cumul_clefs_histo = ""
             if self.item['histo'] != {} or self.item['histo'] != None:   #lecture du dictionnaire hisorique des stages du stagiaire
                 historique = self.item['histo']
@@ -54,7 +48,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
             self.button_5.text = cumul_clefs_histo
-        except:                                      # List à partir table Stagiaires inscrits
+        except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
             user = app_tables.users.get(email=mel)
@@ -66,16 +60,26 @@ class RowTemplate1(RowTemplate1Template):
             stg = app_tables.stages.get(numero=st)
             self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])
             self.button_5.tag = st
-            
+
+    def general_messages_handler(self, message):     # Anvil extra Messaging
+        global msg
+        msg = message.title
+        print(message.title)
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        try:
-            mel = self.item['email']   
-        except:
-            mel = self.item['user_email']['email']
-        from ...Saisie_info_apres_visu import Saisie_info_apres_visu
-        open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
+        global msg
+        alert(msg)
+        if msg=="recherche":
+            try:
+                mel = self.item['email']   
+            except:
+                mel = self.item['user_email']['email']
+            from ...Saisie_info_apres_visu import Saisie_info_apres_visu
+            open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
+        else:  # inscription du stgiaire au satge
+            alert( msg )
+            alert(self.item['email'])
 
     def button_3_click(self, **event_args):
         """This method is called when the button is clicked"""

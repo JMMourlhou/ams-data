@@ -9,24 +9,21 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from itertools import chain
 
+# pour passer des datas d'une forme à l'autre (recherche_stagiaire vers RowTemplate)
 from ..common import publisher
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
-    def __init__(self, inscript=False, **properties):       #insription True si vient de visu_stages pour inscription d'1 stagiare
-        publisher.publish(channel="general", inscription=inscript)
+    def __init__(self, inscript="recherche", **properties):       # inscript="inscription" si vient de visu_stages pour inscription d'1 stagiare
+        # Je lance le message 
+        publisher.publish(channel="general", title=inscript)  
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.inscription = inscript
-        if self.inscription == True:
+        if self.inscription != "recherche":   # inscription/num_stage
             self.drop_down_code_stage.visible = False
             self.drop_down_num_stages.visible = False
-            self.repeating_panel_1.tag = "inscription"    # Je passe l'info au RowTemplate
-            self.data_grid_1.tag = "inscription"
-        else:
-            self.repeating_panel_1.tag = "recherche"
         
-        self.drop_down_code_stage.tag.etat=False
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
         

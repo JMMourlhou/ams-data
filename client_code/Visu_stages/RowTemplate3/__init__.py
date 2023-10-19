@@ -42,6 +42,8 @@ class RowTemplate3(RowTemplate3Template):
     def button_inscription_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ...Recherche_stagiaire import Recherche_stagiaire
-        open_form('Recherche_stagiaire','inscription')
+        num_stage = self.text_box_1.text
+        pour_messaging = "inscription/"+num_stage
+        open_form('Recherche_stagiaire',pour_messaging)
 
 
