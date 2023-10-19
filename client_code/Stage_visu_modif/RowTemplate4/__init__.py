@@ -23,8 +23,9 @@ class RowTemplate4(RowTemplate4Template):
     def text_box_3_focus(self, **event_args):
         """This method is called when the text area gets focus"""
         mel = self.item['user_email']['email']  
-        from ...Saisie_info_apres_visu import Saisie_info_apres_visu
         num_stage = self.item["stage"]['numero']
+        alert(num_stage)
+        from ...Saisie_info_apres_visu import Saisie_info_apres_visu
         open_form('Saisie_info_apres_visu', mel, num_stage, intitule="", provenance="visu_stage")
 
     def text_box_1_focus(self, **event_args):
