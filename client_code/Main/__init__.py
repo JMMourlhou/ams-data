@@ -11,6 +11,9 @@ from ..Visu_stages import Visu_stages
 from ..Visu_stages.RowTemplate3 import RowTemplate3
 from anvil import open_form
 
+from anvil_extras.messaging import Publisher          # Pour passer des datas à une autre forme (data grid)
+publisher = Publisher()
+
 
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):

@@ -9,6 +9,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from itertools import chain
 
+from ..main import publisher
+
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def __init__(self, inscription=False, **properties):       #insription True si vient de visu_stages pour inscription d'1 stagiare
