@@ -7,6 +7,9 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+
+
+
 global num_stage  # pour le click sur button_5 et envoie ds le stage
 num_stage = 0
 

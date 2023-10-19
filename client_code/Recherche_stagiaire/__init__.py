@@ -9,15 +9,15 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from itertools import chain
 
-from ..main import publisher
-
+from ..common import publisher
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
-    def __init__(self, inscription=False, **properties):       #insription True si vient de visu_stages pour inscription d'1 stagiare
+    def __init__(self, inscript=False, **properties):       #insription True si vient de visu_stages pour inscription d'1 stagiare
+        publisher.publish(channel="general", inscription=inscript)
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.inscription = inscription
+        self.inscription = inscript
         if self.inscription == True:
             self.drop_down_code_stage.visible = False
             self.drop_down_num_stages.visible = False
@@ -85,11 +85,8 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def filtre_type_stage(self):
         # Récupération du critère stage
         row_type = self.drop_down_code_stage.selected_value
-        #if row_type == None :
-        #    alert("Sélectionnez le type de stage !")
-        #    return
+
         #lecture du fichier stages et sélection des stages correspond au type de stage choisit
-        
         list1 = app_tables.stages.search(code=row_type)     # recherche ds les stages
         if len(list1)==0:
             alert("Pas de stage de ce type enregistré")

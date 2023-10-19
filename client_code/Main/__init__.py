@@ -11,6 +11,8 @@ from ..Visu_stages import Visu_stages
 from ..Visu_stages.RowTemplate3 import RowTemplate3
 from anvil import open_form
 
+# pour passer des datas d'une forme à l'autre (recherche_stagiaire vers RowTemplate)
+from .. import common  
 
 
 
