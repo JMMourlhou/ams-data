@@ -14,8 +14,11 @@ from ...common import publisher
 global num_stage  # pour le click sur button_5 et envoie ds le stage
 num_stage = 0
 
-global message
-msg = "recherche"  # si vient du bt inscription de la forme Visu_stages, "inscription/num_stage" (passation par Anvil extra Messaging) 
+global msg
+msg = ""  # si vient du bt inscription de la forme Visu_stages, "inscription/num_stage" (passation par Anvil extra Messaging) 
+
+global cpt
+cpt = 0
 
 class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
@@ -62,9 +65,13 @@ class RowTemplate1(RowTemplate1Template):
             self.button_5.tag = st
 
     def general_messages_handler(self, message):     # Anvil extra Messaging
-        global msg
-        msg = message.title
-        print(message.title)
+        
+        global cpt
+        if cpt == 0:
+            global msg
+            msg = message.title
+            print("message;", message.title)
+        
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -95,6 +102,12 @@ class RowTemplate1(RowTemplate1Template):
             num_stage = self.button_5.tag
             if num_stage != 0:
                 open_form('Stage_visu_modif',"recherche",num_stage) 
+
+    def column_panel_1_show(self, **event_args):
+        """This method is called when the column panel is shown on the screen"""
+        global cpt
+        cpt += 1
+
 
 
 
