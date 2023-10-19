@@ -27,7 +27,7 @@ class RowTemplate3(RowTemplate3Template):
     def text_box_1_focus(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = int(self.text_box_1.text)
-        open_form('Stage_visu_modif',num_stage)   
+        open_form('Stage_visu_modif',"visu_stages", num_stage)   
     
     def text_box_2_focus(self, **event_args):
         """This method is called when the button is clicked"""

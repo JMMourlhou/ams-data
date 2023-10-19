@@ -101,7 +101,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if self.provenance == "recherche":
             from ..Recherche_stagiaire import Recherche_stagiaire
             open_form('Recherche_stagiaire')
-        else:    
+        if self.provenance == "visu_stages":
             from ..Visu_stages import Visu_stages
             open_form('Visu_stages')
 

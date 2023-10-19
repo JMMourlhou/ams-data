@@ -24,7 +24,6 @@ class RowTemplate4(RowTemplate4Template):
         """This method is called when the text area gets focus"""
         mel = self.item['user_email']['email']  
         num_stage = self.item["stage"]['numero']
-        alert(num_stage)
         from ...Saisie_info_apres_visu import Saisie_info_apres_visu
         open_form('Saisie_info_apres_visu', mel, num_stage, intitule="", provenance="visu_stage")
 
