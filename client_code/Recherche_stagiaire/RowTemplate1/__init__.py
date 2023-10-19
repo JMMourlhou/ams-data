@@ -14,14 +14,22 @@ class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        """
-        Je remonte ds mes components pour tester ce que je display
-        Si je recherche sur un type de stage ou sur nom, prénom, tel ...
-
-        
-        """
         # Any code you write here will run before the form opens.
- 
+        """
+        Je remonte ds mes components pour tester le tag du repeating panel ("inscription" ?)
+        """
+        panel = self.button_1.parent
+        row = panel.parent
+        grid = row.parent
+        cp = grid.parent
+        print(panel, panel.tag)
+        print(row, row.tag)
+        #print(grid, grid.tag)
+        print(cp, cp.tag)
+        
+        
+        
+        
         # Normalement,dans un Data grid, j'initialise mes lignes en donnant data=nom de la colonne de mon fichier affiché
         # Mais ici, je veux pouvoir clicker sur ma ligne, donc je rajoute des boutons
         try:          # List à partir table users

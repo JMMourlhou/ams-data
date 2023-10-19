@@ -19,7 +19,7 @@ class RowTemplate3(RowTemplate3Template):
         # Any code you write here will run before the form opens.
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']
-        stage = stage.trim()
+        stage = stage.strip()
         self.text_box_2.text = self.item['code']['code']                     # link key
         if self.item['date_debut'] != None:
             self.text_box_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
@@ -39,9 +39,9 @@ class RowTemplate3(RowTemplate3Template):
         """This method is called when the link is clicked"""
         self.text_box_1_focus()
 
-    def button_1_click(self, **event_args):
+    def button_inscription_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
-
+        from ...Recherche_stagiaire import Recherche_stagiaire
+        open_form('Recherche_stagiaire','inscription')
 
 

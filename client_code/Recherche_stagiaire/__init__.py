@@ -11,10 +11,19 @@ from itertools import chain
 
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
-    def __init__(self, **properties):
+    def __init__(self, inscription=False, **properties):       #insription True si vient de visu_stages pour inscription d'1 stagiare
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.inscription = inscription
+        if self.inscription == True:
+            self.drop_down_code_stage.visible = False
+            self.drop_down_num_stages.visible = False
+            self.repeating_panel_1.tag = "inscription"    # Je passe l'info au RowTemplate
+            self.data_grid_1.tag = "inscription"
+        else:
+            self.repeating_panel_1.tag = "recherche"
+        
         self.drop_down_code_stage.tag.etat=False
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
@@ -127,9 +136,6 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         from ..Main import Main
         open_form('Main',99)
 
-    def text_box_nom_pressed_enter(self, **event_args):
-        """This method is called when the user presses Enter in this text box"""
-        pass
 
 
 

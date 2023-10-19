@@ -40,7 +40,7 @@ components:
       foreground: 'theme:On Primary', visible: true, text: Inscr., font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '', bold: false, underline: false, icon: ''}
-    name: button_1
+    name: button_inscription
     layout_properties: {}
-    event_bindings: {click: button_1_click}
+    event_bindings: {click: button_inscription_click}
 is_package: true
