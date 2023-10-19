@@ -7,6 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+global num_stage  # pour le click sur button_5 et envoie ds le stage
+num_stage = 0
 
 class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
@@ -24,10 +26,17 @@ class RowTemplate1(RowTemplate1Template):
         # Mais ici, je veux pouvoir clicker sur ma ligne, donc je rajoute des boutons
         try:          # List à partir table users
             cumul_clefs_histo = ""
-            if self.item['histo'] != {} or self.item['histo'] != None:
+            if self.item['histo'] != {} or self.item['histo'] != None:   #lecture du dictionnaire hisorique des stages du stagiaire
                 historique = self.item['histo']
-                for clef,valeur in historique.items():
+                cpt = 1
+                for clef,valeur in historique.items():   #Boucle sur le dictionnaire histo ds Users
                     print(clef)
+                    global num_stage
+                    num_stage = valeur[0]   # le num stage est le premier élément de valeur (clef:valeur) 
+                    test_tag_vide = self.button_5.tag
+                    if cpt == 1:   # si c'est le stage le plus récent, je le retient pour l'afficher si bt 5 clické
+                        self.button_5.tag = num_stage
+                    cpt += 1
                     cumul_clefs_histo = cumul_clefs_histo + " " + clef
 
             self.button_1.text = self.item['nom']+" "+self.item['prenom']
@@ -45,6 +54,8 @@ class RowTemplate1(RowTemplate1Template):
             st = self.item['stage']['numero']
             stg = app_tables.stages.get(numero=st)
             self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])
+            self.button_5.tag = st
+            
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -62,6 +73,14 @@ class RowTemplate1(RowTemplate1Template):
     def button_4_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.button_1_click()
+
+    def button_5_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        if self.button_5.text != "":
+            num_stage = self.button_5.tag
+            if num_stage != 0:
+                open_form('Stage_visu_modif',"recherche",num_stage) 
+
 
 
         

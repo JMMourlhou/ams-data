@@ -14,10 +14,10 @@ global intitul
 intitul=""
 
 class Stage_visu_modif(Stage_visu_modifTemplate):
-    def __init__(self, num_stage=0, **properties):
+    def __init__(self, provenance="", num_stage=0, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        self.provenance = provenance
         # Any code you write here will run before the form opens.
         if num_stage == 0:
             alert("Numéro de stage non trouvé")
@@ -98,10 +98,12 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        #from ..Main import Main
-        #open_form('Main')
-        open_form('Visu_stages')
+        if self.provenance == "recherche":
+            from ..Recherche_stagiaire import Recherche_stagiaire
+            open_form('Recherche_stagiaire')
+        else:    
+            from ..Visu_stages import Visu_stages
+            open_form('Visu_stages')
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""

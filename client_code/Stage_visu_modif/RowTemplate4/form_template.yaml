@@ -7,14 +7,14 @@ components:
   name: flow_panel_1
   layout_properties: {column: null}
   components:
-  - type: TextArea
-    properties: {role: null, align: left, height: 39, tooltip: '', placeholder: '',
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, auto_expand: true, font: '', spacing_above: none, spacing_below: none,
+      font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: true, underline: false}
-    name: text_area_1
-    layout_properties: {width: 190.647}
-    event_bindings: {focus: text_area_1_focus}
+    name: text_box_3
+    layout_properties: {}
+    event_bindings: {focus: text_box_3_focus}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
