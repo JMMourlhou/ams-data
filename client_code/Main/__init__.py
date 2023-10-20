@@ -219,6 +219,12 @@ class Main(MainTemplate):
         from ..Recherche_stagiaire import Recherche_stagiaire
         open_form('Recherche_stagiaire')
 
+    def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..A_essai import A_essai
+        open_form("A_essai")
+
+
 
 
 
