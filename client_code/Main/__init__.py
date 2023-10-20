@@ -11,11 +11,6 @@ from ..Visu_stages import Visu_stages
 from ..Visu_stages.RowTemplate3 import RowTemplate3
 from anvil import open_form
 
-# pour passer des datas d'une forme à l'autre (recherche_stagiaire vers RowTemplate)
-from .. import common  
-
-
-
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):
         # Set Form properties and Data Bindings.
@@ -219,10 +214,7 @@ class Main(MainTemplate):
         from ..Recherche_stagiaire import Recherche_stagiaire
         open_form('Recherche_stagiaire')
 
-    def button_1_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..A_essai import A_essai
-        open_form("A_essai")
+
 
 
 

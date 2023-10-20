@@ -132,14 +132,6 @@ components:
       name: button_qcm
       layout_properties: {grid_position: 'TKJBWP,DLVHJK'}
       event_bindings: {click: button_qcm_click}
-    - type: Button
-      properties: {role: filled-button, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: A_essai, font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-        underline: false, icon: ''}
-      name: button_1
-      layout_properties: {grid_position: 'BNMPOY,MSSXRH'}
-      event_bindings: {click: button_1_click}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: content_panel

@@ -10,9 +10,6 @@ from anvil.tables import app_tables
 from .. import Visu_stages
 from anvil import open_form
 
-# pour passer des datas d'une forme à l'autre (recherche_stagiaire vers RowTemplate)
-from ..common import publisher
-
 
 class RowTemplate3(RowTemplate3Template):
     def __init__(self, **properties):
@@ -46,9 +43,8 @@ class RowTemplate3(RowTemplate3Template):
         """This method is called when the button is clicked"""
         from ...Recherche_stagiaire import Recherche_stagiaire
         num_stage = self.text_box_1.text
-        pour_messaging = "inscription/"+num_stage
-        # Je lance le message 
-        publisher.publish(channel="general", title=pour_messaging) 
-        open_form('Recherche_stagiaire',pour_messaging)
+        inscription = "inscription/"+num_stage
+        
+        open_form('Recherche_stagiaire',inscription)
 
 
