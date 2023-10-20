@@ -83,7 +83,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         list1 = app_tables.stages.search(code=row_type)     # recherche ds les stages
         if len(list1)==0:
             alert("Pas de stage de ce type enregistré")
-        print("nb de stage de ce type: ",len(list1))
+        #print("nb de stage de ce type: ",len(list1))
         
         # Initialisation du Drop down num_stages et dates
         self.drop_down_num_stages.items = [(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list1]
@@ -103,7 +103,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                     )
             liste_intermediaire1.append(temp)   # ajout de la liste (iterator object)du stage
             
-        print("nb de listes créées: ",len(liste_intermediaire1))
+        #print("nb de listes créées: ",len(liste_intermediaire1))
         
         # Je crée 1 liste à partir de ttes les listes créées:
         liste_finale = []
@@ -115,7 +115,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
         selection=self.drop_down_num_stages.selected_value
-        print("selection: ",selection)
+        #print("selection: ",selection)
         #extraction du num stage
         self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(
                                         tables.order_by("name", ascending=True),

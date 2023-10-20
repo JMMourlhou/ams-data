@@ -45,6 +45,9 @@ class RowTemplate3(RowTemplate3Template):
         num_stage = self.text_box_1.text
         inscription = "inscription/"+num_stage
         
+        table_temp = app_tables.temp.search()[0]
+        table_temp.update(text=inscription)
+      
         open_form('Recherche_stagiaire',inscription)
 
 

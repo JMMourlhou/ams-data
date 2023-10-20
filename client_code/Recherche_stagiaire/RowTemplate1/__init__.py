@@ -60,18 +60,19 @@ class RowTemplate1(RowTemplate1Template):
         """
         Je ne peux pas remonter ds mes components pour savoir si je suis en mode "inscription",
             à partir de la forme Visu_stages
-        Donc j'utilise la table Temp
+        Donc j'utilise la table Temp qui contient la raison d'entrée en recherche : recherche ou inscription
         """
-        contenu = app_tables.temp.search()[0]   # lecture 
-        
-        if contenu[0] != "i":  # recherche
+        temp_row1 = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
+        contenu = str(temp_row1['text'])
+
+        if contenu[0:1] == "r":  # recherche
             try:
                 mel = self.item['email']   
             except:
                 mel = self.item['user_email']['email']
             from ...Saisie_info_apres_visu import Saisie_info_apres_visu
             open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
-        else:  # inscription du stagiaire au stage
+        if contenu[0:1] == "i":  # inscription du stagiaire au stage
             alert(contenu)
             alert(self.item['email'])
 

@@ -39,7 +39,7 @@ metadata: {title: Inscription Stage, logo_img: 'asset:Logo F S small_transparent
 startup_form: null
 db_schema:
   temp:
-    client: none
+    client: full
     server: full
     columns:
     - name: text

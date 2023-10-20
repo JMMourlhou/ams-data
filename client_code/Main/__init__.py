@@ -2,9 +2,8 @@ from ._anvil_designer import MainTemplate
 from anvil import *
 import anvil.server
 
+from anvil.tables import app_tables
 from .. import French_zone
-#import anvil.google.auth, anvil.google.drive
-#from anvil.google.drive import app_files
 from ..Saisie_info_de_base import Saisie_info_de_base
 from ..Stage_creation import Stage_creation
 from ..Visu_stages import Visu_stages
@@ -211,6 +210,8 @@ class Main(MainTemplate):
 
     def button_create_recherche_click(self, **event_args):
         """This method is called when the button is clicked"""
+        table_temp = app_tables.temp.search()[0]
+        table_temp.update(text='recherche')
         from ..Recherche_stagiaire import Recherche_stagiaire
         open_form('Recherche_stagiaire')
 
