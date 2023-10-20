@@ -34,7 +34,7 @@ class RowTemplate1(RowTemplate1Template):
         
         try:          # Liste à partir table users
             cumul_clefs_histo = ""
-            if self.item['histo'] != {} or self.item['histo'] != None:   #lecture du dictionnaire hisorique des stages du stagiaire
+            if self.item['histo'] != {} or self.item['histo'] != None:   #lecture du dictionnaire historique des stages du stagiaire
                 historique = self.item['histo']
                 cpt = 1
                 for clef,valeur in historique.items():   #Boucle sur le dictionnaire histo ds Users
