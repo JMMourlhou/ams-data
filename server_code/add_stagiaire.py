@@ -7,7 +7,12 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
-@anvil.server.callable           #Création d'un nouveau stagiaire ds le stage
+"""
+ADD & EFFACEMENT d'1 stagiaire du stage
+"""
+
+
+@anvil.server.callable           # ADD d'un nouveau stagiaire ds le stage
 @anvil.tables.in_transaction
 def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     valid=""
@@ -20,7 +25,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     # lecture fichier père user (lecture différente si vient de création 1ere entrée ou bt_modif en recherche)
     if type_add == "":               # 1ere entrée par flash Qr_code: le user est le stagiaire
         user = anvil.users.get_user()
-    if type_add == "bt_recherche":   # le stgiaire a été choisit ds recherche (Recherche_stagiaire / RowTemplate1)
+    if type_add == "bt_recherche":   # le stagiaire a été choisit ds recherche (Recherche_stagiaire / RowTemplate1)
         user = app_tables.users.get(email=stagiaire_row['email'])
     if user:
         if user != stagiaire_row :
@@ -88,4 +93,15 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
         valid="Stagiaire inscrit ! (" + str(nb) + ")"
     else:
         valid="Stagiaire non retrouvé dans fichier stagiaires inscrits"
+    return valid
+    
+@anvil.server.callable           #DEL d'1 stagiaire du stage
+@anvil.tables.in_transaction
+def del_stagiaire(stagiaire_row, stage_row):
+    row = app_tables.stagiaires_inscrits.get(user_email=stagiaire_row,       # ce user
+                                                 stage=stage_row)            # ET pour ce stage
+    if row is not None:
+        row.delete()
+    
+    valid="Stagiaire effacé de ce stage !"
     return valid

@@ -13,7 +13,7 @@ components:
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: true, underline: false}
     name: text_box_3
-    layout_properties: {}
+    layout_properties: {width: 203.5}
     event_bindings: {focus: text_box_3_focus}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
@@ -21,7 +21,7 @@ components:
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_1
-    layout_properties: {}
+    layout_properties: {width: 196.151}
     event_bindings: {focus: text_box_1_focus}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
@@ -29,6 +29,14 @@ components:
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_2
-    layout_properties: {width: 214.151}
+    layout_properties: {width: 163.151}
     event_bindings: {focus: text_box_2_focus}
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: '', font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Primary', bold: false, underline: false, icon: 'fa:minus-circle'}
+    name: button_delete
+    layout_properties: {}
+    event_bindings: {click: bt_delete}
 is_package: true
