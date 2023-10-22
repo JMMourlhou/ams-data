@@ -23,6 +23,11 @@ class RowTemplate1(RowTemplate1Template):
         
         try:          # Liste à partir table users
             cumul_clefs_histo = ""
+            if self.item['histo'] == None:
+                msg = self.item['nom']+" "+self.item['prenom'] + " avec histo sans {} (table 'users')"
+                alert(msg)
+                return
+                
             if self.item['histo'] != {} or self.item['histo'] != None:   #lecture du dictionnaire historique des stages du stagiaire
                 historique = self.item['histo']
                 cpt = 1
@@ -74,8 +79,17 @@ class RowTemplate1(RowTemplate1Template):
             open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
         if contenu[0:1] == "i":  # inscription du stagiaire au stage
             alert(contenu)
-            alert(self.item['email'])
-
+            
+            mel = self.item['email']
+            stagiaire_row = app_tables.users.get(email=mel)
+            #alert(stagiaire_row['email'])
+            stage = contenu[12:15]
+            #alert(stage)
+            code_fi = "??"
+            txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
+            alert(txt_msg)
+            open_form('Recherche_stagiaire', contenu)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo
+            
     def button_3_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.button_1_click()

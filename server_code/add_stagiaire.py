@@ -9,7 +9,7 @@ import anvil.server
 
 @anvil.server.callable           #Création d'un nouveau stagiaire ds le stage
 @anvil.tables.in_transaction
-def add_stagiaire(stagiaire, stage, mode_fi):
+def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     valid=""
     # lecture fichier père stages
     code_stage = app_tables.stages.get(numero=int(stage))
@@ -17,10 +17,13 @@ def add_stagiaire(stagiaire, stage, mode_fi):
         valid="Stage non trouvé ds fichier stages !"
         return valid
   
-    # lecture fichier père user
-    user=anvil.users.get_user()
+    # lecture fichier père user (lecture différente si vient de création 1ere entrée ou bt_modif en recherche)
+    if type_add == "":               # 1ere entrée par flash Qr_code: le user est le stagiaire
+        user = anvil.users.get_user()
+    if type_add == "bt_recherche":   # le stgiaire a été choisit ds recherche (Recherche_stagiaire / RowTemplate1)
+        user = app_tables.users.get(email=stagiaire_row['email'])
     if user:
-        if user != stagiaire :
+        if user != stagiaire_row :
             valid="Stagiaire non trouvé ds fichier users !"
             return valid
     else:
@@ -38,7 +41,7 @@ def add_stagiaire(stagiaire, stage, mode_fi):
     test = app_tables.stagiaires_inscrits.search(user_email=user,                 # ce user
                                                  stage=code_stage)                # ET pour ce stage
     if len(test)>0:
-        valid="Vous êtes déjà inscrit à ce stage !"
+        valid="Stagiaire déjà inscrit à ce stage !"
         # ******************************************************************* EFFACT code stage ds user avant retour
         user.update(stage_num_temp = 0)
         return valid 
@@ -82,7 +85,7 @@ def add_stagiaire(stagiaire, stage, mode_fi):
             code_stage.update(nb_stagiaires_deb=nb)
             #print("passage ds except ok")
             
-        valid="Vous êtes inscrit ! (" + str(nb) + ")"
+        valid="Stagiaire inscrit ! (" + str(nb) + ")"
     else:
         valid="Stagiaire non retrouvé dans fichier stagiaires inscrits"
     return valid

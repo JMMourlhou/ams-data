@@ -142,7 +142,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                     else:
                         row = self.drop_down_fi.selected_value
                         code_fi=row['code_fi']
-                        txt_msg = anvil.server.call("add_stagiaire", user, stage, code_fi)
+                        txt_msg = anvil.server.call("add_stagiaire", user, stage, code_fi, type_add="")
                         alert(txt_msg)
                         self.button_retour_click()
             else :
