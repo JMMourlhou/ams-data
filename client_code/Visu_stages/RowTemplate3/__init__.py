@@ -10,6 +10,8 @@ from anvil.tables import app_tables
 from .. import Visu_stages
 from anvil import open_form
 
+from alert2.alert2 import alert2
+
 #import anvil.js    # pour screen size
 from anvil.js import window # to gain access to the window object
 global screen_size
@@ -53,7 +55,24 @@ class RowTemplate3(RowTemplate3Template):
    
         r=alert("Inscription de ce stagiaire ?",buttons=[("Non",False),("Oui",True)])
         if r :   #oui  
-            
+            a=alert2(role='outlined',
+                  background='black',   
+                  content='This is the body of my alert',
+                  #content=   
+                  header='This is the Title of my alert',    # header=False Will disable Header
+                  footer_buttons=["No","Yes"],
+                  close_button_color='red',
+                  footer_buttons_align='center',footer_buttons_spacing='medium',
+                  footer_color='green',
+                  header_color='red', 
+                  foreground='white',   
+                  font_size=18,   
+                  width=80  #amount of screen to be covered by the alert
+                  )
+         
+
+
+            a.close()
             
             from ...Recherche_stagiaire import Recherche_stagiaire
             num_stage = self.text_box_1.text
