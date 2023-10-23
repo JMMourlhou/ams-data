@@ -8,6 +8,9 @@ dependencies:
 - dep_id: dep_bd19zuh0vhcvo
   version: {dev: false}
   resolution_hints: {app_id: 2KPIX2PJP2XMXLCR, name: alert2, package_name: alert2}
+- dep_id: dep_1b6m345gr6tpp
+  version: {dev: false}
+  resolution_hints: {app_id: 5PSA5XWRBNOHKUCJ, name: InputBox, package_name: InputBox}
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}
