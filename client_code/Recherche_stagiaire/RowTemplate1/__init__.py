@@ -103,7 +103,7 @@ class RowTemplate1(RowTemplate1Template):
                   footer_color='transparent',
                   header_color='#fff905',   #yellow
                   foreground='#33a1b8',     #primary color
-                  opacity=0.9,   
+                  opacity=0.8,   
                   font_size=16,   
                   width=50  #amount of screen to be covered by the alert
                   )
