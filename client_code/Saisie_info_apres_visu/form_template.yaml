@@ -230,7 +230,7 @@ components:
         enabled: true
         foreground: theme:On Primary
         items: []
-        visible: true
+        visible: false
         font_size: null
         font: ''
         spacing_above: small

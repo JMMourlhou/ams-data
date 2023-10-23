@@ -50,13 +50,18 @@ class RowTemplate3(RowTemplate3Template):
 
     def button_inscription_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ...Recherche_stagiaire import Recherche_stagiaire
-        num_stage = self.text_box_1.text
-        inscription = "inscription/"+num_stage
+   
+        r=alert("Inscription de ce stagiaire ?",buttons=[("Non",False),("Oui",True)])
+        if r :   #oui  
+            
+            
+            from ...Recherche_stagiaire import Recherche_stagiaire
+            num_stage = self.text_box_1.text
+            inscription = "inscription/"+num_stage
+            
+            table_temp = app_tables.temp.search()[0]
+            table_temp.update(text=inscription)
         
-        table_temp = app_tables.temp.search()[0]
-        table_temp.update(text=inscription)
-      
-        open_form('Recherche_stagiaire',inscription)
+            open_form('Recherche_stagiaire',inscription)
 
 
