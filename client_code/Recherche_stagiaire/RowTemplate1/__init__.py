@@ -8,6 +8,9 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from ...Alert import Alert
+from alert2.alert2 import alert2
+
 global num_stage  # pour le click sur button_5 et envoie ds le stage
 num_stage = 0
 
@@ -86,7 +89,26 @@ class RowTemplate1(RowTemplate1Template):
             stagiaire_row = app_tables.users.get(email=mel)
             #alert(stagiaire_row['email'])
             stage = contenu[12:15]
-            #alert(stage)
+
+            a=alert2(role='outlined_button',
+                  background='transparent',   
+                  #background='#33a1b8',   
+                  content=DropDown(items=[(r['intitule_fi'], r) for r in app_tables.mode_financement.search()],
+                                  
+                                  ),
+                  header='Inscription du stagiaire sélectionné',    # header=False Will disable Header
+                  footer_buttons=["Retour","Inscription"],
+                  close_button_color='blue',
+                  footer_buttons_align='center',footer_buttons_spacing='medium',
+                  footer_color='transparent',
+                  header_color='#fff905',   #yellow
+                  foreground='#33a1b8',     #primary color
+                  opacity=0.9,   
+                  font_size=16,   
+                  width=50  #amount of screen to be covered by the alert
+                  )
+            a.close()
+            
             code_fi = "??"
             txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
             alert(txt_msg)
