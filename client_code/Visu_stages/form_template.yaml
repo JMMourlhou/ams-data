@@ -25,6 +25,16 @@ components:
   components:
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+    name: button_annuler
+    layout_properties:
+      col_widths: {}
+      grid_position: SVCHXN,MYQPJL
+    event_bindings: {click: button_annuler_click}
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Tertiary', visible: true, text: Création d'1 stage, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Primary', bold: true, underline: false, icon: ''}
@@ -33,16 +43,6 @@ components:
       col_widths: {}
       grid_position: SVCHXN,OCZXGM
     event_bindings: {click: creation_stage_click}
-  - type: Button
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: true, underline: false, icon: ''}
-    name: button_annuler
-    layout_properties:
-      col_widths: {}
-      grid_position: SVCHXN,LGPDPO
-    event_bindings: {click: button_annuler_click}
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
@@ -62,7 +62,7 @@ components:
           Primary Container', visible: true, text: Stage du ...              Type                 N°...,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: '', bold: false, underline: false, icon: ''}
-      name: label_1
+      name: label_en_tete
       layout_properties: {}
 - type: DataGrid
   properties:

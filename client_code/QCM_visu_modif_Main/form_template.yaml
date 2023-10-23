@@ -34,7 +34,7 @@ components:
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
         enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour,
         font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:Primary', bold: true, underline: false,
+        italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
         icon: ''}
       name: button_annuler
       layout_properties:

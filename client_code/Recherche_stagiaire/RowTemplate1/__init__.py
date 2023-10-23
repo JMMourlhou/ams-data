@@ -44,7 +44,9 @@ class RowTemplate1(RowTemplate1Template):
             self.button_1.text = self.item['nom']+" "+self.item['prenom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
-            self.button_5.text = cumul_clefs_histo
+            if len(historique)>1:
+                self.button_5.height = 36 * len(historique)
+            self.button_5.text = cumul_clefs_histo.lstrip()
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
@@ -98,17 +100,21 @@ class RowTemplate1(RowTemplate1Template):
         """This method is called when the button is clicked"""
         self.button_1_click()
 
-    def button_5_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        if self.button_5.text != "":
-            num_stage = self.button_5.tag
-            if num_stage != 0:
-                open_form('Stage_visu_modif',"recherche",num_stage) 
+        
 
     def column_panel_1_show(self, **event_args):
         """This method is called when the column panel is shown on the screen"""
         global cpt
         cpt += 1
+
+    def button_5_focus(self, **event_args):
+        """This method is called when the text area gets focus"""
+        if self.button_5.text != "":
+            num_stage = self.button_5.tag
+            
+            if num_stage != 0:
+                open_form('Stage_visu_modif',"recherche",num_stage) 
+
 
 
 

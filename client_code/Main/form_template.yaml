@@ -51,9 +51,9 @@ components:
       components:
       - type: Button
         properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Se déconnecter,
+          enabled: true, foreground: 'theme:On Primary', visible: true, text: Se déconnecter,
           font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+          italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
           icon: ''}
         name: bt_se_deconnecter
         layout_properties:

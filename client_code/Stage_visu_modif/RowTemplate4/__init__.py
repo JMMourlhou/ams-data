@@ -41,14 +41,12 @@ class RowTemplate4(RowTemplate4Template):
 
     def bt_delete(self, **event_args):
         """This method is called when the button is clicked"""
-        stage_row = self.button_delete.tag.stage_row
-        stagiaire_row = self.button_delete.tag.stagiaire_row
-        txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_row)
-        alert(txt_msg)
-        open_form('Stage_visu_modif',"visu_stages", stage_row['numero'])
+        r=alert("Enlever ce stagiaire ?",buttons=[("Non",False),("Oui",True)])
+        if r :   #oui   
+            stage_row = self.button_delete.tag.stage_row
+            stagiaire_row = self.button_delete.tag.stagiaire_row
+            txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_row)
+            alert(txt_msg)
+            open_form('Stage_visu_modif',"visu_stages", stage_row['numero']) # réinitialisation de la fenêtre
         
-
-
-
-
-        
+     

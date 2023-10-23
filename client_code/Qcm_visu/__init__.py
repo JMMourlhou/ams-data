@@ -7,9 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import anvil.js
-
-from anvil.js import window # to gain access to the window object
+#import anvil.js    
+from anvil.js import window # to gain access to the window object (pour screen size)
 from anvil_extras.PageBreak import PageBreak
 global etat_faux
 etat_faux = None

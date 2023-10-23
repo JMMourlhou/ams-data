@@ -33,9 +33,9 @@ components:
     event_bindings: {focus: text_box_2_focus}
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary', visible: true, text: '', font_size: null, font: '',
+      foreground: 'theme:Primary', visible: true, text: '', font_size: null, font: '',
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, underline: false, icon: 'fa:minus-circle'}
+      background: 'theme:Tertiary', bold: false, underline: false, icon: 'fa:minus-circle'}
     name: button_delete
     layout_properties: {}
     event_bindings: {click: bt_delete}

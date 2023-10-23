@@ -10,6 +10,10 @@ from anvil.tables import app_tables
 from .. import Visu_stages
 from anvil import open_form
 
+#import anvil.js    # pour screen size
+from anvil.js import window # to gain access to the window object
+global screen_size
+screen_size = window.innerWidth
 
 class RowTemplate3(RowTemplate3Template):
     def __init__(self, **properties):
@@ -17,6 +21,11 @@ class RowTemplate3(RowTemplate3Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        if screen_size < 800:
+            self.text_box_1.visible = False
+        else:
+            self.text_box_1.visible = True
+            
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']
         stage = stage.strip()

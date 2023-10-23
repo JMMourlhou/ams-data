@@ -61,23 +61,24 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
     if stagiaire_row:
         # ******************************************************************* EFFACT code stage ds user et INCREMENT du nb de stgiaires ds le stage:
-        # ajouter le dico de l'historique du stagiare (ex; {"PSC1":(101,28/08/2023,True)} )
+        # ajouter le dico de l'historique du stagiare (ex; {"PSC1 du 28/08/202":(101,True)} )
         historique = {}
         valeur = []     
-        print(type(user['histo']))
+        #print(type(user['histo']))
         historique = user["histo"]
         #print(historique['PSC1 du 2023-08-28'])
-        print(historique)
+        #print(historique)
         st = code_stage["code"]["code"]
         st=st.strip()
-        print(st)
+        #print(st)
         clef = st + " du "+str(code_stage["date_debut"])
         valeur = [code_stage["numero"],None]  # None sera remplacé par True si diplomé
         historique[clef] = valeur              # ajout de la nouvelle clef ds l'historique
         user.update(stage_num_temp = 0,
                    histo=historique
                    )
-        # Incrément nb de stagiaires début stage ds fichier père stage
+        
+        # INCREMENT nb de stagiaires début stage ds fichier père stage
         try:  # si nb à None il y aurait une erreur
             if code_stage:
                 nb = int(code_stage['nb_stagiaires_deb'])+1
@@ -97,11 +98,42 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     
 @anvil.server.callable           #DEL d'1 stagiaire du stage
 @anvil.tables.in_transaction
-def del_stagiaire(stagiaire_row, stage_row):
+def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users row      stage_row = table stages row
+    valid=""
+    # DECREMENTATION nb de stagiaires ds ce stage
+    # lecture fichier père stages
+    stage_r = app_tables.stages.get(numero=int(stage_row['numero']))
+    if not stage_r :
+        valid="Stage non trouvé ds table stages !"
+        return valid
+    else:
+        nb = int(stage_r['nb_stagiaires_deb'])-1
+        stage_r.update(nb_stagiaires_deb=nb)
+
+    # Lecture table stagiaires inscrits à ce stage pour lecture et MAJ clef histo et effacement du stagiaire
     row = app_tables.stagiaires_inscrits.get(user_email=stagiaire_row,       # ce user
                                                  stage=stage_row)            # ET pour ce stage
-    if row is not None:
-        row.delete()
-    
+    if not row :
+        valid="Stagiaire à enlever du stage non trouvé ds table stagiaires inscrits !"
+        return valid
+        
+    # Pour MAJ HISTO, table users
+    user = app_tables.users.get(email=stagiaire_row['email'])    
+    if not user :
+        valid="MAJ histo: user à mettre à jour non trouvé ds table users !"
+        return valid
+    else:
+        historique = {}
+        valeur = []     
+        historique = user["histo"]   
+        st = stage_r["code"]["code"]
+        st=st.strip()
+        clef = st + " du "+str(stage_r["date_debut"])
+        del historique[clef]
+        user.update(histo=historique)
+   
+    # Del of stagiaire in the stage
+    row.delete()
     valid="Stagiaire effacé de ce stage !"
+   
     return valid

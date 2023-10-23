@@ -33,13 +33,13 @@ components:
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_1
-    layout_properties: {width: 49.15100000000001}
+    layout_properties: {width: 72.15100000000001}
     event_bindings: {focus: text_box_1_focus}
   - type: Button
-    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary', visible: true, text: Inscr., font_size: null,
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Secondary', visible: true, text: Inscr., font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
+      background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
     name: button_inscription
     layout_properties: {}
     event_bindings: {click: button_inscription_click}

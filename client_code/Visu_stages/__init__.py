@@ -9,14 +9,20 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Stage_visu_modif
 from .. import constant_parameters  # importation du module contenant mes variables globales
-
+from anvil.js import window # to gain access to the window object (taille fenêtre)
+global screen_size
+screen_size = window.innerWidth
 
 class Visu_stages(Visu_stagesTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        # Any code you write here will run before the form opens.    
+        if screen_size < 800:
+            self.label_en_tete.text = "Stage du ...              Type           Inscription"
+        else:
+            self.label_en_tete.text = "Stage du ...                 Type              N°...     Inscription "
         
-        # Any code you write here will run before the form opens.     
         # Initilisation de la liste des stages à afficher
         """
         # Je prend les 10 derniers stages, triés de la derniere date de début à la première
