@@ -8,8 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ...Alert import Alert
-from alert2.alert2 import alert2
+from InputBox.input_box import InputBox, alert2, input_box, multi_select_dropdown
 
 global num_stage  # pour le click sur button_5 et envoie ds le stage
 num_stage = 0
@@ -62,8 +61,6 @@ class RowTemplate1(RowTemplate1Template):
             stg = app_tables.stages.get(numero=st)
             self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])
             self.button_5.tag = st
-
-    
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -82,34 +79,45 @@ class RowTemplate1(RowTemplate1Template):
                 mel = self.item['user_email']['email']
             from ...Saisie_info_apres_visu import Saisie_info_apres_visu
             open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
-        if contenu[0:1] == "i":  # inscription du stagiaire au stage
-            alert(contenu)
             
+        if contenu[0:1] == "i":  # inscription du stagiaire au stage
+            #alert(contenu)
             mel = self.item['email']
             stagiaire_row = app_tables.users.get(email=mel)
             #alert(stagiaire_row['email'])
             stage = contenu[12:15]
 
-            a=alert2(role='outlined_button',
-                  background='transparent',   
-                  #background='#33a1b8',   
-                  content=DropDown(items=[(r['intitule_fi'], r) for r in app_tables.mode_financement.search()],
-                                  
-                                  ),
-                  header='Inscription du stagiaire sélectionné',    # header=False Will disable Header
-                  footer_buttons=["Retour","Inscription"],
-                  close_button_color='blue',
-                  footer_buttons_align='center',footer_buttons_spacing='medium',
-                  footer_color='transparent',
-                  header_color='#fff905',   #yellow
-                  foreground='#33a1b8',     #primary color
-                  opacity=0.8,   
-                  font_size=16,   
-                  width=50  #amount of screen to be covered by the alert
-                  )
-            a.close()
+            # Choix du mode de financement / Création d'une box incluant le drop down mode de fi
+            def show_results(self, result):
+                #alert(result)
+                pass
             
-            code_fi = "??"
+            def input_box_show(rows, **event_args):
+                rows['counter'].label.content = 'Sélectionnez le mode de fi'
+                
+            def dropdown_change(results, rows, **event_args):
+                #self.n_changes += 1
+                #rows['counter'].visible = True
+                pass
+                #rows['counter'].label.content = f'The dropdown has changed **{self.n_changes}** time{"s" if self.n_changes != 1 else ""}.'
+                
+            #custom_input_visible = results['Size:'] == 'Custom'
+            #rows["Width:"].visible = custom_input_visible
+            #rows["Height:"].visible = custom_input_visible
+            result={}
+            nom_dropdown = 'mode_fi'  # sera également la clef du dictionnaire de sortie/résultat ib.results
+            ib = InputBox('Choix du mode de financement', ['OK', 'Cancel'], default_button='OK',large=True)  # si touche return = OK
+            #ib = InputBox('Choix du mode de financement', ['OK', 'Cancel'], default_button='OK', form_show=input_box_show)
+            ib.add_dropdown(name=nom_dropdown, prompt="Mode de financement :",items=[(r['intitule_fi'], r) for r in app_tables.mode_financement.search()], selected_value='A définir', events=[('change', dropdown_change)])
+            # Je peux rajouter ds ma input box d'autres components:
+            #ib.add_textbox(text=30, prompt='Width:', visible=True)  # visible True par défaut
+            #ib.add_textbox(text=20, prompt='Height:', visible=True)
+            #ib.add_richtext('Initial text', name='counter', visible = True)
+            ib.show()
+            #alert(ib.results)
+            result=ib.results   #dictionaire  clef 'mode_fi' valeur=row table Mode_financement sélectionnée
+            code_fi = result.get('mode_fi')['code_fi']   # extraction de la colonne 
+            alert(code_fi)
             txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
             alert(txt_msg)
             open_form('Recherche_stagiaire', contenu)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo

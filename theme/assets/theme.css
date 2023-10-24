@@ -2,6 +2,25 @@
  This CSS implements the Material Design 3 look and feel for Anvil apps.
  **/
 
+
+/*****  a few changes to the standard css FROM InputBox example *****/
+/* allow text areas to resize only vertically and make the tabs play nice in EditPanelList */
+textarea {
+  resize: vertical;
+}
+
+/* allow lower case text on buttons and decrease the padding */
+/* origine: padding: 2px 4px !important;        6px élargi un peu le bouton     JM */
+.btn {
+  padding: 2px 5px !important;
+  text-transform: none !important;
+  box-shadow:         inset 0 0 1px 1px rgb(0 0 0 / 20%), 0 1px 2px 1px rgb(0 0 0 / 10%) !important;
+  -webkit-box-shadow: inset 0 0 1px 1px rgb(0 0 0 / 20%), 0 1px 2px 1px rgb(0 0 0 / 10%) !important;
+}
+/*****  end of custom css  *****/
+
+
+
 /* Stop panel-cols cutting off drop shadows */
 .anvil-panel-col {
   padding-bottom: 10px;
