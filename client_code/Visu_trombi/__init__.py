@@ -106,8 +106,8 @@ class Visu_trombi(Visu_trombiTemplate):
         {'button': 1, 'keys': {'meta': False, 'shift': False, 'ctrl': False, 'alt': False}, 'sender': <anvil.Image object>, 'event_name': 'mouse_down'}"""
         #print(event_args) # c'est un dictionnaire contenant les infos de lévenement
         mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
-        from ..Saisie_info_apres_trombi import Saisie_info_apres_trombi
-        open_form('Saisie_info_apres_trombi', self.num_stage, self.intitule, mel)
+        from ..Saisie_info_apres_visu import Saisie_info_apres_visu
+        open_form('Saisie_info_apres_visu', mel, self.num_stage, self.intitule, provenance="trombi")
   
     def im_mouse_down(self, x, y, **event_args):
         """This method is called when the mouse cursor enters this component"""

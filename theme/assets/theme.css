@@ -12,10 +12,10 @@ textarea {
 /* allow lower case text on buttons and decrease the padding */
 /* origine: padding: 2px 4px !important;        6px élargi un peu le bouton     JM */
 .btn {
-  padding: 2px 5px !important;
+  padding: 1px 10px !important;
   text-transform: none !important;
   box-shadow:         inset 0 0 1px 1px rgb(0 0 0 / 20%), 0 1px 2px 1px rgb(0 0 0 / 10%) !important;
-  -webkit-box-shadow: inset 0 0 1px 1px rgb(0 0 0 / 20%), 0 1px 2px 1px rgb(0 0 0 / 10%) !important;
+  -webkit-box-shadow: inset 0 0 0px 0px rgb(0 0 0 / 10%), 0 1px 2px 1px rgb(0 0 0 / 10%) !important;
 }
 /*****  end of custom css  *****/
 

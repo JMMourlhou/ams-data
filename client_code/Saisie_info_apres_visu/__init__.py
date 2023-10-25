@@ -57,7 +57,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
         else:
-            self.button_retour_click()
+            self.button_annuler_click()
 
 
     def file_loader_photo_change(self, file, **event_args):
