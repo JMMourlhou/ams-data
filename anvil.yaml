@@ -55,7 +55,7 @@ db_schema:
     server: full
     columns:
     - name: requis
-      admin_ui: {width: 232.166666}
+      admin_ui: {order: 0, width: 264.17}
       type: string
     - name: commentaires
       admin_ui: {width: 200}
