@@ -60,6 +60,9 @@ db_schema:
     - name: commentaires
       admin_ui: {width: 200}
       type: string
+    - name: code_pre_requis
+      admin_ui: {order: -1, width: 200}
+      type: string
   pre_requis_stage:
     title: Pre_Requis_stage
     client: search
