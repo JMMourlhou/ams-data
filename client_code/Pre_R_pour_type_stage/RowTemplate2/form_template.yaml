@@ -1,0 +1,16 @@
+container: {type: DataRowPanel}
+components:
+- type: FlowPanel
+  properties: {}
+  name: flow_panel_1
+  layout_properties: {column: null}
+  components:
+  - type: TextBox
+    properties: {}
+    name: text_box_1
+    layout_properties: {width: 111.15100000000007}
+  - type: TextBox
+    properties: {}
+    name: text_box_2
+    layout_properties: {width: 615.1510000000001}
+is_package: true

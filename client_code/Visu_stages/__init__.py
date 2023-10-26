@@ -53,8 +53,8 @@ class Visu_stages(Visu_stagesTemplate):
 
     def button_gestion_pre_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Pre_R_visu_modif import Pre_R_visu_modif
-        open_form('Pre_R_visu_modif')
+        from ..Pre_R_pour_type_stage import Pre_R_pour_type_stage
+        open_form('Pre_R_pour_type_stage')
 
 
 

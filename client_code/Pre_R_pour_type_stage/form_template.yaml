@@ -23,10 +23,12 @@ components:
     wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small,
     background: 'theme:Primary'}
   name: column_panel_1
-  layout_properties: {grid_position: 'XGRXOA,LZLTYL'}
+  layout_properties:
+    col_widths: {}
+    grid_position: HVXSKI,IUEAZJ
   components:
   - type: ColumnPanel
-    properties: {col_widths: '{"QAOCRN":10}'}
+    properties: {col_widths: '{}'}
     name: column_panel_6
     layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
     components:
@@ -41,6 +43,19 @@ components:
         col_widths: {}
         grid_position: COGJPP,SACJUA
       event_bindings: {click: button_annuler_click}
+    - type: Button
+      properties: {role: elevated-button, align: center, tooltip: '', border: '',
+        enabled: false, foreground: 'theme:Error', visible: true, text: Créer, font_size: null,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
+      name: button_creer
+      layout_properties: {grid_position: 'COGJPP,NUKLUX', width: null, expand: false}
+      event_bindings: {click: button_creer_click}
+  - type: ColumnPanel
+    properties: {col_widths: '{"SDVOPJ":17,"LJENHL":43}'}
+    name: column_panel_2
+    layout_properties: {grid_position: 'XXPJWW,NYSLAF'}
+    components:
     - type: DropDown
       properties:
         role: outlined
@@ -49,7 +64,7 @@ components:
         placeholder: 'Pour '
         border: ''
         enabled: true
-        foreground: theme:On Primary
+        foreground: theme:On Primary Container
         items: []
         visible: true
         font_size: null
@@ -57,16 +72,63 @@ components:
         spacing_above: small
         spacing_below: small
         italic: false
-        background: theme:Primary
+        background: theme:Tertiary
         bold: false
         underline: false
         include_placeholder: true
       name: drop_down_code_stage
-      layout_properties: {grid_position: 'PDHJJH,OYURKJ', row_background: ''}
+      layout_properties: {grid_position: 'GYKKPW,SDVOPJ', row_background: ''}
+      event_bindings: {change: drop_down_code_stage_change}
+    - type: DropDown
+      properties:
+        role: null
+        align: full
+        tooltip: ''
+        placeholder: Pré-requis
+        border: ''
+        enabled: true
+        foreground: theme:On Primary Container
+        items: []
+        visible: true
+        font_size: null
+        font: ''
+        spacing_above: small
+        spacing_below: small
+        italic: false
+        background: theme:Tertiary
+        bold: false
+        underline: false
+        include_placeholder: true
+      name: drop_down_pre_requis
+      layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: ''}
+      event_bindings: {change: drop_down_pre_requis_change}
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '', spacing_below: small,
-    background: ''}
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: ''}
   name: column_panel_content
-  layout_properties: {grid_position: 'JKQKWS,BTYCFD'}
+  layout_properties: {grid_position: 'OTBUIP,XKMJTF'}
+  components:
+  - type: DataGrid
+    properties:
+      role: null
+      columns: []
+      auto_header: false
+      tooltip: ''
+      border: ''
+      foreground: ''
+      rows_per_page: 10
+      visible: true
+      wrap_on: mobile
+      show_page_controls: true
+      spacing_above: small
+      spacing_below: small
+      background: ''
+    name: data_grid_1
+    layout_properties: {grid_position: 'YHTFZQ,NHTKTZ'}
+    components:
+    - type: RepeatingPanel
+      properties: {spacing_above: none, spacing_below: none, item_template: Pre_R_pour_type_stage.RowTemplate2}
+      name: repeating_panel_1
+      layout_properties: {}
 is_package: true
