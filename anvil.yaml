@@ -48,6 +48,9 @@ db_schema:
     - name: text
       admin_ui: {width: 200, order: 0}
       type: string
+    - name: pre_r_pour_stage
+      admin_ui: {width: 200, order: 1}
+      type: string
     title: Temp
   pre_requis:
     title: Pre_Requis
@@ -58,24 +61,14 @@ db_schema:
       admin_ui: {order: 0, width: 264.17}
       type: string
     - name: commentaires
-      admin_ui: {width: 200}
+      admin_ui: {order: 1, width: 238}
       type: string
     - name: code_pre_requis
       admin_ui: {order: -1, width: 200}
       type: string
-  pre_requis_stage:
-    title: Pre_Requis_stage
-    client: search
-    server: full
-    columns:
-    - name: requis_stage
-      admin_ui: {width: 200}
-      type: link_single
-      target: codes_stages
-    - name: requis_item
-      admin_ui: {order: 1, width: 247}
-      type: link_single
-      target: pre_requis
+    - name: num
+      admin_ui: {order: -2, width: 76}
+      type: number
   lieux:
     client: search
     server: full
@@ -166,6 +159,9 @@ db_schema:
     - name: intitulé
       admin_ui: {order: 1, width: 200}
       type: string
+    - name: pre_requis
+      admin_ui: {width: 200, order: 2}
+      type: simpleObject
     title: Codes_stages
   users:
     client: search
@@ -252,7 +248,7 @@ db_schema:
     server: full
     columns:
     - name: stage_num
-      admin_ui: {width: 200}
+      admin_ui: {order: -1, width: 200}
       type: link_single
       target: stages
     - name: stagiaire_email
@@ -263,7 +259,7 @@ db_schema:
       type: bool
       admin_ui: {width: 200, order: 5}
     - name: item_requis
-      admin_ui: {width: 200}
+      admin_ui: {order: 0, width: 200}
       type: string
     - name: doc
       admin_ui: {width: 200, order: 6}
