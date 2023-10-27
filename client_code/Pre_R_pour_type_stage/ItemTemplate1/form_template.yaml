@@ -1,0 +1,20 @@
+container:
+  type: ColumnPanel
+  properties: {col_widths: '{"NYGTLI":55,"HIXLGT":5}'}
+components:
+- type: Label
+  properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
+      Primary', visible: true, text: '', font_size: null, font: '14', spacing_above: none,
+    icon_align: left, spacing_below: none, italic: false, background: 'theme:Primary',
+    bold: true, underline: false, icon: ''}
+  name: label_1
+  layout_properties: {grid_position: 'PJIZXA,NYGTLI'}
+- type: Button
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    foreground: 'theme:Tertiary', visible: true, text: '', font_size: null, font: '',
+    spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:Primary',
+    bold: false, underline: false, icon: 'fa:minus-square'}
+  name: button_1
+  layout_properties: {grid_position: 'PJIZXA,HIXLGT'}
+  event_bindings: {click: button_1_click}
+is_package: true

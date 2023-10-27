@@ -69,6 +69,9 @@ db_schema:
     - name: num
       admin_ui: {order: -2, width: 76}
       type: number
+    - name: doc
+      admin_ui: {width: 200, order: 2}
+      type: bool
   lieux:
     client: search
     server: full

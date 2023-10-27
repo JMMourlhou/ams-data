@@ -43,14 +43,6 @@ components:
         col_widths: {}
         grid_position: COGJPP,SACJUA
       event_bindings: {click: button_annuler_click}
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: false, foreground: 'theme:Error', visible: true, text: Créer, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
-      name: button_creer
-      layout_properties: {grid_position: 'COGJPP,NUKLUX', width: null, expand: false}
-      event_bindings: {click: button_creer_click}
   - type: ColumnPanel
     properties: {col_widths: '{"SDVOPJ":17,"LJENHL":43}'}
     name: column_panel_2
@@ -89,7 +81,7 @@ components:
         enabled: true
         foreground: theme:On Primary Container
         items: []
-        visible: true
+        visible: false
         font_size: null
         font: ''
         spacing_above: small
@@ -102,33 +94,8 @@ components:
       name: drop_down_pre_requis
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: ''}
       event_bindings: {change: drop_down_pre_requis_change}
-- type: ColumnPanel
-  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
-  name: column_panel_content
-  layout_properties: {grid_position: 'OTBUIP,XKMJTF'}
-  components:
-  - type: DataGrid
-    properties:
-      role: null
-      columns: []
-      auto_header: false
-      tooltip: ''
-      border: ''
-      foreground: ''
-      rows_per_page: 10
-      visible: true
-      wrap_on: mobile
-      show_page_controls: true
-      spacing_above: small
-      spacing_below: small
-      background: ''
-    name: data_grid_1
-    layout_properties: {grid_position: 'YHTFZQ,NHTKTZ'}
-    components:
-    - type: RepeatingPanel
-      properties: {spacing_above: none, spacing_below: none, item_template: Pre_R_pour_type_stage.RowTemplate2}
-      name: repeating_panel_1
-      layout_properties: {}
+- type: RepeatingPanel
+  properties: {item_template: Pre_R_pour_type_stage.ItemTemplate1}
+  name: repeating_panel_1
+  layout_properties: {grid_position: 'LDYBVZ,WMUOAU'}
 is_package: true
