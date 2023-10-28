@@ -44,7 +44,7 @@ components:
         grid_position: COGJPP,SACJUA
       event_bindings: {click: button_annuler_click}
   - type: ColumnPanel
-    properties: {col_widths: '{"SDVOPJ":17,"LJENHL":43}'}
+    properties: {col_widths: '{"SDVOPJ":28,"LJENHL":32}'}
     name: column_panel_2
     layout_properties: {grid_position: 'XXPJWW,NYSLAF'}
     components:
@@ -53,13 +53,13 @@ components:
         role: outlined
         align: full
         tooltip: ''
-        placeholder: 'Pour '
+        placeholder: Choisir le stage
         border: ''
         enabled: true
         foreground: theme:On Primary Container
         items: []
         visible: true
-        font_size: null
+        font_size: 16
         font: ''
         spacing_above: small
         spacing_below: small
@@ -82,7 +82,7 @@ components:
         foreground: theme:On Primary Container
         items: []
         visible: false
-        font_size: null
+        font_size: 16
         font: ''
         spacing_above: small
         spacing_below: small

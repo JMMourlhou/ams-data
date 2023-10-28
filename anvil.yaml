@@ -48,9 +48,12 @@ db_schema:
     - name: text
       admin_ui: {width: 200, order: 0}
       type: string
-    - name: pre_r_pour_stage
-      admin_ui: {width: 200, order: 1}
+    - name: code_stage
+      admin_ui: {order: 0.5, width: 200}
       type: string
+    - name: pre_r_pour_stage
+      admin_ui: {width: 200, order: 1.5}
+      type: simpleObject
     title: Temp
   pre_requis:
     title: Pre_Requis

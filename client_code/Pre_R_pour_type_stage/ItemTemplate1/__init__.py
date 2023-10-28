@@ -15,8 +15,20 @@ class ItemTemplate1(ItemTemplate1Template):
 
         # Any code you write here will run before the form opens.
         row=app_tables.pre_requis.get(code_pre_requis=self.item)
-        self.label_1.text = row['requis']
+        self.label_1.text = "  " + row['requis']
+        self.button_annuler.tag = row['code_pre_requis']
 
-    def button_1_click(self, **event_args):
+    def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        # lecture du dico des pré requis ds table temp
+        temp_row = app_tables.temp.search()[0]
+        dico = temp_row['pre_r_pour_stage']
+        code_stage = temp_row['code_stage']
+        
+        clef_a_annuler = self.button_annuler.tag
+        del dico[clef_a_annuler]
+        
+        result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
+        #alert("Pré requis annuler")
+        # réaffichage complet 
+        open_form('Pre_R_pour_type_stage',code_stage)
