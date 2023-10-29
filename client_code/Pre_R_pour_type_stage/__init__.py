@@ -51,7 +51,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         #print(type(row['pre_requis']))
         if isinstance(row['pre_requis'], dict):       # LE DICT EXISTE DS TABLE CODES STAGE, row du stage
             # INITIALISATION Drop down pré-requis en fonction des pré requis déjà sélectionnés ds dico
-            self.drop_down_pre_requis.items = [(r["code_pre_requis"]+" "+r["requis"], r) for r in app_tables.pre_requis.search() if not dico_pre_requis.get(r["code_pre_requis"])]
+            self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search() if not dico_pre_requis.get(r["code_pre_requis"])]
             self.drop_down_pre_requis.visible = True
             
             
@@ -89,7 +89,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         list_keys = dico_pre_requis.keys()
         self.repeating_panel_1.items = list(list_keys)   # liste des clefs (pré requis)
         #réinitialisation dropdown pré requis
-        self.drop_down_pre_requis.items = [(r["code_pre_requis"]+" "+r["requis"], r) for r in app_tables.pre_requis.search() if not dico_pre_requis.get(r["code_pre_requis"])]
+        self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search() if not dico_pre_requis.get(r["code_pre_requis"])]
         
         global code_stage
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico_pre_requis)

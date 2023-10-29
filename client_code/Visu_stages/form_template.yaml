@@ -1,6 +1,6 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{"AQSLKD":18,"CGPGQU":42}'}
+  properties: {col_widths: '{"CGPGQU":42}'}
 components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
@@ -18,69 +18,53 @@ components:
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
-- type: Button
-  properties: {role: elevated-button, align: full, tooltip: '', border: '', enabled: true,
-    foreground: 'theme:Tertiary', visible: true, text: Création d'1 stage, font_size: null,
-    font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-    background: 'theme:Primary', bold: true, underline: false, icon: ''}
-  name: creation_stage
-  layout_properties:
-    col_widths: {}
-    grid_position: HIAFAM,AQSLKD
-  event_bindings: {click: creation_stage_click}
 - type: ColumnPanel
-  properties: {col_widths: '{"MYQPJL":35,"QLNAKI":25}'}
+  properties: {col_widths: '{"MYQPJL":35}', role: elevated-card}
   name: column_panel_2
   layout_properties: {grid_position: 'HIAFAM,CGPGQU'}
   components:
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false,
       background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
     name: button_annuler
     layout_properties:
       col_widths: {}
       grid_position: SVCHXN,MYQPJL
     event_bindings: {click: button_annuler_click}
-  - type: Button
-    properties: {role: elevated-button, align: full, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Pré_requis, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: true, underline: false, icon: ''}
-    name: button_gestion_pre_requis
-    layout_properties: {grid_position: 'SVCHXN,QLNAKI'}
-    event_bindings: {click: button_gestion_pre_requis_click}
-- type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
-  name: column_panel_1
-  layout_properties: {grid_position: 'ZCWZOI,DOYFZE'}
-  components:
   - type: FlowPanel
-    properties: {role: null, vertical_align: full, spacing: medium, align: center,
-      tooltip: '', border: '', foreground: 'theme:On Primary Container', visible: true,
-      spacing_above: none, spacing_below: none, background: 'theme:Tertiary'}
-    name: flow_panel_1
-    layout_properties: {grid_position: 'MQCVZT,MNLRJS'}
+    properties: {role: null, vertical_align: full, spacing: medium, align: left, tooltip: '',
+      border: '', foreground: '', visible: true, spacing_above: none, spacing_below: none,
+      background: ''}
+    name: flow_panel_2
+    layout_properties: {grid_position: 'CZIKBP,MPYWTC'}
     components:
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
-          Primary Container', visible: true, text: Stage du ...              Type                 N°...,
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: '', bold: false, underline: false, icon: ''}
-      name: label_en_tete
-      layout_properties: {}
+    - type: Button
+      properties: {role: elevated-button, align: full, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:Tertiary', visible: true, text: Création d'1 stage, font_size: null,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: 'theme:Primary', bold: true, underline: false, icon: ''}
+      name: creation_stage
+      layout_properties: {grid_position: 'SVCHXN,ROGZCQ', expand: true, width: null}
+      event_bindings: {click: creation_stage_click}
+    - type: Button
+      properties: {role: elevated-button, align: full, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:Tertiary', visible: true, text: Pré-requis, font_size: null,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: 'theme:Primary', bold: true, underline: false, icon: ''}
+      name: button_gestion_pre_requis
+      layout_properties: {grid_position: 'SVCHXN,QLNAKI', width: null, expand: true}
+      event_bindings: {click: button_gestion_pre_requis_click}
 - type: DataGrid
   properties:
     role: null
     columns: []
-    auto_header: true
+    auto_header: false
     tooltip: ''
     border: ''
     foreground: ''
-    rows_per_page: 8
+    rows_per_page: 6
     visible: true
     wrap_on: mobile
     show_page_controls: true
@@ -90,6 +74,27 @@ components:
   name: data_grid_1
   layout_properties: {grid_position: 'DDRVAU,RHIHMA'}
   components:
+  - type: ColumnPanel
+    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+      spacing_below: small, background: ''}
+    name: column_panel_1
+    layout_properties: {grid_position: 'ZCWZOI,DOYFZE'}
+    components:
+    - type: FlowPanel
+      properties: {role: null, vertical_align: full, spacing: medium, align: center,
+        tooltip: '', border: '', foreground: 'theme:On Primary Container', visible: true,
+        spacing_above: none, spacing_below: none, background: 'theme:Tertiary'}
+      name: flow_panel_1
+      layout_properties: {grid_position: 'MQCVZT,MNLRJS'}
+      components:
+      - type: Label
+        properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
+            Primary Container', visible: true, text: Stage du ...              Type                 N°...,
+          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+          italic: false, background: '', bold: false, underline: false, icon: ''}
+        name: label_en_tete
+        layout_properties: {}
   - type: RepeatingPanel
     properties: {role: outlined-card, tooltip: '', border: '', foreground: '', items: null,
       visible: true, spacing_above: none, spacing_below: none, item_template: Visu_stages.RowTemplate3,

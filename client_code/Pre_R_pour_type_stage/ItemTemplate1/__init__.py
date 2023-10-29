@@ -15,7 +15,7 @@ class ItemTemplate1(ItemTemplate1Template):
 
         # Any code you write here will run before the form opens.
         row=app_tables.pre_requis.get(code_pre_requis=self.item)
-        self.label_1.text = "  " + row['requis']
+        self.text_box_1.text = "  " + row['requis']
         self.button_annuler.tag = row['code_pre_requis']
 
     def button_annuler_click(self, **event_args):

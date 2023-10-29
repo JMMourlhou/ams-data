@@ -43,4 +43,5 @@ components:
     name: button_inscription
     layout_properties: {}
     event_bindings: {click: button_inscription_click}
+  data_bindings: []
 is_package: true
