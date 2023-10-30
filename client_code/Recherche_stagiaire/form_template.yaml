@@ -108,6 +108,17 @@ components:
         name: drop_down_num_stages
         layout_properties: {grid_position: 'YLMZKA,ULPRIB'}
         event_bindings: {change: drop_down_num_stages_change}
+    - type: Button
+      properties: {role: elevated-button, align: center, tooltip: '', border: '',
+        enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
+        icon: ''}
+      name: button_retour
+      layout_properties:
+        col_widths: {}
+        grid_position: FIPRKF,DSRHSQ
+      event_bindings: {click: button_retour_click}
     - type: ColumnPanel
       properties: {col_widths: '{}'}
       name: column_panel_4
@@ -138,14 +149,4 @@ components:
           name: repeating_panel_1
           layout_properties: {pinned: false}
       data_bindings: []
-- type: Button
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
-    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On
-      Primary Container', bold: true, underline: false, icon: ''}
-  name: button_retour
-  layout_properties:
-    col_widths: {}
-    grid_position: VSXLLE,FMCKIE
-  event_bindings: {click: button_retour_click}
 is_package: true
