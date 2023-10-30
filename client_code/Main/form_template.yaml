@@ -32,8 +32,8 @@ components:
   - type: Button
     properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: false,
       foreground: 'theme:Tertiary', visible: true, text: '', font_size: 14, font: '',
-      spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '',
-      bold: true, underline: false, icon: 'fa:user'}
+      spacing_above: none, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: true, underline: false, icon: 'fa:user'}
     name: bt_user_mail
     layout_properties:
       col_widths: {}
