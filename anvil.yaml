@@ -69,9 +69,6 @@ db_schema:
     - name: code_pre_requis
       admin_ui: {order: -1, width: 200}
       type: string
-    - name: num
-      admin_ui: {order: -2, width: 76}
-      type: number
     - name: doc
       admin_ui: {width: 200, order: 2}
       type: bool
@@ -264,12 +261,25 @@ db_schema:
     - name: check
       type: bool
       admin_ui: {width: 200, order: 5}
-    - name: item_requis
-      admin_ui: {order: 0, width: 200}
-      type: string
-    - name: doc
-      admin_ui: {width: 200, order: 6}
+    - name: doc1
+      admin_ui: {order: 6, width: 200}
       type: media
+    - name: doc2
+      admin_ui: {width: 200, order: 7}
+      type: media
+    - name: doc3
+      admin_ui: {width: 200, order: 8}
+      type: media
+    - name: doc4
+      admin_ui: {width: 200, order: 9}
+      type: media
+    - name: doc5
+      admin_ui: {width: 200, order: 10}
+      type: media
+    - name: item_requis
+      admin_ui: {order: 5.5, width: 200}
+      type: link_single
+      target: pre_requis
     title: Pre_Requis_stagiaire
   stages:
     client: search

@@ -66,8 +66,6 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
         valeur = []     
         #print(type(user['histo']))
         historique = user["histo"]
-        #print(historique['PSC1 du 2023-08-28'])
-        #print(historique)
         st = code_stage["code"]["code"]
         st=st.strip()
         #print(st)
@@ -94,8 +92,29 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
         valid="Stagiaire inscrit ! (" + str(nb) + ")"
     else:
         valid="Stagiaire non retrouvé dans fichier stagiaires inscrits"
+
+    """ Création des pré requis pour ce stagiaire """
+    # lecture du fichier stages pour lecture du dictionnaire de ses pré-requis
+    if code_stage:
+        type_stage = code_stage['code']
+        type_stage_row = app_tables.codes_stages.get(code=type_stage['code'])
+    if type_stage_row:
+        dico_pre_requis = type_stage_row['pre_requis']
+        if len(dico_pre_requis)>0:   # il y a des clefs pre-requis
+            for clef,value in dico_pre_requis.items():
+                print("clef: ",clef)
+                pr_row = app_tables.pre_requis.get(code_pre_requis=clef)
+                new_row_pr = app_tables.pre_requis_stagiaire.add_row(
+                              stage_num = code_stage,  
+                              stagiaire_email = user,
+                              item_requis = pr_row,
+                              check=False
+                )
     return valid
-    
+
+
+
+
 @anvil.server.callable           #DEL d'1 stagiaire du stage
 @anvil.tables.in_transaction
 def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users row      stage_row = table stages row
