@@ -9,6 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.PageBreak import PageBreak
 
+
 # Visualisation du TROMBI sur un XY panel
 class Visu_trombi(Visu_trombiTemplate):
     def __init__(self,num_stage, intitule, pdf_mode=False, **properties):
