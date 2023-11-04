@@ -183,8 +183,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if not stage_row:   
             print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
         else:
-            anvil.media.download(stage_row["trombi_media"])
-            alert("Trombinoscope téléchargé")
+            try:
+                anvil.media.download(stage_row["trombi_media"])
+                alert("Trombinoscope téléchargé")
+            except:
+                alert("Avant de télécharger le trombi, affichez le d'abord.")
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -196,8 +199,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if not stage_row:   
             print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
         else:
-            anvil.media.download(stage_row["list_media"])
-            alert("Liste téléchargée")
+            try:
+                anvil.media.download(stage_row["list_media"])
+                alert("Liste téléchargée")
+            except:
+                alert("Avant de télécharger le trombi, affichez le d'abord.")
 
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""
