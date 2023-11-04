@@ -37,18 +37,20 @@ class RowTemplate3(RowTemplate3Template):
         
 
     # récupération par l'event:
-    def text_box_1_focus(self, **event_args):
+    def text_box_3_click(self, **event_args):   # Click sur date
+        """This method is called when the button is clicked"""
+        self.text_box_1_click()
+        
+    def text_box_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = int(self.text_box_1.text)
         open_form('Stage_visu_modif',"visu_stages", num_stage)   
-    
-    def text_box_2_focus(self, **event_args):
+        
+    def text_box_2_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.text_box_1_focus()
+        self.text_box_1_click()
 
-    def text_box_3_focus(self, **event_args):
-        """This method is called when the link is clicked"""
-        self.text_box_1_focus()
+    
 
     def button_inscription_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -67,11 +69,15 @@ class RowTemplate3(RowTemplate3Template):
         if r== "Oui" :   
             from ...Recherche_stagiaire import Recherche_stagiaire
             num_stage = self.text_box_1.text
-            inscription = "inscription/"+num_stage
+            inscription = "inscription/"+str(num_stage)
             
             table_temp = app_tables.temp.search()[0]
             table_temp.update(text=inscription)
         
             open_form('Recherche_stagiaire',inscription)
+
+
+
+  
 
 

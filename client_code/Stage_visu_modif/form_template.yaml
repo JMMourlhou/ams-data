@@ -211,7 +211,7 @@ components:
     tooltip: ''
     border: ''
     foreground: ''
-    rows_per_page: 6
+    rows_per_page: 7
     visible: true
     wrap_on: mobile
     show_page_controls: true

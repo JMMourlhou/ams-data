@@ -11,30 +11,30 @@ components:
   name: flow_panel_1
   layout_properties: {column: null}
   components:
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: 'dates                 ',
+      font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+      italic: false, background: '', bold: false, underline: false, icon: ''}
     name: text_box_3
-    layout_properties: {width: 121.15100000000001}
-    event_bindings: {focus: text_box_3_focus}
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    layout_properties: {}
+    event_bindings: {click: text_box_3_click}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: type, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
     name: text_box_2
-    layout_properties: {width: 82.15100000000001}
-    event_bindings: {focus: text_box_2_focus}
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: false, text: '',
-      font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    layout_properties: {}
+    event_bindings: {click: text_box_2_click}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:On Primary', visible: true, text: num stage, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
     name: text_box_1
-    layout_properties: {width: 72.15100000000001}
-    event_bindings: {focus: text_box_1_focus}
+    layout_properties: {}
+    event_bindings: {click: text_box_1_click}
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Secondary', visible: true, text: Inscr., font_size: null,
