@@ -39,7 +39,7 @@ def create_trombi_pdf(num_stage, intitule):
         # sauvegarde du trombi media ds le stage_row
         stage_row.update(trombi_media = media_object,
                         ) 
-        print("trombi pdf du stage stockée")
+        #print("trombi pdf du stage stockée")
         
     anvil.server.task_state['progress'] = 0 #finished   
     # get_return_value(): returns the return value of the task, or None if the task has not yet returned.
