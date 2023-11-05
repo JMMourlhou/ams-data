@@ -89,8 +89,8 @@ components:
     components:
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary Container', visible: true, text: ' Gestion des
-          stages ', font_size: null, font: '', spacing_above: small, icon_align: left,
+        foreground: 'theme:On Primary Container', visible: true, text: '  Gestion
+          des stages       ', font_size: null, font: '', spacing_above: small, icon_align: left,
         spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
         underline: false, icon: ''}
       name: bt_gestion_stages
@@ -125,13 +125,19 @@ components:
     components:
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' QCM ',
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: 'QCM ',
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}
       name: button_qcm
       layout_properties: {grid_position: 'TKJBWP,DLVHJK'}
       event_bindings: {click: button_qcm_click}
+  - name: button_pre_requis
+    properties: {text: Pré-requis, background: 'theme:Tertiary', foreground: 'theme:On
+        Primary Container', bold: true, visible: true}
+    type: Button
+    layout_properties: {grid_position: 'PILIYH,IOMGME'}
+    event_bindings: {click: button_pre_requis_click}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: content_panel

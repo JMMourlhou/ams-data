@@ -54,8 +54,6 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
             self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search() if not dico_pre_requis.get(r["code_pre_requis"])]
             self.drop_down_pre_requis.visible = True
             
-            
-            
             dico_pre_requis = row['pre_requis']
             # affichage des prérequis à partir du dico que je transforme  en liste
         list_keys = dico_pre_requis.keys()

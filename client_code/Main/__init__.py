@@ -24,6 +24,7 @@ class Main(MainTemplate):
         self.column_panel_admin.visible = False
         self.column_panel_others.visible = False
         self.button_qcm.visible = False
+        self.button_pre_requis.visible = False
         self.bt_gestion_stages.visible = False
         
         self.nb=nb
@@ -139,10 +140,10 @@ class Main(MainTemplate):
             self.bt_sign_in.visible = False
             self.bt_user_mail.enabled = True
             self.button_qcm.visible = True
+            self.button_pre_requis.visible = True
             if user["admin"] == True:  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
-                
                 self.bt_gestion_stages.visible = True
             else:                      # user connected,but no admin
                 self.column_panel_admin.visible = False
@@ -215,7 +216,10 @@ class Main(MainTemplate):
         from ..Recherche_stagiaire import Recherche_stagiaire
         open_form('Recherche_stagiaire')
 
-
+    def button_pre_requis_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
+        open_form('Pre_R_pour_stagiaire')
 
 
 

@@ -26,9 +26,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.drop_down_fi.visible = True
 
         user=anvil.users.get_user()
-
         if user:
-
             self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"]
             self.text_box_prenom.text =              user["prenom"]
