@@ -27,7 +27,7 @@ def create_trombi_pdf(num_stage, intitule):
                                landscape = False,
                                margins = {'top': 0.8, 'bottom': 0.5, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1.0,
-                               quality =  "prepress"
+                               quality =  "default"
                               ).render_form('Visu_trombi',num_stage, intitule, True)
 
     " sauvegarde du media_object ds la table "
@@ -37,19 +37,15 @@ def create_trombi_pdf(num_stage, intitule):
         print("stage non trouvé à partir de num_stage server module: Stagiaires_trombi")
     else:
         # sauvegarde du trombi media ds le stage_row
-        stage_row.update(trombi_media = media_object,
-                        ) 
-        #print("trombi pdf du stage stockée")
+        stage_row.update(trombi_media = media_object) 
+        print("trombi pdf du stage stockée")
         
-    anvil.server.task_state['progress'] = 0 #finished   
-    # get_return_value(): returns the return value of the task, or None if the task has not yet returned.
-
     return media_object
 
 @anvil.server.callable
 def run_bg_task2(num_stage, intitule):
     task = anvil.server.launch_background_task('create_trombi_pdf',num_stage, intitule)
-    #print ("task", task)
+    print ("task", task)
     
     #lecture du fichier stages sur le num de stage
     stage_row = app_tables.stages.get(numero=int(num_stage))

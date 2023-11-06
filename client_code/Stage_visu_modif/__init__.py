@@ -65,11 +65,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             #alert(len(students_rows))
             if students_rows:    # stagiaires existants
                 #with anvil.server.no_loading_indicator:
-                #    task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
+                    #task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
                 
-                #with anvil.server.no_loading_indicator:
-                #    task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
-                pass
+                with anvil.server.no_loading_indicator:
+                    task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
+                #pass
             else:     # pas de stagiares
                 self.button_trombi_pdf.visible = False
                 self.button_display_stagiaires.visible  = False
