@@ -132,7 +132,7 @@ components:
           tooltip: ''
           border: ''
           foreground: ''
-          rows_per_page: 10
+          rows_per_page: 8
           visible: true
           wrap_on: mobile
           show_page_controls: true
