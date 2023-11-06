@@ -29,7 +29,7 @@ components:
     grid_position: GBIDKZ,MRHCGT
   event_bindings: {click: button_retour2_click}
 - type: XYPanel
-  properties: {role: outlined-card, width: 720.011, align: left, height: 874, tooltip: '',
+  properties: {role: outlined-card, width: 720.011, align: left, height: '1500', tooltip: '',
     border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
     background: ''}
   name: xy_panel

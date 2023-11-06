@@ -71,7 +71,7 @@ components:
         underline: false
         include_placeholder: true
       name: drop_down_code_stage
-      layout_properties: {grid_position: 'GYKKPW,SDVOPJ', row_background: '', width: 100.57400000000001}
+      layout_properties: {grid_position: 'GYKKPW,SDVOPJ', row_background: '', width: 107.566}
       event_bindings: {change: drop_down_code_stage_change}
     - type: DropDown
       properties:

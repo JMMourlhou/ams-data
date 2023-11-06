@@ -46,7 +46,8 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         
         if row['pre_requis'] == None:  # si le dictionaire n'existe pas encore (pas de pré requis encore introduit pour ce type de stage)
             dico_pre_requis = {}
-            self.drop_down_pre_requis.items = [(r["code_pre_requis"]+" "+r["requis"], r) for r in app_tables.pre_requis.search()]
+            self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search()]
+            self.drop_down_pre_requis.visible = True
             
         #print(type(row['pre_requis']))
         if isinstance(row['pre_requis'], dict):       # LE DICT EXISTE DS TABLE CODES STAGE, row du stage

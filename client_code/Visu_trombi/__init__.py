@@ -98,9 +98,9 @@ class Visu_trombi(Visu_trombiTemplate):
             else:
                 """ si pas de stagiaire """
                 print("stagiaire non trouvé par son mail")
-        doc = fast_pdf.Visu_trombi()
+        #doc = fast_pdf.Visu_trombi()
         #display
-        doc.preview()
+        #doc.preview()
                 
     """ *************************************************************************************************************************************"""
     """ ******************************              Gestion des évenements click sur image ou nom, extraction grace au TAG de l'image ou nom """
