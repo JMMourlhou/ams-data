@@ -10,6 +10,7 @@ from anvil.tables import app_tables
 from datetime import datetime
 from .. import French_zone
 from anvil import open_form
+
 global intitul
 intitul=""
 
@@ -67,9 +68,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 #with anvil.server.no_loading_indicator:
                     #task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
                 
-                with anvil.server.no_loading_indicator:
-                    task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
-                #pass
+                #with anvil.server.no_loading_indicator:
+                    #task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
+                pass
             else:     # pas de stagiares
                 self.button_trombi_pdf.visible = False
                 self.button_display_stagiaires.visible  = False
@@ -178,16 +179,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def button_trombi_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-        "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
-        stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))
-        if not stage_row:   
-            print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
-        else:
-            try:
-                anvil.media.download(stage_row["trombi_media"])
-                alert("Trombinoscope téléchargé")
-            except:
-                alert("Avant de télécharger le trombi, affichez le d'abord.")
+
+        pdf = anvil.server.call('create_pdf',self.text_box_num_stage.text, self.text_box_intitule.text)
+        anvil.media.download(pdf)
+        alert("Trombinoscope téléchargé")
+
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
