@@ -8,6 +8,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.PageBreak import PageBreak
+global cpt
+cpt = 0
 
 
 # Visualisation du TROMBI sur un XY panel
@@ -17,6 +19,9 @@ class Visu_trombi(Visu_trombiTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        global cpt
+        cpt = 0
+        
         self.num_stage = num_stage
         self.intitule = intitule
         self.pdf_mode = pdf_mode
@@ -55,12 +60,7 @@ class Visu_trombi(Visu_trombiTemplate):
             if stagiaire :
                 #Photo
                 table_pic = stagiaire['photo']
-                """
-                if orig_pic != None:
-                    thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
-                else:
-                    thumb_pic = None
-                """
+                
                 self.im = Image(background="white", 
                                     display_mode="shrink_to_fit",
                                     height = larg,
@@ -72,6 +72,7 @@ class Visu_trombi(Visu_trombiTemplate):
                                     tag = mel
                                     )
                 #self.im.set_event_handler('mouse_down',self.im_mouse_down)            #POUR RENDRE L'IMAGE CLICKABLE, REVALIDER CETTE LIGNE
+                self.im.set_event_handler('show',self.im_show)
                 try:  #au cas où prenom vide 
                     txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 except:
@@ -86,7 +87,7 @@ class Visu_trombi(Visu_trombiTemplate):
                 if cpt_stagiaire % 4 == 0 : # (modulo 4) si 4eme image de la ligne affichée, j'initialise à 1ere image et saute la ligne
                     if cpt_ligne == 4:      # si 4eme image de la 4eme ligne, page break
                         cpt_ligne == 0
-                        self.add_component(PageBreak())      # si en création de pdf, je saute une page après 4 lignes
+                        #self.add_component(PageBreak())      # si en création de pdf, je saute une page après 4 lignes
                     xx = 1
                     yy += 239
                     cpt_ligne += 1
@@ -132,3 +133,11 @@ class Visu_trombi(Visu_trombiTemplate):
         """This method is called when the button is clicked"""
         self.button_retour_click()
 
+    def im_show(self, **event_args):
+        """This method is called when the Image is shown on the screen"""
+        global cpt  # Cpt le nb d'images imprimées
+        cpt += 1
+        print(cpt)
+        if cpt == 16:   
+           print("Page Break", cpt)
+           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 16 images 
