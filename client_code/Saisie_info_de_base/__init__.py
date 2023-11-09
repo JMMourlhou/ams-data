@@ -62,7 +62,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def file_loader_photo_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         #self.image_photo.source = file
-        thumb_pic = anvil.image.generate_thumbnail(file, 320)
+        thumb_pic = anvil.image.generate_thumbnail(file, 640)
         self.image_photo.source = thumb_pic
         self.button_validation.visible = True
 
