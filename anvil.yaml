@@ -250,7 +250,7 @@ db_schema:
       type: simpleObject
     title: Users
   pre_requis_stagiaire:
-    client: none
+    client: search
     server: full
     columns:
     - name: stage_num

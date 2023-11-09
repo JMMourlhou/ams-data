@@ -65,31 +65,12 @@ components:
         underline: false
         include_placeholder: true
       type: DropDown
-      layout_properties: {grid_position: 'GYKKPW,SDVOPJ', row_background: '', width: 100.57400000000001}
+      layout_properties: {grid_position: 'GYKKPW,SDVOPJ', row_background: '', width: 217.562}
       event_bindings: {change: drop_down_code_stage_change}
       data_bindings:
       - {property: border, code: '', writeback: false}
-    - name: drop_down_pre_requis_copy_1
-      properties:
-        role: null
-        align: full
-        tooltip: ''
-        placeholder: Pré-requis à ajouter
-        border: ''
-        enabled: true
-        foreground: theme:On Primary Container
-        items: []
-        visible: false
-        font_size: 16
-        font: ''
-        spacing_above: small
-        spacing_below: small
-        italic: false
-        background: theme:Tertiary
-        bold: false
-        underline: false
-        include_placeholder: true
-      type: DropDown
-      layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
-      event_bindings: {change: drop_down_pre_requis_change}
+- name: repeating_panel_1
+  properties: {item_template: Pre_R_pour_type_stage.ItemTemplate1}
+  type: RepeatingPanel
+  layout_properties: {grid_position: 'NBQQYX,KJNRUT'}
 is_package: true

@@ -7,6 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+global user
+user = anvil.users.get_user()
 
 class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
     def __init__(self, **properties):
@@ -14,10 +16,10 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        user=anvil.users.get_user()
+        global user
         if user:
             print(user['email'])
-            # Drop down stages inscrits
+            # Drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(user_email=user)
             liste_drop_d = []
             for row in liste0:
@@ -28,8 +30,6 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
                 liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
             print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
-            #self.drop_down_code_stage.items = [(r['stage'], r) for r in app_tables.stagiaires_inscrits.search() if ['user_email'] == user['email']]
-            
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -38,4 +38,9 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
 
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
-        pass
+        row = self.drop_down_code_stage.selected_value   # Stage sélectionné du user
+        # lecture des pré requis pour ce stage et pour ce stagiaire
+        global user
+        liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user)
+        self.repeating_panel_1.items =liste_pr
+        
