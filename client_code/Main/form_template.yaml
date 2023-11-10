@@ -133,7 +133,7 @@ components:
       layout_properties: {grid_position: 'TKJBWP,DLVHJK'}
       event_bindings: {click: button_qcm_click}
   - name: button_pre_requis
-    properties: {text: Pré-requis, background: 'theme:Tertiary', foreground: 'theme:On
+    properties: {text: Documents à entrer, background: 'theme:Tertiary', foreground: 'theme:On
         Primary Container', bold: true, visible: true}
     type: Button
     layout_properties: {grid_position: 'PILIYH,IOMGME'}

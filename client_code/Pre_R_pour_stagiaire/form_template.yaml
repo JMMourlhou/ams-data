@@ -70,7 +70,7 @@ components:
       data_bindings:
       - {property: border, code: '', writeback: false}
 - name: repeating_panel_1
-  properties: {item_template: Pre_R_pour_stagiaire.ItemTemplate3}
+  properties: {item_template: Pre_R_pour_stagiaire.ItemTemplate3, background: 'theme:Tertiary'}
   type: RepeatingPanel
   layout_properties: {grid_position: 'QKUWRZ,DLAFWH'}
 is_package: true
