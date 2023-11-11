@@ -18,7 +18,7 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         # Any code you write here will run before the form opens.
         global user
         if user:
-            self.label_1.text = "Pré-Requis pour " + user['email']
+            self.label_1.text = "Pré-Requis pour " + user['prenom'] + " " + user['nom']
             # Drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(user_email=user)
             liste_drop_d = []
@@ -47,5 +47,5 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user,
                                                          stage_num=row_stage
                                                          )
-        self.repeating_panel_1.items =liste_pr
+        self.repeating_panel_1.items = liste_pr
         

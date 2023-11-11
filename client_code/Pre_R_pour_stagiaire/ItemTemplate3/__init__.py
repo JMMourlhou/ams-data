@@ -15,6 +15,7 @@ class ItemTemplate3(ItemTemplate3Template):
 
         # Any code you write here will run before the form opens.
         self.text_box_1.text = self.item['item_requis']['requis']
+        self.image_1.source = self.item['thumb_doc1']
         self.button_valid.tag.stage_num = self.item['stage_num']
         self.button_valid.tag.item_requis = self.item['item_requis']
         self.button_valid.tag.email = self.item['stagiaire_email']
