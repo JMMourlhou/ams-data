@@ -283,6 +283,21 @@ db_schema:
       admin_ui: {order: 5.5, width: 200}
       type: link_single
       target: pre_requis
+    - name: thumb_doc1
+      admin_ui: {order: 6.5, width: 200}
+      type: media
+    - name: thumb_doc2
+      admin_ui: {order: 7.5, width: 200}
+      type: media
+    - name: thumb_doc3
+      admin_ui: {order: 8.5, width: 200}
+      type: media
+    - name: thumb_doc4
+      admin_ui: {order: 9.5, width: 200}
+      type: media
+    - name: thumb_doc5
+      admin_ui: {width: 200, order: 11}
+      type: media
     title: Pre_Requis_stagiaire
   stages:
     client: search
