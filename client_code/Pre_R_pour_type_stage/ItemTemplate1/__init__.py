@@ -29,9 +29,12 @@ class ItemTemplate1(ItemTemplate1Template):
         code_stage = temp_row['code_stage']
         
         clef_a_annuler = self.button_annuler.tag
-        del dico[clef_a_annuler]
-        
+        try:
+            del dico[clef_a_annuler]
+        except:
+            alert(clef_a_annuler, "n'existe plus")
+            
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
-        #alert("Pré requis annuler")
+        #alert("Pré requis annulé")
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)
