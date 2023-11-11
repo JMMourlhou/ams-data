@@ -30,3 +30,7 @@ class ItemTemplate3(ItemTemplate3Template):
           
             #self.button_validation.visible = True
             result = anvil.server.call('modify_pre_r_pour_stagiaire', file, thumb_file)
+
+    def button_valid_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
