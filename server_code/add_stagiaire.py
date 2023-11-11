@@ -129,6 +129,16 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
         nb = int(stage_r['nb_stagiaires_deb'])-1
         stage_r.update(nb_stagiaires_deb=nb)
 
+    #effacement des pré-requis du stagiaire
+    #lecture des rows à effacer ds pre requis
+    liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=stagiaire_row,
+                                                   stage_num=stage_row
+                                                  )
+    if len(liste_pr) > 0:
+        for pr in liste_pr:
+            pr.delete()
+            
+    
     # Lecture table stagiaires inscrits à ce stage pour lecture et MAJ clef histo et effacement du stagiaire
     row = app_tables.stagiaires_inscrits.get(user_email=stagiaire_row,       # ce user
                                                  stage=stage_row)            # ET pour ce stage
