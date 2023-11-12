@@ -86,6 +86,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
 
         #réaffichage des pré requis
         list_keys = dico_pre_requis.keys()
+        print(list_keys)
         self.repeating_panel_1.items = list(list_keys)   # liste des clefs (pré requis)
         #réinitialisation dropdown pré requis
         self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search() if not dico_pre_requis.get(r["code_pre_requis"])]
