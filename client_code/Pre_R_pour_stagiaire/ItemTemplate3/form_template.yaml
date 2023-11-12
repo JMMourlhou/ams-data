@@ -32,9 +32,14 @@ components:
     layout_properties: {width: 100}
     components:
     - name: spacer_1
-      properties: {height: 75}
+      properties: {height: 21}
       type: Spacer
-      layout_properties: {grid_position: 'VJAGPR,DWVDAV'}
+      layout_properties: {grid_position: 'OZUDIW,WDTSRQ'}
+    - name: button_tele_pdf
+      properties: {text: Pdf, foreground: 'theme:On Primary'}
+      type: Button
+      layout_properties: {grid_position: 'CFBKGE,IOYJUG'}
+      event_bindings: {click: button_tele_pdf_click}
     - name: file_loader_1
       properties: {text: Charger, foreground: 'theme:On Primary'}
       type: FileLoader

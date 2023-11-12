@@ -42,3 +42,14 @@ class ItemTemplate3(ItemTemplate3Template):
         print("email ", email)
      
         result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, thumb_file)
+
+    def button_tele_pdf_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        doc = aw.Document()
+        builder = aw.DocumentBuilder(doc)
+        file = self.image_1.source
+        builder.insert_image(file)
+
+        doc.save("Output.pdf")
+
+
