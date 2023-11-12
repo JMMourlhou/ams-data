@@ -21,6 +21,7 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
             self.label_1.text = "Pré-Requis pour " + user['prenom'] + " " + user['nom']
             # Drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(user_email=user)
+            print("nb; ", len(liste0))
             liste_drop_d = []
             for row in liste0:
                 #lecture fichier père stage
