@@ -93,9 +93,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         global code_stage
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico_pre_requis)
 
-        self.sov_dico_ds_temp()   # sauvegarde du dico ds TABLE TEMP
-        
-        
+        self.sov_dico_ds_temp()   # sauvegarde du dico ds TABLE TEMP       
         
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
