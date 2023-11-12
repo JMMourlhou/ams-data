@@ -8,6 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+
 class ItemTemplate3(ItemTemplate3Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -45,11 +46,8 @@ class ItemTemplate3(ItemTemplate3Template):
 
     def button_tele_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-        doc = aw.Document()
-        builder = aw.DocumentBuilder(doc)
+        
         file = self.image_1.source
-        builder.insert_image(file)
-
-        doc.save("Output.pdf")
+        result = anvil.server.call("download_img_pdf", file)
 
 
