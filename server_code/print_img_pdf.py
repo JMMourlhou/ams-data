@@ -26,6 +26,6 @@ def print_pdf(file):
                             landscape = False,
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                             scale = 1.0,
-                            quality =  "original"
+                            quality =  "prepress"
                             ).render_form('image_Pdf',file)
     return media_object_pdf
