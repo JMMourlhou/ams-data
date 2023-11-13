@@ -7,8 +7,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-global user
-user = anvil.users.get_user()
+global user_pr
+user_pr = anvil.users.get_user()
 
 class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
     def __init__(self, **properties):
@@ -16,11 +16,11 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        global user
-        if user:
-            self.label_1.text = "Pré-Requis pour " + user['prenom'] + " " + user['nom']
+        global user_pr
+        if user_pr:
+            self.label_1.text = "Pré-Requis pour " + user_pr['prenom'] + " " + user_pr['nom']
             # Drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(user_email=user)
+            liste0 = app_tables.stagiaires_inscrits.search(user_email=user_pr)
             print("nb; ", len(liste0))
             liste_drop_d = []
             for row in liste0:
@@ -44,8 +44,8 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         # lecture fichier père stages
         row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
         # lecture des pré requis pour ce stage et pour ce stagiaire
-        global user
-        liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user,
+        global user_pr
+        liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user_pr,
                                                          stage_num=row_stage
                                                          )
         self.repeating_panel_1.items = liste_pr

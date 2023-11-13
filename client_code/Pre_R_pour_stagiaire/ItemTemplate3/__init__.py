@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import anvil.media
 
 
 class ItemTemplate3(ItemTemplate3Template):
@@ -27,8 +28,7 @@ class ItemTemplate3(ItemTemplate3Template):
         if file != None:
             self.image_1.source = file
             self.button_valid.visible = True
-            
-            #self.button_valid.enabled = True
+
 
     def button_valid_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -48,6 +48,8 @@ class ItemTemplate3(ItemTemplate3Template):
         """This method is called when the button is clicked"""
         
         file = self.image_1.source
-        result = anvil.server.call("download_img_pdf", file)
+        alert(file)
+        result = anvil.server.call("print_pdf", file)
+        anvil.media.download(result)
 
 
