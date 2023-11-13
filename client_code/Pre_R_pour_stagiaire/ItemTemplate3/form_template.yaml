@@ -23,7 +23,8 @@ components:
     layout_properties: {width: 216.981}
     components:
     - name: image_1
-      properties: {height: 176, role: null, spacing_above: small, spacing_below: medium}
+      properties: {height: 161, role: null, spacing_above: small, spacing_below: medium,
+        display_mode: original_size}
       type: Image
       layout_properties: {grid_position: 'LSIOOU,UOWYNL'}
   - name: column_panel_1
@@ -45,13 +46,3 @@ components:
       type: FileLoader
       layout_properties: {grid_position: 'GHLKMF,CEYBAC'}
       event_bindings: {change: file_loader_1_change}
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:Error', visible: false, text: Valider, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
-      name: button_valid
-      layout_properties:
-        col_widths: {}
-        grid_position: XVKISL,SVTBVT
-      event_bindings: {click: button_valid_click}
