@@ -164,6 +164,7 @@ class Main(MainTemplate):
         self.bt_gestion_stages.visible =False
         self.column_panel_admin.visible = False
         self.button_qcm.visible = False
+        self.button_pre_requis.visible = False
         self.content_panel.clear()
         self.content_panel.add_component(SignupDialog_V2(h, num_stage), full_width_row=True)
 
@@ -220,6 +221,11 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
         open_form('Pre_R_pour_stagiaire')
+
+    def button_pre_requis_admin_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
+        open_form('Pre_R_pour_stagiaire_admin')
 
 
 

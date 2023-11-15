@@ -1,4 +1,4 @@
-from ._anvil_designer import Pre_R_pour_stagiaireTemplate
+from ._anvil_designer import Pre_R_pour_stagiaire_adminTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -7,10 +7,10 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-global user_pr
-user_pr = anvil.users.get_user()
+#global user_pr
+#user_pr = anvil.users.get_user()
 
-class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
+class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
@@ -40,13 +40,11 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         row_stagiaire_inscrit = self.drop_down_code_stage.selected_value   # Stage sélectionné du user ds drop_down (row table stagiaire inscrit)
-        
+
         # lecture fichier père stages
         row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
-        # lecture des pré requis pour ce stage et pour ce stagiaire
-        global user_pr
-        liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user_pr,
-                                                         stage_num=row_stage
+        # lecture des pré requis pour ce stage et pour ts les stagiaires
+        #global user_pr
+        liste_pr = app_tables.pre_requis_stagiaire.search(stage_num=row_stage
                                                          )
-        self.repeating_panel_1.items = liste_pr
-        
+        self.repeating_panel_admin.items = liste_pr

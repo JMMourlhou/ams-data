@@ -9,7 +9,8 @@ import anvil.server
 
 import anvil.pdf
 from anvil.pdf import PDFRenderer
-
+from PIL import Image
+import io
 
 @anvil.server.callable
 def print_pdf(file):
@@ -21,6 +22,13 @@ def print_pdf(file):
     "prepress": Output similar to Acrobat Distiller “Prepress Optimized” setting.
     "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
     """
+    # Convert the 'file' Media object into a Pillow Image
+    img = Image.open(io.BytesIO(file.get_bytes()))
+    width, height = img.size
+    print('size', width, height)
+    
+    
+            
     media_object_pdf = PDFRenderer(page_size ='A4',
                             filename = "img.pdf",
                             landscape = False,

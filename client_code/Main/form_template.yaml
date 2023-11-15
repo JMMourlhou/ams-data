@@ -96,6 +96,17 @@ components:
       name: bt_gestion_stages
       layout_properties: {grid_position: 'JKULHH,FQNSKM'}
       event_bindings: {click: bt_gestion_stages_click}
+    - name: button_pre_requis_admin
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:On Primary Container', visible: true, text: Gestion Pré-Requis par stage,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
+      type: Button
+      layout_properties:
+        col_widths: {}
+        grid_position: DSZPGS,BQEPSW
+      event_bindings: {click: button_pre_requis_admin_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
         enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Recherche

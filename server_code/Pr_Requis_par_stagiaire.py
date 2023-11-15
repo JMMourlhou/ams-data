@@ -6,12 +6,40 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-
+from PIL import Image
+import io
 
 @anvil.server.callable
 @anvil.tables.in_transaction
 def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, thumb_file):
-    # finding the stgiaire's row 
+    
+    # Convert the 'file' Media object into a Pillow Image
+    img = Image.open(io.BytesIO(file.get_bytes()))
+    width, height = img.size
+    print('size', width, height)
+    """
+    # Si img de très haute qualité je divise en deux
+    if width >= height:   #landscape
+        if width > 3000:
+            width = width / 2
+            height = height / 2
+    if height > width:
+        if height > 3000:
+           width = int(width / 2)
+           height = int(height / 2)
+     # Resize the image to the required size
+    img = img.resize((width,height))    
+    width, height = img.size
+    print('new_size', width, height)
+    
+    # Convert the Pillow Image into an Anvil Media object and return it
+    bs = io.BytesIO()
+    img.save(bs, format="JPEG")
+
+    file_name=str(stage_num['numero'])+"_"+item_requis['code_pre_requis']
+    file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=file_name)   
+    """
+    # finding the stagiaire's row 
     row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
                                               item_requis = item_requis                                             
