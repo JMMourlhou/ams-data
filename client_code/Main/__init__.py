@@ -106,7 +106,7 @@ class Main(MainTemplate):
         return
     def qr_code(self, **event_args):
         num_stage=self.h["stage"]
-        #alert(f"num stage test {num_stage}")
+        alert(f"num stage test {num_stage}")
         if len(num_stage) != 0 :        
             self.bt_sign_in_click(self.h, num_stage)
             return
