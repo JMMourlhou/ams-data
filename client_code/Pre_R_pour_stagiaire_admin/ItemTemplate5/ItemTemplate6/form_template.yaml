@@ -33,17 +33,15 @@ components:
     properties: {}
     type: ColumnPanel
     components:
-    - name: button_2
-      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary', visible: true, text: charger, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      type: Button
-      layout_properties: {grid_position: 'NWJNWX,BDMIBM'}
-    - name: button_1
+    - name: file_loader_1
+      properties: {foreground: 'theme:On Primary', text: Charger}
+      type: FileLoader
+      layout_properties: {grid_position: 'OJZEBD,OVCNOI'}
+    - name: button_tele_pdf
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: 'theme:On Primary', visible: true, text: PDF, font_size: null,
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: false, underline: false, icon: ''}
       type: Button
       layout_properties: {grid_position: 'FTNTDR,KZLFXJ'}
+      event_bindings: {click: button_tele_pdf_click}

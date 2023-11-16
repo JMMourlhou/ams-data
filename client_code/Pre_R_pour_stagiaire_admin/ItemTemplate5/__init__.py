@@ -14,3 +14,14 @@ class ItemTemplate5(ItemTemplate5Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        # lecture fichier père users 
+        user_row=app_tables.users.get(email=self.item['user_email']['email'])
+        self.button_1.text=self.item['name'].capitalize()+" "+user_row['prenom']
+        
+        # lecture du fichier des pré requis pour ce stagiaire
+        # lecture fichier père stages
+        row_stage = app_tables.stages.get(numero=self.item['stage']['numero'])
+        liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user_row,        # user
+                                                         stage_num=row_stage             # stage
+                                                         )
+        self.repeating_panel_1.items = liste_pr

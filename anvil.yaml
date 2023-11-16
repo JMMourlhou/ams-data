@@ -313,7 +313,7 @@ db_schema:
       admin_ui: {order: 3, width: 200}
       type: date
     - name: nb_stagiaires_deb
-      admin_ui: {order: 5, width: 200}
+      admin_ui: {order: 2.5, width: 152.33}
       type: number
     - name: code
       admin_ui: {order: 0, width: 200}

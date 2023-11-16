@@ -16,21 +16,17 @@ class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        global user_pr
-        if user_pr:
-            self.label_1.text = "Documents à fournir pour " + user_pr['prenom'] + " " + user_pr['nom']
-            # Drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(user_email=user_pr)
-            print("nb; ", len(liste0))
-            liste_drop_d = []
-            for row in liste0:
-                #lecture fichier père stage
-                stage=app_tables.stages.get(numero=row['stage']['numero'])
-                #lecture fichier père type de stage
-                type=app_tables.codes_stages.get(code=stage['code']['code'])
-                liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
-            print(liste_drop_d)
-            self.drop_down_code_stage.items = liste_drop_d
+        self.label_1.text = "Gestion des pré-Requis"
+        # Drop down stages 
+        liste0 = app_tables.stages.search(tables.order_by("date_debut", ascending=False))
+        print("nb; ", len(liste0))
+        liste_drop_d = []
+        for row in liste0:
+            #lecture fichier père type de stage
+            type=app_tables.codes_stages.get(code=row['code']['code'])
+            liste_drop_d.append((type['code']+"  du "+str(row['date_debut']), row))
+        print(liste_drop_d)
+        self.drop_down_code_stage.items = liste_drop_d
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -39,12 +35,9 @@ class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
 
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
-        row_stagiaire_inscrit = self.drop_down_code_stage.selected_value   # Stage sélectionné du user ds drop_down (row table stagiaire inscrit)
+        row_stage = self.drop_down_code_stage.selected_value   # Stage sélectionné du user ds drop_down (row table stagiaire inscrit)
 
-        # lecture fichier père stages
-        row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
-        # lecture des pré requis pour ce stage et pour ts les stagiaires
-        #global user_pr
-        liste_pr = app_tables.pre_requis_stagiaire.search(stage_num=row_stage
+        # lecture des stagiaires de ce stage
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(stage=row_stage
                                                          )
-        self.repeating_panel_admin.items = liste_pr
+        self.repeating_panel_1.items = liste_stagiaires
