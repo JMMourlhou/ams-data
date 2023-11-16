@@ -45,7 +45,7 @@ class RowTemplate4(RowTemplate4Template):
         if r :   #oui   
             stage_row = self.button_delete.tag.stage_row
             stagiaire_row = self.button_delete.tag.stagiaire_row
-            txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_row)
+            txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_row)   # module serveur "add_stagiaire"
             alert(txt_msg)
             open_form('Stage_visu_modif',"visu_stages", stage_row['numero']) # réinitialisation de la fenêtre
         
