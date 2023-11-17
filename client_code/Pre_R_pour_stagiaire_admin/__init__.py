@@ -27,5 +27,5 @@ class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main')
+        from ..Visu_stages import Visu_stages
+        open_form('Visu_stages')
