@@ -50,8 +50,6 @@ class RowTemplate3(RowTemplate3Template):
         """This method is called when the button is clicked"""
         self.text_box_1_click()
 
-    
-
     def button_inscription_click(self, **event_args):
         """This method is called when the button is clicked"""
         r=alert2('Si vous voulez effectuer une **inscription**:\n\n'
@@ -75,6 +73,12 @@ class RowTemplate3(RowTemplate3Template):
             table_temp.update(text=inscription)
         
             open_form('Recherche_stagiaire',inscription)
+
+    def button_pr_requis_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ...Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
+        num_stage = int(self.text_box_1.text)
+        open_form('Pre_R_pour_stagiaire_admin',num_stage)
 
 
 

@@ -222,10 +222,7 @@ class Main(MainTemplate):
         from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
         open_form('Pre_R_pour_stagiaire')
 
-    def button_pre_requis_admin_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
-        open_form('Pre_R_pour_stagiaire_admin')
+
 
 
 

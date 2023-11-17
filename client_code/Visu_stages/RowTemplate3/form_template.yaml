@@ -37,11 +37,19 @@ components:
     event_bindings: {click: text_box_1_click}
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Secondary', visible: true, text: Inscr., font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      foreground: 'theme:Secondary', visible: true, text: Ins, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
     name: button_inscription
     layout_properties: {}
     event_bindings: {click: button_inscription_click}
+  - name: button_pre_requis
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Secondary', visible: true, text: Pr, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
+    type: Button
+    layout_properties: {}
+    event_bindings: {click: button_pr_requis_click}
   data_bindings: []
 is_package: true
