@@ -267,18 +267,6 @@ db_schema:
     - name: doc1
       admin_ui: {order: 6, width: 200}
       type: media
-    - name: doc2
-      admin_ui: {width: 200, order: 7}
-      type: media
-    - name: doc3
-      admin_ui: {width: 200, order: 8}
-      type: media
-    - name: doc4
-      admin_ui: {width: 200, order: 9}
-      type: media
-    - name: doc5
-      admin_ui: {width: 200, order: 10}
-      type: media
     - name: item_requis
       admin_ui: {order: 5.5, width: 200}
       type: link_single
@@ -286,17 +274,8 @@ db_schema:
     - name: thumb_doc1
       admin_ui: {order: 6.5, width: 200}
       type: media
-    - name: thumb_doc2
-      admin_ui: {order: 7.5, width: 200}
-      type: media
-    - name: thumb_doc3
-      admin_ui: {order: 8.5, width: 200}
-      type: media
-    - name: thumb_doc4
-      admin_ui: {order: 9.5, width: 200}
-      type: media
-    - name: thumb_doc5
-      admin_ui: {width: 200, order: 11}
+    - name: pdf_doc1
+      admin_ui: {width: 200, order: 7.5}
       type: media
     title: Pre_Requis_stagiaire
   stages:

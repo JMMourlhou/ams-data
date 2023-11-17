@@ -21,7 +21,9 @@ class ItemTemplate5(ItemTemplate5Template):
         # lecture du fichier des pré requis pour ce stagiaire
         # lecture fichier père stages
         row_stage = app_tables.stages.get(numero=self.item['stage']['numero'])
-        liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user_row,        # user
+        liste_pr = app_tables.pre_requis_stagiaire.search(
+                                                         tables.order_by("item_requis", ascending=True),
+                                                         stagiaire_email=user_row,        # user
                                                          stage_num=row_stage             # stage
                                                          )
         self.repeating_panel_1.items = liste_pr
