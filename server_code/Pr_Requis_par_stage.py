@@ -4,15 +4,10 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
+
 @anvil.server.callable           #modif du dico pré_requis pour un stage
 @anvil.tables.in_transaction
 def modif_pre_requis_codes_stages(code_stage, pr_requis_dico):
-
-     # Convert the 'file' Media object into a Pillow Image
-    img = Image.open(io.BytesIO(file.get_bytes()))
-    width, height = img.size
-    print('size', width, height)
-
 
     
     valid=""
