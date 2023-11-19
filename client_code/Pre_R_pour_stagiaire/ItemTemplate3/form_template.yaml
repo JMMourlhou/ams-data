@@ -46,7 +46,30 @@ components:
       layout_properties: {grid_position: 'CFBKGE,IOYJUG'}
       event_bindings: {click: button_tele_pdf_click}
     - name: file_loader_1
-      properties: {text: Charger, foreground: 'theme:On Primary'}
+      properties:
+        role: null
+        show_state: true
+        align: center
+        tooltip: ''
+        border: ''
+        file_types: image/*
+        enabled: true
+        files: []
+        foreground: theme:On Primary
+        visible: true
+        text: Charger
+        font_size: null
+        font: ''
+        spacing_above: small
+        icon_align: left
+        spacing_below: small
+        italic: false
+        file: null
+        background: ''
+        bold: false
+        underline: false
+        multiple: false
+        icon: fa:upload
       type: FileLoader
       layout_properties: {grid_position: 'GHLKMF,CEYBAC'}
       event_bindings: {change: file_loader_1_change}

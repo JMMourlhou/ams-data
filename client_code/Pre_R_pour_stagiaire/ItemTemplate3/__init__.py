@@ -23,6 +23,16 @@ class ItemTemplate3(ItemTemplate3Template):
         """This method is called when a new file is loaded into this FileLoader"""
         if file != None:
             self.image_1.source = file
+            #extraction du type de fichier, extension:  derniers caractères
+            
+            path_parent, file_name, file_extension = anvil.server.call('path_infos', str(file.name))
+            print(path_parent)
+            print(file_name)
+            print(file_extension)
+            
+            if file_extension == ".pdf":
+                pass
+            
             thumb_file =  anvil.image.generate_thumbnail(file, 640)
             stage_num =   self.item['stage_num']
             item_requis = self.item['item_requis']
