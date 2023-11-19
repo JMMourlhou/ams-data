@@ -133,6 +133,7 @@ class Main(MainTemplate):
              self.column_panel_others.visible = False
              #self.button_qcm.visible = False
              self.bt_gestion_stages.visible = False
+             self.button_pre_requis.visible = False
 
     def display_admin_or_other_buttons(self, **event_args):
         user=anvil.users.get_user()
