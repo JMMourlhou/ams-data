@@ -116,6 +116,9 @@ class RowTemplate1(RowTemplate1Template):
             if valid == 'OK':
                 code_fi = result.get('mode_fi')['code_fi']   # ds dict 'result', extraction de la valeur de la clef 'mode_fi' (row, col 'code_fi')
                 #alert(code_fi)
+                if code_fi == "??":
+                    alert("Sélectionner un mode de financement")
+                    return
                 txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
                 alert(txt_msg)
                 open_form('Recherche_stagiaire', contenu)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo
