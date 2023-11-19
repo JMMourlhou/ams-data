@@ -101,7 +101,15 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     if type_stage_row:
         dico_pre_requis = type_stage_row['pre_requis']
         if dico_pre_requis != None:   # il y a des clefs pre-requis
-            for clef,value in dico_pre_requis.items():
+            
+            #tri du dictionaire sur les clefs 
+            liste_des_clefs = dico_pre_requis.keys()   #création de la liste des clefs du dictionaires prérequis
+            liste_triée_des_clefs = sorted(liste_des_clefs)  # création de la liste triée des clefs du dictionaires prérequis
+            dico_pre_requis_trié = {}
+            for key in liste_triée_des_clefs:
+                 dico_pre_requis_trié[key] = dico_pre_requis[key]
+            
+            for clef,value in dico_pre_requis_trié.items():
                 print("clef: ",clef)
                 pr_row = app_tables.pre_requis.get(code_pre_requis=clef)
                 new_row_pr = app_tables.pre_requis_stagiaire.add_row(
