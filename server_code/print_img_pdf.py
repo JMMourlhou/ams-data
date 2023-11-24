@@ -1,10 +1,4 @@
-#import anvil.email
-#import anvil.google.auth, anvil.google.drive, anvil.google.mail
-#from anvil.google.drive import app_files
-#import anvil.users
-#import anvil.tables as tables
-#import anvil.tables.query as q
-#from anvil.tables import app_tables
+
 import anvil.server
 
 import anvil.pdf
@@ -13,7 +7,7 @@ from PIL import Image
 import io
 
 @anvil.server.callable
-def print_pdf(file):
+def print_pdf(file, file_name="download.pdf"):
     """
     quality :
     "original": All images will be embedded at original resolution. Output file can be very large.
@@ -31,7 +25,7 @@ def print_pdf(file):
     
             
     media_object_pdf = PDFRenderer(page_size ='A4',
-                            filename = "img.pdf",
+                            filename = file_name,
                             landscape = False,
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                             scale = 1.0,

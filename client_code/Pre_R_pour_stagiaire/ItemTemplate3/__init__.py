@@ -31,7 +31,7 @@ class ItemTemplate3(ItemTemplate3Template):
             print(file_extension)
             
             if file_extension == ".pdf":
-                pass
+                alert("Ce fichier est un pdf")
             
             thumb_file =  anvil.image.generate_thumbnail(file, 640)
             stage_num =   self.item['stage_num']
@@ -42,9 +42,9 @@ class ItemTemplate3(ItemTemplate3Template):
 
     def button_tele_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-        
+        file_name="img_stagiaire.pdf"
         file = self.image_1.source
-        result = anvil.server.call("print_pdf", file)
+        result = anvil.server.call("print_pdf", file, file_name)
         anvil.media.download(result)
 
 
