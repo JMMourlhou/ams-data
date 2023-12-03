@@ -143,7 +143,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                         txt_msg = anvil.server.call("add_stagiaire", user, stage, code_fi, type_add="")
                         alert(txt_msg)
                         anvil.users.logout()
-                        alert("Connectez-vous maintenand.")
+                        alert("Connectez-vous maintenant.")
                         self.button_retour_click()
             else :
                 alert("Fiche de renseignements non enregistée !")
