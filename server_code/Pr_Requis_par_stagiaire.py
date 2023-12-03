@@ -1,6 +1,4 @@
-#import anvil.email
-#import anvil.google.auth, anvil.google.drive, anvil.google.mail
-#from anvil.google.drive import app_files
+
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -12,6 +10,13 @@ import io
 @anvil.server.callable
 @anvil.tables.in_transaction
 def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, thumb_file):
+    # appel module path (path_info)
+    path_parent, file_name, file_extension = path_infos(str(file.name))
+    print("serveur: ",path_parent)
+    print("serveur: ",file_name)
+    print("serveur: ",file_extension)
+    if file_extension == ".pdf":
+        print("serveur: Ce fichier est un pdf")
     
     # Convert the 'file' Media object into a Pillow Image
     img = Image.open(io.BytesIO(file.get_bytes()))
