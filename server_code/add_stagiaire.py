@@ -121,8 +121,6 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     return valid
 
 
-
-
 @anvil.server.callable           #DEL d'1 stagiaire du stage
 @anvil.tables.in_transaction
 def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users row      stage_row = table stages row

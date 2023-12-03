@@ -87,6 +87,7 @@ class Main(MainTemplate):
                 self.bt_se_deconnecter.visible = False
                 self.button_qcm.visible = False
                 self.bt_gestion_stages.visible = False
+                self.button_pre_requis.visible = False
                 self.bt_user_mail_click(True)   # 1ere utilisation True
    
     def pwreset(self, **event_args):
@@ -106,7 +107,7 @@ class Main(MainTemplate):
         return
     def qr_code(self, **event_args):
         num_stage=self.h["stage"]
-        alert(f"num stage test {num_stage}")
+        #alert(f"num stage test {num_stage}")
         if len(num_stage) != 0 :        
             self.bt_sign_in_click(self.h, num_stage)
             return

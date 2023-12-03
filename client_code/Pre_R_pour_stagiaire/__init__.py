@@ -35,7 +35,7 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-        open_form('Main')
+        open_form('Main',99)
 
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
