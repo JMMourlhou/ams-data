@@ -52,7 +52,7 @@ components:
         align: center
         tooltip: ''
         border: ''
-        file_types: image/*, .pdf
+        file_types: image/*
         enabled: true
         files: []
         foreground: theme:On Primary

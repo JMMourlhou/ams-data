@@ -25,15 +25,11 @@ class ItemTemplate3(ItemTemplate3Template):
             self.image_1.source = file
             #extraction du type de fichier, extension
             
-            path_parent, file_name, file_extension = anvil.server.call('path_infos', str(file.name))
-            #print(path_parent)
-            #print(file_name)
-            #print(file_extension)
-            
+            path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
             if file_extension == ".pdf":
-                alert("Ce fichier est un pdf")
-            
-            thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                alert(file_extension)
+            else:       
+                thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 
             stage_num =   self.item['stage_num']
             item_requis = self.item['item_requis']
