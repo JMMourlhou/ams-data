@@ -55,7 +55,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             if user['admin'] == True:
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
-            
+            self.spacer_1.scroll_into_view()
         else:
             self.button_annuler_click()
 

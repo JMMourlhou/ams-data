@@ -11,6 +11,10 @@ components:
     col_widths: {}
     grid_position: OFVPWK,OAIUIT
   components:
+  - name: spacer_1
+    properties: {height: -3.9891357421875, visible: false}
+    type: Spacer
+    layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
         Tertiary', visible: true, text: Liste des stages, font_size: 16, font: '',

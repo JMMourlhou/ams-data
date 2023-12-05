@@ -39,7 +39,9 @@ class Visu_stages(Visu_stagesTemplate):
                                                                 )
         """
         self.repeating_panel_1.items = app_tables.stages.search(tables.order_by("date_debut", ascending=False),
-                                                                )
+                                                               )
+        self.spacer_1.scroll_into_view()
+        
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
