@@ -9,7 +9,7 @@ components:
   components:
   - type: TextBox
     properties: {role: null, align: center, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: '',
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: true, underline: false}
     name: text_box_3
