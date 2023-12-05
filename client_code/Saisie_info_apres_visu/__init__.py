@@ -23,7 +23,6 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
 
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
- 
 
         # lecture sur le mail du stagiaire après click sur trombi
         user=app_tables.users.get(email=self.mel)
