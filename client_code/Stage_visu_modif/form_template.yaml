@@ -13,6 +13,10 @@ components:
     col_widths: {}
     grid_position: CKCXCN,ZDKXQR
   components:
+  - name: spacer_1
+    properties: {height: -0.6613616943359375, visible: true}
+    type: Spacer
+    layout_properties: {grid_position: 'WZHJXJ,FRHOQZ'}
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
         Tertiary', visible: true, text: Modif stage / QR code, font_size: 16, font: '',

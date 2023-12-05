@@ -75,7 +75,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 self.button_trombi_pdf.visible = False
                 self.button_display_stagiaires.visible  = False
                 self.button_trombi.visible = False
-            self.column_panel_header.scroll_into_view()
+            self.spacer_1.scroll_into_view()
         else:
             alert("Stage non trouvé")
             return

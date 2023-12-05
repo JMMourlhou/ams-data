@@ -12,7 +12,7 @@ components:
     grid_position: OFVPWK,OAIUIT
   components:
   - name: spacer_1
-    properties: {height: -3.9891357421875, visible: false}
+    properties: {height: -3.9891357421875, visible: true}
     type: Spacer
     layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
   - type: Label
