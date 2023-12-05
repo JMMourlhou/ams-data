@@ -27,7 +27,7 @@ class RowTemplate1(RowTemplate1Template):
             cumul_clefs_histo = ""
             if self.item['histo'] == None:
                 msg = self.item['nom']+" "+self.item['prenom'] + " avec histo sans {} (table 'users')"
-                alert(msg)
+                print(msg)
                 return
                 
             if self.item['histo'] != {} or self.item['histo'] != None:   #lecture du dictionnaire historique des stages du stagiaire
@@ -42,8 +42,10 @@ class RowTemplate1(RowTemplate1Template):
                         self.button_5.tag = num_stage
                     cpt += 1
                     cumul_clefs_histo = cumul_clefs_histo + " " + clef
-
-            self.button_1.text = self.item['nom']+" "+self.item['prenom']
+            if self.item['prenom'] != None:    # si prénom None, erreur
+                self.button_1.text = self.item['nom']+" "+self.item['prenom']
+            else:
+                self.button_1.text = self.item['nom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
             if len(historique)>1:
@@ -61,7 +63,7 @@ class RowTemplate1(RowTemplate1Template):
             stg = app_tables.stages.get(numero=st)
             self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])
             self.button_5.tag = st
-            
+
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         """
