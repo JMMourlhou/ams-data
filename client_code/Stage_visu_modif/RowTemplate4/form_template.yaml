@@ -1,35 +1,35 @@
 container: {type: DataRowPanel}
 components:
 - type: FlowPanel
-  properties: {role: null, vertical_align: middle, spacing: medium, align: center,
+  properties: {role: null, vertical_align: middle, spacing: small, align: center,
     tooltip: '', border: '', foreground: '', visible: true, spacing_above: none, spacing_below: small,
     background: 'theme:Primary'}
   name: flow_panel_1
   layout_properties: {column: null}
   components:
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+    properties: {role: null, align: center, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: true, underline: false}
     name: text_box_3
-    layout_properties: {width: 203.5}
+    layout_properties: {width: 205.588560546875, expand: false}
     event_bindings: {focus: text_box_3_focus}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+    properties: {role: null, align: center, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
+      font_size: 12, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_1
-    layout_properties: {width: 196.151}
+    layout_properties: {width: 240.1821396484375}
     event_bindings: {focus: text_box_1_focus}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+    properties: {role: null, align: center, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: none,
       italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_2
-    layout_properties: {width: 163.151}
+    layout_properties: {width: 125.679583984375}
     event_bindings: {focus: text_box_2_focus}
   - type: Button
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
