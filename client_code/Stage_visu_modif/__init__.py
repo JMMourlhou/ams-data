@@ -75,7 +75,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 self.button_trombi_pdf.visible = False
                 self.button_display_stagiaires.visible  = False
                 self.button_trombi.visible = False
-            self.spacer_1.scroll_into_view()
+            
         else:
             alert("Stage non trouvé")
             return
@@ -207,6 +207,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         # False indique que ce n'est pas une invitation à log in normal
         # mais une invitation à s'inscrire au stage
         open_form('QrCode_display', False, self.text_box_num_stage.text)
+
+    def form_show(self, **event_args):
+        """This method is called when the form is shown on the page"""
+        self.column_panel_header.scroll_into_view()
     
   
 

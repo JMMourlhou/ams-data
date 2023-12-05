@@ -55,7 +55,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             if user['admin'] == True:
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
-            self.label_3.scroll_into_view()
+            
         else:
             self.button_annuler_click()
 
@@ -209,3 +209,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         if self.provenance == "visu_stage":
             from ..Stage_visu_modif import Stage_visu_modif
             open_form('Stage_visu_modif',"recherche",self.num_stage)
+
+    def form_show(self, **event_args):
+        """This method is called when the form is shown on the page"""
+        self.column_panel_1.scroll_into_view()

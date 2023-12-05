@@ -3,6 +3,7 @@ container:
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
     spacing_below: none, background: ''}
+  event_bindings: {show: form_show}
 components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,

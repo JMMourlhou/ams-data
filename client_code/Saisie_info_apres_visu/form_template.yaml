@@ -1,6 +1,7 @@
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
+  event_bindings: {show: form_show}
 components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
