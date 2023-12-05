@@ -1,6 +1,7 @@
 container:
   type: ColumnPanel
   properties: {col_widths: '{"CGPGQU":42}'}
+  event_bindings: {show: form_show}
 components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
@@ -22,6 +23,7 @@ components:
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+  event_bindings: {}
 - type: ColumnPanel
   properties: {col_widths: '{"MYQPJL":35}', role: elevated-card}
   name: column_panel_2
