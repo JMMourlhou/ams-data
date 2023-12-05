@@ -28,8 +28,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         user=anvil.users.get_user()
         if user:
             self.text_box_mail.text =                user['email']
-            self.text_box_nom.text =                 user["nom"]
-            self.text_box_prenom.text =              user["prenom"]
+            self.text_box_nom.text =                 user["nom"].capitalize()
+            self.text_box_prenom.text =              user["prenom"].capitalize()
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
@@ -72,8 +72,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             alert("Entrez le prénom !")
             return
         p=self.text_box_prenom.text
-        p=p.capitalize()
-        self.text_box_prenom.text = p
+        self.text_box_prenom.text = p.capitalize()
         if self.text_box_nom.text == "" :           # dates vides ?
             alert("Entrez le nom !")
             return

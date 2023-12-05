@@ -30,8 +30,8 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
 
         if user:
             self.text_box_mail.text =                user['email']
-            self.text_box_nom.text =                 user["nom"]
-            self.text_box_prenom.text =              user["prenom"]
+            self.text_box_nom.text =                 user["nom"].capitalize()
+            self.text_box_prenom.text =              user["prenom"].capitalize()
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
@@ -56,6 +56,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             if user['admin'] == True:
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
+            
         else:
             self.button_annuler_click()
 

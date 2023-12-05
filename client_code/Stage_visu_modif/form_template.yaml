@@ -207,11 +207,11 @@ components:
   properties:
     role: null
     columns: []
-    auto_header: true
+    auto_header: false
     tooltip: ''
     border: ''
     foreground: ''
-    rows_per_page: 7
+    rows_per_page: 25
     visible: true
     wrap_on: mobile
     show_page_controls: true
