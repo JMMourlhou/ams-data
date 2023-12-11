@@ -33,9 +33,10 @@ class ItemTemplate6(ItemTemplate6Template):
             
             if file_extension == ".pdf":
                 alert("pdf")
-                pdf_images = anvil.server.call('get_example_pdf_as_images',file)
+                pdf_images = anvil.server.call('get_example_pdf_as_images', stage_num, item_requis, email)
+                print(pdf_images)
                 from ....Visu_PDF_into_IMG.ImageItem import ImageItem
-                open_form('Visu_PDF_into_IMG',images=pdf_images, add_border=True)
+                open_form('Visu_PDF_into_IMG', images=pdf_images, add_border=True)
                 
     def button_tele_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""

@@ -1,6 +1,11 @@
 container: {type: ColumnPanel}
 components:
-- name: repeating_panel_images
+- name: Retour
+  properties: {text: Retour, background: 'theme:Primary', foreground: 'theme:Tertiary'}
+  type: Button
+  layout_properties: {grid_position: 'UVEHTJ,VQRZMF'}
+  event_bindings: {click: Retour_click}
+- name: images
   properties: {item_template: Visu_PDF_into_IMG.ImageItem}
   type: RepeatingPanel
   layout_properties: {grid_position: 'RMFEXQ,YZFAEM'}

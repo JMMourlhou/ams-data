@@ -12,9 +12,20 @@ from io import BytesIO
 from shutil import copyfile
 
 @anvil.server.callable
-def get_example_pdf_as_images(file) -> List:                       # file est un pdf qui vient d'être choisi par le user
-  media = file
-  return get_pdf_file_images(media=media)
+def get_example_pdf_as_images(stage_num, item_requis, email) -> List:   # file est un pdf qui vient d'être choisi par le user
+    
+    # finding the stagiaire's row 
+    row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
+                                              stagiaire_email = email,
+                                              item_requis = item_requis                                             
+                                             )
+    if not row:
+        raise Exception("Erreur: stagiaire not found !")
+        return False  
+   
+    media = row["doc1"]
+    return get_pdf_file_images(media=media)
+    
 
 @anvil.server.callable
 def get_pdf_file_images_from_url(pdf_file_url: str) -> List:
