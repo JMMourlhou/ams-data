@@ -8,6 +8,6 @@ components:
   type: Label
   layout_properties: {grid_position: 'TOZGHS,PWVYSD'}
 - name: image
-  properties: {height: 20.881622314453125}
+  properties: {height: 74, display_mode: fill_width}
   type: Image
   layout_properties: {grid_position: 'XSBMRQ,AGAVYZ'}
