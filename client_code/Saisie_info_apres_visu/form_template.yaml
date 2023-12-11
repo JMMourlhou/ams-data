@@ -17,6 +17,10 @@ components:
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+  - name: column_panel_6
+    properties: {}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'BRKJSD,JIOSID'}
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
@@ -268,6 +272,10 @@ components:
     name: text_area_commentaires
     layout_properties: {grid_position: 'DJXAYC,NLJVZN'}
     event_bindings: {change: text_area_commentaires_change}
+- name: text_box_id
+  properties: {background: 'theme:On Primary', foreground: 'theme:Gray 600', align: center}
+  type: TextBox
+  layout_properties: {grid_position: 'CQFMME,QVMEKS'}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: column_panel_2

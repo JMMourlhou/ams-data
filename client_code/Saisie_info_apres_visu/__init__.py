@@ -20,7 +20,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         self.mel = mel
         self.provenance=provenance
         # Any code you write here will run before the form opens.
-
+       
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
 
@@ -28,6 +28,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         user=app_tables.users.get(email=self.mel)
 
         if user:
+            self.text_box_id.text = "Id = "+ str(user.get_id())
             self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"].capitalize()
             self.text_box_prenom.text =              user["prenom"].capitalize()
