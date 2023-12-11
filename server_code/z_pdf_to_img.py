@@ -12,8 +12,8 @@ from io import BytesIO
 from shutil import copyfile
 
 @anvil.server.callable
-def get_example_pdf_as_images() -> List:
-  media = app_tables.table_1.get(name='pdfexample.pdf')['file']
+def get_example_pdf_as_images(file) -> List:                       # file est un pdf qui vient d'être choisi par le user
+  media = file
   return get_pdf_file_images(media=media)
 
 @anvil.server.callable

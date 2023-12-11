@@ -21,13 +21,22 @@ class ItemTemplate6(ItemTemplate6Template):
         """This method is called when a new file is loaded into this FileLoader"""
         if file != None:
             self.image_1.source = file
-            thumb_file =  anvil.image.generate_thumbnail(file, 640)
+            
+            path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
+            thumb_file = None
+            if file_extension != ".pdf":
+                thumb_file =  anvil.image.generate_thumbnail(file, 640)
             stage_num =   self.item['stage_num']
             item_requis = self.item['item_requis']
             email =       self.item['stagiaire_email']
             result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, thumb_file)
-
-
+            
+            if file_extension == ".pdf":
+                alert("pdf")
+                pdf_images = anvil.server.call('get_example_pdf_as_images',file)
+                from ....Visu_PDF_into_IMG.ImageItem import ImageItem
+                open_form('Visu_PDF_into_IMG',images=pdf_images, add_border=True)
+                
     def button_tele_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
         

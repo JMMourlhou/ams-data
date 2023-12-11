@@ -16,14 +16,21 @@ def path_info(file):
 @anvil.server.callable
 @anvil.tables.in_transaction
 def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, thumb_file):
+    # finding the stagiaire's row 
+    row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
+                                              stagiaire_email = email,
+                                              item_requis = item_requis                                             
+                                             )
+    if not row:
+        raise Exception("Erreur: stagiaire not found !")
+        return False
+    
     # appel module path (path_info)
     path_parent, file_name, file_extension = path_info(str(file.name))       #module path info 
-    print(file_name)
-    print(file_extension)
     
-    if file_extension == ".pdf":
-        print("serveur: Ce fichier est un pdf")
-    else:
+    if file_extension != ".pdf":
+        print("serveur: Ce fichier est une image")
+
         # Img file, Convert the 'file' Media object into a Pillow Image
         img = Image.open(io.BytesIO(file.get_bytes()))
         width, height = img.size
@@ -49,18 +56,13 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, thumb_file):
     
         file_name=str(stage_num['numero'])+"_"+item_requis['code_pre_requis']
         file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=file_name)   
-        """
-    # finding the stagiaire's row 
-    row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
-                                              stagiaire_email = email,
-                                              item_requis = item_requis                                             
-                                             )
-    if not row:
-        raise Exception("Erreur: stagiaire not found !")
-        return False
-    else:           
-        row.update(check=True,
-                   doc1 = file,
-                   thumb_doc1 = thumb_file
-                   )
-        return True
+        """ 
+        
+    # SAUVEGARDE QUELQUESOIT L'EXTENSION IMG OU PDF dans doc1
+    row.update(check=True,               
+                doc1 = file,
+                thumb_doc1 = thumb_file
+                )
+    return True
+
+        
