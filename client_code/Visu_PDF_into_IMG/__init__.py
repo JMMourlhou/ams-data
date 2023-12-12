@@ -25,5 +25,5 @@ class Visu_PDF_into_IMG(Visu_PDF_into_IMGTemplate):
 
     def Retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
-        open_form('Pre_R_pour_stagiaire_admin',num_stage="107")
+        from ..Visu_stages import Visu_stages
+        open_form('Visu_stages')
