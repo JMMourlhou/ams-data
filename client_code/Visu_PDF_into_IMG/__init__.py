@@ -14,12 +14,13 @@ class Visu_PDF_into_IMG(Visu_PDF_into_IMGTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        print(images)
         list = [{
         'image': im,
         'page_number': page_number + 1,
         'display_page_numbers': len(images) > 1,
         'add_border': add_border,
-        } for page_number, im in enumerate(images)]
+        } for page_number, im in enumerate(images)]    # enumerate permet de connaitre la position, qui devient ici la page
     
         self.images.items = list
 

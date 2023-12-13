@@ -11,11 +11,11 @@ import pathlib
 @anvil.server.callable
 def path_info(file):
     path = pathlib.Path(file)
-    return str(path.parent), str(path.name), str(path.suffix)
+    return str(path.parent), str(path.name), str(path.suffix)  # path, file name, extension
 
 @anvil.server.callable
 @anvil.tables.in_transaction
-def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, thumb_file):
+def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, thumb_file=None, pdf_doc1=None):
     # finding the stagiaire's row 
     row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
@@ -61,7 +61,8 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, thumb_file):
     # SAUVEGARDE QUELQUESOIT L'EXTENSION IMG OU PDF dans doc1
     row.update(check=True,               
                 doc1 = file,
-                thumb_doc1 = thumb_file
+                thumb_doc1 = thumb_file,
+                pdf_doc1 = pdf_doc1
                 )
     return True
 
