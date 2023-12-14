@@ -23,7 +23,9 @@ def pdf_into_images(stage_num, item_requis, email, new_file_name) -> List:   # f
         return False  
   
     media = row["pdf_doc1"]
+
     return get_pdf_file_images(media=media)
+        
     
 
 @anvil.server.callable

@@ -8,10 +8,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ....image_Pdf import image_Pdf   # pour générer un fichier pdf d'une image et la télecharger
 from ....import Pre_R_doc_name        # Pour générer un nouveau nom au document chargé
-global file_name
-file_name = ""
+
 
 class ItemTemplate6(ItemTemplate6Template):
     def __init__(self, **properties):
@@ -34,7 +32,6 @@ class ItemTemplate6(ItemTemplate6Template):
             new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse 
             
             # Type de fichier ?
-            global file_name
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
 
             thumb_file = None
@@ -62,15 +59,17 @@ class ItemTemplate6(ItemTemplate6Template):
                     alert("Fichier jpg sauvé") 
             self.image_1.source = file
 
-            # A créer le click sur l'image:
-            #from ....Visu_PDF_into_IMG.ImageItem import ImageItem
-            #open_form('Visu_PDF_into_IMG', images=liste_images, add_border=True)
+            
     
     def button_tele_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
         stage_num =   self.item['stage_num']
         item_requis = self.item['item_requis']
         email =       self.item['stagiaire_email']
+        
+        # nouveau nom doc
+        new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse 
+        
         # finding the stagiaire's row 
         pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
@@ -79,14 +78,25 @@ class ItemTemplate6(ItemTemplate6Template):
         if not pr_requis_row:
             alert("Erreur: stagiaire not found !")
         
-        if pr_requis_row['pdf_doc1']:     #pdf existe ds le row
-            file = pr_requis_row['pdf_doc1']
-        else:                             #img
+        if pr_requis_row['doc1']:     #img existe ds le row
             doc_img = pr_requis_row['doc1']
-            global file_name
-            file = anvil.server.call("print_pdf",doc_img, file_name)
+            file = anvil.server.call("print_pdf",doc_img, new_file_name)
         anvil.media.download(file)   
-            
-        
-        
+
+    def image_1_mouse_down(self, x, y, button, keys, **event_args):
+        """This method is called when the button is clicked"""      
+        stage_num =   self.item['stage_num']
+        item_requis = self.item['item_requis']
+        email =       self.item['stagiaire_email']
+
+         # nouveau nom doc
+        new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse
+        try:  # si Pdf 
+            liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email, new_file_name)
+            from ....Pre_Visu_PDF_into_IMG import Pre_Visu_PDF_into_IMG
+            open_form('Pre_Visu_PDF_into_IMG', images=liste_images, add_border=True)
+        except:  # si JPG
+            self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité
+            from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour générer un fichier pdf d'une image et la télecharger
+            open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name)
 

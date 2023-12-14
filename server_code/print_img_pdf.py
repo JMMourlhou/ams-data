@@ -1,6 +1,6 @@
 
 import anvil.server
-
+from anvil import *  #pour les alertes
 import anvil.pdf
 from anvil.pdf import PDFRenderer
 from PIL import Image
@@ -8,6 +8,7 @@ import io
 
 @anvil.server.callable
 def print_pdf(file, file_name="download.pdf"):
+    print("file_name",file_name)
     
     """
     quality :
@@ -24,12 +25,12 @@ def print_pdf(file, file_name="download.pdf"):
     print('size', width, height)
     """
     
-            
+    file_name = file_name+".pdf"       
     media_object_pdf = PDFRenderer(page_size ='A4',
                             filename = file_name,
                             landscape = False,
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                             scale = 1.0,
                             quality =  "prepress"
-                            ).render_form('image_Pdf',file)
+                            ).render_form('Pre_Visu_img_Pdf',file, file_name)
     return media_object_pdf
