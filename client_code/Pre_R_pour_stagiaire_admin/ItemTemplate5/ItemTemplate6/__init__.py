@@ -31,25 +31,21 @@ class ItemTemplate6(ItemTemplate6Template):
             thumb_file = None
             if file_extension != ".pdf":
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
-                # Sauvegarde du 'file' jpg
-                result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, thumb_file) 
-                if result == False:
-                    alert("Fichier non sauvé")
-                    
-           
-            if file_extension == ".pdf":
-                # Sauvegarde du 'file' pdf
-                result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, None, thumb_file=None, pdf_doc1=file) 
-                if result == False:
-                    alert("Fichier non sauvé")
+                
+            # Sauvegarde du 'file' (qu'il soit img ou pdf)
+            result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file) 
+            if result == False:
+                alert("Fichier non sauvé")                
 
             # si 'file' est pdf, je l'affiche au format jpg
             if file_extension == ".pdf":
-                liste_images = anvil.server.call('get_example_pdf_as_images', stage_num, item_requis, email)
+                #liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email)
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
                 file = liste_images[0]
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)    
             self.image_1.source = file
+
+            # A créer le click sur l'image:
             #from ....Visu_PDF_into_IMG.ImageItem import ImageItem
             #open_form('Visu_PDF_into_IMG', images=liste_images, add_border=True)
           

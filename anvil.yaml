@@ -254,7 +254,7 @@ db_schema:
     server: full
     columns:
     - name: stage_num
-      admin_ui: {order: -1, width: 200}
+      admin_ui: {order: -1, width: 93}
       type: link_single
       target: stages
     - name: stagiaire_email
@@ -262,13 +262,13 @@ db_schema:
       type: link_single
       target: users
     - name: check
+      admin_ui: {order: 5, width: 60}
       type: bool
-      admin_ui: {width: 200, order: 5}
     - name: doc1
       admin_ui: {order: 6, width: 200}
       type: media
     - name: item_requis
-      admin_ui: {order: 5.5, width: 200}
+      admin_ui: {order: 5.5, width: 145}
       type: link_single
       target: pre_requis
     - name: thumb_doc1
