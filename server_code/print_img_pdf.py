@@ -8,6 +8,7 @@ import io
 
 @anvil.server.callable
 def print_pdf(file, file_name="download.pdf"):
+    
     """
     quality :
     "original": All images will be embedded at original resolution. Output file can be very large.

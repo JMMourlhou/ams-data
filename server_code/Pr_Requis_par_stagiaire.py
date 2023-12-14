@@ -7,7 +7,7 @@ import anvil.server
 from PIL import Image
 import io
 import pathlib
-impo
+import z_pdf_to_img
 
 
 @anvil.server.callable
@@ -28,7 +28,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
         return False, None   
     
     if file_extension != ".pdf":
-        print("serveur: Ce fichier est une image")
+        print("serveur Preq: Ce fichier est une image")
 
         # Img file, Convert the 'file' Media object into a Pillow Image
         img = Image.open(io.BytesIO(file.get_bytes()))
@@ -66,12 +66,12 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
         
 
     if file_extension == ".pdf":
-        print("serveur: Ce fichier est un pdf")
+        print("serveur Preq: Ce fichier est un pdf")
         # SAUVEGARDE du fichier pdf 'file'
         pr_requis_row.update(check=True,               
                             pdf_doc1 = file
                             )
-
-        liste_images = z_pdf_to_img.pdf_into_images(stage_num, item_requis, email, pr_requis_row)
+        print("Preq maj du pdf_doc1, envoi au module z_pdf_to_img.pdf_into_image")
+        liste_images = z_pdf_to_img.pdf_into_images(stage_num, item_requis, email)
     return True, liste_images
         
