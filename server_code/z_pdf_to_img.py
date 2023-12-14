@@ -12,7 +12,7 @@ from io import BytesIO
 from shutil import copyfile
 
 @anvil.server.callable
-def pdf_into_images(stage_num, item_requis, email) -> List:   # file est un pdf qui vient d'être choisi par le user
+def pdf_into_images(stage_num, item_requis, email, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
     # finding the stagiaire's row 
     row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
@@ -21,9 +21,7 @@ def pdf_into_images(stage_num, item_requis, email) -> List:   # file est un pdf 
     if not row:
         print("module pdf_into_images","Erreur: stagiaire not found !")
         return False  
-    else:
-        print("module pdf_into_images",row['stagiaire_email'], row['item_requis'], row['pdf_doc1'])
-   
+  
     media = row["pdf_doc1"]
     return get_pdf_file_images(media=media)
     
@@ -78,6 +76,7 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:
     im_paths = []
     for i in range(len(images)):
         # Save pages as images in the pdf
+        #im_name = 'page' + str(i) + '.jpg'
         im_name = 'page' + str(i) + '.jpg'
         path = os.path.join(target_folder_path, im_name)
         im_paths.append(path)

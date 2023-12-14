@@ -254,7 +254,7 @@ db_schema:
     server: full
     columns:
     - name: stage_num
-      admin_ui: {order: -1, width: 93}
+      admin_ui: {order: -1, width: 109}
       type: link_single
       target: stages
     - name: stagiaire_email

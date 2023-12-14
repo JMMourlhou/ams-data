@@ -17,7 +17,7 @@ def path_info(file):
 
 @anvil.server.callable
 @anvil.tables.in_transaction
-def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file=None):
+def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
     # finding the stagiaire's row 
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
@@ -34,7 +34,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
         img = Image.open(io.BytesIO(file.get_bytes()))
         width, height = img.size
         print('size', width, height)
-        """
+
         # Si img de très haute qualité je divise en deux
         if width >= height:   #landscape
             if width > 3000:
@@ -42,8 +42,8 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                 height = height / 2
         if height > width:
             if height > 3000:
-            width = int(width / 2)
-            height = int(height / 2)
+                width = int(width / 2)
+                height = int(height / 2)
         # Resize the image to the required size
         img = img.resize((width,height))    
         width, height = img.size
@@ -52,10 +52,9 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
         # Convert the Pillow Image into an Anvil Media object and return it
         bs = io.BytesIO()
         img.save(bs, format="JPEG")
-    
-        file_name=str(stage_num['numero'])+"_"+item_requis['code_pre_requis']
-        file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=file_name)   
-        """ 
+
+        file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
+ 
         
         # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1
         pr_requis_row.update(check=True,               
@@ -72,6 +71,6 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                             pdf_doc1 = file
                             )
         print("Preq maj du pdf_doc1, envoi au module z_pdf_to_img.pdf_into_image")
-        liste_images = z_pdf_to_img.pdf_into_images(stage_num, item_requis, email)
+        liste_images = z_pdf_to_img.pdf_into_images(stage_num, item_requis, email, new_file_name)
     return True, liste_images
         

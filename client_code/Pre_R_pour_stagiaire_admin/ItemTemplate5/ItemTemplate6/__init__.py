@@ -7,7 +7,9 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ....image_Pdf import image_Pdf
+
+from ....image_Pdf import image_Pdf   # pour générer un fichier pdf d'une image et la télecharger
+from ....import Pre_R_doc_name        # Pour générer un nouveau nom au document chargé
 global file_name
 file_name = ""
 
@@ -28,28 +30,34 @@ class ItemTemplate6(ItemTemplate6Template):
             item_requis = self.item['item_requis']
             email =       self.item['stagiaire_email']
 
+            # nouveau nom doc
+            new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse 
+            
             # Type de fichier ?
             global file_name
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
-            print("templ6", file_name, file_extension)
+
             thumb_file = None
             if file_extension != ".pdf":
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
-                
+                new_file_name = new_file_name + ".jpg"
             # Sauvegarde du 'file' (qu'il soit img ou pdf)
-            result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file) 
+            
+            result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name) 
             if result == False:
                 alert("Fichier non sauvé")                
 
             # si 'file' est pdf, je l'affiche au format jpg
             if file_extension == ".pdf":
-                liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email)
+                new_file_name = new_file_name
+                liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email, new_file_name)
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
                 file = liste_images[0]
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 # renvoi en écriture des images générées ds table
                 file_extension = ".img"
-                result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file)
+                new_file_name = new_file_name + ".jpg"
+                result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name)
                 if result == True:
                     alert("Fichier jpg sauvé") 
             self.image_1.source = file
