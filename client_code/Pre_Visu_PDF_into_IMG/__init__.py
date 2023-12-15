@@ -9,12 +9,15 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 class Pre_Visu_PDF_into_IMG(Pre_Visu_PDF_into_IMGTemplate):
-    def __init__(self,  images, add_border: bool=False, **properties):
+    def __init__(self,  images, add_border: bool=False, mode="visu", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        
         # Any code you write here will run before the form opens.
-        print(images)
+        if mode == "visu":
+            self.download.visible = True
+            self.retour.visible = True
+        #print(images)
         list = [{
         'image': im,
         'page_number': page_number + 1,
@@ -24,7 +27,7 @@ class Pre_Visu_PDF_into_IMG(Pre_Visu_PDF_into_IMGTemplate):
     
         self.images.items = list
 
-    def Retour_click(self, **event_args):
+    def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_stages import Visu_stages
         open_form('Visu_stages')

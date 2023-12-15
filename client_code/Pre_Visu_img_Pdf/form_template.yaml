@@ -3,15 +3,15 @@ container:
   properties: {col_widths: '{}'}
 components:
 - name: column_panel_1
-  properties: {}
+  properties: {visible: false}
   type: ColumnPanel
   layout_properties: {grid_position: 'QXUMRX,XOENHR'}
   components:
-  - name: Retour
+  - name: retour
     properties: {text: Retour, background: 'theme:Primary', foreground: 'theme:Tertiary'}
     type: Button
     layout_properties: {grid_position: 'UMSACC,GBFKOH'}
-    event_bindings: {click: Retour_click}
+    event_bindings: {click: retour_click}
   - name: download
     properties: {text: Téléchargement, background: 'theme:Primary', foreground: 'theme:Tertiary'}
     type: Button
