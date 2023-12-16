@@ -1,24 +1,26 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{}', visible: true}
 components:
 - name: column_panel_1
-  properties: {visible: false}
+  properties: {visible: true}
   type: ColumnPanel
   layout_properties: {grid_position: 'QXUMRX,XOENHR'}
   components:
   - name: retour
-    properties: {text: Retour, background: 'theme:Primary', foreground: 'theme:Tertiary'}
+    properties: {text: Retour, background: 'theme:Primary', foreground: 'theme:Tertiary',
+      visible: false}
     type: Button
     layout_properties: {grid_position: 'UMSACC,GBFKOH'}
     event_bindings: {click: retour_click}
   - name: download
-    properties: {text: Téléchargement, background: 'theme:Primary', foreground: 'theme:Tertiary'}
+    properties: {text: Téléchargement, background: 'theme:Primary', foreground: 'theme:Tertiary',
+      visible: false}
     type: Button
     layout_properties: {grid_position: 'UMSACC,APKITP'}
     event_bindings: {click: download_click}
 - type: Image
-  properties: {display_mode: original_size, height: 68.60549926757812}
+  properties: {display_mode: fill_width, height: 68.60549926757812}
   name: image_1
   layout_properties: {grid_position: 'VFNFBJ,SZNESW'}
 is_package: true

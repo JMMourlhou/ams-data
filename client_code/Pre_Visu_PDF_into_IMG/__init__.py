@@ -12,9 +12,9 @@ class Pre_Visu_PDF_into_IMG(Pre_Visu_PDF_into_IMGTemplate):
     def __init__(self,  images, add_border: bool=False, mode="visu", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        
+        self.mode = mode
         # Any code you write here will run before the form opens.
-        if mode == "visu":
+        if self.mode == "visu":
             self.download.visible = True
             self.retour.visible = True
         #print(images)

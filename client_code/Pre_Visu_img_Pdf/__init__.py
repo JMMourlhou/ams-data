@@ -6,8 +6,9 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
     def __init__(self, file, new_file_name, mode="visu", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-       
+     
         # Any code you write here will run before the form opens.
+
         self.new_file_name = new_file_name
         if mode == "visu":
             self.download.visible = True
@@ -21,5 +22,8 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
 
     def download_click(self, **event_args):
         """This method is called when the button is clicked"""
-        file = anvil.server.call("print_pdf",self.image_1.source, self.new_file_name)
-        anvil.media.download(file) 
+        with anvil.server.no_loading_indicator:
+            file = anvil.server.call("run_bg_task_jpg",self.image_1.source, self.new_file_name)
+            
+           
+            anvil.media.download(file) 

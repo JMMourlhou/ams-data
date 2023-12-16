@@ -89,14 +89,16 @@ class ItemTemplate6(ItemTemplate6Template):
         item_requis = self.item['item_requis']
         email =       self.item['stagiaire_email']
 
-         # nouveau nom doc
+        # nouveau nom doc
         new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse
         try:  # si Pdf 
-            liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email, new_file_name)
+            liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email, new_file_name, "visu")
+            alert("pdf")
             from ....Pre_Visu_PDF_into_IMG import Pre_Visu_PDF_into_IMG
             open_form('Pre_Visu_PDF_into_IMG', images=liste_images, add_border=True)
         except:  # si JPG
+            alert("jpg doc1")
             self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour générer un fichier pdf d'une image et la télecharger
-            open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name)
+            open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name, "visu")
 

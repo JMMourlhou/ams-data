@@ -6,10 +6,10 @@ from anvil.pdf import PDFRenderer
 from PIL import Image
 import io
 
+
+@anvil.server.background_task
 @anvil.server.callable
 def print_pdf(file, file_name="download.pdf"):
-    print("file_name",file_name)
-    
     """
     quality :
     "original": All images will be embedded at original resolution. Output file can be very large.
@@ -18,19 +18,21 @@ def print_pdf(file, file_name="download.pdf"):
     "prepress": Output similar to Acrobat Distiller “Prepress Optimized” setting.
     "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
     """
-    """
-    # Convert the 'file' Media object into a Pillow Image
-    img = Image.open(io.BytesIO(file.get_bytes()))
-    width, height = img.size
-    print('size', width, height)
-    """
     
-    file_name = file_name+".pdf"       
-    media_object_pdf = PDFRenderer(page_size ='A4',
+    file_name = file_name+".pdf" 
+    print("file_name",file_name)
+    media_object = PDFRenderer(page_size ='A4',
                             filename = file_name,
                             landscape = False,
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                             scale = 1.0,
-                            quality =  "prepress"
-                            ).render_form('Pre_Visu_img_Pdf',file, file_name)
-    return media_object_pdf
+                            quality =  "default"
+                            ).render_form('Pre_Visu_img_Pdf',file, file_name, "pdf")
+    return media_object
+
+@anvil.server.callable
+def run_bg_task_jpg(file, file_name="download.pdf"):
+    task_jpg = anvil.server.launch_background_task('print_pdf',file, file_name="download.pdf")
+
+    if task_jpg.is_completed():
+        return
