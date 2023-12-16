@@ -32,7 +32,7 @@ def print_pdf(file, file_name="download.pdf"):
 
 @anvil.server.callable
 def run_bg_task_jpg(file, file_name="download.pdf"):
-    task_jpg = anvil.server.launch_background_task('print_pdf',file, file_name="download.pdf")
+    task = anvil.server.launch_background_task('print_pdf',file, file_name="download.pdf")
 
-    if task_jpg.is_completed():
-        return
+    if task.is_completed():
+        return task
