@@ -58,7 +58,7 @@ db_schema:
       admin_ui: {width: 200, order: 1.5}
       type: simpleObject
     - name: media
-      admin_ui: {order: 2.5, width: 200}
+      admin_ui: {order: 2.5, width: 282}
       type: media
     title: Temp
   pre_requis:

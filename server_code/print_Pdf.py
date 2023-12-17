@@ -4,16 +4,16 @@ import anvil.tables.query as q
 import anvil.server
 from anvil import *  #pour les alertes
 
+import anvil.media
 import anvil.pdf
 from anvil.pdf import PDFRenderer
 from PIL import Image
 import io
-global img
-img = ""
+
 
 @anvil.server.background_task
 @anvil.server.callable
-def print_pdf(file, file_name="download.pdf"):
+def print_pdf(file, file_name):
     
     """
     quality :
@@ -25,13 +25,13 @@ def print_pdf(file, file_name="download.pdf"):
     """
     
     media_object = PDFRenderer(page_size ='A4',
-                            filename = file_name,
+                            filename = f"{file_name}.pdf",
                             landscape = False,
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                             scale = 1.0,
                             quality =  "default"
                             ).render_form('Pre_Visu_img_Pdf',file, file_name , "pdf")
-    # sauver le mediaobject ds table teemp
+    # sauver le mediaobject ds table temp
     temp_row = app_tables.temp.search()[0]
     if not temp_row:   
         result = False
@@ -41,6 +41,6 @@ def print_pdf(file, file_name="download.pdf"):
 
 
 @anvil.server.callable
-def run_bg_task_jpg(file, file_name="download.pdf"):
+def run_bg_task_jpg(file, file_name):
     task = anvil.server.launch_background_task('print_pdf',file, file_name)
     return task
