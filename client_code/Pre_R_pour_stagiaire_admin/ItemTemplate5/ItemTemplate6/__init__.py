@@ -97,7 +97,7 @@ class ItemTemplate6(ItemTemplate6Template):
             from ....Pre_Visu_PDF_into_IMG import Pre_Visu_PDF_into_IMG
             open_form('Pre_Visu_PDF_into_IMG', images=liste_images, add_border=True)
         except:  # si JPG
-            alert("jpg doc1")
+            #alert("jpg doc1")
             self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour générer un fichier pdf d'une image et la télecharger
             open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name, "visu")

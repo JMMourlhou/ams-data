@@ -57,6 +57,9 @@ db_schema:
     - name: pre_r_pour_stage
       admin_ui: {width: 200, order: 1.5}
       type: simpleObject
+    - name: media
+      admin_ui: {order: 2.5, width: 200}
+      type: media
     title: Temp
   pre_requis:
     title: Pre_Requis
