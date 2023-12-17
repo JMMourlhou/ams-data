@@ -15,7 +15,7 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         self.new_file_name = new_file_name
         print("new file name:", new_file_name)
         with anvil.server.no_loading_indicator:
-            self.task = anvil.server.call("run_bg_task_jpg",self.image_1.source, self.new_file_name)
+            self.task = anvil.server.call("run_bg_task_jpg",file, self.new_file_name)
        
         if mode == "visu":
             self.download.visible = True
