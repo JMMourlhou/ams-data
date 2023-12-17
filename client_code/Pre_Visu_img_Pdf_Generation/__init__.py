@@ -1,8 +1,5 @@
 from ._anvil_designer import Pre_Visu_img_Pdf_GenerationTemplate
 from anvil import *
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.server
 import anvil.tables as tables

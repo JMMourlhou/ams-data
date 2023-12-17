@@ -35,7 +35,7 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
                 temp_row = app_tables.temp.search()[0]
                 file = temp_row['media']
                 anvil.media.download(file) 
-                # kill the task
+                anvil.server.call("task_killer",self.task)
             
 
     def timer_1_tick(self, **event_args):

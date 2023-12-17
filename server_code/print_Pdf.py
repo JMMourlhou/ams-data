@@ -29,3 +29,8 @@ def print_pdf(file, file_name):
 def run_bg_task_jpg(file, file_name):
     task = anvil.server.launch_background_task('print_pdf',file, file_name)
     return task
+
+@anvil.server.callable
+def task_killer(task):
+    task.kill()
+    print("task killed")
