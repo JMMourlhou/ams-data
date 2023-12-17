@@ -1,4 +1,7 @@
 from anvil import *
+import anvil.stripe
+import anvil.files
+from anvil.files import data_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q

@@ -29,6 +29,12 @@ services:
   client_config: {}
   server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com,
     smtp_encryption: starttls, test_mode: false, smtp_password: QLIB1/Dus2L7U+DnULi4FiHDfnnpO9pngmcTQoEW2c5S3F9WJf98ajzV6GhR5Y+dZiFjLhgemtwFnHXHZsu0x70rgR7iVgSrGrvnQ8+WxJ4FHOGIR+cU21/WeF/5gFar2wXshdKczFLumhdAm0j093ELiUf0Qzq+3h85WR6V47sUltS39qOiGz0=}
+- source: /runtime/services/anvil/files.yml
+  client_config: {}
+  server_config: {file_table: files}
+- source: /runtime/services/stripe.yml
+  client_config: {}
+  server_config: {}
 startup: {type: form, module: Main}
 package_name: AMS_Data
 allow_embedding: false
@@ -145,7 +151,16 @@ db_schema:
   files:
     client: none
     server: full
-    columns: []
+    columns:
+    - name: path
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: file
+      admin_ui: {order: 1, width: 200}
+      type: media
+    - name: file_version
+      admin_ui: {order: 2, width: 200}
+      type: string
     title: Files
   mode_financement:
     client: search

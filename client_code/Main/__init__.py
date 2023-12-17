@@ -1,5 +1,6 @@
 from ._anvil_designer import MainTemplate
 from anvil import *
+import stripe.checkout
 import anvil.server
 
 from anvil.tables import app_tables

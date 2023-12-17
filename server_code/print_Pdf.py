@@ -1,3 +1,6 @@
+import anvil.stripe
+import anvil.files
+from anvil.files import data_files
 import anvil.tables as tables
 from anvil.tables import app_tables
 import anvil.tables.query as q
@@ -30,7 +33,7 @@ def print_pdf(file, file_name):
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                             scale = 1.0,
                             quality =  "default"
-                            ).render_form('Pre_Visu_img_Pdf',file, file_name , "pdf")
+                            ).render_form('Pre_Visu_img_Pdf_Generation',file)
     # sauver le mediaobject ds table temp
     temp_row = app_tables.temp.search()[0]
     if not temp_row:   
