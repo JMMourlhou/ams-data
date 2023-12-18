@@ -30,7 +30,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if user:
             self.text_box_mail.text =                user['email']
             self.text_box_nom.text =                 user["nom"].capitalize()
-            self.text_box_prenom.text =              user["prenom"].capitalize()
+            
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
@@ -72,6 +72,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if self.text_box_prenom.text == "" :           # dates vides ?
             alert("Entrez le prénom !")
             return
+        else:
+            self.text_box_prenom.text = self.text_box_prenom.text.capitalize()
         p=self.text_box_prenom.text
         self.text_box_prenom.text = p.capitalize()
         if self.text_box_nom.text == "" :           # dates vides ?
