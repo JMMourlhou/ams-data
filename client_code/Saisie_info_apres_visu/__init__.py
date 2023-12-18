@@ -31,8 +31,10 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         if user:
             self.text_box_id.text = "Id = "+ str(user.get_id())
             self.text_box_mail.text =                user['email']
-            self.text_box_nom.text =                 user["nom"].capitalize()
-            self.text_box_prenom.text =              user["prenom"].capitalize()
+            if self.text_box_nom:
+                self.text_box_nom.text =                 user["nom"].capitalize()
+            if self.text_box_prenom:
+                self.text_box_prenom.text =          user["prenom"].capitalize()
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
@@ -184,6 +186,10 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         """This method is called when an item is selected"""
         self.text_box_nom_change()
 
+    def check_box_accept_data_use_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.text_box_nom_change()
+
     def button_download_photo_click(self, **event_args):
         """This method is called when the button is clicked"""
         "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
@@ -214,3 +220,5 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
         self.column_panel_1.scroll_into_view()
+
+

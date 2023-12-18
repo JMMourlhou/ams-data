@@ -256,6 +256,7 @@ components:
         background: 'theme:Primary', bold: false, checked: false, underline: false}
       name: check_box_accept_data_use
       layout_properties: {grid_position: 'TEDLAG,EHPYAA'}
+      event_bindings: {change: check_box_accept_data_use_change}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: 2eme mail,
       border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
