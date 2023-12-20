@@ -41,14 +41,21 @@ def create_list_pdf(num_stage, intitule):
     else:
         # sauvegarde de la liste pdf ds le stage_row
         stage_row.update(list_media = media_object,
-                        list_time = French_zone_server_side.time_french_zone(),
-                        list_task_id = task.get_id()        
+                        list_time = French_zone_server_side.time_french_zone()
                         ) 
 
 
 @anvil.server.callable
 def run_bg_task_stage_list(num_stage, intitule):
     task = anvil.server.launch_background_task('create_list_pdf',num_stage, intitule)
+    #lecture du fichier stages sur le num de stage pour sauver la task
+    stage_row = app_tables.stages.get(numero=int(num_stage))
+    if not stage_row:   
+        print("stage non trouvé à partir de num_stageds server module: Stagiaires_list_pdf")
+    else:
+        # sauvegarde de la liste pdf ds le stage_row
+        stage_row.update(list_task_id = task.get_id()        
+                        ) 
     return task
         
 

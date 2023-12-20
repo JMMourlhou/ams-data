@@ -44,7 +44,7 @@ class Visu_1_stage(Visu_1_stageTemplate):
         print(list1[0]['name'])     row 1, column 'nom'
         """
 
-        cod = stage_row["type"]['code']
+        cod = stage_row["code"]['code']
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
         self.label_titre.text = "Fiches stagiaires" + cod + " du " + date + "   (num " +num_stage+")"
 
