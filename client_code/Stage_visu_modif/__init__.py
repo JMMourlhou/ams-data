@@ -20,6 +20,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.provenance = provenance
+        self.num_stage=num_stage
+        
         # Any code you write here will run before the form opens.
         if num_stage == 0:
             alert("Numéro de stage non trouvé")
@@ -66,12 +68,18 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
             #alert(len(students_rows))
             if students_rows:    # stagiaires existants
-                #with anvil.server.no_loading_indicator:
-                    #task1 = anvil.server.call('run_bg_task',self.text_box_num_stage.text, self.text_box_intitule.text)
+                with anvil.server.no_loading_indicator:
+                    
+                    self.task_list = anvil.server.call('run_bg_task_stage_list',self.text_box_num_stage.text, self.text_box_intitule.text)
+                    #alert(self.task_list.get_task_name())
+                    #alert(self.task_list.get_id())
                 
-                #with anvil.server.no_loading_indicator:
-                    #task2 = anvil.server.call('run_bg_task2',self.text_box_num_stage.text, self.text_box_intitule.text)
-                pass
+                with anvil.server.no_loading_indicator:
+                    with anvil.server.no_loading_indicator:
+                        self.task_trombi = anvil.server.call('run_bg_task_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
+                        #alert(self.task_trombi.get_id())
+                        #alert(self.task_trombi.get_task_name())
+                    
             else:     # pas de stagiares
                 self.button_trombi_pdf.visible = False
                 self.button_display_stagiaires.visible  = False
@@ -180,16 +188,20 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def button_trombi_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-
-        pdf = anvil.server.call('create_pdf',self.text_box_num_stage.text, self.text_box_intitule.text)
-        anvil.media.download(pdf)
-        alert("Trombinoscope téléchargé")
+        # A FAIRE: lire le résultat en table de la bgTask au lieu de le générer ici, si la tache est achevée
+        if not self.task_trombi.is_running():
+            stage_row = app_tables.stages.get(numero=int(self.num_stage))
+            pdf = stage_row['trombi_media']
+            if pdf:
+                anvil.media.download(pdf)
+                alert("Trombinoscope téléchargé")
+            else:
+                alert("Pdf du trombi non trouvé")
 
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        #global intitul
-        #open_form('Visu_1_stage', self.text_box_num_stage.text, intitul, False) 
+       
 
         "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
         stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))

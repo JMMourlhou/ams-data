@@ -30,7 +30,7 @@ def create_list_pdf(num_stage, intitule):
                                landscape = False,
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1.0,
-                               quality =  "printer"
+                               quality =  "default"
                               ).render_form('Visu_1_stage',num_stage, intitule, True)
     
     " sauvegarde du media_object ds la table "
@@ -39,25 +39,16 @@ def create_list_pdf(num_stage, intitule):
     if not stage_row:   
         print("stage non trouvé à partir de num_stageds server module: Stagiaires_list_pdf")
     else:
-        stage_row.update(list_media = media_object) # sauvegarde de la liste pdf ds le stage_row
-        print("liste pdf du stage stockée")
-    return media_object
+        # sauvegarde de la liste pdf ds le stage_row
+        stage_row.update(list_media = media_object,
+                        list_time = French_zone_server_side.time_french_zone(),
+                        list_task_id = task.get_id()        
+                        ) 
+
 
 @anvil.server.callable
-def run_bg_task(num_stage, intitule):
+def run_bg_task_stage_list(num_stage, intitule):
     task = anvil.server.launch_background_task('create_list_pdf',num_stage, intitule)
-    #lecture du fichier stages sur le num de stage
-    stage_row = app_tables.stages.get(numero=int(num_stage))
-    if not stage_row:   
-        print("stage non trouvé à partir de num_stage server module: Stagiaires_trombi")
-        return
-    else:
-        # sauvegarde du liste time et id media ds le stage_row
-        stage_row.update(list_time = French_zone_server_side.time_french_zone(),
-                         list_task_id = task.get_id()        
-                        ) 
-        print("time et id liste stockée")
-        pass 
+    return task
         
-    if task.is_completed():
-        return
+

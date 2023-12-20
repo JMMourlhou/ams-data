@@ -12,8 +12,9 @@ import anvil.server
 import anvil.pdf
 from anvil.pdf import PDFRenderer
 
-@anvil.server.callable
-def create_pdf(num_stage, intitule):
+@anvil.server.background_task
+#@anvil.server.callable
+def create_trombi_pdf(num_stage, intitule):
     """
     quality :
     "original": All images will be embedded at original resolution. Output file can be very large.
@@ -39,6 +40,12 @@ def create_pdf(num_stage, intitule):
         # sauvegarde du trombi media ds le stage_row
         stage_row.update(trombi_media = media_object) 
     return media_object
+
+# A FAIRE APPELER from client side
+@anvil.server.callable
+def run_bg_task_trombi(file, file_name):
+    task = anvil.server.launch_background_task('create_trombi_pdf',file, file_name)
+    return task
 
 
 

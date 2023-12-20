@@ -12,8 +12,8 @@ import anvil.pdf
 from anvil.pdf import PDFRenderer
 
 @anvil.server.background_task
-@anvil.server.callable
-def print_pdf(file, file_name):
+#@anvil.server.callable
+def create_doc_img_into_pdf(file, file_name):
     media_object = PDFRenderer(page_size ='A4',
                             filename = f"{file_name}.pdf",
                             landscape = False,
@@ -27,10 +27,6 @@ def print_pdf(file, file_name):
 
 @anvil.server.callable
 def run_bg_task_jpg(file, file_name):
-    task = anvil.server.launch_background_task('print_pdf',file, file_name)
+    task = anvil.server.launch_background_task('create_doc_img_into_pdf',file, file_name)
     return task
 
-@anvil.server.callable
-def task_killer(task):
-    task.kill()
-    print("task killed")
