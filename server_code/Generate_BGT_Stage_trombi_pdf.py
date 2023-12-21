@@ -26,8 +26,8 @@ def create_trombi_pdf(num_stage, intitule):
     """
     media_object = PDFRenderer(page_size ='A4',
                                filename = f"{intitule}/{num_stage}.pdf",
-                               landscape = False,
-                               margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
+                               landscape = True,
+                               margins = {'top': , 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1.0,
                                quality =  "printer"
                               ).render_form('Visu_trombi',num_stage, intitule, True)
@@ -39,11 +39,11 @@ def create_trombi_pdf(num_stage, intitule):
         print("stage non trouvé à partir de num_stage server module: Stagiaires_trombi")
     else:
         # sauvegarde du trombi media et de time creation ds le stage_row
-        ti
+        timing = French_zone_server_side.time_french_zone()
         stage_row.update(trombi_media = media_object,
-                         list_time = French_zone_server_side.time_french_zone()
+                         list_time = timing
                          )
-        print("Sauvegarde trombi pdf et son timing", list_time)
+        print("Sauvegarde trombi pdf et son timing", timing)
 
 # A FAIRE APPELER from client side
 @anvil.server.callable
