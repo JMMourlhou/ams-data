@@ -301,29 +301,29 @@ db_schema:
     server: full
     columns:
     - name: numero
-      admin_ui: {order: 1, width: 200}
+      admin_ui: {order: 1, width: 72.17}
       type: number
     - name: date_debut
-      admin_ui: {order: 2, width: 200}
+      admin_ui: {order: 2, width: 101.17}
       type: date
     - name: date_fin
-      admin_ui: {order: 3, width: 200}
+      admin_ui: {order: 3, width: 95}
       type: date
     - name: nb_stagiaires_deb
       admin_ui: {order: 2.5, width: 152.33}
       type: number
     - name: code
-      admin_ui: {order: 0, width: 200}
+      admin_ui: {order: 0, width: 157}
       type: link_single
       target: codes_stages
     - name: nb_stagiaires_fin
-      admin_ui: {order: 6, width: 200}
+      admin_ui: {order: 6, width: 136.17}
       type: number
     - name: nb_stagiaires_diplomes
-      admin_ui: {order: 7, width: 200}
+      admin_ui: {order: 7, width: 76.12}
       type: number
     - name: lieu
-      admin_ui: {order: 7, width: 200}
+      admin_ui: {order: 1.5, width: 144}
       type: link_single
       target: lieux
     - name: commentaires
