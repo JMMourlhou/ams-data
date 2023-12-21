@@ -46,7 +46,7 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
 
         cod = stage_row["code"]['code']
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
-        self.label_titre.text = "Fiches stagiaires" + cod + " du " + date + "   (num " +num_stage+")"
+        self.label_titre.text = "Fiches stagiaires " + cod + " du " + date + "   (num " +num_stage+")"
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
