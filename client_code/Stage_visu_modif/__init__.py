@@ -199,9 +199,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.task_liste.is_completed():
+        if self.task_list.is_completed():
             stage_row = app_tables.stages.get(numero=int(self.num_stage))
-            pdf = stage_row['liste_media']
+            pdf = stage_row['list_media']
             if pdf:
                 anvil.media.download(pdf)
                 alert("Liste téléchargée")

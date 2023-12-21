@@ -45,8 +45,9 @@ class ItemTemplate2(ItemTemplate2Template):
             #self.rich_text_1.background="theme:Primary"
             #self.rich_text_1.foreground="theme:On Primary"
             self.rich_text_1.content=f" {stagiaire['nom']} {stagiaire['prenom']} ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
-            self.rich_text_2.content=f" Né le {stagiaire['date_naissance']} à {stagiaire['ville_naissance'] ({stagiaire['code_postal_naissance']}, {stagiaire['pays_']})} "
-            #self.rich_text_2.content=f"Né le {stagiaire['date_naissance'} à {stagiaire['ville_naissance']} ({stagiaire['pays_naissance']}) "
+            self.rich_text_2.content=f" Né le {stagiaire['date_naissance']} " #" ({stagiaire['code_postal_naissance']}, {stagiaire['pays_naissance']})} "
+            #self.rich_text_2.content=f" Né le {stagiaire['date_naissance']} à {stagiaire['ville_naissance'] ({stagiaire['code_postal_naissance']}, {stagiaire['pays_naissance']})} "
+
 
     def image_1_show(self, **event_args):
         """This method is called when the Image is shown on the screen"""
