@@ -201,8 +201,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-       
-
         "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
         stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))
         if not stage_row:   

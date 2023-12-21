@@ -37,8 +37,9 @@ def create_trombi_pdf(num_stage, intitule):
     if not stage_row:   
         print("stage non trouvé à partir de num_stage server module: Stagiaires_trombi")
     else:
-        # sauvegarde du trombi media ds le stage_row
+        # sauvegarde du trombi media et de ds le stage_row
         stage_row.update(trombi_media = media_object) 
+        list_time = French_zone_server_side.time_french_zone()
     return media_object
 
 # A FAIRE APPELER from client side
