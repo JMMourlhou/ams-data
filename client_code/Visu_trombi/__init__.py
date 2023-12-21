@@ -86,7 +86,7 @@ class Visu_trombi(Visu_trombiTemplate):
                 self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
 
                 if cpt_stagiaire % 5 == 0 : # (modulo 5) si 5eme image de la ligne affichée, j'initialise à 1ere image et saute la ligne
-                    if cpt_ligne == 4:      # si 5eme image de la 4eme ligne, page break
+                    if cpt_ligne == 5:      # si 5eme image de la 4eme ligne, page break
                         self.add_component(PageBreak())      # si en création de pdf, je saute une page après 4 lignes
                         cpt_ligne == 0
                         
