@@ -199,16 +199,14 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        "lecture du media object que j'ai stocké en server module ds table stages, ligne du stage"
-        stage_row = app_tables.stages.get(numero=int(self.text_box_num_stage.text))
-        if not stage_row:   
-            print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
-        else:
-            try:
-                anvil.media.download(stage_row["list_media"])
+        if self.task_liste.is_completed():
+            stage_row = app_tables.stages.get(numero=int(self.num_stage))
+            pdf = stage_row['liste_media']
+            if pdf:
+                anvil.media.download(pdf)
                 alert("Liste téléchargée")
-            except:
-                alert("Avant de télécharger le trombi, affichez le d'abord.")
+            else:
+                alert("Liste du trombi non trouvée")
 
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""
