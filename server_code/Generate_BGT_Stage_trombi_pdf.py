@@ -27,8 +27,8 @@ def create_trombi_pdf(num_stage, intitule):
     media_object = PDFRenderer(page_size ='A4',
                                filename = f"{intitule}/{num_stage}.pdf",
                                landscape = True,
-                               margins = {'top': , 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
-                               scale = 1.0,
+                               margins = {'top': 1.0, 'bottom': 1.0, 'left': 0.0, 'right': 0.0},  # en cm
+                               scale = 0.5,
                                quality =  "printer"
                               ).render_form('Visu_trombi',num_stage, intitule, True)
     
