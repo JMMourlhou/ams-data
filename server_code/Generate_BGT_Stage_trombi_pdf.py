@@ -11,6 +11,7 @@ from anvil.tables import app_tables
 import anvil.server
 import anvil.pdf
 from anvil.pdf import PDFRenderer
+from . import French_zone_server_side
 
 @anvil.server.background_task
 #@anvil.server.callable
@@ -37,8 +38,10 @@ def create_trombi_pdf(num_stage, intitule):
     if not stage_row:   
         print("stage non trouvé à partir de num_stage server module: Stagiaires_trombi")
     else:
-        # sauvegarde du trombi media ds le stage_row
-        stage_row.update(trombi_media = media_object) 
+        # sauvegarde du trombi media et de time creation ds le stage_row
+        stage_row.update(trombi_media = media_object,
+                         list_time = French_zone_server_side.time_french_zone()
+                         )
     return media_object
 
 # A FAIRE APPELER from client side

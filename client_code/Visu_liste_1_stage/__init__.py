@@ -1,4 +1,4 @@
-from ._anvil_designer import Visu_1_stageTemplate
+from ._anvil_designer import Visu_liste_1_stageTemplate
 from anvil import *
 import stripe.checkout
 import anvil.server
@@ -13,7 +13,7 @@ import anvil.media                               # pour le pdf standard
 global pdf_mode
 pdf_mode=False
 
-class Visu_1_stage(Visu_1_stageTemplate):
+class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
