@@ -188,7 +188,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def button_trombi_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-        # A FAIRE: lire le résultat en table de la bgTask au lieu de le générer ici, si la tache est achevée
         if self.task_trombi.is_completed():
             stage_row = app_tables.stages.get(numero=int(self.num_stage))
             pdf = stage_row['trombi_media']

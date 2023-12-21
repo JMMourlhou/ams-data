@@ -15,7 +15,7 @@ cpt = 0
 
 # Visualisation du TROMBI sur un XY panel
 class Visu_trombi(Visu_trombiTemplate):
-    def __init__(self,num_stage, intitule, pdf_mode=False, **properties):
+    def __init__(self, num_stage, intitule, pdf_mode=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
@@ -53,6 +53,7 @@ class Visu_trombi(Visu_trombiTemplate):
         cpt_stagiaire = 0
         cpt_ligne = 1
         for row in rows :
+    
             cpt_stagiaire += 1  # incrément compteur nb stagiaires
        
             #lecture fichier users à partir du mail
@@ -87,17 +88,16 @@ class Visu_trombi(Visu_trombiTemplate):
 
                 if cpt_stagiaire % 5 == 0 : # (modulo 5) si 5eme image de la ligne affichée, j'initialise à 1ere image et saute la ligne
                     if cpt_ligne == 5:      # si 5eme image de la 4eme ligne, page break
-                        self.add_component(PageBreak())      # si en création de pdf, je saute une page après 4 lignes
+                        #self.add_component(PageBreak())      # si en création de pdf, je saute une page après 4 lignes
                         cpt_ligne == 0
-                        
+                       
                     xx = 1
                     yy += 239
                     cpt_ligne += 1
                 else :                      # pas 4eme image, je décalle à la prochaine image
                     xx = xx + larg + inter
-
-                #print("ligne ", cpt_ligne) 
-                #print("stagiaire", cpt_stagiaire)  
+                    
+                
             else:
                 """ si pas de stagiaire """
                 print("stagiaire non trouvé par son mail")
@@ -126,8 +126,8 @@ class Visu_trombi(Visu_trombiTemplate):
     
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        open_form('Visu_stages')
+        from ..Stage_visu_modif import Stage_visu_modif
+        open_form('Stage_visu_modif', None, int(self.num_stage))
 
     def button_retour2_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -138,6 +138,6 @@ class Visu_trombi(Visu_trombiTemplate):
         global cpt  # Cpt le nb d'images imprimées
         cpt += 1
         print(cpt)
-        if cpt == 16:   
+        if cpt == 25:   
            print("Page Break", cpt)
-           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 16 images 
+           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!

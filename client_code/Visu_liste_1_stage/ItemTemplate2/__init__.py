@@ -28,7 +28,7 @@ class ItemTemplate2(ItemTemplate2Template):
             #Photo
             orig_pic = stagiaire['photo']
             if orig_pic != None:
-                thumb_pic = anvil.image.generate_thumbnail(orig_pic, 160)
+                thumb_pic = anvil.image.generate_thumbnail(orig_pic, 320)
                 self.image_1.source = thumb_pic
             
             # self.text_box_5.text
@@ -44,7 +44,9 @@ class ItemTemplate2(ItemTemplate2Template):
             self.rich_text_1.font="Noto"
             #self.rich_text_1.background="theme:Primary"
             #self.rich_text_1.foreground="theme:On Primary"
-            self.rich_text_1.content=f"{stagiaire['nom']} {stagiaire['prenom']} ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']}"
+            self.rich_text_1.content=f" {stagiaire['nom']} {stagiaire['prenom']} ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
+            self.rich_text_2.content=f" Né le {stagiaire['date_naissance']} à {stagiaire['ville_naissance'] ({stagiaire['code_postal_naissance']}, {stagiaire['pays_']})} "
+            #self.rich_text_2.content=f"Né le {stagiaire['date_naissance'} à {stagiaire['ville_naissance']} ({stagiaire['pays_naissance']}) "
 
     def image_1_show(self, **event_args):
         """This method is called when the Image is shown on the screen"""
