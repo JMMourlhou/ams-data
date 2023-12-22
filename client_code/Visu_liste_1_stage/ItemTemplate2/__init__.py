@@ -45,8 +45,8 @@ class ItemTemplate2(ItemTemplate2Template):
             date_naiss_format = stagiaire['date_naissance'].strftime("%d/%m/%Y")
             #self.rich_text_1.background="theme:Primary"
             #self.rich_text_1.foreground="theme:On Primary"
-            self.rich_text_1.content=f" {stagiaire['nom']} {stagiaire['prenom']} ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
-            self.rich_text_2.content=f" Né le {date_naiss_format} ({stagiaire['code_postal_naissance']}, {stagiaire['pays_naissance']}) \n {stagiaire['adresse_rue']}, {stagiaire['adresse_ville']}, {stagiaire['adresse_code_postal']} "
+            self.rich_text_1.content=f" **{stagiaire['prenom']} {stagiaire['nom']}** ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
+            self.rich_text_2.content=f" Né le {date_naiss_format} à {stagiaire['ville_naissance']} ({stagiaire['code_postal_naissance']} {stagiaire['pays_naissance']}) \n {stagiaire['adresse_rue']}, {stagiaire['adresse_code_postal']} {stagiaire['adresse_ville']} "
 
 
 
@@ -55,12 +55,10 @@ class ItemTemplate2(ItemTemplate2Template):
     
         global cpt  # Cpt le nb de form imprimée
         cpt += 1
-        print(cpt)
         #récup du param 
         nb_stag_par_page = constant_parameters.nb_fiche_stagiaire_pdf
-        if (cpt // nb_stag_par_page) * nb_stag_par_page == cpt:          # ts les 1 ou 6 stagiaires, selon param global
-           #print("saut")
-           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 6 stagiares 
+        if (cpt // nb_stag_par_page) * nb_stag_par_page == cpt:          # ts les 1 ou 5 stagiaires, selon param global
+           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les n stagiares 
        
            
         

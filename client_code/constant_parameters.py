@@ -14,5 +14,4 @@ nom_app_pour_mail = "AMSport Data"
 mon_mail = "jmarc@jmm-formation-et-services.fr"
 mon_logo = "_/theme/Logo%20F%20S%20small_transparent.png"
 logo_client = "_/theme/Logo%20AMS.JPG"
-nb_stages_a_montrer = 10      # 10 derniers stages à montrer
-nb_fiche_stagiaire_pdf = 5  # 1 fiche avec photo en haut 
+nb_fiche_stagiaire_pdf = 5  # 1 ou 5   (1 fiche avec photo en haut ou 5/page)
