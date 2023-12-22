@@ -16,11 +16,12 @@ global intitul
 intitul=""
 
 class Stage_visu_modif(Stage_visu_modifTemplate):
-    def __init__(self, provenance="", num_stage=0, **properties):
+    def __init__(self, provenance="", num_stage=0, bg_task=True, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.provenance = provenance
         self.num_stage=num_stage
+        self.bg_task = bg_task
         
         # Any code you write here will run before the form opens.
         if num_stage == 0:
@@ -61,29 +62,31 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.text_box_nb_stagiaires_diplom.text = stage_row['nb_stagiaires_diplomes']
             self.text_area_commentaires.text = stage_row['commentaires']
             self.drop_down_lieux.selected_value = stage_row['lieu']
+            self.check_box_allow_bg_task.checked = stage_row['allow_bgt_generation']
             
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
             """ ***********************************************************************"""            
-            students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
-            #alert(len(students_rows))
-            if students_rows:    # stagiaires existants
-                with anvil.server.no_loading_indicator:
-                    
-                    self.task_list = anvil.server.call('run_bg_task_stage_list',self.text_box_num_stage.text, self.text_box_intitule.text)
-                    #alert(self.task_list.get_task_name())
-                    #alert(self.task_list.get_id())
-                
-                with anvil.server.no_loading_indicator:
+            if self.bg_task == True and self.check_box_allow_bg_task.checked == False:     # ex: en retour de trombi, pas besoin de re-générer les listes
+                students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
+                #alert(len(students_rows))
+                if students_rows:    # stagiaires existants
                     with anvil.server.no_loading_indicator:
-                        self.task_trombi = anvil.server.call('run_bg_task_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
-                        #alert(self.task_trombi.get_id())
-                        #alert(self.task_trombi.get_task_name())
+                        
+                        self.task_list = anvil.server.call('run_bg_task_stage_list',self.text_box_num_stage.text, self.text_box_intitule.text)
+                        #alert(self.task_list.get_task_name())
+                        #alert(self.task_list.get_id())
                     
-            else:     # pas de stagiares
-                self.button_trombi_pdf.visible = False
-                self.button_display_stagiaires.visible  = False
-                self.button_trombi.visible = False
+                    with anvil.server.no_loading_indicator:
+                        with anvil.server.no_loading_indicator:
+                            self.task_trombi = anvil.server.call('run_bg_task_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
+                            #alert(self.task_trombi.get_id())
+                            #alert(self.task_trombi.get_task_name())
+                        
+                else:     # pas de stagiares
+                    self.button_trombi_pdf.visible = False
+                    self.button_display_stagiaires.visible  = False
+                    self.button_trombi.visible = False
         else:
             alert("Stage non trouvé")
             return
@@ -150,7 +153,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                                                 self.date_picker_to.date,
                                                 self.text_box_nb_stagiaires_fin.text,
                                                 self.text_box_nb_stagiaires_diplom.text,
-                                                self.text_area_commentaires.text
+                                                self.text_area_commentaires.text,
+                                                self.check_box_allow_bg_task.checked
                                                  )
         if result == True :
             alert("Stage enregisté !")
@@ -180,6 +184,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
+        
+    def check_box_allow_bg_task_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_validation.visible = True   
 
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -199,7 +207,16 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.task_list.is_completed():
+        try:  # si les BG tasks de génération des listes trombi pdf / list pdf existent 
+            if self.task_list.is_completed():
+                stage_row = app_tables.stages.get(numero=int(self.num_stage))
+                pdf = stage_row['list_media']
+                if pdf:
+                    anvil.media.download(pdf)
+                    alert("Liste téléchargée")
+                else:
+                    alert("Liste du trombi non trouvée")
+        except:  #sinon, j'utise les existentes, créées en table stage, row du stage sélectionné
             stage_row = app_tables.stages.get(numero=int(self.num_stage))
             pdf = stage_row['list_media']
             if pdf:
@@ -217,6 +234,12 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
         self.column_panel_header.scroll_into_view()
+
+    
+
+    
+
+    
     
   
 

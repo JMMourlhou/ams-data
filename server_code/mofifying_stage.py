@@ -21,7 +21,8 @@ def modif_stage(code,
               date_fin,
               nb_stagiaires_fin,
               nb_stagiaires_diplomes,
-              commentaires
+              commentaires,
+              allow_bgt_generation
              ):
     numero=int(numero)
 
@@ -50,7 +51,8 @@ def modif_stage(code,
                     date_fin = date_fin,
                     nb_stagiaires_fin = nb_stagiaires_fin,
                     nb_stagiaires_diplomes = nb_stagiaires_diplomes,
-                    commentaires = commentaires
+                    commentaires = commentaires,
+                    allow_bgt_generation = allow_bgt_generation
                     )
         valid=True
     return valid

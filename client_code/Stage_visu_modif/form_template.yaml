@@ -163,14 +163,26 @@ components:
     name: text_box_nb_stagiaires_diplom
     layout_properties: {grid_position: 'PNQOFK,QFPUNN'}
     event_bindings: {change: text_box_nb_stagiaires_diplom_change}
-  - type: TextArea
-    properties: {role: null, align: left, height: 52, tooltip: '', placeholder: Commentaires,
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, auto_expand: false, font: '', spacing_above: none, spacing_below: none,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
-    name: text_area_commentaires
-    layout_properties: {grid_position: 'KVEZRN,ZQLFGM'}
-    event_bindings: {change: text_area_commentaires_change}
+  - name: column_panel_3
+    properties: {col_widths: '{"CIIGDL":53,"NNNVVG":7}', col_spacing: small, role: null}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'ZAAEXD,BBKYES'}
+    components:
+    - type: TextArea
+      properties: {role: null, align: left, height: 52, tooltip: '', placeholder: Commentaires,
+        border: '', enabled: true, foreground: 'theme:On Primary', visible: true,
+        text: '', font_size: null, auto_expand: false, font: '', spacing_above: none,
+        spacing_below: none, italic: false, background: 'theme:Primary', bold: false,
+        underline: false}
+      name: text_area_commentaires
+      layout_properties: {grid_position: 'WSXPGK,CIIGDL'}
+      event_bindings: {change: text_area_commentaires_change}
+    - name: check_box_allow_bg_task
+      properties: {text: Stable, background: 'theme:Primary', foreground: 'theme:On
+          Primary', align: center, font_size: 9, spacing_above: medium}
+      type: CheckBox
+      layout_properties: {grid_position: 'WSXPGK,NNNVVG LMXOTC,GEZJOV'}
+      event_bindings: {change: check_box_allow_bg_task_change}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: column_panel_2
