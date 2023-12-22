@@ -193,7 +193,7 @@ components:
       foreground: 'theme:Tertiary', visible: true, text: Pdf Fiches stagiaires, font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: 'theme:Primary', bold: false, underline: false, icon: ''}
-    name: button_display_stagiaires
+    name: button_fiches_stagiaires
     layout_properties: {grid_position: 'YGLAJE,YISRGZ'}
     event_bindings: {click: button_list_pdf_stagiaires_click}
   - type: Button

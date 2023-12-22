@@ -48,7 +48,7 @@ def add_stage(code,
                               nb_stagiaires_fin = 0,
                               nb_stagiaires_diplomes = 0,
                               commentaires = commentaires,
-                              allow_bgt_generation = True
+                              allow_bgt_generation = False
                              )
         
                  

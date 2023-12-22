@@ -36,9 +36,16 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         #lecture du stage
         stage_row=app_tables.stages.get(numero=num_stage)
         #lecture des stagiaires inscrits
-        self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(tables.order_by("name", ascending=True),
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(tables.order_by("name", ascending=True),
                                                                             stage=stage_row
                                                                            )
+        if len(liste_stagiaires) > 0:                      # des stagiaires sont déjà inscrits ds stage
+            self.repeating_panel_1.items = liste_stagiaires
+        else:                                              # stage vide, je n'affiche pas les bt et la liste
+            self.button_trombi.visible = False
+            self.button_trombi_pdf.visible = False
+            self.button_fiches_stagiaires.visible = False
+        
         #lecture intitulé stage
         global intitul
         intitul = stage_row['code']['code']
@@ -71,7 +78,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 #alert(len(students_rows))
                 if students_rows:    # stagiaires existants
                     with anvil.server.no_loading_indicator:
-                        
                         self.task_list = anvil.server.call('run_bg_task_stage_list',self.text_box_num_stage.text, self.text_box_intitule.text)
                         #alert(self.task_list.get_task_name())
                         #alert(self.task_list.get_id())
@@ -81,11 +87,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                             self.task_trombi = anvil.server.call('run_bg_task_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
                             #alert(self.task_trombi.get_id())
                             #alert(self.task_trombi.get_task_name())
-                        
-                else:     # pas de stagiares
-                    self.button_trombi_pdf.visible = False
-                    self.button_display_stagiaires.visible  = False
-                    self.button_trombi.visible = False
         else:
             alert("Stage non trouvé")
             return

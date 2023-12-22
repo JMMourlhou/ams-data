@@ -17,7 +17,7 @@ class QrCode_display(QrCode_displayTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens
-        # si log_in =False, appel du qr_code pour que les stagiaires s'inscrive au stage
+        # si log_in = False, appel du qr_code pour que les stagiaires s'inscrivent au stage
         if log_in == False:
             # lecture du stage par son numéro si pas de log_in normal
             stage = app_tables.stages.get(numero=int(num_stage)) 
