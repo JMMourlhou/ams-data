@@ -127,7 +127,7 @@ class Visu_trombi(Visu_trombiTemplate):
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_visu_modif import Stage_visu_modif
-        open_form('Stage_visu_modif', None, int(self.num_stage))
+        open_form('Stage_visu_modif', "visu_stages", int(self.num_stage))
 
     def button_retour2_click(self, **event_args):
         """This method is called when the button is clicked"""
