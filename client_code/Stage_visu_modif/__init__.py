@@ -39,7 +39,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(tables.order_by("name", ascending=True),
                                                                             stage=stage_row
                                                                            )
-       
         #lecture intitulé stage
         global intitul
         intitul = stage_row['code']['code']
@@ -67,7 +66,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
             """ ***********************************************************************"""            
-            if self.bg_task == True and self.check_box_allow_bg_task.checked == False:     # ex: en retour de trombi, pas besoin de re-générer les listes
+            if self.check_box_allow_bg_task.checked == False or self.bg_task == False:     # ex: en retour de trombi, pas besoin de re-générer les listes
                 students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
                 #alert(len(students_rows))
                 if students_rows:    # stagiaires existants
@@ -196,7 +195,16 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def button_trombi_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.task_trombi.is_completed():
+        try:  # si les BG tasks de génération des listes trombi pdf / list pdf existent
+            if self.task_trombi.is_completed():
+                stage_row = app_tables.stages.get(numero=int(self.num_stage))
+                pdf = stage_row['trombi_media']
+                if pdf:
+                    anvil.media.download(pdf)
+                    alert("Trombinoscope téléchargé")
+                else:
+                    alert("Pdf du trombi non trouvé")
+        except: #sinon, j'utise les existentes, créées en table stage, (revient de trombi ou stage_row['allow_bgt_generation']=False)
             stage_row = app_tables.stages.get(numero=int(self.num_stage))
             pdf = stage_row['trombi_media']
             if pdf:
@@ -216,7 +224,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                     alert("Liste téléchargée")
                 else:
                     alert("Liste du trombi non trouvée")
-        except:  #sinon, j'utise les existentes, créées en table stage, row du stage sélectionné
+        except:  #sinon, j'utise les existentes, créées en table stage, (revient de trombi ou stage_row['allow_bgt_generation']=False)
             stage_row = app_tables.stages.get(numero=int(self.num_stage))
             pdf = stage_row['list_media']
             if pdf:
