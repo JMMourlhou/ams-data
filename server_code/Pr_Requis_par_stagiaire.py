@@ -32,7 +32,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
     
     if file_extension != ".pdf":
         print("serveur Preq: Ce fichier est une image")
-
+        """
         # Img file, Convert the 'file' Media object into a Pillow Image
         img = Image.open(io.BytesIO(file.get_bytes()))
         width, height = img.size
@@ -57,7 +57,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
         img.save(bs, format="JPEG")
 
         file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
- 
+        """
         
         # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1
         pr_requis_row.update(check=True,               
