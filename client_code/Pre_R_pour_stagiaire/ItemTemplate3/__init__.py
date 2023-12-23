@@ -9,7 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.media
-
+from ...import Pre_R_doc_name        # Pour générer un nouveau nom au document chargé
 
 class ItemTemplate3(ItemTemplate3Template):
     def __init__(self, **properties):
@@ -23,18 +23,26 @@ class ItemTemplate3(ItemTemplate3Template):
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file != None:
-            self.image_1.source = file
-            #extraction du type de fichier, extension        
-            path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
-            if file_extension == ".pdf":
-                alert(file_extension)
-            else:       
-                thumb_file =  anvil.image.generate_thumbnail(file, 640)
-                
+    
             stage_num =   self.item['stage_num']
             item_requis = self.item['item_requis']
             email =       self.item['stagiaire_email']
-            result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, thumb_file)
+
+            # nouveau nom doc
+            new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse 
+            
+            # Type de fichier ?
+            path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
+
+            thumb_file = None
+            if file_extension != ".pdf":
+                thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                new_file_name = new_file_name + ".jpg"
+            # Sauvegarde du 'file' (qu'il soit img ou pdf)
+            
+            result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name) 
+            if result == False:
+                alert("Fichier non sauvé")                   
 
 
     def button_tele_pdf_click(self, **event_args):

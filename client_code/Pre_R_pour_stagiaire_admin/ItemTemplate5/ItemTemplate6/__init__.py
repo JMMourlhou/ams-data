@@ -58,8 +58,9 @@ class ItemTemplate6(ItemTemplate6Template):
                 result = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name)
                 if result == True:
                     alert("Fichier jpg sauvé") 
-            self.image_1.source = file
-
+                self.image_1.source = file
+            else:   # jpg: file est le fichier chargé sans modif
+                self.image_1.source = file
             
     
     def button_tele_pdf_click(self, **event_args):
