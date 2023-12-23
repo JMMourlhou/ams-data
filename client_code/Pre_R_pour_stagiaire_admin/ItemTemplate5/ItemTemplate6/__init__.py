@@ -10,7 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 from ....import Pre_R_doc_name        # Pour générer un nouveau nom au document chargé
-
+from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf   #pour afficher un document avant de le télécharger
 
 class ItemTemplate6(ItemTemplate6Template):
     def __init__(self, **properties):
@@ -39,8 +39,8 @@ class ItemTemplate6(ItemTemplate6Template):
             if file_extension != ".pdf":
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 new_file_name = new_file_name + ".jpg"
+                
             # Sauvegarde du 'file' (qu'il soit img ou pdf)
-            
             result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name) 
             if result == False:
                 alert("Fichier non sauvé")                
@@ -80,10 +80,10 @@ class ItemTemplate6(ItemTemplate6Template):
         if not pr_requis_row:
             alert("Erreur: stagiaire not found !")
         
-        if pr_requis_row['doc1']:     #img existe ds le row
-            doc_img = pr_requis_row['doc1']
-            file = anvil.server.call("print_pdf",doc_img, new_file_name)
-        anvil.media.download(file)   
+        if pr_requis_row['doc1']:     #img existe ds le row, je l'affiche ds Pre_visu_img_pdf
+            from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour générer un fichier pdf d'une image et la télecharger
+            open_form('Pre_Visu_img_Pdf', pr_requis_row['doc1'], new_file_name, stage_num, email, item_requis)
+  
 
     def image_1_mouse_down(self, x, y, button, keys, **event_args):
         """This method is called when the button is clicked"""      

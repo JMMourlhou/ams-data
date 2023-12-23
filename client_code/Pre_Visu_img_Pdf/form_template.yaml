@@ -16,13 +16,13 @@ components:
     components:
     - name: download
       properties: {text: Téléchargement, background: 'theme:Primary', foreground: 'theme:Tertiary',
-        visible: false}
+        visible: true}
       type: Button
       layout_properties: {grid_position: 'LSXOEP,ZQNCZV'}
       event_bindings: {click: download_click}
     - name: retour
       properties: {text: Retour, background: 'theme:Primary', foreground: 'theme:Tertiary',
-        visible: false}
+        visible: true}
       type: Button
       layout_properties: {grid_position: 'LSXOEP,WHUOGR'}
       event_bindings: {click: retour_click}

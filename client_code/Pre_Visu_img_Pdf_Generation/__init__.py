@@ -14,4 +14,4 @@ class Pre_Visu_img_Pdf_Generation(Pre_Visu_img_Pdf_GenerationTemplate):
         self.image_1.source = file
         print("Pdf Generation")
 
-
+   
