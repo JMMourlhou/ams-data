@@ -39,13 +39,13 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             print('img.size', img.size)
             # Si img de très haute qualité je divise en deux
             if width >= height:   #landscape
-                if width > 3000:
-                    width = width / 2
-                    height = height / 2
+                if width > 2000:
+                    width = width / 3                       # A RENTRER DS LES PARAM
+                    height = height / 3
             if height > width:
-                if height > 3000:
-                    width = int(width / 2)
-                    height = int(height / 2)
+                if height > 2000:
+                    width = int(width / 3)
+                    height = int(height / 3)
             # Resize the image to the required size
             img = img.resize((width,height))    
             width, height = img.size

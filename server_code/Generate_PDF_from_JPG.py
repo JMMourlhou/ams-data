@@ -4,6 +4,14 @@ from anvil.tables import app_tables
 import anvil.server
 from anvil.pdf import PDFRenderer
 
+"""
+    quality :
+    "original": All images will be embedded at original resolution. Output file can be very large.
+    "screen": Low-resolution output similar to the Acrobat Distiller “Screen Optimized” setting.
+    "printer": Output similar to the Acrobat Distiller “Print Optimized” setting.
+    "prepress": Output similar to Acrobat Distiller “Prepress Optimized” setting.
+    "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
+    """
 
 @anvil.server.callable
 def generate_pdf_from_jpg(file, file_name, stage_num, email, item_requis, pr_requis_row):
