@@ -1,18 +1,12 @@
-
-import anvil.files
-from anvil.files import data_files
 import anvil.tables as tables
-from anvil.tables import app_tables
 import anvil.tables.query as q
+from anvil.tables import app_tables
 import anvil.server
-from anvil import *  #pour les alertes
-
-import anvil.media
 from anvil.pdf import PDFRenderer
 
-@anvil.server.background_task
-#@anvil.server.callable
-def create_doc_img_into_pdf(file, file_name, stage_num, email, item_requis):
+
+@anvil.server.callable
+def generate_pdf_from_jpg(file, file_name, stage_num, email, item_requis, pr_requis_row):
     pdf_object = PDFRenderer(page_size ='A4',
                             filename = f"{file_name}.pdf",
                             landscape = False,
@@ -22,17 +16,17 @@ def create_doc_img_into_pdf(file, file_name, stage_num, email, item_requis):
                             ).render_form('Pre_Visu_img_Pdf_Generation',file)
                             #).render_form('Pre_Visu_img_Pdf',file, file_name, stage_num, email, item_requis)
     # save mediaobject in table pre requi du stage/stagiaire/pre requi  
+    """
     # finding the row
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
                                               item_requis = item_requis                                             
-                                             )                                      
-    if not pr_requis_row:
-        print("Erreur: stagiaire not found !")
-    else: 
-        pr_requis_row.update(   
-                                pdf_doc1 = media_object
-                          )
+                                             )
+    """                                        
+    if pr_requis_row:
+        pr_requis_row.update(pdf_doc1 = pdf_object)
+
+    return pdf_object
 
 
 

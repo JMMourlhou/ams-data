@@ -26,54 +26,56 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                                               stagiaire_email = email,
                                               item_requis = item_requis                                             
                                              )                                      
-    if not pr_requis_row:
-        raise Exception("Erreur: stagiaire not found !")
-        return False, None   
+    if pr_requis_row:
+        if file_extension == ".jpg":
+            print("serveur Preq: Ce fichier est une image JPG")
+
+            
+            #--------------------------------------------------------------------------------
+            # Img file, Convert the 'file' Media object into a Pillow Image
+            img = Image.open(io.BytesIO(file.get_bytes()))
+            width, height = img.size
+            print('size', width, height)
+            print('img.size', img.size)
+            # Si img de très haute qualité je divise en deux
+            if width >= height:   #landscape
+                if width > 3000:
+                    width = width / 2
+                    height = height / 2
+            if height > width:
+                if height > 3000:
+                    width = int(width / 2)
+                    height = int(height / 2)
+            # Resize the image to the required size
+            img = img.resize((width,height))    
+            width, height = img.size
+            print('new_size', width, height)
+            
+            # Convert the Pillow Image into an Anvil Media object and return it
+            bs = io.BytesIO()
+            img.save(bs, format="JPEG")
     
-    if file_extension != ".pdf":
-        print("serveur Preq: Ce fichier est une image")
-        """
-        # Img file, Convert the 'file' Media object into a Pillow Image
-        img = Image.open(io.BytesIO(file.get_bytes()))
-        width, height = img.size
-        print('size', width, height)
+            file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
+            # -------------------------------------------------------------------------------------
 
-        # Si img de très haute qualité je divise en deux
-        if width >= height:   #landscape
-            if width > 3000:
-                width = width / 2
-                height = height / 2
-        if height > width:
-            if height > 3000:
-                width = int(width / 2)
-                height = int(height / 2)
-        # Resize the image to the required size
-        img = img.resize((width,height))    
-        width, height = img.size
-        print('new_size', width, height)
-        
-        # Convert the Pillow Image into an Anvil Media object and return it
-        bs = io.BytesIO()
-        img.save(bs, format="JPEG")
+            
+            # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1
+            pr_requis_row.update(check=True,               
+                                doc1 = file,
+                                thumb_doc1 = thumb_file
+                                )
+            return True, None    # Sov effectué et None liste_images (car img, pas pdf)   
+    
 
-        file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
-        """
-        
-        # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1
-        pr_requis_row.update(check=True,               
-                            doc1 = file,
-                            thumb_doc1 = thumb_file
-                            )
-        return True, None    # Sov effectué et None liste_images (car img, pas pdf)   
-        
-
-    if file_extension == ".pdf":
-        print("serveur Preq: Ce fichier est un pdf")
-        # SAUVEGARDE du fichier pdf 'file'
-        pr_requis_row.update(check=True,               
-                            pdf_doc1 = file
-                            )
-        print("Preq maj du pdf_doc1, envoi au module z_pdf_to_img.pdf_into_image")
-        liste_images = z_pdf_to_img.pdf_into_images(stage_num, item_requis, email, new_file_name)
-    return True, liste_images
-        
+        if file_extension == ".pdf":
+            print("serveur Preq: Ce fichier est un pdf")
+            # SAUVEGARDE du fichier pdf 'file'
+            pr_requis_row.update(check=True,               
+                                pdf_doc1 = file
+                                )
+            print("Preq maj du pdf_doc1, envoi au module z_pdf_to_img.pdf_into_image") # pour récupérer le fichier JPG du pdf
+            liste_images = z_pdf_to_img.pdf_into_images(stage_num, item_requis, email, new_file_name)
+        return True, liste_images
+    else:
+        Print("pr_requis_row vide")
+        return False, None
