@@ -20,8 +20,8 @@ def create_doc_img_into_pdf(file, file_name, stage_num, email, item_requis):
                             margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  #  cm
                             scale = 1.0,
                             quality =  "default"
-                            ).render_form('Pre_Visu_img_Pdf',file, file_name, stage_num, email, item_requis)
-                            #).render_form('Pre_Visu_img_Pdf_Generation',file)
+                            ).render_form('Pre_Visu_img_Pdf_Generation',file)
+                            #).render_form('Pre_Visu_img_Pdf',file, file_name, stage_num, email, item_requis)
     # save mediaobject in table pre requi du stage/stagiaire/pre requi  
     # finding the row
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
