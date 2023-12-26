@@ -39,28 +39,29 @@ class ItemTemplate6(ItemTemplate6Template):
             thumb_file = None
             # si 'file' est jpg, je l'affiche directement 
             if file_extension == ".jpg":
+                print("JPG loaded")
                 new_file_name = new_file_name + ".jpg" # rajout extension
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 self.image_1.source = file
                
                 # Sauvegarde du 'file' jpg et de son thumb nail
                 result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
-                if result2 == True:
+                if result == True:
                      print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
             
             # si 'file' est pdf, je l'affiche, après traitement, au format jpg
-            if self.file_extension == ".pdf":
-                result1, liste_images = anvil.server.call('pdf_into_jpg', stage_num, item_requis, email, new_file_name)
+            if file_extension == ".pdf":
+                print("PDF loaded")
+                result1, liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
                 if result1:
                     file = liste_images[0] #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
                     thumb_file =  anvil.image.generate_thumbnail(file, 640)
         
                     
                     # renvoi en écriture des images générées ds table
-                    file_extension = ".jpg"
                     new_file_name = new_file_name + ".jpg"
                     # Sauvegarde du 'file' jpg et de son thumb nail
-                    result2 = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name)
+                    result2 = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, ".jpg", thumb_file, new_file_name)
                     if result2 == True:
                         print(f"Fichier {new_file_name} de pdf en jpg, sauvé") 
     

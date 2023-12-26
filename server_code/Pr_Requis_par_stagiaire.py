@@ -10,7 +10,7 @@ import anvil.server
 from PIL import Image
 import io
 import pathlib
-import z_pdf_to_img
+import Pr_pdf_to_jpg
 
 
 @anvil.server.callable
