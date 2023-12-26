@@ -53,13 +53,22 @@ class ItemTemplate6(ItemTemplate6Template):
             # si 'file' est pdf, je l'affiche, après traitement, au format jpg
             if file_extension == ".pdf":
                 print("PDF loaded")
-                
-                # Sauvegarde du 'file' pdf ds table pré requis
+        
+                # Sauvegarde du 'file'
                 result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                if result == False:
+                    alert("Fichier non sauvé")     
+                
+                liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
+                #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
+                file = liste_images[0]
+                thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                # renvoi en écriture des images générées ds table
+                file_extension = ".img"
+                new_file_name = new_file_name + ".jpg"
+                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name)
                 if result == True:
-                     print(f"Fichier pdf, jpg et thumb {new_file_name} sauvés")
-                jpg_file = liste_images[0] #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
-                thumb_file =  anvil.image.generate_thumbnail(jpg_file, 640)
+                    alert("Fichier jpg sauvé") 
                 self.image_1.source = file
                     
     
