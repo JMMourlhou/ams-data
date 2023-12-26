@@ -64,9 +64,10 @@ class ItemTemplate6(ItemTemplate6Template):
                 file = liste_images[0]
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 # renvoi en écriture des images générées ds table
-                file_extension = ".img"
+                file_ext = ".jpg"
                 new_file_name = new_file_name + ".jpg"
-                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name)
+                print("new_file_name ",new_file_name)
+                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_ext, thumb_file, new_file_name)
                 if result == True:
                     alert("Fichier jpg sauvé") 
                 self.image_1.source = file
@@ -87,7 +88,8 @@ class ItemTemplate6(ItemTemplate6Template):
         
     def image_1_mouse_down(self, x, y, button, keys, **event_args):
         """This method is called when the button is clicked"""      
-
+        pass
+        """
         # nouveau nom doc
         new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse
         try:  # si Pdf 
@@ -97,7 +99,7 @@ class ItemTemplate6(ItemTemplate6Template):
             open_form('Pre_Visu_PDF_into_IMG', images=liste_images, add_border=True)
         except:  # si JPG
             self.button_visu_click()
-
+        """
 
 
 

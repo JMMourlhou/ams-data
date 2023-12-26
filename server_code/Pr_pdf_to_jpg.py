@@ -13,9 +13,13 @@ import requests
 from typing import List
 from io import BytesIO
 from shutil import copyfile
+global filename 
+filename=""
 
 @anvil.server.callable
 def pdf_into_jpg(stage_num, item_requis, email, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
+    global filename
+    filename = new_file_name                                    # essai
     # finding the stagiaire's row 
     row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
@@ -36,14 +40,14 @@ def get_pdf_file_images_from_url(pdf_file_url: str) -> List:
     with tempfile.TemporaryDirectory() as tmpdirname:
         pdf_file_path = os.path.join(tmpdirname, 'tmp.pdf')
         _download_file(pdf_file_url, pdf_file_path)
-        return get_images_from_pdf_file(pdf_file_path, tmpdirname)
+        return get_images_from_pdf_file(pdf_file_path, tmpdirname)             
 
 
 def get_pdf_file_images(media: anvil.media) -> List:
     with tempfile.TemporaryDirectory() as tmpdirname:
         pdf_file_path = os.path.join(tmpdirname, media.name)
         _write_file(pdf_file_path, media)
-        return get_images_from_pdf_file(pdf_file_path, tmpdirname)
+        return get_images_from_pdf_file(pdf_file_path, tmpdirname)             
 
 def _write_file(file_name, media):
     os.makedirs(os.path.dirname(file_name), exist_ok=True)
@@ -71,19 +75,20 @@ def _download_file(url, destination):
 
 
 def get_images_from_pdf_file(pdf_file_path: str, target_folder: str) -> List:
-    images = pdf_to_jpg(source_file_path=pdf_file_path, target_folder_path=target_folder)
+    images = pdf_to_jpg(source_file_path=pdf_file_path, target_folder_path=target_folder)       
     return [anvil.media.from_file(fpath) for fpath in images]
 
 
-def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:
+def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    # new file name rentré à la place de page 
+    global filename
+    
     images = convert_from_path(source_file_path)
-
     im_paths = []
     for i in range(len(images)):
         # Save pages as images in the pdf
         #im_name = 'page' + str(i) + '.jpg'
-        im_name = 'page' + str(i) + '.jpg'
-        path = os.path.join(target_folder_path, im_name)
+        im_name = filename + str(i) + '.jpg'                  # <--  Ici
+        path = os.path.join(target_folder_path, im_name)     
         im_paths.append(path)
         images[i].save(path, 'JPEG')
     return im_paths
