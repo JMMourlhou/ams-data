@@ -23,11 +23,10 @@ def pdf_into_images(stage_num, item_requis, email, new_file_name) -> List:   # f
                                              )
     if not row:
         print("module pdf_into_images","Erreur: stagiaire not found !")
-        return False  
-  
-    media = row["pdf_doc1"]
-
-    return get_pdf_file_images(media=media)
+        return False, None 
+    else:
+        media = row["pdf_doc1"]
+        return True, get_pdf_file_images(media=media)
         
     
 

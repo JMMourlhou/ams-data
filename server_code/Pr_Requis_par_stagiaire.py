@@ -28,9 +28,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                                              )                                      
     if pr_requis_row:
         if file_extension == ".jpg":
-            print("serveur Preq: Ce fichier est une image JPG")
-
-            
+            print("serveur Preq: Ce fichier est une image JPG")          
             #--------------------------------------------------------------------------------
             # Img file, Convert the 'file' Media object into a Pillow Image
             img = Image.open(io.BytesIO(file.get_bytes()))
