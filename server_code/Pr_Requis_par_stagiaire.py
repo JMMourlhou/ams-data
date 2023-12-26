@@ -70,6 +70,14 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             pr_requis_row.update(check=True,               
                                 pdf_doc1 = file,
                                 )
+
+            # stagiaire's row test
+            pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
+                                              stagiaire_email = email,
+                                              item_requis = item_requis                                             
+                                             )                        
+            print(len(pr_requis_row['pdf_doc1']),pr_requis_row['pdf_doc1'])
+            
             print("PDF: Preq maj du pdf_doc1, envoi au module z_pdf_to_img.pdf_into_image") # pour récupérer le fichier JPG du pdf
             liste_images = Pr_pdf_to_jpg.pdf_into_jpg(stage_num, item_requis, email, new_file_name)
             jpg_file = liste_images[0] #extraction 1ere image de la liste (il peut y avoir plusieurs pages
