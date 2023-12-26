@@ -20,7 +20,8 @@ class ItemTemplate6(ItemTemplate6Template):
         # Any code you write here will run before the form opens.
         self.text_area_1.text = self.item['item_requis']['requis']
         self.image_1.source = self.item['thumb_doc1']              # DIPLAY L'image basse qualité (640 x 640)
-
+        self.button_visu.tag = self.item['doc1']             # pour récupérer l'image source pour bt visu
+        
         self.stage_num =   self.item['stage_num']
         self.item_requis = self.item['item_requis']
         self.email =       self.item['stagiaire_email']
@@ -80,6 +81,16 @@ class ItemTemplate6(ItemTemplate6Template):
             open_form('Pre_Visu_img_Pdf', pr_requis_row['doc1'], new_file_name, stage_num, email, item_requis)
         """
 
+        def button_visu_click(self, **event_args):
+            """This method is called when the button is clicked"""
+            # nouveau nom doc
+            new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse
+            # si doc type jpg ds table
+            if self.button_visu.tag != None:
+                #self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité
+                from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
+                open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name, self.stage_num, self.email, self.item_requis)
+        
     def image_1_mouse_down(self, x, y, button, keys, **event_args):
         """This method is called when the button is clicked"""      
 
@@ -95,4 +106,8 @@ class ItemTemplate6(ItemTemplate6Template):
             self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour générer un fichier pdf d'une image et la télecharger
             open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name, "visu")
+
+
+
+
 

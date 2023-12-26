@@ -64,11 +64,16 @@ components:
       type: FileLoader
       layout_properties: {grid_position: 'OJZEBD,OVCNOI'}
       event_bindings: {change: file_loader_1_change}
+    - name: button_visu
+      properties: {text: Visu, foreground: 'theme:On Primary', icon: 'fa:window-maximize'}
+      type: Button
+      layout_properties: {grid_position: 'HELJAN,UDSXGB'}
+      event_bindings: {click: button_visu_click}
     - name: button_tele_pdf
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: 'theme:On Primary', visible: true, text: Téléchrgt PDF, font_size: null,
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
+        background: '', bold: false, underline: false, icon: 'fa:download'}
       type: Button
       layout_properties: {grid_position: 'FTNTDR,KZLFXJ'}
       event_bindings: {click: button_tele_pdf_click}
