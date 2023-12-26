@@ -74,7 +74,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                                 )
             #print("Preq maj du pdf_doc1, envoi au module z_pdf_to_img.pdf_into_image")
             #liste_images = z_pdf_to_img.pdf_into_jpg(stage_num, item_requis, email, new_file_name)
-        return True, liste_images
+        return True, None
     else:
         Print("pr_requis_row vide")
         return False, None
