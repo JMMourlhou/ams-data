@@ -11,11 +11,12 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.image_1.source = file
+        self.image_1.source = file          
         self.new_file_name = new_file_name
         self.stage_num = stage_num
         self.email = email
         self.item_requis = item_requis
+        self.label_1.text = self.new_file_name
 
     def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -24,9 +25,16 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
 
     def download_click(self, **event_args):
         """This method is called when the button is clicked"""
-        # recup file pdf de table temp
-        media_object = anvil.server.call("create_doc_img_into_pdf", self.image_1.source)
-        anvil.media.download(media_object)
+        # finding the stagiaire's row et envoi du row au serveur
+        pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = self.stage_num,
+                                              stagiaire_email = self.email,
+                                              item_requis = self.item_requis                                             
+                                             )                                      
+        if not pr_requis_row:
+            alert("Erreur: stagiaire not found !")
+    
+        media_object = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
+        anvil.media.download(media_object) 
 
             
 
