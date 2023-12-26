@@ -19,13 +19,14 @@ class ItemTemplate6(ItemTemplate6Template):
 
         # Any code you write here will run before the form opens.
         self.text_area_1.text = self.item['item_requis']['requis']
-        self.image_1.source = self.item['thumb_doc1']              # DIPLAY L'image basse qualité (640 x 640)
-        #self.button_visu.tag = self.item['doc1']             # pour récupérer l'image source pour bt visu
+        self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
+        if self.image_1.source != "":
+            self.button_visu.visible = True
         
         self.stage_num =   self.item['stage_num']
         self.item_requis = self.item['item_requis']
         self.email =       self.item['stagiaire_email']
-
+        
     
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
@@ -44,7 +45,7 @@ class ItemTemplate6(ItemTemplate6Template):
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 self.image_1.source = file
                
-                # Sauvegarde du 'file' jpg et de son thumb nail
+                # Sauvegarde du 'file' jpg et de son thumb nail ds table pré requis
                 result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
                 if result == True:
                      print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
@@ -52,18 +53,15 @@ class ItemTemplate6(ItemTemplate6Template):
             # si 'file' est pdf, je l'affiche, après traitement, au format jpg
             if file_extension == ".pdf":
                 print("PDF loaded")
-                result1, liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
-                if result1:
-                    file = liste_images[0] #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
-                    thumb_file =  anvil.image.generate_thumbnail(file, 640)
-        
+                
+                # Sauvegarde du 'file' pdf ds table pré requis
+                result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                if result == True:
+                     print(f"Fichier pdf, jpg et thumb {new_file_name} sauvés")
+                jpg_file = liste_images[0] #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
+                thumb_file =  anvil.image.generate_thumbnail(jpg_file, 640)
+                self.image_1.source = file
                     
-                    # renvoi en écriture des images générées ds table
-                    new_file_name = new_file_name + ".jpg"
-                    # Sauvegarde du 'file' jpg et de son thumb nail
-                    result2 = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, ".jpg", thumb_file, new_file_name)
-                    if result2 == True:
-                        print(f"Fichier {new_file_name} de pdf en jpg, sauvé") 
     
 
     def button_visu_click(self, **event_args):
@@ -71,9 +69,12 @@ class ItemTemplate6(ItemTemplate6Template):
         # nouveau nom doc
         new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse
         # si doc type jpg ds table
-        if self.item['doc1']:
+        if self.image_1.source != "":
+            self.button_visu.visible = True
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
-            open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name, self.stage_num, self.email, self.item_requis)
+            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis)
+
+            
         
     def image_1_mouse_down(self, x, y, button, keys, **event_args):
         """This method is called when the button is clicked"""      
