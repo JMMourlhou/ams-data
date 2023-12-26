@@ -76,7 +76,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                                               stagiaire_email = email,
                                               item_requis = item_requis                                             
                                              )                        
-            print(len(pr_requis_row['pdf_doc1']),pr_requis_row['pdf_doc1'])
+            print(pr_requis_row['pdf_doc1'])
             
             print("PDF: Preq maj du pdf_doc1, envoi au module z_pdf_to_img.pdf_into_image") # pour récupérer le fichier JPG du pdf
             liste_images = Pr_pdf_to_jpg.pdf_into_jpg(stage_num, item_requis, email, new_file_name)
