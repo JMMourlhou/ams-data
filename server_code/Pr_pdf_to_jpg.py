@@ -1,4 +1,4 @@
-
+# Transform a pdf file loaded into 1 or several pictures
 import anvil.files
 from anvil.files import data_files
 import anvil.tables as tables
@@ -15,7 +15,7 @@ from io import BytesIO
 from shutil import copyfile
 
 @anvil.server.callable
-def pdf_into_images(stage_num, item_requis, email, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
+def pdf_into_jpg(stage_num, item_requis, email, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
     # finding the stagiaire's row 
     row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
                                               stagiaire_email = email,
@@ -85,6 +85,5 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:
         path = os.path.join(target_folder_path, im_name)
         im_paths.append(path)
         images[i].save(path, 'JPEG')
-
     return im_paths
   

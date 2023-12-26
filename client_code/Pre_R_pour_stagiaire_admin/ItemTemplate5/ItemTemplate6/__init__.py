@@ -50,7 +50,7 @@ class ItemTemplate6(ItemTemplate6Template):
             
             # si 'file' est pdf, je l'affiche, après traitement, au format jpg
             if self.file_extension == ".pdf":
-                result1, liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email, new_file_name)
+                result1, liste_images = anvil.server.call('pdf_into_jpg', stage_num, item_requis, email, new_file_name)
                 if result1:
                     file = liste_images[0] #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
                     thumb_file =  anvil.image.generate_thumbnail(file, 640)
