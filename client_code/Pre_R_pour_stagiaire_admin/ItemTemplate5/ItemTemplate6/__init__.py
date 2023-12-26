@@ -55,12 +55,13 @@ class ItemTemplate6(ItemTemplate6Template):
                 print("PDF loaded")
         
                 # Sauvegarde du 'file'
-                result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
                 if result == False:
                     alert("Fichier non sauvé")     
                 
                 liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
+                
                 file = liste_images[0]
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 # renvoi en écriture des images générées ds table
