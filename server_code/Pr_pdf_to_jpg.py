@@ -88,6 +88,8 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    
         # Save pages as images in the pdf
         #im_name = 'page' + str(i) + '.jpg'
         im_name = filename + str(i) + '.jpg'                  # <--  Ici
+        print("pdfinto img:",im_name)                         # ok
+        
         path = os.path.join(target_folder_path, im_name)     
         im_paths.append(path)
         images[i].save(path, 'JPEG')
