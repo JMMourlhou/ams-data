@@ -39,12 +39,12 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             # Si img de très haute qualité je divise en deux
             if width >= height:   #landscape
                 if width > 2000:
-                    width = width / 3                       # A RENTRER DS LES PARAM
-                    height = height / 3
+                    width = width / 2.5                       # A RENTRER DS LES PARAM
+                    height = height / 2.5
             if height > width:
                 if height > 2000:
-                    width = int(width / 3)
-                    height = int(height / 3)
+                    width = int(width / 2.5)
+                    height = int(height / 2.5)
             # Resize the image to the required size
             img = img.resize((width,height))    
             width, height = img.size
@@ -58,7 +58,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             # -------------------------------------------------------------------------------------
 
             
-            # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1
+            # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file
                                 )
