@@ -32,9 +32,21 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
                                              )                                      
         if not pr_requis_row:
             alert("Erreur: stagiaire not found !")
-    
-        media_object = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
-        anvil.media.download(media_object) 
+
+        # Si le doc pdf a un nom déjà formatté, je le télécharge direct
+        media = pr_requis_row['pdf_doc1']   #j'extrai le nom du doc pdf ds la table
+        if media != None:
+            name_media = media.name[0:3]   
+            try:
+                test_if_integer = int(media) # pas d'erreur doc pdf a un nom déjà formatté, je le télécharge direct
+                 
+            except:      # si 3 1eres lettres ne sont pas numériques: c'est le doc pdf chargé au départ, et nom d'origine en table, je sauve
+                
+                media = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
+               
+        else:  # si pas de doc pdf pour ce doc, je le génère et le sauverai   
+            media = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
+        anvil.media.download(media) 
 
             
 
