@@ -37,15 +37,19 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         media = pr_requis_row['pdf_doc1']   #j'extrai le nom du doc pdf ds la table
         if media != None:
             name_media = media.name[0:3]   
+            print(name_media)
             try:
-                test_if_integer = int(media) # pas d'erreur doc pdf a un nom déjà formatté, je le télécharge direct
-                 
+                test_if_integer = int(media) # pas d'erreur TRY doc pdf a un nom déjà formatté, je le télécharge direct
+                print("nom déja formatté: téléchrgt")
             except:      # si 3 1eres lettres ne sont pas numériques: c'est le doc pdf chargé au départ, et nom d'origine en table, je sauve
                 # Il serait bien de trouver la façon de changer le nom de ce fichier binaire avec python
                 # https://www.pythoniste.fr/python/travailler-avec-les-i-o-de-fichiers-en-python/
+                print("nom pas encore formatté: doc pdf original, téléchrgt après traitement cht de nom")
                 media = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
                
         else:  # si pas de doc pdf pour ce doc, je le génère et le sauverai   
+            print("pdf pas encore créé, téléchrgt après génération et cht de nom")
+            
             media = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
         anvil.media.download(media) 
 

@@ -51,7 +51,7 @@ def get_pdf_file_images(media: anvil.media) -> List:
 
 def _write_file(file_name, media):
     os.makedirs(os.path.dirname(file_name), exist_ok=True)
-    with open(file_name, "wb") as f:
+    with open(file_name, "wb") as f:                        # with permet de fermer auto le fichier binaire à la fin
         if type(media) == BytesIO:
             _write_bytes_io(file_name, media)
         else:
@@ -80,7 +80,7 @@ def get_images_from_pdf_file(pdf_file_path: str, target_folder: str) -> List:
 
 
 def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    # new file name rentré à la place de page 
-    global filename
+    global filename                                          # global file name
     
     images = convert_from_path(source_file_path)
     im_paths = []
