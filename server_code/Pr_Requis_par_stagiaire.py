@@ -54,9 +54,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             img.save(bs, format="JPEG")
     
             file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
-            # -------------------------------------------------------------------------------------
-
-            
+            # -------------------------------------------------------------------------------------            
             # SAUVEGARDE IMG ds doc1, je ne change pas pdf_doc1, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file

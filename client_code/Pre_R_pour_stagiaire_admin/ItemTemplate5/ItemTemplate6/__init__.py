@@ -57,7 +57,7 @@ class ItemTemplate6(ItemTemplate6Template):
                 # Sauvegarde du 'file'
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
                 if result == False:
-                    alert("Fichier non sauvé")     
+                    alert("Fichier PDF non sauvé")     
                 # génération du JPG à partir du pdf
                 liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
@@ -69,11 +69,9 @@ class ItemTemplate6(ItemTemplate6Template):
                 new_file_name = new_file_name + ".jpg"
                 print("new_file_name ",new_file_name)
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_ext, thumb_file, new_file_name)
-                if result == True:
-                    alert("Fichier jpg sauvé") 
+                if result != True:
+                    alert("Fichier jpg non sauvé") 
                 self.image_1.source = file
-                    
-    
 
     def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -84,23 +82,8 @@ class ItemTemplate6(ItemTemplate6Template):
             self.button_visu.visible = True
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
             open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis)
-
-            
         
-    def image_1_mouse_down(self, x, y, button, keys, **event_args):
-        """This method is called when the button is clicked"""      
-        pass
-        """
-        # nouveau nom doc
-        new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse
-        try:  # si Pdf 
-            liste_images = anvil.server.call('pdf_into_images', stage_num, item_requis, email, new_file_name, "visu")
-            alert("pdf")
-            from ....Pre_Visu_PDF_into_IMG import Pre_Visu_PDF_into_IMG
-            open_form('Pre_Visu_PDF_into_IMG', images=liste_images, add_border=True)
-        except:  # si JPG
-            self.button_visu_click()
-        """
+
 
 
 
