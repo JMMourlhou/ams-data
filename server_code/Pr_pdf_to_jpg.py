@@ -27,11 +27,11 @@ def pdf_into_jpg(stage_num, item_requis, email, new_file_name) -> List:   # file
                                              )
     if not row:
         print("module pdf_into_images","Erreur: stagiaire not found !")
-        return False, None 
+        return False
     else:
         media = row["pdf_doc1"]                        # Lecture du doc pdf ds table
         print(media.name)
-        return True, get_pdf_file_images(media=media)
+        return get_pdf_file_images(media=media)
         
     
 
