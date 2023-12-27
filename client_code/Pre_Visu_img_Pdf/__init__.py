@@ -41,7 +41,8 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
                 test_if_integer = int(media) # pas d'erreur doc pdf a un nom déjà formatté, je le télécharge direct
                  
             except:      # si 3 1eres lettres ne sont pas numériques: c'est le doc pdf chargé au départ, et nom d'origine en table, je sauve
-                
+                # Il serait bien de trouver la façon de changer le nom de ce fichier binaire avec python
+                # https://www.pythoniste.fr/python/travailler-avec-les-i-o-de-fichiers-en-python/
                 media = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
                
         else:  # si pas de doc pdf pour ce doc, je le génère et le sauverai   
