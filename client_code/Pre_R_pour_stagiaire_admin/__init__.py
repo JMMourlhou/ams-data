@@ -8,8 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-#global user_pr
-#user_pr = anvil.users.get_user()
+
 
 class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
     def __init__(self, num_stage, **properties):
@@ -29,5 +28,5 @@ class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
-        open_form('Pre_R_pour_stagiaire_admin',self.num_stage)
+        from ..Visu_stages import Visu_stages
+        open_form('Visu_stages')
