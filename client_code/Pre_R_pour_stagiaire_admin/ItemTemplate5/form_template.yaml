@@ -3,7 +3,7 @@ container: {type: ColumnPanel}
 components:
 - name: flow_panel_1
   properties: {role: null, vertical_align: full, spacing: medium, align: center, tooltip: '',
-    border: '', foreground: '', visible: true, spacing_above: medium, spacing_below: none,
+    border: '', foreground: '', visible: true, spacing_above: small, spacing_below: none,
     background: 'theme:Tertiary'}
   type: FlowPanel
   layout_properties: {grid_position: 'LOJURE,JOSXQR'}
