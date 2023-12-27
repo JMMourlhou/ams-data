@@ -19,8 +19,8 @@ def generate_pdf_from_jpg(file, file_name, stage_num, email, item_requis, pr_req
     pdf_object = PDFRenderer(page_size ='A4',
                             filename = f"{file_name}.pdf",
                             landscape = False,
-                            margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  #  cm
-                            scale = 1.0,
+                            margins = {'top': 0.3, 'bottom': 0.1, 'left': 0.2, 'right': 0.2},  #  cm
+                            scale = 1.0,                                                       
                             quality =  "default"   # 'default' ok pdf 3300 ko --> pdf 368 ko
                             ).render_form('Pre_Visu_img_Pdf_Generation',file, file_name)
                     

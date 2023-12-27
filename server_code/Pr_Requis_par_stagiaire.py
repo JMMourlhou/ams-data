@@ -60,9 +60,16 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             
             # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1
             pr_requis_row.update(check=True,               
+                                doc1 = file
+                                )
+            """
+            pr_requis_row.update(check=True,               
                                 doc1 = file,
                                 thumb_doc1 = thumb_file
                                 )
+            """
+            
+            
             return True, None    # Sov effectué et None liste_images (car img, pas pdf)   
     
 

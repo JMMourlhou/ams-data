@@ -10,15 +10,13 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 class Pre_Visu_PDF_into_IMG(Pre_Visu_PDF_into_IMGTemplate):
-    def __init__(self,  images, add_border: bool=False, mode="visu", **properties):
+    def __init__(self,  images, add_border: bool=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.mode = mode
         # Any code you write here will run before the form opens.
-        if self.mode == "visu":
-            self.download.visible = True
-            self.retour.visible = True
-        #print(images)
+        
+        print(images)
         list = [{
         'image': im,
         'page_number': page_number + 1,
