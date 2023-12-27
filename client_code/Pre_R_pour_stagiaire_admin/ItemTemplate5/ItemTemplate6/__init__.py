@@ -18,8 +18,8 @@ class ItemTemplate6(ItemTemplate6Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        txt = "f{self.item['item_requis']['requis']} / {self.item['item_requis']}"
-        self.label_1.text = self.item['item_requis']['requis']
+        txt = {self.item['item_requis']['requis']} + "/" {self.item['item_requis']}"
+        self.label_1.text = txt
         self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
         if self.image_1.source != "":
             self.button_visu.visible = True

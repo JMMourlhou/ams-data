@@ -27,13 +27,13 @@ components:
       event_bindings: {}
     layout_properties: {width: 331.789}
   - name: column_panel_2
-    properties: {role: null}
+    properties: {role: null, col_spacing: none}
     type: ColumnPanel
-    layout_properties: {width: 164.6711044921875}
+    layout_properties: {width: 195.7799384765625}
     components:
     - name: file_loader_1
       properties:
-        role: elevated-button
+        role: outlined-button
         show_state: true
         align: center
         tooltip: ''
@@ -47,7 +47,7 @@ components:
         font_size: null
         font: ''
         spacing_above: small
-        icon_align: left
+        icon_align: top
         spacing_below: small
         italic: false
         file: null
@@ -55,13 +55,13 @@ components:
         bold: false
         underline: false
         multiple: false
-        icon: ''
+        icon: fa:upload
       type: FileLoader
       layout_properties: {grid_position: 'YVDKSY,HANUML'}
       event_bindings: {change: file_loader_1_change}
     - name: button_visu
-      properties: {text: Voir, foreground: 'theme:On Primary', icon: '', visible: false,
-        role: filled-button, background: 'theme:Primary'}
+      properties: {text: '  Voir', foreground: 'theme:On Primary', icon: 'fa:window-restore',
+        visible: true, role: filled-button, background: 'theme:Primary', icon_align: top}
       type: Button
       layout_properties: {grid_position: 'YVDKSY,OGIMLT'}
       event_bindings: {click: button_visu_click}
