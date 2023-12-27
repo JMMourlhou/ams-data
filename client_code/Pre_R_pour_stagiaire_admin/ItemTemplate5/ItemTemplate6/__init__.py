@@ -36,6 +36,7 @@ class ItemTemplate6(ItemTemplate6Template):
         """This method is called when a new file is loaded into this FileLoader"""
         if file != None:  #pas d'annulation en ouvrant choix de fichier
             # nouveau nom doc SANS extension
+
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
             print(new_file_name)
             # Type de fichier ?
@@ -76,6 +77,7 @@ class ItemTemplate6(ItemTemplate6Template):
                 if result != True:
                     alert("Fichier jpg non sauvé") 
                 self.image_1.source = file
+            self.button_visu.visible = True
 
     def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""

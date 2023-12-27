@@ -18,38 +18,71 @@ class ItemTemplate3(ItemTemplate3Template):
 
         # Any code you write here will run before the form opens.
         self.text_box_1.text = self.item['item_requis']['requis']
-        self.image_1.source = self.item['thumb_doc1']              # DIPLAY L'image basse qualité (640 x 640)
+        self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
+        try:
+            media = self.item['doc1'].name
+            self.button_visu.visible = True
+        except:
+            pass
+        
+        self.stage_num =   self.item['stage_num'] 
+        self.item_requis = self.item['item_requis']
+        self.email =       self.item['stagiaire_email']
 
     def file_loader_1_change(self, file, **event_args):
-        """This method is called when a new file is loaded into this FileLoader"""
-        if file != None:
-    
-            stage_num =   self.item['stage_num']
-            item_requis = self.item['item_requis']
-            email =       self.item['stagiaire_email']
+        if file != None:  #pas d'annulation en ouvrant choix de fichier
+            # nouveau nom doc SANS extension
 
-            # nouveau nom doc
-            new_file_name = Pre_R_doc_name.doc_name_creation(stage_num, item_requis, email)   # extension non incluse 
-            
+            new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
+            print(new_file_name)
             # Type de fichier ?
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
 
             thumb_file = None
-            if file_extension != ".pdf":
+            # si 'file' est jpg, je l'affiche directement 
+            if file_extension == ".jpg":
+                print("JPG loaded")
+                new_file_name = new_file_name + ".jpg" # rajout extension
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
-                new_file_name = new_file_name + ".jpg"
-            # Sauvegarde du 'file' (qu'il soit img ou pdf)
+                self.image_1.source = file
+               
+                # Sauvegarde du 'file' jpg et de son thumb nail ds table pré requis
+                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                if result == True:
+                     print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
             
-            result, liste_images = anvil.server.call('modify_pre_r_par_stagiaire', stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name) 
-            if result == False:
-                alert("Fichier non sauvé")                   
+            # si 'file' est pdf, je l'affiche, après traitement, au format jpg
+            if file_extension == ".pdf":
+                print("PDF loaded")
+        
+                # Sauvegarde du 'file'
+                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                if result == False:
+                    alert("Fichier PDF non sauvé")     
+                # génération du JPG à partir du pdf
+                liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
+                #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
+                print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
+                file = liste_images[0]
+                thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                # renvoi en écriture des images générées ds table
+                file_ext = ".jpg"
+                new_file_name = new_file_name + ".jpg"
+                print("new_file_name ",new_file_name)
+                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_ext, thumb_file, new_file_name)
+                if result != True:
+                    alert("Fichier jpg non sauvé") 
+                self.image_1.source = file
+            self.button_visu.visible = True     
 
 
-    def button_tele_pdf_click(self, **event_args):
+    def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""
-        file_name="img_stagiaire.pdf"
-        file = self.image_1.source
-        result = anvil.server.call("print_pdf", file, file_name)
-        anvil.media.download(result)
-
+        # nouveau nom doc
+        new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse
+        # si doc type jpg ds table
+        if self.image_1.source != "":
+            self.button_visu.visible = True
+            from ...Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
+            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis)
 

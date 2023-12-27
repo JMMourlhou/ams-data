@@ -21,7 +21,8 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
     def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
-        open_form('Pre_R_pour_stagiaire_admin',self.stage_num)
+        stage = self.stage_num['numero']
+        open_form('Pre_R_pour_stagiaire_admin',stage)
 
     def download_click(self, **event_args):
         """This method is called when the button is clicked"""
