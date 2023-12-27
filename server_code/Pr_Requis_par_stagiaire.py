@@ -59,6 +59,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             pr_requis_row.update(check=True,               
                                 doc1 = file
                                 )
+            print("MAJ de la table pre recquis par le doc jpg")
             """
             pr_requis_row.update(check=True,               
                                 doc1 = file,
