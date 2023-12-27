@@ -55,7 +55,7 @@ class ItemTemplate6(ItemTemplate6Template):
                 print("PDF loaded")
         
                 # Sauvegarde du 'file'
-                result, result2 = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
                 if result == False:
                     alert("Fichier non sauvé")     
                 # génération du JPG à partir du pdf

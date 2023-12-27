@@ -35,7 +35,6 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             img = Image.open(io.BytesIO(file.get_bytes()))
             width, height = img.size
             print('size', width, height)
-            print('img.size', img.size)
             # Si img de très haute qualité je divise en deux
             if width >= height:   #landscape
                 if width > 2000:
@@ -58,7 +57,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             # -------------------------------------------------------------------------------------
 
             
-            # SAUVEGARDE IMG ds doc1 et thumb_nail, je ne change pas pdf_doc1, je ne sauve plus le thumb
+            # SAUVEGARDE IMG ds doc1, je ne change pas pdf_doc1, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file
                                 )
@@ -67,10 +66,8 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                                 doc1 = file,
                                 thumb_doc1 = thumb_file
                                 )
-            """
-            
-            
-            return True, None    # Sov effectué et None liste_images (car img, pas pdf)   
+            """           
+            return True    # Sov effectué et None liste_images (car img, pas pdf)   
     
 
         if file_extension == ".pdf":
@@ -79,7 +76,6 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             pr_requis_row.update(check=True,               
                                 pdf_doc1 = file
                                 )
-        return True, None
+        return True
     else:
-        Print("pr_requis_row vide")
-        return False, None
+        return False
