@@ -28,6 +28,8 @@ class RowTemplate3(RowTemplate3Template):
             self.text_box_1.visible = False
         else:
             self.text_box_1.visible = True
+            self.button_inscription.text = "Inscription"
+            self.button_pre_requis.text = "Pré-requis"
             
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']

@@ -18,16 +18,19 @@ class ItemTemplate6(ItemTemplate6Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        txt = {self.item['item_requis']['requis']} + "/" {self.item['item_requis']}"
-        self.label_1.text = txt
+        txt2 = self.item['item_requis']['code_pre_requis']
+        txt1 = self.item['item_requis']['requis']
+        self.label_1.text = txt1 +" / "+ txt2
         self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
-        if self.image_1.source != "":
+        try:
+            media = self.item['doc1'].name
             self.button_visu.visible = True
+        except:
+            pass
         
         self.stage_num =   self.item['stage_num'] 
         self.item_requis = self.item['item_requis']
         self.email =       self.item['stagiaire_email']
-
     
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
@@ -43,7 +46,7 @@ class ItemTemplate6(ItemTemplate6Template):
             if file_extension == ".jpg":
                 print("JPG loaded")
                 new_file_name = new_file_name + ".jpg" # rajout extension
-                thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                #thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 self.image_1.source = file
                
                 # Sauvegarde du 'file' jpg et de son thumb nail ds table pré requis
