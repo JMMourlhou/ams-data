@@ -41,13 +41,13 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         row_stagiaire_inscrit = self.drop_down_code_stage.selected_value   # Stage sélectionné du user ds drop_down (row table stagiaire inscrit)
-        
-        # lecture fichier père stages
-        row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
-        # lecture des pré requis pour ce stage et pour ce stagiaire
-        global user_pr
-        liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user_pr,
-                                                         stage_num=row_stage
-                                                         )
-        self.repeating_panel_1.items = liste_pr
+        if row_stagiaire_inscrit != None:
+            # lecture fichier père stages
+            row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
+            # lecture des pré requis pour ce stage et pour ce stagiaire
+            global user_pr
+            liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user_pr,
+                                                            stage_num=row_stage
+                                                            )
+            self.repeating_panel_1.items = liste_pr
         

@@ -167,8 +167,12 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
         st = stage_r["code"]["code"]
         st=st.strip()
         clef = st + " du "+str(stage_r["date_debut"])
-        del historique[clef]
-        user.update(histo=historique)
+        try:                          # erreur si histo vide
+            del historique[clef]
+            user.update(histo=historique)
+        except:
+            print("clé historique non trouvée")
+        
    
     # Del of stagiaire in the stage
     row.delete()
