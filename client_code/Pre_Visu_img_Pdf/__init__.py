@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
-    def __init__(self, file, new_file_name, stage_num, email, item_requis, **properties):
+    def __init__(self, file, new_file_name, stage_num, email, item_requis, origine, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
@@ -17,12 +17,18 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         self.email = email
         self.item_requis = item_requis
         self.label_1.text = self.new_file_name
+        self.origine = origine
 
     def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
         stage = self.stage_num['numero']
-        open_form('Pre_R_pour_stagiaire_admin',stage)
+        if self.origine == "admin":
+            from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
+            open_form('Pre_R_pour_stagiaire_admin',stage)
+        else:     #origine = "stagiaire"
+            from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
+            open_form("Pre_R_pour_stagiaire")
+            
 
     def download_click(self, **event_args):
         """This method is called when the button is clicked"""

@@ -2,8 +2,8 @@ is_package: true
 container: {type: ColumnPanel}
 components:
 - name: label_1
-  properties: {font_size: 12, align: center, spacing_above: none, spacing_below: none,
-    icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary'}
+  properties: {font_size: 13, align: center, spacing_above: none, spacing_below: none,
+    icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary', bold: true}
   type: Label
   layout_properties: {grid_position: 'SJMHPD,ZJEVOW', full_width_row: false}
 - name: flow_panel_1
@@ -14,53 +14,58 @@ components:
   layout_properties: {grid_position: 'IBXGQY,HHIGRU'}
   components:
   - name: column_panel_1
-    properties: {spacing_above: none}
+    properties: {spacing_above: none, background: 'theme:On Primary Container', role: tonal-card}
     type: ColumnPanel
     components:
     - name: image_1
-      properties: {height: 99.99755859375, role: null, background: 'theme:On Tertiary',
-        spacing_above: small, spacing_below: none}
+      properties: {height: '50', role: null, background: '', spacing_above: small,
+        spacing_below: none, display_mode: original_size}
       type: Image
       layout_properties: {grid_position: 'VTTKFP,ZCKDCL'}
       data_bindings:
       - {property: border, code: '', writeback: false}
       event_bindings: {}
-    - name: flow_panel_2
-      properties: {align: center}
-      type: FlowPanel
-      layout_properties: {grid_position: 'VTTKFP,SJNPJP'}
-      components:
-      - name: file_loader_1
-        properties:
-          role: outlined-button
-          show_state: true
-          align: center
-          tooltip: ''
-          border: ''
-          file_types: .jpg , .pdf
-          enabled: true
-          files: []
-          foreground: theme:On Primary
-          visible: true
-          text: Choisir
-          font_size: null
-          font: ''
-          spacing_above: small
-          icon_align: left
-          spacing_below: small
-          italic: false
-          file: null
-          background: theme:Primary
-          bold: false
-          underline: false
-          multiple: false
-          icon: fa:upload
-        type: FileLoader
-        event_bindings: {change: file_loader_1_change}
-      - name: button_visu
-        properties: {text: '   Voir', foreground: 'theme:On Primary', icon: 'fa:window-restore',
-          visible: false, role: filled-button, background: 'theme:Primary', icon_align: left}
-        type: Button
-        layout_properties: {}
-        event_bindings: {click: button_visu_click}
-    layout_properties: {width: 359.3017094726562}
+    layout_properties: {width: 204.79634716796875}
+  - name: column_panel_2
+    properties: {}
+    type: ColumnPanel
+    layout_properties: {width: 129.09600830078125}
+    components:
+    - name: file_loader_1
+      properties:
+        role: outlined-button
+        show_state: true
+        align: center
+        tooltip: ''
+        border: ''
+        file_types: .jpg , .pdf
+        enabled: true
+        files: []
+        foreground: theme:On Primary
+        visible: true
+        text: Choisir
+        font_size: null
+        font: ''
+        spacing_above: small
+        icon_align: left
+        spacing_below: small
+        italic: false
+        file: null
+        background: theme:Primary
+        bold: false
+        underline: false
+        multiple: false
+        icon: fa:upload
+      type: FileLoader
+      event_bindings: {change: file_loader_1_change}
+      layout_properties: {grid_position: 'TFBXFH,DLPMVB'}
+    - name: spacer_1
+      properties: {height: 8.001739501953125}
+      type: Spacer
+      layout_properties: {grid_position: 'LZJODH,QJETZV'}
+    - name: button_visu
+      properties: {text: '   Voir / PDF', foreground: 'theme:On Primary', icon: 'fa:window-restore',
+        visible: false, role: filled-button, background: 'theme:Primary', icon_align: left}
+      type: Button
+      layout_properties: {grid_position: 'QJKZUK,XPKLKS'}
+      event_bindings: {click: button_visu_click}

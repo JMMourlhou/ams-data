@@ -87,7 +87,7 @@ class ItemTemplate6(ItemTemplate6Template):
         if self.image_1.source != "":
             self.button_visu.visible = True
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
-            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis)
+            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis, origine="admin")
         
 
 

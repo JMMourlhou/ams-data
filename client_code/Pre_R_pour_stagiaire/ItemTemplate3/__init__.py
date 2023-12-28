@@ -19,7 +19,7 @@ class ItemTemplate3(ItemTemplate3Template):
         # Any code you write here will run before the form opens.
         self.text_box_1.text = self.item['item_requis']['requis']
         self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
-        try:
+        try:     # si pas de doc en table, erreur
             media = self.item['doc1'].name
             self.button_visu.visible = True
         except:
@@ -84,5 +84,5 @@ class ItemTemplate3(ItemTemplate3Template):
         if self.image_1.source != "":
             self.button_visu.visible = True
             from ...Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
-            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis)
+            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis, origine="stagiaire")
 
