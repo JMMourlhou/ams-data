@@ -38,7 +38,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
-                thumb_pic = anvil.image.generate_thumbnail(user["photo"], 320)
+                thumb_pic = anvil.image.generate_thumbnail(user["photo"], 640)
                 self.image_photo.source = thumb_pic
             else:
                 self.image_photo.source =            user["photo"]

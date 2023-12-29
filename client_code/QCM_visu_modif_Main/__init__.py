@@ -9,25 +9,31 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..QCM_visu_modif import QCM_visu_modif
-
+global liste
+liste = []
 
 class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
-    def __init__(self, **properties):
+    def __init__(self, qcm_nb=None, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
         # Any code you write here will run before the form opens.
-        # Drop down codes qcm
-        self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
         
+        #initialisation du drop down des qcm créés et barêmes
+        self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
         self.drop_down_bareme.items=["1","2","3","4","5"]
-        #self.drop_down_bareme.selected_value = 0              # Barême = 1 par défaut       
+        if qcm_nb != None:      #réinitialisation de la forme après une création ou modif
+            self.qcm_nb = qcm_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
+            # j'affiche le drop down du qcm
+            self.drop_down_qcm_row.selected_value = qcm_nb
+            # j'envoie en drop_down_qcm_row_change
+            self.drop_down_qcm_row_change()
     
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         qcm_row = self.drop_down_qcm_row.selected_value
         
         # Pour les lignes QCM déjà crée du qcm choisi
+        global liste
         liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
         nb_questions = len(liste)
         self.text_box_num.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées 
@@ -36,7 +42,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.affiche_lignes_qcm(liste)
         
 
-    def affiche_lignes_qcm(self, liste):
+    def affiche_lignes_qcm(self, l=[]):
+        global liste
         self.column_panel_content.clear()
         self.column_panel_content.add_component(QCM_visu_modif(liste), full_width_row=True)
 
@@ -77,23 +84,19 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         question = self.text_box_question.text
         bareme = int(self.drop_down_bareme.selected_value)
         reponse = self.check_box_reponse.checked
+        qcm_nb = self.drop_down_qcm_row.selected_value
+        image = self.image_photo.source
         
-
         #je connais le num de question à changer
         num = int(self.text_box_num.text)
-        if self.image_photo.source == None:
-            image = None
-        else:
-            image = self.image_photo.source
         
         # je récupère mes variables globales  question, reponse, bareme
-        result = anvil.server.call("add_ligne_qcm", num, question, reponse, bareme, image, code_stage="PSE1")         #num du stage  de la ligne
+        result = anvil.server.call("add_ligne_qcm", num, question, reponse, bareme, image, qcm_nb)         #num du stage  de la ligne
         if result:
             alert("ok")
-            # raffraichit les lignes qcm
-            self.affiche_lignes_qcm()
-            from anvil import open_form       # j'initialise la forme principale
-            open_form("QCM_visu_modif_Main") 
+            # raffraichit les lignes qcm en récupérant le choix du qcm ds la dropdown
+            from anvil import open_form       # j'initialise la forme principale avec le choix du qcm ds la dropdown
+            open_form("QCM_visu_modif_Main", qcm_nb) 
             
         else:
             alert("erreur de création d'une question QCM")

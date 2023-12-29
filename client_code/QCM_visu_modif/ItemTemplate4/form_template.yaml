@@ -4,100 +4,98 @@ container:
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
     spacing_below: none, background: 'theme:Primary'}
 components:
-- name: flow_panel_2
-  properties: {align: center, background: 'theme:Primary'}
+- name: flow_panel_1_copy
+  properties: {spacing_above: none, vertical_align: middle, spacing: huge, align: center}
+  type: FlowPanel
+  layout_properties: {grid_position: 'WCTDVJ,RHXZKP'}
+  components:
+  - name: label_2
+    properties: {foreground: '', text: '#  '}
+    type: Label
+    layout_properties: {}
+- name: column_panel_2
+  properties: {role: tonal-card, background: 'theme:On Primary Container'}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'FTKVPN,AZSJNQ'}
+  components:
+  - name: image_1
+    properties: {height: 53.599700927734375, role: null, spacing_above: small, spacing_below: medium,
+      display_mode: original_size}
+    type: Image
+    layout_properties: {grid_position: 'LSIOOU,UOWYNL', full_width_row: true}
+    data_bindings: []
+- name: flow_panel_1
+  properties: {align: center, background: 'theme:Primary', vertical_align: middle,
+    spacing: none}
   type: FlowPanel
   layout_properties: {grid_position: 'QYLBBA,CLNJLM'}
   components:
-  - name: column_panel_1
-    properties: {role: null, col_widths: '{}', spacing_above: none, spacing_below: none,
-      col_spacing: tiny}
-    type: ColumnPanel
-    layout_properties: {width: 100.920490625}
-    components:
-    - name: label_1
-      properties: {text: '  Num       Barême', spacing_above: none, spacing_below: none,
-        align: left, font_size: 12}
-      type: Label
-      layout_properties: {grid_position: 'TKQQUA,JTKQRC'}
-    - name: flow_panel_1
-      properties: {}
-      type: FlowPanel
-      layout_properties: {grid_position: 'XEGAXH,LPTYNO'}
-      components:
-      - type: TextBox
-        properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '#',
-          border: '', enabled: false, foreground: 'theme:On Tertiary', visible: true,
-          text: '', font_size: 14, font: '', spacing_above: small, type: text, spacing_below: small,
-          italic: false, background: 'theme:Tertiary', bold: false, underline: false}
-        name: text_box_num
-        event_bindings: {}
-      - type: DropDown
-        properties:
-          role: null
-          align: full
-          tooltip: ''
-          placeholder: ''
-          border: ''
-          enabled: true
-          foreground: ''
-          items: ['']
-          visible: true
-          font_size: 18
-          font: ''
-          spacing_above: small
-          spacing_below: small
-          italic: false
-          background: theme:Tertiary
-          bold: false
-          underline: false
-          include_placeholder: true
-        name: drop_down_bareme
-        layout_properties: {grid_position: 'NEHOXE,EJHAPX', width: 99.9798}
-        event_bindings: {change: drop_down_bareme_change}
-  - name: column_panel_2
-    properties: {role: tonal-card, background: 'theme:On Primary Container'}
-    type: ColumnPanel
-    layout_properties: {width: 190.92928759765624}
-    components:
-    - name: image_1
-      properties: {height: 46.99418640136719, role: null, spacing_above: small, spacing_below: medium,
-        display_mode: original_size}
-      type: Image
-      layout_properties: {grid_position: 'LSIOOU,UOWYNL', full_width_row: true}
-      data_bindings: []
-  - name: flow_panel_3
-    properties: {spacing_above: medium, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
-    components:
-    - type: CheckBox
-      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', allow_indeterminate: false, visible: true, text: V/F, font_size: 16,
-        font: '', spacing_above: none, spacing_below: none, italic: false, background: 'theme:Tertiary',
-        bold: false, checked: false, underline: false}
-      name: check_box_reponse
-      layout_properties: {}
-      event_bindings: {change: check_box_reponse_change}
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: false, foreground: 'theme:Error', visible: true, text: Modif, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
-      name: button_modif
-      event_bindings: {click: button_modif_click}
+  - type: Button
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: false,
+      foreground: 'theme:Error', visible: true, text: Modif, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
+    name: button_modif
+    event_bindings: {click: button_modif_click}
+- name: flow_panel_2
+  properties: {align: center, spacing: tiny, vertical_align: middle}
+  type: FlowPanel
+  layout_properties: {grid_position: 'QYLBBA,BQCPXV'}
+  components:
+  - type: CheckBox
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', allow_indeterminate: false, visible: true, text: V/F, font_size: 16,
+      font: '', spacing_above: none, spacing_below: none, italic: false, background: 'theme:Tertiary',
+      bold: false, checked: false, underline: false}
+    name: check_box_reponse
+    event_bindings: {change: check_box_reponse_change}
+  - name: spacer_2
+    properties: {height: 32}
+    type: Spacer
+    layout_properties: {width: 74.4174384765625}
+  - name: label_1_copy
+    properties: {text: '     Barême:', spacing_above: none, spacing_below: none, align: right,
+      font_size: 12}
+    type: Label
+  - type: DropDown
+    properties:
+      role: null
+      align: full
+      tooltip: ''
+      placeholder: ''
+      border: ''
+      enabled: true
+      foreground: ''
+      items: ['']
+      visible: true
+      font_size: 18
+      font: ''
+      spacing_above: small
+      spacing_below: small
+      italic: false
+      background: theme:Tertiary
+      bold: false
+      underline: false
+      include_placeholder: false
+    name: drop_down_bareme
     layout_properties: {}
+    event_bindings: {change: drop_down_bareme_change}
 - type: TextArea
-  properties: {role: null, align: center, height: 43.425384521484375, tooltip: '',
+  properties: {role: null, align: center, height: 82.52047729492188, tooltip: '',
     placeholder: '', border: '', enabled: true, foreground: '', visible: true, text: Question,
     font_size: null, auto_expand: true, font: '', spacing_above: none, spacing_below: small,
     italic: false, background: 'theme:Tertiary', bold: false, underline: false}
   name: text_box_question
-  layout_properties: {grid_position: 'CIIQAU,HMBSZD'}
+  layout_properties: {grid_position: 'JLAIPW,BIEYAY'}
   event_bindings: {focus: text_box_question_focus, lost_focus: text_box_question_lost_focus,
     change: text_box_question_change}
 - name: text_box_correction
-  properties: {background: 'theme:Tertiary', placeholder: Correction, align: center,
-    spacing_above: none, spacing_below: none}
-  type: TextBox
-  layout_properties: {grid_position: 'QFIOLS,NZACKN'}
+  properties: {role: null, align: center, height: 83.68646240234375, tooltip: '',
+    placeholder: '', border: '', enabled: true, foreground: '', visible: true, text: Correction,
+    font_size: null, auto_expand: true, font: '', spacing_above: none, spacing_below: small,
+    italic: false, background: 'theme:Tertiary', bold: false, underline: false}
+  type: TextArea
+  layout_properties: {grid_position: 'JLAIPW,ZKCUSU'}
+  event_bindings: {focus: text_box_question_focus, lost_focus: text_box_question_lost_focus,
+    change: text_box_question_change}
 is_package: true

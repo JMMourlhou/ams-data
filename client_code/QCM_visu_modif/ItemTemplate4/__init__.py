@@ -16,10 +16,10 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        
-        self.text_box_num.text = self.item['num']
-        self.text_box_num.tag.numero = self.item['num']
-        self.text_box_num.tag.nom = "num"
+        txt = "# " + str(self.item['num'])
+        self.label_2.text = txt
+        self.label_2.tag.numero = self.item['num']
+        self.label_2.tag.nom = "num"
         
         self.text_box_question.text = self.item['question']
         self.text_box_question.tag.nom = "question"
