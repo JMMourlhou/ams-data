@@ -10,14 +10,14 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 class QCM_visu_modif(QCM_visu_modifTemplate):
-    def __init__(self, **properties):
+    def __init__(self, liste, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
 
         # Pour les lignes QCM déjà crée du repeating panel 
-        liste = list(app_tables.qcm.search())
+        #liste = list(app_tables.qcm.search())
         self.repeating_panel_1.items = liste
         nb_questions = len(liste)
 

@@ -85,7 +85,7 @@ db_schema:
       admin_ui: {width: 200, order: 2}
       type: bool
   qcm_description:
-    client: none
+    client: search
     server: full
     columns:
     - name: qcm_nb
@@ -133,7 +133,7 @@ db_schema:
       admin_ui: {width: 200, order: 4}
       type: string
     - name: qcm_nb
-      admin_ui: {order: -2, width: 200}
+      admin_ui: {order: -2, width: 171}
       type: link_single
       target: qcm_description
     - name: correction
