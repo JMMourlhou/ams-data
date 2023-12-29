@@ -36,6 +36,9 @@ class ItemTemplate4(ItemTemplate4Template):
         
         self.button_modif.tag.numero = self.item['num']          #Je sauve le NUMERO de question ds le tag      
         self.button_modif.tag.nom = "button"
+
+        self.image_1.source = self.item['photo']
+        
         
     def text_box_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
