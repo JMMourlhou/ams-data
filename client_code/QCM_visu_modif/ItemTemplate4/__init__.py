@@ -24,21 +24,26 @@ class ItemTemplate4(ItemTemplate4Template):
         self.text_box_question.text = self.item['question']
         self.text_box_question.tag.nom = "question"
         self.text_box_question.tag.numero = self.item['num']
+
+        self.text_box_correction.text = self.item['correction']
+        self.text_box_correction.tag.nom = "correction"
+        self.text_box_correction.tag.numero = self.item['num']
         
         self.check_box_reponse.checked = self.item['reponse']
         self.check_box_reponse.tag.nom = "reponse"
         self.check_box_reponse.tag.numero = self.item['num']
         
-        self.drop_down_bareme.items=["1","2","3","4","5"]
+        self.drop_down_bareme.items=["1","5"]
         self.drop_down_bareme.selected_value = self.item['bareme']                 
         self.drop_down_bareme.tag.nom = "bareme"
         self.drop_down_bareme.tag.numero = self.item['num']
         
         self.button_modif.tag.numero = self.item['num']          #Je sauve le NUMERO de question ds le tag      
         self.button_modif.tag.nom = "button"
-
+     
         self.image_1.source = self.item['photo']
-        
+        self.image_1.tag.nom = "photo"
+        self.image_1.tag.numero = self.item['num']
         
     def text_box_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""

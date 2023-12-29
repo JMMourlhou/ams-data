@@ -12,7 +12,7 @@ import anvil.server
 
 
 @anvil.server.callable
-def add_ligne_qcm(num_question, question, reponse, bareme, image, qcm_nb):
+def add_ligne_qcm(num_question, question, correction, reponse, bareme, image, qcm_nb):
     """
     #lecture fichier père code stages
     code_stage = app_tables.codes_stages.get(code=code_stage)          # A MODIFIER QD RAJOUTE DIFFERENRS QCM
@@ -26,6 +26,7 @@ def add_ligne_qcm(num_question, question, reponse, bareme, image, qcm_nb):
     
     new_row=app_tables.qcm.add_row(num= int(num_question),
                                    question = question,
+                                   correction = correction,
                                    reponse = reponse,
                                    bareme = str(bareme),
                                    photo = image,

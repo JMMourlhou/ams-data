@@ -36,7 +36,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         global liste
         liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
         nb_questions = len(liste)
-        self.text_box_num.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées 
+        self.label_2.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées 
 
          # affiches les lignes du qcm
         self.affiche_lignes_qcm(liste)
@@ -50,7 +50,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def file_loader_photo_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         thumb_pic = anvil.image.generate_thumbnail(file, 640)
-        self.image_photo.source = thumb_pic
+        self.image_1.source = thumb_pic
         self.button_creer.visible = True
 
     def button_annuler_click(self, **event_args):
@@ -61,8 +61,12 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def text_box_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
         self.button_creer_couleurs()
+
+    def text_box_correction_change(self, **event_args):
+        """This method is called when the text in this text area is edited"""
+        self.button_creer_couleurs()
     
-    def text_box_bareme_change(self, **event_args):     # Bareme a changé
+    def drop_down_bareme_change(self, **event_args):     # Bareme a changé
         """This method is called when this checkbox is checked or unchecked"""
         self.button_creer_couleurs()
         
@@ -82,16 +86,17 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             alert("La question est vide !")
             return
         question = self.text_box_question.text
+        correction = self.text_box_correction.text
         bareme = int(self.drop_down_bareme.selected_value)
         reponse = self.check_box_reponse.checked
         qcm_nb = self.drop_down_qcm_row.selected_value
-        image = self.image_photo.source
+        image = self.image_1.source
         
         #je connais le num de question à changer
-        num = int(self.text_box_num.text)
+        num = int(self.label_2.text)
         
         # je récupère mes variables globales  question, reponse, bareme
-        result = anvil.server.call("add_ligne_qcm", num, question, reponse, bareme, image, qcm_nb)         #num du stage  de la ligne
+        result = anvil.server.call("add_ligne_qcm", num, question, correction, reponse, bareme, image, qcm_nb)         #num du stage  de la ligne
         if result:
             alert("ok")
             # raffraichit les lignes qcm en récupérant le choix du qcm ds la dropdown
@@ -100,6 +105,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             
         else:
             alert("erreur de création d'une question QCM")
+
+   
+
+
 
     
             
