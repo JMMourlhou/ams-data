@@ -84,6 +84,17 @@ db_schema:
     - name: doc
       admin_ui: {width: 200, order: 2}
       type: bool
+  qcm_description:
+    client: none
+    server: full
+    columns:
+    - name: qcm_nb
+      admin_ui: {width: 200, order: 0}
+      type: number
+    - name: destination
+      admin_ui: {order: 1, width: 200}
+      type: string
+    title: Qcm_description
   lieux:
     client: search
     server: full
@@ -121,11 +132,12 @@ db_schema:
     - name: bareme
       admin_ui: {width: 200, order: 4}
       type: string
-    - name: Qcm_num
-      admin_ui: {order: -2, width: 120}
-      type: number
-    - name: description
-      admin_ui: {order: -1.5, width: 200}
+    - name: qcm_nb
+      admin_ui: {order: -2, width: 200}
+      type: link_single
+      target: qcm_description
+    - name: correction
+      admin_ui: {order: 5, width: 200}
       type: string
     title: Qcm
   stagiaires_inscrits:
@@ -273,21 +285,6 @@ db_schema:
       admin_ui: {width: 200, order: 24}
       type: simpleObject
     title: Users
-  qcm_descr:
-    client: none
-    server: full
-    columns:
-    - name: qcm_nb
-      admin_ui: {width: 200, order: 0}
-      type: number
-    - name: description
-      admin_ui: {width: 200, order: 1}
-      type: string
-    - name: pour
-      admin_ui: {width: 200, order: 2}
-      type: link_single
-      target: stages
-    title: Table 13
   pre_requis_stagiaire:
     client: search
     server: full
