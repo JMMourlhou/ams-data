@@ -80,13 +80,18 @@ class ItemTemplate4(ItemTemplate4Template):
         # je récupère mes question, reponse, bareme de la ligne du bouton pressé
         # Je remonte au conteneur parent du bouton (le flow panel)
         
-        fp_modif = self.button_modif.parent    # conteneur bt modif
-        #cp_img = fp_modif.parent            # conteneur cp_img
-        c<p_inconnu = cp_img.parent
-        cp_father = cp_inconnu.parent
-        print("0",cp_father)
-        for cpnt in cp_father.get_components():   #(contient cp_img, tb question, tb correction)
-            print("1",cpnt, cpnt.tag.nom)
+        n1 = self.button_modif.parent    # conteneur bt modif
+        print("n1",n1)
+        #print("n1",n1,n1.nom)
+        n2 = n1.parent            # conteneur cp_img
+        print("n2",n2)
+        #print("n2",n2,n2.nom)
+        n3 = n2.parent            # conteneur cp_img
+        print("n3",n3)
+        #print("n3",n3,n3.nom)
+    
+        for cpnt in n2.get_components():   #(contient cp_img, tb question, tb correction)
+            print("cpnt",cpnt.tag.nom)
             if cpnt.tag.nom == "question":
                 print(cpnt, cpnt.tag.nom)
                 num = int(cpnt.tag.numero)           # j'ai le num de la question
@@ -104,15 +109,16 @@ class ItemTemplate4(ItemTemplate4Template):
                 for cpnt1 in cpnt.get_components():   #( cp_img contient image_1)
                     if cpnt1.tag.nom =="photo":
                         print(cpnt, cpnt.tag.nom)
-                        photo = cpnt.source           # j'ai la photo
+                        photo = cpnt1.source           # j'ai la photo
             
-            if cpnt.tag.nom =="fp_vf_barem":       # fp_vf_barem contient reponse et bareme          
-                if cpnt.tag.nom =="reponse":
-                    print(cpnt, cpnt.tag.nom)
-                    reponse = cpnt.checked            # j'ai la réponse ( v/F )
-                if cpnt.tag.nom =="bareme":
-                    print(cpnt, cpnt.tag.nom)
-                    bareme = cpnt.selected_value
+            if cpnt.tag.nom =="fp_vf_bareme":       # fp_vf_barem contient reponse et bareme   
+                for cpnt2 in cpnt.get_components():   #( cp_img contient image_1)
+                    if cpnt2.tag.nom =="reponse":
+                        print(cpnt, cpnt2.tag.nom)
+                        reponse = cpnt2.checked            # j'ai la réponse ( v/F )
+                    if cpnt.tag2.nom =="bareme":
+                        print(cpnt2, cpnt2.tag.nom)
+                        bareme = cpnt2.selected_value
         
         result = anvil.server.call('modif_qcm', num, question, reponse, bareme)
         if not result:
