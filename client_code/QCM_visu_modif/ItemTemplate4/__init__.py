@@ -21,6 +21,10 @@ class ItemTemplate4(ItemTemplate4Template):
         self.cp_img.tag.nom = "cp_img"
         self.fp_modif.tag.nom = "fp_modif"
         self.fp_vf_barem.tag.nom = "fp_vrai/faux_bareme"
+        self.check_box_reponse.tag.nom = "reponse"
+        self.spacer_2.tag.nom = "spacer"
+        self.label_1.tag.nom = "label"
+        self.drop_down_bareme.tag.nom = "bareme"
         
         txt = "# " + str(self.item['num'])
         self.label_2.text = txt
@@ -86,12 +90,18 @@ class ItemTemplate4(ItemTemplate4Template):
         n2 = n1.parent            # conteneur cp_img
         print("n2",n2)
         #print("n2",n2,n2.nom)
-        n3 = n2.parent            # conteneur cp_img
-        print("n3",n3)
+        #n3 = n2.parent            # conteneur cp_img
+        #print("n3",n3)
         #print("n3",n3,n3.nom)
     
         for cpnt in n2.get_components():   #(contient cp_img, tb question, tb correction)
-            print("cpnt",cpnt.tag.nom)
+            print("début boucle cpnt",cpnt.tag.nom)
+            if cpnt.tag.nom =="cp_img":
+                for cpnt1 in cpnt.get_components():   #( cp_img contient image_1)
+                    if cpnt1.tag.nom =="photo":
+                        print(cpnt, cpnt.tag.nom)
+                        photo = cpnt1.source           # j'ai la photo
+            
             if cpnt.tag.nom == "question":
                 print(cpnt, cpnt.tag.nom)
                 num = int(cpnt.tag.numero)           # j'ai le num de la question
@@ -102,25 +112,26 @@ class ItemTemplate4(ItemTemplate4Template):
                 txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
                 txt2 = question[1:len(question)]   #Slice je prends toute la question à partir de la position 2
                 question = txt + txt2 
-            if cpnt.tag.nom =="correction":
+                
+            if cpnt.tag.nom == "correction":
                 print(cpnt, cpnt.tag.nom)
                 correction = cpnt.text               #    j'ai la correction
-            if cpnt.tag.nom =="cp_img":
-                for cpnt1 in cpnt.get_components():   #( cp_img contient image_1)
-                    if cpnt1.tag.nom =="photo":
-                        print(cpnt, cpnt.tag.nom)
-                        photo = cpnt1.source           # j'ai la photo
-            
-            if cpnt.tag.nom =="fp_vf_bareme":       # fp_vf_barem contient reponse et bareme   
+                
+            print("avt test2",cpnt, cpnt.tag.nom)
+            if cpnt.tag.nom == "fp_vrai/faux_bareme":       # fp_vf_barem contient reponse et bareme   
+                print("test2", cpnt, cpnt.tag.nom)
                 for cpnt2 in cpnt.get_components():   #( cp_img contient image_1)
                     if cpnt2.tag.nom =="reponse":
-                        print(cpnt, cpnt2.tag.nom)
+                        print(cpnt2, cpnt2.tag.nom)
                         reponse = cpnt2.checked            # j'ai la réponse ( v/F )
-                    if cpnt.tag2.nom =="bareme":
+                    if cpnt2.tag.nom =="bareme":
                         print(cpnt2, cpnt2.tag.nom)
                         bareme = cpnt2.selected_value
+           
+        #recup qcm_nb ds fichier temp
+
         
-        result = anvil.server.call('modif_qcm', num, question, reponse, bareme)
+        result = anvil.server.call('modif_qcm', qcm_nb, num, question, reponse, bareme, photo, correction)
         if not result:
             alert("erreur de création d'une question QCM")
             return
