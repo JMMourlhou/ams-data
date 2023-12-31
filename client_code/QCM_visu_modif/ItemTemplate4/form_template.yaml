@@ -47,7 +47,7 @@ components:
     layout_properties: {grid_position: ''}
     event_bindings: {focus: text_box_question_focus, lost_focus: text_box_question_lost_focus,
       change: text_box_question_change}
-  - name: flow_panel_1
+  - name: fp_modif
     properties: {align: center, background: 'theme:Primary', vertical_align: middle,
       spacing: none}
     type: FlowPanel
@@ -60,6 +60,7 @@ components:
         background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
       name: button_modif
       event_bindings: {click: button_modif_click}
+    data_bindings: []
   - name: fp_vf_barem
     properties: {align: center, spacing: tiny, vertical_align: middle}
     type: FlowPanel
@@ -76,7 +77,7 @@ components:
       properties: {height: 32}
       type: Spacer
       layout_properties: {width: 74.4174384765625}
-    - name: label_1_copy
+    - name: label_1
       properties: {text: '     Barême:', spacing_above: none, spacing_below: none,
         align: right, font_size: 12}
       type: Label

@@ -16,6 +16,12 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.flow_panel_num.tag.nom = "fp_num"
+        self.cp_father.tag.nom = "cp_father"
+        self.cp_img.tag.nom = "cp_img"
+        self.fp_modif.tag.nom = "fp_modif"
+        self.fp_vf_barem.tag.nom = "fp_vrai/faux_bareme"
+        
         txt = "# " + str(self.item['num'])
         self.label_2.text = txt
         self.label_2.tag.numero = self.item['num']
@@ -73,29 +79,40 @@ class ItemTemplate4(ItemTemplate4Template):
   
         # je récupère mes question, reponse, bareme de la ligne du bouton pressé
         # Je remonte au conteneur parent du bouton (le flow panel)
-        flowpanel = self.button_modif.parent    # conteneur d'1 ligne 
-        for cpnt in flowpanel.get_components():
-            print(cpnt, cpnt.tag)
-            if cpnt.tag.nom == "num":
-                num = int(cpnt.text)
-            if cpnt.tag.nom =="question":
-                question = cpnt.text
+        
+        fp_modif = self.button_modif.parent    # conteneur bt modif
+        cp_img = fp_modif.parent            # conteneur cp_img
+        cp_inconnu = cp_img.parent
+        cp_father = cp_inconnu.parent
+        print("0",cp_father)
+        for cpnt in cp_father.get_components():   #(contient cp_img, tb question, tb correction)
+            print("1",cpnt, cpnt.tag.nom)
+            if cpnt.tag.nom == "question":
+                print(cpnt, cpnt.tag.nom)
+                num = int(cpnt.tag.numero)           # j'ai le num de la question
+                question = cpnt.text                 #         question
+                
                 # mettre la 1ere lettre en maj mais laisser le reste comme tappé
-                #je boucle à partir de la deuxieme lettre et cumul le text
-                
-                
+                #je boucle à partir de la deuxieme lettre et cumul le text             
                 txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
                 txt2 = question[1:len(question)]   #Slice je prends toute la question à partir de la position 2
-                #print(txt+txt2)
-                """
-                for x in range(1,len(question)):  # je pars de la position2 et boucle j'usquà la fin de la question
-                    txt = txt + question[x]
-                """
                 question = txt + txt2 
-            if cpnt.tag.nom =="reponse":
-                reponse = cpnt.checked
-            if cpnt.tag.nom =="bareme":
-                bareme = cpnt.selected_value
+            if cpnt.tag.nom =="correction":
+                print(cpnt, cpnt.tag.nom)
+                correction = cpnt.text               #    j'ai la correction
+            if cpnt.tag.nom =="cp_img":
+                for cpnt1 in cpnt.get_components():   #( cp_img contient image_1)
+                    if cpnt1.tag.nom =="photo":
+                        print(cpnt, cpnt.tag.nom)
+                        photo = cpnt.source           # j'ai la photo
+            
+            if cpnt.tag.nom =="fp_vf_barem":       # fp_vf_barem contient reponse et bareme          
+                if cpnt.tag.nom =="reponse":
+                    print(cpnt, cpnt.tag.nom)
+                    reponse = cpnt.checked            # j'ai la réponse ( v/F )
+                if cpnt.tag.nom =="bareme":
+                    print(cpnt, cpnt.tag.nom)
+                    bareme = cpnt.selected_value
         
         result = anvil.server.call('modif_qcm', num, question, reponse, bareme)
         if not result:

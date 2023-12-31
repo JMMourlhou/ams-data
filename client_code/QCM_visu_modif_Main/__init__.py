@@ -20,7 +20,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         
         #initialisation du drop down des qcm créés et barêmes
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
-        self.drop_down_bareme.items=["1","2","3","4","5"]
+        self.drop_down_bareme.items=["1","5"]
         if qcm_nb != None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
             # j'affiche le drop down du qcm
