@@ -81,8 +81,8 @@ class ItemTemplate4(ItemTemplate4Template):
         # Je remonte au conteneur parent du bouton (le flow panel)
         
         fp_modif = self.button_modif.parent    # conteneur bt modif
-        cp_img = fp_modif.parent            # conteneur cp_img
-        cp_inconnu = cp_img.parent
+        #cp_img = fp_modif.parent            # conteneur cp_img
+        c<p_inconnu = cp_img.parent
         cp_father = cp_inconnu.parent
         print("0",cp_father)
         for cpnt in cp_father.get_components():   #(contient cp_img, tb question, tb correction)
