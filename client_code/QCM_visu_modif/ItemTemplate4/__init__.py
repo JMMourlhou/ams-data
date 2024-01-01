@@ -184,6 +184,7 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the form is shown on the page"""
         global cpt    # cpt = nb de questions
         cpt += 1
+        print(cpt)
 
     
                                 
