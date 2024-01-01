@@ -51,7 +51,7 @@ components:
           spacing_above: small
           spacing_below: small
           italic: false
-          background: theme:On Primary Container
+          background: theme:Error
           bold: false
           underline: false
           include_placeholder: true

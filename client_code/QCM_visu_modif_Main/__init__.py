@@ -13,7 +13,7 @@ global liste
 liste = []
 
 class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
-    def __init__(self, qcm_nb=None, **properties):
+    def __init__(self, qcm_descro_nb=None, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
@@ -21,10 +21,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         #initialisation du drop down des qcm créés et barêmes
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
         self.drop_down_bareme.items=["1","5"]
-        if qcm_nb != None:      #réinitialisation de la forme après une création ou modif
-            self.qcm_nb = qcm_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
+        if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
+            self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
             # j'affiche le drop down du qcm
-            self.drop_down_qcm_row.selected_value = qcm_nb
+            self.drop_down_qcm_row.selected_value = qcm_descro_nb
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
     

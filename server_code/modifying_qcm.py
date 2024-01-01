@@ -12,7 +12,7 @@ import anvil.server
 
 
 @anvil.server.callable           #modif d'une ligne de Qcm
-def modif_qcm(qcm_nb, num_question, question, reponse, bareme, photo, correction):
+def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, correction):
     """ lecture fichier père code stages
     code_stage = app_tables.codes_stages.get(code="PSE1")          # A MODIFIER QD RAJOUTE DIFFERENRS QCM
     if not code_stage:   
@@ -20,10 +20,10 @@ def modif_qcm(qcm_nb, num_question, question, reponse, bareme, photo, correction
         valid=False
         return valid        
     """
-    
+
     # lecture de la ligne à modifier par son numéro             
     qcm_row = app_tables.qcm.get(num=num_question,
-                                qcm_nb=qcm_nb) 
+                                qcm_nb=qcm_descro_row)
     if not qcm_row:
         print("Ligne qcm non trouvée ds fichier qcm")
         return False

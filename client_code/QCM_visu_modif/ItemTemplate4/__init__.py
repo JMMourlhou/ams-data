@@ -16,6 +16,7 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        
         self.flow_panel_num.tag.nom = "fp_num"
         self.cp_father.tag.nom = "cp_father"
         self.cp_img.tag.nom = "cp_img"
@@ -25,7 +26,8 @@ class ItemTemplate4(ItemTemplate4Template):
         self.spacer_2.tag.nom = "spacer"
         self.label_1.tag.nom = "label"
         self.drop_down_bareme.tag.nom = "bareme"
-        
+
+        self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
         txt = "# " + str(self.item['num'])
         self.label_2.text = txt
         self.label_2.tag.numero = self.item['num']
@@ -61,6 +63,14 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
+
+    def file_loader_1_change(self, file, **event_args):
+        """This method is called when a new file is loaded into this FileLoader"""
+        thumb_pic = anvil.image.generate_thumbnail(file, 640)
+        self.image_1.source = thumb_pic
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foregroundground = "yellow"
        
     def drop_down_bareme_change(self, **event_args):     # Bareme a changé
         """This method is called when this checkbox is checked or unchecked"""
@@ -84,15 +94,13 @@ class ItemTemplate4(ItemTemplate4Template):
         # je récupère mes question, reponse, bareme de la ligne du bouton pressé
         # Je remonte au conteneur parent du bouton (le flow panel)
         
-        n1 = self.button_modif.parent    # conteneur bt modif
+        n1 = self.button_modif.parent    # conteneur fpanel du bt modif
         print("n1",n1)
         #print("n1",n1,n1.nom)
-        n2 = n1.parent            # conteneur cp_img
+        n2 = n1.parent            # conteneur cpanel : contient cp_img, tb question, tb correction
         print("n2",n2)
         #print("n2",n2,n2.nom)
-        #n3 = n2.parent            # conteneur cp_img
-        #print("n3",n3)
-        #print("n3",n3,n3.nom)
+        
     
         for cpnt in n2.get_components():   #(contient cp_img, tb question, tb correction)
             print("début boucle cpnt",cpnt.tag.nom)
@@ -130,15 +138,16 @@ class ItemTemplate4(ItemTemplate4Template):
            
         #recup qcm_nb ds fichier temp
 
-        
-        result = anvil.server.call('modif_qcm', qcm_nb, num, question, reponse, bareme, photo, correction)
+        qcm_descro_row = self.qcm_nb
+        print(qcm_descro_row)
+        result = anvil.server.call('modif_qcm', qcm_descro_row, num, question, reponse, bareme, photo, correction)
         if not result:
             alert("erreur de création d'une question QCM")
             return
             
         # j'initialise la forme principale
         from anvil import open_form       
-        open_form("QCM_visu_modif_Main")
+        open_form("QCM_visu_modif_Main",qcm_descro_row)
 
     def text_box_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
@@ -152,10 +161,11 @@ class ItemTemplate4(ItemTemplate4Template):
         #Je remonte du component sur 3 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
         global ancien_num_ligne
         if ancien_num_ligne != 0 and num != ancien_num_ligne:
-            flowpanel = self.button_modif.parent    # conteneur d'1 ligne 
-            repeat_item_panel = flowpanel.parent    # conteneur objet ligne (item)
+            n1 = self.button_modif.parent    # conteneur d'1 ligne 
+            n2 = n1.parent            # conteneur cpanel : contient cp_img, tb question, tb correction
+            repeat_item_panel = n2.parent    # conteneur objet ligne (item)
             repeat_panel = repeat_item_panel.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
-            #print("**** repeating panel *****", type(repeat_panel))
+            print("**** repeating panel *****", type(repeat_panel))
            
             for item_lignes in repeat_panel.get_components():
                 for ligne in item_lignes.get_components():
@@ -166,6 +176,8 @@ class ItemTemplate4(ItemTemplate4Template):
                             self.button_modif.background = "theme:Tertiary"
                             self.button_modif.foregroundground = "theme:Error"
                             ancien_num_ligne = 0
+
+    
                                 
 
             
