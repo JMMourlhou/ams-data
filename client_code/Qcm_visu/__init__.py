@@ -94,7 +94,6 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cp = FlowPanel(role="default",
                             align="center",     
                             background="theme:Primary",
-                            wrap_on="mobile",
                             spacing_above=None,
                             spacing_below=None,
                             )
