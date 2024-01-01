@@ -10,6 +10,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
 ancien_num_ligne = 0
+global cpt   # cpt nb de questions
+cpt = 0
 
 class ItemTemplate4(ItemTemplate4Template):
     def __init__(self, **properties):
@@ -28,7 +30,8 @@ class ItemTemplate4(ItemTemplate4Template):
         self.drop_down_bareme.tag.nom = "bareme"
 
         self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
-        txt = "# " + str(self.item['num'])
+        global cpt
+        txt = "# " + str(self.item['num']) + "/" + str(cpt)
         self.label_2.text = txt
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
@@ -176,6 +179,11 @@ class ItemTemplate4(ItemTemplate4Template):
                             self.button_modif.background = "theme:Tertiary"
                             self.button_modif.foregroundground = "theme:Error"
                             ancien_num_ligne = 0
+
+    def form_show(self, **event_args):
+        """This method is called when the form is shown on the page"""
+        global cpt    # cpt = nb de questions
+        cpt += 1
 
     
                                 

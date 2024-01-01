@@ -20,6 +20,7 @@ class QCM_visu_modif(QCM_visu_modifTemplate):
         #liste = list(app_tables.qcm.search())
         self.repeating_panel_1.items = liste
         nb_questions = len(liste)
+        self.nb_questions = nb_questions
 
     def file_loader_photo_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
