@@ -55,6 +55,8 @@ class QrCode_display(QrCode_displayTemplate):
         
         from ..Main import Main
         open_form('Main',99)
+
+        event_args
         
 
 
