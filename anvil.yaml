@@ -362,6 +362,9 @@ db_schema:
     - name: allow_bgt_generation
       admin_ui: {order: 12, width: 200}
       type: bool
+    - name: diplomes
+      admin_ui: {width: 200, order: 13}
+      type: media
     title: Stages
   cpt_stages:
     client: search
