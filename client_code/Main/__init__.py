@@ -144,7 +144,7 @@ class Main(MainTemplate):
             self.bt_user_mail.enabled = True
             self.button_qcm.visible = True
             self.button_pre_requis.visible = True
-            if user["admin"] == True:  # Administrator
+            if user['admin'] == True:  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
                 self.bt_gestion_stages.visible = True
@@ -210,8 +210,8 @@ class Main(MainTemplate):
         
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from .. Qcm_visu import Qcm_visu
-        open_form('Qcm_visu')
+        from ..QCM_visu_modif_ST_Main import QCM_visu_modif_ST_Main
+        open_form('QCM_visu_modif_ST_Main')
 
     def button_create_recherche_click(self, **event_args):
         """This method is called when the button is clicked"""

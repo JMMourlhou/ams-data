@@ -152,7 +152,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 self.button_retour_click()
         else:
             alert("utilisateur non trouvé !")
-            self.button_retour_click()
+            #self.button_retour_click()
             
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
