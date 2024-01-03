@@ -41,7 +41,9 @@ class ItemTemplate4(ItemTemplate4Template):
 
         self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
         global cpt
-        txt = "# " + str(self.item['num']) + "/" + str(cpt)
+        nb = ""
+        nb = str(cpt)
+        txt = str(self.item['num']) + " / " + nb
         self.label_2.text = txt
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
