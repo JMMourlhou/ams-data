@@ -66,6 +66,9 @@ db_schema:
     - name: media
       admin_ui: {order: 2.5, width: 282}
       type: media
+    - name: nb_questions
+      admin_ui: {width: 200, order: 3.5}
+      type: number
     title: Temp
   pre_requis:
     title: Pre_Requis

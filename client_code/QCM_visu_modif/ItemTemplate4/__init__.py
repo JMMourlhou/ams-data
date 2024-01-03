@@ -28,7 +28,7 @@ class ItemTemplate4(ItemTemplate4Template):
                 self.mode= "creation"
             else:
                 self.mode = "test"
-        
+
         self.flow_panel_num.tag.nom = "fp_num"
         self.cp_father.tag.nom = "cp_father"
         self.cp_img.tag.nom = "cp_img"
@@ -38,13 +38,12 @@ class ItemTemplate4(ItemTemplate4Template):
         self.spacer_2.tag.nom = "spacer"
         self.label_1.tag.nom = "label"
         self.drop_down_bareme.tag.nom = "bareme"
-
+        
         self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
         global cpt
-        nb = ""
-        nb = str(cpt)
-        txt = str(self.item['num']) + " / " + nb
-        self.label_2.text = txt
+        self.label_4.text = cpt
+        self.label_2.tag.nom = "cpt"
+        self.label_2.text = self.item['num']
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
         
@@ -203,6 +202,7 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the form is shown on the page"""
         global cpt    # cpt = nb de questions
         cpt += 1
+        self.label_4.text = cpt
         print(cpt)
 
     
