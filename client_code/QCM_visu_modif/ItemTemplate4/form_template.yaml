@@ -41,18 +41,20 @@ components:
       data_bindings: []
   - type: TextArea
     properties: {role: null, align: center, height: 63.673095703125, tooltip: '',
-      placeholder: '', border: '', enabled: true, foreground: '', visible: true, text: Question,
-      font_size: null, auto_expand: true, font: '', spacing_above: none, spacing_below: small,
-      italic: false, background: 'theme:Primary 700', bold: false, underline: false}
+      placeholder: '', border: '', enabled: true, foreground: 'theme:On Primary',
+      visible: true, text: Question, font_size: 14, auto_expand: true, font: '', spacing_above: none,
+      spacing_below: small, italic: false, background: 'theme:Primary 700', bold: true,
+      underline: false}
     name: text_box_question
     layout_properties: {grid_position: 'MCXGLF,YCEZGA'}
     event_bindings: {focus: text_box_question_focus, lost_focus: text_box_question_lost_focus,
       change: text_box_question_change}
   - name: text_box_correction
     properties: {role: null, align: center, height: 63.784912109375, tooltip: '',
-      placeholder: '', border: '', enabled: true, foreground: '', visible: true, text: Correction,
-      font_size: null, auto_expand: true, font: '', spacing_above: none, spacing_below: small,
-      italic: false, background: 'theme:Tertiary', bold: false, underline: false}
+      placeholder: '', border: '', enabled: true, foreground: 'theme:On Tertiary',
+      visible: true, text: Correction, font_size: null, auto_expand: true, font: '',
+      spacing_above: none, spacing_below: small, italic: false, background: 'theme:Tertiary',
+      bold: true, underline: false}
     type: TextArea
     layout_properties: {grid_position: ''}
     event_bindings: {focus: text_box_question_focus, lost_focus: text_box_question_lost_focus,

@@ -170,19 +170,19 @@ components:
         data_bindings: []
   - name: text_box_question
     properties: {role: null, align: left, height: 82.52047729492188, tooltip: '',
-      placeholder: Question, border: '', enabled: true, foreground: '', visible: true,
-      text: '', font_size: null, auto_expand: true, font: '', spacing_above: none,
-      spacing_below: small, italic: false, background: 'theme:Primary 700', bold: false,
+      placeholder: Question, border: '', enabled: true, foreground: 'theme:On Primary',
+      visible: true, text: '', font_size: 14, auto_expand: true, font: '', spacing_above: none,
+      spacing_below: small, italic: false, background: 'theme:Primary 700', bold: true,
       underline: false}
     type: TextArea
     layout_properties: {grid_position: 'OQBWAL,EOAWPD'}
     event_bindings: {change: text_box_question_change}
   - name: text_box_correction
     properties: {role: null, align: left, height: 83.68646240234375, tooltip: '',
-      placeholder: Correction, border: '', enabled: true, foreground: '', visible: true,
-      text: '', font_size: null, auto_expand: true, font: '', spacing_above: none,
-      spacing_below: small, italic: false, background: 'theme:Secondary 700', bold: false,
-      underline: false}
+      placeholder: Correction, border: '', enabled: true, foreground: 'theme:On Primary
+        Container', visible: true, text: '', font_size: 14, auto_expand: true, font: '',
+      spacing_above: none, spacing_below: small, italic: false, background: 'theme:Secondary
+        700', bold: true, underline: false}
     type: TextArea
     layout_properties: {grid_position: 'OQBWAL,KUNSFE'}
     event_bindings: {change: text_box_correction_change}
