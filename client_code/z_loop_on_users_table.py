@@ -8,12 +8,13 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-#boucle sur la table users pour modif rapide d'une colonne, ici sur le role
+#boucle sur la table users pour modif rapide d'une colonne, ici sur le role (sauf l'administrateur)
 def loop():
     table_users = app_tables.users.search()
     result="erreur"
-    if list_users:
+    if table_users:
         for row in table_users:
-            row.update(role="S")
+            if row['email'] != "jmarc@jmm-formation-et-services.fr":
+                row.update(role="S")
         result="loop ok"     
     return result

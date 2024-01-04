@@ -54,7 +54,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_area_commentaires.text =       user['commentaires']
             self.histo =                             user['histo']
                 
-            if user['admin'] == True:
+            if user['role'] == "A":
                self.text_box_email2.visible = True
                self.text_area_commentaires.visible = True
         else:

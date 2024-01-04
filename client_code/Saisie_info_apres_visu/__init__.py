@@ -56,7 +56,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             self.text_box_email2.text =              user['email2']
             self.check_box_accept_data_use.checked = user['accept_data']
             self.text_area_commentaires.text =       user['commentaires']
-            if user['admin'] == True:
+            if user['role'] == "A":
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
         else:

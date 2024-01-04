@@ -144,7 +144,7 @@ class Main(MainTemplate):
             self.bt_user_mail.enabled = True
             self.button_qcm.visible = True
             self.button_pre_requis.visible = True
-            if user['admin'] == True:  # Administrator
+            if user['role'] == "A":  # Administrator
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
                 self.bt_gestion_stages.visible = True
@@ -225,6 +225,11 @@ class Main(MainTemplate):
         from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
         open_form('Pre_R_pour_stagiaire')
 
+    def button_loop_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from .. import z_loop_on_users_table
+        result=z_loop_on_users_table.loop()
+        alert(result)
 
 
 
