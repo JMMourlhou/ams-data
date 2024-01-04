@@ -9,7 +9,11 @@ from anvil.tables import app_tables
 
 
 #boucle sur la table users pour modif rapide d'une colonne, ici sur le role
-table_users = app_tables.stages.search()
-if list_users:
-    for row in table_users:
-        row
+def loop():
+    table_users = app_tables.users.search()
+    result="erreur"
+    if list_users:
+        for row in table_users:
+            row.update(role="S")
+        result="loop ok"     
+    return result
