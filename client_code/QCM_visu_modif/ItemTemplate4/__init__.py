@@ -20,11 +20,10 @@ class ItemTemplate4(ItemTemplate4Template):
         # Any code you write here will run before the form opens.
         # lecture  user: si user admin A: mode création 
         user=anvil.users.get_user()
-        print("admin: ", user[''])
+        print("admin: ", user['role'])
         if user:
-            self.admin = user['admin']
-            #if admin[0:1]=="A":
-            if self.admin == True:
+            self.admin = user['role']
+            if self.admin[0:1]=="A":
                 self.mode= "creation"
             else:
                 self.mode = "test"
