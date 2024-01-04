@@ -16,11 +16,11 @@ components:
     type: Label
     layout_properties: {}
   - name: label_3
-    properties: {text: /, foreground: 'theme:On Primary', visible: false}
+    properties: {text: /, foreground: 'theme:On Primary', visible: true}
     type: Label
     layout_properties: {}
   - name: label_4
-    properties: {text: '#', foreground: 'theme:On Primary', visible: false}
+    properties: {text: '#', foreground: 'theme:On Primary', visible: true}
     type: Label
     layout_properties: {}
   - name: flow_panel_num

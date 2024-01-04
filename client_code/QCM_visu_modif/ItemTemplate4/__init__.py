@@ -40,8 +40,10 @@ class ItemTemplate4(ItemTemplate4Template):
         self.drop_down_bareme.tag.nom = "bareme"
         
         self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
-        global cpt
-        self.label_4.text = cpt
+        #recherche nb de questions (sauvées ds temp table)
+        table_temp = app_tables.temp.search()[0]
+        self.label_4.text = table_temp['nb_questions_qcm']
+        
         self.label_2.tag.nom = "cpt"
         self.label_2.text = self.item['num']
         self.label_2.tag.numero = self.item['num']
@@ -202,7 +204,6 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the form is shown on the page"""
         global cpt    # cpt = nb de questions
         cpt += 1
-        self.label_4.text = cpt
         print(cpt)
 
     

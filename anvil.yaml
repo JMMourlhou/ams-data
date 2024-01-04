@@ -66,8 +66,8 @@ db_schema:
     - name: media
       admin_ui: {order: 2.5, width: 282}
       type: media
-    - name: nb_questions
-      admin_ui: {width: 200, order: 3.5}
+    - name: nb_questions_qcm
+      admin_ui: {order: 3.5, width: 200}
       type: number
     title: Temp
   pre_requis:
@@ -239,9 +239,6 @@ db_schema:
     - name: signed_up
       admin_ui: {order: 1.5, width: 253}
       type: datetime
-    - name: admin
-      admin_ui: {order: 1.25, width: 148}
-      type: bool
     - name: prenom
       admin_ui: {order: 10, width: 200}
       type: string
@@ -287,6 +284,9 @@ db_schema:
     - name: histo
       admin_ui: {width: 200, order: 24}
       type: simpleObject
+    - name: role
+      admin_ui: {order: 0.5, width: 96}
+      type: string
     title: Users
   pre_requis_stagiaire:
     client: search
