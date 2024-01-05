@@ -25,10 +25,11 @@ components:
     layout_properties: {}
   - name: file_loader_1
     properties: {background: 'theme:On Primary Container', text: Choix de l'image,
-      visible: true, foreground: 'theme:On Primary', role: null, spacing_above: none,
+      visible: false, foreground: 'theme:On Primary', role: null, spacing_above: none,
       spacing_below: none}
     type: FileLoader
     event_bindings: {change: file_loader_1_change}
+    layout_properties: {}
 - name: cp_father
   properties: {}
   type: ColumnPanel
@@ -58,7 +59,7 @@ components:
   - name: text_box_correction
     properties: {role: null, align: center, height: 63.784912109375, tooltip: '',
       placeholder: '', border: '', enabled: true, foreground: 'theme:On Tertiary',
-      visible: true, text: Correction, font_size: null, auto_expand: true, font: '',
+      visible: false, text: Correction, font_size: null, auto_expand: true, font: '',
       spacing_above: none, spacing_below: small, italic: false, background: 'theme:Tertiary',
       bold: true, underline: false}
     type: TextArea

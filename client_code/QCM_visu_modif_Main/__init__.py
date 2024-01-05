@@ -36,9 +36,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         global liste
         liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
         nb_questions = len(liste)
-        txt = "Q° # "
-        num_question = str(nb_questions + 1)
-        self.label_2.text = txt + num_question  # Num ligne à partir du nb lignes déjà créées 
+        #num_question = str(nb_questions + 1)
+        self.label_2.text = nb_questions + 1  # Num ligne à partir du nb lignes déjà créées 
 
         table_temp = app_tables.temp.search()[0]
         table_temp.update(nb_questions_qcm=nb_questions)
@@ -103,7 +102,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # je récupère mes variables globales  question, reponse, bareme
         result = anvil.server.call("add_ligne_qcm", num, question, correction, reponse, bareme, image, qcm_nb)         #num du stage  de la ligne
         if result:
-            n = Notification("Création de la création !",
+            n = Notification("Création de la question !",
                  timeout=2)   # par défaut 2 secondes
             n.show()
             # raffraichit les lignes qcm en récupérant le choix du qcm ds la dropdown
