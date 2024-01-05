@@ -50,6 +50,6 @@ def modify_users(user_to_be_modified,
                    email2 = mail2,
                    accept_data = accept_storage,
                    commentaires = comments,
-                   ro
+                   histo=histo
                             )
         return True
