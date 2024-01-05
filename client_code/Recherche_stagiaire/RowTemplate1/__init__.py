@@ -45,6 +45,8 @@ class RowTemplate1(RowTemplate1Template):
                     cumul_clefs_histo = cumul_clefs_histo + " " + clef
             if self.item['prenom'] != None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
+                if self.item['role'] != "S":
+                    self.button_1.foreground = "red"
             else:
                 self.button_1.text = self.item['nom']
             self.button_3.text = self.item['tel']

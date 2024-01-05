@@ -27,8 +27,11 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # j'affiche tous les stagiaires
         self.repeating_panel_1.items = app_tables.users.search(
                 tables.order_by("nom", ascending=True),
-                role =q.not_("A")    # on n'affiche pas l'admin !
+                role ="S"    # on affiche les stagiaires uniqt
+                #role =q.not_("A")    # on n'affiche pas l'admin !
                 )
+        self.text_box_role.text = "S"    # j'affiche le role "S"
+        
     def text_box_nom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
         self.drop_down_code_stage.selected_value = None
@@ -51,14 +54,21 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.filtre()
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
-        
         self.text_box_nom.text=""       # critere nom
         self.text_box_prenom.text=""  # critere prenom
         self.text_box_email.text=""  # critere email
         self.text_box_tel.text=""  # critere tel
         self.filtre_type_stage()   
+        
+    def text_box_role_change(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.drop_down_code_stage.selected_value = None
+        self.drop_down_num_stages.visible = False
+        self.filtre()
+    
     def filtre(self):
         # Récupération des critères
+        c_role = self.text_box_role.text + "%"          # critère role
         c_nom = self.text_box_nom.text + "%"       # critere nom
         c_prenom = self.text_box_prenom.text + "%"  # critere prenom
         c_email = self.text_box_email.text + "%"  # critere email
@@ -69,11 +79,12 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                 tables.order_by("nom", ascending=True),
                 q.all_of                  # all of queries must match
                 (
+                    role =q.ilike(c_role),   # ET
                     nom=q.ilike(c_nom),       # ET
                     prenom=q.ilike(c_prenom),  # ET
                     email=q.ilike(c_email),    # ET
                     tel=q.ilike(c_tel),    # ET
-                    admin =q.not_(True)    # on n'affiche pas l'admin !
+                    #role =q.not_("A")   # on n'affiche pas l'admin !                 
                 )
             )
     def filtre_type_stage(self):
@@ -128,6 +139,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+  
+
+
 
 
 

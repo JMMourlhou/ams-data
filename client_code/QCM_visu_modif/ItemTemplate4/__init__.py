@@ -14,17 +14,17 @@ global cpt   # cpt nb de questions
 cpt = 0
 
 class ItemTemplate4(ItemTemplate4Template):
-    def __init__(self, **properties):               # "creation" = mode création/MAJ pas de test stagiaire
+    def __init__(self, **properties):               
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         # lecture  user: si user admin A: mode création 
         user=anvil.users.get_user()
-        print("admin: ", user['role'])
+        print("role: ", user['role'])
         if user:
             self.admin = user['role']
-            if self.admin[0:1]=="A":
-                self.mode= "creation"
+            if self.admin[0:1]!="S":         # si pas stagiaire
+                self.mode= "creation"        # "creation" = mode création/MAJ pas de test stagiaire
             else:
                 self.mode = "test"
 
@@ -78,6 +78,8 @@ class ItemTemplate4(ItemTemplate4Template):
             self.file_loader_1.visible = False
             self.text_box_correction.visible = False
             self.drop_down_bareme.enabled = False
+        else:
+            self.file_loader_1.visible = True
         
     def text_box_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
