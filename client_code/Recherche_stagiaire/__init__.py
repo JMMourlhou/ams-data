@@ -27,7 +27,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # j'affiche tous les stagiaires
         self.repeating_panel_1.items = app_tables.users.search(
                 tables.order_by("nom", ascending=True),
-                admin =q.not_(True)    # on n'affiche pas l'admin !
+                role =q.not_("A")    # on n'affiche pas l'admin !
                 )
     def text_box_nom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
