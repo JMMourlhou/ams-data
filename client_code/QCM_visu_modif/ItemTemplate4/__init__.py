@@ -33,7 +33,12 @@ class ItemTemplate4(ItemTemplate4Template):
         self.cp_img.tag.nom = "cp_img"
         self.fp_modif.tag.nom = "fp_modif"
         self.fp_vf_barem.tag.nom = "fp_vrai/faux_bareme"
-        self.check_box_reponse.tag.nom = "reponse"
+       
+        self.check_box_true.tag.nom = "rep_true"
+        self.check_box_true.tag.numero = self.item['num']
+        self.check_box_false.tag.nom = "rep_false"
+        self.check_box_false.tag.numero = self.item['num']
+        
         self.spacer_2.tag.nom = "spacer"
         self.label_1.tag.nom = "label"
         self.drop_down_bareme.tag.nom = "bareme"
@@ -56,10 +61,6 @@ class ItemTemplate4(ItemTemplate4Template):
         self.text_box_correction.tag.nom = "correction"
         self.text_box_correction.tag.numero = self.item['num']
         
-        self.check_box_reponse.checked = self.item['reponse']
-        self.check_box_reponse.tag.nom = "reponse"
-        self.check_box_reponse.tag.numero = self.item['num']
-        
         self.drop_down_bareme.items=["1","5"]
         self.drop_down_bareme.selected_value = self.item['bareme']                 
         self.drop_down_bareme.tag.nom = "bareme"
@@ -80,9 +81,14 @@ class ItemTemplate4(ItemTemplate4Template):
             self.drop_down_bareme.enabled = False
             self.button_modif.text = "Validation"
             self.drop_down_bareme.visible = False
-            self.label_1.text = self.item['bareme'] + " points" 
+            self.label_1.text = self.item['bareme'] + " point(s)"
         else:
-            self.file_loader_1.visible = True
+            rep = self.item['reponse']             # mode création, j'affiche la réponse
+            if rep == True:
+                self.check_box_true.checked = True
+            else:
+                self.check_box_false.checked = True
+
         
     def text_box_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
@@ -106,18 +112,32 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_modif.foregroundground = "yellow"
         global ancien_num_ligne
         ancien_num_ligne = self.drop_down_bareme.tag.numero
-    
-    def check_box_reponse_change(self, **event_args):   # Reponse a changé: 
+
+      
+    def check_box_true_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_true.checked == True:
+            self.check_box_false.checked = False
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
             
         global ancien_num_ligne
-        ancien_num_ligne = self.check_box_reponse.tag.numero
+        ancien_num_ligne = self.check_box_true.tag.numero
+            
+    def check_box_false_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_false.checked == True:
+            self.check_box_true.checked = False
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foregroundground = "yellow"
+            
+        global ancien_num_ligne
+        ancien_num_ligne = self.check_box_false.tag.numero
 
         
-  
+    # Bouton modif si mode création  // Validation si mode test qcm pour stagiaire
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
         """This method is called when the button is clicked"""
         
@@ -159,12 +179,19 @@ class ItemTemplate4(ItemTemplate4Template):
             if cpnt.tag.nom == "fp_vrai/faux_bareme":       # fp_vf_barem contient reponse et bareme   
                 print("test2", cpnt, cpnt.tag.nom)
                 for cpnt2 in cpnt.get_components():   #( cp_img contient image_1)
-                    if cpnt2.tag.nom =="reponse":
-                        print(cpnt2, cpnt2.tag.nom)
-                        reponse = cpnt2.checked            # j'ai la réponse ( v/F )
-                    if cpnt2.tag.nom =="bareme":
-                        print(cpnt2, cpnt2.tag.nom)
-                        bareme = cpnt2.selected_value
+                        #if cpnt2.tag.nom =="reponse":
+                        #    print(cpnt2, cpnt2.tag.nom)
+                        #    reponse = cpnt2.checked            # j'ai la réponse ( v/F )
+                        if cpnt2.tag.nom =="rep_true":
+                            print(cpnt2, cpnt2.tag.nom)
+                            if cpnt2.checked == True:
+                                reponse = True
+                            else:
+                                reponse = False
+                            
+                        if cpnt2.tag.nom =="bareme":
+                            print(cpnt2, cpnt2.tag.nom)
+                            bareme = cpnt2.selected_value
            
 
         qcm_descro_row = self.qcm_nb
@@ -181,6 +208,8 @@ class ItemTemplate4(ItemTemplate4Template):
         else:
             self.button_modif.enabled = False
             self.button_modif.visible = False
+            self.check_box_true.enabled = False
+            self.check_box_false.enabled = False
             
             alert("calcul")
             
@@ -222,14 +251,7 @@ class ItemTemplate4(ItemTemplate4Template):
         cpt += 1
         #print(cpt)
 
-    def radio_button_False_clicked(self, **event_args):
-        """This method is called when this radio button is selected"""
-        if self.radio_button_False.selected == True
-            self.radio_button_True.selected == False
 
-    def radio_button_True_clicked(self, **event_args):
-        """This method is called when this radio button is selected"""
-        pass
 
     
                                 
