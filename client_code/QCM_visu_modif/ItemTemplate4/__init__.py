@@ -78,6 +78,9 @@ class ItemTemplate4(ItemTemplate4Template):
             self.file_loader_1.visible = False
             self.text_box_correction.visible = False
             self.drop_down_bareme.enabled = False
+            self.button_modif.text = "Validation"
+            self.drop_down_bareme.visible = False
+            self.label_1.text = self.item['bareme'] + " points" 
         else:
             self.file_loader_1.visible = True
         
@@ -109,12 +112,15 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
+            
         global ancien_num_ligne
         ancien_num_ligne = self.check_box_reponse.tag.numero
+
+        
   
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
         """This method is called when the button is clicked"""
-  
+        
         # je récupère mes question, reponse, bareme de la ligne du bouton pressé
         # Je remonte au conteneur parent du bouton (le flow panel)
         
@@ -160,18 +166,27 @@ class ItemTemplate4(ItemTemplate4Template):
                         print(cpnt2, cpnt2.tag.nom)
                         bareme = cpnt2.selected_value
            
-        #recup qcm_nb ds fichier temp
 
         qcm_descro_row = self.qcm_nb
         print(qcm_descro_row)
-        result = anvil.server.call('modif_qcm', qcm_descro_row, num, question, reponse, bareme, photo, correction)
-        if not result:
-            alert("erreur de création d'une question QCM")
-            return
+        
+        if self.mode == "creation":
+            result = anvil.server.call('modif_qcm', qcm_descro_row, num, question, reponse, bareme, photo, correction)
+            if not result:
+                alert("erreur de création d'une question QCM")
+                return
+            # j'initialise la forme principale
+            from anvil import open_form       
+            open_form("QCM_visu_modif_Main",qcm_descro_row)
+        else:
+            self.button_modif.enabled = False
+            self.button_modif.visible = False
             
-        # j'initialise la forme principale
-        from anvil import open_form       
-        open_form("QCM_visu_modif_Main",qcm_descro_row)
+            alert("calcul")
+            
+            
+            
+        
 
     def text_box_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
@@ -205,7 +220,16 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the form is shown on the page"""
         global cpt    # cpt = nb de questions
         cpt += 1
-        print(cpt)
+        #print(cpt)
+
+    def radio_button_False_clicked(self, **event_args):
+        """This method is called when this radio button is selected"""
+        if self.radio_button_False.selected == True
+            self.radio_button_True.selected == False
+
+    def radio_button_True_clicked(self, **event_args):
+        """This method is called when this radio button is selected"""
+        pass
 
     
                                 

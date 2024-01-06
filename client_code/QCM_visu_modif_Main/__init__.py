@@ -36,6 +36,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         global liste
         liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
         nb_questions = len(liste)
+        print("nb d'images", nb_questions)
         #num_question = str(nb_questions + 1)
         self.label_2.text = nb_questions + 1  # Num ligne à partir du nb lignes déjà créées 
 

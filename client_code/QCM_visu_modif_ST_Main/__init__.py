@@ -30,6 +30,8 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
 
+
+    
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         qcm_row = self.drop_down_qcm_row.selected_value
@@ -40,9 +42,14 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         nb_questions = len(liste)
         self.label_2.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées
 
+        table_temp = app_tables.temp.search()[0]
+        table_temp.update(nb_questions_qcm=nb_questions)
+
          # affiches les lignes du qcm
         self.affiche_lignes_qcm(liste)
 
+
+    
     def affiche_lignes_qcm(self, l=[]):
         global liste
         self.column_panel_content.clear()
