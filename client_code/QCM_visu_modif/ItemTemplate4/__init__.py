@@ -18,7 +18,7 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        # lecture  user: si user admin A: mode création 
+        # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
         print("role: ", user['role'])
         if user:
@@ -88,6 +88,7 @@ class ItemTemplate4(ItemTemplate4Template):
                 self.check_box_true.checked = True
             else:
                 self.check_box_false.checked = True
+            self.text_box_correction.visible = True  # j'affiche la correction
 
         
     def text_box_question_change(self, **event_args):   # Question a changé
