@@ -45,7 +45,7 @@ class ItemTemplate2(ItemTemplate2Template):
             date_naiss_format = stagiaire['date_naissance'].strftime("%d/%m/%Y")
             #self.rich_text_1.background="theme:Primary"
             #self.rich_text_1.foreground="theme:On Primary"
-            self.rich_text_1.content=f" **{stagiaire['prenom']} {stagiaire['nom']}** ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
+            self.rich_text_1.content=f" **{stagiaire['nom']} {stagiaire['prenom']}** ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
             self.rich_text_2.content=f" Né le {date_naiss_format} à {stagiaire['ville_naissance']} ({stagiaire['code_postal_naissance']} {stagiaire['pays_naissance']}) \n {stagiaire['adresse_rue']}, {stagiaire['adresse_code_postal']} {stagiaire['adresse_ville']} "
 
 
