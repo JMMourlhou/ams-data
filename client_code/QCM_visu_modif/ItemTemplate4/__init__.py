@@ -13,6 +13,15 @@ ancien_num_ligne = 0
 global cpt   # cpt nb de questions
 cpt = 0
 
+global nb_bonnes_rep
+nb_bonnes_rep = 0
+global max_points
+max_points = 0
+global points
+points = 0      # Je cumule les points en fonction de la réponse et du barême
+global reponses
+reponses = []   #liste de toutes les réponses du stagiaire {num, reponseV/F}
+
 class ItemTemplate4(ItemTemplate4Template):
     def __init__(self, **properties):               
         # Set Form properties and Data Bindings.
@@ -73,6 +82,8 @@ class ItemTemplate4(ItemTemplate4Template):
         self.image_1.tag.nom = "photo"
         self.image_1.tag.numero = self.item['num']
 
+        self.reponse = self.item['reponse']
+
         print(self.mode)
         if self.mode != "creation":
             self.text_box_question.enabled = False
@@ -82,6 +93,8 @@ class ItemTemplate4(ItemTemplate4Template):
             self.button_modif.text = "Validation"
             self.drop_down_bareme.visible = False
             self.label_1.text = self.item['bareme'] + " point(s)"
+
+            
         else:
             rep = self.item['reponse']             # mode création, j'affiche la réponse
             if rep == True:
@@ -180,19 +193,17 @@ class ItemTemplate4(ItemTemplate4Template):
             if cpnt.tag.nom == "fp_vrai/faux_bareme":       # fp_vf_barem contient reponse et bareme   
                 print("test2", cpnt, cpnt.tag.nom)
                 for cpnt2 in cpnt.get_components():   #( cp_img contient image_1)
-                        #if cpnt2.tag.nom =="reponse":
-                        #    print(cpnt2, cpnt2.tag.nom)
-                        #    reponse = cpnt2.checked            # j'ai la réponse ( v/F )
+                               
                         if cpnt2.tag.nom =="rep_true":
                             print(cpnt2, cpnt2.tag.nom)
                             if cpnt2.checked == True:
-                                reponse = True
+                                reponse = True                # j'ai la réponse du stagiaire ( v/F )
                             else:
                                 reponse = False
                             
                         if cpnt2.tag.nom =="bareme":
                             print(cpnt2, cpnt2.tag.nom)
-                            bareme = cpnt2.selected_value
+                            bareme = cpnt2.selected_value      # j'ai le bareme
            
 
         qcm_descro_row = self.qcm_nb
@@ -212,9 +223,31 @@ class ItemTemplate4(ItemTemplate4Template):
             self.check_box_true.enabled = False
             self.check_box_false.enabled = False
             
-            alert("calcul")
+            #alert("calcul")
+            global nb_bonnes_rep
+            global max_points
+            global points
+            global reponses
             
-            
+            rep_stagiaire = False
+            rep=()
+            if self.check_box_true.checked == False:       # le stagiaire a répondu False
+                rep=[num,False]
+                rep_stagiaire = False
+            else:
+                rep=[num,True]    # le stagiaire a répondu True
+                rep_stagiaire = True
+            reponses.append(rep)      # je mets à jour la liste
+
+            #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
+            max_points = max_points + int(bareme)   # cumul du max de points possible
+            if self.reponse == rep_stagiaire:
+                nb_bonnes_rep += 1
+                points = points + int(bareme)
+            print("rep; ", rep)
+            print("reponses; ", reponses)
+            print("nb bonnes reponses: ", nb_bonnes_rep)
+            print("nb points: ", points)
             
         
 
