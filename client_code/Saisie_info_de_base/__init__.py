@@ -29,8 +29,12 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         user=anvil.users.get_user()
         if user:
             self.text_box_mail.text =                user['email']
-            self.text_box_nom.text =                 user["nom"].capitalize()
-            
+            if user["nom"] != None:
+                nm = user["nom"]
+                nm = nm.strip()
+                nm = nm.capitalize()
+                self.text_box_nom.text = nm
+               
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
@@ -73,8 +77,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             alert("Entrez le prénom !")
             return
         else:
-            self.text_box_prenom.text = self.text_box_prenom.text.capitalize()
-        p=self.text_box_prenom.text
+            pn = self.text_box_prenom.capitalize()
+            pn = pn.strip()
+            self.text_box_prenom.text =  pn  
+        p=stripe(self.text_box_prenom.text)
+        
         self.text_box_prenom.text = p.capitalize()
         if self.text_box_nom.text == "" :           # dates vides ?
             alert("Entrez le nom !")
@@ -110,11 +117,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if r :   #Non, nom pas correct
                 self.check_box_accept_data_use.checked = True
                 return
-    
+        
         user=anvil.users.get_user()
         if user:
             result = anvil.server.call("modify_users", user,
-                                                    self.text_box_nom.text,
+                                                    strip(self.text_box_nom.text),
                                                     self.text_box_prenom.text,
                                                     self.image_photo.source,
                                                     self.text_box_v_naissance.text,
