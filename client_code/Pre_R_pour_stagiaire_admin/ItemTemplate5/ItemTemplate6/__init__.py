@@ -47,7 +47,8 @@ class ItemTemplate6(ItemTemplate6Template):
             if file_extension == ".jpg":
                 print("JPG loaded")
                 new_file_name = new_file_name + ".jpg" # rajout extension
-                thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                #thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                #self.image_1.source = file
                 self.image_1.source = file
                
                 # Sauvegarde du 'file' jpg et de son thumb nail ds table pré requis

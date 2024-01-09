@@ -87,6 +87,11 @@ components:
     name: column_panel_admin
     layout_properties: {grid_position: 'CWEFOY,ECORVD'}
     components:
+    - name: Close
+      properties: {text: Fermer, foreground: 'theme:On Primary'}
+      type: Button
+      layout_properties: {grid_position: 'ANOUBQ,OYAPQI'}
+      event_bindings: {click: Close_click}
     - name: button_loop
       properties: {text: Loop, background: 'theme:Tertiary', foreground: 'theme:On
           Primary Container', bold: true, visible: true}

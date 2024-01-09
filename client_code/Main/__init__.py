@@ -231,7 +231,13 @@ class Main(MainTemplate):
         result=z_loop_on_users_table.loop()
         alert(result)
 
-
+    def Close_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        import anvil.js
+        from anvil.js.window import localStorage
+        from anvil.js import window
+        #window.close()
+        window.setTimeout(window.close, 10000)
 
 
 

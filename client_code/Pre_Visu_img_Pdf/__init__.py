@@ -60,6 +60,9 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
             
             media = anvil.server.call("generate_pdf_from_jpg", self.image_1.source, self.new_file_name, self.stage_num, self.email, self.item_requis, pr_requis_row)
         anvil.media.download(media)
+        n = Notification("Téléchargement effectué !",
+                 timeout=1)   # par défaut 2 secondes
+        n.show()
 
             
 

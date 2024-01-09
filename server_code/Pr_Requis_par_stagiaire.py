@@ -39,7 +39,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             if width >= height:   #landscape
                 if width > 2000:
                     print("**** w > H")
-                    width = math.floor(width / 2.5)                       # A RENTRER DS LES PARAM
+                    width = math.floor(width / 2.5)            # je ne prends pas les virgules           # A RENTRER DS LES PARAM
                     height = math.floor(height / 2.5)
             if height > width:
                 if height > 2000:
@@ -57,17 +57,13 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
     
             file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
             # -------------------------------------------------------------------------------------            
-            # SAUVEGARDE IMG ds doc1, je ne change pas pdf_doc1, je ne sauve plus le thumb
-            pr_requis_row.update(check=True,               
-                                doc1 = file
-                                )
-            print("MAJ de la table pre recquis par le doc jpg")
-            """
+            # SAUVEGARDE IMG ds doc1, j'efface pdf_doc1 sinon je risque de télécharger un ancien fichier, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file,
-                                thumb_doc1 = thumb_file
+                                pdf_doc1 = None
                                 )
-            """           
+            print("MAJ de la table pre recquis par le doc jpg")
+            
             return True    # Sov effectué et None liste_images (car img, pas pdf)   
     
 

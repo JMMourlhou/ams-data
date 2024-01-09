@@ -104,7 +104,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         result = anvil.server.call("add_ligne_qcm", num, question, correction, reponse, bareme, image, qcm_nb)         #num du stage  de la ligne
         if result:
             n = Notification("Création de la question !",
-                 timeout=2)   # par défaut 2 secondes
+                 timeout=1)   # par défaut 2 secondes
             n.show()
             # raffraichit les lignes qcm en récupérant le choix du qcm ds la dropdown
             from anvil import open_form       # j'initialise la forme principale avec le choix du qcm ds la dropdown
