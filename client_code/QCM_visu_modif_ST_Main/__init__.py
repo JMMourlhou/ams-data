@@ -60,5 +60,16 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         from ..Main import Main
         open_form('Main',99)
 
+    def button_fin_qcm1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # affichage des résultats
+        nb_bonnes        
+        self.column_panel_2.visible = True
+        
+
+    def button_fin_qcm1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_fin_qcm1()
+
 
 
