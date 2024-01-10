@@ -21,7 +21,8 @@ class ItemTemplate1(ItemTemplate1Template):
             self.text_box_1.text = "  " + row['requis']
             self.button_annuler.tag = row['code_pre_requis']
         except:
-            alert("Un code pré-requis n'existe plus")
+            msg = (f"Un code pré-requis n'existe plus pour:  {row['requis']}")
+            print(msg)
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
