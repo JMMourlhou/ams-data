@@ -130,7 +130,7 @@ components:
       event_bindings: {click: button_modif_click}
     data_bindings: []
 - name: button_fin_qcm
-  properties: {text: Sortir du QCM, visible: false, background: 'theme:Error', foreground: 'theme:Tertiary'}
+  properties: {text: Sortir du QCM, visible: true, background: 'theme:Error', foreground: 'theme:Tertiary'}
   type: Button
   layout_properties: {grid_position: 'VPTSCN,EQKGQF'}
   event_bindings: {click: button_fin_qcm_click}

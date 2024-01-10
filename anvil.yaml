@@ -164,8 +164,11 @@ db_schema:
     - name: nb_rep_ok
       admin_ui: {order: 4, width: 120}
       type: number
-    - name: pourcentage_ok
-      admin_ui: {order: 5, width: 132}
+    - name: p100_sur_nb_rep
+      admin_ui: {order: 5, width: 147}
+      type: number
+    - name: p100_sur_points
+      admin_ui: {order: 6, width: 144}
       type: number
     title: Qcm_result
   stagiaires_inscrits:

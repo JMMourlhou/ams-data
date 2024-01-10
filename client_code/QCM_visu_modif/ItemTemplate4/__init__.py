@@ -8,6 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+
 global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
 ancien_num_ligne = 0
 global cpt   # cpt nb de questions
@@ -37,6 +38,9 @@ class ItemTemplate4(ItemTemplate4Template):
             else:
                 self.mode = "test"
 
+        # Extraction du numéro de qcm
+        self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
+
         self.flow_panel_num.tag.nom = "fp_num"
         self.cp_father.tag.nom = "cp_father"
         self.cp_img.tag.nom = "cp_img"
@@ -52,7 +56,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_1.tag.nom = "label"
         self.drop_down_bareme.tag.nom = "bareme"
         
-        self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
+        
         #recherche nb de questions (sauvées ds temp table)
         table_temp = app_tables.temp.search()[0]
         self.label_4.text = table_temp['nb_questions_qcm']
@@ -244,6 +248,7 @@ class ItemTemplate4(ItemTemplate4Template):
             if self.reponse == rep_stagiaire:
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
+            print("num qcm: ", self.qcm_nb)
             print("rep; ", rep)
             print("reponses; ", reponses)
             print("nb bonnes reponses: ", nb_bonnes_rep)
@@ -292,9 +297,13 @@ class ItemTemplate4(ItemTemplate4Template):
         global max_points
         global points
         global reponses  
+        print("num qcm: ", self.qcm_nb)
+        print("reponses; ", reponses)
+        print("nb bonnes reponses: ", nb_bonnes_rep)
+        print("nb points: ", points)
         user=anvil.users.get_user()
         if user:
-            result = anvil.server.call("qcm_result", user, nb_bonnes_rep, max_points, points, reponses)  
+            result = anvil.server.call("qcm_result", user, self.qcm_nb, nb_bonnes_rep, max_points, points, reponses)  
             if result == True :
                 alert("QCM enregisté !")
                               
