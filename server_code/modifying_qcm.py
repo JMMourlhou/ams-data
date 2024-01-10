@@ -1,16 +1,12 @@
-import anvil.stripe
 import anvil.files
 from anvil.files import data_files
-import anvil.email
-import anvil.google.auth, anvil.google.drive, anvil.google.mail
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
-
+# MODIF du QCM
 @anvil.server.callable           #modif d'une ligne de Qcm
 def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, correction):
     """ lecture fichier père code stages
@@ -35,4 +31,35 @@ def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, co
                      correction= correction
                     )
         return True
-                     
+
+# ENREGITREMENT du QCM pour un stagiaire
+@anvil.server.callable 
+@anvil.tables.in_transaction
+def qcm_result(user, qcm_descro_row, qcm_nb, nb_bonnes_rep, max_points, points, reponses, mode="debut"):      # debut: debut de qcm, enregt du num et user
+    
+    if mode == "debut":
+        #lire le fichier père qcm à partir du qcm number
+        #
+        #
+        
+        new_row=app_tables.qcm_result.add_row(
+                                                user_qcm= user,
+                                                qcm_number=qcm_number
+                                                
+                                )
+    if mode == "fin":  
+        import French_zone_server_side
+        
+        # finding the qcm row 
+        row = app_tables.qcm_result.get(qcm_number=qcm_number)
+        if not row:
+            result = "QCM Row non trouvé"
+        else:           
+            row.update(
+                        time= time_french_zone(),
+                        liste_rep = reponses,
+                        nb_rep_ok = nb_bonnes_rep,
+                        pourcentage_ok=0
+                              )
+            result = "Résultats du QCM enregistrés"
+        return result    

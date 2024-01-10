@@ -285,10 +285,19 @@ class ItemTemplate4(ItemTemplate4Template):
         cpt += 1
         #print(cpt)
 
-
-
-    
-                                
+    def button_fin_qcm_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # enregistrement des résultats ds table qcm_results
+        global nb_bonnes_rep
+        global max_points
+        global points
+        global reponses  
+        user=anvil.users.get_user()
+        if user:
+            result = anvil.server.call("qcm_result", user, nb_bonnes_rep, max_points, points, reponses)  
+            if result == True :
+                alert("QCM enregisté !")
+                              
 
             
 

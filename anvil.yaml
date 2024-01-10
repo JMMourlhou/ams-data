@@ -144,7 +144,7 @@ db_schema:
       type: string
     title: Qcm
   qcm_result:
-    client: search
+    client: full
     server: full
     columns:
     - name: user_qcm
