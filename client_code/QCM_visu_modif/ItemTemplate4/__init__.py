@@ -9,6 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+
 global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
 ancien_num_ligne = 0
 global cpt   # cpt nb de questions
@@ -56,7 +57,7 @@ class ItemTemplate4(ItemTemplate4Template):
         
         #recherche nb de questions (sauvées ds temp table)
         table_temp = app_tables.temp.search()[0]
-        self.label_4.text = table_temp['nb_questions_qcm']
+        self.label_nb_questions.text = table_temp['nb_questions_qcm']
         
         self.label_2.tag.nom = "cpt"
         self.label_2.text = self.item['num']
@@ -87,7 +88,8 @@ class ItemTemplate4(ItemTemplate4Template):
 
         self.reponse = self.item['reponse']
 
-        print(self.mode)
+        #print(self.mode)
+        self.button_fin_qcm.visible = False
         if self.mode != "creation":
             self.rich_text_question.enabled = False
             self.file_loader_1.visible = False
@@ -95,9 +97,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.drop_down_bareme.enabled = False
             self.button_modif.text = "Validation"
             self.drop_down_bareme.visible = False
-            #self.label_1.text = self.item['bareme'] + " point(s)"
-
-            
+            self.button_fin_qcm.visible = False
         else:
             rep = self.item['reponse']             # mode création, j'affiche la réponse
             if rep == True:
@@ -252,8 +252,6 @@ class ItemTemplate4(ItemTemplate4Template):
             print("reponses; ", reponses)
             print("nb bonnes reponses: ", nb_bonnes_rep)
             print("nb points: ", points)
-            
-        
 
     def rich_text_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
@@ -285,10 +283,26 @@ class ItemTemplate4(ItemTemplate4Template):
 
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
+        """
         global cpt    # cpt = nb de questions
         cpt += 1
-        #print(cpt)
-
+        print("cpt: ", cpt)
+        print(self.label_nb_questions.text)
+        if cpt == int(self.label_nb_questions.text):
+            self.button_fin_qcm.visible = False
+        else:
+            self.button_fin_qcm.visible = True
+        """
+        
+    def button_fin_qcm_show(self, **event_args):
+        """This method is called when the Button is shown on the screen"""
+        from ...QCM_visu_modif_ST_Main import QCM_visu_modif_ST_Main
+        global cpt    # cpt = nb de questions
+        cpt += 1
+        if cpt == 1:
+            self.button_fin_qcm.visible = True
+            #QCM_visu_modif_ST_Main.column_panel_results.visible = True        
+            
     def button_fin_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
         # enregistrement des résultats ds table qcm_results
@@ -305,6 +319,8 @@ class ItemTemplate4(ItemTemplate4Template):
             result = anvil.server.call("qcm_result", user, self.qcm_nb, nb_bonnes_rep, max_points, points, reponses)  
             if result == True :
                 alert("QCM enregisté !")
+
+
                               
 
             
