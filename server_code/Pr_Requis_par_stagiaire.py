@@ -29,8 +29,9 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                                              )                                      
     if pr_requis_row:
         if file_extension == ".jpg":
-            print("serveur Preq: Ce fichier est une image JPG")          
-            #--------------------------------------------------------------------------------
+            print("serveur Preq: Ce fichier est une image JPG")        
+            """
+            #-------------------------------------------------------------------------------- Remplacé par1 B.G. task / pression bt loop traitmt images
             # Img file, Convert the 'file' Media object into a Pillow Image
             img = Image.open(io.BytesIO(file.get_bytes()))
             width, height = img.size
@@ -56,7 +57,9 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
             img.save(bs, format="JPEG")
     
             file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
-            # -------------------------------------------------------------------------------------            
+            # -------------------------------------------------------------------------------------  
+            """
+            
             # SAUVEGARDE IMG ds doc1, j'efface pdf_doc1 sinon je risque de télécharger un ancien fichier, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file,
