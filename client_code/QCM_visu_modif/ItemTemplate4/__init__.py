@@ -65,10 +65,12 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_2.text = self.item['num']
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
-        
-        self.text_area_question.text = (f"{self.item['question']}   ({self.item['bareme']} point(s)")
-        self.text_area_question.tag.nom = "question"
-        self.text_area_question.tag.numero = self.item['num']
+        if self.item['bareme'] > 1:
+            self.rich_text_question.content = (f"**{self.item['question']}** \n  {self.item['bareme']} points")
+        else:  # bareme 1 point
+            self.rich_text_question.content = (f"**{self.item['question']}** \n  {self.item['bareme']} points")
+        self.rich_text_question.tag.nom = "question"
+        self.rich_text_question.tag.numero = self.item['num']
         
         self.text_box_correction.text = self.item['correction']
         self.text_box_correction.tag.nom = "correction"
@@ -90,7 +92,7 @@ class ItemTemplate4(ItemTemplate4Template):
 
         print(self.mode)
         if self.mode != "creation":
-            self.text_area_question.enabled = False
+            self.rich_text_question.enabled = False
             self.file_loader_1.visible = False
             self.text_box_correction.visible = False
             self.drop_down_bareme.enabled = False
@@ -108,7 +110,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.text_box_correction.visible = True  # j'affiche la correction
 
         
-    def text_area_question_change(self, **event_args):   # Question a changé
+    def rich_text_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
         # je récupère le contenu du cpnt
         self.button_modif.enabled = True
@@ -256,14 +258,14 @@ class ItemTemplate4(ItemTemplate4Template):
             
         
 
-    def text_box_question_lost_focus(self, **event_args):
+    def rich_text_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
         global ancien_num_ligne
-        ancien_num_ligne = self.text_area_question.tag.numero
+        ancien_num_ligne = self.rich_text_question.tag.numero
         
-    def text_box_question_focus(self, **event_args):
+    def rich_text_question_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        num = self.text_area_question.tag.numero
+        num = self.rich_text_question.tag.numero
         # Je recherche le bouton de l'ancienne ligne pour le désactiver
         #Je remonte du component sur 3 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
         global ancien_num_ligne
