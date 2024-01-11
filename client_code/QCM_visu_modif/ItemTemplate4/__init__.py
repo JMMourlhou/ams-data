@@ -66,9 +66,9 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
         
-        self.text_box_question.text = self.item['question']
-        self.text_box_question.tag.nom = "question"
-        self.text_box_question.tag.numero = self.item['num']
+        self.text_area_question.text = (f"{self.item['question']}   ({self.item['bareme']} point(s)")
+        self.text_area_question.tag.nom = "question"
+        self.text_area_question.tag.numero = self.item['num']
         
         self.text_box_correction.text = self.item['correction']
         self.text_box_correction.tag.nom = "correction"
@@ -90,7 +90,7 @@ class ItemTemplate4(ItemTemplate4Template):
 
         print(self.mode)
         if self.mode != "creation":
-            self.text_box_question.enabled = False
+            self.text_area_question.enabled = False
             self.file_loader_1.visible = False
             self.text_box_correction.visible = False
             self.drop_down_bareme.enabled = False
@@ -108,7 +108,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.text_box_correction.visible = True  # j'affiche la correction
 
         
-    def text_box_question_change(self, **event_args):   # Question a changé
+    def text_area_question_change(self, **event_args):   # Question a changé
         """This method is called when the text in this text box is edited"""
         # je récupère le contenu du cpnt
         self.button_modif.enabled = True
@@ -186,7 +186,7 @@ class ItemTemplate4(ItemTemplate4Template):
                 # mettre la 1ere lettre en maj mais laisser le reste comme tappé
                 #je boucle à partir de la deuxieme lettre et cumul le text             
                 txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
-                txt2 = question[1:len(question)]   #Slice je prends toute la question à partir de la position 2
+                txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
                 question = txt + txt2 
                 
             if cpnt.tag.nom == "correction":
@@ -259,11 +259,11 @@ class ItemTemplate4(ItemTemplate4Template):
     def text_box_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
         global ancien_num_ligne
-        ancien_num_ligne = self.text_box_question.tag.numero
+        ancien_num_ligne = self.text_area_question.tag.numero
         
     def text_box_question_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        num = self.text_box_question.tag.numero
+        num = self.text_area_question.tag.numero
         # Je recherche le bouton de l'ancienne ligne pour le désactiver
         #Je remonte du component sur 3 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
         global ancien_num_ligne
