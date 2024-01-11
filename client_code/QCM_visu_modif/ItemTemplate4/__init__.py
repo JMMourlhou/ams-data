@@ -52,10 +52,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.check_box_false.tag.nom = "rep_false"
         self.check_box_false.tag.numero = self.item['num']
         
-        self.spacer_2.tag.nom = "spacer"
-        self.label_1.tag.nom = "label"
         self.drop_down_bareme.tag.nom = "bareme"
-        
         
         #recherche nb de questions (sauvées ds temp table)
         table_temp = app_tables.temp.search()[0]
@@ -65,10 +62,10 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_2.text = self.item['num']
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
-        if self.item['bareme'] > 1:
-            self.rich_text_question.content = (f"**{self.item['question']}** \n  {self.item['bareme']} points")
+        if int(self.item['bareme']) > 1:
+            self.rich_text_question.content = (f"**{self.item['question']}** \n  ({self.item['bareme']} points)")
         else:  # bareme 1 point
-            self.rich_text_question.content = (f"**{self.item['question']}** \n  {self.item['bareme']} point")
+            self.rich_text_question.content = (f"**{self.item['question']}** \n  ({self.item['bareme']} point)")
         self.rich_text_question.tag.nom = "question"
         self.rich_text_question.tag.numero = self.item['num']
         
@@ -98,7 +95,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.drop_down_bareme.enabled = False
             self.button_modif.text = "Validation"
             self.drop_down_bareme.visible = False
-            self.label_1.text = self.item['bareme'] + " point(s)"
+            #self.label_1.text = self.item['bareme'] + " point(s)"
 
             
         else:
