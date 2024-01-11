@@ -68,7 +68,7 @@ class ItemTemplate4(ItemTemplate4Template):
         if self.item['bareme'] > 1:
             self.rich_text_question.content = (f"**{self.item['question']}** \n  {self.item['bareme']} points")
         else:  # bareme 1 point
-            self.rich_text_question.content = (f"**{self.item['question']}** \n  {self.item['bareme']} points")
+            self.rich_text_question.content = (f"**{self.item['question']}** \n  {self.item['bareme']} point")
         self.rich_text_question.tag.nom = "question"
         self.rich_text_question.tag.numero = self.item['num']
         
