@@ -31,7 +31,7 @@ class ItemTemplate4(ItemTemplate4Template):
         # Any code you write here will run before the form opens.
         # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
-        print("role: ", user['role'])
+        #print("role: ", user['role'])
         if user:
             self.admin = user['role']
             if self.admin[0:1]!="S":         # si pas stagiaire
@@ -56,17 +56,18 @@ class ItemTemplate4(ItemTemplate4Template):
         self.drop_down_bareme.tag.nom = "bareme"
         
         #recherche nb de questions (sauvées ds temp table)
-        table_temp = app_tables.temp.search()[0]
-        self.label_nb_questions.text = table_temp['nb_questions_qcm']
+        self.label_nb_questions.text = user['temp']
         
         self.label_2.tag.nom = "cpt"
         self.label_2.text = self.item['num']
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
+        qst = self.item['question']
+        qst = qst.strip()
         if int(self.item['bareme']) > 1:
-            self.rich_text_question.content = (f"**{self.item['question']}** \n  ({self.item['bareme']} points)")
+            self.rich_text_question.content = (f"**{qst}** \n  ({self.item['bareme']} points)")
         else:  # bareme 1 point
-            self.rich_text_question.content = (f"**{self.item['question']}** \n  ({self.item['bareme']} point)")
+            self.rich_text_question.content = (f"**{qst}** \n  ({self.item['bareme']} point)")
         self.rich_text_question.tag.nom = "question"
         self.rich_text_question.tag.numero = self.item['num']
         
@@ -180,7 +181,7 @@ class ItemTemplate4(ItemTemplate4Template):
             if cpnt.tag.nom == "question":
                 print(cpnt, cpnt.tag.nom)
                 num = int(cpnt.tag.numero)           # j'ai le num de la question
-                question = cpnt.text                 #         question
+                question = cpnt.content                 #         question
                 
                 # mettre la 1ere lettre en maj mais laisser le reste comme tappé
                 #je boucle à partir de la deuxieme lettre et cumul le text             
@@ -280,19 +281,6 @@ class ItemTemplate4(ItemTemplate4Template):
                             self.button_modif.background = "theme:Tertiary"
                             self.button_modif.foregroundground = "theme:Error"
                             ancien_num_ligne = 0
-
-    def form_show(self, **event_args):
-        """This method is called when the form is shown on the page"""
-        """
-        global cpt    # cpt = nb de questions
-        cpt += 1
-        print("cpt: ", cpt)
-        print(self.label_nb_questions.text)
-        if cpt == int(self.label_nb_questions.text):
-            self.button_fin_qcm.visible = False
-        else:
-            self.button_fin_qcm.visible = True
-        """
         
     def button_fin_qcm_show(self, **event_args):
         """This method is called when the Button is shown on the screen"""
@@ -301,24 +289,33 @@ class ItemTemplate4(ItemTemplate4Template):
         cpt += 1
         if cpt == 1:
             self.button_fin_qcm.visible = True
-            #QCM_visu_modif_ST_Main.column_panel_results.visible = True        
-            
+             
     def button_fin_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
+        self.button_fin_qcm.visible = False
+        
         # enregistrement des résultats ds table qcm_results
         global nb_bonnes_rep
         global max_points
         global points
-        global reponses  
-        print("num qcm: ", self.qcm_nb)
-        print("reponses; ", reponses)
-        print("nb bonnes reponses: ", nb_bonnes_rep)
-        print("nb points: ", points)
+        global reponses         
         user=anvil.users.get_user()
         if user:
             result = anvil.server.call("qcm_result", user, self.qcm_nb, nb_bonnes_rep, max_points, points, reponses)  
             if result == True :
                 alert("QCM enregisté !")
+                
+        # affichage des résultats   
+        nb = self.qcm_nb["qcm_nb"]
+        self.label_nb_quest_ok.text = (f"{nb_bonnes_rep} bonnes réponses sur {nb}.")
+        self.label_nb_points.text = (f"{points} points obtenus sur {max_points} possibles.")
+        self.column_panel_results.visible = True 
+        
+
+    def button_enregistrer_et_sortir_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form('Main',99)
 
 
                               

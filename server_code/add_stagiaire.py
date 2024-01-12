@@ -51,7 +51,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     if len(test)>0:
         valid="Stagiaire déjà inscrit à ce stage !"
         # ******************************************************************* EFFACT code stage ds user avant retour
-        user.update(stage_num_temp = 0)
+        user.update(temp = 0)
         return valid 
         
     new_row=app_tables.stagiaires_inscrits.add_row(
@@ -75,7 +75,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
         clef = st + " du "+str(code_stage["date_debut"])
         valeur = [code_stage["numero"],None]  # None sera remplacé par True si diplomé
         historique[clef] = valeur              # ajout de la nouvelle clef ds l'historique
-        user.update(stage_num_temp = 0,
+        user.update(temp = 0,
                    histo=historique
                    )
         

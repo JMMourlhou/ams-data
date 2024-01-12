@@ -92,10 +92,10 @@ db_schema:
     server: full
     columns:
     - name: qcm_nb
-      admin_ui: {width: 200, order: 0}
+      admin_ui: {order: 0, width: 125}
       type: number
     - name: destination
-      admin_ui: {order: 1, width: 200}
+      admin_ui: {order: 1, width: 288}
       type: string
     title: Qcm_description
   lieux:
@@ -306,9 +306,9 @@ db_schema:
     - name: accept_data
       admin_ui: {order: 22, width: 200}
       type: bool
-    - name: stage_num_temp
+    - name: temp
+      admin_ui: {order: 23, width: 200}
       type: number
-      admin_ui: {width: 200, order: 23}
     - name: histo
       admin_ui: {width: 200, order: 24}
       type: simpleObject

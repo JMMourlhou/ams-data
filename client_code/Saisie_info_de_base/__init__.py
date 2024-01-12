@@ -142,8 +142,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 # insertion du stagiaire automatiqt si num_stage != 0
                 user=anvil.users.get_user()
                 if user and self.first_entry:          # 1ERE ENTREE 
-                    stage=str(user['stage_num_temp'])
-                    if  user['stage_num_temp']==0:
+                    stage=str(user['temp'])
+                    if  user['temp']==0:
                         alert("User non trouvé en 1ere entrée !")
                         self.button_retour_click()
                     else:

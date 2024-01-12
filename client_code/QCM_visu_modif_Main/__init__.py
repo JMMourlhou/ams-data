@@ -40,8 +40,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         #num_question = str(nb_questions + 1)
         self.label_2.text = nb_questions + 1  # Num ligne à partir du nb lignes déjà créées 
 
-        table_temp = app_tables.temp.search()[0]
-        table_temp.update(nb_questions_qcm=nb_questions)
+        # acquisition du user
+        user=anvil.users.get_user()
+        user.update(temp=nb_questions)
 
          # affiches les lignes du qcm
         self.affiche_lignes_qcm(liste)
