@@ -41,7 +41,7 @@ class ItemTemplate4(ItemTemplate4Template):
 
         # Extraction du numéro de qcm
         self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
-
+        self.tag.nom = "top"
         self.flow_panel_num.tag.nom = "fp_num"
         self.cp_father.tag.nom = "cp_father"
         self.cp_img.tag.nom = "cp_img"
@@ -49,7 +49,14 @@ class ItemTemplate4(ItemTemplate4Template):
         self.fp_vf_barem.tag.nom = "fp_vrai/faux_bareme"
         self.button_fin_qcm.tag.nom = "fin_qcm"
         self.column_panel_results.tag.nom = "cp_results"
-       
+        self.label_2.tag.nom = "label_2"
+        self.label_3.tag.nom = "label_3"
+        self.label_nb_questions.nom = "Label_nb_questions"
+        self.label_nb_quest_ok.nom = "Label_nb_questions ok"
+        self.label_nb_points.nom = "nb points"
+        self.button_enregistrer_et_sortir.tag.nom = "sortir"
+        self.column_panel_results.tag.nom = "cp_results"
+        
         self.check_box_true.tag.nom = "rep_true"
         self.check_box_true.tag.numero = self.item['num']
         self.check_box_false.tag.nom = "rep_false"
@@ -68,11 +75,11 @@ class ItemTemplate4(ItemTemplate4Template):
         qst = qst.strip()
         if self.mode != "creation":
             if int(self.item['bareme']) > 1:
-                self.rich_text_question.content = (f"**{qst}** \n  ({self.item['bareme']} points)")
+                self.text_area_question.text = (f"{qst} \n  ({self.item['bareme']} points)")
             else:  # bareme 1 point
-                self.rich_text_question.content = (f"**{qst}** \n  ({self.item['bareme']} point)")
+                self.text_area_question.text = (f"{qst} \n  ({self.item['bareme']} point)")
         else:
-            self.text_box_question.text = qst
+            self.text_area_question.text = qst
         
         self.text_area_question.tag.nom = "question"
         self.text_area_question.tag.numero = self.item['num']
@@ -189,13 +196,12 @@ class ItemTemplate4(ItemTemplate4Template):
             if cpnt.tag.nom == "question":
                 print(cpnt, cpnt.tag.nom)
                 print("mode :", self.mode)
-                if cpnt.tag.nom == "question_formateur" and self.mode == "creation":
-                    question = cpnt.text
-                    # mettre la 1ere lettre en maj mais laisser le reste comme tappé
-                    #je boucle à partir de la deuxieme lettre et cumul le text             
-                    txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
-                    txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
-                    question = txt + txt2 
+                question = cpnt.text
+                # mettre la 1ere lettre en maj mais laisser le reste comme tappé
+                #je boucle à partir de la deuxieme lettre et cumul le text             
+                txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
+                txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
+                question = txt + txt2 
                 
                 
             if cpnt.tag.nom == "correction":
@@ -258,11 +264,7 @@ class ItemTemplate4(ItemTemplate4Template):
             if self.reponse == rep_stagiaire:
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
-            print("num qcm: ", self.qcm_nb)
-            print("rep; ", rep)
-            print("reponses; ", reponses)
-            print("nb bonnes reponses: ", nb_bonnes_rep)
-            print("nb points: ", points)
+
 
     def text_area_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
@@ -276,27 +278,42 @@ class ItemTemplate4(ItemTemplate4Template):
         #Je remonte du component sur 3 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
         global ancien_num_ligne
         if ancien_num_ligne != 0 and num != ancien_num_ligne:
-            n1 = self.button_modif.parent    # conteneur d'1 ligne 
+            n1 = self.button_modif.parent    # conteneur bt bouton modif (flow panel) 
+            print("n1", type(n1))
+            print("n1_nom; ", n1.tag.nom)
+            
             n2 = n1.parent            # conteneur cpanel : contient cp_img, tb question, tb correction
-            repeat_item_panel = n2.parent    # conteneur objet ligne (item)
+            print("n2", type(n2))
+            print("n2_nom; ", n2.tag.nom)
+            
+            repeat_item_panel = n2.parent    # conteneur form self
+            print("n3 repeat_item_panel", type(repeat_item_panel))
+            #print("n3 repeat_item_panel_nom; ", repeat_item_panel.tag.nom)
+            
             repeat_panel = repeat_item_panel.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
             print("**** repeating panel *****", type(repeat_panel))
            
             for item_lignes in repeat_panel.get_components():
                 for ligne in item_lignes.get_components():
                     for cpnt in ligne.get_components():
-                        if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:
-                            #c'est le bt de l'ancienne ligne
-                            self.button_modif.enabled = False
-                            self.button_modif.background = "theme:Tertiary"
-                            self.button_modif.foregroundground = "theme:Error"
-                            ancien_num_ligne = 0
-        
+                        try:
+                            if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:
+                                #c'est le bt de l'ancienne ligne
+                                self.button_modif.enabled = False
+                                self.button_modif.background = "theme:Tertiary"
+                                self.button_modif.foregroundground = "theme:Error"
+                                ancien_num_ligne = 0
+                        except:
+                            print("ERREUR", type(cpnt))
+                            return
+
+    
     def button_fin_qcm_show(self, **event_args):
         """This method is called when the Button is shown on the screen"""
         from ...QCM_visu_modif_ST_Main import QCM_visu_modif_ST_Main
-        global cpt    # cpt = nb de questions
+        global cpt    # cpt = nb de questions  
         cpt += 1
+        print(cpt)
         if cpt == 1:
             self.button_fin_qcm.visible = True
              
@@ -319,8 +336,28 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_nb_quest_ok.text = (f"{nb_bonnes_rep} bonnes réponses sur {self.label_nb_questions.text}.")
         self.label_nb_points.text = (f"{points} points obtenus sur {max_points} possibles.")
         self.column_panel_results.visible = True 
-        
 
+        #affichage des corrections
+        n1 = self.button_fin_qcm.parent    # conteneur bt bouton fin qcm (self) 
+        print("n1", type(n1))
+        print("n1_nom; ", n1.tag.nom)
+        
+        repeat_panel = n1.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
+        print("**** repeating panel *****", type(repeat_panel))
+        
+        for lignes in repeat_panel.get_components():
+            print("item_lignes", type(lignes))
+            for cpnt in lignes.get_components():
+                print("cpnts", type(cpnt))
+                if cpnt.tag.nom == "cp_father":
+                    for c in cpnt.get_components():
+                        print("c", type(c))
+                        print("c", c.tag.nom)
+                        
+                        if c.tag.nom == "correction" :
+                            c.visible = True
+            
+                    
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ...Main import Main
@@ -328,15 +365,15 @@ class ItemTemplate4(ItemTemplate4Template):
 
     def text_box_correction_focus(self, **event_args):
         """This method is called when the text area gets focus"""
-        self.text_box_question_focus()
+        self.text_area_question_focus()
 
     def text_box_correction_lost_focus(self, **event_args):
         """This method is called when the text area loses focus"""
-        self.text_box_question_lost_focus()
+        self.text_area_question_lost_focus()
 
     def text_box_correction_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
-        self.text_box_question_change()
+        self.text_area_question_change()
 
 
 

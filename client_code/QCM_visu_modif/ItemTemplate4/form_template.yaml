@@ -48,7 +48,8 @@ components:
       data_bindings: []
   - name: text_area_question
     properties: {background: 'theme:Primary 700', foreground: 'theme:On Primary',
-      spacing_below: medium, auto_expand: true, placeholder: Question, align: center}
+      spacing_below: medium, auto_expand: true, placeholder: Question, align: center,
+      height: 53.43121337890625, bold: true}
     type: TextArea
     layout_properties: {grid_position: 'GKLCIZ,MZYDIM'}
     event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus,
