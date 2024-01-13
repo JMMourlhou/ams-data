@@ -29,6 +29,9 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        global cpt
+        cpt=0
+        
         # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
         #print("role: ", user['role'])
@@ -166,8 +169,7 @@ class ItemTemplate4(ItemTemplate4Template):
             
         global ancien_num_ligne
         ancien_num_ligne = self.check_box_false.tag.numero
-
-        
+       
     # Bouton modif si mode création  // Validation si mode test qcm pour stagiaire
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
         """This method is called when the button is clicked"""
@@ -243,11 +245,10 @@ class ItemTemplate4(ItemTemplate4Template):
             self.check_box_true.enabled = False
             self.check_box_false.enabled = False
             
-            #alert("calcul")
             global nb_bonnes_rep
             global max_points
             global points
-            global reponses
+            global reponses    # liste
             
             rep_stagiaire = False
             rep=()
@@ -279,19 +280,19 @@ class ItemTemplate4(ItemTemplate4Template):
         global ancien_num_ligne
         if ancien_num_ligne != 0 and num != ancien_num_ligne:
             n1 = self.button_modif.parent    # conteneur bt bouton modif (flow panel) 
-            print("n1", type(n1))
-            print("n1_nom; ", n1.tag.nom)
+            #print("n1", type(n1))
+            #print("n1_nom; ", n1.tag.nom)
             
             n2 = n1.parent            # conteneur cpanel : contient cp_img, tb question, tb correction
-            print("n2", type(n2))
-            print("n2_nom; ", n2.tag.nom)
+            #print("n2", type(n2))
+            #print("n2_nom; ", n2.tag.nom)
             
             repeat_item_panel = n2.parent    # conteneur form self
-            print("n3 repeat_item_panel", type(repeat_item_panel))
-            #print("n3 repeat_item_panel_nom; ", repeat_item_panel.tag.nom)
+            #print("n3 repeat_item_panel", type(repeat_item_panel))
+
             
             repeat_panel = repeat_item_panel.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
-            print("**** repeating panel *****", type(repeat_panel))
+            #print("**** repeating panel *****", type(repeat_panel))
            
             for item_lignes in repeat_panel.get_components():
                 for ligne in item_lignes.get_components():
@@ -306,11 +307,21 @@ class ItemTemplate4(ItemTemplate4Template):
                         except:
                             print("ERREUR", type(cpnt))
                             return
+    
+    def text_box_correction_focus(self, **event_args):
+        """This method is called when the text area gets focus"""
+        self.text_area_question_focus()
 
+    def text_box_correction_lost_focus(self, **event_args):
+        """This method is called when the text area loses focus"""
+        self.text_area_question_lost_focus()
+
+    def text_box_correction_change(self, **event_args):
+        """This method is called when the text in this text area is edited"""
+        self.text_area_question_change()
     
     def button_fin_qcm_show(self, **event_args):
         """This method is called when the Button is shown on the screen"""
-        from ...QCM_visu_modif_ST_Main import QCM_visu_modif_ST_Main
         global cpt    # cpt = nb de questions  
         cpt += 1
         print(cpt)
@@ -319,13 +330,29 @@ class ItemTemplate4(ItemTemplate4Template):
              
     def button_fin_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.button_fin_qcm.visible = False
+        from InputBox.input_box import InputBox, alert2, input_box, multi_select_dropdown
+        
         
         # enregistrement des résultats ds table qcm_results
         global nb_bonnes_rep
         global max_points
         global points
-        global reponses         
+        global reponses     # liste des réponses du stagiaire    
+
+        if len(reponses) != int(self.label_nb_questions.text):
+            r=alert2('Ce QCM est inachevé, \n\n'
+                      'Voulez-vous vraiment abandonner ?\n'
+                      ,
+                buttons=['Oui', 'Non'],
+                default_button='Non',    
+                large=True
+                )
+            if r == "Oui" :                    
+                self.button_enregistrer_et_sortir_click()
+            else:
+                return
+                
+        self.button_fin_qcm.visible = False               
         user=anvil.users.get_user()
         if user:
             result = anvil.server.call("qcm_result", user, self.qcm_nb, nb_bonnes_rep, max_points, points, reponses)  
@@ -363,17 +390,6 @@ class ItemTemplate4(ItemTemplate4Template):
         from ...Main import Main
         open_form('Main',99)
 
-    def text_box_correction_focus(self, **event_args):
-        """This method is called when the text area gets focus"""
-        self.text_area_question_focus()
-
-    def text_box_correction_lost_focus(self, **event_args):
-        """This method is called when the text area loses focus"""
-        self.text_area_question_lost_focus()
-
-    def text_box_correction_change(self, **event_args):
-        """This method is called when the text in this text area is edited"""
-        self.text_area_question_change()
 
 
 
