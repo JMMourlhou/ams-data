@@ -46,21 +46,23 @@ components:
       type: Image
       layout_properties: {grid_position: 'NJZSBG,MVJVXU'}
       data_bindings: []
-  - name: rich_text_question
-    properties: {background: 'theme:Primary 700', align: center, font_size: 16, foreground: 'theme:On
-        Primary', content: '', role: null}
-    type: RichText
-    layout_properties: {grid_position: 'OVAOQH,CVSJHD'}
+  - name: text_area_question
+    properties: {background: 'theme:Primary 700', foreground: 'theme:On Primary',
+      spacing_below: medium, auto_expand: true, placeholder: Question, align: center}
+    type: TextArea
+    layout_properties: {grid_position: 'GKLCIZ,MZYDIM'}
+    event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus,
+      focus: text_area_question_focus}
   - name: text_box_correction
     properties: {role: null, align: center, height: 63.784912109375, tooltip: '',
       placeholder: '', border: '', enabled: true, foreground: 'theme:On Tertiary',
-      visible: false, text: Correction, font_size: null, auto_expand: true, font: '',
-      spacing_above: none, spacing_below: small, italic: false, background: 'theme:Tertiary',
-      bold: true, underline: false}
+      visible: false, text: '', font_size: null, auto_expand: true, font: '', spacing_above: none,
+      spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
+      underline: false}
     type: TextArea
     layout_properties: {grid_position: ''}
-    event_bindings: {focus: rich_text_question_focus, lost_focus: rich_text_question_lost_focus,
-      change: rich_text_question_change}
+    event_bindings: {focus: text_box_correction_focus, lost_focus: text_box_correction_lost_focus,
+      change: text_box_correction_change}
   - name: fp_vf_barem
     properties: {align: center, spacing: tiny, vertical_align: middle}
     type: FlowPanel

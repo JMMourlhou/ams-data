@@ -259,7 +259,7 @@ db_schema:
       type: bool
       admin_ui: {order: 5, width: 200}
     - name: nom
-      admin_ui: {order: 6, width: 200}
+      admin_ui: {order: 2.5, width: 200}
       type: string
     - name: api_key
       admin_ui: {order: 8, width: 200}

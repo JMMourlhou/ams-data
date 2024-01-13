@@ -40,9 +40,12 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         #num_question = str(nb_questions + 1)
         self.label_2.text = nb_questions + 1  # Num ligne à partir du nb lignes déjà créées 
 
-        # acquisition du user
+        # acquisition du user et modif de son temp (nb de questions de son qcm)
         user=anvil.users.get_user()
-        user.update(temp=nb_questions)
+        r = anvil.server.call("temp_user_qcm", user, nb_questions)
+        if r == False:
+            alert("user non MAJ")
+            return
 
          # affiches les lignes du qcm
         self.affiche_lignes_qcm(liste)
@@ -91,8 +94,13 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         if self.text_box_question.text == "":
             alert("La question est vide !")
             return
-        question = self.text_box_question.text
-        correction = self.text_box_correction.text
+        qst = self.text_box_question.text
+        qst = qst.strip()    
+        question = qst
+
+        cor = self.text_box_correction.text
+        cor = cor.strip()
+        correction = cor
         bareme = int(self.drop_down_bareme.selected_value)
         reponse = self.check_box_reponse.checked
         qcm_nb = self.drop_down_qcm_row.selected_value

@@ -67,8 +67,10 @@ def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, co
 @anvil.tables.in_transaction
 def qcm_result(user, qcm_nb, nb_bonnes_rep, max_points, points, reponses):      # debut: debut de qcm, enregt du num et user
     import French_zone_server_side
-    
     nb_questions = len(reponses)
+    if nb_questions == 0:
+        valid = False
+        return
     p100_sur_nb_rep = int(nb_bonnes_rep / nb_questions * 100)
     p100_sur_points = int(points / max_points * 100)
     app_tables.qcm_result.add_row(

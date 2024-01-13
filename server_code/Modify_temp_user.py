@@ -10,10 +10,14 @@ import anvil.server
 # modify the temp of user during qcm (nb of questions)
 @anvil.server.callable
 def temp_user_qcm(user, nb_questions_in_qcm):
-    try:
-        user.update(temp = nb_questions_in_qcm)
-        result == True
-    except:
-        result == False
-    return
+    #user.update(temp = int(nb_questions_in_qcm))
+    result = False
+    if user:
+        try:
+            user.update(temp = int(nb_questions_in_qcm))
+            result = True
+        except:
+            result = False
+            
+    return result
 

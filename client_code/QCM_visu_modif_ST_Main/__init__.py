@@ -29,8 +29,6 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             self.drop_down_qcm_row.selected_value = qcm_descro_nb
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
-
-
     
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -44,15 +42,13 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
 
         # acquisition du user et modif de son temp (nb de questions de son qcm)
         user=anvil.users.get_user()
-        r = anvil.server.call("temp_user_qcm", user)
-        if not r:
+        r = anvil.server.call("temp_user_qcm", user, nb_questions)
+        if r == False:
             alert("user non MAJ")
             return
 
          # affiches les lignes du qcm
         self.affiche_lignes_qcm(liste)
-
-
     
     def affiche_lignes_qcm(self, l=[]):
         global liste
