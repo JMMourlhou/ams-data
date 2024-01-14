@@ -34,7 +34,6 @@ class ItemTemplate4(ItemTemplate4Template):
         
         # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
-        #print("role: ", user['role'])
         if user:
             self.admin = user['role']
             if self.admin[0:1]!="S":         # si pas stagiaire
@@ -125,13 +124,13 @@ class ItemTemplate4(ItemTemplate4Template):
             self.text_box_correction.visible = True  # j'affiche la correction
 
         
-    def text_area_question_change(self, **event_args):   # Question a changé
+    def text_area_question_change(self, **event_args):                         # Question a changé (en création QCM)
         """This method is called when the text in this text box is edited"""
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
 
-    def file_loader_1_change(self, file, **event_args):
+    def file_loader_1_change(self, file, **event_args):                         # image a changé (en création QCM)
         """This method is called when a new file is loaded into this FileLoader"""
         thumb_pic = anvil.image.generate_thumbnail(file, 640)
         self.image_1.source = thumb_pic
@@ -139,7 +138,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"
        
-    def drop_down_bareme_change(self, **event_args):     # Bareme a changé
+    def drop_down_bareme_change(self, **event_args):                             # Bareme a changé (en création QCM)
         """This method is called when this checkbox is checked or unchecked"""
         self.button_modif.enabled = True
         self.button_modif.background = "red"
@@ -150,22 +149,30 @@ class ItemTemplate4(ItemTemplate4Template):
       
     def check_box_true_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        self.text_area_question_focus("check_box_true")                                                  #     *******************************************************
         if self.check_box_true.checked == True:
             self.check_box_false.checked = False
+            self.check_box_false.foreground = "yellow"
+            self.check_box_true.foreground = "red"
+            
         self.button_modif.enabled = True
         self.button_modif.background = "red"
-        self.button_modif.foregroundground = "yellow"
-            
+        self.check_box_true.foreground = "red"
+        
         global ancien_num_ligne
         ancien_num_ligne = self.check_box_true.tag.numero
             
     def check_box_false_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        self.text_area_question_focus("check_box_false")                                                            #     *******************************************************
         if self.check_box_false.checked == True:
+            self.check_box_false.foreground = "red"
             self.check_box_true.checked = False
+            self.check_box_true.foreground = "yellow"
+            
         self.button_modif.enabled = True
         self.button_modif.background = "red"
-        self.button_modif.foregroundground = "yellow"
+        self.button_modif.foreground = "yellow"
             
         global ancien_num_ligne
         ancien_num_ligne = self.check_box_false.tag.numero
@@ -184,7 +191,6 @@ class ItemTemplate4(ItemTemplate4Template):
         n2 = n1.parent            # conteneur cpanel : contient cp_img, tb question, tb correction
         print("n2",n2)
         #print("n2",n2,n2.nom)
-        
     
         for cpnt in n2.get_components():   #(contient cp_img, tb question, tb correction)
             print("début boucle cpnt",cpnt.tag.nom)
@@ -205,11 +211,9 @@ class ItemTemplate4(ItemTemplate4Template):
                 txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
                 question = txt + txt2 
                 
-                
             if cpnt.tag.nom == "correction":
                 print(cpnt, cpnt.tag.nom)
                 correction = cpnt.text               #    j'ai la correction
-                
                 
             print("avt test2",cpnt, cpnt.tag.nom)
             if cpnt.tag.nom == "fp_vrai/faux_bareme":       # fp_vf_barem contient reponse et bareme   
@@ -226,12 +230,12 @@ class ItemTemplate4(ItemTemplate4Template):
                         if cpnt2.tag.nom =="bareme":
                             print(cpnt2, cpnt2.tag.nom)
                             bareme = cpnt2.selected_value      # j'ai le bareme
-           
 
         qcm_descro_row = self.qcm_nb
         print(qcm_descro_row)
         
-        if self.mode == "creation":
+        if self.mode == "creation":  # ===================================================  MODE CREATION QCM
+            
             result = anvil.server.call('modif_qcm', qcm_descro_row, num, question, reponse, bareme, photo, correction)
             if not result:
                 alert("erreur de création d'une question QCM")
@@ -239,7 +243,7 @@ class ItemTemplate4(ItemTemplate4Template):
             # j'initialise la forme principale
             from anvil import open_form       
             open_form("QCM_visu_modif_Main",qcm_descro_row)
-        else:
+        else:                       # ===================================================  MODE UTILISATION QCM
             self.button_modif.enabled = False
             self.button_modif.visible = False
             self.check_box_true.enabled = False
@@ -272,41 +276,65 @@ class ItemTemplate4(ItemTemplate4Template):
         global ancien_num_ligne
         ancien_num_ligne = self.text_area_question.tag.numero
         
-    def text_area_question_focus(self, **event_args):
+    def text_area_question_focus(self, check_box="", **event_args):
         """This method is called when the TextBox gets focus"""
         num = self.text_area_question.tag.numero
+        
         # Je recherche le bouton de l'ancienne ligne pour le désactiver
         #Je remonte du component sur 3 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
         global ancien_num_ligne
         if ancien_num_ligne != 0 and num != ancien_num_ligne:
+
             n1 = self.button_modif.parent    # conteneur bt bouton modif (flow panel) 
-            #print("n1", type(n1))
-            #print("n1_nom; ", n1.tag.nom)
+            print("n1", type(n1))
+            print("n1_nom; ", n1.tag.nom)
             
             n2 = n1.parent            # conteneur cpanel : contient cp_img, tb question, tb correction
-            #print("n2", type(n2))
-            #print("n2_nom; ", n2.tag.nom)
+            print("n2", type(n2))
+            print("n2_nom; ", n2.tag.nom)
             
             repeat_item_panel = n2.parent    # conteneur form self
-            #print("n3 repeat_item_panel", type(repeat_item_panel))
-
+            print("n3 repeat_item_panel", type(repeat_item_panel))
             
             repeat_panel = repeat_item_panel.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
-            #print("**** repeating panel *****", type(repeat_panel))
+            print("**** repeating panel *****", type(repeat_panel))
            
             for item_lignes in repeat_panel.get_components():
+                print("Descente à prtir de: ",item_lignes)
                 for ligne in item_lignes.get_components():
-                    for cpnt in ligne.get_components():
-                        try:
-                            if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:
-                                #c'est le bt de l'ancienne ligne
-                                self.button_modif.enabled = False
-                                self.button_modif.background = "theme:Tertiary"
-                                self.button_modif.foregroundground = "theme:Error"
-                                ancien_num_ligne = 0
-                        except:
-                            print("ERREUR", type(cpnt))
-                            return
+                    print("Descente d'1 niveau: ", ligne)  # FLOW PANEL c'est l'ancienne ligne
+                    if self.mode != "creation":
+                        if ligne.tag.nom == "fp_vf_barem":
+                            for cpnt in ligne.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
+                                if ligne.tag.nom == "rep_true":
+                                    print("CHECK BOX REP TRUE")
+                                if ligne.tag.nom == "rep_false":
+                                    print("CHECK BOX REP FALSE")
+                            
+                        if ligne.tag.nom == "button" and ligne.tag.numero == ancien_num_ligne:                    # <=============  mode utiiisation qcm
+                            #c'est le bt de l'ancienne ligne
+                            self.button_modif.enabled = False
+                            self.button_modif.background = "theme:Tertiary"
+                            self.button_modif.foregroundground = "theme:Error"
+                            ancien_num_ligne = 0
+                    if self.mode == "creation":
+                        for cpnt in ligne.get_components():                                                      # <=============  mode utilisation qcm
+                            try:
+                                if ligne.tag.nom == "fp_vf_barem":
+                                    for cpnt in ligne.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
+                                        if ligne.tag.nom == "rep_true":
+                                            print("CHECK BOX REP TRUE ", cpnt.checked)
+                                        if ligne.tag.nom == "rep_false":
+                                            print("CHECK BOX REP FALSE ", cpnt.checked)
+                                if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:
+                                    #c'est le bt de l'ancienne ligne
+                                    self.button_modif.enabled = False
+                                    self.button_modif.background = "theme:Tertiary"
+                                    self.button_modif.foregroundground = "theme:Error"
+                                    ancien_num_ligne = 0
+                            except:
+                                print("ERREUR", type(cpnt))
+                                return
     
     def text_box_correction_focus(self, **event_args):
         """This method is called when the text area gets focus"""

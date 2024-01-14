@@ -93,15 +93,18 @@ components:
       layout_properties: {}
       event_bindings: {change: drop_down_bareme_change}
     - name: check_box_true
-      properties: {text: Vrai, foreground: 'theme:On Primary', background: 'theme:Error',
-        spacing_above: none, spacing_below: none, visible: true}
+      properties: {text: Vrai, foreground: 'theme:Tertiary', background: 'theme:On
+          Primary Container', spacing_above: none, spacing_below: none, visible: true}
       type: CheckBox
       event_bindings: {change: check_box_true_change}
+      layout_properties: {}
     - name: check_box_false
-      properties: {text: Faux, foreground: 'theme:On Primary', background: 'theme:Error',
-        spacing_above: none, spacing_below: none, align: left, visible: true}
+      properties: {text: Faux, foreground: 'theme:Tertiary', background: 'theme:On
+          Primary Container', spacing_above: none, spacing_below: none, align: left,
+        visible: true}
       type: CheckBox
       event_bindings: {change: check_box_false_change}
+      layout_properties: {}
   - name: fp_modif
     properties: {align: center, background: 'theme:Primary', vertical_align: middle,
       spacing: none}
@@ -110,11 +113,13 @@ components:
     components:
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: false, foreground: 'theme:Error', visible: true, text: Modif, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: 'theme:Tertiary', bold: false, underline: false, icon: ''}
+        enabled: false, foreground: 'theme:On Primary', visible: true, text: Modif,
+        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:On Primary Container', bold: false, underline: false,
+        icon: ''}
       name: button_modif
       event_bindings: {click: button_modif_click}
+      layout_properties: {}
     data_bindings: []
 - name: button_fin_qcm
   properties: {text: Fin du QCM, visible: false, background: 'theme:Error', foreground: 'theme:Tertiary'}

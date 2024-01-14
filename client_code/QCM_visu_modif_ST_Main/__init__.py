@@ -18,7 +18,11 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         # acquisition du user
-        user=anvil.users.get_user()
+        user=anvil.users.get_user()        
+        if user:
+            self.admin = user['role']
+            if self.admin[0:1]=="S":         # si pas stagiaire
+               self.label_3.text = "Q.C.M"
         
         #initialisation du drop down des qcm créés et barêmes
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
@@ -46,8 +50,10 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         if r == False:
             alert("user non MAJ")
             return
-
-         # affiches les lignes du qcm
+        # affiche le titre
+        if self.admin[0:1]=="S":         # si pas stagiaire
+               self.label_3.text = "Q.C.M " + qcm_row["destination"]
+        # affiches les lignes du qcm
         self.affiche_lignes_qcm(liste)
     
     def affiche_lignes_qcm(self, l=[]):

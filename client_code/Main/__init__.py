@@ -188,8 +188,7 @@ class Main(MainTemplate):
         from sign_in_for_AMS_Data.LoginDialog_V2 import LoginDialog_V2
         self.content_panel.clear()
         self.content_panel.add_component(LoginDialog_V2(), full_width_row=False)
-        
-
+ 
     def button_qr_click(self, **event_args):
         """This method is called when the button is clicked"""
         open_form('QrCode_display', True)
