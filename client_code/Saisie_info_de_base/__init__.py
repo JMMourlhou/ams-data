@@ -28,13 +28,14 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
         user=anvil.users.get_user()
         if user:
-            self.text_box_mail.text =                user['email']
+            self.text_box_mail.text =  user['email']
             if user["nom"] != None:
                 nm = user["nom"]
                 nm = nm.strip()
                 nm = nm.capitalize()
                 self.text_box_nom.text = nm
-               
+                
+            self.text_box_prenom.text =  user['prenom']
 
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
@@ -77,15 +78,20 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             alert("Entrez le prénom !")
             return
         else:
-            pn = self.text_box_prenom.capitalize()
+            pn = self.text_box_prenom.text
+            pn = pn.capitalize()
             pn = pn.strip()
             self.text_box_prenom.text =  pn  
-        p=stripe(self.text_box_prenom.text)
         
-        self.text_box_prenom.text = p.capitalize()
         if self.text_box_nom.text == "" :           # dates vides ?
             alert("Entrez le nom !")
             return
+        else:
+            n = self.text_box_nom.text
+            n = n.capitalize()
+            n = n.strip()
+            self.text_box_nom.text =  n  
+            
         if self.text_box_tel.text == "":    # tel vides ou inf à 10 caract ?
             alert("Entrez le teléphone !")
             return
@@ -121,7 +127,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         user=anvil.users.get_user()
         if user:
             result = anvil.server.call("modify_users", user,
-                                                    strip(self.text_box_nom.text),
+                                                    self.text_box_nom.text,
                                                     self.text_box_prenom.text,
                                                     self.image_photo.source,
                                                     self.text_box_v_naissance.text,
