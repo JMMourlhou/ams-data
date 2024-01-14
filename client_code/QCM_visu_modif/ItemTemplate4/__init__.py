@@ -317,6 +317,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                                         print("CHECK BOX REP TRUE ANCIENNE LIGNE", ancien_num_ligne)
                                                     if cpnt.tag.nom == "rep_false":
                                                         print("CHECK BOX REP FALSE ANCIENNE LIGNE", ancien_num_ligne)
+                                                    ancien_num_ligne = 0
                                         
                                     if c.tag.nom == "fp_modif":     # je suis ds le fp bareme qui contient le bouton modif/valid
                                         for cpnt in c.get_components():    
