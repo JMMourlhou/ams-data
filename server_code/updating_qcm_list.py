@@ -9,7 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-
+# ================================================================   Vielle version à retirer
 @anvil.server.callable
 def save_qcm(user_email, result_qcm, qcm_list):
     result = False

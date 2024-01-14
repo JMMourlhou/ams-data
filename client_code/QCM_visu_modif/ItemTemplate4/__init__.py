@@ -12,6 +12,7 @@ from anvil.tables import app_tables
 
 global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
 ancien_num_ligne = 0
+
 global cpt   # cpt nb de questions
 cpt = 0
 
@@ -115,7 +116,8 @@ class ItemTemplate4(ItemTemplate4Template):
             self.drop_down_bareme.visible = False
             self.button_fin_qcm.visible = False
         else:
-            self.text_area_question.anable = True # mode création, j'affiche la question (text box, pas le rich text)
+            self.button_fin_qcm.visible = False
+            self.text_area_question.enable = True # mode création, j'affiche la question (text box, pas le rich text)
             rep = self.item['reponse']             # mode création, j'affiche la réponse
             if rep == True:
                 self.check_box_true.checked = True
@@ -161,6 +163,7 @@ class ItemTemplate4(ItemTemplate4Template):
         
         global ancien_num_ligne
         ancien_num_ligne = self.check_box_true.tag.numero
+        
             
     def check_box_false_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
@@ -176,6 +179,7 @@ class ItemTemplate4(ItemTemplate4Template):
             
         global ancien_num_ligne
         ancien_num_ligne = self.check_box_false.tag.numero
+
        
     # Bouton modif si mode création  // Validation si mode test qcm pour stagiaire
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
@@ -281,51 +285,54 @@ class ItemTemplate4(ItemTemplate4Template):
         num = self.text_area_question.tag.numero
         
         # Je recherche le bouton de l'ancienne ligne pour le désactiver
-        #Je remonte du component sur 3 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
+        #Je remonte du component sur 4 niveaux (jusqu'au repeat panel de la form 'QCM_visu_modif') 
         global ancien_num_ligne
         if ancien_num_ligne != 0 and num != ancien_num_ligne:
 
-            n1 = self.button_modif.parent    # conteneur bt bouton modif (flow panel) 
-            print("n1", type(n1))
-            print("n1_nom; ", n1.tag.nom)
-            
+            n1 = self.button_modif.parent    # conteneur bt bouton modif (flow panel)     
+            print("n1_nom/type; ", n1.tag.nom, type(n1))
             n2 = n1.parent            # conteneur cpanel : contient cp_img, tb question, tb correction
-            print("n2", type(n2))
-            print("n2_nom; ", n2.tag.nom)
-            
-            repeat_item_panel = n2.parent    # conteneur form self
-            print("n3 repeat_item_panel", type(repeat_item_panel))
-            
-            repeat_panel = repeat_item_panel.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
-            print("**** repeating panel *****", type(repeat_panel))
-           
-            for item_lignes in repeat_panel.get_components():
-                print("Descente à prtir de: ",item_lignes)
-                for ligne in item_lignes.get_components():
-                    print("Descente d'1 niveau: ", ligne)  # FLOW PANEL c'est l'ancienne ligne
-                    if self.mode != "creation":
-                        if ligne.tag.nom == "fp_vf_barem":
-                            for cpnt in ligne.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
-                                if ligne.tag.nom == "rep_true":
-                                    print("CHECK BOX REP TRUE")
-                                if ligne.tag.nom == "rep_false":
-                                    print("CHECK BOX REP FALSE")
-                            
-                        if ligne.tag.nom == "button" and ligne.tag.numero == ancien_num_ligne:                    # <=============  mode utiiisation qcm
-                            #c'est le bt de l'ancienne ligne
-                            self.button_modif.enabled = False
-                            self.button_modif.background = "theme:Tertiary"
-                            self.button_modif.foregroundground = "theme:Error"
-                            ancien_num_ligne = 0
+            print("n2_nom/type; ", n2.tag.nom, type(n2))
+            n3 = n2.parent
+            print("n3_nom/type; ", n3.tag.nom, type(n3))
+            repeat_panel = n3.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
+            print("**** repeating panel ", type(repeat_panel))
+            if self.mode != "creation":                         # mode utilisation du QCM           
+                for lignes in repeat_panel.get_components():
+                    print("item_lignes", type(lignes))
+                
+                    for ligne in lignes.get_components():
+                        print("cpnts", type(ligne))
+                        if ligne.tag.nom == "cp_father":        # control panel incluant img, question, rep, fp_vrai faux
+                            for c in ligne.get_components():
+                                print("ligne", type(c))
+                                print("ligne", c.tag.nom)
+                                try:    # text area question et réponses n'ont pas de components
+                                    if c.tag.nom ==  "fp_vrai/faux_bareme": 
+                                            for cpnt in c.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
+                                                print("ligne num",cpnt.tag.numero,'ancien num',ancien_num_ligne)
+                                                if cpnt.tag.numero == ancien_num_ligne:
+                                                    if cpnt.tag.nom == "rep_true" :
+                                                        alert(f"Validez d'abord la question {ancien_num_ligne}")
+                                                        print("CHECK BOX REP TRUE ANCIENNE LIGNE", ancien_num_ligne)
+                                                    if cpnt.tag.nom == "rep_false":
+                                                        print("CHECK BOX REP FALSE ANCIENNE LIGNE", ancien_num_ligne)
+                                        
+                                    if c.tag.nom == "fp_modif":     # je suis ds le fp bareme qui contient le bouton modif/valid
+                                        for cpnt in c.get_components():    
+                                            if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:                    # <=============  mode utiiisation qcm
+                                                #c'est le bt de l'ancienne ligne
+                                                self.button_modif.enabled = False
+                                                self.button_modif.background = "theme:Tertiary"
+                                                self.button_modif.foregroundground = "theme:Error"
+                                                ancien_num_ligne = 0
+                                except:
+                                    pass    # pour les éléments ne contenant pas de d'éléments en eux
+                                                
                     if self.mode == "creation":
                         for cpnt in ligne.get_components():                                                      # <=============  mode utilisation qcm
                             try:
-                                if ligne.tag.nom == "fp_vf_barem":
-                                    for cpnt in ligne.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
-                                        if ligne.tag.nom == "rep_true":
-                                            print("CHECK BOX REP TRUE ", cpnt.checked)
-                                        if ligne.tag.nom == "rep_false":
-                                            print("CHECK BOX REP FALSE ", cpnt.checked)
+                                
                                 if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:
                                     #c'est le bt de l'ancienne ligne
                                     self.button_modif.enabled = False
@@ -353,14 +360,13 @@ class ItemTemplate4(ItemTemplate4Template):
         global cpt    # cpt = nb de questions  
         cpt += 1
         print(cpt)
-        if cpt == 1:
+        if cpt == 1 and self.mode != "creation":
             self.button_fin_qcm.visible = True
              
     def button_fin_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
         from InputBox.input_box import InputBox, alert2, input_box, multi_select_dropdown
-        
-        
+       
         # enregistrement des résultats ds table qcm_results
         global nb_bonnes_rep
         global max_points
@@ -378,7 +384,8 @@ class ItemTemplate4(ItemTemplate4Template):
             if r == "Oui" :                    
                 self.button_enregistrer_et_sortir_click()
             else:
-                return
+                #return
+                self.button_enregistrer_et_sortir_click()                                    # A MODIFIER
                 
         self.button_fin_qcm.visible = False               
         user=anvil.users.get_user()
@@ -408,7 +415,6 @@ class ItemTemplate4(ItemTemplate4Template):
                     for c in cpnt.get_components():
                         print("c", type(c))
                         print("c", c.tag.nom)
-                        
                         if c.tag.nom == "correction" :
                             c.visible = True
             

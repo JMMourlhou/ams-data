@@ -34,13 +34,6 @@ def add_ligne_qcm(num_question, question, correction, reponse, bareme, image, qc
 # MODIF du QCM (en maj d'un qcm)
 @anvil.server.callable           #modif d'une ligne de Qcm
 def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, correction):
-    """ lecture fichier père code stages
-    code_stage = app_tables.codes_stages.get(code="PSE1")          # A MODIFIER QD RAJOUTE DIFFERENRS QCM
-    if not code_stage:   
-        alert("Code stage non trouvé ds fichier param Code_stages")
-        valid=False
-        return valid        
-    """
 
     # lecture de la ligne à modifier par son numéro             
     qcm_row = app_tables.qcm.get(num=num_question,
@@ -60,7 +53,7 @@ def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, co
 
 
 # =====================================================================================================================
-#                 UTILISATION DU QCM PAR UN STAGIAIRE, SAUVEGARDE DES RESULTATS
+#                 UTILISATION DU QCM PAR UN STAGIAIRE, SAUVEGARDE DES RESULTATS DS table.qcm_result
 # =====================================================================================================================
 # ENREGITREMENT, en fin de questions du QCM pour un stagiaire
 @anvil.server.callable 
@@ -91,4 +84,20 @@ def qcm_result(user, qcm_nb, nb_bonnes_rep, max_points, points, reponses):      
     else:
         valid=False
     return valid
-    
+
+
+# ==================================================================================================
+# modify the column temp of table user during qcm (nb of questions)
+# ==================================================================================================
+@anvil.server.callable
+def temp_user_qcm(user, nb_questions_in_qcm):
+    #user.update(temp = int(nb_questions_in_qcm))
+    result = False
+    if user:
+        try:
+            user.update(temp = int(nb_questions_in_qcm))
+            result = True
+        except:
+            result = False
+            
+    return result

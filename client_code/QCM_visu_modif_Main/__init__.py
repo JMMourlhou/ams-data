@@ -11,7 +11,7 @@ from anvil.tables import app_tables
 from ..QCM_visu_modif import QCM_visu_modif
 global liste
 liste = []
-
+# ==========================================================================   Ellaboration d'un QCM par un formateur ou admin
 class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def __init__(self, qcm_descro_nb=None, **properties):
         # Set Form properties and Data Bindings.
