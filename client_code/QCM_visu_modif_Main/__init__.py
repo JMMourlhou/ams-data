@@ -17,7 +17,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        
+        self.column_panel_1.visible = False
         #initialisation du drop down des qcm créés et barêmes
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
         self.drop_down_bareme.items=["1","5"]
@@ -48,6 +48,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             return
 
          # affiches les lignes du qcm
+        self.label_3.text = "Mise à jour du Q.C.M " + qcm_row["destination"]
+        self.column_panel_1.visible = True
         self.affiche_lignes_qcm(liste)
         
 

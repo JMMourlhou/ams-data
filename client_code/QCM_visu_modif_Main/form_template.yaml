@@ -1,6 +1,6 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{}', visible: true}
 components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
@@ -18,63 +18,67 @@ components:
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+- name: flow_panel_3
+  properties: {align: center, spacing_below: none, vertical_align: middle}
+  type: FlowPanel
+  layout_properties: {grid_position: 'UKPMSE,XQQSCC'}
+  components:
+  - type: DropDown
+    properties:
+      role: outlined
+      align: full
+      tooltip: ''
+      placeholder: Choix du QCM à mettre à jour
+      border: ''
+      enabled: true
+      foreground: theme:On Primary Container
+      items: []
+      visible: true
+      font_size: null
+      font: ''
+      spacing_above: small
+      spacing_below: small
+      italic: false
+      background: theme:Tertiary
+      bold: false
+      underline: false
+      include_placeholder: true
+    name: drop_down_qcm_row
+    layout_properties: {width: 305.4136850585937}
+    event_bindings: {change: drop_down_qcm_row_change}
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small,
-    background: 'theme:Primary'}
+    background: 'theme:On Primary Container'}
   name: column_panel_1
   layout_properties: {grid_position: 'XGRXOA,LZLTYL'}
   components:
   - type: ColumnPanel
-    properties: {col_widths: '{"QAOCRN":15,"BESKSH":15}', background: 'theme:Primary'}
+    properties: {col_widths: '{"QAOCRN":15,"BESKSH":15}', background: 'theme:On Primary
+        Container'}
     name: column_panel_6
     layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
     components:
-    - name: flow_panel_3
-      properties: {align: left, spacing_below: none}
+    - name: flow_panel_5
+      properties: {align: center, border: ''}
       type: FlowPanel
-      layout_properties: {grid_position: 'WOTOGW,QAOCRN DOBJBF,ODQPDN'}
+      layout_properties: {grid_position: 'WOTOGW,QAOCRN HVZJDO,AYPITW'}
       components:
-      - type: DropDown
-        properties:
-          role: outlined
-          align: full
-          tooltip: ''
-          placeholder: 'Pour '
-          border: ''
-          enabled: true
-          foreground: theme:On Primary
-          items: []
-          visible: true
-          font_size: null
-          font: ''
-          spacing_above: small
-          spacing_below: small
-          italic: false
-          background: theme:Error
-          bold: false
-          underline: false
-          include_placeholder: true
-        name: drop_down_qcm_row
-        layout_properties: {width: 221.94752978515626}
-        event_bindings: {change: drop_down_qcm_row_change}
-      - type: Button
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour,
-          font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small,
-          italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
-          icon: ''}
-        name: button_annuler
-        event_bindings: {click: button_annuler_click}
+      - name: label_6
+        properties: {text: Création d'une question, align: center, bold: true, font_size: 20,
+          italic: false, underline: false, foreground: 'theme:On Primary'}
+        type: Label
+        layout_properties: {}
+      data_bindings: []
     - name: flow_panel_4
-      properties: {align: left, vertical_align: middle, background: 'theme:On Primary
-          Container', spacing_above: none}
+      properties: {align: center, vertical_align: middle, background: 'theme:Primary',
+        spacing_above: none}
       type: FlowPanel
       layout_properties: {grid_position: 'WOTOGW,QAOCRN ECTKNK,OUOTOJ'}
       components:
       - name: label_1
         properties: {text: '   Barême  :', spacing_above: none, spacing_below: none,
-          align: right, font_size: 15, foreground: 'theme:On Primary', bold: false}
+          align: center, font_size: 15, foreground: 'theme:On Primary', bold: true}
         type: Label
         layout_properties: {}
       - name: drop_down_bareme
@@ -101,7 +105,7 @@ components:
         layout_properties: {width: 51.84057880859375}
         event_bindings: {change: drop_down_bareme_change}
     - name: flow_panel_1
-      properties: {align: left, background: 'theme:On Primary Container', vertical_align: middle,
+      properties: {align: center, background: 'theme:Primary', vertical_align: middle,
         spacing_above: small}
       type: FlowPanel
       layout_properties: {grid_position: 'WOTOGW,QAOCRN TZPJHC,MLWSGL'}
@@ -112,26 +116,26 @@ components:
         type: Label
         layout_properties: {}
       - name: check_box_reponse
-        properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+        properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
           foreground: 'theme:Primary Container', allow_indeterminate: false, visible: true,
-          text: V/F, font_size: 14, font: '', spacing_above: none, spacing_below: none,
+          text: V / F, font_size: 14, font: '', spacing_above: none, spacing_below: none,
           italic: false, background: 'theme:On Primary Container', bold: false, checked: false,
           underline: false}
         type: CheckBox
         event_bindings: {change: check_box_reponse_change}
         layout_properties: {}
     - name: column_panel_2
-      properties: {role: tonal-card, background: 'theme:On Primary Container'}
+      properties: {role: outlined-card, background: 'theme:On Primary Container'}
       type: ColumnPanel
       layout_properties: {grid_position: 'WOTOGW,BESKSH'}
       components:
       - name: flow_panel_6
-        properties: {align: center}
+        properties: {align: center, vertical_align: middle}
         type: FlowPanel
         layout_properties: {grid_position: 'LSIOOU,PIDVHC SUSBXK,JOLCAE'}
         components:
         - name: label_5
-          properties: {text: 'Q° #', foreground: 'theme:On Primary'}
+          properties: {text: 'Q° #', foreground: 'theme:On Primary', font_size: 16}
           type: Label
           layout_properties: {}
         - name: label_2
@@ -191,15 +195,24 @@ components:
     layout_properties: {grid_position: 'OQBWAL,KUNSFE'}
     event_bindings: {change: text_box_correction_change}
   - name: flow_panel_2
-    properties: {align: center, spacing: huge}
+    properties: {align: center, spacing: huge, vertical_align: middle}
     type: FlowPanel
-    layout_properties: {grid_position: 'HGNZXD,LEVUCO'}
+    layout_properties: {grid_position: 'CWYLSB,IXFVSQ'}
     components:
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: false, foreground: 'theme:Tertiary', visible: true, text: Créer,
+        enabled: true, foreground: 'theme:On Primary Container', visible: true, text: Retour,
+        font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small,
+        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+        icon: ''}
+      name: button_annuler
+      event_bindings: {click: button_annuler_click}
+      layout_properties: {}
+    - type: Button
+      properties: {role: elevated-button, align: center, tooltip: '', border: '',
+        enabled: false, foreground: 'theme:On Primary Container', visible: true, text: Créer,
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:On Primary Container', bold: false, underline: false,
+        italic: false, background: 'theme:Tertiary', bold: false, underline: false,
         icon: ''}
       name: button_creer
       event_bindings: {click: button_creer_click}

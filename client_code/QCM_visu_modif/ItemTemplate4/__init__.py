@@ -59,6 +59,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_nb_points.nom = "nb points"
         self.button_enregistrer_et_sortir.tag.nom = "sortir"
         self.column_panel_results.tag.nom = "cp_results"
+        self.spacer_1.tag.nom = "spacer"
         
         self.check_box_true.tag.nom = "rep_true"
         self.check_box_true.tag.numero = self.item['num']
@@ -156,7 +157,6 @@ class ItemTemplate4(ItemTemplate4Template):
             self.check_box_false.checked = False
             self.check_box_false.foreground = "yellow"
             self.check_box_true.foreground = "red"
-            
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.check_box_true.foreground = "red"
@@ -297,20 +297,22 @@ class ItemTemplate4(ItemTemplate4Template):
             print("n3_nom/type; ", n3.tag.nom, type(n3))
             repeat_panel = n3.parent  # conteneur des lignes (repeat panel) ds QCM_visu_modi
             print("**** repeating panel ", type(repeat_panel))
-            if self.mode != "creation":                         # mode utilisation du QCM           
-                for lignes in repeat_panel.get_components():
-                    print("item_lignes", type(lignes))
+        
+            for lignes in repeat_panel.get_components():
+                print("item_lignes", type(lignes))
                 
-                    for ligne in lignes.get_components():
-                        print("cpnts", type(ligne))
-                        if ligne.tag.nom == "cp_father":        # control panel incluant img, question, rep, fp_vrai faux
-                            for c in ligne.get_components():
-                                print("ligne", type(c))
-                                print("ligne", c.tag.nom)
-                                try:    # text area question et réponses n'ont pas de components
+                for ligne in lignes.get_components():
+                    print("cpnts", type(ligne))
+                    
+                    if ligne.tag.nom == "cp_father":        # control panel incluant img, question, rep, fp_vrai faux
+                        for c in ligne.get_components():
+                            print("ligne", type(c))
+                            print("ligne", c.tag.nom)
+                            try:    # text area question et réponses n'ont pas de components
+                                if self.mode != "creation":                         # mode utilisation du QCM uniqt:   
                                     if c.tag.nom ==  "fp_vrai/faux_bareme": 
                                             for cpnt in c.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
-                                                print("ligne num",cpnt.tag.numero,'ancien num',ancien_num_ligne)
+                                                print("ligne num en utiisation **********************************************",cpnt.tag.numero,'ancien num',ancien_num_ligne)
                                                 if cpnt.tag.numero == ancien_num_ligne:
                                                     if cpnt.tag.nom == "rep_true" :
                                                         alert(f"Validez d'abord la question {ancien_num_ligne}")
@@ -318,32 +320,27 @@ class ItemTemplate4(ItemTemplate4Template):
                                                     if cpnt.tag.nom == "rep_false":
                                                         print("CHECK BOX REP FALSE ANCIENNE LIGNE", ancien_num_ligne)
                                                     ancien_num_ligne = 0
-                                        
-                                    if c.tag.nom == "fp_modif":     # je suis ds le fp bareme qui contient le bouton modif/valid
-                                        for cpnt in c.get_components():    
-                                            if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:                    # <=============  mode utiiisation qcm
-                                                #c'est le bt de l'ancienne ligne
-                                                self.button_modif.enabled = False
-                                                self.button_modif.background = "theme:Tertiary"
-                                                self.button_modif.foregroundground = "theme:Error"
-                                                ancien_num_ligne = 0
-                                except:
-                                    pass    # pour les éléments ne contenant pas de d'éléments en eux
-                                                
-                    if self.mode == "creation":
-                        for cpnt in ligne.get_components():                                                      # <=============  mode utilisation qcm
-                            try:
-                                
-                                if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:
-                                    #c'est le bt de l'ancienne ligne
-                                    self.button_modif.enabled = False
-                                    self.button_modif.background = "theme:Tertiary"
-                                    self.button_modif.foregroundground = "theme:Error"
-                                    ancien_num_ligne = 0
+                                    
+                                if c.tag.nom == "fp_modif":     # je suis ds le fp bareme qui contient le bouton modif/valid
+                                    for cpnt in c.get_components():   
+                                        print("ligne num en création **********************************************",cpnt.tag.numero,'ancien num',ancien_num_ligne)
+                                        if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:                    # <=============  mode utiiisation qcm
+                                            print("=============================================================== ok bouton ancienne ligne trouvé")
+                                            #c'est le bt de l'ancienne ligne
+                                            cpnt.enabled = False
+                                            cpnt.background = "theme:On Primary Container"
+                                            cpnt.foregroundground = "theme:On Primary"
+                                            """
+                                            self.button_modif.enabled = False
+                                            self.button_modif.background = "theme:On Primary Container"
+                                            self.button_modif.foregroundground = "theme:On Primary"
+                                            """
+                                            ancien_num_ligne = 0
                             except:
-                                print("ERREUR", type(cpnt))
-                                return
-    
+                                pass    # pour les éléments ne contenant pas de d'éléments en eux
+
+  
+                
     def text_box_correction_focus(self, **event_args):
         """This method is called when the text area gets focus"""
         self.text_area_question_focus()
@@ -373,7 +370,7 @@ class ItemTemplate4(ItemTemplate4Template):
         global max_points
         global points
         global reponses     # liste des réponses du stagiaire    
-
+        alert(f"liste réponses contient : {len(reponses)}")
         if len(reponses) != int(self.label_nb_questions.text):
             r=alert2('Ce QCM est inachevé, \n\n'
                       'Voulez-vous vraiment abandonner ?\n'
@@ -385,15 +382,14 @@ class ItemTemplate4(ItemTemplate4Template):
             if r == "Oui" :                    
                 self.button_enregistrer_et_sortir_click()
             else:
-                #return
-                self.button_enregistrer_et_sortir_click()                                    # A MODIFIER
+                return
                 
         self.button_fin_qcm.visible = False               
         user=anvil.users.get_user()
         if user:
             result = anvil.server.call("qcm_result", user, self.qcm_nb, nb_bonnes_rep, max_points, points, reponses)  
-            if result == True :
-                alert("QCM enregisté !")
+            if result == False :
+                alert("QCM non enregisté !")
                 
         # affichage des résultats   
         self.label_nb_quest_ok.text = (f"{nb_bonnes_rep} bonnes réponses sur {self.label_nb_questions.text}.")
