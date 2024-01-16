@@ -9,7 +9,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
 global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
 ancien_num_ligne = 0
 
@@ -18,18 +17,23 @@ cpt = 0
 
 global nb_bonnes_rep
 nb_bonnes_rep = 0
+
 global max_points
 max_points = 0
+
 global points
 points = 0      # Je cumule les points en fonction de la réponse et du barême
+
 global reponses
-reponses = []   #liste de toutes les réponses du stagiaire {num, reponseV/F}
+reponses = {}   #liste type dict de toutes les réponses du stagiaire {cle:num, valeurV/F}
 
 class ItemTemplate4(ItemTemplate4Template):
     def __init__(self, **properties):               
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        global reponses
+        reponses = {}   #liste type dict de toutes les réponses du stagiaire {cle:num, valeurV/F}
         global cpt
         cpt=0
         
@@ -63,8 +67,11 @@ class ItemTemplate4(ItemTemplate4Template):
         
         self.check_box_true.tag.nom = "rep_true"
         self.check_box_true.tag.numero = self.item['num']
+        self.check_box_true.tag.correction = self.item['reponse']   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
+        
         self.check_box_false.tag.nom = "rep_false"
         self.check_box_false.tag.numero = self.item['num']
+        self.check_box_false.tag.correction = self.item['reponse']   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
         
         self.drop_down_bareme.tag.nom = "bareme"
         
@@ -77,14 +84,17 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_2.tag.nom = "num"
         qst = self.item['question']
         qst = qst.strip()
+        
         if self.mode != "creation":
             if int(self.item['bareme']) > 1:
                 self.text_area_question.text = (f"{qst} \n  ({self.item['bareme']} points)")
             else:  # bareme 1 point
                 self.text_area_question.text = (f"{qst} \n  ({self.item['bareme']} point)")
+            self.text_area_question.enabled = False
         else:
             self.text_area_question.text = qst
-        
+            self.text_area_question.enabled = True
+            
         self.text_area_question.tag.nom = "question"
         self.text_area_question.tag.numero = self.item['num']
         
@@ -104,12 +114,12 @@ class ItemTemplate4(ItemTemplate4Template):
         self.image_1.tag.nom = "photo"
         self.image_1.tag.numero = self.item['num']
 
-        self.reponse = self.item['reponse']
+        self.reponse = self.item['reponse']                       # je sauve la correction de la réponse
 
         #print(self.mode)
         self.button_fin_qcm.visible = False
         if self.mode != "creation":               # mode utilisation du QCM par le stagiare
-            self.text_area_question.enable = False
+            self.text_area_question.enabled = False
             self.file_loader_1.visible = False
             self.text_box_correction.visible = False
             self.drop_down_bareme.enabled = False
@@ -256,17 +266,18 @@ class ItemTemplate4(ItemTemplate4Template):
             global nb_bonnes_rep
             global max_points
             global points
-            global reponses    # liste
+            global reponses    # liste type dict
             
             rep_stagiaire = False
-            rep=()
+            valeur=[]  # valeur est la reponse v/f
             if self.check_box_true.checked == False:       # le stagiaire a répondu False
-                rep=[num,False]
-                rep_stagiaire = False
+                valeur = False
+                rep_stagiaire = False    # pour le calcul des points
             else:
-                rep=[num,True]    # le stagiaire a répondu True
+                valeur = True    # le stagiaire a répondu True
                 rep_stagiaire = True
-            reponses.append(rep)      # je mets à jour la liste
+            clef = str(num)
+            reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses
 
             #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
             max_points = max_points + int(bareme)   # cumul du max de points possible
@@ -309,32 +320,29 @@ class ItemTemplate4(ItemTemplate4Template):
                             print("ligne", type(c))
                             print("ligne", c.tag.nom)
                             try:    # text area question et réponses n'ont pas de components
+                                """
                                 if self.mode != "creation":                         # mode utilisation du QCM uniqt:   
                                     if c.tag.nom ==  "fp_vrai/faux_bareme": 
                                             for cpnt in c.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
-                                                print("ligne num en utiisation **********************************************",cpnt.tag.numero,'ancien num',ancien_num_ligne)
-                                                if cpnt.tag.numero == ancien_num_ligne:
-                                                    if cpnt.tag.nom == "rep_true" :
-                                                        alert(f"Validez d'abord la question {ancien_num_ligne}")
-                                                        print("CHECK BOX REP TRUE ANCIENNE LIGNE", ancien_num_ligne)
-                                                    if cpnt.tag.nom == "rep_false":
-                                                        print("CHECK BOX REP FALSE ANCIENNE LIGNE", ancien_num_ligne)
-                                                    ancien_num_ligne = 0
-                                    
+                                                print("ligne en utilisation **********************************************",cpnt.tag.numero,'ancien num',ancien_num_ligne)
+                                                
+                                                if cpnt.tag.nom == "rep_true" and cpnt.tag.numero == ancien_num_ligne:
+                                                    alert(f"Validez d'abord la question {ancien_num_ligne}")
+                                                    print("CHECK BOX REP TRUE ANCIENNE LIGNE", ancien_num_ligne)
+                                                if cpnt.tag.nom == "rep_false":
+                                                    print("CHECK BOX REP FALSE ANCIENNE LIGNE", ancien_num_ligne)
+                                                #ancien_num_ligne = 0
+                                """    
                                 if c.tag.nom == "fp_modif":     # je suis ds le fp bareme qui contient le bouton modif/valid
                                     for cpnt in c.get_components():   
-                                        print("ligne num en création **********************************************",cpnt.tag.numero,'ancien num',ancien_num_ligne)
+                                        print("ligne  **********************************************",cpnt.tag.numero,'ancien num',ancien_num_ligne)
                                         if cpnt.tag.nom == "button" and cpnt.tag.numero == ancien_num_ligne:                    # <=============  mode utiiisation qcm
                                             print("=============================================================== ok bouton ancienne ligne trouvé")
                                             #c'est le bt de l'ancienne ligne
                                             cpnt.enabled = False
                                             cpnt.background = "theme:On Primary Container"
                                             cpnt.foregroundground = "theme:On Primary"
-                                            """
-                                            self.button_modif.enabled = False
-                                            self.button_modif.background = "theme:On Primary Container"
-                                            self.button_modif.foregroundground = "theme:On Primary"
-                                            """
+                                           
                                             ancien_num_ligne = 0
                             except:
                                 pass    # pour les éléments ne contenant pas de d'éléments en eux
@@ -369,8 +377,8 @@ class ItemTemplate4(ItemTemplate4Template):
         global nb_bonnes_rep
         global max_points
         global points
-        global reponses     # liste des réponses du stagiaire    
-        alert(f"liste réponses contient : {len(reponses)}")
+        global reponses     # liste type dict  des réponses du stagiaire    
+        #alert(f"liste réponses contient : {len(reponses)}")
         if len(reponses) != int(self.label_nb_questions.text):
             r=alert2('Ce QCM est inachevé, \n\n'
                       'Voulez-vous vraiment abandonner ?\n'
@@ -406,20 +414,54 @@ class ItemTemplate4(ItemTemplate4Template):
         
         for lignes in repeat_panel.get_components():
             print("item_lignes", type(lignes))
-            for cpnt in lignes.get_components():
-                print("cpnts", type(cpnt))
-                if cpnt.tag.nom == "cp_father":
-                    for c in cpnt.get_components():
+            for cpt in lignes.get_components():
+                print("cpnts", type(cpt))
+                
+                if cpt.tag.nom == "cp_father":
+                    for c in cpt.get_components():
                         print("c", type(c))
                         print("c", c.tag.nom)
+                        
                         if c.tag.nom == "correction" :
                             c.visible = True
+                            c.enabled = False
+                            
+                        if c.tag.nom ==  "fp_vrai/faux_bareme": 
+                            for cpnt in c.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
+                                if cpnt.tag.nom == "rep_true":
+                                    num_ligne = cpnt.tag.numero                  # barem et spacer n'ont pas de tag numero
+                                    if reponses[str(num_ligne)] == True:
+                                        print("================================================================> ok")
+                                        print("cpnt", type(cpnt))
+                                        print("reponse doir être :", self.reponse)
+                                        cpnt.enabled = True
+                                        cpnt.foreground = "yellow"
+                                        if cpnt.tag.correction != True:
+                                            cpnt.background = "red"                               
+                                        cpnt.checked = True
+                                if cpnt.tag.nom == "rep_false":
+                                    num_ligne = cpnt.tag.numero
+                                    if reponses[str(num_ligne)] == False:
+                                        print("================================================================> ok")
+                                        print("cpnt", type(cpnt))
+                                        print("reponse doit être :", self.reponse)
+                                        
+                                        cpnt.enabled = True
+                                        cpnt.foreground = "yellow"
+                                        if cpnt.tag.correction != False:
+                                            cpnt.background = "red"  
+                                        cpnt.checked = True
+                            
             
                     
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ...Main import Main
         open_form('Main',99)
+
+    def column_panel_results_show(self, **event_args):
+        """This method is called when the column panel is shown on the screen"""
+        self.column_panel_results.scroll_into_view()
 
 
 
