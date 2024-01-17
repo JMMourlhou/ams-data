@@ -32,7 +32,7 @@ class ItemTemplate3(ItemTemplate3Template):
     def file_loader_1_change(self, file, **event_args):
         if file != None:  #pas d'annulation en ouvrant choix de fichier
             # nouveau nom doc SANS extension
-
+            """
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
             print(new_file_name)
             # Type de fichier ?
@@ -44,13 +44,16 @@ class ItemTemplate3(ItemTemplate3Template):
                 print("JPG loaded")
                 new_file_name = new_file_name + ".jpg" # rajout extension
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
-                self.image_1.source = file
+            """    
+            self.image_1.source = file
                
-                # Sauvegarde du 'file' jpg et de son thumb nail ds table pré requis
-                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
-                if result == True:
-                     print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
-            
+                # Sauvegarde du 'file' jpg
+            #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+            result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file) 
+            if result == True:
+                #print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
+                print(f"Fichier de jpg en jpg, sauvé")
+            """
             # si 'file' est pdf, je l'affiche, après traitement, au format jpg
             if file_extension == ".pdf":
                 print("PDF loaded")
@@ -73,6 +76,7 @@ class ItemTemplate3(ItemTemplate3Template):
                 if result != True:
                     alert("Fichier jpg non sauvé") 
                 self.image_1.source = file
+                """
             self.button_visu.visible = True     
 
 
