@@ -235,9 +235,13 @@ class Main(MainTemplate):
         import anvil.js
         from anvil.js.window import localStorage
         from anvil.js import window
-        #window.close()
+        import anvil.users
+         # Déconnecter l'utilisateur
+        anvil.users.logout()
+        # Afficher un message
+        alert("Vous êtes déconnecté.")
         window.setTimeout(window.close, 10000)
-
+        anvil.server.wait_forever()
 
 
 
