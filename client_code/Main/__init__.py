@@ -241,7 +241,7 @@ class Main(MainTemplate):
         # Afficher un message
         alert("Vous êtes déconnecté.")
         window.setTimeout(window.close, 10000)
-        anvil.server.wait_forever()
+        #anvil.server.wait_forever()
 
 
 
