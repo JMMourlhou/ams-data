@@ -29,3 +29,11 @@ class ItemTemplate5(ItemTemplate5Template):
         
         list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])
         self.repeating_panel_1.items = liste_pr
+
+    def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        if self.repeating_panel_1.visible == True:
+            self.repeating_panel_1.visible = False
+        else:
+            self.repeating_panel_1.visible = True
+            

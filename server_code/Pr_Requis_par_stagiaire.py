@@ -21,13 +21,8 @@ def path_info(file):
 @anvil.server.callable
 @anvil.tables.in_transaction
 #def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
-def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension=".jpg"):
-    
-    # finding the stagiaire's row 
-    pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
-                                                         stagiaire_email = email,
-                                                         item_requis = item_requis                                             
-                                             )                                      
+def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
+    valid=False
     if pr_requis_row:
         if file_extension == ".jpg":
             print("serveur Preq: Ce fichier est une image JPG")        
@@ -68,8 +63,8 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
                                 )
             print("MAJ de la table pre recquis par le doc jpg")
             
-            return True    # Sov effectué et None liste_images (car img, pas pdf)   
-    
+            valid=True    # Sov effectué et None liste_images (car img, pas pdf)   
+            return valid
 
         if file_extension == ".pdf":
             print("serveur Preq: Ce fichier est un pdf")

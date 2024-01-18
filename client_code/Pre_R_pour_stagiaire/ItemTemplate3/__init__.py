@@ -46,38 +46,45 @@ class ItemTemplate3(ItemTemplate3Template):
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
             """    
             self.image_1.source = file
-               
+            # finding the stagiaire's row 
+            pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = self.stage_num,
+                                                         stagiaire_email = self.email,
+                                                         item_requis = self.item_requis                                             
+                                             )                                      
+            if pr_requis_row:         
                 # Sauvegarde du 'file' jpg
-            #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
-            result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file) 
-            if result == True:
-                #print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
-                print(f"Fichier de jpg en jpg, sauvé")
-            """
-            # si 'file' est pdf, je l'affiche, après traitement, au format jpg
-            if file_extension == ".pdf":
-                print("PDF loaded")
-        
-                # Sauvegarde du 'file'
-                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
-                if result == False:
-                    alert("Fichier PDF non sauvé")     
-                # génération du JPG à partir du pdf
-                liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
-                #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
-                print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
-                file = liste_images[0]
-                thumb_file =  anvil.image.generate_thumbnail(file, 640)
-                # renvoi en écriture des images générées ds table
-                file_ext = ".jpg"
-                new_file_name = new_file_name + ".jpg"
-                print("new_file_name ",new_file_name)
-                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_ext, thumb_file, new_file_name)
-                if result != True:
-                    alert("Fichier jpg non sauvé") 
-                self.image_1.source = file
+                #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                result = anvil.server.call('modify_pre_r_par_stagiaire', pr_requis_row, file) 
+                if result == True:
+                    #print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
+                    print(f"Fichier de jpg en jpg, sauvé")
+                    
                 """
-            self.button_visu.visible = True     
+                # si 'file' est pdf, je l'affiche, après traitement, au format jpg
+                if file_extension == ".pdf":
+                    print("PDF loaded")
+            
+                    # Sauvegarde du 'file'
+                    result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+                    if result == False:
+                        alert("Fichier PDF non sauvé")     
+                    # génération du JPG à partir du pdf
+                    liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
+                    #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
+                    print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
+                    file = liste_images[0]
+                    thumb_file =  anvil.image.generate_thumbnail(file, 640)
+                    # renvoi en écriture des images générées ds table
+                    file_ext = ".jpg"
+                    new_file_name = new_file_name + ".jpg"
+                    print("new_file_name ",new_file_name)
+                    result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_ext, thumb_file, new_file_name)
+                    if result != True:
+                        alert("Fichier jpg non sauvé") 
+                    self.image_1.source = file
+                    """
+                
+                self.button_visu.visible = True     
 
 
     def button_visu_click(self, **event_args):

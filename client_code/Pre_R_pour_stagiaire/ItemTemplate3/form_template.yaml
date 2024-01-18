@@ -1,5 +1,7 @@
 is_package: true
-container: {type: ColumnPanel}
+container:
+  type: ColumnPanel
+  properties: {role: null}
 components:
 - name: flow_panel_1
   properties: {align: center, vertical_align: middle, spacing: small, spacing_above: medium,
