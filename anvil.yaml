@@ -142,7 +142,7 @@ db_schema:
     - name: correction
       admin_ui: {order: 5, width: 200}
       type: string
-    title: Qcm
+    title: Qcm_VF
   qcm_result:
     client: full
     server: full
