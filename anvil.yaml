@@ -97,6 +97,9 @@ db_schema:
     - name: destination
       admin_ui: {order: 1, width: 288}
       type: string
+    - name: type
+      admin_ui: {width: 200, order: 2}
+      type: string
     title: Qcm_description
   lieux:
     client: search
@@ -211,6 +214,15 @@ db_schema:
       admin_ui: {order: 2, width: 200}
       type: string
     title: Files
+  qcm_multi:
+    client: none
+    server: full
+    columns:
+    - name: qcm_nb
+      admin_ui: {width: 200, order: 0}
+      type: link_single
+      target: qcm_description
+    title: Qcm_Multi_choix
   mode_financement:
     client: search
     server: full
