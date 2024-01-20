@@ -7,15 +7,19 @@ from anvil.tables import app_tables
 import anvil.server
 
 @anvil.server.callable
-def add_ligne_qcm(num_question, question, correction, reponse, bareme, image, qcm_nb):
+def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb):
     
     # qcm_nb est la row venant du dropdown choix du qcm
-    #print(qcm_nb)
-    
+
+    if rep == True:
+        rep_multi = "10"
+    else:
+        rep_multi = "01"
+   
     new_row=app_tables.qcm.add_row(num= int(num_question),
                                    question = question,
                                    correction = correction,
-                                   reponse = reponse,
+                                   rep_multi = rep_multi,
                                    bareme = str(bareme),
                                    photo = image,
                                    qcm_nb = qcm_nb )
@@ -33,7 +37,7 @@ def add_ligne_qcm(num_question, question, correction, reponse, bareme, image, qc
 # =================================================================================================================
 # MODIF du QCM (en maj d'un qcm)
 @anvil.server.callable           #modif d'une ligne de Qcm
-def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, correction):
+def modif_qcm(qcm_descro_row, num_question, question, rep, bareme, photo, correction):
 
     # lecture de la ligne à modifier par son numéro             
     qcm_row = app_tables.qcm.get(num=num_question,
@@ -42,8 +46,12 @@ def modif_qcm(qcm_descro_row, num_question, question, reponse, bareme, photo, co
         print("Ligne qcm non trouvée ds fichier qcm")
         return False
     else:   
+        if rep == True:
+            rep_multi = "10"
+        else:
+            rep_multi = "01"
         qcm_row.update(question = question,
-                     reponse = reponse,
+                     rep_multi = rep_multi,
                      bareme = str(bareme),
                      photo = photo,
                      correction= correction

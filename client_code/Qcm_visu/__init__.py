@@ -143,7 +143,10 @@ class Qcm_visu(Qcm_visuTemplate):
             self.cb_false.tag.nom = "cb_false"
             self.cb_false.tag.num_question = row['num']
             self.cb_false.tag.bareme = row['bareme']    # Je sauve le bareme de la question ds tag de combo false
+
             self.cb_false.tag.bonne_rep = row['reponse']    # Je sauve le bareme de la question ds tag de combo false
+            
+            
             self.fp.add_component(self.cb_false)
             self.cb_false.set_event_handler('change',self.check_box_false_change)
 

@@ -18,3 +18,18 @@ def loop():
                 row.update(role="S")
         result="loop ok"     
     return result
+
+
+#boucle sur la table qcm pour modif rapide d'une colonne, ici sur la reponse multi critères
+def loop_qcm():
+    table = app_tables.qcm.search()
+    result="erreur"
+    if table:
+        for row in table:
+            if row['reponse'] == True:
+                rep_multi = "10"
+            else:
+                rep_multi = "01"
+            row.update(rep_multi = rep_multi)
+        result="loop ok"     
+    return result

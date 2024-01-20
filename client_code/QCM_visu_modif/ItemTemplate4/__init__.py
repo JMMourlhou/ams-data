@@ -67,11 +67,20 @@ class ItemTemplate4(ItemTemplate4Template):
         
         self.check_box_true.tag.nom = "rep_true"
         self.check_box_true.tag.numero = self.item['num']
-        self.check_box_true.tag.correction = self.item['reponse']   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
-        
+        rep_multi = self.item['rep_multi']
+        nb_options = len(rep_multi)
+        if nb_options == 2: # v/F qcm (pse1, pse2)
+            if rep_multi[0:1] == "10": # rep vrai
+                self.check_box_true.tag.correction = True   # pour afficher correctement les réponses fauses du stagiaire en fin de QCM
+                self.check_box_false.tag.correction = False   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
+            else:    # "01"   rep false
+                self.check_box_true.tag.correction = False
+                self.check_box_false.tag.correction = True   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
+            
         self.check_box_false.tag.nom = "rep_false"
         self.check_box_false.tag.numero = self.item['num']
-        self.check_box_false.tag.correction = self.item['reponse']   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
+        
+        
         
         self.drop_down_bareme.tag.nom = "bareme"
         
@@ -114,8 +123,14 @@ class ItemTemplate4(ItemTemplate4Template):
         self.image_1.tag.nom = "photo"
         self.image_1.tag.numero = self.item['num']
 
-        self.reponse = self.item['reponse']                       # je sauve la correction de la réponse
+        rep_multi = self.item['rep_multi']
+        if rep_multi == "10":
+            self.reponse = True              # je sauve la correction de la réponse
+        else:    # "01" 
+            self.reponse = False
 
+
+        
         #print(self.mode)
         self.button_fin_qcm.visible = False
         if self.mode != "creation":               # mode utilisation du QCM par le stagiare
@@ -129,8 +144,9 @@ class ItemTemplate4(ItemTemplate4Template):
         else:
             self.button_fin_qcm.visible = False
             self.text_area_question.enable = True # mode création, j'affiche la question (text box, pas le rich text)
-            rep = self.item['reponse']             # mode création, j'affiche la réponse
-            if rep == True:
+            
+            rep = self.item['rep_multi']             # mode création, j'affiche la réponse
+            if rep == "10":
                 self.check_box_true.checked = True
             else:
                 self.check_box_false.checked = True
