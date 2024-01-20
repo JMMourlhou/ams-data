@@ -12,29 +12,44 @@ import anvil.server
 @anvil.server.callable
 def file_reading():
     # Read the contents of a file
-    with open(data_files['qcm1.txt']) as f:
-        ligne = f.readline()   # numero 1ere question en 1er
-        #print("nb de lignes:", len(fichier)) 
-        num = ligne[0:2]   
-        print(num)
-
-        question_nb = 1
-        question_txt = ""
-
+    cpt=0
+    question_txt = ""
+    f = open(data_files['qcm1.txt'])              # se ferme qd ligne est vide
+    x = True
+    while x:
+        ligne = f.readline()  # lecture  1 ligne
+        if not ligne:
+            print(f"question # {cpt}, nb de choix: {nb_de_choix-1}, question:{question_txt}")
+            print('Fin du fichier')
+            break
         
-        ligne=f.readline()    #lecture 2eme ligne : début question ?
-        while ligne == "":
-              ligne=f.readline()    #lecture next line
-            
-        while ligne != "":      #début question
-            question_txt = question_txt + str(ligne) 
-            ligne=f.readline()   
-        print(f"question # {question_nb} : {question_txt}")
+        #print(f"lg: {len(ligne)}")
+        n = ligne[0:1] 
+        #print(n)
+        try:
+            num = int(n) # cette ligne est le début d'une question car contient un nombre
 
-        # il y a eu une ligne vide, # ligne : début prochaine question ?
-        ligne=f.readline()    
-        while ligne == "":
-              ligne=f.readline()    #lecture next line
+            if cpt != 0:
+                # SAUVER LA QUESTION et SON NUM et le nb de choix et les réponses 
+                print(f"question # {cpt}, nb de choix: {nb_de_choix-1}, question:{question_txt}")
+                print()
+            nb_de_choix = 0
+            dico = {}
+            cpt += 1     # incrément du num de question
+            #print(f"début question {cpt}")
+            # puis effacer la question
+            question_txt = ""  # je remets à "" ma question
+        except:
+            if len(ligne)>4:
+                nb_de_choix += 1
+                #print(f"except, nb de choix: {nb_de_choix}")
+                question_txt = question_txt + ligne
+            # créer le dictionnaire qui décrit les reponses (clé est le num de choix, valeur est la réponse si on trouve le caractère "✔" )
+    f.close()
+
+       
+        
+
 
         
             
