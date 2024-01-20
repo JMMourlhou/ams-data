@@ -67,19 +67,11 @@ class ItemTemplate4(ItemTemplate4Template):
         
         self.check_box_true.tag.nom = "rep_true"
         self.check_box_true.tag.numero = self.item['num']
-        rep_multi = self.item['rep_multi']
-        nb_options = len(rep_multi)
-        if nb_options == 2: # v/F qcm (pse1, pse2)
-            if rep_multi[0:1] == "10": # rep vrai
-                self.check_box_true.tag.correction = True   # pour afficher correctement les réponses fauses du stagiaire en fin de QCM
-                self.check_box_false.tag.correction = False   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
-            else:    # "01"   rep false
-                self.check_box_true.tag.correction = False
-                self.check_box_false.tag.correction = True   # pour afficher correctement les réponses fauuses du stagiaire en fin de QCM
+        self.check_box_true.tag.correction = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
             
         self.check_box_false.tag.nom = "rep_false"
         self.check_box_false.tag.numero = self.item['num']
-        
+        self.check_box_false.tag.correction = self.item['rep_multi']
         
         
         self.drop_down_bareme.tag.nom = "bareme"
@@ -123,13 +115,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.image_1.tag.nom = "photo"
         self.image_1.tag.numero = self.item['num']
 
-        rep_multi = self.item['rep_multi']
-        if rep_multi == "10":
-            self.reponse = True              # je sauve la correction de la réponse
-        else:    # "01" 
-            self.reponse = False
-
-
+        self.reponse = self.item['rep_multi']             # je sauve la correction de la réponse
         
         #print(self.mode)
         self.button_fin_qcm.visible = False
@@ -287,11 +273,11 @@ class ItemTemplate4(ItemTemplate4Template):
             rep_stagiaire = False
             valeur=[]  # valeur est la reponse v/f
             if self.check_box_true.checked == False:       # le stagiaire a répondu False
-                valeur = False
-                rep_stagiaire = False    # pour le calcul des points
+                valeur = "01"
+                rep_stagiaire = "01"    # pour le calcul des points
             else:
-                valeur = True    # le stagiaire a répondu True
-                rep_stagiaire = True
+                valeur = "10"    # le stagiaire a répondu True
+                rep_stagiaire = "10"
             clef = str(num)
             reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses
 
@@ -446,25 +432,25 @@ class ItemTemplate4(ItemTemplate4Template):
                             for cpnt in c.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
                                 if cpnt.tag.nom == "rep_true":
                                     num_ligne = cpnt.tag.numero                  # barem et spacer n'ont pas de tag numero
-                                    if reponses[str(num_ligne)] == True:
+                                    if reponses[str(num_ligne)] == "10":
                                         print("================================================================> ok")
                                         print("cpnt", type(cpnt))
                                         print("reponse doir être :", self.reponse)
                                         cpnt.enabled = True
                                         cpnt.foreground = "yellow"
-                                        if cpnt.tag.correction != True:
+                                        if cpnt.tag.correction != "10":
                                             cpnt.background = "red"                               
                                         cpnt.checked = True
                                 if cpnt.tag.nom == "rep_false":
                                     num_ligne = cpnt.tag.numero
-                                    if reponses[str(num_ligne)] == False:
+                                    if reponses[str(num_ligne)] == "01":
                                         print("================================================================> ok")
                                         print("cpnt", type(cpnt))
                                         print("reponse doit être :", self.reponse)
                                         
                                         cpnt.enabled = True
                                         cpnt.foreground = "yellow"
-                                        if cpnt.tag.correction != False:
+                                        if cpnt.tag.correction != "01":
                                             cpnt.background = "red"  
                                         cpnt.checked = True
                             
