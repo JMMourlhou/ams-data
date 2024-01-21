@@ -51,6 +51,8 @@ class ItemTemplate4(ItemTemplate4Template):
         self.tag.nom = "top"
         self.flow_panel_num.tag.nom = "fp_num"
         self.cp_father.tag.nom = "cp_father"
+        self.cp_quest_rep.tag.nom = "cp_quest_rep"
+        self.cp_options.tag.nom = "cp_options"
         self.cp_img.tag.nom = "cp_img"
         self.fp_modif.tag.nom = "fp_modif"
         self.fp_vf_barem.tag.nom = "fp_vrai/faux_bareme"
@@ -64,14 +66,28 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_enregistrer_et_sortir.tag.nom = "sortir"
         self.column_panel_results.tag.nom = "cp_results"
         self.spacer_1.tag.nom = "spacer"
-        
-        self.check_box_true.tag.nom = "rep_true"
-        self.check_box_true.tag.numero = self.item['num']
-        self.check_box_true.tag.correction = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
+
+        # acquisition des réponses
+        self.reponse = self.item['rep_multi']             # je sauve la correction de la réponse
+        self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
+        if self.nb_options == 2:   # question V/F 
+            self.rep1.tag.nom = "rep1-true"
+            self.rep1.tag.numero = self.item['num']
+            rep = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
+            self.rep1.tag.correction = rep[0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
+
+            self.rep2.tag.nom = "rep2-false"
+            self.rep2.tag.numero = self.item['num']
+            self.rep2.tag.correction = rep[1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
+
             
-        self.check_box_false.tag.nom = "rep_false"
-        self.check_box_false.tag.numero = self.item['num']
-        self.check_box_false.tag.correction = self.item['rep_multi']
+            self.check_box_true.tag.nom = "rep_true"
+            self.check_box_true.tag.numero = self.item['num']
+            self.check_box_true.tag.correction = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
+                
+            self.check_box_false.tag.nom = "rep_false"
+            self.check_box_false.tag.numero = self.item['num']
+            self.check_box_false.tag.correction = self.item['rep_multi']
         
         
         self.drop_down_bareme.tag.nom = "bareme"
@@ -114,8 +130,6 @@ class ItemTemplate4(ItemTemplate4Template):
         self.image_1.source = self.item['photo']
         self.image_1.tag.nom = "photo"
         self.image_1.tag.numero = self.item['num']
-
-        self.reponse = self.item['rep_multi']             # je sauve la correction de la réponse
         
         #print(self.mode)
         self.button_fin_qcm.visible = False
@@ -128,10 +142,17 @@ class ItemTemplate4(ItemTemplate4Template):
             self.drop_down_bareme.visible = False
             self.button_fin_qcm.visible = False
         else:
-            self.button_fin_qcm.visible = False
-            self.text_area_question.enable = True # mode création, j'affiche la question (text box, pas le rich text)
-            
-            rep = self.item['rep_multi']             # mode création, j'affiche la réponse
+            self.button_fin_qcm.visible = False    # mode création, j'affiche la réponse
+            self.text_area_question.enable = True  # j'affiche la question text box
+            if self.rep1.tag.correction == "1":
+                self.rep1.checked = True      
+            else:
+                self.rep1.checked = False
+            if self.rep2.tag.correction == "1":
+                self.rep2.checked = True      
+            else:
+                self.rep2.checked = False
+                
             if rep == "10":
                 self.check_box_true.checked = True
             else:
@@ -192,6 +213,38 @@ class ItemTemplate4(ItemTemplate4Template):
         global ancien_num_ligne
         ancien_num_ligne = self.check_box_false.tag.numero
 
+    def rep1_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.text_area_question_focus()  
+        #print("******************************************************************", self.nb_options)
+        if self.nb_options == 2 and self.rep1.checked == True:   # question V/F
+            self.rep2.checked == False
+            self.rep2.foreground = "yellow"
+            self.rep1.foreground = "red"
+            
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foreground = "yellow"
+        
+        global ancien_num_ligne
+        ancien_num_ligne = self.check_box_false.tag.numero
+
+    def rep2_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.text_area_question_focus()
+        #print("******************************************************************", self.nb_options)
+
+        if self.nb_options == 2 and self.rep2.checked == True:   # question V/F
+            self.rep1.checked == False
+            self.rep1.foreground = "yellow"
+            self.rep2.foreground = "red"
+                
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foreground = "yellow"
+            
+        global ancien_num_ligne
+        ancien_num_ligne = self.check_box_false.tag.numero
        
     # Bouton modif si mode création  // Validation si mode test qcm pour stagiaire
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
@@ -216,16 +269,17 @@ class ItemTemplate4(ItemTemplate4Template):
                         print(cpnt, cpnt.tag.nom)
                         photo = cpnt1.source           # j'ai la photo
                         
-            
-            if cpnt.tag.nom == "question":
-                print(cpnt, cpnt.tag.nom)
-                print("mode :", self.mode)
-                question = cpnt.text
-                # mettre la 1ere lettre en maj mais laisser le reste comme tappé
-                #je boucle à partir de la deuxieme lettre et cumul le text             
-                txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
-                txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
-                question = txt + txt2 
+            if cpnt.tag.nom == "cp_quest_rep":
+                for cpnt1 in cpnt.get_components():
+                    if cpnt1.tag.nom == "question":
+                        print(cpnt, cpnt1.tag.nom)
+                        print("mode :", self.mode)
+                        question = cpnt1.text
+                        # mettre la 1ere lettre en maj mais laisser le reste comme tappé
+                        #je boucle à partir de la deuxieme lettre et cumul le text             
+                        txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
+                        txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
+                        question = txt + txt2 
                 
             if cpnt.tag.nom == "correction":
                 print(cpnt, cpnt.tag.nom)
@@ -271,14 +325,16 @@ class ItemTemplate4(ItemTemplate4Template):
             global reponses    # liste type dict
             
             rep_stagiaire = False
-            valeur=[]  # valeur est la reponse v/f
-            if self.check_box_true.checked == False:       # le stagiaire a répondu False
-                valeur = "01"
-                rep_stagiaire = "01"    # pour le calcul des points
-            else:
-                valeur = "10"    # le stagiaire a répondu True
-                rep_stagiaire = "10"
-            clef = str(num)
+            valeur=[]  # valeur est la reponse du stagiaire
+            if self.nb_options == 2:  # qcm de type v/f
+                if self.check_box_true.checked == False:       # le stagiaire a répondu False
+                    valeur = "01"
+                    rep_stagiaire = "01"    # pour le calcul des points
+                else:
+                    valeur = "10"    # le stagiaire a répondu True
+                    rep_stagiaire = "10"
+            
+            clef = str(num)           # clé du dict des réponses: numéro de qcm
             reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses
 
             #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
@@ -464,6 +520,12 @@ class ItemTemplate4(ItemTemplate4Template):
     def column_panel_results_show(self, **event_args):
         """This method is called when the column panel is shown on the screen"""
         self.column_panel_results.scroll_into_view()
+
+
+
+
+
+
 
 
 

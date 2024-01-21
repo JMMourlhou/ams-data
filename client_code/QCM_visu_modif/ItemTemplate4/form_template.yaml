@@ -46,14 +46,39 @@ components:
       type: Image
       layout_properties: {grid_position: 'NJZSBG,MVJVXU'}
       data_bindings: []
-  - name: text_area_question
-    properties: {align: center, height: 53.43121337890625, placeholder: Question,
-      enabled: false, foreground: 'theme:On Primary', auto_expand: true, spacing_below: medium,
-      background: 'theme:Primary 700', bold: true}
-    type: TextArea
-    layout_properties: {grid_position: 'GKLCIZ,MZYDIM'}
-    event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus,
-      focus: text_area_question_focus}
+  - name: cp_quest_rep
+    properties: {col_widths: '{"EAZFGY":81,"SNTWTT":5}', col_spacing: tiny}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'VWBXEW,BIJGKW'}
+    components:
+    - name: text_area_question
+      properties: {align: center, height: 56.981689453125, placeholder: Question,
+        enabled: false, foreground: 'theme:On Primary', font_size: 14, auto_expand: true,
+        spacing_below: medium, background: 'theme:Primary 700', bold: true}
+      type: TextArea
+      layout_properties: {grid_position: 'JRGWCO,EAZFGY'}
+      event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus,
+        focus: text_area_question_focus}
+    - name: cp_options
+      properties: {col_spacing: tiny}
+      type: ColumnPanel
+      layout_properties: {grid_position: 'JRGWCO,SNTWTT'}
+      components:
+      - name: rep1
+        properties: {align: right, foreground: 'theme:On Primary', text: V, font_size: 10,
+          spacing_above: none, spacing_below: none, background: 'theme:Primary 700',
+          bold: true, checked: false}
+        type: CheckBox
+        layout_properties: {grid_position: 'JSZRDP,EICFQK', full_width_row: false}
+        event_bindings: {change: rep1_change}
+      - name: rep2
+        properties: {align: right, foreground: 'theme:On Primary', text: F, font_size: 10,
+          spacing_above: none, spacing_below: none, background: 'theme:Primary 700',
+          bold: true, checked: false}
+        type: CheckBox
+        layout_properties: {grid_position: 'YEFAGY,IYUETY'}
+        event_bindings: {change: rep2_change}
+      data_bindings: []
   - name: text_box_correction
     properties: {role: null, align: center, height: 63.784912109375, tooltip: '',
       placeholder: '', border: '', enabled: true, foreground: 'theme:On Primary Container',

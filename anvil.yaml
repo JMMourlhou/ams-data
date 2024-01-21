@@ -100,6 +100,13 @@ db_schema:
     - name: type
       admin_ui: {width: 200, order: 2}
       type: string
+    - name: filtre
+      admin_ui: {width: 200, order: 3}
+      type: link_single
+      target: codes_stages
+    - name: Visible
+      admin_ui: {order: 4, width: 133}
+      type: bool
     title: Qcm_description
   lieux:
     client: search
