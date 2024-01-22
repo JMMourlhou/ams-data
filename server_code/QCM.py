@@ -7,7 +7,7 @@ from anvil.tables import app_tables
 import anvil.server
 
 @anvil.server.callable
-def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb):
+def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb, param=""):
     
     # qcm_nb est la row venant du dropdown choix du qcm
 
@@ -22,7 +22,8 @@ def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb
                                    rep_multi = rep_multi,
                                    bareme = str(bareme),
                                    photo = image,
-                                   qcm_nb = qcm_nb )
+                                   qcm_nb = qcm_nb,
+                                   param = param)
 
             
     qcm_row = app_tables.qcm.search(qcm_nb = qcm_nb,

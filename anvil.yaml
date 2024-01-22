@@ -107,6 +107,9 @@ db_schema:
     - name: Visible
       admin_ui: {order: 4, width: 133}
       type: bool
+    - name: use_image
+      admin_ui: {width: 200, order: 5}
+      type: bool
     title: Qcm_description
   lieux:
     client: search
@@ -130,7 +133,7 @@ db_schema:
       admin_ui: {order: 0, width: 200}
       type: media
     - name: question
-      admin_ui: {order: 0.5, width: 619}
+      admin_ui: {order: 0.5, width: 413}
       type: string
     - name: pour_stage
       admin_ui: {order: -1, width: 116}
@@ -147,10 +150,13 @@ db_schema:
       type: link_single
       target: qcm_description
     - name: correction
-      admin_ui: {order: 5, width: 200}
+      admin_ui: {order: 5, width: 138}
       type: string
     - name: rep_multi
-      admin_ui: {order: 3.5, width: 200}
+      admin_ui: {order: 3.5, width: 95}
+      type: string
+    - name: param
+      admin_ui: {width: 200, order: 6}
       type: string
     title: Qcm
   qcm_result:

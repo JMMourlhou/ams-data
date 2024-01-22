@@ -22,7 +22,7 @@ def add_stage(code,
               nb_stagiaires_diplomes,
               commentaires
              ):
-    print("lieu: ",lieu)         
+    #print("lieu: ",lieu)         
     numero=int(numero)
 
     # lecture fichier père code stages

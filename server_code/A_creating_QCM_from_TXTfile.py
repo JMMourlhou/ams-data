@@ -11,46 +11,79 @@ import anvil.server
 @anvil.server.callable
 def file_reading():
     # Read the contents of a file
-    cpt=0
-    question_txt = ""
+    cpt=0                # nb de questions
+    question_txt = ""    # la question incluant l'intitilé et les options
+    rep =""              # dernier caractère d'une option 1 si vrai, 0 si faux
+    nb_de_choix = 0      # nb d'options ex: A, B, C  = 3 options
     f = open(data_files['qcm1.txt'])              # à fermer en sortie qd ligne vide
     x = True
+    n="" # 1er caractère à tester pour savoir si la ligne est une question
     while x:
         ligne = f.readline()  # lecture  1 ligne
-        if not ligne:
-            print(f"question # {cpt}, nb de choix: {nb_de_choix-1}, question:{question_txt}")
+        
+        if not ligne:                                        # FIN DE FICHIER TEXT           #rep = rep + dernier_caract
+            resume(cpt, nb_de_choix, question_txt, rep)
             print('Fin du fichier')
             break
-        else:
-            dernier_caract = ligne[len(ligne)-1:len(ligne)]
-            print(f"dernier caract: '{dernier_caract}'")
-        
-        #print(f"lg: {len(ligne)}")
-        n = ligne[0:1] 
-        #print(n)
+            
+        n = ligne[0:1]   # Je prends le 1er caract de ligne
         try:
             num = int(n) # cette ligne est le début d'une question car contient un nombre
-
-            if cpt != 0:
-                # SAUVER LA QUESTION et SON NUM et le nb de choix et les réponses 
-                print(f"question # {cpt}, nb de choix: {nb_de_choix-1}, question:{question_txt}")
-                print()
+            new_question = True
+        except ValueError:
+            new_question = False
+       
+        if new_question:
+            resume(cpt, nb_de_choix, question_txt, rep)  
+            rep = ""
             nb_de_choix = 0
             dico = {}
-            cpt += 1     # incrément du num de question
-            #print(f"début question {cpt}")
-            # puis effacer la question
+            cpt += 1     # incrément du num de questions ds ce qcm
+            cpt_lignes_ds_question = 0
             question_txt = ""  # je remets à "" ma question
-        except:
-            if len(ligne)>4:
+            
+        if not new_question:    
+            # cette ligne n'est pas la 1ere ligne de la question mais une des options
+            cpt_lignes_ds_question += 1
+            dernier_caract = ligne[len(ligne)-2:len(ligne)-1]    # je prends la réponse au dernier caract (0 ou 1) je commence 2 caract avt la fin car le dernier est un retour ligne
+            if not cpt_lignes_ds_question == 1:   # je ne suis plus ds l'entete de la question, avant les options
                 nb_de_choix += 1
-                #print(f"except, nb de choix: {nb_de_choix}")
-                question_txt = question_txt + ligne
-            # créer le dictionnaire qui décrit les reponses (clé est le num de choix, valeur est la réponse si on trouve le caractère "✔" )
+                ligne = ligne[0:len(ligne)-2]+ "\n"
+                # creation du code de la réponse: sur 2,3,ou 4 caract 
+                rep = rep + dernier_caract
+            question_txt = question_txt + ligne
+
     f.close()
 
-       
-        
+def resume(cpt, nb_de_choix, question_txt, rep):       
+     # SAUVER LA QUESTION précédente, SON NUM et le nb de choix et les réponses 
+    if cpt != 0:
+        #rep = rep[1:len(rep)]
+        print(f"question # {cpt}, nb de choix: {nb_de_choix}, question:{question_txt}, réponse codée: {rep}")   
+        print()
+
+    # Préparation de l'intertion ds table QCM
+    param = "Connaissance du milieu"
+    bareme = 1
+    
+    # Lecture du fichier qcm descro pour obtenir le row
+    qcm_descro_row=app_tables.qcm_description.get(qcm_nb=4)
+    if qcm_descro_row:
+        print("ok")
+    
+        "création de la ligne qcm ds table qcm"
+        new_row=app_tables.qcm.add_row(
+                                   num= cpt,
+                                   question = question_txt,
+                                   correction = None,
+                                   rep_multi = rep,
+                                   bareme = "1",
+                                   photo = None,
+                                   qcm_nb = qcm_descro_row,
+                                   param = param
+                                    )
+    else:
+        print("qcm_descro non trouvé")
 
 
         
