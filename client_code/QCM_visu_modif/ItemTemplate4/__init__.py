@@ -32,6 +32,8 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        global nb_bonnes_rep
+        nb_bonnes_rep = 0
         global reponses
         reponses = {}   #liste type dict de toutes les réponses du stagiaire {cle:num, valeurV/F}
         global cpt
@@ -79,17 +81,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.rep2.tag.nom = "rep2-false"
             self.rep2.tag.numero = self.item['num']
             self.rep2.tag.correction = rep[1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
-
-            
-            self.check_box_true.tag.nom = "rep_true"
-            self.check_box_true.tag.numero = self.item['num']
-            self.check_box_true.tag.correction = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
-                
-            self.check_box_false.tag.nom = "rep_false"
-            self.check_box_false.tag.numero = self.item['num']
-            self.check_box_false.tag.correction = self.item['rep_multi']
-        
-        
+       
         self.drop_down_bareme.tag.nom = "bareme"
         
         #recherche nb de questions (sauvées ds temp table)
@@ -182,69 +174,39 @@ class ItemTemplate4(ItemTemplate4Template):
         global ancien_num_ligne
         ancien_num_ligne = self.drop_down_bareme.tag.numero
 
-      
-    def check_box_true_change(self, **event_args):
-        """This method is called when this checkbox is checked or unchecked"""
-        self.text_area_question_focus("check_box_true")                                                  #     *******************************************************
-        if self.check_box_true.checked == True:
-            self.check_box_false.checked = False
-            self.check_box_false.foreground = "yellow"
-            self.check_box_true.foreground = "red"
-        self.button_modif.enabled = True
-        self.button_modif.background = "red"
-        self.check_box_true.foreground = "red"
-        
-        global ancien_num_ligne
-        ancien_num_ligne = self.check_box_true.tag.numero
-        
-            
-    def check_box_false_change(self, **event_args):
-        """This method is called when this checkbox is checked or unchecked"""
-        self.text_area_question_focus("check_box_false")                                                            #     *******************************************************
-        if self.check_box_false.checked == True:
-            self.check_box_false.foreground = "red"
-            self.check_box_true.checked = False
-            self.check_box_true.foreground = "yellow"
-            
-        self.button_modif.enabled = True
-        self.button_modif.background = "red"
-        self.button_modif.foreground = "yellow"
-            
-        global ancien_num_ligne
-        ancien_num_ligne = self.check_box_false.tag.numero
-
     def rep1_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         self.text_area_question_focus()  
-        #print("******************************************************************", self.nb_options)
-        if self.nb_options == 2 and self.rep1.checked == True:   # question V/F
-            self.rep2.checked == False
-            self.rep2.foreground = "yellow"
-            self.rep1.foreground = "red"
+
+        if self.nb_options == 2:
+            if self.rep1.checked == True:   # question V/F
+                self.rep2.checked = False
+            else:
+                self.rep2.checked = True
             
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foreground = "yellow"
         
         global ancien_num_ligne
-        ancien_num_ligne = self.check_box_false.tag.numero
+        ancien_num_ligne = self.rep1.tag.numero
 
     def rep2_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         self.text_area_question_focus()
-        #print("******************************************************************", self.nb_options)
 
-        if self.nb_options == 2 and self.rep2.checked == True:   # question V/F
-            self.rep1.checked == False
-            self.rep1.foreground = "yellow"
-            self.rep2.foreground = "red"
+        if self.nb_options == 2:
+            if self.rep2.checked == True:   # question V/F
+                self.rep1.checked = False
+            else:
+                self.rep1.checked = True
                 
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foreground = "yellow"
             
         global ancien_num_ligne
-        ancien_num_ligne = self.check_box_false.tag.numero
+        ancien_num_ligne = self.rep1.tag.numero
        
     # Bouton modif si mode création  // Validation si mode test qcm pour stagiaire
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
@@ -271,8 +233,9 @@ class ItemTemplate4(ItemTemplate4Template):
                         
             if cpnt.tag.nom == "cp_quest_rep":
                 for cpnt1 in cpnt.get_components():
+                    print(f"+++++++++++++++++++++++++++++++++++++++++++++++++++++ {cpnt1.tag.nom}")
                     if cpnt1.tag.nom == "question":
-                        print(cpnt, cpnt1.tag.nom)
+                        print(cpnt1, cpnt1.tag.nom)
                         print("mode :", self.mode)
                         question = cpnt1.text
                         # mettre la 1ere lettre en maj mais laisser le reste comme tappé
@@ -280,26 +243,41 @@ class ItemTemplate4(ItemTemplate4Template):
                         txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
                         txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
                         question = txt + txt2 
+                    if cpnt1.tag.nom == "cp_options":
+                        rep_multi = ""    # initialisation de la codif des réponses 
+                        print(f"+++++++++++++++++++++++++++++++++++++++++++ {cpnt1}, {cpnt1.tag.nom}")
+                        for rep in cpnt1.get_components():
+                            print(f"+++++++++++++++++++++++++++++++++++++++++++ {rep}, {rep.tag.nom}")
+                            
+                            if rep.tag.nom == "rep1-true": 
+                                print(f"rep1 trouvé {rep.checked}")   
+                                if rep.checked == True:
+                                    rep_multi = rep_multi + "1"
+                                else:
+                                    rep_multi = rep_multi + "0"
+                                
+                            if rep.tag.nom == "rep2-false":
+                                print(f"rep2 trouvé {rep.checked}")
+                                if rep.checked == True:
+                                    rep_multi = rep_multi + "1"
+                                else:
+                                    rep_multi = rep_multi + "0"
+                            reponse = rep_multi                       # J'ai la réponse codée
+                            print(f" ++++++++++++++++++++++++++++++++++ rep_multi/reponse: {rep_multi}, ({len(rep_multi)} options)")
+                           
                 
             if cpnt.tag.nom == "correction":
                 print(cpnt, cpnt.tag.nom)
-                correction = cpnt.text               #    j'ai la correction
+                correction = cpnt.text                                #    j'ai la correction
                 
             print("avt test2",cpnt, cpnt.tag.nom)
-            if cpnt.tag.nom == "fp_vrai/faux_bareme":       # fp_vf_barem contient reponse et bareme   
+            if cpnt.tag.nom == "fp_vrai/faux_bareme":                 # fp_vf_barem contient  bareme   
                 print("test2", cpnt, cpnt.tag.nom)
                 for cpnt2 in cpnt.get_components():   #( cp_img contient image_1)
-                               
-                        if cpnt2.tag.nom =="rep_true":
-                            print(cpnt2, cpnt2.tag.nom)
-                            if cpnt2.checked == True:
-                                reponse = True                # j'ai la réponse du stagiaire ( v/F )
-                            else:
-                                reponse = False
-                            
+                        
                         if cpnt2.tag.nom =="bareme":
                             print(cpnt2, cpnt2.tag.nom)
-                            bareme = cpnt2.selected_value      # j'ai le bareme
+                            bareme = cpnt2.selected_value                 # j'ai le bareme
 
         qcm_descro_row = self.qcm_nb
         print(qcm_descro_row)
@@ -316,33 +294,24 @@ class ItemTemplate4(ItemTemplate4Template):
         else:                       # ===================================================  MODE UTILISATION QCM
             self.button_modif.enabled = False
             self.button_modif.visible = False
-            self.check_box_true.enabled = False
-            self.check_box_false.enabled = False
+ 
             
             global nb_bonnes_rep
             global max_points
             global points
             global reponses    # liste type dict
             
-            rep_stagiaire = False
             valeur=[]  # valeur est la reponse du stagiaire
             if self.nb_options == 2:  # qcm de type v/f
-                if self.check_box_true.checked == False:       # le stagiaire a répondu False
-                    valeur = "01"
-                    rep_stagiaire = "01"    # pour le calcul des points
-                else:
-                    valeur = "10"    # le stagiaire a répondu True
-                    rep_stagiaire = "10"
-            
+                valeur = reponse
             clef = str(num)           # clé du dict des réponses: numéro de qcm
             reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses
 
             #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
             max_points = max_points + int(bareme)   # cumul du max de points possible
-            if self.reponse == rep_stagiaire:
+            if self.reponse == reponse:      
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
-
 
     def text_area_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
@@ -509,7 +478,24 @@ class ItemTemplate4(ItemTemplate4Template):
                                         if cpnt.tag.correction != "01":
                                             cpnt.background = "red"  
                                         cpnt.checked = True
-                            
+                                        
+                        if c.tag.nom == "cp_quest_rep":
+                            for cpnt1 in c.get_components():
+                                print(f"++++++++++++++++++++++++++++++++++++   correction  ++++++++++++++ {cpnt1.tag.nom}")
+                                if cpnt1.tag.nom == "question":
+                                    pass
+                                if cpnt1.tag.nom == "cp_options":
+                                    print(f"+++++++++++++++++++++++++++++++++++++++++++ {cpnt1}, {cpnt1.tag.nom}")
+                                    for rep in cpnt1.get_components():
+                                        print(f"+++++++++++++++++++++++++++++++++++++++++++ {rep}, {rep.tag.nom}")
+                                        
+                                        if rep.tag.nom == "rep1-true": 
+                                            print(f"rep1 trouvé {rep.checked}")   
+                                            
+                                            
+                                        if rep.tag.nom == "rep2-false":
+                                            print(f"rep2 trouvé {rep.checked}")
+
             
                     
     def button_enregistrer_et_sortir_click(self, **event_args):

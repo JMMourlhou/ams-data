@@ -47,10 +47,7 @@ def modif_qcm(qcm_descro_row, num_question, question, rep, bareme, photo, correc
         print("Ligne qcm non trouvée ds fichier qcm")
         return False
     else:   
-        if rep == True:
-            rep_multi = "10"
-        else:
-            rep_multi = "01"
+        rep_multi = rep
         qcm_row.update(question = question,
                      rep_multi = rep_multi,
                      bareme = str(bareme),

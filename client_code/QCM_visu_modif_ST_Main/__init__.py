@@ -74,7 +74,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def button_aff_result1_click(self, **event_args):
         """This method is called when the button is clicked"""
         # affichage des résultats
-        nb_bonnes_rep = 0   
+        #nb_bonnes_rep = 0   
         self.column_panel_2.visible = True
 
     def button_aff_result2_click(self, **event_args):

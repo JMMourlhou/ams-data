@@ -93,13 +93,13 @@ components:
       layout_properties: {grid_position: 'ANOUBQ,OYAPQI'}
       event_bindings: {click: Close_click}
     - name: button_1
-      properties: {text: button_1, background: 'theme:On Primary Container', foreground: 'theme:On
-          Primary'}
+      properties: {text: extraction de fichier txt pour qcm bnssa, background: 'theme:On
+          Primary Container', foreground: 'theme:On Primary'}
       type: Button
       layout_properties: {grid_position: 'EXPBVX,ZNIVBG'}
       event_bindings: {click: button_1_click}
     - name: button_loop
-      properties: {text: Loop, background: 'theme:Tertiary', foreground: 'theme:On
+      properties: {text: Loop sur une table, background: 'theme:Tertiary', foreground: 'theme:On
           Primary Container', bold: true, visible: true}
       type: Button
       layout_properties: {grid_position: 'JLTYUN,QXOJCB'}

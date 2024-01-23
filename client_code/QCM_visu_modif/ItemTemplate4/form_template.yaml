@@ -121,19 +121,6 @@ components:
       properties: {height: 32}
       type: Spacer
       layout_properties: {width: 19.66973876953125}
-    - name: check_box_true
-      properties: {text: Vrai, foreground: 'theme:Tertiary', background: 'theme:On
-          Primary Container', spacing_above: none, spacing_below: none, visible: true}
-      type: CheckBox
-      event_bindings: {change: check_box_true_change}
-      layout_properties: {}
-    - name: check_box_false
-      properties: {text: Faux, foreground: 'theme:Tertiary', background: 'theme:On
-          Primary Container', spacing_above: none, spacing_below: none, align: left,
-        visible: true}
-      type: CheckBox
-      event_bindings: {change: check_box_false_change}
-      layout_properties: {}
   - name: fp_modif
     properties: {align: center, background: 'theme:Primary', vertical_align: middle,
       spacing: none}
