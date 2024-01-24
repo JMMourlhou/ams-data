@@ -488,9 +488,15 @@ class ItemTemplate4(ItemTemplate4Template):
                                         if rep.tag.nom == "rep1-true": 
                                             print(f"rep1 trouvé {rep.checked}")   
                                             # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
-                                            # acquisition du num question: rep.tag.numero
+                                            num_question = rep.tag.numero
+                                            print("num",num_question)
                                             # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question
-                                            # acquisition 
+                                            rep_stagiaire = reponses[str(num_question)]
+                                            # la correction est self.reponse
+                                            # comparaison et affichage
+                                            if rep_stagiaire != self.reponse:
+                                                rep.tag.background = "red"
+                                                
                                         if rep.tag.nom == "rep2-false":
                                             print(f"rep2 trouvé {rep.checked}")
                                             # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
