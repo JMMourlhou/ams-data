@@ -291,7 +291,6 @@ class ItemTemplate4(ItemTemplate4Template):
         else:                       # ===================================================  MODE UTILISATION QCM
             self.button_modif.enabled = False
             self.button_modif.visible = False
- 
             
             global nb_bonnes_rep
             global max_points
@@ -488,11 +487,13 @@ class ItemTemplate4(ItemTemplate4Template):
                                         
                                         if rep.tag.nom == "rep1-true": 
                                             print(f"rep1 trouvé {rep.checked}")   
-                                            
-                                            
+                                            # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
+                                            # acquisition du num question: rep.tag.numero
+                                            # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question
+                                            # acquisition 
                                         if rep.tag.nom == "rep2-false":
                                             print(f"rep2 trouvé {rep.checked}")
-
+                                            # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
             
                     
     def button_enregistrer_et_sortir_click(self, **event_args):
