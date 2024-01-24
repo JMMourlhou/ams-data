@@ -145,10 +145,7 @@ class ItemTemplate4(ItemTemplate4Template):
             else:
                 self.rep2.checked = False
                 
-            if rep == "10":
-                self.check_box_true.checked = True
-            else:
-                self.check_box_false.checked = True
+            
             self.text_box_correction.visible = True  # j'affiche la correction
 
         
