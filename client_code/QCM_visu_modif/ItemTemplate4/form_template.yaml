@@ -65,14 +65,14 @@ components:
       layout_properties: {grid_position: 'JRGWCO,SNTWTT'}
       components:
       - name: rep1
-        properties: {align: right, foreground: 'theme:On Primary', text: V, font_size: 10,
+        properties: {align: center, foreground: 'theme:On Primary', text: V, font_size: 10,
           spacing_above: none, spacing_below: none, background: 'theme:Primary 700',
           bold: true, checked: false}
         type: CheckBox
         layout_properties: {grid_position: 'JSZRDP,EICFQK', full_width_row: false}
         event_bindings: {change: rep1_change}
       - name: rep2
-        properties: {align: right, foreground: 'theme:On Primary', text: F, font_size: 10,
+        properties: {align: center, foreground: 'theme:On Primary', text: F, font_size: 10,
           spacing_above: none, spacing_below: none, background: 'theme:Primary 700',
           bold: true, checked: false}
         type: CheckBox
