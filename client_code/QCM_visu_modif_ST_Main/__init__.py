@@ -82,15 +82,8 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         # affichage des résultats
         self.button_aff_result1_click()    
 
-    def button_enregsistrer_et_sortir_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
 
-    def button_fin_qcm_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
 
-    def button_fin_qcm1_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        self.button_fin_qcm_click()
+
+
 

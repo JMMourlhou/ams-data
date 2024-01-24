@@ -32,6 +32,10 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        global max_points
+        max_points = 0
+        global points
+        points = 0      # Je cumule les points en fonction de la réponse et du barême
         global nb_bonnes_rep
         nb_bonnes_rep = 0
         global reponses
@@ -143,12 +147,9 @@ class ItemTemplate4(ItemTemplate4Template):
             if self.rep2.tag.correction == "1":
                 self.rep2.checked = True      
             else:
-                self.rep2.checked = False
-                
-            
+                self.rep2.checked = False            
             self.text_box_correction.visible = True  # j'affiche la correction
-
-        
+       
     def text_area_question_change(self, **event_args):                         # Question a changé (en création QCM)
         """This method is called when the text in this text box is edited"""
         self.button_modif.enabled = True
@@ -261,7 +262,6 @@ class ItemTemplate4(ItemTemplate4Template):
                                     rep_multi = rep_multi + "0"
                             reponse = rep_multi                       # J'ai la réponse codée
                             print(f" ++++++++++++++++++++++++++++++++++ rep_multi/reponse: {rep_multi}, ({len(rep_multi)} options)")
-                           
                 
             if cpnt.tag.nom == "correction":
                 print(cpnt, cpnt.tag.nom)
@@ -296,6 +296,7 @@ class ItemTemplate4(ItemTemplate4Template):
             global max_points
             global points
             global reponses    # liste type dict
+            #global cpt         # compteur de ligne pour afficher le bt 'Fin du Qcm' (on affiche en bas, cpt=1)
             
             valeur=[]  # valeur est la reponse du stagiaire
             if self.nb_options == 2:  # qcm de type v/f
@@ -308,6 +309,9 @@ class ItemTemplate4(ItemTemplate4Template):
             if self.reponse == reponse:      
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
+   
+            if num == int(self.label_nb_questions.text):
+                self.button_fin_qcm.visible = True
 
     def text_area_question_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
@@ -365,7 +369,6 @@ class ItemTemplate4(ItemTemplate4Template):
                                             cpnt.enabled = False
                                             cpnt.background = "theme:On Primary Container"
                                             cpnt.foregroundground = "theme:On Primary"
-                                           
                                             ancien_num_ligne = 0
                             except:
                                 pass    # pour les éléments ne contenant pas de d'éléments en eux
@@ -388,9 +391,6 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the Button is shown on the screen"""
         global cpt    # cpt = nb de questions  
         cpt += 1
-        print(cpt)
-        if cpt == 1 and self.mode != "creation":
-            self.button_fin_qcm.visible = True
              
     def button_fin_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -484,23 +484,26 @@ class ItemTemplate4(ItemTemplate4Template):
                                     print(f"+++++++++++++++++++++++++++++++++++++++++++ {cpnt1}, {cpnt1.tag.nom}")
                                     for rep in cpnt1.get_components():
                                         print(f"+++++++++++++++++++++++++++++++++++++++++++ {rep}, {rep.tag.nom}")
+                                        num_question = rep.tag.numero
+                                        # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question                                      
+                                        rep_stagiaire = reponses[str(num_question)]
                                         
-                                        if rep.tag.nom == "rep1-true": 
-                                            print(f"rep1 trouvé {rep.checked}")   
+                                        if rep.tag.nom == "rep1-true":   
                                             # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
-                                            num_question = rep.tag.numero
-                                            print("num",num_question)
-                                            # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question
-                                            rep_stagiaire = reponses[str(num_question)]
                                             print(f"{rep_stagiaire} {self.reponse}")
-                                            # la correction est self.reponse
-                                            # comparaison et affichage
-                                            if rep_stagiaire != self.reponse:
-                                                rep.tag.background = "red"
+                                            # comparaison et affichage si cheched
+                                            if rep_stagiaire != self.reponse and rep.checked == True:
+                                                rep.background = "red"
+                                            if rep_stagiaire == self.reponse and rep.checked == True:
+                                                rep.background = "green"
                                                 
                                         if rep.tag.nom == "rep2-false":
-                                            print(f"rep2 trouvé {rep.checked}")
-                                            # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
+                                            # comparaison et affichage si cheched
+                                            print(f"{rep_stagiaire} {self.reponse}")
+                                            if rep_stagiaire != self.reponse and rep.checked == True:
+                                                rep.background = "red"
+                                            if rep_stagiaire != self.reponse and rep.checked == True:
+                                                rep.background = "green"
             
                     
     def button_enregistrer_et_sortir_click(self, **event_args):
