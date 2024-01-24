@@ -492,6 +492,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                             print("num",num_question)
                                             # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question
                                             rep_stagiaire = reponses[str(num_question)]
+                                            print(f"{rep_stagiaire} {self.reponse}")
                                             # la correction est self.reponse
                                             # comparaison et affichage
                                             if rep_stagiaire != self.reponse:
