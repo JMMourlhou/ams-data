@@ -76,6 +76,9 @@ class ItemTemplate4(ItemTemplate4Template):
         # ==============================================================================================="                      INFOS DE BASE
         self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
 
+       
+
+        
         self.rep1.tag.nom = "rep1-true"                             #    A COMPLETER 
         self.rep2.tag.nom = "rep2-false"
         
@@ -84,7 +87,7 @@ class ItemTemplate4(ItemTemplate4Template):
 
 
         self.rep1.tag.correction = self.item['rep_multi'][0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
-        self.rep2.tag.correction = self.item['rep_multi'][1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
+        self.rep2.tag.correction = self.item['rep_multi'][1:2]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep2: {self.item['rep_multi'][1:2]} ")
         # à compléter
@@ -295,7 +298,7 @@ class ItemTemplate4(ItemTemplate4Template):
         print(qcm_descro_row)
         
         if self.mode == "creation":  # ===================================================  MODE CREATION QCM
-            result = anvil.server.call('modif_qcm', qcm_descro_row, num, question, reponse, bareme, photo, correction)
+            result = anvil.server.call('modif_qcm', qcm_descro_row, num, question, rep_multi_stagiaire, bareme, photo, correction)
             if not result:
                 alert("erreur de création d'une question QCM")
                 return
