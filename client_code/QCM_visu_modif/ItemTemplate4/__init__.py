@@ -450,59 +450,43 @@ class ItemTemplate4(ItemTemplate4Template):
                             c.enabled = False
                             
                         if c.tag.nom ==  "fp_vrai/faux_bareme": 
-                            for cpnt in c.get_components():    # je suis ds le fp bareme qui contient le bareme et reponses v/f
-                                if cpnt.tag.nom == "rep_true":
-                                    num_ligne = cpnt.tag.numero                  # barem et spacer n'ont pas de tag numero
-                                    if reponses[str(num_ligne)] == "10":
-                                        print("================================================================> ok")
-                                        print("cpnt", type(cpnt))
-                                        print("reponse doir être :", self.reponse)
-                                        cpnt.enabled = True
-                                        cpnt.foreground = "yellow"
-                                        if cpnt.tag.correction != "10":
-                                            cpnt.background = "red"                               
-                                        cpnt.checked = True
-                                if cpnt.tag.nom == "rep_false":
-                                    num_ligne = cpnt.tag.numero
-                                    if reponses[str(num_ligne)] == "01":
-                                        print("================================================================> ok")
-                                        print("cpnt", type(cpnt))
-                                        print("reponse doit être :", self.reponse)
-                                        
-                                        cpnt.enabled = True
-                                        cpnt.foreground = "yellow"
-                                        if cpnt.tag.correction != "01":
-                                            cpnt.background = "red"  
-                                        cpnt.checked = True
-                                        
+                            pass
+                                
                         if c.tag.nom == "cp_quest_rep":
                             for cpnt1 in c.get_components():
-                                print(f"++++++++++++++++++++++++++++++++++++   correction  ++++++++++++++ {cpnt1.tag.nom}")
+                                #print(f"++++++++++++++++++++++++++++++++++++   correction  ++++++++++++++ {cpnt1.tag.nom}")
                                 if cpnt1.tag.nom == "question":
                                     pass
                                 if cpnt1.tag.nom == "cp_options":
-                                    print(f"+++++++++++++++++++++++++++++++++++++++++++ {cpnt1}, {cpnt1.tag.nom}")
+                                    #print(f"+++++++++++++++++++++++++++++++++++++++++++ {cpnt1}, {cpnt1.tag.nom}")
                                     for rep in cpnt1.get_components():
                                         print(f"+++++++++++++++++++++++++++++++++++++++++++ {rep}, {rep.tag.nom}")
                                         num_question = rep.tag.numero
                                         # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question                                      
                                         rep_stagiaire = reponses[str(num_question)]
-                                        
+                                    
+                                            
+                                            
                                         if rep.tag.nom == "rep1-true":   
+                                            rep_s = rep_stagiaire[0:1]  # réponse du stagiaire pour option 1
+                                            rep_c = self.reponse[0:1]   # correction pour option 1
                                             # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
-                                            print(f"{rep_stagiaire} {self.reponse}")
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {rep_c} / check: {rep.checked}")
                                             # comparaison et affichage si cheched
-                                            if rep_stagiaire != self.reponse and rep.checked == True:
+                                            
+                                            if rep_s != rep_c:
                                                 rep.background = "red"
-                                            if rep_stagiaire == self.reponse and rep.checked == True:
+                                            else:
                                                 rep.background = "green"
                                                 
                                         if rep.tag.nom == "rep2-false":
+                                            rep_s = rep_stagiaire[1:2]  # réponse du stagiaire pour option 2
+                                            rep_c = self.reponse[1:2]   # correction pour option 2
                                             # comparaison et affichage si cheched
-                                            print(f"{rep_stagiaire} {self.reponse}")
-                                            if rep_stagiaire != self.reponse and rep.checked == True:
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {rep_c} / check: {rep.checked}")
+                                            if rep_s != rep_c:
                                                 rep.background = "red"
-                                            if rep_stagiaire != self.reponse and rep.checked == True:
+                                            else:
                                                 rep.background = "green"
             
                     
