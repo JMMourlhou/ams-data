@@ -72,19 +72,20 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_enregistrer_et_sortir.tag.nom = "sortir"
         self.column_panel_results.tag.nom = "cp_results"
         self.spacer_1.tag.nom = "spacer"
-
+        
+        # ==============================================================================================="
         # acquisition des réponses
         self.reponse = self.item['rep_multi']             # je sauve la correction de la réponse
         self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
-        if self.nb_options == 2:   # question V/F 
-            self.rep1.tag.nom = "rep1-true"
-            self.rep1.tag.numero = self.item['num']
-            rep = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
-            self.rep1.tag.correction = rep[0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
-
-            self.rep2.tag.nom = "rep2-false"
-            self.rep2.tag.numero = self.item['num']
-            self.rep2.tag.correction = rep[1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
+        
+        rep = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
+        self.rep1.tag.nom = "rep1-true"
+        self.rep2.tag.nom = "rep2-false"
+        self.rep1.tag.numero = self.item['num']
+        self.rep2.tag.numero = self.item['num']
+            
+        self.rep1.tag.correction = rep[0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
+        self.rep2.tag.correction = rep[1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
        
         self.drop_down_bareme.tag.nom = "bareme"
         
@@ -260,7 +261,6 @@ class ItemTemplate4(ItemTemplate4Template):
                                     rep_multi = rep_multi + "1"
                                 else:
                                     rep_multi = rep_multi + "0"
-                            reponse = rep_multi                       # J'ai la réponse codée
                             print(f" ++++++++++++++++++++++++++++++++++ rep_multi/reponse: {rep_multi}, ({len(rep_multi)} options)")
                 
             if cpnt.tag.nom == "correction":
@@ -288,8 +288,8 @@ class ItemTemplate4(ItemTemplate4Template):
             # j'initialise la forme principale
             from anvil import open_form       
             open_form("QCM_visu_modif_Main",qcm_descro_row)
-        else:                       # ===================================================  MODE UTILISATION QCM
-            self.button_modif.enabled = False
+        else:                       # ======================================Calcul nb bonnes réponses en MODE UTILISATION QCM
+            self.button_modif.enabled = False   # on ne peut plus modi la ligne
             self.button_modif.visible = False
             
             global nb_bonnes_rep
@@ -299,8 +299,22 @@ class ItemTemplate4(ItemTemplate4Template):
             #global cpt         # compteur de ligne pour afficher le bt 'Fin du Qcm' (on affiche en bas, cpt=1)
             
             valeur=[]  # valeur est la reponse du stagiaire
-            if self.nb_options == 2:  # qcm de type v/f
-                valeur = reponse
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            reponse=""
+            if self.nb_options == 2:
+                if self.rep1.checked == True:
+                    reponse = "1"
+                else:
+                    reponse = "0"
+            # à continuer 
+
+
+
+
+
+            
+            valeur = reponse    # REPONSE STAGIAIRE : cumul de rep1 et 2 pour type vrai faux   
             clef = str(num)           # clé du dict des réponses: numéro de qcm
             reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses
 
@@ -464,27 +478,24 @@ class ItemTemplate4(ItemTemplate4Template):
                                         num_question = rep.tag.numero
                                         # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question                                      
                                         rep_stagiaire = reponses[str(num_question)]
-                                    
-                                            
-                                            
+                                           
                                         if rep.tag.nom == "rep1-true":   
                                             rep_s = rep_stagiaire[0:1]  # réponse du stagiaire pour option 1
-                                            rep_c = self.reponse[0:1]   # correction pour option 1
+
                                             # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
-                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {rep_c} / check: {rep.checked}")
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep1.tag.correction} / check: {rep.checked}")
                                             # comparaison et affichage si cheched
                                             
-                                            if rep_s != rep_c:
+                                            if rep_s != self.rep1.tag.correction:
                                                 rep.background = "red"
                                             else:
                                                 rep.background = "green"
                                                 
                                         if rep.tag.nom == "rep2-false":
                                             rep_s = rep_stagiaire[1:2]  # réponse du stagiaire pour option 2
-                                            rep_c = self.reponse[1:2]   # correction pour option 2
                                             # comparaison et affichage si cheched
-                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {rep_c} / check: {rep.checked}")
-                                            if rep_s != rep_c:
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep2.tag.correction} / check: {rep.checked}")
+                                            if rep_s != self.rep2.tag.correction:
                                                 rep.background = "red"
                                             else:
                                                 rep.background = "green"
