@@ -73,20 +73,24 @@ class ItemTemplate4(ItemTemplate4Template):
         self.column_panel_results.tag.nom = "cp_results"
         self.spacer_1.tag.nom = "spacer"
         
-        # ==============================================================================================="
-        # acquisition des réponses
-        self.reponse_corr = self.item['rep_multi']             # je sauve la correction de la réponse
+        # ==============================================================================================="                      INFOS DE BASE
         self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
-        
-        rep = self.item['rep_multi']   # pour afficher correctement les réponses fauses 
-        self.rep1.tag.nom = "rep1-true"
+
+        self.rep1.tag.nom = "rep1-true"                             #    A COMPLETER 
         self.rep2.tag.nom = "rep2-false"
+        
         self.rep1.tag.numero = self.item['num']
         self.rep2.tag.numero = self.item['num']
-            
-        self.rep1.tag.correction = rep[0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
-        self.rep2.tag.correction = rep[1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
-       
+
+        self.reponse_corr = self.item['rep_multi']        # je sauve la correction de la réponse pour aff en rouge les rep fausses
+        self.rep1.tag.correction = self.reponse_corr[0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
+        self.rep2.tag.correction = self.reponse_corr[1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
+        # à compléter
+
+
+
+
+        
         self.drop_down_bareme.tag.nom = "bareme"
         
         #recherche nb de questions (sauvées ds temp table)
@@ -242,26 +246,30 @@ class ItemTemplate4(ItemTemplate4Template):
                         txt = question[0].capitalize()    # txt commence par la position 1 de la question, mise en majuscule
                         txt2 = question[1:len(question)]  # slice: je prends toute la question à partir de la position 2
                         question = txt + txt2 
+                        
                     if cpnt1.tag.nom == "cp_options":
-                        rep_multi = ""    # initialisation de la codif des réponses 
+                        rep_multi_stagiaire = ""    # initialisation de la codif des réponses du stagiaire
                         print(f"+++++++++++++++++++++++++++++++++++++++++++ {cpnt1}, {cpnt1.tag.nom}")
-                        for rep in cpnt1.get_components():
-                            print(f"+++++++++++++++++++++++++++++++++++++++++++ {rep}, {rep.tag.nom}")
-                            
-                            if rep.tag.nom == "rep1-true": 
-                                print(f"rep1 trouvé {rep.checked}")   
-                                if rep.checked == True:
-                                    rep_multi = rep_multi + "1"
+                        for repo in cpnt1.get_components():
+                            if repo.tag.nom == "rep1-true": 
+                                print(f"rep1 trouvé {repo.checked}")   
+                                if repo.checked == True:
+                                    rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                 else:
-                                    rep_multi = rep_multi + "0"
+                                    rep_multi_stagiaire = rep_multi_stagiaire + "0"
                                 
-                            if rep.tag.nom == "rep2-false":
-                                print(f"rep2 trouvé {rep.checked}")
-                                if rep.checked == True:
-                                    rep_multi = rep_multi + "1"
+                            if repo.tag.nom == "rep2-false":
+                                print(f"rep2 trouvé {repo.checked}")
+                                if repo.checked == True:
+                                    rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                 else:
-                                    rep_multi = rep_multi + "0"
-                            print(f" ++++++++++++++++++++++++++++++++++ rep_multi/reponse: {rep_multi}, ({len(rep_multi)} options)")
+                                    rep_multi_stagiaire = rep_multi_stagiaire + "0"
+
+                            # A compléter avec les autre options ===========================================================================================================================
+
+
+                            
+                            print(f" ++++++++++++++++++++++++++++++++++ rep_multi/reponse: {rep_multi_stagiaire}, ({len(rep_multi_stagiaire)} options)")
                 
             if cpnt.tag.nom == "correction":
                 print(cpnt, cpnt.tag.nom)
@@ -296,28 +304,16 @@ class ItemTemplate4(ItemTemplate4Template):
             global points
             global reponses    # liste type dict
             #global cpt         # compteur de ligne pour afficher le bt 'Fin du Qcm' (on affiche en bas, cpt=1)
-            
+
+            # ++++++++++++++++++++++++++++++++++++++++++++++++++++++ Création du dictionaire des rep stagiaire ds table qcm
             valeur=[]  # valeur est la reponse du stagiaire
-            reponse=""
-            if self.nb_options == 2:  # QD options = 2, la réponse stagiaire est forcément Vrai (10) ou Fausse (01)
-                if self.rep1.checked == True:
-                    reponse = "10"
-                else:
-                    reponse = "01"
-            # à continuer pour nb d'options > 2  *****************************************************************************************************************
-
-
-
-
-
-            
-            valeur = reponse    # REPONSE STAGIAIRE : cumul de rep1 et 2 pour type vrai faux   
+            valeur = rep_multi_stagiaire    # REPONSE STAGIAIRE : cumul de rep1 et 2 pour type vrai faux   
             clef = str(num)           # clé du dict des réponses: numéro de qcm
-            reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses
+            reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses stagiaire
 
             #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
             max_points = max_points + int(bareme)   # cumul du max de points possible
-            if self.reponse_corr == reponse:      
+            if self.reponse_corr == rep_multi_stagiaire:      
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
    
