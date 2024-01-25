@@ -82,9 +82,11 @@ class ItemTemplate4(ItemTemplate4Template):
         self.rep1.tag.numero = self.item['num']
         self.rep2.tag.numero = self.item['num']
 
-        self.reponse_corr = self.item['rep_multi']        # je sauve la correction de la réponse pour aff en rouge les rep fausses
-        self.rep1.tag.correction = self.reponse_corr[0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
-        self.rep2.tag.correction = self.reponse_corr[1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
+
+        self.rep1.tag.correction = self.item['rep_multi'][0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
+        self.rep2.tag.correction = self.item['rep_multi'][1:2]   # 2eme caractère, correspond à la réponse vrai (0 ou 1)
+        print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
+        print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep2: {self.item['rep_multi'][1:2]} ")
         # à compléter
 
 
@@ -152,7 +154,12 @@ class ItemTemplate4(ItemTemplate4Template):
             if self.rep2.tag.correction == "1":
                 self.rep2.checked = True      
             else:
-                self.rep2.checked = False            
+                self.rep2.checked = False     
+
+            # A COMPLETER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+            
             self.text_box_correction.visible = True  # j'affiche la correction
        
     def text_area_question_change(self, **event_args):                         # Question a changé (en création QCM)
@@ -248,7 +255,7 @@ class ItemTemplate4(ItemTemplate4Template):
                         question = txt + txt2 
                         
                     if cpnt1.tag.nom == "cp_options":
-                        rep_multi_stagiaire = ""    # initialisation de la codif des réponses du stagiaire
+                        rep_multi_stagiaire = ""    #                                                         CUMUL de la codif des réponses du stagiaire
                         print(f"+++++++++++++++++++++++++++++++++++++++++++ {cpnt1}, {cpnt1.tag.nom}")
                         for repo in cpnt1.get_components():
                             if repo.tag.nom == "rep1-true": 
@@ -265,7 +272,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                 else:
                                     rep_multi_stagiaire = rep_multi_stagiaire + "0"
 
-                            # A compléter avec les autre options ===========================================================================================================================
+                            # A COMPLETER avec les autre options ===========================================================================================================================
 
 
                             
@@ -313,7 +320,7 @@ class ItemTemplate4(ItemTemplate4Template):
 
             #cumul de nb bonnes rep et des points si bonne réponse à partir des tags du combo False
             max_points = max_points + int(bareme)   # cumul du max de points possible
-            if self.reponse_corr == rep_multi_stagiaire:      
+            if rep_multi_stagiaire == self.item["rep_multi"]:
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
    
@@ -450,12 +457,12 @@ class ItemTemplate4(ItemTemplate4Template):
                                 if cpnt1.tag.nom == "cp_options":
                                     #print(f" {cpnt1}, {cpnt1.tag.nom}")
                                     for rep in cpnt1.get_components():
-                                        print(f"+++++++++++++++++++++++++++++++++++++++++++ {rep}, {rep.tag.nom}")
+                                        print(f"++++++++ {rep}, {rep.tag.nom}")
                                         num_question = rep.tag.numero
                                         # --------------------------------------------------------------------------------------------
                                          # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question 
                                         # --------------------------------------------------------------------------------------------
-                                        rep_stagiaire = reponses[str(num_question)]
+                                        rep_stagiaire = reponses[str(num_question)]   # reponses est le dictionaire des réponses stagiaire
                                            
                                         if rep.tag.nom == "rep1-true":   
                                             rep_s = rep_stagiaire[0:1]  # réponse du stagiaire pour option 1
