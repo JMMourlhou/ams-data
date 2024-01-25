@@ -75,26 +75,55 @@ class ItemTemplate4(ItemTemplate4Template):
         
         # ==============================================================================================="                      INFOS DE BASE
         self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
-
-       
-
         
-        self.rep1.tag.nom = "rep1-true"                             #    A COMPLETER 
+        self.rep1.tag.nom = "rep1-true"                             
         self.rep2.tag.nom = "rep2-false"
+        self.rep3.tag.nom = "rep3"
+        self.rep4.tag.nom = "rep4"
+        self.rep5.tag.nom = "rep5"
         
         self.rep1.tag.numero = self.item['num']
         self.rep2.tag.numero = self.item['num']
+        self.rep3.tag.numero = self.item['num']
+        self.rep4.tag.numero = self.item['num']
+        self.rep5.tag.numero = self.item['num']
 
-
+        
         self.rep1.tag.correction = self.item['rep_multi'][0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
         self.rep2.tag.correction = self.item['rep_multi'][1:2]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep2: {self.item['rep_multi'][1:2]} ")
-        # à compléter
-
-
-
-
+        
+        if self.nb_options > 2:
+            self.rep1.text = "A"
+            self.rep1.text = "B"
+        if self.nb_options == 3:
+            self.rep3.text = "C"
+            self.rep3.visible = True
+            self.rep3.tag.correction = self.item['rep_multi'][2:3]   # 3eme caractère, correspond à la réponse faux (0 ou 1) 
+            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
+        if self.nb_options == 4:
+            self.rep3.text = "C"
+            self.rep4.text = "D"
+            self.rep3.visible = True
+            self.rep4.visible = True
+            self.rep3.tag.correction = self.item['rep_multi'][2:3]   # 3eme caractère, correspond à la réponse faux (0 ou 1)
+            self.rep4.tag.correction = self.item['rep_multi'][3:4]   # 4eme caractère, correspond à la réponse faux (0 ou 1)
+            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep3: {self.item['rep_multi'][2:3]} ")
+            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep4: {self.item['rep_multi'][3:4]} ")
+        if self.nb_options == 5:
+            self.rep3.text = "C"
+            self.rep4.text = "D"
+            self.rep5.text = "E"
+            self.rep3.visible = True
+            self.rep4.visible = True
+            self.rep5.visible = True
+            self.rep3.tag.correction = self.item['rep_multi'][2:3]   # 3eme caractère, correspond à la réponse faux (0 ou 1)
+            self.rep4.tag.correction = self.item['rep_multi'][3:4]   # 4eme caractère, correspond à la réponse faux (0 ou 1)
+            self.rep5.tag.correction = self.item['rep_multi'][4:5]   # 5eme caractère, correspond à la réponse faux (0 ou 1)      
+            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep3: {self.item['rep_multi'][2:3]} ")
+            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep4: {self.item['rep_multi'][3:4]} ")
+            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep5: {self.item['rep_multi'][4:5]} ")
         
         self.drop_down_bareme.tag.nom = "bareme"
         
@@ -159,9 +188,35 @@ class ItemTemplate4(ItemTemplate4Template):
             else:
                 self.rep2.checked = False     
 
-            # A COMPLETER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
+            if self.nb_options == 3:
+                if self.rep3.tag.correction == "1":
+                    self.rep3.checked = True      
+                else:
+                    self.rep3.checked = False
+            
+            if self.nb_options == 4:
+                if self.rep3.tag.correction == "1":
+                    self.rep3.checked = True      
+                else:
+                    self.rep3.checked = False
+                if self.rep4.tag.correction == "1":
+                    self.rep4.checked = True      
+                else:
+                    self.rep4.checked = False
+            
+            if self.nb_options == 5:
+                if self.rep3.tag.correction == "1":
+                    self.rep3.checked = True      
+                else:
+                    self.rep3.checked = False
+                if self.rep4.tag.correction == "1":
+                    self.rep4.checked = True      
+                else:
+                    self.rep4.checked = False
+                if self.rep5.tag.correction == "1":
+                    self.rep5.checked = True      
+                else:
+                    self.rep5.checked = False
             
             self.text_box_correction.visible = True  # j'affiche la correction
        
@@ -214,6 +269,33 @@ class ItemTemplate4(ItemTemplate4Template):
             else:
                 self.rep1.checked = True
                 
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foreground = "yellow"
+            
+        global ancien_num_ligne
+        ancien_num_ligne = self.rep1.tag.numero
+
+    def rep3_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foreground = "yellow"
+            
+        global ancien_num_ligne
+        ancien_num_ligne = self.rep1.tag.numero
+
+    def rep4_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_modif.enabled = True
+        self.button_modif.background = "red"
+        self.button_modif.foreground = "yellow"
+            
+        global ancien_num_ligne
+        ancien_num_ligne = self.rep1.tag.numero
+
+    def rep5_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foreground = "yellow"
@@ -275,10 +357,48 @@ class ItemTemplate4(ItemTemplate4Template):
                                 else:
                                     rep_multi_stagiaire = rep_multi_stagiaire + "0"
 
-                            # A COMPLETER avec les autre options ===========================================================================================================================
+                            if self.nb_options == 3:
+                                if repo.tag.nom == "rep3":
+                                    print(f"rep3 trouvé {repo.checked}")
+                                    if repo.checked == True:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "1"
+                                    else:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "0"
+                           
+                            if self.nb_options == 4:
+                                if repo.tag.nom == "rep3":
+                                    print(f"rep3 trouvé {repo.checked}")
+                                    if repo.checked == True:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "1"
+                                    else:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "0"
+                                if repo.tag.nom == "rep4":
+                                    print(f"rep4 trouvé {repo.checked}")
+                                    if repo.checked == True:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "1"
+                                    else:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "0"
 
-
-                            
+                            if self.nb_options == 5:
+                                if repo.tag.nom == "rep3":
+                                    print(f"rep3 trouvé {repo.checked}")
+                                    if repo.checked == True:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "1"
+                                    else:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "0"
+                                if repo.tag.nom == "rep4":
+                                    print(f"rep4 trouvé {repo.checked}")
+                                    if repo.checked == True:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "1"
+                                    else:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "0"
+                                if repo.tag.nom == "rep5":
+                                    print(f"rep5 trouvé {repo.checked}")
+                                    if repo.checked == True:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "1"
+                                    else:
+                                        rep_multi_stagiaire = rep_multi_stagiaire + "0"
+                           
                             print(f" ++++++++++++++++++++++++++++++++++ rep_multi/reponse: {rep_multi_stagiaire}, ({len(rep_multi_stagiaire)} options)")
                 
             if cpnt.tag.nom == "correction":
@@ -495,6 +615,8 @@ class ItemTemplate4(ItemTemplate4Template):
     def column_panel_results_show(self, **event_args):
         """This method is called when the column panel is shown on the screen"""
         self.column_panel_results.scroll_into_view()
+
+    
 
 
 
