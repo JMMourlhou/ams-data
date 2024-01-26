@@ -443,7 +443,8 @@ class ItemTemplate4(ItemTemplate4Template):
 
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++ Création du dictionaire des rep stagiaire ds table qcm
             valeur=[]  # valeur est la reponse du stagiaire
-            valeur = rep_multi_stagiaire    # REPONSE STAGIAIRE : cumul de rep1 et 2 pour type vrai faux   
+            valeur = rep_multi_stagiaire    # REPONSE STAGIAIRE : cumul de rep1 et 2 pour type vrai faux 
+            
             clef = str(num)           # clé du dict des réponses: numéro de qcm
             reponses[clef] = valeur   # je mets à jour la liste dictionaire des réponses stagiaire
 
@@ -668,12 +669,6 @@ class ItemTemplate4(ItemTemplate4Template):
                                                 rep.background = "red"
                                             else:
                                                 rep.background = "green"
-
-
-
-
-
-
     
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
