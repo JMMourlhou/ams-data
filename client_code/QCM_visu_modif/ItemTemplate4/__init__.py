@@ -91,6 +91,7 @@ class ItemTemplate4(ItemTemplate4Template):
         
         self.rep1.tag.correction = self.item['rep_multi'][0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
         self.rep2.tag.correction = self.item['rep_multi'][1:2]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
+        
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep2: {self.item['rep_multi'][1:2]} ")
         
@@ -593,6 +594,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                          # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question 
                                         # --------------------------------------------------------------------------------------------
                                         rep_stagiaire = reponses[str(num_question)]   # reponses est le dictionaire des réponses stagiaire
+
                                            
                                         if rep.tag.nom == "rep1-true":   
                                             rep_s = rep_stagiaire[0:1]  # réponse du stagiaire pour option 1
