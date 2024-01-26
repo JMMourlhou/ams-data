@@ -96,7 +96,7 @@ class ItemTemplate4(ItemTemplate4Template):
         
         if self.nb_options > 2:
             self.rep1.text = "A"
-            self.rep1.text = "B"
+            self.rep2.text = "B"
         if self.nb_options == 3:
             self.rep3.text = "C"
             self.rep3.visible = True
@@ -138,10 +138,13 @@ class ItemTemplate4(ItemTemplate4Template):
         qst = qst.strip()
         
         if self.mode != "creation":
+            """
             if int(self.item['bareme']) > 1:
                 self.text_area_question.text = (f"{qst} \n  ({self.item['bareme']} points)")
             else:  # bareme 1 point
                 self.text_area_question.text = (f"{qst} \n  ({self.item['bareme']} point)")
+            """
+            self.text_area_question.text = qst
             self.text_area_question.enabled = False
         else:
             self.text_area_question.text = qst
@@ -161,8 +164,11 @@ class ItemTemplate4(ItemTemplate4Template):
         
         self.button_modif.tag.numero = self.item['num']          #Je sauve le NUMERO de question ds le tag      
         self.button_modif.tag.nom = "button"
-     
-        self.image_1.source = self.item['photo']
+        if self.item['photo'] != None:
+            self.image_1.source = self.item['photo']
+        else:
+            self.cp_img.visible = False
+            self.image_1.visible = False
         self.image_1.tag.nom = "photo"
         self.image_1.tag.numero = self.item['num']
         
@@ -605,8 +611,70 @@ class ItemTemplate4(ItemTemplate4Template):
                                                 rep.background = "red"
                                             else:
                                                 rep.background = "green"
-            
-                    
+
+                                        if self.nb_options == 3:
+                                            if rep.tag.nom == "rep3":
+                                                rep_s = rep_stagiaire[2:3]  # réponse du stagiaire pour option 2
+                                                # comparaison et affichage si cheched
+                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep3.tag.correction} / check: {rep.checked}")
+                                            if rep_s != self.rep3.tag.correction:
+                                                rep.background = "red"
+                                            else:
+                                                rep.background = "green"
+                                        
+                                        if self.nb_options == 4:
+                                            if rep.tag.nom == "rep3":
+                                                rep_s = rep_stagiaire[2:3]  # réponse du stagiaire pour option 2
+                                                # comparaison et affichage si cheched
+                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep3.tag.correction} / check: {rep.checked}")
+                                            if rep_s != self.rep3.tag.correction:
+                                                rep.background = "red"
+                                            else:
+                                                rep.background = "green"
+
+                                            if rep.tag.nom == "rep4":
+                                                rep_s = rep_stagiaire[3:4]  # réponse du stagiaire pour option 2
+                                                # comparaison et affichage si cheched
+                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep4.tag.correction} / check: {rep.checked}")
+                                            if rep_s != self.rep4.tag.correction:
+                                                rep.background = "red"
+                                            else:
+                                                rep.background = "green"
+
+                                        if self.nb_options == 5:
+                                            if rep.tag.nom == "rep3":
+                                                rep_s = rep_stagiaire[2:3]  # réponse du stagiaire pour option 2
+                                                # comparaison et affichage si cheched
+                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep3.tag.correction} / check: {rep.checked}")
+                                            if rep_s != self.rep3.tag.correction:
+                                                rep.background = "red"
+                                            else:
+                                                rep.background = "green"
+
+                                            if rep.tag.nom == "rep4":
+                                                rep_s = rep_stagiaire[3:4]  # réponse du stagiaire pour option 2
+                                                # comparaison et affichage si cheched
+                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep4.tag.correction} / check: {rep.checked}")
+                                            if rep_s != self.rep4.tag.correction:
+                                                rep.background = "red"
+                                            else:
+                                                rep.background = "green"
+
+                                            if rep.tag.nom == "rep5":
+                                                rep_s = rep_stagiaire[4:5]  # réponse du stagiaire pour option 2
+                                                # comparaison et affichage si cheched
+                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep5.tag.correction} / check: {rep.checked}")
+                                            if rep_s != self.rep5.tag.correction:
+                                                rep.background = "red"
+                                            else:
+                                                rep.background = "green"
+
+
+
+
+
+
+    
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ...Main import Main

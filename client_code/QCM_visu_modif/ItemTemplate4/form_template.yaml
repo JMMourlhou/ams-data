@@ -1,7 +1,7 @@
 container:
   type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: large, col_widths: '{}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
     spacing_below: small, background: 'theme:Primary'}
   event_bindings: {}
 components:
@@ -52,9 +52,9 @@ components:
     layout_properties: {grid_position: 'VWBXEW,BIJGKW'}
     components:
     - name: text_area_question
-      properties: {align: center, height: 56.981689453125, placeholder: Question,
-        enabled: false, foreground: 'theme:On Primary', font_size: 14, auto_expand: true,
-        spacing_below: medium, background: 'theme:Primary 700', bold: true}
+      properties: {align: left, height: 56.981689453125, placeholder: Question, enabled: false,
+        foreground: 'theme:On Primary', font_size: 14, auto_expand: true, spacing_below: small,
+        background: 'theme:Primary 700', bold: true}
       type: TextArea
       layout_properties: {grid_position: 'JRGWCO,EAZFGY'}
       event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus,
@@ -79,22 +79,23 @@ components:
         layout_properties: {grid_position: 'YEFAGY,IYUETY'}
         event_bindings: {change: rep2_change}
       - name: rep3
-        properties: {text: C, background: 'theme:Primary 700', foreground: 'theme:On
-            Primary', spacing_above: none, visible: false, font_size: 10, align: center}
+        properties: {align: center, foreground: 'theme:On Primary', visible: false,
+          text: C, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true}
         type: CheckBox
         layout_properties: {grid_position: 'UNTKDO,VKZZDN'}
         event_bindings: {change: rep3_change}
       - name: rep4
-        properties: {text: D, background: 'theme:Primary 700', foreground: 'theme:On
-            Primary', spacing_above: none, spacing_below: none, visible: false, font_size: 10,
-          align: center}
+        properties: {align: center, foreground: 'theme:On Primary', visible: false,
+          text: D, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true}
         type: CheckBox
         layout_properties: {grid_position: 'EIBGWA,IJOGUK'}
         event_bindings: {change: rep4_change}
       - name: rep5
-        properties: {text: E, background: 'theme:Primary 700', foreground: 'theme:On
-            Primary', spacing_above: none, spacing_below: none, visible: false, font_size: 10,
-          align: center}
+        properties: {align: center, foreground: 'theme:On Primary', visible: false,
+          text: E, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true}
         type: CheckBox
         layout_properties: {grid_position: 'PPWLBL,TJKTNJ'}
         event_bindings: {change: rep5_change}

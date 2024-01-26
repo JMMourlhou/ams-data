@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 
 
 #boucle sur la table users pour modif rapide d'une colonne, ici sur le role (sauf l'administrateur)
-def loop():
+def loop_users():
     table_users = app_tables.users.search()
     result="erreur"
     if table_users:
@@ -21,7 +21,7 @@ def loop():
 
 
 #boucle sur la table qcm pour modif rapide d'une colonne, ici sur la reponse multi critères
-def loop_qcm():
+def loop_qcm1():
     table = app_tables.qcm.search()
     result="erreur"
     if table:
@@ -33,3 +33,16 @@ def loop_qcm():
             row.update(rep_multi = rep_multi)
         result="loop ok"     
     return result
+
+#boucle sur la table qcm pour modif rapide du qcm spécifié, ici sur l'effacmt deslignes du qcm 4, 
+def loop_qcm2():
+    #lecture fichier père qcm descro
+    qcm_row = app_tables.qcm_description.get(qcm_nb=4)
+    if qcm_row:
+    
+        table = app_tables.qcm.search(qcm_nb=qcm_row)
+        result="erreur"
+        if table:
+            for row in table:
+                row.delete()
+            result="loop ok"     

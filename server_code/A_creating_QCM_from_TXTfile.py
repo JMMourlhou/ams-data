@@ -33,7 +33,8 @@ def file_reading():
         except ValueError:
             new_question = False
        
-        if new_question:
+        if new_question: 
+            # cette ligne est la 1ere ligne de la question (le thème de cette question BNSSA)
             resume(cpt, nb_de_choix, question_txt, rep)  
             rep = ""
             nb_de_choix = 0
@@ -51,8 +52,11 @@ def file_reading():
                 ligne = ligne[0:len(ligne)-2]+ "\n"
                 # creation du code de la réponse: sur 2,3,ou 4 caract 
                 rep = rep + dernier_caract
-            question_txt = question_txt + ligne
-
+            if cpt_lignes_ds_question == 1:
+                question_txt = question_txt + ligne + "\n"
+            else:
+                txt = ligne[0:1] + "  " + ligne[2:len(ligne)] + "\n"
+                question_txt = question_txt + txt
     f.close()
 
 def resume(cpt, nb_de_choix, question_txt, rep):       
@@ -61,13 +65,13 @@ def resume(cpt, nb_de_choix, question_txt, rep):
         #rep = rep[1:len(rep)]
         print(f"question # {cpt}, nb de choix: {nb_de_choix}, question:{question_txt}, réponse codée: {rep}")   
         print()
-
+    
     # Préparation de l'intertion ds table QCM
     param = "Connaissance du milieu"
-    bareme = 1
-    
+    bareme = "1"
+    qcm_nb = 4
     # Lecture du fichier qcm descro pour obtenir le row
-    qcm_descro_row=app_tables.qcm_description.get(qcm_nb=4)
+    qcm_descro_row=app_tables.qcm_description.get(qcm_nb=qcm_nb)
     if qcm_descro_row:
         print("ok")
     
@@ -77,7 +81,7 @@ def resume(cpt, nb_de_choix, question_txt, rep):
                                    question = question_txt,
                                    correction = None,
                                    rep_multi = rep,
-                                   bareme = "1",
+                                   bareme = bareme,
                                    photo = None,
                                    qcm_nb = qcm_descro_row,
                                    param = param
