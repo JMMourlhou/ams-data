@@ -75,7 +75,8 @@ class ItemTemplate4(ItemTemplate4Template):
         
         # ==============================================================================================="                      INFOS DE BASE
         self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
-        
+
+        self.rep1.tag.nb_options = len(self.item['rep_multi'])   # je sauve le nb d'options pour cette question ds rep1
         self.rep1.tag.nom = "rep1-true"                             
         self.rep2.tag.nom = "rep2-false"
         self.rep3.tag.nom = "rep3"
@@ -88,42 +89,35 @@ class ItemTemplate4(ItemTemplate4Template):
         self.rep4.tag.numero = self.item['num']
         self.rep5.tag.numero = self.item['num']
 
-        
+        # Récupération de chaque réponse corrigée pour chaque option de la question
+        self.rep1.tag.correction = ""
+        self.rep2.tag.correction = ""
+        self.rep3.tag.correction = ""
+        self.rep4.tag.correction = ""
+        self.rep5.tag.correction = ""
         self.rep1.tag.correction = self.item['rep_multi'][0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
         self.rep2.tag.correction = self.item['rep_multi'][1:2]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
-        
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep2: {self.item['rep_multi'][1:2]} ")
         
         if self.nb_options > 2:
             self.rep1.text = "A"
             self.rep2.text = "B"
-        if self.nb_options == 3:
             self.rep3.text = "C"
             self.rep3.visible = True
             self.rep3.tag.correction = self.item['rep_multi'][2:3]   # 3eme caractère, correspond à la réponse faux (0 ou 1) 
-            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
-        if self.nb_options == 4:
-            self.rep3.text = "C"
-            self.rep4.text = "D"
-            self.rep3.visible = True
-            self.rep4.visible = True
-            self.rep3.tag.correction = self.item['rep_multi'][2:3]   # 3eme caractère, correspond à la réponse faux (0 ou 1)
-            self.rep4.tag.correction = self.item['rep_multi'][3:4]   # 4eme caractère, correspond à la réponse faux (0 ou 1)
             print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep3: {self.item['rep_multi'][2:3]} ")
-            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep4: {self.item['rep_multi'][3:4]} ")
-        if self.nb_options == 5:
-            self.rep3.text = "C"
+            
+        if self.nb_options > 3:        
             self.rep4.text = "D"
+            self.rep4.visible = True
+            self.rep4.tag.correction = self.item['rep_multi'][3:4]   # 4eme caractère, correspond à la réponse faux (0 ou 1)
+            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep4: {self.item['rep_multi'][3:4]} ")
+            
+        if self.nb_options > 4:
             self.rep5.text = "E"
-            self.rep3.visible = True
-            self.rep4.visible = True
             self.rep5.visible = True
-            self.rep3.tag.correction = self.item['rep_multi'][2:3]   # 3eme caractère, correspond à la réponse faux (0 ou 1)
-            self.rep4.tag.correction = self.item['rep_multi'][3:4]   # 4eme caractère, correspond à la réponse faux (0 ou 1)
             self.rep5.tag.correction = self.item['rep_multi'][4:5]   # 5eme caractère, correspond à la réponse faux (0 ou 1)      
-            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep3: {self.item['rep_multi'][2:3]} ")
-            print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep4: {self.item['rep_multi'][3:4]} ")
             print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep5: {self.item['rep_multi'][4:5]} ")
         
         self.drop_down_bareme.tag.nom = "bareme"
@@ -153,7 +147,8 @@ class ItemTemplate4(ItemTemplate4Template):
             
         self.text_area_question.tag.nom = "question"
         self.text_area_question.tag.numero = self.item['num']
-        
+        self.text_area_question.tag.corr_multi = self.item['rep_multi']    # la correction de chaque question qcm sera sauvée ds chaque question, utilisé pour la correction
+
         self.text_box_correction.text = self.item['correction']
         self.text_box_correction.tag.nom = "correction"
         self.text_box_correction.tag.numero = self.item['num']
@@ -584,93 +579,84 @@ class ItemTemplate4(ItemTemplate4Template):
                             for cpnt1 in c.get_components():
                                 #print(f"++++++++++++++++++++++++++++++++++++   correction  ++++++++++++++ {cpnt1.tag.nom}")
                                 if cpnt1.tag.nom == "question":
-                                    pass
+                                    # récup de la réponse corrigée de cette question (sous forme 101...)
+                                    rep_corrigée = cpnt1.tag.corr_multi         # j'utilise la correction de la question sauvée pour la question
+                                    
                                 if cpnt1.tag.nom == "cp_options":
-                                    #print(f" {cpnt1}, {cpnt1.tag.nom}")
                                     for rep in cpnt1.get_components():
                                         print(f"++++++++ {rep}, {rep.tag.nom}")
                                         num_question = rep.tag.numero
+                                        if rep.tag.nom == "rep1-true": 
+                                            nb_options = rep.tag.nb_options     # si j'utilise self.nb_options je prends le nb d'options de la dernière question lue
                                         # --------------------------------------------------------------------------------------------
                                          # acquisition de la réponse du stagiaire en lisant le dictionaire avec clef numero de question 
                                         # --------------------------------------------------------------------------------------------
                                         rep_stagiaire = reponses[str(num_question)]   # reponses est le dictionaire des réponses stagiaire
-
-                                           
-                                        if rep.tag.nom == "rep1-true":   
-                                            rep_s = rep_stagiaire[0:1]  # réponse du stagiaire pour option 1
-                                            # si réponse stagiaire diff de la correction, j'affiche rouge la réponse fausse
-                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep1.tag.correction} / check: {rep.checked}")
-                                            # comparaison et affichage
-                                            if rep_s != self.rep1.tag.correction:
-                                                rep.background = "red"
-                                            else:
-                                                rep.background = "green"
-                                                
-                                        if rep.tag.nom == "rep2-false":
-                                            rep_s = rep_stagiaire[1:2]  # réponse du stagiaire pour option 2
-                                            # comparaison et affichage si cheched
-                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep2.tag.correction} / check: {rep.checked}")
-                                            if rep_s != self.rep2.tag.correction:
-                                                rep.background = "red"
-                                            else:
-                                                rep.background = "green"
-
-                                        if self.nb_options == 3:
-                                            if rep.tag.nom == "rep3":
-                                                rep_s = rep_stagiaire[2:3]  # réponse du stagiaire pour option 2
-                                                # comparaison et affichage si cheched
-                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep3.tag.correction} / check: {rep.checked}")
-                                            if rep_s != self.rep3.tag.correction:
-                                                rep.background = "red"
-                                            else:
-                                                rep.background = "green"
+                                        print(f" ****************** nb options:{nb_options} rep corrigée:{rep_corrigée}  rep stagiaire:{rep_stagiaire}")
                                         
-                                        if self.nb_options == 4:
-                                            if rep.tag.nom == "rep3":
-                                                rep_s = rep_stagiaire[2:3]  # réponse du stagiaire pour option 2
-                                                # comparaison et affichage si cheched
-                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep3.tag.correction} / check: {rep.checked}")
-                                            if rep_s != self.rep3.tag.correction:
-                                                rep.background = "red"
-                                            else:
+                                        rep1_stagiaire = rep_stagiaire[0:1]  # réponse du stagiaire pour option 1
+                                        rep1_correction = rep_corrigée[0:1]   # 1er caractère, correspond à la réponse vrai (0 ou 1)
+                                        print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep1_stagiaire} / rep corr: {rep1_correction} / check: {rep.checked}")
+                                        if nb_options > 1:
+                                            rep2_stagiaire = rep_stagiaire[1:2]  # réponse du stagiaire pour option 1
+                                            rep2_correction = rep_corrigée[1:2]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep2_stagiaire} / rep corr: {rep2_correction} / check: {rep.checked}")
+                                        if nb_options > 2:
+                                            rep3_stagiaire = rep_stagiaire[2:3]  # réponse du stagiaire pour option 1
+                                            rep3_correction = rep_corrigée[2:3]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep3_stagiaire} / rep corr: {rep3_correction} / check: {rep.checked}")
+                                        if nb_options > 3:
+                                            rep4_stagiaire = rep_stagiaire[3:4]  # réponse du stagiaire pour option 1
+                                            rep4_correction = rep_corrigée[3:4]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep4_stagiaire} / rep corr: {rep4_correction} / check: {rep.checked}")
+                                        if nb_options > 4:
+                                            rep5_stagiaire = rep_stagiaire[4:5]  # réponse du stagiaire pour option 1
+                                            rep5_correction = rep_corrigée[4:5]   # 2eme caractère, correspond à la réponse faux (0 ou 1)
+                                            print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep5_stagiaire} / rep corr: {rep5_correction} / check: {rep.checked}")
+                                            
+                                        # SI REPONSE STAGIAIRE EXACTE, je mets chq option en vert, sinon je recherche l'erreur au niveau des options
+                                        if rep_corrigée == rep_stagiaire:  
+                                            if rep.tag.nom == "rep1-true" or rep.tag.nom == "rep2-false" or rep.tag.nom == "rep3" or rep.tag.nom == "rep4" or rep.tag.nom == "rep5":
                                                 rep.background = "green"
-
-                                            if rep.tag.nom == "rep4":
-                                                rep_s = rep_stagiaire[3:4]  # réponse du stagiaire pour option 2
-                                                # comparaison et affichage si cheched
-                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep4.tag.correction} / check: {rep.checked}")
-                                            if rep_s != self.rep4.tag.correction:
-                                                rep.background = "red"
-                                            else:
-                                                rep.background = "green"
-
-                                        if self.nb_options == 5:
-                                            if rep.tag.nom == "rep3":
-                                                rep_s = rep_stagiaire[2:3]  # réponse du stagiaire pour option 2
-                                                # comparaison et affichage si cheched
-                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep3.tag.correction} / check: {rep.checked}")
-                                            if rep_s != self.rep3.tag.correction:
-                                                rep.background = "red"
-                                            else:
-                                                rep.background = "green"
-
-                                            if rep.tag.nom == "rep4":
-                                                rep_s = rep_stagiaire[3:4]  # réponse du stagiaire pour option 2
-                                                # comparaison et affichage si cheched
-                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep4.tag.correction} / check: {rep.checked}")
-                                            if rep_s != self.rep4.tag.correction:
-                                                rep.background = "red"
-                                            else:
-                                                rep.background = "green"
-
-                                            if rep.tag.nom == "rep5":
-                                                rep_s = rep_stagiaire[4:5]  # réponse du stagiaire pour option 2
-                                                # comparaison et affichage si cheched
-                                                print(f"num quest: {num_question} / copnt: {rep.tag.nom} / rep Stag: {rep_s} / rep corr: {self.rep5.tag.correction} / check: {rep.checked}")
-                                            if rep_s != self.rep5.tag.correction:
-                                                rep.background = "red"
-                                            else:
-                                                rep.background = "green"
+                                        else: # je recherche où est l'erreur pour chq option et l'affiche en rouge
+                                            if rep.tag.nom == "rep1-true":   
+                                                # comparaison et affichage
+                                                if rep1_stagiaire != rep1_correction:
+                                                    rep.background = "red"
+                                                else:
+                                                    rep.background = "green"
+                                                    
+                                            if nb_options > 1:        
+                                                if rep.tag.nom == "rep2-false":
+                                                    # comparaison et affichage
+                                                    if rep2_stagiaire != rep2_correction:
+                                                        rep.background = "red"
+                                                    else:
+                                                        rep.background = "green"
+    
+                                            if nb_options > 2:
+                                                if rep.tag.nom == "rep3":
+                                                    # comparaison et affichage
+                                                    if rep3_stagiaire != rep3_correction:
+                                                        rep.background = "red"
+                                                    else:
+                                                        rep.background = "green"
+                                            
+                                            if nb_options > 3:
+                                                if rep.tag.nom == "rep4":
+                                                    # comparaison et affichage
+                                                    if rep4_stagiaire != rep4_correction:
+                                                        rep.background = "red"
+                                                    else:
+                                                        rep.background = "green"
+    
+                                            if nb_options > 4:
+                                                if rep.tag.nom == "rep5":
+                                                    # comparaison et affichage
+                                                    if rep5_stagiaire != rep5_correction:
+                                                        rep.background = "red"
+                                                    else:
+                                                        rep.background = "green"
     
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
