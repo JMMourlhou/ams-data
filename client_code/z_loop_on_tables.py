@@ -46,3 +46,16 @@ def loop_qcm2():
             for row in table:
                 row.delete()
             result="loop ok"     
+
+#boucle sur la table qcm pour modif rapide d'une colonne, ici sur la description
+def loop_qcm3():
+    #lecture fichier père qcm descro
+    qcm_row = app_tables.qcm_description.get(qcm_nb=4)
+    if qcm_row:
+        table = app_tables.qcm.search(qcm_nb=qcm_row)
+        result="erreur"
+        txt="BNSSA 1 'Conn. du milieu'"
+        if table:
+            for row in table:
+                row.update(param = txt)
+            result="loop ok"     
