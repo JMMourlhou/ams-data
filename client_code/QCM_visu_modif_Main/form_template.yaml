@@ -70,17 +70,29 @@ components:
         type: Label
         layout_properties: {}
       data_bindings: []
-    - name: flow_panel_4
-      properties: {align: center, vertical_align: middle, background: 'theme:Primary',
-        spacing_above: none}
-      type: FlowPanel
-      layout_properties: {grid_position: 'WOTOGW,QAOCRN ECTKNK,OUOTOJ'}
+    - name: column_panel_3
+      properties: {col_widths: '{"GBRULA":32,"PQAOPB":16,"OFLDAH":12}'}
+      type: ColumnPanel
+      layout_properties: {grid_position: 'WOTOGW,QAOCRN XRGEML,IVCNFU', full_width_row: false}
       components:
+      - name: drop_down_nb_options
+        properties:
+          include_placeholder: true
+          items: [' ']
+          placeholder: Nb d'options
+          background: theme:Primary
+          foreground: theme:On Primary
+          role: outlined
+          spacing_above: none
+          spacing_below: none
+        type: DropDown
+        layout_properties: {grid_position: 'PQGBGA,GBRULA'}
+        event_bindings: {change: drop_down_nb_options_change}
       - name: label_1
         properties: {text: '   Barême  :', spacing_above: none, spacing_below: none,
-          align: center, font_size: 15, foreground: 'theme:On Primary', bold: true}
+          align: right, font_size: 15, foreground: 'theme:On Primary', bold: true}
         type: Label
-        layout_properties: {}
+        layout_properties: {grid_position: 'PQGBGA,PQAOPB'}
       - name: drop_down_bareme
         properties:
           role: outlined
@@ -94,36 +106,56 @@ components:
           visible: true
           font_size: 18
           font: ''
-          spacing_above: small
-          spacing_below: small
+          spacing_above: none
+          spacing_below: none
           italic: false
           background: theme:On Primary Container
           bold: false
           underline: false
           include_placeholder: false
         type: DropDown
-        layout_properties: {width: 51.84057880859375}
+        layout_properties: {grid_position: 'PQGBGA,OFLDAH'}
         event_bindings: {change: drop_down_bareme_change}
-    - name: flow_panel_1
-      properties: {align: center, background: 'theme:Primary', vertical_align: middle,
-        spacing_above: small}
-      type: FlowPanel
-      layout_properties: {grid_position: 'WOTOGW,QAOCRN TZPJHC,MLWSGL'}
+    - name: column_panel_options
+      properties: {col_spacing: none, visible: false}
+      type: ColumnPanel
+      layout_properties: {grid_position: 'WOTOGW,QAOCRN PVVWTX,HISDLN'}
       components:
-      - name: label_4
-        properties: {text: '   Réponse :', spacing_above: none, spacing_below: none,
-          align: right, font_size: 16, foreground: 'theme:On Primary', bold: false}
-        type: Label
-        layout_properties: {}
-      - name: check_box_reponse
-        properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-          foreground: 'theme:Primary Container', allow_indeterminate: false, visible: true,
-          text: V / F, font_size: 14, font: '', spacing_above: none, spacing_below: none,
-          italic: false, background: 'theme:On Primary Container', bold: false, checked: false,
-          underline: false}
+      - name: rep1
+        properties: {align: center, foreground: 'theme:On Primary', visible: true,
+          text: A, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true, checked: false}
         type: CheckBox
-        event_bindings: {change: check_box_reponse_change}
-        layout_properties: {}
+        event_bindings: {change: rep1_change}
+        layout_properties: {grid_position: 'JDVZNP,XUVLUM'}
+      - name: rep2
+        properties: {align: center, foreground: 'theme:On Primary', visible: true,
+          text: B, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true, checked: false}
+        type: CheckBox
+        event_bindings: {change: rep2_change}
+        layout_properties: {grid_position: 'JDVZNP,ALPAYR'}
+      - name: rep3
+        properties: {align: center, foreground: 'theme:On Primary', visible: true,
+          text: C, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true}
+        type: CheckBox
+        event_bindings: {change: rep3_change}
+        layout_properties: {grid_position: 'JDVZNP,BUZTBR'}
+      - name: rep4
+        properties: {align: center, foreground: 'theme:On Primary', visible: true,
+          text: D, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true}
+        type: CheckBox
+        event_bindings: {change: rep4_change}
+        layout_properties: {grid_position: 'JDVZNP,NGMQOM'}
+      - name: rep5
+        properties: {align: center, foreground: 'theme:On Primary', visible: true,
+          text: E, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
+            700', bold: true}
+        type: CheckBox
+        layout_properties: {grid_position: 'JDVZNP,CYEJCI'}
+        event_bindings: {change: rep5_change}
     - name: column_panel_2
       properties: {role: outlined-card, background: 'theme:On Primary Container'}
       type: ColumnPanel
