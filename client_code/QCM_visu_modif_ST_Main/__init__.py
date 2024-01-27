@@ -25,7 +25,9 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
                self.label_3.text = "Q.C.M"
         
         #initialisation du drop down des qcm créés et barêmes
-        self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
+        self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search(
+                                                                                                         visible=True
+                                                                                                         )]
         
         if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler

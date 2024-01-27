@@ -104,7 +104,7 @@ db_schema:
       admin_ui: {width: 200, order: 3}
       type: link_single
       target: codes_stages
-    - name: Visible
+    - name: visible
       admin_ui: {order: 4, width: 133}
       type: bool
     - name: use_image

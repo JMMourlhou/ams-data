@@ -15,7 +15,7 @@ def file_reading():
     question_txt = ""    # la question incluant l'intitilé et les options
     rep =""              # dernier caractère d'une option 1 si vrai, 0 si faux
     nb_de_choix = 0      # nb d'options ex: A, B, C  = 3 options
-    f = open(data_files['qcm2.txt'])              # à fermer en sortie qd ligne vide
+    f = open(data_files['qcm3.txt'])              # à fermer en sortie qd ligne vide
     x = True
     n="" # 1er caractère à tester pour savoir si la ligne est une question
     while x:
@@ -67,9 +67,9 @@ def resume(cpt, nb_de_choix, question_txt, rep):
         print()
     
     # Préparation de l'intertion ds table QCM
-    param = "BNSSA 2 'Diplômes, compétences et obligations'"
+    param = "BNSSA 3 'Organisation administrative'"
     bareme = "1"
-    qcm_nb = 5
+    qcm_nb = 6
     # Lecture du fichier qcm descro pour obtenir le row
     qcm_descro_row=app_tables.qcm_description.get(qcm_nb=qcm_nb)
     if qcm_descro_row:
