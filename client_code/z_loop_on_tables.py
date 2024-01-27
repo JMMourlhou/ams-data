@@ -34,10 +34,10 @@ def loop_qcm1():
         result="loop ok"     
     return result
 
-#boucle sur la table qcm pour modif rapide du qcm spécifié, ici sur l'effacmt deslignes du qcm 4, 
+#boucle sur la table qcm pour modif rapide du qcm spécifié, ici sur l'effacmt desl ignes du qcm 4, 
 def loop_qcm2():
     #lecture fichier père qcm descro
-    qcm_row = app_tables.qcm_description.get(qcm_nb=4)
+    qcm_row = app_tables.qcm_description.get(qcm_nb=7)
     if qcm_row:
     
         table = app_tables.qcm.search(qcm_nb=qcm_row)
