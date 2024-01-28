@@ -18,10 +18,11 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.column_panel_1.visible = False
-        #initialisation du drop down des qcm créés et barêmes
+        #initialisation des drop down des qcm créés et barêmes
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
         self.drop_down_bareme.items=["1","2","3","4","5","10"]
         self.drop_down_nb_options.items=([("Vrai/Faux", 1), ("2 options", 2), ("3 options", 3), ("4 options", 4), ("5 options", 5)])
+        # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Ré-affichage ?   +++++++++++++++++++++++++++++
         if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
             # j'affiche le drop down du qcm
@@ -174,11 +175,17 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             reponse = r1 + r2 + r3 + r4
         if self.drop_down_nb_options.selected_value == 5:
             reponse = r1 + r2 + r3 + r4 + r5
-        # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  NUM question   +++++++++++++++++++++++++++++
         num = int(self.label_2.text) #je connais le num de question à changer
-
+        # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  type de question   +++++++++++++++++++++++++++++
+        if self.drop_down_nb_options.selected_value == 1:    # type V/F
+            type = "V/F"       # rep1 ou rep2 peuvent être vrai
+        else:
+            type = "Multi"     # rep1 et rep2 peuvent être vrai 
+        # param
+        param = self.drop_down_qcm_row.selected_value["destination"]
         # je récupère mes variables globales  question, reponse, bareme
-        result = anvil.server.call("add_ligne_qcm", num, question, correction, reponse, bareme, image, qcm_nb)         #num du stage  de la ligne
+        result = anvil.server.call("add_ligne_qcm", num, question, correction, reponse, bareme, image, qcm_nb, type, param)         #num du stage  de la ligne
         if result:
             n = Notification("Création de la question !",
                  timeout=1)   # par défaut 2 secondes

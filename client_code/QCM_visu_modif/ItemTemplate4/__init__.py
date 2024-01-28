@@ -153,7 +153,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.text_box_correction.tag.nom = "correction"
         self.text_box_correction.tag.numero = self.item['num']
         
-        self.drop_down_bareme.items=["1","5"]
+        self.drop_down_bareme.items=["1","2","3","4","5","10"]
         self.drop_down_bareme.selected_value = self.item['bareme']                 
         self.drop_down_bareme.tag.nom = "bareme"
         self.drop_down_bareme.tag.numero = self.item['num']
@@ -181,40 +181,30 @@ class ItemTemplate4(ItemTemplate4Template):
         else:
             self.button_fin_qcm.visible = False    # mode création, j'affiche la réponse
             self.text_area_question.enable = True  # j'affiche la question text box
+
             if self.rep1.tag.correction == "1":
                 self.rep1.checked = True      
             else:
                 self.rep1.checked = False
+                
             if self.rep2.tag.correction == "1":
                 self.rep2.checked = True      
             else:
                 self.rep2.checked = False     
 
-            if self.nb_options == 3:
+            if self.nb_options > 2:
                 if self.rep3.tag.correction == "1":
                     self.rep3.checked = True      
                 else:
                     self.rep3.checked = False
             
-            if self.nb_options == 4:
-                if self.rep3.tag.correction == "1":
-                    self.rep3.checked = True      
-                else:
-                    self.rep3.checked = False
+            if self.nb_options > 3:
                 if self.rep4.tag.correction == "1":
                     self.rep4.checked = True      
                 else:
                     self.rep4.checked = False
             
-            if self.nb_options == 5:
-                if self.rep3.tag.correction == "1":
-                    self.rep3.checked = True      
-                else:
-                    self.rep3.checked = False
-                if self.rep4.tag.correction == "1":
-                    self.rep4.checked = True      
-                else:
-                    self.rep4.checked = False
+            if self.nb_options > 4:
                 if self.rep5.tag.correction == "1":
                     self.rep5.checked = True      
                 else:
@@ -422,7 +412,7 @@ class ItemTemplate4(ItemTemplate4Template):
         if self.mode == "creation":  # ===================================================  MODE CREATION QCM
             result = anvil.server.call('modif_qcm', qcm_descro_row, num, question, rep_multi_stagiaire, bareme, photo, correction)
             if not result:
-                alert("erreur de création d'une question QCM")
+                alert("erreur de modification d'une question QCM")
                 return
             # j'initialise la forme principale
             from anvil import open_form       
