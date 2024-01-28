@@ -226,6 +226,8 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when a new file is loaded into this FileLoader"""
         thumb_pic = anvil.image.generate_thumbnail(file, 640)
         self.image_1.source = thumb_pic
+        self.cp_img.visible = True
+        self.image_1.visible = True
         self.button_modif.enabled = True
         self.button_modif.background = "red"
         self.button_modif.foregroundground = "yellow"

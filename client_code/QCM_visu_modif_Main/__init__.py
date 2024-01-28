@@ -19,8 +19,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Any code you write here will run before the form opens.
         self.column_panel_1.visible = False
         #initialisation des drop down des qcm créés et barêmes
+        self.image_1.source = None
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
         self.drop_down_bareme.items=["1","2","3","4","5","10"]
+        self.drop_down_bareme.selected_value = "1"
         self.drop_down_nb_options.items=([("Vrai/Faux", 1), ("2 options", 2), ("3 options", 3), ("4 options", 4), ("5 options", 5)])
         # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Ré-affichage ?   +++++++++++++++++++++++++++++
         if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
@@ -64,6 +66,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         """This method is called when a new file is loaded into this FileLoader"""
         thumb_pic = anvil.image.generate_thumbnail(file, 640)
         self.image_1.source = thumb_pic
+        self.column_panel_img.visible = True
         self.button_creer.visible = True
 
     def button_annuler_click(self, **event_args):
@@ -105,7 +108,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         if choix > 4:     # 5 options possibles, rep1 à rep2 peuvent être identiques
             self.rep5.visible = True
             self.text_box_question.text = "titre\n\nA  .\nB  .\nC  .\nD  .\nE  ."
-            
+
+        self.column_panel_img.visible = True
+        self.text_box_correction.visible = True    
+        self.text_box_question.visible = True    
         self.column_panel_options.visible = True
         self.button_creer_couleurs()
 
@@ -135,6 +141,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         if self.text_box_question.text == "":
             alert("La question est vide !")
             return
+        if self.drop_down_bareme.selected_value == None:
+            alert("Choisissez un barême !")
+            return
         qst = self.text_box_question.text
         qst = qst.strip()
         question = qst
@@ -144,7 +153,11 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         correction = cor
         bareme = int(self.drop_down_bareme.selected_value)
         qcm_nb = self.drop_down_qcm_row.selected_value
-        image = self.image_1.source
+
+        if self.image_1.source != "":
+            image = self.image_1.source
+        else:
+            image = None
         # creation de la réponse multi en fonction du nb d'options choisies +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         reponse = ""
         if self.rep1.checked == True:

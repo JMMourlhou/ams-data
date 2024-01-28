@@ -83,27 +83,33 @@ components:
         grid_position: LRXJXA,CUVIXY
       event_bindings: {click: bt_sign_in_click}
   - type: ColumnPanel
-    properties: {col_widths: '{}'}
+    properties: {col_widths: '{}', background: 'theme:On Primary Container'}
     name: column_panel_admin
     layout_properties: {grid_position: 'CWEFOY,ECORVD'}
     components:
-    - name: Close
-      properties: {text: Fermer, foreground: 'theme:On Primary'}
-      type: Button
-      layout_properties: {grid_position: 'ANOUBQ,OYAPQI'}
-      event_bindings: {click: Close_click}
-    - name: button_1
-      properties: {text: extraction de fichier txt pour qcm bnssa, background: 'theme:On
-          Primary Container', foreground: 'theme:On Primary'}
-      type: Button
-      layout_properties: {grid_position: 'EXPBVX,ZNIVBG'}
-      event_bindings: {click: button_1_click}
-    - name: button_loop
-      properties: {text: Loop sur une table, background: 'theme:Tertiary', foreground: 'theme:On
-          Primary Container', bold: true, visible: true}
-      type: Button
-      layout_properties: {grid_position: 'JLTYUN,QXOJCB'}
-      event_bindings: {click: button_loop_click}
+    - name: flow_panel_1
+      properties: {background: 'theme:On Primary Container', vertical_align: middle,
+        align: center}
+      type: FlowPanel
+      layout_properties: {grid_position: 'AOZXYS,RPVEJB'}
+      components:
+      - name: Close
+        properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary'}
+        type: Button
+        layout_properties: {}
+        event_bindings: {click: Close_click}
+      - name: button_loop
+        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On
+            Primary', bold: true, visible: true}
+        type: Button
+        layout_properties: {}
+        event_bindings: {click: button_loop_click}
+      - name: button_1
+        properties: {text: extraction Txt, background: 'theme:Primary', foreground: 'theme:On
+            Primary'}
+        type: Button
+        layout_properties: {}
+        event_bindings: {click: button_1_click}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: 'theme:On Primary Container', visible: true, text: '  Stages  ',
@@ -111,7 +117,7 @@ components:
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}
       name: bt_gestion_stages
-      layout_properties: {grid_position: 'JKULHH,FQNSKM'}
+      layout_properties: {grid_position: 'WDMJDM,WHUDPU'}
       event_bindings: {click: bt_gestion_stages_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
@@ -120,16 +126,14 @@ components:
         italic: false, background: 'theme:Tertiary', bold: true, underline: false,
         icon: ''}
       name: button_create_recherche
-      layout_properties:
-        col_widths: {}
-        grid_position: IHJQSV,FNIJDD
+      layout_properties: {grid_position: 'XIVNPX,PHPRXV'}
       event_bindings: {click: button_create_recherche_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' QCM    ',
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-        icon: ''}
+        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Création
+          / Modif QCM    ', font_size: null, font: '', spacing_above: small, icon_align: left,
+        spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
+        underline: false, icon: ''}
       name: button_create_qcm
       layout_properties:
         col_widths: {}
