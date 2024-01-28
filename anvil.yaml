@@ -126,7 +126,7 @@ db_schema:
       type: string
     title: Lieux
   qcm:
-    client: search
+    client: full
     server: full
     columns:
     - name: photo
@@ -143,7 +143,7 @@ db_schema:
       admin_ui: {order: 0.375, width: 76}
       type: number
     - name: bareme
-      admin_ui: {width: 200, order: 4}
+      admin_ui: {order: 4, width: 96}
       type: string
     - name: qcm_nb
       admin_ui: {order: -2, width: 171}
