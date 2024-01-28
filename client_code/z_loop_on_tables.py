@@ -126,3 +126,5 @@ def loop_qcm4():
                           )
             result="loop ok"
         print(f"loop sur qcm9: {result}")
+
+    

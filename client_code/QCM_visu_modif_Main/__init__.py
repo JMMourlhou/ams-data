@@ -148,25 +148,25 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # creation de la réponse multi en fonction du nb d'options choisies +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         reponse = ""
         if self.rep1.checked == True:
-            r1 = 1
+            r1 = "1"
         else: 
-            r1 = 0
+            r1 = "0"
         if self.rep2.checked == True:
-            r2 = 1
+            r2 = "1"
         else: 
-            r2 = 0
+            r2 = "0"
         if self.rep3.checked == True:
-            r3 = 1
+            r3 = "1"
         else: 
-            r3 = 0
+            r3 = "0"
         if self.rep4.checked == True:
-            r4 = 1
+            r4 = "1"
         else: 
-            r4 = 0
+            r4 = "0"
         if self.rep5.checked == True:
-            r5 = 1
+            r5 = "1"
         else: 
-            r5 = 0
+            r5 = "0"
         if self.drop_down_nb_options.selected_value == 1 or self.drop_down_nb_options.selected_value == 2:    
             reponse = r1 + r2
         if self.drop_down_nb_options.selected_value == 3:

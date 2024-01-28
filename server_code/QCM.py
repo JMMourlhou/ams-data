@@ -52,7 +52,39 @@ def modif_qcm(qcm_descro_row, num_question, question, rep, bareme, photo, correc
                     )
         return True
 
+# =================================================================================================================
+# Delete d'1 ligne du QCM (en mode maj d'un qcm)
+@anvil.server.callable           #modif d'une ligne de Qcm
+def delete_qcm(qcm_descro_row, num_question):
 
+    # lecture de la ligne à modifier par son numéro             
+    qcm_row = app_tables.qcm.get(num=num_question,
+                                qcm_nb=qcm_descro_row)
+    if not qcm_row:
+        print("Ligne qcm non trouvée ds fichier qcm")
+        return False
+    else:   
+        qcm_row.delete()        
+        return True
+
+# ==================================================================================================
+# modify the question number of the qcm questions after a deletion of a question
+# ==================================================================================================
+@anvil.server.callable
+def renumber_qcm(qcm_descro_row):
+#lecture fichier père qcm descro
+        table = app_tables.qcm.search(qcm_nb=qcm_descro_row)
+        result=False
+        cpt = 0
+        if table:
+            for row in table:
+                cpt += 1
+                row.update(num = cpt
+                          )
+            result=True
+        param_table_qcm = qcm_descro_row["destination"]
+        print(f"loop Re-numération après delete ds table {param_table_qcm}: {result}")
+        return result    
 
 # =====================================================================================================================
 #                 UTILISATION DU QCM PAR UN STAGIAIRE, SAUVEGARDE DES RESULTATS DS table.qcm_result
@@ -103,3 +135,4 @@ def temp_user_qcm(user, nb_questions_in_qcm):
             result = False
             
     return result
+

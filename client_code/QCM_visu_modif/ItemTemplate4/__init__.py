@@ -74,6 +74,9 @@ class ItemTemplate4(ItemTemplate4Template):
         self.spacer_1.tag.nom = "spacer"
         
         # ==============================================================================================="                      INFOS DE BASE
+        self.button_delete.tag.nom = "delete"
+        self.button_delete.tag.numero = self.item['num']
+
         self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
 
         self.rep1.tag.nb_options = len(self.item['rep_multi'])   # je sauve le nb d'options pour cette question ds rep1
@@ -141,6 +144,7 @@ class ItemTemplate4(ItemTemplate4Template):
             """
             self.text_area_question.text = qst
             self.text_area_question.enabled = False
+            self.button_delete.visible = False
         else:
             self.text_area_question.text = qst
             self.text_area_question.enabled = True
@@ -238,7 +242,7 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when this checkbox is checked or unchecked"""
         self.text_area_question_focus()  
 
-        if self.nb_options == 2:
+        if self.item["type"] == "V/F":
             if self.rep1.checked == True:   # question V/F
                 self.rep2.checked = False
             else:
@@ -255,7 +259,7 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when this checkbox is checked or unchecked"""
         self.text_area_question_focus()
 
-        if self.nb_options == 2:
+        if self.item["type"] == "V/F":
             if self.rep2.checked == True:   # question V/F
                 self.rep1.checked = False
             else:
@@ -657,6 +661,31 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the column panel is shown on the screen"""
         self.column_panel_results.scroll_into_view()
 
+    def button_delete_click(self, **event_args):                        # Delete a Qcm question
+        """This method is called when the button is clicked"""
+        qcm_descro_row = self.qcm_nb
+        num_question = self.button_delete.tag.numero
+        #question de confirmation
+        r=alert("Enlever cette question ?",buttons=[("Non",False),("Oui",True)])
+        if r :   #oui     
+            if self.mode == "creation":  # ===================================================  MODE CREATION QCM
+                result = anvil.server.call('delete_qcm', qcm_descro_row, num_question)
+                if not result:
+                    alert("erreur d'annulation d'une question QCM")
+                    return
+                # Je re-calcul les numéros de question du qcm
+                result = anvil.server.call('renumber_qcm', qcm_descro_row)
+                if not result:
+                    alert("erreur lors des recalculs des num de lignes QCM")
+                
+                # j'initialise la forme principale
+                from anvil import open_form       
+                open_form("QCM_visu_modif_Main",qcm_descro_row)
+
+
+
+
+ 
     
 
 

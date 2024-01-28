@@ -71,9 +71,9 @@ components:
         layout_properties: {}
       data_bindings: []
     - name: column_panel_3
-      properties: {col_widths: '{"GBRULA":32,"PQAOPB":16,"OFLDAH":12}'}
+      properties: {col_widths: '{"GBRULA":22,"PQAOPB":29,"OFLDAH":9}'}
       type: ColumnPanel
-      layout_properties: {grid_position: 'WOTOGW,QAOCRN XRGEML,IVCNFU', full_width_row: false}
+      layout_properties: {grid_position: 'WOTOGW,QAOCRN XRGEML,IVCNFU', full_width_row: true}
       components:
       - name: drop_down_nb_options
         properties:
