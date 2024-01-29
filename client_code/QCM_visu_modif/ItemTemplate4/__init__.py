@@ -54,6 +54,7 @@ class ItemTemplate4(ItemTemplate4Template):
 
         # Extraction du numéro de qcm
         self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb
+        
         self.tag.nom = "top"
         self.flow_panel_num.tag.nom = "fp_num"
         self.cp_father.tag.nom = "cp_father"

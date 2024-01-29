@@ -9,8 +9,11 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..QCM_visu_modif import QCM_visu_modif
+import random             # pour rechercher les qcm BNSSA randomly avec random.randrange(début, fin)
 global liste
 liste = []
+
+
 
 class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def __init__(self, qcm_descro_nb=None, **properties):
@@ -42,7 +45,10 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
 
         # Pour les lignes QCM déjà crée du qcm choisi
         global liste
-        liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
+        if qcm_row["qcm_nb"] != 10:
+            liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
+        else:
+            liste = list(self.liste_qcm_bnssa_blanc())
         nb_questions = len(liste)
         self.label_2.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées
 
@@ -53,7 +59,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             alert("user non MAJ")
             return
         # affiche le titre
-        if self.admin[0:1]=="S":         # si pas stagiaire
+        if self.admin[0:1]=="S":         # si stagiaire
                self.label_3.text = "Q.C.M " + qcm_row["destination"]
         # affiches les lignes du qcm
         self.affiche_lignes_qcm(liste)
@@ -87,6 +93,65 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def button_fin_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
         pass
+
+    def liste_qcm_bnssa_blanc(self, **event_args):
+        global liste
+        liste=[]
+        # 10 questions pour partie 1 qcm BNSSA (nb4)
+        liste1 = self.liste_qcm_partie_x(4, 10)   # (num qcm, nb de questions à prendre randomly)
+        for i in range(len(liste1)):
+            liste.append(liste1[i])
+        liste2 = self.liste_qcm_partie_x(5, 10)
+        for i in range(len(liste2)):
+            liste.append(liste2[i])
+        liste3 = self.liste_qcm_partie_x(6, 10)
+        for i in range(len(liste3)):
+            liste.append(liste3[i])
+        liste4 = self.liste_qcm_partie_x(7, 8)
+        for i in range(len(liste4)):
+            liste.append(liste4[i])
+        liste5 = self.liste_qcm_partie_x(8, 8)
+        for i in range(len(liste5)):
+            liste.append(liste5[i])
+        liste6 = self.liste_qcm_partie_x(9, 5)
+        for i in range(len(liste6)):
+            liste.append(liste6[i])
+        return liste
+
+    def liste_qcm_partie_x(self, qcm_nb, nb_max, **event_args):
+        liste = []
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ qcm nb: ", qcm_nb)
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ nb max: ", nb_max)
+        # 10 questions à extraire randomly 
+        #extraction du nb de questions du BNSSA partie 1
+        qcm_row = app_tables.qcm_description.get(qcm_nb=qcm_nb)
+        if qcm_row:
+            liste_entierre = app_tables.qcm.search(qcm_nb=qcm_row )
+            nb_total_questions = len(liste_entierre)
+            print(f"nb question ds qcm_nb {qcm_nb}: {nb_total_questions}" )
+        else:
+            print("pb accès table qcm n° 4 (BNSSA partie 1)")
+            return
+        dict = {}
+        while len(dict) < nb_max:
+            num_question =   random.randrange(1, nb_total_questions+1)  
+            question_row = app_tables.qcm.get(qcm_nb=qcm_row,
+                                             num=num_question
+                                             )
+            clef = num_question           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
+            valeur = question_row
+            print("clef: ",clef)
+            dict[clef] = valeur   # je mets à jour la liste dictionaire des questions
+        
+        for cle, valeur in dict.items():
+            liste.append(valeur)
+        
+        return liste
+        
+
+            
+        
+        
 
 
 
