@@ -80,7 +80,7 @@ class Visu_trombi(Visu_trombiTemplate):
                 except:
                     txt = stagiaire['nom']
                 
-                self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 11, enabled = True)
+                self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 14, enabled = True)
                 self.bt.set_event_handler('click',self.bt_click)
                 
                 self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
