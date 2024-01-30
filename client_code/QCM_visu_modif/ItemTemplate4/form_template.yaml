@@ -58,7 +58,7 @@ components:
       type: TextArea
       layout_properties: {grid_position: 'JRGWCO,EAZFGY'}
       event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus,
-        focus: text_area_question_focus}
+        focus: text_area_question_focus, show: text_area_question_show}
     - name: cp_options
       properties: {col_spacing: tiny}
       type: ColumnPanel

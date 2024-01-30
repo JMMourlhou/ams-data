@@ -15,11 +15,13 @@ liste = []
 
 
 
+
 class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def __init__(self, qcm_descro_nb=None, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.qcm_row = None
         # acquisition du user
         user=anvil.users.get_user()        
         if user:
@@ -42,7 +44,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         qcm_row = self.drop_down_qcm_row.selected_value
-
+        self.qcm_row = qcm_row
         # Pour les lignes QCM déjà crée du qcm choisi
         global liste
         if qcm_row["qcm_nb"] != 10:
@@ -116,6 +118,8 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         liste6 = self.liste_qcm_partie_x(9, 5)
         for i in range(len(liste6)):
             liste.append(liste6[i])
+        #if user:
+        #    result = anvil.server.call("qcm_blanc", liste)     # sauvegarde liste ds user
         return liste
 
     def liste_qcm_partie_x(self, qcm_nb, nb_max, **event_args):
@@ -147,7 +151,8 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             liste.append(valeur)
         
         return liste
-        
+
+
 
             
         

@@ -9,11 +9,15 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+
 global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
 ancien_num_ligne = 0
 
 global cpt   # cpt nb de questions
 cpt = 0
+
+global nb
+nb = 0
 
 global nb_bonnes_rep
 nb_bonnes_rep = 0
@@ -42,6 +46,7 @@ class ItemTemplate4(ItemTemplate4Template):
         reponses = {}   #liste type dict de toutes les réponses du stagiaire {cle:num, valeurV/F}
         global cpt
         cpt=0
+        
         
         # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
@@ -130,7 +135,10 @@ class ItemTemplate4(ItemTemplate4Template):
         self.label_nb_questions.text = user['temp']
         
         self.label_2.tag.nom = "cpt"
-        self.label_2.text = self.item['num']
+        
+        self.label_2.text = self.item['num']  #-----------------------------------------------------------------   A MODIFIER
+        self.label_2.text = nb
+        
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
         qst = self.item['question']
@@ -684,6 +692,12 @@ class ItemTemplate4(ItemTemplate4Template):
                 # j'initialise la forme principale
                 from anvil import open_form       
                 open_form("QCM_visu_modif_Main",qcm_descro_row)
+
+    def text_area_question_show(self, **event_args):
+        """This method is called when the text area is shown on the screen"""
+        global nb
+        nb += 1
+        self.label_2.text = nb
 
 
 
