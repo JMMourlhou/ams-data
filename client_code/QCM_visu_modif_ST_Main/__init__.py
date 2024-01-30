@@ -142,6 +142,36 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             nb_total_questions = len(liste_entierre)
             print(f"nb question ds qcm_nb {qcm_nb}: {nb_total_questions}" )
         else:
+            print("pb accès table qcm n° 4 (BNSSA partie 1)")
+            return
+        dict = {}
+        while len(dict) < nb_max:
+            num_question =   random.randrange(1, nb_total_questions+1)  
+            question_row = app_tables.qcm.get(qcm_nb=qcm_row,
+                                             num=num_question
+                                             )
+            clef = num_question           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
+            valeur = question_row
+            print("clef: ",clef)
+            dict[clef] = valeur   # je mets à jour la liste dictionaire des questions
+        
+        for cle, valeur in dict.items():
+            liste.append(valeur)
+        
+  
+"""
+    def liste_qcm_partie_x(self, qcm_nb, nb_max, **event_args):
+        liste = []
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ qcm nb: ", qcm_nb)
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ nb max: ", nb_max)
+        # 10 questions à extraire randomly 
+        #extraction du nb de questions du BNSSA partie 1
+        qcm_row = app_tables.qcm_description.get(qcm_nb=qcm_nb)
+        if qcm_row:
+            liste_entierre = app_tables.qcm.search(qcm_nb=qcm_row )
+            nb_total_questions = len(liste_entierre)
+            print(f"nb question ds qcm_nb {qcm_nb}: {nb_total_questions}" )
+        else:
             print(f"pb accès table qcm n° {qcm_nb} (BNSSA)")
             return
         dict = {}
@@ -152,7 +182,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
                                              )
             clef = num_question           # clé du dict de questions     
             valeur = question_row  # changt du tuple à l'index 7, je met le row du qcm 10 exam blan
-            """
+            
             #==================================================================================================
             valeur = list(question_row)# changt du tuple à l'index 7, je met le row du qcm 10 exam blan
             print()
@@ -160,11 +190,11 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             
             valeur[6] = ('qcm_nb' , self.drop_down_qcm_row.selected_value)    # changt 7eme tuple,  (index 6)           
             #==================================================================================================
-            """
+        
             # je mets à jour la liste dictionaire des questions
             dict[clef] = valeur   #Comme il ne peut y avoir 2 même clé ds 1 dico, si random prend 2 fois la même question, elle écrase l'autre
 
-        """
+        
         for cle, valeur in dict.items():
             global cpt           # compteur global du nb de questions sélectionnées pour l'examen blanc (servira de num de ligne de chq question
             cpt +=1                           
@@ -173,12 +203,12 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             print()
             print("valeur finale: ",valeur) 
             #=====================================================================================================================
-        """    
+           
         liste.append(valeur)
 
         
         return liste
-        
+"""
 
             
         
