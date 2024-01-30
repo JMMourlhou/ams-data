@@ -155,12 +155,11 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             #==================================================================================================
             dict[clef] = valeur  # je mets à jour la liste dictionaire des questions 
 
-            
         global cpt
         for cle, valeur in dict.items():
             cpt +=1
              # ===================================================================================================================
-            valeur = list(question_row)
+            valeur[3]=('num', cpt)
             
             #=====================================================================================================================
             liste.append(valeur)
