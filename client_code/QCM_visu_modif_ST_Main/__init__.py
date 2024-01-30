@@ -152,16 +152,21 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             #==================================================================================================
             valeur = list(question_row)# changt du tuple à l'index 7, je met le row du qcm 10 exam blanc
             if len(dict)==1:
+                print()
                 print("valeur initiale: ",valeur)
-            valeur[7] = (qcm_nb , self.drop_down_qcm_row.selected_value)
+            
+            valeur[6] = (qcm_nb , self.drop_down_qcm_row.selected_value)
+            
             #==================================================================================================
             dict[clef] = valeur  # je mets à jour la liste dictionaire des questions 
-
+            if len(dict)==1:
+                print()
+                print("valeur interm. après chgt row: ",valeur)
         global cpt
         for cle, valeur in dict.items():
             cpt +=1
              # ===================================================================================================================
-            valeur[3]=('num', cpt)
+            valeur[2]=('num', cpt)
             #=====================================================================================================================
             liste.append(valeur)
         print()
