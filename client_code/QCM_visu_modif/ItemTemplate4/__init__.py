@@ -16,8 +16,10 @@ ancien_num_ligne = 0
 global cpt   # cpt nb de questions
 cpt = 0
 
-global nb
-nb = 0
+global nb   # pour l'affichage du num de la question
+nb = 0  # initialisé en init   (pour l'affichage du numéro de la question, notemment qd qcm extrait de plusieurs qcm
+        # ex: exam blanc tiré de plusieurs parties
+
 
 global nb_bonnes_rep
 nb_bonnes_rep = 0
@@ -133,11 +135,11 @@ class ItemTemplate4(ItemTemplate4Template):
         
         #recherche nb de questions (sauvées ds temp table)
         self.label_nb_questions.text = user['temp']
-        
         self.label_2.tag.nom = "cpt"
-        
-        self.label_2.text = self.item['num']  #-----------------------------------------------------------------   A MODIFIER
-        self.label_2.text = nb
+        global nb
+        nb = -1 * (int(self.label_nb_questions.text)+1)
+        #self.label_2.text = self.item['num']  #-------------Affichage du num de question (universelle, y compris pour qcm à partir )
+        self.label_2.text = nb                 # VOIR L'initilisation avec global nb = nb de questions
         
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
@@ -697,7 +699,7 @@ class ItemTemplate4(ItemTemplate4Template):
         """This method is called when the text area is shown on the screen"""
         global nb
         nb += 1
-        self.label_2.text = nb
+        self.label_2.text = abs(nb)
 
 
 
