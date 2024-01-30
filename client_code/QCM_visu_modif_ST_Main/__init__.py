@@ -10,16 +10,20 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..QCM_visu_modif import QCM_visu_modif
 import random             # pour rechercher les qcm BNSSA randomly avec random.randrange(début, fin)
+
 global liste
 liste = []
 
-
+global cpt       # comptage des questions pour examen blanc BNSSA
+cpt = 0
 
 class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def __init__(self, qcm_descro_nb=None, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        global cpt
+        cpt = 0
         # acquisition du user
         user=anvil.users.get_user()        
         if user:
@@ -41,6 +45,9 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
+        global cpt
+        cpt = 0
+        
         qcm_row = self.drop_down_qcm_row.selected_value
 
         # Pour les lignes QCM déjà crée du qcm choisi
@@ -95,6 +102,9 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         pass
 
     def liste_qcm_bnssa_blanc(self, **event_args):
+        global cpt
+        cpt=0
+        
         global liste
         liste=[]
         # 10 questions pour partie 1 qcm BNSSA (nb4)
@@ -130,7 +140,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             nb_total_questions = len(liste_entierre)
             print(f"nb question ds qcm_nb {qcm_nb}: {nb_total_questions}" )
         else:
-            print("pb accès table qcm n° 4 (BNSSA partie 1)")
+            print(f"pb accès table qcm n° {qcm_nb} (BNSSA)")
             return
         dict = {}
         while len(dict) < nb_max:
@@ -139,13 +149,21 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
                                              num=num_question
                                              )
             clef = num_question           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
-            valeur = question_row
-            print("clef: ",clef)
-            dict[clef] = valeur   # je mets à jour la liste dictionaire des questions
-        
+            #==================================================================================================
+            valeur = list(question_row)# changt du tuple à l'index 7, je met le row du qcm 10 exam blanc
+            valeur[7] = (qcm_nb , self.drop_down_qcm_row.selected_value)
+            #==================================================================================================
+            dict[clef] = valeur  # je mets à jour la liste dictionaire des questions 
+
+            
+        global cpt
         for cle, valeur in dict.items():
+            cpt +=1
+             # ===================================================================================================================
+            valeur = list(question_row)
+            
+            #=====================================================================================================================
             liste.append(valeur)
-        
         return liste
         
 

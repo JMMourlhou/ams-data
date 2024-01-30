@@ -65,7 +65,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.fp_vf_barem.tag.nom = "fp_vrai/faux_bareme"
         self.button_fin_qcm.tag.nom = "fin_qcm"
         self.column_panel_results.tag.nom = "cp_results"
-        self.label_2.tag.nom = "label_2"
+        #self.label_2.tag.nom = "label_2"
         self.label_3.tag.nom = "label_3"
         self.label_nb_questions.nom = "Label_nb_questions"
         self.label_nb_quest_ok.nom = "Label_nb_questions ok"
@@ -129,8 +129,9 @@ class ItemTemplate4(ItemTemplate4Template):
         #recherche nb de questions (sauvées ds temp table)
         self.label_nb_questions.text = user['temp']
         
-        self.label_2.tag.nom = "cpt"
+        #self.label_2.tag.nom = "cpt"
         self.label_2.text = self.item['num']
+        
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
         qst = self.item['question']
