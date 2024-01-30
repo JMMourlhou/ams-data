@@ -43,7 +43,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
     
-    def drop_down_qcm_row_change(self, **event_args):
+    def drop_down_qcm_row_change(self, **event_args):           # ===================================  Sélection du QCM à partie de la drop down
         """This method is called when an item is selected"""
         global cpt
         cpt = 0
@@ -54,8 +54,10 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         global liste
         if qcm_row["qcm_nb"] != 10:
             liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
+            print("*************************************************************  ", liste)
         else:
-            liste = list(self.liste_qcm_bnssa_blanc())
+            liste = list(self.liste_qcm_bnssa_blanc())                                                    # examen blanc sélectionné (qcm 10)
+            print("*************************************************************  ", liste)
         nb_questions = len(liste)
         self.label_2.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées
 
@@ -148,29 +150,33 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             question_row = app_tables.qcm.get(qcm_nb=qcm_row,
                                              num=num_question
                                              )
-            clef = num_question           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
+            clef = num_question           # clé du dict de questions     
+            valeur = question_row  # changt du tuple à l'index 7, je met le row du qcm 10 exam blan
+            """
             #==================================================================================================
-            valeur = list(question_row)# changt du tuple à l'index 7, je met le row du qcm 10 exam blanc
-            if len(dict)==1:
-                print()
-                print("valeur initiale: ",valeur)
+            valeur = list(question_row)# changt du tuple à l'index 7, je met le row du qcm 10 exam blan
+            print()
+            print("valeur initiale: ",valeur)
             
-            valeur[6] = (qcm_nb , self.drop_down_qcm_row.selected_value)
-            
+            valeur[6] = ('qcm_nb' , self.drop_down_qcm_row.selected_value)    # changt 7eme tuple,  (index 6)           
             #==================================================================================================
-            dict[clef] = valeur  # je mets à jour la liste dictionaire des questions 
-            if len(dict)==1:
-                print()
-                print("valeur interm. après chgt row: ",valeur)
-        global cpt
+            """
+            # je mets à jour la liste dictionaire des questions
+            dict[clef] = valeur   #Comme il ne peut y avoir 2 même clé ds 1 dico, si random prend 2 fois la même question, elle écrase l'autre
+
+        """
         for cle, valeur in dict.items():
-            cpt +=1
+            global cpt           # compteur global du nb de questions sélectionnées pour l'examen blanc (servira de num de ligne de chq question
+            cpt +=1                           
              # ===================================================================================================================
-            valeur[2]=('num', cpt)
+            valeur[2]=('num', cpt)     # chgt 3em tuple par le numero (cpt) de la question ds ce qcm blanc 
+            print()
+            print("valeur finale: ",valeur) 
             #=====================================================================================================================
-            liste.append(valeur)
-        print()
-        print("valeur finale: ",valeur)   
+        """    
+        liste.append(valeur)
+
+        
         return liste
         
 
