@@ -151,7 +151,8 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             clef = num_question           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
             #==================================================================================================
             valeur = list(question_row)# changt du tuple à l'index 7, je met le row du qcm 10 exam blanc
-            print(valeur)
+            if len(dict)==1:
+                print("valeur initiale: ",valeur)
             valeur[7] = (qcm_nb , self.drop_down_qcm_row.selected_value)
             #==================================================================================================
             dict[clef] = valeur  # je mets à jour la liste dictionaire des questions 
@@ -163,7 +164,8 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             valeur[3]=('num', cpt)
             #=====================================================================================================================
             liste.append(valeur)
-        print(liste)    
+        print()
+        print("valeur finale: ",valeur)   
         return liste
         
 
