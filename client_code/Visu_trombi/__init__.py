@@ -18,8 +18,13 @@ class Visu_trombi(Visu_trombiTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+  
         # Any code you write here will run before the form opens.
+        #import anvil.js    # pour screen size
+        from anvil.js import window # to gain access to the window object
+        global screen_size
+        screen_size = window.innerWidth
+        
         global cpt
         cpt = 0
         
@@ -86,7 +91,12 @@ class Visu_trombi(Visu_trombiTemplate):
                 self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                 self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
 
-                if cpt_stagiaire % 5 == 0 : # (modulo 5) si 5eme image de la ligne affichée, j'initialise à 1ere image et saute la ligne
+                if screen_size < 800:
+                    nb_img_par_ligne = 4
+                else:
+                    nb_img_par_ligne = 5
+                
+                if cpt_stagiaire % nb_img_par_ligne == 0 : # (modulo 5) si 5eme image de la ligne affichée, j'initialise à 1ere image et saute la ligne
                     if cpt_ligne == 5:      # si 5eme image de la 4eme ligne, page break
                         #self.add_component(PageBreak())      # si en création de pdf, je saute une page après 4 lignes
                         cpt_ligne == 0
