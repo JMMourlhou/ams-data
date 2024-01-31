@@ -136,10 +136,10 @@ class ItemTemplate4(ItemTemplate4Template):
         
         #recherche nb de questions (sauvées ds temp table)
         self.label_nb_questions.text = user['temp']
-        self.label_2.tag.nom = "cpt"
+        #self.label_2.tag.nom = "cpt"
         global nb
         nb = -1 * (int(self.label_nb_questions.text)+1)
-        #self.label_2.text = self.item['num']  #-------------Affichage du num de question (universelle, y compris pour qcm à partir )
+        #self.label_2.text = self.item['num']  #-------------Affichage du num de question (universelle, y compris pour qcm à partir d'autres qcm (exam blanc BNSSA))
         self.label_2.text = nb                 # VOIR L'initilisation avec global nb = nb de questions
         
         self.label_2.tag.numero = self.item['num']
@@ -701,73 +701,6 @@ class ItemTemplate4(ItemTemplate4Template):
         global nb                                                                   # comme le BNSSA blanc
         nb += 1
         self.label_2.text = abs(nb)    
-
-    def plot_1_click(self, points, **event_args):
-        """This method is called when a data point is clicked."""
-        pass
-        """
-        assuming you are using Plotly, you can compose the figure on the server side and return the figure (which is essentially a dictionary)
-        
-        using plottly
-        
-        client side:
-        self.plot_1.figure=anvil.server.call('get_fig')
-
-        server side:
-        @anvil.server.callable
-        def get_fig():
-            df=pd.read_csv(...)  #load your csv
-            fig = px.bar(df, ....) #convert to a figure
-            return fig
-        """
-
-        
-        """
-        # Import Anvil libraries
-        from ._anvil_designer import EntrypointTemplate
-        from anvil import *
-        import anvil.server
-        
-        # Import client-side Plotly
-        import plotly.graph_objects as go
-        
-        
-        
-        # This is an Anvil Form
-        class Entrypoint(EntrypointTemplate):
-        def __init__(self, **properties):
-        # Set Form properties and Data Bindings.
-        self.init_components(**properties)
-        
-        # Fetch the data from the server
-        data = anvil.server.call('get_election_data')
-        
-        #  Get a convenient list of x-values
-        years = data['year']
-        x = list(range(len(years)))
-        
-        # Specify the plots
-        bar_plots = [
-            go.Bar(x=x, y=data['conservative'], name='Conservative', marker=dict(color='#0343df')),
-            go.Bar(x=x, y=data['labour'], name='Labour', marker=dict(color='#e50000')),
-            go.Bar(x=x, y=data['liberal'], name='Liberal', marker=dict(color='#ffff14')),
-            go.Bar(x=x, y=data['others'], name='Others', marker=dict(color='#929591')),
-        ]
-        # Specify the layout
-        layout = {
-            'title': 'Election results',
-            'yaxis': {'title': 'Seats'},
-            'xaxis': {
-            'tickmode': 'array',
-            'tickvals': list(range(27)),
-            'ticktext': data['year'],
-            },
-        }
-        
-        # Make the multi-bar plot
-        self.plot_1.data = bar_plots
-        self.plot_1.layout = layout
-        """
 
 
 
