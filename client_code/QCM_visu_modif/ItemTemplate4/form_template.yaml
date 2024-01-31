@@ -185,10 +185,24 @@ components:
         Primary', align: center}
     type: Label
     layout_properties: {grid_position: 'BOETUR,QJFZAA'}
+  - name: column_panel_2
+    properties: {}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'YWQDIE,ZKMATK'}
+    components:
+    - name: plot_1
+      properties: {}
+      type: Plot
+      layout_properties: {grid_position: 'ULZPED,OHGZWJ'}
+      event_bindings: {click: plot_1_click}
   - name: button_enregistrer_et_sortir
     properties: {text: Sortir du QCM, foreground: 'theme:Tertiary', bold: true, role: outlined-button}
     type: Button
     layout_properties: {grid_position: 'ILCZMZ,OEJJCE'}
     event_bindings: {click: button_enregistrer_et_sortir_click}
   event_bindings: {show: column_panel_results_show}
+- name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'JERMGY,XAOWDK'}
 is_package: true
