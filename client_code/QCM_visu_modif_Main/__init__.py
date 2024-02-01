@@ -248,6 +248,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Concepteur du qcm demande un test du qcm qu'il met à jour
         # écriture ds table user, colonne 'temp2' : "test" 
         user=anvil.users.get_user()
-        result = anvil.server.call("modify_users_temp2", user, "test")
-        affiche_lignes_qcm()
-        result = anvil.server.call("modify_users_temp2", None)
+        if user:
+            result = anvil.server.call("modify_users_temp2", user, "test")
+            self.affiche_lignes_qcm()
+            result = anvil.server.call("modify_users_temp2", user, None)   # je remets temp2 à vide
