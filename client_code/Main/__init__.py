@@ -247,6 +247,11 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         result = anvil.server.call("file_reading")
 
+    def button_plot_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..plot import plot
+        open_form('plot')
+
 
 
 

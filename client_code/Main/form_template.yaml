@@ -110,6 +110,11 @@ components:
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
+      - name: button_plot
+        properties: {text: plot}
+        type: Button
+        layout_properties: {}
+        event_bindings: {click: button_plot_click}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: 'theme:On Primary Container', visible: true, text: '  Stages  ',

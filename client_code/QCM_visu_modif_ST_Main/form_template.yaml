@@ -40,7 +40,7 @@ components:
           role: outlined
           align: full
           tooltip: ''
-          placeholder: 'Pour '
+          placeholder: Choisissez le QCM
           border: ''
           enabled: true
           foreground: theme:On Primary
@@ -71,22 +71,10 @@ components:
         properties: {foreground: 'theme:On Primary', text: '#  ', visible: false}
         type: Label
         layout_properties: {}
-  - name: button_aff_result1
-    properties: {text: Afficher les résultats, spacing_above: medium, bold: true,
-      visible: false, background: 'theme:Error', foreground: 'theme:On Primary'}
-    type: Button
-    layout_properties: {grid_position: 'UVZIAW,IOCMVX'}
-    event_bindings: {click: button_aff_result1_click}
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '', spacing_below: small,
     background: ''}
   name: column_panel_content
   layout_properties: {grid_position: 'JKQKWS,BTYCFD'}
-- name: button_aff_results2
-  properties: {text: Afficher les résultats, spacing_above: medium, bold: true, visible: false,
-    background: 'theme:Error', foreground: 'theme:On Primary'}
-  type: Button
-  layout_properties: {grid_position: 'LJLEWC,TOBTVR'}
-  event_bindings: {click: button_fin_qcm_click}
 is_package: true
