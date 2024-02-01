@@ -334,9 +334,9 @@ db_schema:
     - name: role
       admin_ui: {order: 0.5, width: 96}
       type: string
-    - name: qcm_blanc_dict
-      admin_ui: {width: 200, order: 25}
-      type: simpleObject
+    - name: temp2
+      admin_ui: {order: 23.5, width: 200}
+      type: string
     title: Users
   pre_requis_stagiaire:
     client: search

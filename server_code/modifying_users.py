@@ -53,3 +53,19 @@ def modify_users(user_to_be_modified,
                    histo=histo
                             )
         return True
+
+
+#=======================================================================================
+# In qcm process, maj d'un qcm, l'utilisateur demande un test en visu
+@anvil.server.callable
+@anvil.tables.in_transaction
+def modify_users_temp2(user_to_be_modified, temp2):
+    # finding the user's row 
+    row=anvil.users.get_user(user_to_be_modified)
+    
+    if not row:
+        raise Exception("Erreur: stagiaire non trouvé (mail modifié?) !")
+        return False
+    else:           
+        row.update(temp2=temp2)
+        return True

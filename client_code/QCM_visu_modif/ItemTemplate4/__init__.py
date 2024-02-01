@@ -53,11 +53,14 @@ class ItemTemplate4(ItemTemplate4Template):
         # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
         if user:
-            self.admin = user['role']
-            if self.admin[0:1]!="S":         # si pas stagiaire
-                self.mode= "creation"        # "creation" = mode création/MAJ pas de test stagiaire
+            if user['temp2']!="test":            # si le concepteur du qcm a demandé un test (bt 'test' en QCM_visu_modif_Main) 
+                self.admin = user['role']
+                if self.admin[0:1]!="S":         # si pas stagiaire
+                    self.mode= "creation"        # "creation" = mode création/MAJ pas de test stagiaire
+                else:
+                    self.mode = "test"
             else:
-                self.mode = "test"
+                self.mode = "test"     # le concepteur du qcm a demandé un test (bt 'test' en QCM_visu_modif_Main) 
 
         # Extraction du numéro de qcm
         self.qcm_nb = self.item["qcm_nb"]    # récup qcm nb

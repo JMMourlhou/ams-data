@@ -50,7 +50,11 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         if r == False:
             alert("user non MAJ")
             return
-
+            
+        # Affiche button Test si au moins 1 question existe déjà
+        if nb_questions > 1:
+            self.button_test.visible = True
+            
          # affiches les lignes du qcm
         self.label_3.text = "Mise à jour du Q.C.M " + qcm_row["destination"]
         self.column_panel_1.visible = True
@@ -237,3 +241,13 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def rep5_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         self.button_creer_couleurs()
+
+    def button_test_click(self, **event_args):
+        """This method is called when the button is clicked"""
+
+        # Concepteur du qcm demande un test du qcm qu'il met à jour
+        # écriture ds table user, colonne 'temp2' : "test" 
+        user=anvil.users.get_user()
+        result = anvil.server.call("modify_users_temp2", user, "test")
+        affiche_lignes_qcm()
+        result = anvil.server.call("modify_users_temp2", None)
