@@ -47,9 +47,7 @@ class plot(plotTemplate):
         go.Scatter(
                     x = listx,
                     y = listy,
-                    marker = dict(
-                                     color= 'rgb(16, 32, 77)'
-                                 )
+                    marker = dict(color= 'rgb(16, 32, 77)' )
                 ),
         go.Bar(
             x = listx,
@@ -61,11 +59,11 @@ class plot(plotTemplate):
         # Configure the plot layout
         self.plot_1.layout = {
                                 'title': 'Progression des résultats, QCM ' + qcm_n['destination'],
-                                'xaxis':    {
-                                                'title': "Nb d'essais"
-                                            }
+                                'xaxis': {'title': "Nb d'essais"},
+                                'tickmode': 1,
                             }
         self.plot_1.layout.yaxis.title = 'Nb bonnes réponses'
+        
         self.plot_1.layout.annotations = [
                                              dict(
                                                     text = 'text !!!!!!!!',
@@ -77,3 +75,17 @@ class plot(plotTemplate):
                                         ]
 
 # title=go.layout.Title(text="Election results", x=0.5),
+"""
+'tickmode': 'array',
+
+# Specify the layout
+    layout = {
+      'title': 'Election results',
+      'yaxis': {'title': 'Seats'},
+      'xaxis': {
+        'tickmode': 'array',
+        'tickvals': list(range(27)),
+        'ticktext': data['year'],
+      },
+    }
+"""
