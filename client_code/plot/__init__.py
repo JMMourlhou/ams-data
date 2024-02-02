@@ -40,12 +40,12 @@ class plot(plotTemplate):
         # Plot some data
         self.plot_1.data = [
             go.Scatter(
-                        x=x,
-                        y=y,
-                        marker = dict(
-                                        color= 'rgb(16, 32, 77)'
-                                    )
-                    ),
+                    x = [1, 2, 3],
+                    y = [3, 1, 6],
+                    marker = dict(
+                                     color= 'rgb(16, 32, 77)'
+                                 )
+                ),
             go.Bar(
                 x,
                 y,
