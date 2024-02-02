@@ -24,49 +24,56 @@ class plot(plotTemplate):
                                             user_qcm = user,
                                             qcm_number = qcm_n
                                         )
-           
-            x = []
-            y = []
+            
+            listx = []
+            listy = []
+            list_max = []
             cpt=0
             nb_qcm_passe = len(qcm_rows)
-            
+
             for q in qcm_rows:
                 cpt += 1
-                x.append(cpt)
-                y.append(q['nb_rep_ok'])
-            print(x)
-            print(y)
+                listx.append(cpt)
+                listy.append(q['nb_rep_ok'])
+                max_rep = q['nb_rep_ok']/q['p100_sur_nb_rep']*100
+                list_max.append(max_rep)
+                
+            print(listx)
+            print(listy)
+            print(list_max)
                 
         # Plot some data
         self.plot_1.data = [
-            go.Scatter(
-                    x = [1, 2, 3],
-                    y = [3, 1, 6],
+        go.Scatter(
+                    x = listx,
+                    y = listy,
                     marker = dict(
                                      color= 'rgb(16, 32, 77)'
                                  )
                 ),
-            go.Bar(
-                x,
-                y,
-                name = "essai"
-            )
+        go.Bar(
+            x = listx,
+            y = list_max,
+            name = 'max questions'
+        )
         ]
     
         # Configure the plot layout
         self.plot_1.layout = {
                                 'title': 'Progression des résultats, QCM ' + qcm_n['destination'],
                                 'xaxis':    {
-                                                'title': 'QCM'
+                                                'title': "Nb d'essais"
                                             }
                             }
         self.plot_1.layout.yaxis.title = 'Nb bonnes réponses'
         self.plot_1.layout.annotations = [
                                              dict(
-                                                    text = 'Simple annotation',
+                                                    text = 'text !!!!!!!!',
                                                     x = 0,
-                                                    xref = 'paper',
+                                                    xref = 'x ref -------',
                                                     y = 0,
-                                                    yref = 'paper'
+                                                    yref = 'yref --------- '
                                                  )
                                         ]
+
+# title=go.layout.Title(text="Election results", x=0.5),
