@@ -86,22 +86,22 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         global liste
         liste=[]
         # 10 questions pour partie 1 qcm BNSSA (nb4)
-        liste1 = self.liste_qcm_partie_x(4, 10)   # (num qcm, nb de questions à prendre randomly)
+        liste1 = self.liste_qcm_partie_x(4, 8)   # (num qcm, nb de questions à prendre randomly)
         for i in range(len(liste1)):
             liste.append(liste1[i])
-        liste2 = self.liste_qcm_partie_x(5, 10)
+        liste2 = self.liste_qcm_partie_x(5, 8)
         for i in range(len(liste2)):
             liste.append(liste2[i])
-        liste3 = self.liste_qcm_partie_x(6, 10)
+        liste3 = self.liste_qcm_partie_x(6, 8)
         for i in range(len(liste3)):
             liste.append(liste3[i])
-        liste4 = self.liste_qcm_partie_x(7, 8)
+        liste4 = self.liste_qcm_partie_x(7, 6)
         for i in range(len(liste4)):
             liste.append(liste4[i])
-        liste5 = self.liste_qcm_partie_x(8, 8)
+        liste5 = self.liste_qcm_partie_x(8, 6)
         for i in range(len(liste5)):
             liste.append(liste5[i])
-        liste6 = self.liste_qcm_partie_x(9, 5)
+        liste6 = self.liste_qcm_partie_x(9, 4)
         for i in range(len(liste6)):
             liste.append(liste6[i])
         #if user:

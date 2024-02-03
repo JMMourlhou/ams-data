@@ -36,10 +36,10 @@ class Plot(PlotTemplate):
                 cpt += 1
                 listx.append(cpt)
                 listy.append(q['p100_sur_nb_rep'])    
-                max_rep = 100                         # max = 100 %
+                max_rep = 75                         # max = 75 %
                 list_max.append(max_rep)
-                #liste_date.append(str(q['time'].strftime("%d/%m/%Y")))
-                liste_date.append(str(q['time'].strftime("%d/%m")))
+                liste_date.append(str(q['time'].strftime("%d/%m/%Y")))
+                #liste_date.append(str(q['time'].strftime("%d/%m")))
                 
             print(listx)
             print(listy)
@@ -62,7 +62,7 @@ class Plot(PlotTemplate):
         # Configure the plot layout
         title = f"{nb_qcm_passe} Qcm effectués"
         self.plot_1.layout = {
-                                'title': 'Progression de vos résultats pour le QCM ' + qcm_n['destination'],
+                                'title': 'Progression de vos résultats pour le QCM: ' + qcm_n['destination'],
                                 'xaxis': {'title': title},
                                 'tickmode': 1,           # de 1 en 1
                                 'showlegend': legend     # True pour montrer la légende
