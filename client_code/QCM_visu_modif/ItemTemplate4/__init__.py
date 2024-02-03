@@ -317,7 +317,10 @@ class ItemTemplate4(ItemTemplate4Template):
     # Bouton modif si mode création  // Validation si mode test qcm pour stagiaire
     def button_modif_click(self, **event_args):   #ce n'est que l'orsque le user a clicker sur modif que je prend le contenu
         """This method is called when the button is clicked"""
-        num = self.button_modif.tag.numero           # j'ai le num de la question   
+        if self.mode == "creation":
+            num = self.button_modif.tag.numero           # j'ai le (vrai) num de la question ds le qcm 
+        else:
+            num = int(self.label_2.text)                 # je prends le num de question affiché (qcm tiré de plusieurs qcm ex; BNSSA )
         
         # je récupère mes question, reponse, bareme de la ligne du bouton pressé
         # Je remonte au conteneur parent du bouton (le flow panel)
