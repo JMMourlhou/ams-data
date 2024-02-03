@@ -38,7 +38,7 @@ class plot(plotTemplate):
                 listy.append(q['nb_rep_ok'])
                 max_rep = q['nb_rep_ok']/q['p100_sur_nb_rep']*100
                 list_max.append(max_rep)
-                liste_date = q['time']
+                liste_date.append(str(q['time'].strftime("%d/%m/%Y")))
                 
             print(listx)
             print(listy)
@@ -66,19 +66,32 @@ class plot(plotTemplate):
                             }
         self.plot_1.layout.yaxis.title = 'Nb bonnes réponses'
         
-        date = str(liste_date[0].strftime("%d/%m/%Y"))
-        text1 = liste_date[0]
+        date_deb = liste_date[0]     #dernière date
+        date_fin = liste_date[nb_qcm_passe-1]   # derniere date
         self.plot_1.layout.annotations = [
                                              dict(
-                                                    text = text1,            # flèche commentaire
+                                                    text = date_deb,            # flèche commentaire
                                                     x = 1,
-                                                    xref = 'x ref -------',
+                                                    xref = 'x',
                                                     y = 0,
-                                                    yref = 'yref --------- '
+                                                    yref = 'y',
+                                                    showarrow=True,
+                                                    arrowhead=7,
+                                                    ax=0,
+                                                    ay=-40
+                                                 ),
+                                            dict(
+                                                    text = date_fin,            # flèche commentaire
+                                                    x = nb_qcm_passe,
+                                                    xref = 'x',
+                                                    y = 0,
+                                                    yref = 'y',
+                                                    showarrow=True,
+                                                    arrowhead=7,
+                                                    ax=0,
+                                                    ay=-40
                                                  )
                                         ]
-        
-# title=go.layout.Title(text="Election results", x=0.5),
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
