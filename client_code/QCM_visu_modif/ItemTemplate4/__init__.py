@@ -672,7 +672,7 @@ class ItemTemplate4(ItemTemplate4Template):
         nb = self.qcm_nb['qcm_nb']
         print(nb)
         from ...Plot import Plot
-        self.column_panel_plot.add_component(Plot(nb, True))   # nb:num de qcm   True:afficher la légende
+        self.column_panel_plot.add_component(Plot(nb, False))   # nb:num de qcm   True:afficher la légende
         
         
     def button_enregistrer_et_sortir_click(self, **event_args):

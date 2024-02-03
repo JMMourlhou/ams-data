@@ -144,11 +144,6 @@ components:
     name: column_panel_others
     layout_properties: {grid_position: 'RTTJYF,ASKDYA'}
     components:
-    - name: button_plot
-      properties: {text: plot, background: 'theme:On Primary Container'}
-      type: Button
-      layout_properties: {grid_position: 'ELMVEX,CNPITP'}
-      event_bindings: {click: button_plot_click}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
         enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Effectuer un QCM,
