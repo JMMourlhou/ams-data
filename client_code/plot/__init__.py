@@ -16,7 +16,7 @@ class plot(plotTemplate):
 
         # Any code you write here will run before the form opens.
         # lecture du qcm
-        qcm_n = app_tables.qcm_description.get(qcm_nb=1)
+        qcm_n = app_tables.qcm_description.get(qcm_nb=3)
         # lecture du stagiaire
         user=anvil.users.get_user()
         if user:
@@ -28,6 +28,7 @@ class plot(plotTemplate):
             listx = []
             listy = []
             list_max = []
+            liste_date =[]
             cpt=0
             nb_qcm_passe = len(qcm_rows)
 
@@ -37,6 +38,7 @@ class plot(plotTemplate):
                 listy.append(q['nb_rep_ok'])
                 max_rep = q['nb_rep_ok']/q['p100_sur_nb_rep']*100
                 list_max.append(max_rep)
+                liste_date = q['time']
                 
             print(listx)
             print(listy)
@@ -60,21 +62,28 @@ class plot(plotTemplate):
         self.plot_1.layout = {
                                 'title': 'Progression des résultats, QCM ' + qcm_n['destination'],
                                 'xaxis': {'title': "Nb d'essais"},
-                                'tickmode': 1,
+                                'tickmode': 1,           # de 1 en 1
                             }
         self.plot_1.layout.yaxis.title = 'Nb bonnes réponses'
         
+        date = str(liste_date[0].strftime("%d/%m/%Y"))
+        text1 = liste_date[0]
         self.plot_1.layout.annotations = [
                                              dict(
-                                                    text = 'text !!!!!!!!',
-                                                    x = 0,
+                                                    text = text1,            # flèche commentaire
+                                                    x = 1,
                                                     xref = 'x ref -------',
                                                     y = 0,
                                                     yref = 'yref --------- '
                                                  )
                                         ]
-
+        
 # title=go.layout.Title(text="Election results", x=0.5),
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form('Main',99)
 """
 'tickmode': 'array',
 
