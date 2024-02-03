@@ -141,7 +141,7 @@ class ItemTemplate4(ItemTemplate4Template):
         global nb
         nb = -1 * (int(self.label_nb_questions.text)+1)
         #self.label_2.text = self.item['num']  #-------------Affichage du num de question (universelle, y compris pour qcm à partir )
-        self.label_2.text = nb                 # VOIR L'initialisation avec global nb = nb de questions
+        #self.label_2.text = nb                 # VOIR L'initialisation avec global nb = nb de questions
 
         if self.mode == "creation":                   # EN MODE CREATION JE CONSERVE LES NUM DE QUESTION REELS
             self.rep1.tag.numero = self.item['num']
@@ -149,12 +149,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.rep3.tag.numero = self.item['num']
             self.rep4.tag.numero = self.item['num']
             self.rep5.tag.numero = self.item['num']
-        else:                                         # # EN MODE UTILISATION JE MEMORISE LES NUM VIRTUELS (sinon en cas de QCM tirés de plusieurs, pb de num de question)
-            self.rep1.tag.numero = self.label_2.text
-            self.rep2.tag.numero = self.label_2.text
-            self.rep3.tag.numero = self.label_2.text
-            self.rep4.tag.numero = self.label_2.text
-            self.rep5.tag.numero = self.label_2.text
+        
 
         
         self.label_2.tag.numero = self.item['num']
@@ -735,4 +730,11 @@ class ItemTemplate4(ItemTemplate4Template):
         global nb
         nb += 1
         self.label_2.text = abs(nb)
+
+        if self.mode != "creation":                                         # # EN MODE UTILISATION JE MEMORISE LES NUM VIRTUELS (sinon en cas de QCM tirés de plusieurs, pb de num de question)
+            self.rep1.tag.numero = self.label_2.text
+            self.rep2.tag.numero = self.label_2.text
+            self.rep3.tag.numero = self.label_2.text
+            self.rep4.tag.numero = self.label_2.text
+            self.rep5.tag.numero = self.label_2.text
       
