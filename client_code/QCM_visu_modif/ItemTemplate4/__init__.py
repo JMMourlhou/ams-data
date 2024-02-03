@@ -96,11 +96,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.rep4.tag.nom = "rep4"
         self.rep5.tag.nom = "rep5"
         
-        self.rep1.tag.numero = self.item['num']
-        self.rep2.tag.numero = self.item['num']
-        self.rep3.tag.numero = self.item['num']
-        self.rep4.tag.numero = self.item['num']
-        self.rep5.tag.numero = self.item['num']
+        
 
         # Récupération de chaque réponse corrigée pour chaque option de la question
         self.rep1.tag.correction = ""
@@ -137,11 +133,29 @@ class ItemTemplate4(ItemTemplate4Template):
         
         #recherche nb de questions (sauvées ds temp table)
         self.label_nb_questions.text = user['temp']
+
+        """
+                                               POUR AFFICHAGE DU NUM DE QUESTION VIRTUEL DE LA QUESTION EN LABEL_2.text 
+        """        
         self.label_2.tag.nom = "cpt"
         global nb
         nb = -1 * (int(self.label_nb_questions.text)+1)
         #self.label_2.text = self.item['num']  #-------------Affichage du num de question (universelle, y compris pour qcm à partir )
-        self.label_2.text = nb                 # VOIR L'initilisation avec global nb = nb de questions
+        self.label_2.text = nb                 # VOIR L'initialisation avec global nb = nb de questions
+
+        if self.mode == "creation":                   # EN MODE CREATION JE CONSERVE LES NUM DE QUESTION REELS
+            self.rep1.tag.numero = self.item['num']
+            self.rep2.tag.numero = self.item['num']
+            self.rep3.tag.numero = self.item['num']
+            self.rep4.tag.numero = self.item['num']
+            self.rep5.tag.numero = self.item['num']
+        else:                                         # # EN MODE UTILISATION JE MEMORISE LES NUM VIRTUELS (sinon en cas de QCM tirés de plusieurs, pb de num de question)
+            self.rep1.tag.numero = self.label_2.text
+            self.rep2.tag.numero = self.label_2.text
+            self.rep3.tag.numero = self.label_2.text
+            self.rep4.tag.numero = self.label_2.text
+            self.rep5.tag.numero = self.label_2.text
+
         
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"
@@ -598,7 +612,14 @@ class ItemTemplate4(ItemTemplate4Template):
                                 if cpnt1.tag.nom == "cp_options":
                                     for rep in cpnt1.get_components():
                                         print(f"++++++++ {rep}, {rep.tag.nom}")
+
+                                        
+                                        
                                         num_question = rep.tag.numero
+
+
+
+                                        
                                         if rep.tag.nom == "rep1-true": 
                                             nb_options = rep.tag.nb_options     # si j'utilise self.nb_options je prends le nb d'options de la dernière question lue
                                         # --------------------------------------------------------------------------------------------
