@@ -23,4 +23,4 @@ components:
     properties: {}
     type: Plot
     layout_properties: {grid_position: 'RWRPVG,IYMMON'}
-is_package: true
+is_package: false
