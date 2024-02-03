@@ -48,8 +48,7 @@ class ItemTemplate4(ItemTemplate4Template):
         reponses = {}   #liste type dict de toutes les réponses du stagiaire {cle:num, valeurV/F}
         global cpt
         cpt=0
-        
-        
+  
         # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
         if user:
@@ -667,7 +666,15 @@ class ItemTemplate4(ItemTemplate4Template):
                                                         rep.background = "red"
                                                     else:
                                                         rep.background = "green"
-    
+        # Affichage du plot
+        self.column_panel_plot.clear()
+        #print("self.qcm_nb: ", self.qcm_nb)
+        nb = self.qcm_nb['qcm_nb']
+        print(nb)
+        from ...Plot import Plot
+        self.column_panel_plot.add_component(Plot(nb, True))   # nb:num de qcm   True:afficher la légende
+        
+        
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ...Main import Main
@@ -703,48 +710,4 @@ class ItemTemplate4(ItemTemplate4Template):
         global nb
         nb += 1
         self.label_2.text = abs(nb)
-
-
-
-
- 
-    
-
-
-
-
-
-
-
-
-
-
-                              
-
-            
-
-
-
-
-        
-
-   
-        
-
-
-    
-
-        
-
-    
-
-        
-
-
-
-
- 
-
-
-        
-        
+      

@@ -196,7 +196,6 @@ class Main(MainTemplate):
     def bt_user_mail_click(self, prem_util=False, **event_args):    # True=1ere utilisation
         """This method is called when the button is clicked"""
         self.content_panel.clear()
-        
         self.bt_se_deconnecter.visible = False
         self.bt_sign_in.visible = False
         # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
@@ -249,8 +248,8 @@ class Main(MainTemplate):
 
     def button_plot_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..plot import plot
-        open_form('plot')
+        from ..Plot import Plot
+        open_form('Plot')
 
 
 

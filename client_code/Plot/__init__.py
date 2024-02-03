@@ -1,4 +1,4 @@
-from ._anvil_designer import plotTemplate
+from ._anvil_designer import PlotTemplate
 from anvil import *
 import plotly.graph_objects as go
 import anvil.server
@@ -7,10 +7,10 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from plotly import graph_objects as go
+from plotly import graph_objects as go           # AFFICHAGE DES RESULTATS de plusieurs tests sur 1 QCM
 
-class plot(plotTemplate):
-    def __init__(self, nb=3, **properties):
+class Plot(PlotTemplate):
+    def __init__(self, nb, legend = True, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
@@ -62,9 +62,10 @@ class plot(plotTemplate):
         # Configure the plot layout
         title = f"{nb_qcm_passe} Qcm effectués"
         self.plot_1.layout = {
-                                'title': 'Progression des résultats, QCM ' + qcm_n['destination'],
+                                'title': 'Progression de vos résultats pour le QCM ' + qcm_n['destination'],
                                 'xaxis': {'title': title},
                                 'tickmode': 1,           # de 1 en 1
+                                'showlegend': legend     # True pour montrer la légende
                             }
         self.plot_1.layout.yaxis.title = '% de bonnes réponses'
         
@@ -97,6 +98,6 @@ class plot(plotTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
+        from .Main import Main
         open_form('Main',99)
 
