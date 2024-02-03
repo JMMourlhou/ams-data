@@ -148,7 +148,7 @@ class ItemTemplate4(ItemTemplate4Template):
         qst = self.item['question']
         qst = qst.strip()
         
-        if self.mode != "creation":
+        if self.mode != "creation":                 # Mode Utilisation
             """
             if int(self.item['bareme']) > 1:
                 self.text_area_question.text = (f"{qst} \n  ({self.item['bareme']} points)")
@@ -158,7 +158,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.text_area_question.text = qst
             self.text_area_question.enabled = False
             self.button_delete.visible = False
-        else:
+        else:                                       # Mode Création/MAJ 
             self.text_area_question.text = qst
             self.text_area_question.enabled = True
             
@@ -226,7 +226,7 @@ class ItemTemplate4(ItemTemplate4Template):
                     self.rep5.checked = True      
                 else:
                     self.rep5.checked = False
-            
+
             self.text_box_correction.visible = True  # j'affiche la correction
        
     def text_area_question_change(self, **event_args):                         # Question a changé (en création QCM)
@@ -578,8 +578,9 @@ class ItemTemplate4(ItemTemplate4Template):
                         print("c", c.tag.nom)
                         
                         if c.tag.nom == "correction" :
-                            c.visible = True
-                            c.enabled = False
+                            if c.text != "":
+                                c.visible = True
+                                c.enabled = False
                             
                         if c.tag.nom ==  "fp_vrai/faux_bareme": 
                             pass
