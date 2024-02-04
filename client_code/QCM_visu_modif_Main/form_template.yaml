@@ -250,7 +250,7 @@ components:
       layout_properties: {}
     - type: Button
       properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: false, foreground: 'theme:On Primary', visible: true, text: Insérer  la question,
+        enabled: false, foreground: 'theme:On Primary', visible: true, text: 'Insérer ',
         font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
         italic: false, background: 'theme:On Primary Container', bold: false, underline: false,
         icon: ''}
@@ -258,7 +258,7 @@ components:
       event_bindings: {click: button_creer_click}
       layout_properties: {}
     - name: button_test
-      properties: {text: Test du Qcm, background: 'theme:On Primary Container', foreground: 'theme:Tertiary',
+      properties: {text: Test Qcm, background: 'theme:On Primary Container', foreground: 'theme:Tertiary',
         visible: false}
       type: Button
       layout_properties: {}
