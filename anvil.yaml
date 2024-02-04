@@ -5,9 +5,6 @@ dependencies:
 - dep_id: dep_s1ab3kmc49opgj
   version: {dev: false}
   resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_in_for_AMS_Data}
-- dep_id: dep_bd19zuh0vhcvo
-  version: {dev: false}
-  resolution_hints: {app_id: 2KPIX2PJP2XMXLCR, name: alert2, package_name: alert2}
 - dep_id: dep_1b6m345gr6tpp
   version: {dev: false}
   resolution_hints: {app_id: 5PSA5XWRBNOHKUCJ, name: InputBox, package_name: InputBox}
@@ -336,6 +333,9 @@ db_schema:
       type: string
     - name: temp2
       admin_ui: {order: 23.5, width: 200}
+      type: string
+    - name: temp3
+      admin_ui: {order: 23.75, width: 200}
       type: string
     title: Users
   pre_requis_stagiaire:

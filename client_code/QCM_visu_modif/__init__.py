@@ -10,7 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 class QCM_visu_modif(QCM_visu_modifTemplate):
-    def __init__(self, liste, **properties):
+    def __init__(self, liste, **properties):      
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 

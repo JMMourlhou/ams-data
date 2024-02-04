@@ -92,7 +92,7 @@ def renumber_qcm(qcm_descro_row):
 # ENREGITREMENT, en fin de questions du QCM pour un stagiaire
 @anvil.server.callable 
 @anvil.tables.in_transaction
-def qcm_result(user, qcm_nb, nb_bonnes_rep, max_points, points, reponses):      # debut: debut de qcm, enregt du num et user
+def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):      # debut: debut de qcm, enregt du num et user
     import French_zone_server_side
     nb_questions = len(reponses)
     if nb_questions == 0:
@@ -100,9 +100,13 @@ def qcm_result(user, qcm_nb, nb_bonnes_rep, max_points, points, reponses):      
         return
     p100_sur_nb_rep = int(nb_bonnes_rep / nb_questions * 100)
     p100_sur_points = int(points / max_points * 100)
+
+    # lecture fichier qcm_decription
+    qcm_row=app_tables.qcm_description.get(qcm_nb=qcm_numero)
+    
     app_tables.qcm_result.add_row(
                                     user_qcm= user,
-                                    qcm_number=qcm_nb,
+                                    qcm_number=qcm_row,
                                     time= French_zone_server_side.time_french_zone(),
                                     liste_rep = reponses,
                                     nb_rep_ok = nb_bonnes_rep,
@@ -110,7 +114,7 @@ def qcm_result(user, qcm_nb, nb_bonnes_rep, max_points, points, reponses):      
                                     p100_sur_points = p100_sur_points
                             )
 
-    qcm_result_row = app_tables.qcm_result.search(qcm_number = qcm_nb,
+    qcm_result_row = app_tables.qcm_result.search(qcm_number = qcm_row,
                                                   user_qcm= user,
                                             )
     if qcm_result_row:
@@ -124,12 +128,14 @@ def qcm_result(user, qcm_nb, nb_bonnes_rep, max_points, points, reponses):      
 # modify the column temp of table user during qcm (nb of questions)
 # ==================================================================================================
 @anvil.server.callable
-def temp_user_qcm(user, nb_questions_in_qcm):
+def temp_user_qcm(user, nb_questions_in_qcm, numero_qcm):
     #user.update(temp = int(nb_questions_in_qcm))
     result = False
     if user:
         try:
-            user.update(temp = int(nb_questions_in_qcm))
+            user.update(temp = int(nb_questions_in_qcm),           # temp2 contient 'test' si le concepteur a testé son qcm
+                        temp3 = str(numero_qcm)                        
+                       )
             result = True
         except:
             result = False

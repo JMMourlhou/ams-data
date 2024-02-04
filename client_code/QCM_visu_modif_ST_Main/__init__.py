@@ -13,9 +13,6 @@ import random             # pour rechercher les qcm BNSSA randomly avec random.r
 global liste
 liste = []
 
-
-
-
 class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def __init__(self, qcm_descro_nb=None, **properties):
         # Set Form properties and Data Bindings.
@@ -40,6 +37,8 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             self.drop_down_qcm_row.selected_value = qcm_descro_nb
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
+
+        self.button_annuler_copy.visible = False
     
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -56,7 +55,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
 
         # acquisition du user et modif de son temp (nb de questions de son qcm)
         user=anvil.users.get_user()
-        r = anvil.server.call("temp_user_qcm", user, nb_questions)
+        r = anvil.server.call("temp_user_qcm", user, nb_questions, qcm_row["qcm_nb"])
         if r == False:
             alert("user non MAJ")
             return
@@ -70,6 +69,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         global liste
         self.column_panel_content.clear()
         self.column_panel_content.add_component(QCM_visu_modif(liste), full_width_row=True)
+        self.button_annuler_copy.visible = True
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
