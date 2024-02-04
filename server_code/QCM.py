@@ -133,12 +133,11 @@ def temp_user_qcm(user, nb_questions_in_qcm, numero_qcm):
     result = False
     if user:
         try:
-            user.update(temp = int(nb_questions_in_qcm),           # temp2 contient 'test' si le concepteur a testé son qcm
-                        temp3 = str(numero_qcm)                        
-                       )
+            user.update(temp = int(nb_questions_in_qcm),        # temp2 contient 'test' si le concepteur a testé son qcm     
+                        temp3 = str(numero_qcm)                 # temp3 contient num du qcm réel
+                       )                                        # temp contient le nb de questions
             result = True
         except:
             result = False
             
     return result
-

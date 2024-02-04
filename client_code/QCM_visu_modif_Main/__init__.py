@@ -46,7 +46,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
         # acquisition du user et modif de son temp (nb de questions de son qcm)
         user=anvil.users.get_user()
-        r = anvil.server.call("temp_user_qcm", user, nb_questions)
+        r = anvil.server.call("temp_user_qcm", user, nb_questions,qcm_row["qcm_nb"])
         if r == False:
             alert("user non MAJ")
             return
