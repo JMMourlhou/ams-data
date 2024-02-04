@@ -554,7 +554,9 @@ class ItemTemplate4(ItemTemplate4Template):
                 default_button='Non',    
                 large=True
                 )
-            if r == "Oui" :                    
+           
+            if r == "Oui" :  
+                print("r :",r)
                 self.button_enregistrer_et_sortir_click()
             else:
                 return
