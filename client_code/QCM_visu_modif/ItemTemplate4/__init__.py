@@ -690,9 +690,14 @@ class ItemTemplate4(ItemTemplate4Template):
                 #print("self.qcm_nb: ", self.qcm_nb)
                 nb = self.qcm_nb['qcm_nb']
                 print(nb)
+                """ plotlib """
+                from ...Plot_matplotlib import Plot_matplotlib
+                self.column_panel_plot.add_component(Plot_matplotlib(int(self.vrai_numero_qcm), False))   # nb:num de qcm   True:afficher la légende
+                
+                """ plotly 
                 from ...Plot import Plot
                 self.column_panel_plot.add_component(Plot(int(self.vrai_numero_qcm), False))   # nb:num de qcm   True:afficher la légende
-        
+                """
         
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
