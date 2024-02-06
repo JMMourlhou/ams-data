@@ -1,5 +1,8 @@
-from ._anvil_designer import PlotTemplate
+from ._anvil_designer import Plot_avec_barsTemplate
 from anvil import *
+import stripe.checkout
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
 import plotly.graph_objects as go
 import anvil.server
 import anvil.users
@@ -9,16 +12,16 @@ from anvil.tables import app_tables
 
 from plotly import graph_objects as go           # AFFICHAGE DES RESULTATS de plusieurs tests sur 1 QCM
 
-class Plot(PlotTemplate):
+class Plot_avec_bars(Plot_avec_barsTemplate):
     def __init__(self, nb, legend = True, **properties):        # le nb vient de temp3 ds user (à cause du qcm BNSSA tiré de plusieurs qcm)
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
+
         # lecture du qcm
         qcm_n = app_tables.qcm_description.get(qcm_nb=nb)
-        
+
         # lecture du stagiaire
         user=anvil.users.get_user()
         if user:
@@ -26,9 +29,8 @@ class Plot(PlotTemplate):
                                             user_qcm = user,
                                             qcm_number = qcm_n
                                         )
-            
-            listx_int = []           # liste nb de fois qcm effectué         (1,    2,   3,  ...)
-            listx_str = []           # liste nb de fois, mais en str pour affichage de x
+
+            listx = []           # liste nb de fois qcm effectué         (1,    2,   3,  ...)
             listy = []           # liste du résultat obtenu àch passage  (10%, 25%, 35%, ...)
             list_min = []
             liste_date =[]
@@ -37,48 +39,41 @@ class Plot(PlotTemplate):
 
             for q in qcm_rows:
                 cpt += 1
-                listx_int.append(cpt)
-                listx_str.append(str(cpt))
-                listy.append(q['p100_sur_nb_rep'])    
+                listx.append(cpt)
+                listy.append(q['p100_sur_nb_rep'])
                 min_rep = 75                         # max = 75 %
                 list_min.append(min_rep)
                 liste_date.append(str(q['time'].strftime("%d/%m/%Y")))
                 #liste_date.append(str(q['time'].strftime("%d/%m")))
-                
-            print("x int  ",listx_int)
-            print("x text ",listx_str)
-            print("y", listy)
+
+            print(listx)
+            print(listy)
             print(list_min)
-                
+
         # Plot some data
         self.plot_1.data = [
         go.Scatter(
-                    x = listx_int,
+                    x = listx,
                     y = listy,
                     marker = dict(color= 'rgb(16, 32, 77)' )
                 ),
-        go.Scatter(
-                    x = listx_int,
-                    y = list_min,
-                    marker = dict(color= 'rgb(204, 0, 0)' ),
-                    mode="lines",
-                    line=dict(dash='dash')
+        go.Bar(
+            x = listx,
+            y = list_max,
+            name = '100 %'
                 )
         ]
-        
+
         # Configure the plot layout
         title = f"{nb_qcm_passe} Qcm effectués"
         self.plot_1.layout = {
                                 'title': 'Vos résultats pour le QCM: ' + qcm_n['destination'],
                                 'xaxis': {'title': title},
-                                'yaxis': dict(range=[0, 100]),
-                                'tickmode': 'array',           # de 1 en 1
-                                'tickvals' : listx_int,            # position des marques de graduation
-                                'ticktext' : listx_str,            # texte qui doit être affiché sur x
+                                'tickmode': 1,           # de 1 en 1
                                 'showlegend': legend     # True pour montrer la légende
                             }
         self.plot_1.layout.yaxis.title = '% de bonnes réponses'
-        
+
         date_deb = liste_date[0]     #dernière date
         date_fin = liste_date[nb_qcm_passe-1]   # derniere date
         self.plot_1.layout.annotations = [
@@ -110,4 +105,3 @@ class Plot(PlotTemplate):
         """This method is called when the button is clicked"""
         from .Main import Main
         open_form('Main',99)
-
