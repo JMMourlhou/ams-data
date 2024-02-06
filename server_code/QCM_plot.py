@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt           # AFFICHAGE DES RESULTATS de plusieurs tests sur 1 QCM
 import anvil.server
-
+import anvil.mpl_util
 # ==================================================================================================
 # At the end od a QCM, displays the results
 # ==================================================================================================

@@ -52,7 +52,7 @@ class Plot_matplotlib(Plot_matplotlibTemplate):
             print(listy)
             print(list_max)
             
-            self.plot_1 = anvil.server.call("qcm_plot", listx, listy, x_label, y_label)
+            self.plot_1.source = anvil.server.call("qcm_plot", listx, listy, x_label, y_label)
            
         
     def button_annuler_click(self, **event_args):
