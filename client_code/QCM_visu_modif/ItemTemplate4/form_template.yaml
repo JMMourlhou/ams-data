@@ -101,9 +101,9 @@ components:
         event_bindings: {change: rep5_change}
       data_bindings: []
   - name: text_box_correction
-    properties: {role: null, align: center, height: 63.784912109375, tooltip: '',
-      placeholder: '', border: '', enabled: true, foreground: 'theme:On Primary Container',
-      visible: false, text: '', font_size: null, auto_expand: true, font: '', spacing_above: none,
+    properties: {role: null, align: left, height: 63.784912109375, tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: 'theme:On Primary Container', visible: false,
+      text: '', font_size: null, auto_expand: true, font: '', spacing_above: none,
       spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
       underline: false}
     type: TextArea
