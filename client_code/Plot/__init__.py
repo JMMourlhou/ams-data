@@ -67,9 +67,9 @@ class Plot(PlotTemplate):
         ]
         
         # Configure the plot layout
-        title = f"{nb_qcm_passe} Qcm effectués"
+        title = f"{nb_qcm_passe} Qcm passés pour {qcm_n['destination']}"
         self.plot_1.layout = {
-                                'title': 'Vos résultats pour le QCM: ' + qcm_n['destination'],
+                                'title': title,
                                 'xaxis': {'title': title,
                                          'visible': False  # Masque l'axe X
                                          },
