@@ -71,9 +71,10 @@ class Plot(PlotTemplate):
         self.plot_1.layout = {
                                 'title': title,
                                 'xaxis': {'title': title,
-                                         'visible': False  # Masque l'axe X
-                                         },
+                                         'visible': False                 # Masque l'axe X   !!
+                                          },
                                 'yaxis': dict(range=[0, 100]),
+                                'plot_bgcolor': 'lightblue',  # Couleur de fond personnalisée
                                 'tickmode': 'array',           # de 1 en 1
                                 'tickvals' : listx_int,            # position des marques de graduation
                                 'ticktext' : listx_str,            # texte qui doit être affiché sur x
