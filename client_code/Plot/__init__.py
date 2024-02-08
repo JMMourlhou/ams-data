@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 from plotly import graph_objects as go           # AFFICHAGE DES RESULTATS de plusieurs tests sur 1 QCM
 
 class Plot(PlotTemplate):
-    def __init__(self, nb, legend = True, **properties):        # le nb vient de temp3 ds user (à cause du qcm BNSSA tiré de plusieurs qcm)
+    def __init__(self, nb, legend = False, **properties):        # le nb vient de temp3 ds user (à cause du qcm BNSSA tiré de plusieurs qcm)
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
@@ -42,8 +42,8 @@ class Plot(PlotTemplate):
                 listy.append(q['p100_sur_nb_rep'])    
                 min_rep = 75                         # max = 75 %
                 list_min.append(min_rep)
-                liste_date.append(str(q['time'].strftime("%d/%m/%Y")))
-                #liste_date.append(str(q['time'].strftime("%d/%m")))
+                #liste_date.append(str(q['time'].strftime("%d/%m/%Y")))
+                liste_date.append(str(q['time'].strftime("%d/%m")))
                 
             print("x int  ",listx_int)
             print("x text ",listx_str)
@@ -70,7 +70,9 @@ class Plot(PlotTemplate):
         title = f"{nb_qcm_passe} Qcm effectués"
         self.plot_1.layout = {
                                 'title': 'Vos résultats pour le QCM: ' + qcm_n['destination'],
-                                'xaxis': {'title': title},
+                                'xaxis': {'title': title,
+                                         'visible': False  # Masque l'axe X
+                                         },
                                 'yaxis': dict(range=[0, 100]),
                                 'tickmode': 'array',           # de 1 en 1
                                 'tickvals' : listx_int,            # position des marques de graduation
@@ -88,10 +90,10 @@ class Plot(PlotTemplate):
                                                     xref = 'x',
                                                     y = 0,
                                                     yref = 'y',
-                                                    showarrow=True,
+                                                    showarrow=True,       # Montre lea flèche :True
                                                     arrowhead=15,
                                                     ax=0,
-                                                    ay=-40
+                                                    ay=-20
                                                  ),
                                             dict(
                                                     text = date_fin,            # flèche commentaire
@@ -102,7 +104,7 @@ class Plot(PlotTemplate):
                                                     showarrow=True,
                                                     arrowhead=15,
                                                     ax=0,
-                                                    ay=-40
+                                                    ay=-20
                                                  )
                                         ]
 
