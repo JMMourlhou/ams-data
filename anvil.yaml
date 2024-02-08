@@ -364,6 +364,28 @@ db_schema:
       admin_ui: {width: 200, order: 7.5}
       type: media
     title: Pre_Requis_stagiaire
+  formateurs:
+    client: none
+    server: full
+    columns:
+    - name: email_formateur
+      admin_ui: {width: 200, order: 0}
+      type: link_single
+      target: users
+    - name: item_requis
+      admin_ui: {width: 200, order: 1}
+      type: link_single
+      target: pre_requis
+    - name: doc1
+      admin_ui: {order: 2, width: 200}
+      type: media
+    - name: pdf_doc1
+      admin_ui: {width: 200, order: 3}
+      type: media
+    - name: check
+      admin_ui: {order: 1.5, width: 138}
+      type: bool
+    title: Formateurs
   stages:
     client: search
     server: full

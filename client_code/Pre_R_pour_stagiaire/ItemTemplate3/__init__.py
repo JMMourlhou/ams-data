@@ -10,7 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.media
 from ...import Pre_R_doc_name        # Pour générer un nouveau nom au document chargé
-
+# test
 class ItemTemplate3(ItemTemplate3Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
