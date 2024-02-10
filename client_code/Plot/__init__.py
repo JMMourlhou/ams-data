@@ -114,3 +114,8 @@ class Plot(PlotTemplate):
         from .Main import Main
         open_form('Main',99)
 
+    def plot_1_click(self, points, **event_args):
+        """This method is called when a data point is clicked."""
+        print("download")
+        anvil.media.download(self.plot_1)
+
