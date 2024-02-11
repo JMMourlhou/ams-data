@@ -71,16 +71,18 @@ class Plot(PlotTemplate):
         self.plot_1.layout = {
                                 'title': title,
                                 'xaxis': {'title': title,
-                                         'visible': False                 # Masque l'axe X   !!
+                                         'visible': False                 # Masque l'axe X et son titre  !!
                                           },
-                                'yaxis': dict(range=[0, 100]),
-                                'plot_bgcolor': 'lightblue',  # Couleur de fond personnalisée
-                                'tickmode': 'array',           # de 1 en 1
+                                'yaxis': dict(range=[0, 100]),    
+                                'plot_bgcolor': 'lightblue',       # Couleur de fond personnalisée
+                                'tickmode': 'array',               # de 1 en 1
                                 'tickvals' : listx_int,            # position des marques de graduation
                                 'ticktext' : listx_str,            # texte qui doit être affiché sur x
                                 'showlegend': legend     # True pour montrer la légende
                             }
         self.plot_1.layout.yaxis.title = '% de bonnes réponses'
+        self.plot_1.layout.xaxis.title = 'Essai nom date'
+        
         
         date_deb = liste_date[0]     #dernière date
         date_fin = liste_date[nb_qcm_passe-1]   # derniere date
