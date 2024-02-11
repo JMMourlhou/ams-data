@@ -43,9 +43,10 @@ class Plot(PlotTemplate):
                 listy.append(q['p100_sur_nb_rep'])    
                 min_rep = 75                         # max = 75 %
                 list_min.append(min_rep)
-                liste_date.append(str(q['time'].strftime("%d/%m/%Y, %Hh%M")))
-                #liste_date.append(str(q['time'].strftime("%d/%m, %Hh%M")))
-            
+                if len(qcm_rows)>1:
+                    liste_date.append(str(q['time'].strftime("%d/%m")))
+                else:
+                    liste_date.append(str(q['time'].strftime("%d/%m/%Y, %Hh%M")))            
             
             print('date / h : ', str(liste_date[nb_qcm_passe-1]))
             print("x int  ",listx_int)
@@ -71,13 +72,12 @@ class Plot(PlotTemplate):
                         line=dict(dash='dash')
                     )
             ]
-        else:                            # 1 SEUL QCM 
+        else:                            # 1 SEUL QCM : Camembert
             date_qcm = str(liste_date[nb_qcm_passe-1])
             title = f"QCM {qcm_n['destination']} du {date_qcm}, de {user['email']}"
             colors = ['green', 'lightblue']  # couleurs pour chaque tranche
             labels = ['% Bonnes réponses','Erreurs']  # Les étiquettes correspondantes
             listy_pour1qcm = [listy[0],100-listy[0]]
-            
             if  listy[0] >= 75:
                 self.label_nom.text = f"Réussite au QCM {qcm_n['destination']} / {user['nom']} {user['prenom']}"
                 title_pie = "Réussite"
