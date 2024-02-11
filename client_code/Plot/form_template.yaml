@@ -4,30 +4,20 @@ is_package: true
 toolbox_item: {title: JM_Plot}
 custom_component: false
 components:
-- name: column_panel_1
+- name: column_panel_2
   properties: {role: outlined-card}
   type: ColumnPanel
-  layout_properties: {grid_position: 'AGWGLN,VIMPZF'}
+  layout_properties: {grid_position: 'FYHKZF,LNOYEI'}
   components:
-  - name: column_panel_2
-    properties: {role: outlined-card}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'GHBWPX,ETEHCJ'}
-    components:
-    - name: label_nom
-      properties: {spacing_above: none, align: center, font: '14', foreground: 'theme:On
-          Primary Container', background: 'theme:On Primary', role: null, bold: true,
-        spacing_below: none}
-      type: Label
-      layout_properties: {grid_position: 'UVEBTB,ARQPYG'}
-  - name: column_panel_4
-    properties: {role: outlined-card}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'DNKSBO,CEEIHO'}
-    components:
-    - name: plot_1
-      properties: {interactive: true, spacing_above: none, spacing_below: none}
-      type: Plot
-      layout_properties: {grid_position: 'VJDPXB,HKDFLR'}
-      event_bindings: {click: plot_1_click}
+  - name: label_nom
+    properties: {spacing_above: none, align: center, font: '14', foreground: 'theme:On
+        Primary Container', background: 'theme:On Primary', role: null, bold: true,
+      spacing_below: none}
+    type: Label
+    layout_properties: {grid_position: 'UVEBTB,ARQPYG'}
+- name: plot_1
+  properties: {interactive: true, spacing_above: none, spacing_below: none}
+  type: Plot
+  layout_properties: {grid_position: 'SHINHL,XWBYBZ'}
+  event_bindings: {click: plot_1_click}
 container: {type: ColumnPanel}
