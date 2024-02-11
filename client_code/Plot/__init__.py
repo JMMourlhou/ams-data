@@ -43,7 +43,7 @@ class Plot(PlotTemplate):
                 min_rep = 75                         # max = 75 %
                 list_min.append(min_rep)
                 #liste_date.append(str(q['time'].strftime("%d/%m/%Y")))
-                liste_date.append(str(q['time'].strftime("%d/%m")))
+                liste_date.append(str(q['time'].strftime("%d/%m, %Hh%M")))
                 
             print("x int  ",listx_int)
             print("x text ",listx_str)
@@ -67,7 +67,7 @@ class Plot(PlotTemplate):
         ]
         
         # Configure the plot layout
-        title = f"{nb_qcm_passe} Qcm passés pour {qcm_n['destination']}"
+        title = f"{nb_qcm_passe} Qcm passé(s) pour {qcm_n['destination']}"
         self.plot_1.layout = {
                                 'title': title,
                                 'xaxis': {'title': title,
@@ -80,8 +80,7 @@ class Plot(PlotTemplate):
                                 'ticktext' : listx_str,            # texte qui doit être affiché sur x
                                 'showlegend': legend     # True pour montrer la légende
                             }
-        self.plot_1.layout.yaxis.title = '% de bonnes réponses'
-        self.plot_1.layout.xaxis.title = 'Essai nom date'
+        self.plot_1.layout.yaxis.title = '% réponses ok - ' + user['email']
         
         
         date_deb = liste_date[0]     #dernière date
