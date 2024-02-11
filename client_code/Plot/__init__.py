@@ -68,7 +68,8 @@ class Plot(PlotTemplate):
         
         # Configure the plot layout
         title = f"{nb_qcm_passe} Qcm passé(s) pour {qcm_n['destination']}"
-        self.plot_1.layout = {
+        self.plot_1.layout = {  'displayModeBar' : True,          # False: n'affiche que qd passe au dessus
+                                'modeBarButtonsToRemove' : ['zoomIn2d', 'zoomOut2d', 'pan2d' ],
                                 'title': title,
                                 'xaxis': {'title': title,
                                          'visible': False                 # Masque l'axe X et son titre  !!
@@ -78,10 +79,9 @@ class Plot(PlotTemplate):
                                 'tickmode': 'array',               # de 1 en 1
                                 'tickvals' : listx_int,            # position des marques de graduation
                                 'ticktext' : listx_str,            # texte qui doit être affiché sur x
-                                'showlegend': legend     # True pour montrer la légende
+                                'showlegend': legend     # True pour montrer la légende (false par défaut voir l'init)
                             }
         self.plot_1.layout.yaxis.title = '% réponses ok - ' + user['email']
-        
         
         date_deb = liste_date[0]     #dernière date
         date_fin = liste_date[nb_qcm_passe-1]   # derniere date

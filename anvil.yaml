@@ -40,7 +40,7 @@ runtime_options:
   version: 2
   client_version: '3'
   server_version: python3-full
-  server_spec: null
+  server_spec: {base: python310-datascience}
   server_spec_disabled: {requirements: 'bcrypt==4.0.1
 
       qrcode==7.4.2', base: python310-standard}
