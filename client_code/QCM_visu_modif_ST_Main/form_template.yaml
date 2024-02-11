@@ -77,6 +77,10 @@ components:
     background: ''}
   name: column_panel_content
   layout_properties: {grid_position: 'JKQKWS,BTYCFD'}
+- name: spacer_1
+  properties: {height: 123.45870971679688}
+  type: Spacer
+  layout_properties: {grid_position: 'BAQSAH,ZEHNCW'}
 - name: button_annuler_copy
   properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
     foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',

@@ -45,7 +45,7 @@ class Plot(PlotTemplate):
                 list_min.append(min_rep)
                 liste_date.append(str(q['time'].strftime("%d/%m/%Y, %Hh%M")))
                 #liste_date.append(str(q['time'].strftime("%d/%m, %Hh%M")))
-            self.label_time.text = str(liste_date[nb_qcm_passe-1])
+            
             
             print('date / h : ', str(liste_date[nb_qcm_passe-1]))
             print("x int  ",listx_int)
