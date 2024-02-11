@@ -83,10 +83,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                         #alert(self.task_list.get_id())
                     
                     with anvil.server.no_loading_indicator:
-                        with anvil.server.no_loading_indicator:
-                            self.task_trombi = anvil.server.call('run_bg_task_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
-                            #alert(self.task_trombi.get_id())
-                            #alert(self.task_trombi.get_task_name())
+                        self.task_trombi = anvil.server.call('run_bg_task_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
+                        #alert(self.task_trombi.get_id())
+                        #alert(self.task_trombi.get_task_name())
         else:
             alert("Stage non trouvé")
             return

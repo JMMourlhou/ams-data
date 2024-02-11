@@ -10,17 +10,22 @@ from anvil.tables import app_tables
 from plotly import graph_objects as go           # AFFICHAGE DES RESULTATS de plusieurs tests sur 1 QCM
 
 class Plot(PlotTemplate):
-    def __init__(self, nb, legend = False, **properties):        # le nb vient de temp3 ds user (à cause du qcm BNSSA tiré de plusieurs qcm)
+    def __init__(self,user, nb, legend = False, **properties):        # le nb vient de temp3 ds user (à cause du qcm BNSSA tiré de plusieurs qcm)
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
+        print("***************** user:", user["email"])
         # lecture du qcm
         qcm_n = app_tables.qcm_description.get(qcm_nb=nb)
-        
+        """
         # lecture du stagiaire
         user=anvil.users.get_user()
+        if not user:
+            print("pas de user")
+            return
+        """   
+        
         if user:
             qcm_rows = app_tables.qcm_result.search(
                                             user_qcm = user,

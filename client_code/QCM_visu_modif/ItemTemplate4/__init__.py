@@ -693,11 +693,16 @@ class ItemTemplate4(ItemTemplate4Template):
   
                 # plotly 
                 from ...Plot import Plot
-                self.column_panel_plot.add_component(Plot(int(self.vrai_numero_qcm), False))   # nb:num de qcm   True:afficher la légende
+                self.column_panel_plot.add_component(Plot(user,int(self.vrai_numero_qcm), False))   # nb:num de qcm   True:afficher la légende
+                #alert()
+                with anvil.server.no_loading_indicator:
+                        anvil.server.call("run_bg_task_qcm_pdf", user, int(self.vrai_numero_qcm), False)
+               
                 
         
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
+        
         from ...Main import Main
         open_form('Main',99)
 

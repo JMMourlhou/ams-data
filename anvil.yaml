@@ -188,6 +188,9 @@ db_schema:
     - name: p100_sur_points
       admin_ui: {order: 6, width: 144}
       type: number
+    - name: resultat_qcm_pdf
+      admin_ui: {order: 7, width: 200}
+      type: media
     title: Qcm_result
   stagiaires_inscrits:
     client: full

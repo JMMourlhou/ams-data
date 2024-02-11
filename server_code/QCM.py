@@ -141,3 +141,57 @@ def temp_user_qcm(user, nb_questions_in_qcm, numero_qcm):
             result = False
             
     return result
+
+
+@anvil.server.background_task
+#@anvil.server.callable
+def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
+    from anvil.pdf import PDFRenderer
+    """
+    quality :
+    "original": All images will be embedded at original resolution. Output file can be very large.
+    "screen": Low-resolution output similar to the Acrobat Distiller “Screen Optimized” setting.
+    "printer": Output similar to the Acrobat Distiller “Print Optimized” setting.
+    "prepress": Output similar to Acrobat Distiller “Prepress Optimized” setting.
+    "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
+    """
+
+    media_object = PDFRenderer(page_size ='A4',
+                               filename = "result_qcm.pdf",
+                               landscape = False,
+                               margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
+                               scale = 1,
+                               quality =  "printer"
+                              ).render_form('Plot',user, nb, legend)
+    
+
+    #lecture du fichier qcm descro sur le num de qcm
+    # lecture du qcm
+    qcm_n = app_tables.qcm_description.get(qcm_nb=nb)
+    
+    # lecture du stagiaire
+    #user=anvil.users.get_user()
+    #if user:
+    qcm_rows = app_tables.qcm_result.search(
+                                    user_qcm = user,
+                                    qcm_number = qcm_n
+                                )
+    nb_qcm_passe = len(qcm_rows)
+    #lecture dernier qcm
+        
+    if len(qcm_rows) < 1:   
+            print("qcm du stgiaire non trouvé à partir de num qcm et user")
+    else:
+        # sauvegarde du qcm ds le dernier qcm effectué par le user
+        # lecture dernier qcm
+        last_row = qcm_rows[len(qcm_rows)-1]
+        
+        last_row.update(resultat_qcm_pdf = media_object)
+
+        print("Sauvegarde qcm pdf")
+
+# A FAIRE APPELER from client side
+@anvil.server.callable
+def run_bg_task_qcm_pdf(user, nb, legend=False):
+    task = anvil.server.launch_background_task('create_qcm_plot_pdf', user, nb , legend=False)
+ 
