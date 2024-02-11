@@ -103,7 +103,7 @@ class Plot(PlotTemplate):
                                     'xaxis': {'title': title,
                                             'visible': False                 # Masque l'axe X et son titre  !!
                                             },
-                                    #'yaxis': dict(range=[0, 100]),  
+                                    'yaxis': dict(range=[0, 100]),  
                                     'yaxis': {'title': title,
                                             'visible': False                # Masque l'axe y et son titre  !!
                                             },
