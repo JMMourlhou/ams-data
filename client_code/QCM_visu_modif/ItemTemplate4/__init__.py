@@ -695,8 +695,8 @@ class ItemTemplate4(ItemTemplate4Template):
                 from ...Plot import Plot
                 self.column_panel_plot.add_component(Plot(user,int(self.vrai_numero_qcm), False))   # nb:num de qcm   True:afficher la légende
                 #alert()
-                with anvil.server.no_loading_indicator:
-                        anvil.server.call("run_bg_task_qcm_pdf", user, int(self.vrai_numero_qcm), False)
+                #with anvil.server.no_loading_indicator:
+                #        anvil.server.call("run_bg_task_qcm_pdf", user, int(self.vrai_numero_qcm), False)
                
                 
         
