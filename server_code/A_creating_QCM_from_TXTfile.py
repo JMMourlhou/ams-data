@@ -15,7 +15,7 @@ def file_reading():
     question_txt = ""    # la question incluant l'intitilé et les options
     rep =""              # dernier caractère d'une option 1 si vrai, 0 si faux
     nb_de_choix = 0      # nb d'options ex: A, B, C  = 3 options
-    f = open(data_files['qcm6.txt'])              # <-----------------------------------------------------  à modifier
+    f = open(data_files['sb1.txt'])              # <-----------------------------------------------------  à modifier
     x = True
     n="" # 1er caractère à tester pour savoir si la ligne est une question
     while x:
@@ -67,9 +67,9 @@ def resume(cpt, nb_de_choix, question_txt, rep):
         print()
     
     # Préparation de l'intertion ds table QCM
-    param = "BNSSA 6 'Conduite à tenir en cas d'accident - 1ers soins'"                     # <-----------------------------------------------------  à modifier
+    param = "BSB 1 'Sécuriser et prévenir'"                     # <-----------------------------------------------------  à modifier
     bareme = "1"
-    qcm_nb = 9
+    qcm_nb = 12
     # Lecture du fichier qcm descro pour obtenir le row
     qcm_descro_row=app_tables.qcm_description.get(qcm_nb=qcm_nb)
     if qcm_descro_row:
