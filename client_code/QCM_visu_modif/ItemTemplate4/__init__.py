@@ -189,7 +189,10 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_modif.tag.nom = "button"
         if self.item['photo'] != None:
             self.image_1.source = self.item['photo']
+            print("--------------------------------------------------------------------------------------------------img ",self.item['photo'])
         else:
+            print("--------------------------------------------------------------------------------------------------img ",self.item['photo'])
+            self.image_1.source = None
             self.cp_img.visible = False
             self.image_1.visible = False
         self.image_1.tag.nom = "photo"
@@ -348,7 +351,11 @@ class ItemTemplate4(ItemTemplate4Template):
                 for cpnt1 in cpnt.get_components():   #( cp_img contient image_1)
                     if cpnt1.tag.nom =="photo":
                         print(cpnt, cpnt.tag.nom)
-                        photo = cpnt1.source           # j'ai la photo
+                        print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ img: ",cpnt1.source)
+                        if cpnt1.source == None:
+                            photo = None
+                        else:
+                            photo = cpnt1.source           # j'ai la photo
                         
             if cpnt.tag.nom == "cp_quest_rep":
                 for cpnt1 in cpnt.get_components():

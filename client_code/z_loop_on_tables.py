@@ -21,10 +21,10 @@ def loop_users():
 
 
 
-#boucle sur la table qcm pour l'effacmt des lignes du qcm 4, 
-def loop_qcm2():
+#boucle sur la table qcm pour l'effacmt des lignes du qcm 12, 
+def loop_qcm12():
     #lecture fichier père qcm descro
-    qcm_row = app_tables.qcm_description.get(qcm_nb=7)
+    qcm_row = app_tables.qcm_description.get(qcm_nb=12)
     if qcm_row:
     
         table = app_tables.qcm.search(qcm_nb=qcm_row)
