@@ -97,10 +97,10 @@ db_schema:
       admin_ui: {order: 1, width: 288}
       type: string
     - name: type
-      admin_ui: {width: 200, order: 2}
+      admin_ui: {order: 2, width: 103}
       type: string
     - name: filtre
-      admin_ui: {width: 200, order: 3}
+      admin_ui: {order: 3, width: 162}
       type: link_single
       target: codes_stages
     - name: visible
@@ -109,6 +109,15 @@ db_schema:
     - name: use_image
       admin_ui: {width: 200, order: 5}
       type: bool
+    - name: timing
+      admin_ui: {order: 6, width: 115}
+      type: number
+    - name: nb_questions_exam
+      admin_ui: {order: 7, width: 161}
+      type: number
+    - name: taux_success
+      admin_ui: {order: 8, width: 138}
+      type: number
     title: Qcm_description
   lieux:
     client: search

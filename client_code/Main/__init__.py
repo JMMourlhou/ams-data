@@ -238,8 +238,7 @@ class Main(MainTemplate):
          # Déconnecter l'utilisateur
         anvil.users.logout()
         # Afficher un message
-        alert("Vous êtes déconnecté.")
-        window.setTimeout(window.close, 10000)
+        alert("Vous êtes déconnecté.")   # Close the window in 1 second
         #anvil.server.wait_forever()
 
     def button_1_click(self, **event_args):
