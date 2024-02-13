@@ -45,11 +45,11 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         qcm_row = self.drop_down_qcm_row.selected_value
         self.qcm_row = qcm_row
         # Pour les lignes QCM déjà crée du qcm choisi
-        global liste
-        if qcm_row["qcm_nb"] != 10:
+        global liste  
+        if qcm_row["qcm_source"] == None:                                  # si source est null : Qcm unique, non sous élement d'un QCM master
             liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
-        else:
-            liste = list(self.liste_qcm_bnssa_blanc())
+        else:                                                              # si source non null : QCM master, créer à partir de qcm enfants
+            liste = list(self.liste_qcm_bnssa_blanc(qcm_row["qcm_source"]))
         nb_questions = len(liste)
         self.label_2.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées
 
@@ -82,7 +82,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         open_form('Main',99)
  
 
-    def liste_qcm_bnssa_blanc(self, **event_args):
+    def liste_qcm_bnssa_blanc(self, dict, **event_args):            # lecture des qcm enfants ds dict qcm_source
         global liste
         liste=[]
         # 10 questions pour partie 1 qcm BNSSA (nb4)

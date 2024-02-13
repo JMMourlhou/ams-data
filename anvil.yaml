@@ -118,6 +118,9 @@ db_schema:
     - name: taux_success
       admin_ui: {order: 8, width: 138}
       type: number
+    - name: qcm_source
+      admin_ui: {order: 2.5, width: 200}
+      type: simpleObject
     title: Qcm_description
   lieux:
     client: search
