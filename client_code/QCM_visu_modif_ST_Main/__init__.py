@@ -23,10 +23,10 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         user=anvil.users.get_user()        
         if user:
             self.admin = user['role']
-            if self.admin[0:1]=="S":         # si pas stagiaire
+            if self.admin[0:1]=="S":         # si stagiaire
                self.label_3.text = "Q.C.M"
         
-        #initialisation du drop down des qcm créés et barêmes
+        #initialisation du drop down des qcm créés et barêmes, n'affiche que les qcm visibles
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search(
                                                                                                          visible=True
                                                                                                          )]
@@ -49,7 +49,10 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         if qcm_row["qcm_source"] == None:                                  # si source est null : Qcm unique, non sous élement d'un QCM master
             liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
         else:                                                              # si source non null : QCM master, créer à partir de qcm enfants
-            liste = list(self.liste_qcm_bnssa_blanc(qcm_row["qcm_source"]))
+            dico = {}
+            dico = qcm_row["qcm_source"]
+            print("------------------------------------------------------  dico: ", dico)
+            liste = list(self.liste_qcm_master(dico))
         nb_questions = len(liste)
         self.label_2.text = nb_questions + 1   # Num ligne à partir du nb lignes déjà créées
 
@@ -80,47 +83,28 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
- 
 
-    def liste_qcm_bnssa_blanc(self, dict, **event_args):            # lecture des qcm enfants ds dict qcm_source
+    def liste_qcm_master(self, dico, **event_args):            # lecture des qcm enfants ds table qcm_descro /colonne dict 'qcm_source'
         global liste
         liste=[]
-        # 10 questions pour partie 1 qcm BNSSA (nb4)
-        liste1 = self.liste_qcm_partie_x(4, 8)   # (num qcm, nb de questions à prendre randomly)
-        for i in range(len(liste1)):
-            liste.append(liste1[i])
-        liste2 = self.liste_qcm_partie_x(5, 8)
-        for i in range(len(liste2)):
-            liste.append(liste2[i])
-        liste3 = self.liste_qcm_partie_x(6, 8)
-        for i in range(len(liste3)):
-            liste.append(liste3[i])
-        liste4 = self.liste_qcm_partie_x(7, 6)
-        for i in range(len(liste4)):
-            liste.append(liste4[i])
-        liste5 = self.liste_qcm_partie_x(8, 6)
-        for i in range(len(liste5)):
-            liste.append(liste5[i])
-        liste6 = self.liste_qcm_partie_x(9, 4)
-        for i in range(len(liste6)):
-            liste.append(liste6[i])
-        #if user:
-        #    result = anvil.server.call("qcm_blanc", liste)     # sauvegarde liste ds user
+        for clef_NumQcm, valeur_NbQuestions in dico.items():
+            liste_temp = self.liste_qcm_partie_x(int(clef_NumQcm), int(valeur_NbQuestions))   # (clef:num qcm, valeur: nb de questions à prendre randomly)
+            for i in range(len(liste_temp)):
+                liste.append(liste_temp[i])
         return liste
 
     def liste_qcm_partie_x(self, qcm_nb, nb_max, **event_args):
         liste = []
         print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ qcm nb: ", qcm_nb)
         print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ nb max: ", nb_max)
-        # 10 questions à extraire randomly 
-        #extraction du nb de questions du BNSSA partie 1
+        #extraction du nb de questions pour le qcm Master
         qcm_row = app_tables.qcm_description.get(qcm_nb=qcm_nb)
         if qcm_row:
             liste_entierre = app_tables.qcm.search(qcm_nb=qcm_row )
             nb_total_questions = len(liste_entierre)
             print(f"nb question ds qcm_nb {qcm_nb}: {nb_total_questions}" )
         else:
-            print("pb accès table qcm n° 4 (BNSSA partie 1)")
+            print(f"pb accès table qcm n° {qcm_nb} (enfant d'un qcm master)")
             return
         dict = {}
         while len(dict) < nb_max:
