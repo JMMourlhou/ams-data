@@ -53,12 +53,23 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
         # ******************************************************************* EFFACT code stage ds user avant retour
         user.update(temp = 0)
         return valid 
-        
+
+    """ Ajout des droits QCM pour ce stagiaire """
+    if code_stage:
+        type_stage = code_stage['code']
+        type_stage_row = app_tables.codes_stages.get(code=type_stage['code'])
+        if type_stage_row:
+            if type_stage_row['droit_qcm'] != None:
+                dico_droits_qcm = type_stage_row['droit_qcm']
+            else:
+                dico_droits_qcm = {}
+    
     new_row=app_tables.stagiaires_inscrits.add_row(
                               stage = code_stage,  
                               user_email = user,
                               name = user['nom'].lower(),    # nom pour permettre le tri sur le nom
-                              financement = mode_fin
+                              financement = mode_fin,
+                              droits_stagiaire_qcms = dico_droits_qcm
                               )
              
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
@@ -96,7 +107,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     else:
         valid="Stagiaire non retrouvé dans fichier stagiaires inscrits"
 
-    """ Création des pré requis pour ce stagiaire """
+    """  +++++++++++++++++++++++++   Création des pré requis pour ce stagiaire """
     # lecture du fichier stages pour lecture du dictionnaire de ses pré-requis
     if code_stage:
         type_stage = code_stage['code']
@@ -105,7 +116,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
         dico_pre_requis = type_stage_row['pre_requis']
         if dico_pre_requis != None:   # il y a des clefs pre-requis
             
-            #tri du dictionaire sur les clefs 
+            #tri du dictionaire pre requis sur les clefs 
             liste_des_clefs = dico_pre_requis.keys()   #création de la liste des clefs du dictionaires prérequis
             liste_triée_des_clefs = sorted(liste_des_clefs)  # création de la liste triée des clefs du dictionaires prérequis
             dico_pre_requis_trié = {}
@@ -120,10 +131,11 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
                               stagiaire_email = user,
                               item_requis = pr_row,
                               check=False
-                )
+                )    
     return valid
 
 
+# =========================================================================================================================================
 @anvil.server.callable           #DEL d'1 stagiaire du stage
 @anvil.tables.in_transaction
 def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users row      stage_row = table stages row

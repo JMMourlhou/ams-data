@@ -229,6 +229,9 @@ db_schema:
     - name: qcm_list
       admin_ui: {order: 4, width: 188}
       type: simpleObject
+    - name: droits_stagiaire_qcms
+      admin_ui: {width: 200, order: 5}
+      type: simpleObject
     title: Stagiaires_inscrits
   files:
     client: none
