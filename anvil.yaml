@@ -263,13 +263,13 @@ db_schema:
       admin_ui: {order: 0, width: 200}
       type: string
     - name: intitulé
-      admin_ui: {order: 1, width: 200}
+      admin_ui: {order: 1, width: 258.49}
       type: string
     - name: pre_requis
       admin_ui: {width: 200, order: 2}
       type: simpleObject
     - name: droit_qcm
-      admin_ui: {width: 200, order: 3}
+      admin_ui: {order: 3, width: 757}
       type: simpleObject
     title: Codes_stages
   users:
