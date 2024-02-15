@@ -26,10 +26,34 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             if self.admin[0:1]=="S":         # si stagiaire
                self.label_3.text = "Q.C.M"
         
-        #initialisation du drop down des qcm créés et barêmes, n'affiche que les qcm visibles
-        self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search(
-                                                                                                         visible=True
-                                                                                                         )]
+        #initialisation du drop down des qcm créés et barêmes, n'affiche que les qcm visibles ET ds dict d'autorisations du stqgiaire (stagiaires inscrits)
+        dict = {}  # dict contenant en clef le num qcm autorisé 
+        liste_temp_visible = [(r['destination'], r) for r in app_tables.qcm_description.search(
+                                                                                        visible=True      # Je prends tous les qcm visibles
+                                                                                        )]
+        #lecture du ou des dictionaires du stagiaire (il peut être inscrit à plusieurs stages)
+        liste_temp_dictionaires = app_tables.stagiaires_inscrits.search(user_email=user)
+        if  liste_temp_dictionaires:
+            for stage in liste_temp_dictionaires:
+                droits_stagiaire = {}
+                if stage['droits_stagiaire_qcms']:     # je lis toutes les clefs de droits_stagiaire (qcm authorisés pour ce stage)
+                    droits_stagiaire = stage['droits_stagiaire_qcms']
+                    # je boucle sur ce dictionaire des qcm authorisés pour ce stage et rempli dict 
+                    for clef, valeur in droits_stagiaire.items():   #clef=numqcm   valeur=("intitulé", "TRUE/False")   True si on le montre
+                        print(clef,valeur)
+                        if valeur[1]=="True":
+                            dict[clef]= valeur  # num_qcm:intitulé
+            
+        # J'initilise la liste en transformant le "dict" des qcm authorisés en liste
+        # boucle de "dict"
+        liste_qcm_rows=[]   # liste des qcm lus
+        for clef, valeur in dict.items():
+            print(clef)
+            # lecture sur la clef
+            qcm_row = app_tables.qcm_description.get(qcm_nb=int(clef))
+            liste_qcm_rows.append(qcm_row['destination'])                     #  INSERERE LA ROW PAS UNIQT la destination
+            
+        self.drop_down_qcm_row.items = liste_qcm_rows
         
         if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
@@ -42,8 +66,9 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
-        qcm_row = self.drop_down_qcm_row.selected_value
+        qcm_row = self.drop_down_qcm_row.selected_value          #qcm description row
         self.qcm_row = qcm_row
+        print("dropD change :",qcm_row["qcm_nb"],qcm_row["qcm_source"])
         # Pour les lignes QCM déjà crée du qcm choisi
         global liste  
         if qcm_row["qcm_source"] == None:                                  # si source est null : Qcm unique, non sous élement d'un QCM master
