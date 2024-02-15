@@ -98,11 +98,17 @@ def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):  
     if nb_questions == 0:
         valid = False
         return
-    p100_sur_nb_rep = int(nb_bonnes_rep / nb_questions * 100)
+    p100_sur_nb_rep = int(nb_bonnes_rep / nb_questions * 100)    # Ce résultat permet de débloquer le prochain QCM si il y en a un 
     p100_sur_points = int(points / max_points * 100)
 
     # lecture fichier qcm_decription
     qcm_row=app_tables.qcm_description.get(qcm_nb=qcm_numero)
+    # si résultat en % >= résultats requis pour réussite ds qcm_descro : je valide le prochain qcm (si colonne next_qcm non vide): je change le dict ds stagiaire_inscrit
+    #
+    # A FAIRE
+
+
+    
     
     app_tables.qcm_result.add_row(
                                     user_qcm= user,
@@ -142,7 +148,7 @@ def temp_user_qcm(user, nb_questions_in_qcm, numero_qcm):
             
     return result
 
-
+# Génération du pdf des résultats du QCM
 @anvil.server.background_task
 #@anvil.server.callable
 def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
@@ -184,8 +190,7 @@ def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
     else:
         # sauvegarde du qcm ds le dernier qcm effectué par le user
         # lecture dernier qcm
-        last_row = qcm_rows[len(qcm_rows)-1]
-        
+        last_row = qcm_rows[len(qcm_rows)-1]       
         last_row.update(resultat_qcm_pdf = media_object)
 
         print("Sauvegarde qcm pdf")

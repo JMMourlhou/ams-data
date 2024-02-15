@@ -99,10 +99,6 @@ db_schema:
     - name: type
       admin_ui: {order: 2, width: 103}
       type: string
-    - name: filtre
-      admin_ui: {order: 3, width: 162}
-      type: link_single
-      target: codes_stages
     - name: visible
       admin_ui: {order: 4, width: 133}
       type: bool
@@ -121,6 +117,9 @@ db_schema:
     - name: qcm_source
       admin_ui: {order: 2.5, width: 200}
       type: simpleObject
+    - name: next_qcm
+      admin_ui: {order: 2.75, width: 200}
+      type: number
     title: Qcm_description
   lieux:
     client: search
@@ -223,12 +222,6 @@ db_schema:
     - name: name
       admin_ui: {order: 1.5, width: 200}
       type: string
-    - name: result_qcm
-      admin_ui: {width: 122}
-      type: number
-    - name: qcm_list
-      admin_ui: {order: 4, width: 188}
-      type: simpleObject
     - name: droits_stagiaire_qcms
       admin_ui: {width: 200, order: 5}
       type: simpleObject

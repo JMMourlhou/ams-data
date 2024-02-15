@@ -1,4 +1,4 @@
-from ._anvil_designer import Qcm_visuTemplate
+from ._anvil_designer import Qcm_visu_OLDTemplate
 from anvil import *
 import stripe.checkout
 import anvil.server
@@ -19,7 +19,7 @@ global former_screen_size
 former_screen_size = window.innerWidth
 
 
-class Qcm_visu(Qcm_visuTemplate):
+class Qcm_visu_OLD(Qcm_visu_OLDTemplate):
     def __init__(self, pdf_mode=False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
