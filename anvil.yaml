@@ -174,7 +174,7 @@ db_schema:
       type: string
     title: Qcm
   qcm_result:
-    client: full
+    client: search
     server: full
     columns:
     - name: user_qcm
@@ -205,7 +205,7 @@ db_schema:
       type: media
     title: Qcm_result
   stagiaires_inscrits:
-    client: full
+    client: search
     server: full
     columns:
     - name: stage
@@ -388,7 +388,7 @@ db_schema:
       type: media
     title: Pre_Requis_stagiaire
   formateurs:
-    client: none
+    client: search
     server: full
     columns:
     - name: email_formateur

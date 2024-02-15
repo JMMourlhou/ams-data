@@ -226,7 +226,7 @@ class Main(MainTemplate):
     def button_loop_click(self, **event_args):
         """This method is called when the button is clicked"""
         from .. import z_loop_on_tables
-        result=z_loop_on_tables.loop_qcm12()
+        result=z_loop_on_tables.loop_stagiaire_inscrits()
         alert(result)
 
     def Close_click(self, **event_args):

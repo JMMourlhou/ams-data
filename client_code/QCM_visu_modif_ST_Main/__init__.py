@@ -51,9 +51,9 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             print(clef)
             # lecture sur la clef
             qcm_row = app_tables.qcm_description.get(qcm_nb=int(clef))
-            liste_qcm_rows.append(qcm_row['destination'])                     #  INSERERE LA ROW PAS UNIQT la destination
-            
-        self.drop_down_qcm_row.items = liste_qcm_rows
+            liste_qcm_rows.append(qcm_row)                     #  INSERERE LA ROW PAS UNIQT la destination
+        if liste_qcm_rows:    
+            self.drop_down_qcm_row.items = [(r['destination'],r) for r in liste_qcm_rows]     # initialisation de la drop down par "compréhension de liste"
         
         if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
