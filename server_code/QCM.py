@@ -104,11 +104,46 @@ def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):  
     # lecture fichier qcm_decription
     qcm_row=app_tables.qcm_description.get(qcm_nb=qcm_numero)
     # si résultat en % >= résultats requis pour réussite ds qcm_descro : je valide le prochain qcm (si colonne next_qcm non vide): je change le dict ds stagiaire_inscrit
-    #
-    # A FAIRE
-
-
-    
+    if qcm_row:
+        seuil = qcm_row['taux_success']
+        print("seuil :", seuil)
+        if p100_sur_nb_rep >= seuil:
+            #recherche du qcm suivant éventuel
+            if qcm_row['next_qcm'] != None:
+                next_qcm = str(qcm_row['next_qcm'])   
+                print("next qcm: ", next_qcm)
+                # je recherche le dernier stage du user à partir de son mail
+                liste_stages_stagiaire = app_tables.stagiaires_inscrits.search(user_email=user)
+                if liste_stages_stagiaire:
+                    dico_date_stages = {}
+                    for st in liste_stages_stagiaire:
+                        clef = st['stage']['date_debut']              # je peux lire la table mère et mettre la date du stage en clef de dico
+                        dico_date_stages[clef]=st['stage']
+                #tri des dates pour prendre la dernière
+                print(dico_date_stages)
+                liste_stages_stagiaire_temp = dico_date_stages.keys()   # crée la liste des clefs
+                liste_stages_stagiaire_triée = sorted(liste_stages_stagiaire_temp)   
+                dernière_date = liste_stages_stagiaire_triée[len(liste_stages_stagiaire_triée)-1]
+                # lecture du dico sur cette date
+                num_stage = dico_date_stages.get(dernière_date)   # lecture sur la clef (date du dernier stage) renvoi la valeur, le num de stage
+                    
+                # mettre le dict du prochain qcm à 'True' dans le row du stagiaire inscrit
+                stagiaire_insc_row = app_tables.stagiaires_inscrits.get(
+                                                    stage = num_stage,                   # stage num
+                                                    user_email=user
+                                                  )
+                if stagiaire_insc_row:
+                    print(stagiaire_insc_row['stage']['code']['code'])
+                    dict = stagiaire_insc_row['droits_stagiaire_qcms']
+                    print("dict droits stagiaire :", dict)
+                    valeur = dict.get(next_qcm)
+                    print(" ----  next qcm: ", next_qcm)
+                    print(" ----  valeur: ", valeur)
+                    
+                    new_valeur = [valeur[0],"True"]
+                    dict[next_qcm] = new_valeur   #réaffectation de cette clé
+                    stagiaire_insc_row.update(droits_stagiaire_qcms = dict)
+                     
     
     app_tables.qcm_result.add_row(
                                     user_qcm= user,

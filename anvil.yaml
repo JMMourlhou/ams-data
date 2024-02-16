@@ -118,7 +118,7 @@ db_schema:
       admin_ui: {order: 2.5, width: 200}
       type: simpleObject
     - name: next_qcm
-      admin_ui: {order: 2.75, width: 200}
+      admin_ui: {order: 2.75, width: 117}
       type: number
     title: Qcm_description
   lieux:
@@ -212,7 +212,7 @@ db_schema:
       type: link_single
       target: stages
     - name: financement
-      admin_ui: {width: 251}
+      admin_ui: {order: 2, width: 187}
       type: link_single
       target: mode_financement
     - name: user_email
@@ -220,10 +220,10 @@ db_schema:
       type: link_single
       target: users
     - name: name
-      admin_ui: {order: 1.5, width: 200}
+      admin_ui: {order: 1.5, width: 133}
       type: string
     - name: droits_stagiaire_qcms
-      admin_ui: {width: 200, order: 5}
+      admin_ui: {order: 5, width: 908}
       type: simpleObject
     title: Stagiaires_inscrits
   files:
