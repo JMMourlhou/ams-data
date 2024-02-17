@@ -5,6 +5,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from anvil.pdf import PDFRenderer
 
 @anvil.server.callable
 def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb, type, param):
@@ -175,7 +176,7 @@ def temp_user_qcm(user, nb_questions_in_qcm, numero_qcm):
 @anvil.server.background_task
 #@anvil.server.callable
 def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
-    from anvil.pdf import PDFRenderer
+    #from anvil.pdf import PDFRenderer
     """
     quality :
     "original": All images will be embedded at original resolution. Output file can be very large.
@@ -190,7 +191,7 @@ def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
                                landscape = False,
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1,
-                               quality =  "printer"
+                               quality =  "default"
                               ).render_form('Plot',user, nb, legend)
     
 
@@ -206,8 +207,8 @@ def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
                                     qcm_number = qcm_n
                                 )
     nb_qcm_passe = len(qcm_rows)
-    #lecture dernier qcm
-        
+    
+    #lecture dernier qcm       
     if len(qcm_rows) < 1:   
             print("qcm du stgiaire non trouvé à partir de num qcm et user")
     else:
@@ -222,4 +223,6 @@ def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
 @anvil.server.callable
 def run_bg_task_qcm_pdf(user, nb, legend=False):
     task = anvil.server.launch_background_task('create_qcm_plot_pdf', user, nb , legend=False)
+    return task
  
+

@@ -245,14 +245,16 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         result = anvil.server.call("file_reading")
 
-
-
-
-
-
-
-
-    
+    def button_loop_qcm_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # loop on table qcm_result, je prends les résultats qui n'ont pas de plot sauvés
+        liste = app_tables.qcm_result.search()
+        for q in liste:
+            if q['resultat_qcm_pdf'] == None:
+                user_qcm = q['user_qcm']
+                nb_qcm = q['qcm_number']['qcm_nb']
+                with anvil.server.no_loading_indicator:
+                    self.task_list = anvil.server.call('run_bg_task_qcm_pdf',user_qcm, nb_qcm, legend=False)
 
            
             

@@ -128,17 +128,25 @@ components:
       name: button_create_recherche
       layout_properties: {grid_position: 'XIVNPX,PHPRXV'}
       event_bindings: {click: button_create_recherche_click}
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Création
-          / Modif QCM    ', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
-        underline: false, icon: ''}
-      name: button_create_qcm
-      layout_properties:
-        col_widths: {}
-        grid_position: ISFVUM,CODQDW
-      event_bindings: {click: button_create_qcm_click}
+    - name: flow_panel_2
+      properties: {align: center}
+      type: FlowPanel
+      layout_properties: {grid_position: 'TYYBCY,QDBBUT'}
+      components:
+      - type: Button
+        properties: {role: elevated-button, align: center, tooltip: '', border: '',
+          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Création
+            / Modif QCM    ', font_size: null, font: '', spacing_above: small, icon_align: left,
+          spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
+          underline: false, icon: ''}
+        name: button_create_qcm
+        event_bindings: {click: button_create_qcm_click}
+      - name: button_loop_qcm
+        properties: {text: Maj Plots, background: 'theme:Primary', foreground: 'theme:On
+            Primary'}
+        type: Button
+        layout_properties: {}
+        event_bindings: {click: button_loop_qcm_click}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_others

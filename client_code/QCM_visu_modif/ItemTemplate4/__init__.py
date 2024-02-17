@@ -613,13 +613,8 @@ class ItemTemplate4(ItemTemplate4Template):
                                     if cpnt1.tag.nom == "cp_options":
                                         for rep in cpnt1.get_components():
                                             print(f"++++++++ {rep}, {rep.tag.nom}")
-    
-                                            
                                             
                                             num_question = rep.tag.numero
-    
-    
-    
                                             
                                             if rep.tag.nom == "rep1-true": 
                                                 nb_options = rep.tag.nb_options     # si j'utilise self.nb_options je prends le nb d'options de la dernière question lue
@@ -701,11 +696,8 @@ class ItemTemplate4(ItemTemplate4Template):
                 # plotly 
                 from ...Plot import Plot
                 self.column_panel_plot.add_component(Plot(user,int(self.vrai_numero_qcm), False))   # nb:num de qcm   True:afficher la légende
-                # alert()
-                #with anvil.server.no_loading_indicator:
-                #    anvil.server.call("run_bg_task_qcm_pdf", user, int(self.vrai_numero_qcm), False)
-               
-                
+                # Le dernier plot vivualisé du stagiaire ne sera sauvé en table qcm_result qu'avec BG task à partir de "main" form
+                 
         
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""
