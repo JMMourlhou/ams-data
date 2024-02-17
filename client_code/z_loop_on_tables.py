@@ -34,22 +34,25 @@ def loop_stagiaire_inscrits():
         row_stagiaire.update(droits_stagiaire_qcms=type_stage_row['droit_qcm'])
 
 
-
-
-
-
-#boucle sur la table qcm pour l'effacmt des lignes du qcm 12, 
-def loop_qcm12():
+#boucle sur la table qcm_result pour l'effacmt des lignes du qcm test (3), 
+def loop_del_qcm3_result():
+    #lecture user
+    user_jm = app_tables.users.get(email="jmmourlhou@gmail.com")
+    print(user_jm['prenom'])
     #lecture fichier père qcm descro
-    qcm_row = app_tables.qcm_description.get(qcm_nb=12)
+    qcm_row = app_tables.qcm_description.get(qcm_nb=3)
+    print(qcm_row['destination'])
     if qcm_row:
-    
-        table = app_tables.qcm.search(qcm_nb=qcm_row)
+        table = app_tables.qcm_result.search(qcm_number=qcm_row,
+                                             user_qcm=user_jm
+                                            )
+        print(len(table))
         result="erreur"
-        if table:
+        if table: 
             for row in table:
                 row.delete()
-            result="loop ok"     
+            result="loop ok" 
+    return result
 
 #boucle sur la table qcm pour modif rapide d'une colonne, ici sur la description
 def loop_qcm3():
@@ -58,7 +61,6 @@ def loop_qcm3():
     if qcm_row:
         table = app_tables.qcm.search(qcm_nb=qcm_row)
         result="erreur"
-        txt="BNSSA 1 'Conn. du milieu'"
         if table:
             for row in table:
                 row.update(param = txt)

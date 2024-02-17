@@ -71,10 +71,10 @@ class Plot(PlotTemplate):
                         line=dict(dash='dash')
                     )
             ]
-        else:                            # 1 SEUL QCM : Camembert
+        else:                            # 1 SEUL QCM : Pie
             date_qcm = str(liste_date[nb_qcm_passe-1])
             title = f"QCM {qcm_n['destination']} du {date_qcm}, de {user['email']}"
-            colors = ['green', 'lightblue']  # couleurs pour chaque tranche
+            colors = ['green', 'red']  # couleurs pour chaque tranche
             labels = ['% Bonnes réponses','Erreurs']  # Les étiquettes correspondantes
             listy_pour1qcm = [listy[0],100-listy[0]]
             if  listy[0] >= 75:
@@ -120,9 +120,9 @@ class Plot(PlotTemplate):
                                             'visible': False                 # Masque l'axe X et son titre  !!
                                             },
                                     'yaxis': {'title': title,
-                                            'visible': False                # Masque l'axe y et son titre  !!
+                                            'visible': True               # Masque l'axe y et son titre  !!
                                             },
-                                    'plot_bgcolor': 'lightblue',       # Couleur de fond personnalisée
+                                    'plot_bgcolor': 'red',       # Couleur de fond personnalisée
                                 }
             
         self.plot_1.layout.yaxis.title = '% réponses ok - ' + user['email']
