@@ -34,13 +34,13 @@ def loop_stagiaire_inscrits():
         row_stagiaire.update(droits_stagiaire_qcms=type_stage_row['droit_qcm'])
 
 
-#boucle sur la table qcm_result pour l'effacmt des lignes du qcm test (3), 
+#boucle sur la table qcm_result pour l'effacmt des lignes du qcm test (11), 
 def loop_del_qcm3_result():
     #lecture user
     user_jm = app_tables.users.get(email="jmmourlhou@gmail.com")
     print(user_jm['prenom'])
     #lecture fichier père qcm descro
-    qcm_row = app_tables.qcm_description.get(qcm_nb=3)
+    qcm_row = app_tables.qcm_description.get(qcm_nb=11)
     print(qcm_row['destination'])
     if qcm_row:
         table = app_tables.qcm_result.search(qcm_number=qcm_row,
