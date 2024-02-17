@@ -98,18 +98,18 @@ class Plot(PlotTemplate):
         if len(qcm_rows)>1:     # Plusieurs passages
             self.plot_1.layout = {  'displayModeBar' : True,          # False: n'affiche que qd passe au dessus
                                     'modeBarButtonsToRemove' : ['zoomIn2d', 'zoomOut2d', 'pan2d' ],
+                                  
                                     'title': title,
+                                  
                                     'xaxis': {'title': title,
                                             'visible': False                 # Masque l'axe X et son titre  !!
                                             },
                                     'yaxis': dict(range=[0, 100]),  
                                     'yaxis': {'title': title,
-                                            'visible': True               # Masque l'axe y et son titre  !!
+                                            'visible': True               # Montre l'axe y et son titre  !!
                                             },
+                                  
                                     'plot_bgcolor': 'lightblue',       # Couleur de fond personnalisée
-                                    #'tickmode': 'array',               # de 1 en 1
-                                    #'tickvals' : listx_int,            # position des marques de graduation
-                                    #'ticktext' : listx_str,            # texte qui doit être affiché sur x
                                     'showlegend': False     # True pour montrer la légende (false par défaut voir l'init)
                                 }
         else:      # 1 seul QCM: Pie, je n'affiche pas les axes
@@ -126,6 +126,7 @@ class Plot(PlotTemplate):
                                 }
             
         self.plot_1.layout.yaxis.title = '% réponses ok - ' + user['email']
+        #self.plot_1.layout.title.fontsize = 5
         
         date_deb = liste_date[0]     #dernière date
         date_fin = liste_date[nb_qcm_passe-1]   # derniere date
