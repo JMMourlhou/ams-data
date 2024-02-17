@@ -145,10 +145,6 @@ db_schema:
     - name: question
       admin_ui: {order: 0.5, width: 413}
       type: string
-    - name: pour_stage
-      admin_ui: {order: -1, width: 116}
-      type: link_single
-      target: codes_stages
     - name: num
       admin_ui: {order: 0.375, width: 76}
       type: number

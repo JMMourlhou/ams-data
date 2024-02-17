@@ -55,8 +55,8 @@ class Plot(PlotTemplate):
                 
         # Plot some data     SI PLUSIEURS QCM EFFECTUES j'affiche la ligne de 75%
         if len(qcm_rows)>1:
-            self.label_nom.text = f"{user['email']}"
-            title = f"{nb_qcm_passe} tests pour QCM '{qcm_n['destination']}'"
+            self.label_txt.text = f"{user['email']}"
+            title = f"{nb_qcm_passe}ème test, QCM '{qcm_n['destination']}'"
             self.plot_1.data = [
                 go.Scatter(
                         x = listx_int,
@@ -78,10 +78,10 @@ class Plot(PlotTemplate):
             labels = ['% Bonnes réponses','Erreurs']  # Les étiquettes correspondantes
             listy_pour1qcm = [listy[0],100-listy[0]]
             if  listy[0] >= 75:
-                self.label_nom.text = f"Réussite au QCM {qcm_n['destination']} / {user['nom']} {user['prenom']}"
+                self.label_txt.text = f"Réussite !  QCM {qcm_n['destination']} / {user['nom']} {user['prenom']}"
                 title_pie = "Réussite"
             else:
-                self.label_nom.text = f"Echec au QCM {qcm_n['destination']} / {user['nom']} {user['prenom']}"
+                self.label_txt.text = f"Echec au QCM {qcm_n['destination']} / {user['nom']} {user['prenom']}"
                 title_pie = "Echec"
             
             self.plot_1.data = [
