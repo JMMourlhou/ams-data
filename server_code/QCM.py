@@ -57,15 +57,38 @@ def modif_qcm(qcm_descro_row, num_question, question, rep, bareme, photo, correc
 # Delete d'1 ligne du QCM (en mode maj d'un qcm)
 @anvil.server.callable           #modif d'une ligne de Qcm
 def delete_qcm(qcm_descro_row, num_question):
-
-    # lecture de la ligne à modifier par son numéro             
-    qcm_row = app_tables.qcm.get(num=num_question,
-                                qcm_nb=qcm_descro_row)
-    if not qcm_row:
+    # lecture de la ligne à enlever par son numéro             
+    quest_qcm = app_tables.qcm.get(num=num_question,
+                                   qcm_nb=qcm_descro_row)
+    if not quest_qcm:
         print("Ligne qcm non trouvée ds fichier qcm")
         return False
     else:   
-        qcm_row.delete()        
+        #------------------------------------------------------------- Copie ds le qcm 16
+        w_sur_qcm_nb = 16
+        r = app_tables.qcm_description.get(qcm_nb=w_sur_qcm_nb)   # acquisition du row du qcm
+        liste_qcm_cible = app_tables.qcm.search(qcm_nb=r)
+        if liste_qcm_cible: 
+            nb_lignes_qcm_cible = len(liste_qcm_cible)
+        else:
+            nb_lignes_qcm_cible = 0
+
+        num_question = nb_lignes_qcm_cible + 1
+        question = quest_qcm['question']  
+        correction = quest_qcm['correction']
+        rep = quest_qcm['rep_multi']
+        bareme = quest_qcm['bareme']
+        image = quest_qcm['photo']
+        qcm_nb = r
+        type = quest_qcm['type']
+        param = quest_qcm['param']
+        
+        result = add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb, type, param)
+        if not result:
+            print("Erreur en copy/delete de ligne")
+            return
+        #-------------------------------------------------------------
+        quest_qcm.delete()        
         return True
 
 # ==================================================================================================
