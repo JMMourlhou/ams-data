@@ -91,7 +91,7 @@ db_schema:
     server: full
     columns:
     - name: qcm_nb
-      admin_ui: {order: 0, width: 125}
+      admin_ui: {order: 0, width: 116}
       type: number
     - name: destination
       admin_ui: {order: 1, width: 288}
