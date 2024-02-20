@@ -66,7 +66,7 @@ def delete_qcm(qcm_descro_row, num_question):
     else:   
         pass
         """
-        #------------------------------------------------------------- Copie ds le qcm 16
+        #------------------------------------------------------------- tranfert/ ds le qcm 16 de la question annulée
         w_sur_qcm_nb = 16
         r = app_tables.qcm_description.get(qcm_nb=w_sur_qcm_nb)   # acquisition du row du qcm
         liste_qcm_cible = app_tables.qcm.search(qcm_nb=r)
