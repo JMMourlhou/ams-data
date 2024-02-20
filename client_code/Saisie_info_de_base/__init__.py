@@ -150,7 +150,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 if user and self.first_entry:          # 1ERE ENTREE 
                     stage=str(user['temp'])
                     if  user['temp']==0:
-                        alert("User non trouvé en 1ere entrée !")
+                        alert("Pas d'inscription à un stage prévue, en inscription.")
                         self.button_retour_click()
                     else:
                         row = self.drop_down_fi.selected_value

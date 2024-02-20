@@ -46,7 +46,7 @@ runtime_options:
       qrcode==7.4.2
 
       pdf2image==1.17.0'}
-metadata: {title: Inscription Stage, logo_img: 'asset:logo_fs_small.png'}
+metadata: {title: 'Gestion de données, AMS', logo_img: 'asset:logo_fs_small.png'}
 startup_form: null
 db_schema:
   temp:
@@ -169,7 +169,7 @@ db_schema:
       type: string
     title: Qcm
   qcm_result:
-    client: full
+    client: search
     server: full
     columns:
     - name: user_qcm
