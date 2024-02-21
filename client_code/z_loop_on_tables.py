@@ -21,7 +21,7 @@ def loop_users():
 
 #boucle sur la table stagiaires inscrits pour maj des droits aux qcm par type de stage
 def loop_stagiaire_inscrits():
-    # 1 loop sur fichier stgiaires inscrits
+    # 1 loop sur fichier stagiaires inscrits
     liste_st_inscrits = app_tables.stagiaires_inscrits.search()
     for row_stagiaire in liste_st_inscrits:
         # 2 lecture fichier père stage
@@ -30,7 +30,7 @@ def loop_stagiaire_inscrits():
         # 3 lecture fichier père type_stage
         type_stage_row = app_tables.codes_stages.get(code = stage_row['code']['code'])
         print(type_stage_row['droit_qcm'])
-        #  *************************************************************************** MAJ des droits de ce stgiaire aux qcm (par type de stage) 
+        #  *************************************************************************** MAJ des droits de ce stagiaire aux qcm (par type de stage) 
         row_stagiaire.update(droits_stagiaire_qcms=type_stage_row['droit_qcm'])
 
 
