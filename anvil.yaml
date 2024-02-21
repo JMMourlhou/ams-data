@@ -102,20 +102,14 @@ db_schema:
     - name: visible
       admin_ui: {order: 4, width: 133}
       type: bool
-    - name: use_image
-      admin_ui: {width: 200, order: 5}
-      type: bool
     - name: timing
       admin_ui: {order: 6, width: 115}
-      type: number
-    - name: nb_questions_exam
-      admin_ui: {order: 7, width: 161}
       type: number
     - name: taux_success
       admin_ui: {order: 8, width: 138}
       type: number
     - name: qcm_source
-      admin_ui: {order: 2.5, width: 200}
+      admin_ui: {order: 2.5, width: 355}
       type: simpleObject
     - name: next_qcm
       admin_ui: {order: 2.75, width: 117}
