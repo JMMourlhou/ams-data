@@ -200,7 +200,7 @@ class Plot(PlotTemplate):
                 next_plot = next_plot + "Bonne préparation !"
         else:
             next_plot = f"Vous devez d'abord réussir ce QCM pour ouvrir vos droits au QCM:" + "\n"
-            next_plot = next_plot + intitul_next_qcm + "\n"
+            next_plot = next_plot + intitul_next_qcm + "\n \n"
             next_plot = next_plot + "On ne lâche rien ! \n"
         self.rich_text_next_qcm.content = next_plot
             
