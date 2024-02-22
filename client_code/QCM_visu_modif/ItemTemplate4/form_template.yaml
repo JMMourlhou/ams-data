@@ -177,19 +177,19 @@ components:
   components:
   - name: label_nb_quest_ok
     properties: {text: 'XX questions exactes sur XX, soit xx %', foreground: 'theme:On
-        Primary', align: center}
+        Primary', align: center, visible: false}
     type: Label
     layout_properties: {grid_position: 'WTMNTD,OYYUQY'}
-  - name: label_nb_points
-    properties: {text: 'XX points obtenus sur  XX , soit XX %', foreground: 'theme:On
-        Primary', align: center}
-    type: Label
-    layout_properties: {grid_position: 'BOETUR,QJFZAA'}
   - name: column_panel_plot
     properties: {visible: true, background: 'theme:On Primary Container'}
     type: ColumnPanel
     layout_properties: {grid_position: 'MDFWJT,QOACBK'}
     components: []
+  - name: label_nb_points
+    properties: {text: 'XX points obtenus sur  XX , soit XX %', foreground: 'theme:On
+        Primary', align: center, font_size: 12}
+    type: Label
+    layout_properties: {grid_position: 'MEUEPA,WTTGBQ'}
   - name: button_enregistrer_et_sortir
     properties: {text: Sortir du QCM, foreground: 'theme:Tertiary', bold: true, role: outlined-button,
       visible: false}

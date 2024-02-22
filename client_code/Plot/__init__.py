@@ -57,12 +57,8 @@ class Plot(PlotTemplate):
         print("y", listy)
         print(list_min)
                 
-        # Plot some data     SI PLUSIEURS QCM EFFECTUES j'affiche la ligne de 75%
-        
-        if len(qcm_rows)>1:
-            
-                
-            
+        # Plot some data     SI PLUSIEURS QCM EFFECTUES j'affiche la ligne des résultats, avec la ligne de mini recquis
+        if len(qcm_rows)>1:           
             title = f"{nb_qcm_passe}ème test, QCM '{qcm_n['destination']}'"
             self.plot_1.data = [
                 go.Scatter(
@@ -167,17 +163,45 @@ class Plot(PlotTemplate):
                                                         fontsize = 12
                                                     )
                                             ]
-
-        
+        """
+             -------------------------------------------------------------------------------------------------------
+                               AFFICHAGE DU RICH TEXT INFOS AU DESSUS DU PLOT
+             ------------------------------------------------------------------------------------------------------                         
+        """
         #print("+++++++++++++++++++ dernier résultat listy[nb_qcm_passe-1]: ", listy[nb_qcm_passe-1])
         #print("+++++++++++++++++++ mini recquis listy[nb_qcm_passe-1]: ", list_min[nb_qcm_passe-1]) 
         if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
-            infos_plot = f"Réussite au QCM {qcm_n['destination']} !" + "\n"
+            infos_plot = f"**Réussite au QCM** {qcm_n['destination']} !" + "\n"
         else:
-            infos_plot = f"Echec au QCM {qcm_n['destination']} !" + "\n"
-        infos_plot = infos_plot + f"En date du {liste_date_long[nb_qcm_passe-1]}" + "\n" 
-        infos_plot = infos_plot + f"Pour **{user['prenom']} {user['nom']}**" + "\n"     # NOM Prénom en Gras
+            infos_plot = f"**Echec au QCM** {qcm_n['destination']} !" + "\n"
+        infos_plot = infos_plot + f"Le {liste_date_long[nb_qcm_passe-1]}" + "\n" 
+        infos_plot = infos_plot + f"Effectué par **{user['prenom']} {user['nom']}**" + "\n\n"     # NOM Prénom en Gras puis 2 st de ligne
+        infos_plot = infos_plot + f"Résultats: {listy[nb_qcm_passe-1]} % de réponses exactes" + "\n"
+        infos_plot = infos_plot + f"( Minimum requis: {list_min[nb_qcm_passe-1]} % pour la réussite )" + "\n"
         self.rich_text_infos_plot.content = infos_plot
+
+        """
+             -------------------------------------------------------------------------------------------------------
+                               AFFICHAGE DU RICH TEXT NEXT QCM AU DESSOUS DU PLOT
+             ------------------------------------------------------------------------------------------------------                         
+        """
+        # Lecture de la ligne du qcm descro pour déterminer si next plot ds table qcm descro: 
+        intitul_next_qcm = ""
+        qcm_actuel_row = app_tables.qcm_description.get(qcm_nb=nb)
+        if qcm_actuel_row:
+            if qcm_actuel_row['next_qcm']:
+                next_qcm_row = app_tables.qcm_description.get(qcm_nb=qcm_actuel_row['next_qcm'])
+                if next_qcm_row:
+                    intitul_next_qcm = next_qcm_row['destination']
+                    self.column_panel_2.visible = True      
+        
+        if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
+                next_plot = f"**Vous ouvrez vos droits au QCM {intitul_next_qcm}** !" + "\n"
+                next_plot = next_plot + "Bonne préparation !"
+        else:
+            next_plot = f"Vous devez d'abord réussir ce QCM pour ouvrir vos droits au QCM:" + "\n"
+            next_plot = next_plot + intitul_next_qcm
+        self.rich_text_next_qcm.content = next_plot
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
