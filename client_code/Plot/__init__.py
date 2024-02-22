@@ -175,9 +175,9 @@ class Plot(PlotTemplate):
         else:
             infos_plot = f"**Echec au QCM** {qcm_n['destination']} !" + "\n"
         infos_plot = infos_plot + f"Le {liste_date_long[nb_qcm_passe-1]}" + "\n" 
-        infos_plot = infos_plot + f"Effectué par **{user['prenom']} {user['nom']}**" + "\n\n"     # NOM Prénom en Gras puis 2 st de ligne
-        infos_plot = infos_plot + f"Résultats: {listy[nb_qcm_passe-1]} % de réponses exactes" + "\n"
-        infos_plot = infos_plot + f"( Minimum requis: {list_min[nb_qcm_passe-1]} % pour la réussite )" + "\n"
+        infos_plot = infos_plot + f"De **{user['prenom']} {user['nom']}**" + "\n\n"     # NOM Prénom en Gras puis 2 st de ligne
+        infos_plot = infos_plot + f"{listy[nb_qcm_passe-1]} % de réponses exactes" + "\n"
+        infos_plot = infos_plot + f"( Minimum requis: {list_min[nb_qcm_passe-1]} %)" + "\n"
         self.rich_text_infos_plot.content = infos_plot
 
         """
@@ -196,11 +196,12 @@ class Plot(PlotTemplate):
                     self.column_panel_2.visible = True      
         
         if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
-                next_plot = f"**Vous ouvrez vos droits au QCM {intitul_next_qcm}** !" + "\n"
+                next_plot = f"**Vous ouvrez vos droits au QCM {intitul_next_qcm}**" + "\n"
                 next_plot = next_plot + "Bonne préparation !"
         else:
             next_plot = f"Vous devez d'abord réussir ce QCM pour ouvrir vos droits au QCM:" + "\n"
-            next_plot = next_plot + intitul_next_qcm
+            next_plot = next_plot + intitul_next_qcm + "\n"
+            next_plot = next_plot + "On ne lâche rien ! \n"
         self.rich_text_next_qcm.content = next_plot
             
     def button_annuler_click(self, **event_args):
