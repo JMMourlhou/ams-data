@@ -60,13 +60,7 @@ class Plot(PlotTemplate):
         # Plot some data     SI PLUSIEURS QCM EFFECTUES j'affiche la ligne de 75%
         
         if len(qcm_rows)>1:
-            #print("+++++++++++++++++++ dernier résultat listy[nb_qcm_passe-1]: ", listy[nb_qcm_passe-1])
-            #print("+++++++++++++++++++ mini recquis listy[nb_qcm_passe-1]: ", list_min[nb_qcm_passe-1])
             
-            if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
-                infos_plot = f"Réussite au QCM {qcm_n['destination']} !" + "\n"
-            else:
-                infos_plot = f"Echec au QCM {qcm_n['destination']} !" + "\n"
                 
             
             title = f"{nb_qcm_passe}ème test, QCM '{qcm_n['destination']}'"
@@ -173,8 +167,16 @@ class Plot(PlotTemplate):
                                                         fontsize = 12
                                                     )
                                             ]
+
+        
+        #print("+++++++++++++++++++ dernier résultat listy[nb_qcm_passe-1]: ", listy[nb_qcm_passe-1])
+        #print("+++++++++++++++++++ mini recquis listy[nb_qcm_passe-1]: ", list_min[nb_qcm_passe-1]) 
+        if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
+            infos_plot = f"Réussite au QCM {qcm_n['destination']} !" + "\n"
+        else:
+            infos_plot = f"Echec au QCM {qcm_n['destination']} !" + "\n"
         infos_plot = infos_plot + f"En date du {liste_date_long[nb_qcm_passe-1]}" + "\n" 
-        infos_plot = infos_plot + f"Pour {user['prenom']} {user['nom']}" + "\n"   
+        infos_plot = infos_plot + f"Pour **{user['prenom']} {user['nom']}**" + "\n"     # NOM Prénom en Gras
         self.rich_text_infos_plot.content = infos_plot
             
     def button_annuler_click(self, **event_args):
