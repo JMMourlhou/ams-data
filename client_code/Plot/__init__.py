@@ -196,7 +196,7 @@ class Plot(PlotTemplate):
                     self.column_panel_2.visible = True      
         
         if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
-                next_plot = f"**Vous ouvrez vos droits au QCM {intitul_next_qcm}**" + "\n"
+                next_plot = f"**Vous ouvrez vos droits au QCM {intitul_next_qcm}**" + "\n\n"
                 next_plot = next_plot + "Bonne préparation !"
         else:
             next_plot = f"Vous devez d'abord réussir ce QCM pour ouvrir vos droits au prochain :" + "\n"
