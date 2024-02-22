@@ -20,11 +20,14 @@ class Plot(PlotTemplate):
         min_rep = qcm_n['taux_success']                      # INT       ex : min = 75 %
         
         # lecture table qcm result, création de la liste des qcm de ce stagiaire pour 1 QCM
+        infos_plot = ""          # Texte affiché en self.rich_text_infos_plot
         listx_int = []           # liste nb de fois qcm effectué         (1,    2,   3,  ...)
         listx_str = []           # liste nb de fois, mais en str pour affichage de x
         listy = []           # liste du résultat obtenu àch passage  (10%, 25%, 35%, ...)
         list_min = []
-        liste_date =[]
+        liste_date_short =[]
+        liste_date_long =[]
+        
         cpt=0
         if user:
             qcm_rows = app_tables.qcm_result.search(                         # permet la boucle sur les qcm passés
@@ -43,19 +46,29 @@ class Plot(PlotTemplate):
             listy.append(q['p100_sur_nb_rep'])      # y INT  Résultat du qcm 
             list_min.append(min_rep)                # INT       ex : min = 75 %    pour dessiner la ligne horizontale du mini recqui
             if len(qcm_rows)>1:                     # s'il y a au moins 1 qcm passé
-                liste_date.append(str(q['time'].strftime("%d/%m")))
-            else:
-                liste_date.append(str(q['time'].strftime("%d/%m/%Y, %Hh%M")))            # 1 seul qcm, j'affiche les détails du timing
+                liste_date_short.append(str(q['time'].strftime("%d/%m")))
+                liste_date_long.append(str(q['time'].strftime("%d/%m/%Y, %Hh%M")))            # 1 seul qcm, j'affiche les détails du timing
         
-        print('date / h : ', str(liste_date[nb_qcm_passe-1]))
+        print('date / h : ', str(liste_date_long[nb_qcm_passe-1]))
+        print('date / h : ', str(liste_date_short[nb_qcm_passe-1]))
+        
         print("x int  ",listx_int)
         print("x text ",listx_str)
         print("y", listy)
         print(list_min)
                 
         # Plot some data     SI PLUSIEURS QCM EFFECTUES j'affiche la ligne de 75%
+        
         if len(qcm_rows)>1:
-            self.label_txt.text = f"{user['email']}"
+            #print("+++++++++++++++++++ dernier résultat listy[nb_qcm_passe-1]: ", listy[nb_qcm_passe-1])
+            #print("+++++++++++++++++++ mini recquis listy[nb_qcm_passe-1]: ", list_min[nb_qcm_passe-1])
+            
+            if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
+                infos_plot = f"Réussite au QCM {qcm_n['destination']} !" + "\n"
+            else:
+                infos_plot = f"Echec au QCM {qcm_n['destination']} !" + "\n"
+                
+            
             title = f"{nb_qcm_passe}ème test, QCM '{qcm_n['destination']}'"
             self.plot_1.data = [
                 go.Scatter(
@@ -72,16 +85,15 @@ class Plot(PlotTemplate):
                     )
             ]
         else:                            # 1 SEUL QCM : Pie
-            date_qcm = str(liste_date[nb_qcm_passe-1])
-            title = f"QCM {qcm_n['destination']} du {date_qcm}, de {user['email']}"
+            date_qcm = str(liste_date_long[nb_qcm_passe-1])
+            #title = f"QCM {qcm_n['destination']} du {date_qcm}, de {user['email']}"
+            title = f"QCM {qcm_n['destination']} du {date_qcm}"
             colors = ['green', 'red']  # couleurs pour chaque tranche
             labels = ['% Bonnes réponses','Erreurs']  # Les étiquettes correspondantes
             listy_pour1qcm = [listy[0],100-listy[0]]
             if  listy[0] >= 75:
-                self.label_txt.text = f"Réussite !  QCM {qcm_n['destination']} / {user['nom']} {user['prenom']}"
                 title_pie = "Réussite"
             else:
-                self.label_txt.text = f"Echec au QCM {qcm_n['destination']} / {user['nom']} {user['prenom']}"
                 title_pie = "Echec"
             
             self.plot_1.data = [
@@ -124,12 +136,14 @@ class Plot(PlotTemplate):
                                             },
                                     'plot_bgcolor': 'red',       # Couleur de fond personnalisée
                                 }
-            
+        
+
+        
         self.plot_1.layout.yaxis.title = '% réponses ok - ' + user['email']
         #self.plot_1.layout.title.fontsize = 5
         
-        date_deb = liste_date[0]     #dernière date
-        date_fin = liste_date[nb_qcm_passe-1]   # derniere date
+        date_deb = liste_date_short[0]     #dernière date
+        date_fin = liste_date_short[nb_qcm_passe-1]   # derniere date
         if len(qcm_rows)>1:
             self.plot_1.layout.annotations = [
                                                 dict(
@@ -159,7 +173,9 @@ class Plot(PlotTemplate):
                                                         fontsize = 12
                                                     )
                                             ]
-      
+        infos_plot = infos_plot + f"En date du {liste_date_long[nb_qcm_passe-1]}" + "\n" 
+        infos_plot = infos_plot + f"Pour {user['prenom']} {user['nom']}" + "\n"   
+        self.rich_text_infos_plot.content = infos_plot
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

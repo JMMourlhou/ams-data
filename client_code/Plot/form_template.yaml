@@ -9,14 +9,10 @@ components:
   type: ColumnPanel
   layout_properties: {grid_position: 'FYHKZF,LNOYEI'}
   components:
-  - name: label_txt
-    properties: {role: null, align: center, foreground: 'theme:On Primary Container',
-      text: 'Essai \n
-
-        ', font: '14', spacing_above: none, spacing_below: none, background: 'theme:On
-        Primary', bold: false}
-    type: Label
-    layout_properties: {grid_position: 'UVEBTB,ARQPYG'}
+  - name: rich_text_infos_plot
+    properties: {align: center}
+    type: RichText
+    layout_properties: {grid_position: 'UPVFXD,AFZIQR'}
 - name: plot_1
   properties: {interactive: true, spacing_above: none, spacing_below: none}
   type: Plot
