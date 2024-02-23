@@ -40,6 +40,7 @@ class QrCode_display(QrCode_displayTemplate):
             
         app = constant_parameters.code_app1
         code_app1 = app + param  # App "AMS Data"  + code stage
+        print("code",code_app1)
         media=anvil.server.call('mk_qr_code',code_app1)
         self.image_1.source=media
 
