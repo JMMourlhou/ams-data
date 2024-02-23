@@ -1,11 +1,11 @@
-import stripe.checkout
-import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
+
+#import anvil.server
+#import anvil.google.auth, anvil.google.drive
+#from anvil.google.drive import app_files
+#import anvil.users
+#import anvil.tables as tables
+#import anvil.tables.query as q
+#from anvil.tables import app_tables
 
 # Variables globales que j'appelle par:     constant_parameters.logo_client
 code_app1 = "https://sxgqveyu3c2nj5kr.anvil.app/32M6REZ23NPHINCU26GAZBNM"   # App "AMS Data"  
