@@ -36,7 +36,6 @@ def loop_stagiaire_inscrits():
 
 #boucle sur la table qcm_result pour l'effacmt de tous les résultats, 
 def loop_del_result():
-    
     table = app_tables.qcm_result.search()
     print(len(table))
     result="erreur"
