@@ -89,7 +89,8 @@ class ItemTemplate4(ItemTemplate4Template):
         self.button_delete.tag.numero = self.item['num']
 
         self.nb_options = len(self.item['rep_multi'])     # je sais combien d'options j'utilise pour cette question
-
+        self.type_question = self.item['type']
+        
         self.rep1.tag.nb_options = len(self.item['rep_multi'])   # je sauve le nb d'options pour cette question ds rep1
         self.rep1.tag.nom = "rep1-true"                             
         self.rep2.tag.nom = "rep2-false"
@@ -110,9 +111,13 @@ class ItemTemplate4(ItemTemplate4Template):
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep1: {self.item['rep_multi'][0:1]} ")
         print(f" ++++++++++++++++++++++++++++++++++++++++++   INITIALISATION CORRECTION DE LA LIGNE, rep2: {self.item['rep_multi'][1:2]} ")
         
-        if self.nb_options > 1:     # 2 options possibles, rep1 et rep2 peuvent être identiques  ex 11 
-            self.rep1.text = "A"
-            self.rep2.text = "B"
+        if self.nb_options > 1:     
+            if self.type_question == "V/F":
+                self.rep1.text = "V"
+                self.rep2.text = "F"
+            else:                   # 2 options possibles, rep1 et rep2 peuvent être identiques  ex 11 
+                self.rep1.text = "A"
+                self.rep2.text = "B"
             
         if self.nb_options > 2:
             self.rep1.text = "A"
