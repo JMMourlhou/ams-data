@@ -65,7 +65,7 @@ def delete_qcm(qcm_descro_row, num_question):
         return False
     else:   
         #------------------------------------------------------------- tranfert/ ds le qcm 16 de la question annulée
-        
+        """
         w_sur_qcm_nb = 16
         r = app_tables.qcm_description.get(qcm_nb=w_sur_qcm_nb)   # acquisition du row du qcm
         liste_qcm_cible = app_tables.qcm.search(qcm_nb=r)
@@ -88,7 +88,7 @@ def delete_qcm(qcm_descro_row, num_question):
         if not result:
             print("Erreur en copy/delete de ligne")
             return
-        
+        """
         #-------------------------------------------------------------
         quest_qcm.delete()        
         return True
