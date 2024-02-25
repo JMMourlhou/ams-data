@@ -35,6 +35,8 @@ class Plot(PlotTemplate):
                                             qcm_number = qcm_n
                                         )       
             nb_qcm_passe = len(qcm_rows)
+            print("nb de qcm",nb_qcm_passe)
+            
         else:
             print("plot: user non trouvé")
             return
@@ -45,10 +47,9 @@ class Plot(PlotTemplate):
             listx_str.append(str(cpt))              # x STR
             listy.append(q['p100_sur_nb_rep'])      # y INT  Résultat du qcm 
             list_min.append(min_rep)                # INT       ex : min = 75 %    pour dessiner la ligne horizontale du mini recqui
-            if len(qcm_rows)>1:                     # s'il y a au moins 1 qcm passé
-                liste_date_short.append(str(q['time'].strftime("%d/%m")))
-                liste_date_long.append(str(q['time'].strftime("%d/%m/%Y, %Hh%M")))            # 1 seul qcm, j'affiche les détails du timing
-        
+            liste_date_short.append(str(q['time'].strftime("%d/%m")))
+            liste_date_long.append(str(q['time'].strftime("%d/%m/%Y, %Hh%M")))            # 1 seul qcm, j'affiche les détails du timing
+             
         print('date / h : ', str(liste_date_long[nb_qcm_passe-1]))
         print('date / h : ', str(liste_date_short[nb_qcm_passe-1]))
         
