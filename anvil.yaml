@@ -246,7 +246,7 @@ db_schema:
     server: full
     columns:
     - name: code
-      admin_ui: {order: 0, width: 200}
+      admin_ui: {order: 0, width: 89.96}
       type: string
     - name: intitulé
       admin_ui: {order: 1, width: 196.49}
