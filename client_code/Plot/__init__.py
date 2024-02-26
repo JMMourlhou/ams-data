@@ -177,8 +177,9 @@ class Plot(PlotTemplate):
             infos_plot = f"**Echec au QCM** {qcm_n['destination']} !" + "\n"
         infos_plot = infos_plot + f"Le {liste_date_long[nb_qcm_passe-1]}" + "\n" 
         infos_plot = infos_plot + f"De **{user['prenom']} {user['nom']}**" + "\n\n"     # NOM Prénom en Gras puis 2 st de ligne
+        infos_plot = infos_plot + f"**{user['email']}**" + "\n\n"                    # Mail
         infos_plot = infos_plot + f"{listy[nb_qcm_passe-1]} % de réponses exactes" + "\n"
-        infos_plot = infos_plot + f"( Minimum requis: {list_min[nb_qcm_passe-1]} %)" + "\n"
+        infos_plot = infos_plot + f"(Minimum requis: {list_min[nb_qcm_passe-1]} %)" + "\n"
         self.rich_text_infos_plot.content = infos_plot
 
         """
