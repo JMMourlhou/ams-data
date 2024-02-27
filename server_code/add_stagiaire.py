@@ -151,8 +151,8 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
 
     #effacement des pré-requis du stagiaire
     #lecture des rows à effacer ds pre requis
-    liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=stagiaire_row,
-                                                   stage_num=stage_row
+    liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email = stagiaire_row,
+                                                      stage_num = stage_row
                                                   )
     if len(liste_pr) > 0:
         for pr in liste_pr:
@@ -184,7 +184,7 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
             user.update(histo=historique)
         except:
             print("clé historique non trouvée")
-        
+            
    
     # Del of stagiaire in the stage
     row.delete()
