@@ -11,6 +11,7 @@ from ..Visu_stages import Visu_stages
 from ..Visu_stages.RowTemplate3 import RowTemplate3
 from anvil import open_form
 
+
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):
         # Set Form properties and Data Bindings.
@@ -251,23 +252,25 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         # loop on table qcm_result, je prends les résultats qui n'ont pas de plot sauvés
         liste = app_tables.qcm_result.search()
-        
-
-        for q in liste:
-            green_light = False
+        self.green_light = True
+        for q in liste: 
             if q['resultat_qcm_pdf'] == None:
                 user_qcm = q['user_qcm']
                 nb_qcm = q['qcm_number']['qcm_nb']
-                
-                with anvil.server.no_loading_indicator:
-                    self.task_1qcm = anvil.server.call('run_bg_task_qcm_pdf',user_qcm, nb_qcm, legend=False)
-                    #Timer à créer
-                    if self.task_1qcm.is_completed():
-                        green_light = True
-
+                while True:                        # Boucle infinie: ATTENTE
+                    if self.green_light == True:        # task completed ou 1ere, je peux lancer 1 task
+                        with anvil.server.no_loading_indicator:
+                            self.green_light = False
+                            self.task_1qcm = anvil.server.call('run_bg_task_qcm_pdf',user_qcm, nb_qcm, legend=False)
+                            print("type:",type(self.task_1qcm))
+ 
     def timer_1_tick(self, **event_args):  # Pour lancer une nelle BG task de maj des 
-        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-        pass
+        """This method is called Every 0.5 seconds. Does not trigger if [interval] is 0."""
+        if self.task_1qcm:
+            if self.task_1qcm.is_completed():
+                self.green_light = True
+            else:
+                self.green_light = False
                         
                         
            
