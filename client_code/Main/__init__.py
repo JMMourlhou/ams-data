@@ -250,6 +250,7 @@ class Main(MainTemplate):
 
     def button_loop_qcm_click(self, **event_args):       # GENERATION DU PDF résultat au QCM des stagiaires 
         """This method is called when the button is clicked"""
+        """
         # loop on table qcm_result, je prends les résultats qui n'ont pas de plot sauvés
         liste = app_tables.qcm_result.search()
         self.green_light = True
@@ -263,14 +264,18 @@ class Main(MainTemplate):
                             self.green_light = False
                             self.task_1qcm = anvil.server.call('run_bg_task_qcm_pdf',user_qcm, nb_qcm, legend=False)
                             print("type:",type(self.task_1qcm))
- 
+        """
+        
     def timer_1_tick(self, **event_args):  # Pour lancer une nelle BG task de maj des 
         """This method is called Every 0.5 seconds. Does not trigger if [interval] is 0."""
+        pass
+        """
         if self.task_1qcm:
             if self.task_1qcm.is_completed():
                 self.green_light = True
             else:
                 self.green_light = False
+        """
                         
                         
            
