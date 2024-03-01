@@ -112,14 +112,10 @@ components:
         event_bindings: {click: button_1_click}
       - name: button_loop_qcm
         properties: {text: Maj Plots, background: 'theme:Primary', foreground: 'theme:On
-            Primary', enabled: false}
+            Primary', enabled: true}
         type: Button
         event_bindings: {click: button_loop_qcm_click}
         layout_properties: {}
-      - name: timer_1
-        properties: {}
-        type: Timer
-        event_bindings: {tick: timer_1_tick}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: 'theme:On Primary Container', visible: true, text: '  Stages  ',

@@ -250,31 +250,23 @@ class Main(MainTemplate):
 
     def button_loop_qcm_click(self, **event_args):       # GENERATION DU PDF résultat au QCM des stagiaires 
         """This method is called when the button is clicked"""
-        global green_light
         # loop on table qcm_result, je prends les résultats qui n'ont pas de plot sauvés
+        user=anvil.users.get_user()
         liste = app_tables.qcm_result.search(
-                                            resultat_qcm_pdf = None
+                                            user_qcm = user
                                             )
-        green_light = True
-        for q in liste: 
-            user_qcm = q['user_qcm']
-            nb_qcm = q['qcm_number']['qcm_nb']
-            while True:                        # Boucle infinie: ATTENTE
-                if green_light == True:        # task completed ou 1ere, je peux lancer 1 task
+        if liste:
+            for q in liste: 
+                if q['resultat_qcm_pdf']==None:
+                    user_qcm = q['user_qcm']
+                    nb_qcm = q['qcm_number']['qcm_nb']
+        
                     with anvil.server.no_loading_indicator:
-                        green_light = False
                         task_1qcm = anvil.server.call('run_bg_task_qcm_pdf',user_qcm, nb_qcm, legend=False)
-                        self.timer_1_tick(task_1qcm)
-                        print("type:",type(self.task_1qcm))
+                        print("type:",type(task_1qcm))
         
         
-    def timer_1_tick(self, task_1qcm, **event_args):  # Pour lancer une nelle BG task de maj des 
-        """This method is called Every 0.5 seconds. Does not trigger if [interval] is 0."""
-        global green_light
-        if task_1qcm.is_completed():
-            green_light = True
-        else:
-            green_light = False
+
     
                         
                         
