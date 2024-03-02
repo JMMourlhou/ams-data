@@ -81,27 +81,6 @@ components:
   name: data_grid_1
   layout_properties: {grid_position: 'DDRVAU,RHIHMA'}
   components:
-  - type: ColumnPanel
-    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-      spacing_below: small, background: ''}
-    name: column_panel_1
-    layout_properties: {grid_position: 'ZCWZOI,DOYFZE'}
-    components:
-    - type: FlowPanel
-      properties: {role: null, vertical_align: full, spacing: medium, align: center,
-        tooltip: '', border: '', foreground: 'theme:On Primary Container', visible: true,
-        spacing_above: none, spacing_below: none, background: 'theme:Tertiary'}
-      name: flow_panel_1
-      layout_properties: {grid_position: 'MQCVZT,MNLRJS'}
-      components:
-      - type: Label
-        properties: {role: null, align: left, tooltip: '', border: '', foreground: 'theme:On
-            Primary Container', visible: true, text: Stage du ...              Type                 N°...,
-          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-          italic: false, background: '', bold: false, underline: false, icon: ''}
-        name: label_en_tete
-        layout_properties: {}
   - type: RepeatingPanel
     properties: {role: outlined-card, tooltip: '', border: '', foreground: '', items: null,
       visible: true, spacing_above: none, spacing_below: none, item_template: Visu_stages.RowTemplate3,

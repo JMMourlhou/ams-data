@@ -20,9 +20,8 @@ class Visu_stages(Visu_stagesTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.    
         if screen_size < 800:
-            self.label_en_tete.text = "Stage du ...              Type           Inscription"
-        else:
-            self.label_en_tete.text = "Stage du ...                 Type              N°...     Inscription "
+            #self.label_en_tete.text = "Stage du ...              Type           Inscription"
+            pass
         
         # Initilisation de la liste des stages à afficher
         """
