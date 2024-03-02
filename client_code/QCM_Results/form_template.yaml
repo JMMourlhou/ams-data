@@ -1,0 +1,26 @@
+container: {type: ColumnPanel}
+components:
+- name: column_panel_header
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: ''}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'NWSCOX,IODWSM'}
+  event_bindings: {}
+  components:
+  - name: spacer_1
+    properties: {height: -3.9891357421875, visible: false}
+    type: Spacer
+    layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
+  - name: label_3
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
+        Tertiary', visible: true, text: Résultats aux QCM, font_size: 16, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+    type: Label
+    layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+- name: repeating_panel_1
+  properties: {item_template: QCM_Results.ItemTemplate7, role: outlined-card}
+  type: RepeatingPanel
+  layout_properties: {grid_position: 'VRTKON,RMROCK'}
+is_package: true

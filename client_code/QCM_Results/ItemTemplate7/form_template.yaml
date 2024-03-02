@@ -1,0 +1,24 @@
+is_package: true
+container:
+  type: ColumnPanel
+  properties: {col_widths: '{"XYARPA":12,"VDSJJX":47,"WIUCFF":8}'}
+components:
+- name: button_nom_prenom
+  properties: {text: nom_p, align: left}
+  type: Button
+  layout_properties: {grid_position: 'EOWPLI,XYARPA'}
+- name: button_qcm_designation
+  properties: {text: qcm_descro}
+  type: Button
+  layout_properties: {grid_position: 'EOWPLI,WIUCFF'}
+- name: flow_panel_1
+  properties: {align: center}
+  type: FlowPanel
+  layout_properties: {grid_position: 'EOWPLI,VDSJJX'}
+  components:
+  - name: button_date_heure
+    properties: {text: date_heure}
+    type: Button
+  - name: button_result
+    properties: {text: result}
+    type: Button
