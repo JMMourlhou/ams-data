@@ -18,8 +18,6 @@ class QCM_Results(QCM_ResultsTemplate):
 
         # Any code you write here will run before the form opens.
         #lecture des résultats
-        liste_results = app_tables.qcm_result.search(tables.order_by("name", ascending=True),
-                                                                            stage=stage_row
-                                                                           )
+        liste_results = app_tables.qcm_result.search()
         if liste_results:                      # des stagiaires sont déjà inscrits ds stage
             self.repeating_panel_1.items = liste_results

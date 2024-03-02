@@ -15,3 +15,8 @@ class ItemTemplate7(ItemTemplate7Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        nom_p = self.item['user_qcm']['nom']+" "+self.item['user_qcm']['prenom']
+        self.button_nom_prenom.text = nom_p
+        self.button_qcm_designation.text = self.item['qcm_number']['destination']
+        self.button_date_heure.text = self.item['time']
+        self.button_result.text = self.item['p100_sur_nb_rep']+" %"

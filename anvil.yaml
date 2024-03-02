@@ -192,6 +192,9 @@ db_schema:
     - name: resultat_qcm_pdf
       admin_ui: {order: 7, width: 200}
       type: media
+    - name: dernier_stage
+      admin_ui: {width: 200, order: 8}
+      type: number
     title: Qcm_result
   stagiaires_inscrits:
     client: search
