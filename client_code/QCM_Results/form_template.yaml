@@ -19,6 +19,14 @@ components:
       background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     type: Label
     layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+  - name: button_annuler
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
+      foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
+      font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false,
+      background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+    type: Button
+    layout_properties: {grid_position: 'CIOGIQ,GDJOQK'}
+    event_bindings: {click: button_annuler_click}
 - name: repeating_panel_1
   properties: {item_template: QCM_Results.ItemTemplate7, role: outlined-card}
   type: RepeatingPanel

@@ -1,0 +1,20 @@
+is_package: true
+container:
+  type: ColumnPanel
+  properties: {background: 'theme:Primary', foreground: 'theme:On Primary'}
+components:
+- name: button_qcm_descro
+  properties: {text: button_qcm_description, foreground: 'theme:On Primary'}
+  type: Button
+  layout_properties: {grid_position: 'IUEKNH,HTGGUI'}
+- name: flow_panel_1
+  properties: {align: center}
+  type: FlowPanel
+  layout_properties: {grid_position: 'IUEKNH,AZKMEA'}
+  components:
+  - name: button_qcm_time
+    properties: {text: button_qcm_time, foreground: 'theme:On Primary'}
+    type: Button
+  - name: button_qcm_result
+    properties: {text: button_qcm_result, foreground: 'theme:On Primary'}
+    type: Button

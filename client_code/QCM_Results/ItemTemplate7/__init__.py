@@ -13,10 +13,29 @@ class ItemTemplate7(ItemTemplate7Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        
         # Any code you write here will run before the form opens.
-        nom_p = self.item['user_qcm']['nom']+" "+self.item['user_qcm']['prenom']
-        self.button_nom_prenom.text = nom_p
-        self.button_qcm_designation.text = self.item['qcm_number']['destination']
-        self.button_date_heure.text = self.item['time']
-        self.button_result.text = self.item['p100_sur_nb_rep']+" %"
+        self.repeating_panel_qcm_results.visible = False
+        self.button_nom_prenom.text = self.item['user_email']['nom']+" "+self.item['user_email']['prenom']
+        
+        # recherche des qcm de ce user pour le stage sélectionné ds Visu_stages
+        qcm_results = app_tables.qcm_result.search(
+                                                    tables.order_by("time", ascending=False),
+                                                    user_qcm = self.item['user_email']
+                                                    )
+        if len(qcm_results)>1:      # stagiaires inscrits ds stage
+                self.repeating_panel_qcm_results.items = qcm_results
+        else:
+            self.button_nom_prenom.background = "grey"
+            self.button_nom_prenom.foreground = "blue"
+    
+    def button_nom_prenom_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        
+        if self.repeating_panel_qcm_results.visible == True:
+            self.repeating_panel_qcm_results.visible = False
+        else:
+            self.repeating_panel_qcm_results.visible = True
+        
+    
+

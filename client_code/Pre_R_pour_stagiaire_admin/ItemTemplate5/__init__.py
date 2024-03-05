@@ -1,9 +1,6 @@
 from ._anvil_designer import ItemTemplate5Template
 from anvil import *
-import stripe.checkout
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -27,7 +24,7 @@ class ItemTemplate5(ItemTemplate5Template):
                                                          stage_num=row_stage               # stage
                                                          )
         
-        list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])
+        list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis 
         self.repeating_panel_1.items = liste_pr
 
     def button_1_click(self, **event_args):
