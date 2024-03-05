@@ -4,7 +4,7 @@ container:
   properties: {background: 'theme:Primary', foreground: 'theme:On Primary'}
 components:
 - name: button_qcm_descro
-  properties: {text: button_qcm_description, foreground: 'theme:On Primary'}
+  properties: {text: button_qcm_description, foreground: 'theme:On Primary', align: left}
   type: Button
   layout_properties: {grid_position: 'IUEKNH,HTGGUI'}
 - name: flow_panel_1

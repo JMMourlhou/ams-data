@@ -17,5 +17,8 @@ class ItemTemplate8(ItemTemplate8Template):
         # Any code you write here will run before the form opens.
         self.button_qcm_descro.text = self.item['qcm_number']['destination']
         self.button_qcm_time.text = self.item['time'].strftime("%d/%m/%Y, %Hh%M")
-        
+        if self.item['success'] == True:
+            self.button_qcm_result.background = "green"
+        else:
+            self.button_qcm_result.background = "red"
         self.button_qcm_result.text = self.item['p100_sur_nb_rep']
