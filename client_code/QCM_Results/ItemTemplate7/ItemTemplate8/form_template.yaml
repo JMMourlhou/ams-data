@@ -1,20 +1,28 @@
 is_package: true
 container:
   type: ColumnPanel
-  properties: {background: 'theme:Primary', foreground: 'theme:On Primary'}
+  properties: {background: 'theme:Primary', foreground: 'theme:On Primary', col_widths: '{"AZKMEA":40}'}
 components:
-- name: button_qcm_descro
-  properties: {text: button_qcm_description, foreground: 'theme:On Primary', align: left}
-  type: Button
-  layout_properties: {grid_position: 'IUEKNH,HTGGUI'}
+- name: flow_panel_2
+  properties: {align: center}
+  type: FlowPanel
+  layout_properties: {grid_position: 'EBRCUF,IFQQHG'}
+  components:
+  - name: button_qcm_descro
+    properties: {text: button_qcm_description, foreground: 'theme:On Primary Container',
+      align: left, spacing_above: none}
+    type: Button
+    layout_properties: {}
 - name: flow_panel_1
   properties: {align: center}
   type: FlowPanel
-  layout_properties: {grid_position: 'IUEKNH,AZKMEA'}
+  layout_properties: {grid_position: 'QFUWTJ,YNGIPM'}
   components:
-  - name: button_qcm_time
-    properties: {text: button_qcm_time, foreground: 'theme:On Primary'}
-    type: Button
   - name: button_qcm_result
-    properties: {text: button_qcm_result, foreground: 'theme:On Primary'}
+    properties: {text: button_qcm_result, foreground: 'theme:On Primary', spacing_above: none}
     type: Button
+    layout_properties: {}
+  - name: button_qcm_time
+    properties: {text: button_qcm_time, foreground: 'theme:On Primary', spacing_above: none}
+    type: Button
+    layout_properties: {}

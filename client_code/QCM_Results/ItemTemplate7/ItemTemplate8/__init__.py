@@ -21,4 +21,4 @@ class ItemTemplate8(ItemTemplate8Template):
             self.button_qcm_result.background = "green"
         else:
             self.button_qcm_result.background = "red"
-        self.button_qcm_result.text = self.item['p100_sur_nb_rep']
+        self.button_qcm_result.text = self.item['p100_sur_nb_rep'] + " %"
