@@ -130,12 +130,13 @@ def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):  
     # lecture fichier qcm_decription
     qcm_row=app_tables.qcm_description.get(qcm_nb=qcm_numero)
 
-    
     # si résultat en % >= résultats requis pour réussite ds qcm_descro : je valide le prochain qcm (si colonne next_qcm non vide): je change le dict ds stagiaire_inscrit
+    success = False                            # initialisation du success à False
     if qcm_row:
         seuil = qcm_row['taux_success']
         print("seuil :", seuil)
         if p100_sur_nb_rep >= seuil:
+            success = True                     # success TRUE
             #recherche du qcm suivant éventuel
             if qcm_row['next_qcm'] != None:
                 next_qcm = str(qcm_row['next_qcm'])   
@@ -166,7 +167,8 @@ def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):  
                                     liste_rep = reponses,
                                     nb_rep_ok = nb_bonnes_rep,
                                     p100_sur_nb_rep = p100_sur_nb_rep,
-                                    p100_sur_points = p100_sur_points
+                                    p100_sur_points = p100_sur_points,
+                                    success = success
                             )
 
     qcm_result_row = app_tables.qcm_result.search(qcm_number = qcm_row,

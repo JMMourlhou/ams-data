@@ -700,7 +700,6 @@ class ItemTemplate4(ItemTemplate4Template):
                 self.column_panel_plot.clear()
                 #print("self.qcm_nb: ", self.qcm_nb)
                 nb = self.qcm_nb['qcm_nb']
-                print(nb)
   
                 # plotly 
                 from ...Plot import Plot

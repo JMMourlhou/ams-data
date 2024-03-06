@@ -8,6 +8,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ....Plot import Plot
 
 class ItemTemplate8(ItemTemplate8Template):
     def __init__(self, **properties):
@@ -16,6 +17,8 @@ class ItemTemplate8(ItemTemplate8Template):
 
         # Any code you write here will run before the form opens.
         self.button_qcm_descro.text = self.item['qcm_number']['destination']
+        self.button_qcm_descro.tag.num_qcm = self.item['qcm_number']
+        
         self.button_qcm_time.text = "le " + str(self.item['time'].strftime("%d/%m/%Y")) + " à " + str(self.item['time'].strftime("%Hh%M")) 
         if self.item['success'] == True:
             self.button_qcm_result.background = "green"
@@ -23,16 +26,34 @@ class ItemTemplate8(ItemTemplate8Template):
         else:
             self.button_qcm_result.background = "red"
             self.button_qcm_time.background = "red"
+        self.button_qcm_time.tag.num_qcm = self.item['qcm_number']
+        
         self.button_qcm_result.text = str(self.item['p100_sur_nb_rep']) + " %"
+        self.button_qcm_result.tag.num_qcm = self.item['qcm_number']
 
+        self.stagiaire = self.item['user_qcm']
+        self.num_qcm = self.item['qcm_number']['qcm_nb']
+        
     def button_qcm_descro_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
-
+        
+        if self.column_panel_plot.visible == False:
+            self.button_qcm_descro.foreground = "yellow"
+            # Affichage du plot
+            self.column_panel_plot.clear()
+            self.column_panel_plot.visible = True
+            #print("self.qcm_nb: ", self.qcm_nb)
+            nb = self.button_qcm_descro.tag.num_qcm
+            # plotly 
+            self.column_panel_plot.add_component(Plot(self.stagiaire, self.num_qcm, False))   # nb:num de qcm   True:afficher la légende
+        else:
+            self.column_panel_plot.visible = False
+            self.button_qcm_descro.foreground = "blue"
+    
     def button_qcm_result_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        self.button_qcm_descro_click()
 
     def button_qcm_time_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        self.button_qcm_descro_click()
