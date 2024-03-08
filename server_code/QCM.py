@@ -212,7 +212,7 @@ def create_qcm_plot_pdf(user, nb, visu_next_qcm = False, visu_legend=False):    
     """
 
     media_object = PDFRenderer(page_size ='A4',
-                               filename = "result_qcm.pdf",
+                               filename = "resultat_qcm.pdf",
                                landscape = False,
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1,
