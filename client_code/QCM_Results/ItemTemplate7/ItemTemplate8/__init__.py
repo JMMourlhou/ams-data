@@ -42,10 +42,13 @@ class ItemTemplate8(ItemTemplate8Template):
             # Affichage du plot
             self.column_panel_plot.clear()
             self.column_panel_plot.visible = True
+            self.button_download.visible = True
             #print("self.qcm_nb: ", self.qcm_nb)
             nb = self.button_qcm_descro.tag.num_qcm
             # plotly 
-            self.column_panel_plot.add_component(Plot(self.stagiaire, self.num_qcm, False))   # nb:num de qcm   True:afficher la légende
+            affiche_next_qcm = False
+            affiche_legende = False   # afficher la légende
+            self.column_panel_plot.add_component(Plot(self.stagiaire, self.num_qcm, affiche_next_qcm, affiche_legende))   # nb:num de qcm   True:afficher la légende
         else:
             self.column_panel_plot.visible = False
             self.button_qcm_descro.foreground = "blue"
@@ -57,3 +60,14 @@ class ItemTemplate8(ItemTemplate8Template):
     def button_qcm_time_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.button_qcm_descro_click()
+
+    def button_download_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        affiche_next_qcm = False
+        affiche_legende = False   # afficher la légende
+        pdf = anvil.server.call("create_qcm_plot_pdf",self.stagiaire, self.num_qcm, affiche_next_qcm, affiche_legende)
+        if pdf:
+            anvil.media.download(pdf)
+            alert("PDF 'Résultat QCM' téléchargé !")
+        else:
+            alert("Pdf du QCM non généré")

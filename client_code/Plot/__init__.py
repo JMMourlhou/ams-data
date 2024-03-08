@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 from plotly import graph_objects as go           # AFFICHAGE DES RESULTATS de plusieurs tests sur 1 QCM
 
 class Plot(PlotTemplate):
-    def __init__(self,user, nb, legend = False, **properties):        # le nb vient de temp3 ds user (à cause du qcm BNSSA tiré de plusieurs qcm)
+    def __init__(self,user, nb, next_qcm = True, legend = False, **properties):        # le nb vient de temp3 ds user (à cause du qcm BNSSA tiré de plusieurs qcm)
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
@@ -184,27 +184,30 @@ class Plot(PlotTemplate):
 
         """
              -------------------------------------------------------------------------------------------------------
-                               AFFICHAGE DU RICH TEXT NEXT QCM AU DESSOUS DU PLOT
+                            AFFICHAGE DU RICH TEXT NEXT QCM AU DESSOUS DU PLOT
+                            (Si next_qcm = True, si vient d'un test qcm
+                            Si next_qcm = False, vient d'un affichage en historique, pas de commentaires en dessous)
              ------------------------------------------------------------------------------------------------------                         
         """
-        # Lecture de la ligne du qcm descro pour déterminer si next plot ds table qcm descro: 
-        intitul_next_qcm = ""
-        qcm_actuel_row = app_tables.qcm_description.get(qcm_nb=nb)
-        if qcm_actuel_row:
-            if qcm_actuel_row['next_qcm']:
-                next_qcm_row = app_tables.qcm_description.get(qcm_nb=qcm_actuel_row['next_qcm'])
-                if next_qcm_row:
-                    intitul_next_qcm = next_qcm_row['destination']
-                    self.column_panel_2.visible = True      
-        
-        if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
-                next_plot = f"**Vous ouvrez vos droits au QCM {intitul_next_qcm}**" + "\n\n"
-                next_plot = next_plot + "Bonne préparation !"
-        else:
-            next_plot = f"Vous devez d'abord réussir ce QCM pour ouvrir vos droits au prochain :" + "\n"
-            next_plot = next_plot + intitul_next_qcm + "\n \n"
-            next_plot = next_plot + "On ne lâche rien ! \n"
-        self.rich_text_next_qcm.content = next_plot
+        if next_qcm == True:
+            # Lecture de la ligne du qcm descro pour déterminer si next plot ds table qcm descro: 
+            intitul_next_qcm = ""
+            qcm_actuel_row = app_tables.qcm_description.get(qcm_nb=nb)
+            if qcm_actuel_row:
+                if qcm_actuel_row['next_qcm']:
+                    next_qcm_row = app_tables.qcm_description.get(qcm_nb=qcm_actuel_row['next_qcm'])
+                    if next_qcm_row:
+                        intitul_next_qcm = next_qcm_row['destination']
+                        self.column_panel_2.visible = True      
+            
+            if  listy[nb_qcm_passe-1] >= list_min[nb_qcm_passe-1]:               # si dernier résultat >= mini recquis
+                    next_plot = f"**Vous ouvrez vos droits au QCM {intitul_next_qcm}**" + "\n\n"
+                    next_plot = next_plot + "Bonne préparation !"
+            else:
+                next_plot = f"Vous devez d'abord réussir ce QCM pour ouvrir vos droits au prochain :" + "\n"
+                next_plot = next_plot + intitul_next_qcm + "\n \n"
+                next_plot = next_plot + "On ne lâche rien ! \n"
+            self.rich_text_next_qcm.content = next_plot
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

@@ -244,12 +244,14 @@ class Main(MainTemplate):
         alert("Vous êtes déconnecté.")   # Close the window in 1 second
         #anvil.server.wait_forever()
 
+    # Extraction de fichier texte pour les qcm
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         result = anvil.server.call("file_reading")
-
+        print(result)
+        
+    """
     def button_loop_qcm_click(self, **event_args):       # GENERATION DU PDF résultat au QCM des stagiaires 
-        """This method is called when the button is clicked"""
         # loop on table qcm_result, je prends les résultats qui n'ont pas de plot sauvés
         user=anvil.users.get_user()
         liste = app_tables.qcm_result.search(
@@ -264,7 +266,7 @@ class Main(MainTemplate):
                     with anvil.server.no_loading_indicator:
                         task_1qcm = anvil.server.call('run_bg_task_qcm_pdf',user_qcm, nb_qcm, legend=False)
                         print("type:",type(task_1qcm))
-        
+    """   
         
 
     

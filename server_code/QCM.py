@@ -134,13 +134,13 @@ def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):  
     success = False                            # initialisation du success à False
     if qcm_row:
         seuil = qcm_row['taux_success']
-        print("seuil :", seuil)
+        #print("seuil :", seuil)
         if p100_sur_nb_rep >= seuil:
             success = True                     # success TRUE
             #recherche du qcm suivant éventuel
             if qcm_row['next_qcm'] != None:
                 next_qcm = str(qcm_row['next_qcm'])   
-                print("next qcm: ", next_qcm)
+                #print("next qcm: ", next_qcm)
                 
                 # je recherche les stages du user à partir de son mail
                 liste_stages_stagiaire = app_tables.stagiaires_inscrits.search(user_email=user)
@@ -151,8 +151,8 @@ def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):  
                         print("dict droits stagiaire :", dict)
                         try:
                             valeur = dict.get(next_qcm)
-                            print(" ----  next qcm: ", next_qcm)
-                            print(" ----  valeur: ", valeur)
+                            #print(" ----  next qcm: ", next_qcm)
+                            #print(" ----  valeur: ", valeur)
                             
                             new_valeur = [valeur[0],"True"]
                             dict[next_qcm] = new_valeur   #réaffectation de cette clé
@@ -196,13 +196,11 @@ def temp_user_qcm(user, nb_questions_in_qcm, numero_qcm):
             result = True
         except:
             result = False
-            
     return result
 
 # Génération du pdf des résultats du QCM
-@anvil.server.background_task
-#@anvil.server.callable
-def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
+@anvil.server.callable
+def create_qcm_plot_pdf(user, nb, visu_next_qcm = False, visu_legend=False):     # nb : num du qcm
     #from anvil.pdf import PDFRenderer
     """
     quality :
@@ -219,37 +217,9 @@ def create_qcm_plot_pdf(user, nb, legend=False):     # nb : num du qcm
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1,
                                quality =  "default"
-                              ).render_form('Plot',user, nb, legend)
+                              ).render_form('Plot',user, nb, visu_next_qcm, visu_legend)
     
+    return media_object
 
-    #lecture du fichier qcm descro sur le num de qcm
-    # lecture du qcm
-    qcm_n = app_tables.qcm_description.get(qcm_nb=nb)
-    
-    # lecture du stagiaire
-    #user=anvil.users.get_user()
-    #if user:
-    qcm_rows = app_tables.qcm_result.search(
-                                    user_qcm = user,
-                                    qcm_number = qcm_n
-                                )
-    nb_qcm_passe = len(qcm_rows)
-    
-    #lecture dernier qcm       
-    if len(qcm_rows) < 1:   
-            print("qcm du stgiaire non trouvé à partir de num qcm et user")
-    else:
-        # sauvegarde du qcm ds le dernier qcm effectué par le user
-        # lecture dernier qcm
-        last_row = qcm_rows[len(qcm_rows)-1]       
-        last_row.update(resultat_qcm_pdf = media_object)
-
-        print("Sauvegarde qcm pdf")
-
-# A FAIRE APPELER from client side
-@anvil.server.callable
-def run_bg_task_qcm_pdf(user, nb, legend=False):
-    task = anvil.server.launch_background_task('create_qcm_plot_pdf', user, nb , legend=False)
-    return task
  
 
