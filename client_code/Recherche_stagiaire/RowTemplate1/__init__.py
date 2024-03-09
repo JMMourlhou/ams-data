@@ -26,6 +26,7 @@ class RowTemplate1(RowTemplate1Template):
         
         try:          # Liste à partir table users
             cumul_clefs_histo = ""
+            app_tables.stagiaires_inscrits.search(user_email=self.item[])
             if self.item['histo'] == None:
                 msg = self.item['nom']+" "+self.item['prenom'] + " avec histo sans {} (table 'users')"
                 print(msg)
