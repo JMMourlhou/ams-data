@@ -94,8 +94,9 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         #lecture du fichier stages et sélection des stages correspond au type de stage choisit
         list1 = app_tables.stages.search(code=row_type)     # recherche ds les stages
         if len(list1)==0:
-            alert("Pas de stage de ce type enregistré")
-        #print("nb de stage de ce type: ",len(list1))
+            from anvil import open_form       # j'initialise la forme principale avec le choix du qcm ds la dropdown
+            open_form("Recherche_stagiaire")
+            
         
         # Initialisation du Drop down num_stages et dates
         self.drop_down_num_stages.items = [(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list1]

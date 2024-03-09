@@ -42,7 +42,7 @@ class RowTemplate1(RowTemplate1Template):
                     if cpt == 1:   # si c'est le stage le plus récent, je le retient pour l'afficher si bt 5 clické
                         self.button_5.tag = num_stage
                     cpt += 1
-                    cumul_clefs_histo = cumul_clefs_histo + " " + clef
+                    cumul_clefs_histo = cumul_clefs_histo + clef + "\n"
             if self.item['prenom'] != None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
                 if self.item['role'] != "S":
@@ -52,7 +52,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
             if len(historique)>1:
-                self.button_5.height = 36 * len(historique)
+                self.button_5.height = 28 * len(historique)
             self.button_5.text = cumul_clefs_histo.lstrip()
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
@@ -64,9 +64,9 @@ class RowTemplate1(RowTemplate1Template):
             # lecture fichier père stage pour obtenir le num et date du stage
             st = self.item['stage']['numero']
             stg = app_tables.stages.get(numero=st)
-            self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])
+            self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])+"\n"
             self.button_5.tag = st
-
+            
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         """

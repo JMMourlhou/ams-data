@@ -210,7 +210,6 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             # raffraichit les lignes qcm en récupérant le choix du qcm ds la dropdown
             from anvil import open_form       # j'initialise la forme principale avec le choix du qcm ds la dropdown
             open_form("QCM_visu_modif_Main", qcm_nb)
-
         else:
             alert("erreur de création d'une question QCM")
 

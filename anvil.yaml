@@ -189,9 +189,6 @@ db_schema:
     - name: p100_sur_points
       admin_ui: {order: 6, width: 144}
       type: number
-    - name: resultat_qcm_pdf
-      admin_ui: {order: 7, width: 200}
-      type: media
     - name: success
       admin_ui: {width: 200, order: 8}
       type: bool

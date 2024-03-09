@@ -250,23 +250,7 @@ class Main(MainTemplate):
         result = anvil.server.call("file_reading")
         print(result)
         
-    """
-    def button_loop_qcm_click(self, **event_args):       # GENERATION DU PDF résultat au QCM des stagiaires 
-        # loop on table qcm_result, je prends les résultats qui n'ont pas de plot sauvés
-        user=anvil.users.get_user()
-        liste = app_tables.qcm_result.search(
-                                            user_qcm = user
-                                            )
-        if liste:
-            for q in liste: 
-                if q['resultat_qcm_pdf']==None:
-                    user_qcm = q['user_qcm']
-                    nb_qcm = q['qcm_number']['qcm_nb']
-        
-                    with anvil.server.no_loading_indicator:
-                        task_1qcm = anvil.server.call('run_bg_task_qcm_pdf',user_qcm, nb_qcm, legend=False)
-                        print("type:",type(task_1qcm))
-    """   
+    
         
 
     

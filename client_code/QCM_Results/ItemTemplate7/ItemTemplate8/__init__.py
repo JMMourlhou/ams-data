@@ -52,6 +52,7 @@ class ItemTemplate8(ItemTemplate8Template):
         else:
             self.column_panel_plot.visible = False
             self.button_qcm_descro.foreground = "blue"
+            self.button_download.visible = False
     
     def button_qcm_result_click(self, **event_args):
         """This method is called when the button is clicked"""
