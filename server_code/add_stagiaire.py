@@ -74,19 +74,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
     if stagiaire_row:
         # ******************************************************************* EFFACT code stage ds user et INCREMENT du nb de stgiaires ds le stage:
-        # ajouter le dico de l'historique du stagiare (ex; {"PSC1 du 28/08/202":(101,True)} )
-        historique = {}
-        valeur = []     
-        #print(type(user['histo']))
-        historique = user["histo"]
-        st = code_stage["code"]["code"]
-        st=st.strip()
-        #print(st)
-        clef = st + " du "+str(code_stage["date_debut"])
-        valeur = [code_stage["numero"],None]  # None sera remplacé par True si diplomé
-        historique[clef] = valeur              # ajout de la nouvelle clef ds l'historique
-        user.update(temp = 0,
-                   histo=historique
+        user.update(temp = 0
                    )
         
         # INCREMENT nb de stagiaires début stage ds fichier père stage
@@ -159,33 +147,13 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
             pr.delete()
             
     
-    # Lecture table stagiaires inscrits à ce stage pour lecture et MAJ clef histo et effacement du stagiaire
+    # Lecture table stagiaires inscrits à ce stage pour effacement du stagiaire
     row = app_tables.stagiaires_inscrits.get(user_email=stagiaire_row,       # ce user
                                                  stage=stage_row)            # ET pour ce stage
     if not row :
         valid="Stagiaire à enlever du stage non trouvé ds table stagiaires inscrits !"
         return valid
-        
-    # Pour MAJ HISTO, table users
-    user = app_tables.users.get(email=stagiaire_row['email'])    
-    if not user :
-        valid="MAJ histo: user à mettre à jour non trouvé ds table users !"
-        return valid
-    else:
-        historique = {}
-        valeur = []     
-        historique = user["histo"]   
-        st = stage_r["code"]["code"]
-        st=st.strip()
-        clef = st + " du "+str(stage_r["date_debut"])
-        print("clef",clef)
-        try:                          # erreur si histo vide
-            del historique[clef]
-            user.update(histo=historique)
-        except:
-            print("clé historique non trouvée")
-            
-   
+    
     # Del of stagiaire in the stage
     row.delete()
     valid="Stagiaire effacé de ce stage !"
