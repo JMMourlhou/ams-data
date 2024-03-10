@@ -24,26 +24,18 @@ class RowTemplate1(RowTemplate1Template):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         
-        try:          # Liste à partir table users
+        try: # *********************************          Liste à partir table users
             cumul_clefs_histo = ""
-            app_tables.stagiaires_inscrits.search(user_email=self.item[])
-            if self.item['histo'] == None:
-                msg = self.item['nom']+" "+self.item['prenom'] + " avec histo sans {} (table 'users')"
-                print(msg)
-                return
-                
-            if self.item['histo'] != {} or self.item['histo'] != None:   #lecture du dictionnaire historique des stages du stagiaire
-                historique = self.item['histo']
-                cpt = 1
-                for clef,valeur in historique.items():   #Boucle sur le dictionnaire histo ds Users
-                    print(clef)
-                    global num_stage
-                    num_stage = valeur[0]   # le num stage est le premier élément de valeur (clef:valeur) 
-                    test_tag_vide = self.button_5.tag
+            stagiaire_row = app_tables.users.get(email=self.item['email'])
+            stages_inscrits_rows = app_tables.stagiaires_inscrits.search(user_email = stagiaire_row)
+            if len(stages_inscrits_rows)>0:
+                cpt = 0
+                for stage in stages_inscrits_rows:
+                    cpt += 1 
+                    cumul_clefs_histo = cumul_clefs_histo + stage['stage']['code']['code'] +" du " + str(stage['stage']['date_debut']) + "\n"
                     if cpt == 1:   # si c'est le stage le plus récent, je le retient pour l'afficher si bt 5 clické
                         self.button_5.tag = num_stage
-                    cpt += 1
-                    cumul_clefs_histo = cumul_clefs_histo + clef + "\n"
+                
             if self.item['prenom'] != None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
                 if self.item['role'] != "S":
@@ -52,9 +44,10 @@ class RowTemplate1(RowTemplate1Template):
                 self.button_1.text = self.item['nom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
-            if len(historique)>1:
-                self.button_5.height = 28 * len(historique)
+            if len(stages_inscrits_rows)>1:   # le stagiaire a plus d'1 stage, j'augmente la hauteur du bouton 5
+                self.button_5.height = 28 * len(stages_inscrits_rows)
             self.button_5.text = cumul_clefs_histo.lstrip()
+
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
@@ -136,8 +129,6 @@ class RowTemplate1(RowTemplate1Template):
     def button_4_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.button_1_click()
-
-        
 
     def column_panel_1_show(self, **event_args):
         """This method is called when the column panel is shown on the screen"""
