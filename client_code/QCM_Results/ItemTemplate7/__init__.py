@@ -23,7 +23,7 @@ class ItemTemplate7(ItemTemplate7Template):
                                                     tables.order_by("time", ascending=False),
                                                     user_qcm = self.item['user_email']
                                                     )
-        if len(qcm_results)>1:      # stagiaires inscrits ds stage
+        if len(qcm_results)>0:      # stagiaires inscrits ds stage
                 self.repeating_panel_qcm_results.items = qcm_results
         else:
             self.button_nom_prenom.background = "grey"

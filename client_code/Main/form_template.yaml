@@ -94,19 +94,20 @@ components:
       layout_properties: {grid_position: 'AOZXYS,RPVEJB'}
       components:
       - name: Close
-        properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary'}
+        properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary',
+          visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: Close_click}
       - name: button_loop
         properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On
-            Primary', bold: true, visible: true}
+            Primary', bold: true, visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_loop_click}
       - name: button_1
         properties: {text: extraction Txt, background: 'theme:Primary', foreground: 'theme:On
-            Primary'}
+            Primary', visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
