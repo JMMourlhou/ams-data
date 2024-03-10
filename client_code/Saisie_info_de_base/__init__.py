@@ -57,7 +57,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_email2.text =              user['email2']
             self.check_box_accept_data_use.checked = user['accept_data']
             self.text_area_commentaires.text =       user['commentaires']
-            self.histo =                             user['histo']
+            #self.histo =                             user['histo']
                 
             if user['role'] == "A":
                self.text_box_email2.visible = True
@@ -140,8 +140,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                     self.text_box_tel.text,
                                                     self.text_box_email2.text,
                                                     self.check_box_accept_data_use.checked,
-                                                    self.text_area_commentaires.text,
-                                                    self.histo
+                                                    self.text_area_commentaires.text
+                                                    #self.histo
                                                     )
             if result == True :
                 alert("Renseignements enregistés !")    # *************************************

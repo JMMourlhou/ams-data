@@ -34,7 +34,7 @@ class RowTemplate1(RowTemplate1Template):
                     cpt += 1 
                     cumul_clefs_histo = cumul_clefs_histo + stage['stage']['code']['code'] +" du " + str(stage['stage']['date_debut']) + "\n"
                     if cpt == 1:   # si c'est le stage le plus récent, je le retient pour l'afficher si bt 5 clické
-                        self.button_5.tag = num_stage
+                        self.button_5.tag = stage['stage']['numero']
                 
             if self.item['prenom'] != None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']

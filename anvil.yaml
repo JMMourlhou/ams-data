@@ -331,9 +331,6 @@ db_schema:
     - name: temp
       admin_ui: {order: 23, width: 200}
       type: number
-    - name: histo
-      admin_ui: {width: 200, order: 24}
-      type: simpleObject
     - name: role
       admin_ui: {order: 0.5, width: 96}
       type: string

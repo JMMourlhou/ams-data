@@ -1,14 +1,10 @@
 from ._anvil_designer import Recherche_stagiaireTemplate
 from anvil import *
-import stripe.checkout
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-#from itertools import chain
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def __init__(self, inscript="recherche", **properties):       # inscript="inscription" si vient de visu_stages pour inscription d'1 stagiare

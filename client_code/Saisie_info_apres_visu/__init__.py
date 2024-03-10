@@ -31,12 +31,12 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         if user:
             self.text_box_id.text = "Id = "+ str(user.get_id())
             self.text_box_mail.text = user['email']
-            if self.text_box_nom != None:
+            if user['nom'] != None :
                 nm = user["nom"].capitalize()
                 nm = nm.strip()
                 self.text_box_nom.text = nm
            
-            if self.text_box_prenom != None:
+            if user['prenom'] != None:
                 pn = user["prenom"].capitalize()
                 pn = pn.strip()
                 self.text_box_prenom.text =  pn        
