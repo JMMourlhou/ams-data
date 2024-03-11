@@ -38,7 +38,7 @@ components:
     event_bindings: {click: button_4_click}
   - type: TextArea
     properties: {role: null, align: left, height: '36', tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: false, text: '',
       font_size: 12, auto_expand: false, font: '', spacing_above: none, spacing_below: none,
       italic: false, background: 'theme:On Primary Container', bold: false, underline: false}
     name: button_5

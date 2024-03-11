@@ -25,9 +25,10 @@ class RowTemplate1(RowTemplate1Template):
         # Any code you write here will run before the form opens.
         
         try: # *********************************          Liste à partir table users
+            """
             cumul_clefs_histo = ""
             stagiaire_row = app_tables.users.get(email=self.item['email'])
-            
+
             stages_inscrits_rows = app_tables.stagiaires_inscrits.search(user_email = stagiaire_row)
             if len(stages_inscrits_rows)>0:
                 cpt = 0
@@ -36,7 +37,7 @@ class RowTemplate1(RowTemplate1Template):
                     cumul_clefs_histo = cumul_clefs_histo + stage['stage']['code']['code'] +" du " + str(stage['stage']['date_debut']) + "\n"
                     if cpt == 1:   # si c'est le stage le plus récent, je le retient pour l'afficher si bt 5 clické
                         self.button_5.tag = stage['stage']['numero']
-                
+            """   
             if self.item['prenom'] != None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
                 if self.item['role'] != "S":
@@ -45,9 +46,9 @@ class RowTemplate1(RowTemplate1Template):
                 self.button_1.text = self.item['nom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
-            if len(stages_inscrits_rows)>1:   # le stagiaire a plus d'1 stage, j'augmente la hauteur du bouton 5
-                self.button_5.height = 28 * len(stages_inscrits_rows)
-            self.button_5.text = cumul_clefs_histo.lstrip()
+            #if len(stages_inscrits_rows)>1:   # le stagiaire a plus d'1 stage, j'augmente la hauteur du bouton 5
+            #    self.button_5.height = 28 * len(stages_inscrits_rows)
+            #self.button_5.text = cumul_clefs_histo.lstrip()
 
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
@@ -77,6 +78,7 @@ class RowTemplate1(RowTemplate1Template):
                 mel = self.item['email']   
             except:
                 mel = self.item['user_email']['email']
+
             from ...Saisie_info_apres_visu import Saisie_info_apres_visu
             open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
             

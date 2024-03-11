@@ -40,7 +40,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
                 pn = user["prenom"].capitalize()
                 pn = pn.strip()
                 self.text_box_prenom.text =  pn        
-
+                
             #self.image_photo.source =                user["photo"]
             if user["photo"] != None:
                 thumb_pic = anvil.image.generate_thumbnail(user["photo"], 640)
