@@ -72,7 +72,7 @@ components:
       align: center
       tooltip: ''
       border: ''
-      file_types: null
+      file_types: .jpg
       enabled: true
       files: []
       foreground: theme:On Primary
