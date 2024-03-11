@@ -27,6 +27,7 @@ class RowTemplate1(RowTemplate1Template):
         try: # *********************************          Liste à partir table users
             cumul_clefs_histo = ""
             stagiaire_row = app_tables.users.get(email=self.item['email'])
+            
             stages_inscrits_rows = app_tables.stagiaires_inscrits.search(user_email = stagiaire_row)
             if len(stages_inscrits_rows)>0:
                 cpt = 0
