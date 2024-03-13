@@ -227,7 +227,7 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         
         from .. import z_loop_on_tables
-        result=z_loop_on_tables.ajout_pre_requis()
+        result=z_loop_on_tables.del_pre_requis()
         alert(result)
         
 

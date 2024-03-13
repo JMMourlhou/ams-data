@@ -181,7 +181,7 @@ def del_pre_requis():
     # lecture stage 
     stage_row=app_tables.stages.get(numero=116)
     # lecture pré-requis
-    pre_requis_row=app_tables.pre_requis.get(code_pre_requis="PH-DI")
+    pre_requis_row=app_tables.pre_requis.get(code_pre_requis="PH-CTF-P4")
     # loop sur table pre_requis_stagiaire et del du pré-requis
     liste_a_enlever = app_tables.pre_requis_stagiaire.search(item_requis=pre_requis_row,
                                                              stage_num=stage_row
