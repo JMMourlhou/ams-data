@@ -157,4 +157,35 @@ def loop_qcm4():
             result="loop ok"
         print(f"loop sur qcm9: {result}")
 
+#boucle sur la table pré-requis par stagiaire pour ajouter un pré-requiq à tous les stgiaires d'un stage
+def ajout_pre_requis():
+    # lecture stage 
+    stage_row=app_tables.stages.get(numero=116)
+    # lecture pré-requis
+    pre_requis_row=app_tables.pre_requis.get(code_pre_requis="PH-DI")
+    # loop sur chaque stgiaire et ajout du pré-requis
     
+    stagiaires = app_tables.stagiaires_inscrits.search(stage=stage_row)
+    for stagiaire in stagiaires:
+        
+        app_tables.pre_requis_stagiaire.add_row(
+                              stage_num = stage_row,  
+                              stagiaire_email = stagiaire['user_email'],
+                              item_requis = pre_requis_row,
+                              check=False
+                )    
+        print(stagiaire['user_email'], " ", pre_requis_row['code_pre_requis'])
+
+#boucle sur la table pré-requis par stagiaire pour enlever un pré-requiq à tous les stagiaires d'un stage
+def del_pre_requis():
+    # lecture stage 
+    stage_row=app_tables.stages.get(numero=116)
+    # lecture pré-requis
+    pre_requis_row=app_tables.pre_requis.get(code_pre_requis="PH-DI")
+    # loop sur table pre_requis_stagiaire et del du pré-requis
+    liste_a_enlever = app_tables.pre_requis_stagiaire.search(item_requis=pre_requis_row,
+                                                             stage_num=stage_row
+                                                            )
+    for pr in liste_a_enlever:
+        print(pr['stagiaire_email']," ",pr['item_requis'])
+        pr.delete()
