@@ -66,15 +66,15 @@ def loop_del_qcm3_result():
     return result
 
 #boucle sur la table qcm pour modif rapide d'une colonne, ici sur la description
-def loop_qcm3():
+def loop_qcm19():
     #lecture fichier père qcm descro
-    qcm_row = app_tables.qcm_description.get(qcm_nb=4)
+    qcm_row = app_tables.qcm_description.get(qcm_nb=19)
     if qcm_row:
         table = app_tables.qcm.search(qcm_nb=qcm_row)
         result="erreur"
         if table:
             for row in table:
-                row.update(param = txt)
+                row.update(param = "Communication")
             result="loop ok"     
 
 #boucle sur la table qcm pour modif rapide d'une colonne, ici sur le type des qcm BNSSA (4 à 9) 
