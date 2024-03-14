@@ -23,7 +23,7 @@ class RowTemplate1(RowTemplate1Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        
+        self.repeating_panel_1.visible = False  #qcm non visibles tant que pas de click sur bt Qcm
         try: # *********************************          Liste à partir table users
             """
             cumul_clefs_histo = ""
@@ -152,9 +152,22 @@ class RowTemplate1(RowTemplate1Template):
         """This method is called when the button is clicked"""
         if self.repeating_panel_1.visible == False:
             self.repeating_panel_1.visible = True
+            self.button_qcm.foreground = "red"
         else:
             self.repeating_panel_1.visible = False
+            self.button_qcm.foreground = "blue"
+            
+         # recherche des qcm de ce user pour le stage sélectionné ds Visu_stages
         
+        # si recherche sur la table users
+        #try:
+        stagiaire = app_tables.users.get(email=self.item['email'])
+        qcm_results = app_tables.qcm_result.search(
+                                                    tables.order_by("time", ascending=False),
+                                                    user_qcm = stagiaire
+                                                    )
+        if len(qcm_results)>0:      # qcm trouvés pour ce user
+                self.repeating_panel_1.items = qcm_results
 
 
 
