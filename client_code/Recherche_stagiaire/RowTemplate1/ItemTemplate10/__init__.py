@@ -24,7 +24,9 @@ class ItemTemplate10(ItemTemplate10Template):
         self.button_qcm_time.text = "le " + str(self.item['time'].strftime("%d/%m/%Y")) + " à " + str(self.item['time'].strftime("%Hh%M")) 
         if self.item['success'] == True:
             self.button_qcm_result.background = "green"
+            self.button_qcm_result.foreground = "white"
             self.button_qcm_time.background = "green"
+            self.button_qcm_time.foreground = "white"
         else:
             self.button_qcm_result.background = "red"
             self.button_qcm_time.background = "red"
