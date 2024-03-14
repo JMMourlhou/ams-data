@@ -163,7 +163,7 @@ db_schema:
       type: string
     title: Qcm
   qcm_result:
-    client: full
+    client: search
     server: full
     columns:
     - name: user_qcm
