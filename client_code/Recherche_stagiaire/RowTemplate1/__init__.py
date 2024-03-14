@@ -46,6 +46,7 @@ class RowTemplate1(RowTemplate1Template):
                 self.button_1.text = self.item['nom']
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
+            self.button_qcm.tag = self.item['email']
             #if len(stages_inscrits_rows)>1:   # le stagiaire a plus d'1 stage, j'augmente la hauteur du bouton 5
             #    self.button_5.height = 28 * len(stages_inscrits_rows)
             #self.button_5.text = cumul_clefs_histo.lstrip()
@@ -62,6 +63,7 @@ class RowTemplate1(RowTemplate1Template):
             stg = app_tables.stages.get(numero=st)
             self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])+"\n"
             self.button_5.tag = st
+            self.button_qcm.tag = user['email']
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -148,7 +150,11 @@ class RowTemplate1(RowTemplate1Template):
 
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        if self.repeating_panel_1.visible == False:
+            self.repeating_panel_1.visible = True
+        else:
+            self.repeating_panel_1.visible = False
+        
 
 
 
