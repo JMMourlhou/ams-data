@@ -51,7 +51,7 @@ components:
     event_bindings: {focus: button_5_focus}
   event_bindings: {show: column_panel_1_show}
 - name: repeating_panel_1
-  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10}
+  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card}
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 is_package: true

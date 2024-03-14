@@ -1,8 +1,10 @@
 is_package: true
-container: {type: ColumnPanel}
+container:
+  type: ColumnPanel
+  properties: {role: outlined-card}
 components:
 - name: column_panel_1
-  properties: {col_spacing: small, wrap_on: never}
+  properties: {col_spacing: small, wrap_on: tablet}
   type: ColumnPanel
   layout_properties: {grid_position: 'CPPDXW,GQQCAZ'}
   components:
