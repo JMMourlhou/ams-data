@@ -7,10 +7,10 @@ components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: 'theme:On
       Primary', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small,
-    col_widths: '{"EJHTQQ":15,"VJOTSH":10,"POUXQY":16,"ZHGSBM":13}', spacing_below: none,
-    background: 'theme:Primary'}
+    col_widths: '{"EJHTQQ":12,"VJOTSH":8,"POUXQY":13,"ZHGSBM":11,"ZUMMIC":8,"WISJPW":8}',
+    spacing_below: none, background: 'theme:Primary'}
   name: column_panel_1
-  layout_properties: {column: null}
+  layout_properties: {column: 'null'}
   components:
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -36,6 +36,11 @@ components:
     name: button_4
     layout_properties: {grid_position: 'SJPWGO,POUXQY'}
     event_bindings: {click: button_4_click}
+  - name: button_qcm
+    properties: {text: Qcm, foreground: 'theme:On Primary'}
+    type: Button
+    layout_properties: {grid_position: 'SJPWGO,ZUMMIC'}
+    event_bindings: {click: button_qcm_click}
   - type: TextArea
     properties: {role: null, align: left, height: '36', tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: 'theme:On Primary', visible: false, text: '',
@@ -45,4 +50,8 @@ components:
     layout_properties: {grid_position: 'SJPWGO,ZHGSBM'}
     event_bindings: {focus: button_5_focus}
   event_bindings: {show: column_panel_1_show}
+- name: repeating_panel_1
+  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10}
+  type: RepeatingPanel
+  layout_properties: {column: 'null'}
 is_package: true

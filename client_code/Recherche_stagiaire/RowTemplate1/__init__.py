@@ -146,6 +146,10 @@ class RowTemplate1(RowTemplate1Template):
             if num_stage != 0:
                 open_form('Stage_visu_modif',"recherche",num_stage) 
 
+    def button_qcm_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
+
 
 
 
