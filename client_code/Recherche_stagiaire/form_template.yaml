@@ -24,7 +24,7 @@ components:
       layout_properties: {grid_position: 'VFRGMW,CGVGSJ'}
       components:
       - name: column_panel_6
-        properties: {col_widths: '{"SKICUP":47,"TSDRJZ":13}', wrap_on: never, spacing_above: none,
+        properties: {col_widths: '{"SKICUP":43,"TSDRJZ":17}', wrap_on: never, spacing_above: none,
           spacing_below: medium}
         type: ColumnPanel
         layout_properties: {grid_position: 'QFBRWM,GTQDWQ'}
@@ -107,7 +107,8 @@ components:
             layout_properties: {grid_position: 'OPUFKC,RBHOTT'}
             event_bindings: {change: text_box_email_change}
       - name: column_panel_st_inscrits
-        properties: {wrap_on: never, col_spacing: small, spacing_above: none, spacing_below: none}
+        properties: {wrap_on: never, col_spacing: small, spacing_above: none, spacing_below: none,
+          col_widths: '{"JCWCIU":25,"JJFGBN":35}'}
         type: ColumnPanel
         layout_properties: {grid_position: 'GAHVSD,IFLVSE'}
         components:
