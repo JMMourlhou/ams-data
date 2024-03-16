@@ -159,13 +159,19 @@ class RowTemplate1(RowTemplate1Template):
             
          # recherche des qcm de ce user pour le stage sélectionné ds Visu_stages
         
-        # si recherche sur la table users
-        #try:
-        stagiaire = app_tables.users.get(email=self.item['email'])
-        qcm_results = app_tables.qcm_result.search(
-                                                    tables.order_by("time", ascending=False),
-                                                    user_qcm = stagiaire
-                                                    )
+        
+        try:  # si recherche sur la table users
+            stagiaire = app_tables.users.get(email=self.item['email'])
+            qcm_results = app_tables.qcm_result.search(
+                                                        tables.order_by("time", ascending=False),
+                                                        user_qcm = stagiaire
+                                                        )
+        except: # si recherche sur la table
+            stagiaire = app_tables.users.get(email=self.item['user_email']['email'])
+            qcm_results = app_tables.qcm_result.search(
+                                                        tables.order_by("time", ascending=False),
+                                                        user_qcm = stagiaire
+                                                        )
         if len(qcm_results)>0:      # qcm trouvés pour ce user
                 self.repeating_panel_1.items = qcm_results
 
