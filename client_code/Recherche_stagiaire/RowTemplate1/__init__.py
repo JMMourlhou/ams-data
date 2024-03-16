@@ -25,19 +25,6 @@ class RowTemplate1(RowTemplate1Template):
         # Any code you write here will run before the form opens.
         self.repeating_panel_1.visible = False  #qcm non visibles tant que pas de click sur bt Qcm
         try: # *********************************          Liste à partir table users
-            """
-            cumul_clefs_histo = ""
-            stagiaire_row = app_tables.users.get(email=self.item['email'])
-
-            stages_inscrits_rows = app_tables.stagiaires_inscrits.search(user_email = stagiaire_row)
-            if len(stages_inscrits_rows)>0:
-                cpt = 0
-                for stage in stages_inscrits_rows:
-                    cpt += 1 
-                    cumul_clefs_histo = cumul_clefs_histo + stage['stage']['code']['code'] +" du " + str(stage['stage']['date_debut']) + "\n"
-                    if cpt == 1:   # si c'est le stage le plus récent, je le retient pour l'afficher si bt 5 clické
-                        self.button_5.tag = stage['stage']['numero']
-            """   
             if self.item['prenom'] != None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
                 if self.item['role'] != "S":
@@ -47,10 +34,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
             self.button_qcm.tag = self.item['email']
-            #if len(stages_inscrits_rows)>1:   # le stagiaire a plus d'1 stage, j'augmente la hauteur du bouton 5
-            #    self.button_5.height = 28 * len(stages_inscrits_rows)
-            #self.button_5.text = cumul_clefs_histo.lstrip()
-
+            self.button_histo.tag = self.item['email']
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
@@ -58,12 +42,15 @@ class RowTemplate1(RowTemplate1Template):
             self.button_1.text = user['nom']+" "+user['prenom']
             self.button_3.text = user['tel']
             self.button_4.text = user['email']
+            self.button_histo.tag = user['email']
+            """
             # lecture fichier père stage pour obtenir le num et date du stage
             st = self.item['stage']['numero']
             stg = app_tables.stages.get(numero=st)
             self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])+"\n"
             self.button_5.tag = st
             self.button_qcm.tag = user['email']
+            """
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -153,27 +140,45 @@ class RowTemplate1(RowTemplate1Template):
         if self.repeating_panel_1.visible == False:
             self.repeating_panel_1.visible = True
             self.button_qcm.foreground = "red"
+            self.button_1.foreground = "red"
+            try:  # si recherche sur la table users
+                stagiaire = app_tables.users.get(email=self.item['email'])
+                qcm_results = app_tables.qcm_result.search(
+                                                            tables.order_by("time", ascending=False),
+                                                            user_qcm = stagiaire
+                                                            )
+            except: # si recherche sur la table
+                stagiaire = app_tables.users.get(email=self.item['user_email']['email'])
+                qcm_results = app_tables.qcm_result.search(
+                                                            tables.order_by("time", ascending=False),
+                                                            user_qcm = stagiaire
+                                                            )
+            if len(qcm_results)>0:      # qcm trouvés pour ce user
+                    self.repeating_panel_1.items = qcm_results
         else:
             self.repeating_panel_1.visible = False
-            self.button_qcm.foreground = "blue"
-            
-         # recherche des qcm de ce user pour le stage sélectionné ds Visu_stages
-        
-        
-        try:  # si recherche sur la table users
-            stagiaire = app_tables.users.get(email=self.item['email'])
-            qcm_results = app_tables.qcm_result.search(
-                                                        tables.order_by("time", ascending=False),
-                                                        user_qcm = stagiaire
-                                                        )
-        except: # si recherche sur la table
-            stagiaire = app_tables.users.get(email=self.item['user_email']['email'])
-            qcm_results = app_tables.qcm_result.search(
-                                                        tables.order_by("time", ascending=False),
-                                                        user_qcm = stagiaire
-                                                        )
-        if len(qcm_results)>0:      # qcm trouvés pour ce user
-                self.repeating_panel_1.items = qcm_results
+            self.button_1.foreground = "theme:Tertiary"               #yellow
+            self.button_1.background = "theme:On Primary Container"
+
+    def button_histo_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        if self.repeating_panel_2.visible == False:
+            self.repeating_panel_2.visible = True
+            self.button_histo.foreground = "red"
+            self.button_1.foreground = "red"
+            self.button_1.background = "theme:On Primary Container"
+            try:  # si recherche sur la table users
+                stagiaire = app_tables.users.get(email=self.item['email'])
+            except:
+                stagiaire = app_tables.users.get(email=self.item['user_email']['email'])
+            self.repeating_panel_2.items = app_tables.stagiaires_inscrits.search(user_email = stagiaire)
+        else:
+            self.repeating_panel_2.visible = False
+            self.button_1.foreground = "theme:Tertiary"               #yellow
+            self.button_1.background = "theme:On Primary Container"
+
+
+
 
 
 

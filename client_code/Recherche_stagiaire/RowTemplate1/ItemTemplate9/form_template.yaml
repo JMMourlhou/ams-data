@@ -1,0 +1,7 @@
+is_package: true
+container: {type: ColumnPanel}
+components:
+- name: button_detail_histo
+  properties: {text: button_detail_histo, foreground: 'theme:Error', background: ''}
+  type: Button
+  layout_properties: {grid_position: 'ZIIYXX,YYJFCH'}
