@@ -37,17 +37,17 @@ class RowTemplate1(RowTemplate1Template):
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
-            user = app_tables.users.get(email=mel)
+            user_row = app_tables.users.get(email=mel)
             stagiaire_row = user # pour les pré-requis
-            self.button_1.text = user['nom']+" "+user['prenom']
-            self.button_3.text = user['tel']
-            self.button_4.text = user['email']
-            self.button_histo.tag = user['email']
-            self.drop_down_code_stage.tag = user['email']
+            self.button_1.text = user_row['nom']+" "+user_row['prenom']
+            self.button_3.text = user_row['tel']
+            self.button_4.text = user_row['email']
+            self.button_histo.tag = user_row['email']
+            self.drop_down_code_stage.tag = user_row['email']
             
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
         liste0 = app_tables.stagiaires_inscrits.search(user_email=stagiaire_row)
-        print("nb; ", len(liste0))
+        #print("nb; ", len(liste0))
         liste_drop_d = []
         for row in liste0:
             #lecture fichier père stage
@@ -55,7 +55,7 @@ class RowTemplate1(RowTemplate1Template):
             #lecture fichier père type de stage
             type=app_tables.codes_stages.get(code=stage['code']['code'])
             liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
-        print(liste_drop_d)
+        #print(liste_drop_d)
         self.drop_down_code_stage.items = liste_drop_d   
         
             
