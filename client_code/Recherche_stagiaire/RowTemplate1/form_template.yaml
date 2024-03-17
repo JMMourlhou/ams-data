@@ -33,7 +33,7 @@ components:
       layout_properties: {grid_position: 'MPTIRX,IVRRTP'}
       event_bindings: {click: button_3_click}
   - name: column_panel_3
-    properties: {wrap_on: never, col_spacing: small, col_widths: '{"WNZJOH":20,"ZAXZSJ":40}'}
+    properties: {wrap_on: never, col_spacing: small, col_widths: '{"WNZJOH":24,"ZAXZSJ":36,"JSQDJU":20}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'NNKPGD,FRQZWA'}
     components:
@@ -46,13 +46,13 @@ components:
       layout_properties: {grid_position: 'WLUAHM,WNZJOH'}
       event_bindings: {click: button_4_click}
     - name: button_qcm
-      properties: {text: Qcm, foreground: 'theme:Tertiary', align: left, background: 'theme:On
+      properties: {text: Qcm, foreground: 'theme:Tertiary', align: center, background: 'theme:On
           Primary Container'}
       type: Button
       layout_properties: {grid_position: 'WLUAHM,ZAXZSJ'}
       event_bindings: {click: button_qcm_click}
     - name: button_histo
-      properties: {text: Histo, foreground: 'theme:Tertiary', align: left, background: 'theme:On
+      properties: {text: Histo, foreground: 'theme:Tertiary', align: center, background: 'theme:On
           Primary Container'}
       type: Button
       layout_properties: {grid_position: 'WLUAHM,JSQDJU'}
