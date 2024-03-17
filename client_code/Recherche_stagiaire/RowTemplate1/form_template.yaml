@@ -71,7 +71,7 @@ components:
         visible: true
         font_size: 12
         font: ''
-        spacing_above: medium
+        spacing_above: small
         spacing_below: none
         italic: false
         background: theme:On Primary Container
