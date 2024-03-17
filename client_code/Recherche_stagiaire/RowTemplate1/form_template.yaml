@@ -48,13 +48,13 @@ components:
       event_bindings: {click: button_4_click}
     - name: button_qcm
       properties: {text: Qcm, foreground: 'theme:Tertiary', align: center, background: 'theme:On
-          Primary Container', spacing_above: none, spacing_below: none}
+          Primary Container', spacing_above: none, spacing_below: none, font_size: 10}
       type: Button
       layout_properties: {grid_position: 'WLUAHM,ZAXZSJ'}
       event_bindings: {click: button_qcm_click}
     - name: button_histo
       properties: {text: Histo, foreground: 'theme:Tertiary', align: center, background: 'theme:On
-          Primary Container', spacing_above: none, spacing_below: none}
+          Primary Container', spacing_above: none, spacing_below: none, font_size: 10}
       type: Button
       layout_properties: {grid_position: 'WLUAHM,JSQDJU'}
       event_bindings: {click: button_histo_click}
