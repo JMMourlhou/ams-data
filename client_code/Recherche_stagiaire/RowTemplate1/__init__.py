@@ -11,11 +11,6 @@ from anvil.tables import app_tables
 
 from InputBox.input_box import InputBox, alert2, input_box, multi_select_dropdown
 
-global num_stage  # pour le click sur button_5 et envoie ds le stage
-num_stage = 0
-
-global cpt   # pour afficher le dernier stage assisté ds bt 5
-cpt = 0
 
 class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
@@ -43,14 +38,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_3.text = user['tel']
             self.button_4.text = user['email']
             self.button_histo.tag = user['email']
-            """
-            # lecture fichier père stage pour obtenir le num et date du stage
-            st = self.item['stage']['numero']
-            stg = app_tables.stages.get(numero=st)
-            self.button_5.text = str(stg['date_debut'])+" / "+str(stg['numero'])+"\n"
-            self.button_5.tag = st
-            self.button_qcm.tag = user['email']
-            """
+            
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -122,18 +110,6 @@ class RowTemplate1(RowTemplate1Template):
         """This method is called when the button is clicked"""
         self.button_1_click()
 
-    def column_panel_1_show(self, **event_args):
-        """This method is called when the column panel is shown on the screen"""
-        global cpt
-        cpt += 1
-
-    def button_5_focus(self, **event_args):
-        """This method is called when the text area gets focus"""
-        if self.button_5.text != "":
-            num_stage = self.button_5.tag
-            
-            if num_stage != 0:
-                open_form('Stage_visu_modif',"recherche",num_stage) 
 
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -158,7 +134,7 @@ class RowTemplate1(RowTemplate1Template):
         else:
             self.repeating_panel_1.visible = False
             self.button_1.foreground = "theme:Tertiary"               #yellow
-            self.button_1.background = "theme:On Primary Container"
+            #self.button_1.background = "theme:On Primary Container"
 
     def button_histo_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -166,7 +142,7 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_2.visible = True
             self.button_histo.foreground = "red"
             self.button_1.foreground = "red"
-            self.button_1.background = "theme:On Primary Container"
+            #self.button_1.background = "theme:On Primary Container"
             try:  # si recherche sur la table users
                 stagiaire = app_tables.users.get(email=self.item['email'])
             except:
@@ -175,7 +151,7 @@ class RowTemplate1(RowTemplate1Template):
         else:
             self.repeating_panel_2.visible = False
             self.button_1.foreground = "theme:Tertiary"               #yellow
-            self.button_1.background = "theme:On Primary Container"
+            #self.button_1.background = "theme:On Primary Container"
 
 
 
