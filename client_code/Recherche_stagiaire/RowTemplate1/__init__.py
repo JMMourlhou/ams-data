@@ -30,15 +30,34 @@ class RowTemplate1(RowTemplate1Template):
             self.button_4.text = self.item['email']
             self.button_qcm.tag = self.item['email']
             self.button_histo.tag = self.item['email']
+            self.drop_down_code_stage.tag = self.item['email']
+            stagiaire_row = app_tables.users.get(email=self.item['email']) # pour pré-requis
+
+           
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
             user = app_tables.users.get(email=mel)
+            stagiaire_row = user # pour les pré-requis
             self.button_1.text = user['nom']+" "+user['prenom']
             self.button_3.text = user['tel']
             self.button_4.text = user['email']
             self.button_histo.tag = user['email']
+            self.drop_down_code_stage.tag = user['email']
             
+        # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
+        liste0 = app_tables.stagiaires_inscrits.search(user_email=stagiaire_row)
+        print("nb; ", len(liste0))
+        liste_drop_d = []
+        for row in liste0:
+            #lecture fichier père stage
+            stage=app_tables.stages.get(numero=row['stage']['numero'])
+            #lecture fichier père type de stage
+            type=app_tables.codes_stages.get(code=stage['code']['code'])
+            liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
+        print(liste_drop_d)
+        self.drop_down_code_stage.items = liste_drop_d   
+        
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -110,7 +129,6 @@ class RowTemplate1(RowTemplate1Template):
         """This method is called when the button is clicked"""
         self.button_1_click()
 
-
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
         if self.repeating_panel_1.visible == False:
@@ -152,6 +170,26 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_2.visible = False
             self.button_1.foreground = "theme:Tertiary"               #yellow
             #self.button_1.background = "theme:On Primary Container"
+
+    def drop_down_code_stage_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.repeating_panel_3.visible = True
+        row_stagiaire_inscrit = self.drop_down_code_stage.selected_value   # Stage sélectionné du user ds drop_down (row table stagiaire inscrit)
+        if row_stagiaire_inscrit != None:
+            # lecture fichier père stages
+            row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
+            print(row_stage['numero'])
+            # lecture des pré requis pour ce stage et pour ce stagiaire
+            stagiaire_email = self.drop_down_code_stage.tag
+            stagiaire_row = app_tables.users.get(email=stagiaire_email)
+            liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=stagiaire_row,
+                                                            stage_num=row_stage
+                                                            )
+            print(len(liste_pr))
+            self.repeating_panel_3.items = liste_pr
+        else:
+            self.repeating_panel_3.visible = False
+            
 
 
 

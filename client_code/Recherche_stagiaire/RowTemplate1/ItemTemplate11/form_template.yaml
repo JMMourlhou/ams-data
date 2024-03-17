@@ -1,0 +1,64 @@
+is_package: true
+container: {type: ColumnPanel}
+components:
+- name: flow_panel_2
+  properties: {align: center, background: 'theme:Primary', spacing_above: none, spacing_below: none}
+  type: FlowPanel
+  layout_properties: {grid_position: 'XWJESW,TGRIWD'}
+  components:
+  - name: column_panel_2
+    properties: {role: tonal-card, background: 'theme:On Primary Container'}
+    type: ColumnPanel
+    layout_properties: {width: 210.978, expand: false}
+    components:
+    - name: image_1
+      properties: {height: '50', role: null, spacing_above: small, spacing_below: medium,
+        display_mode: original_size}
+      type: Image
+      layout_properties: {grid_position: 'LSIOOU,UOWYNL', full_width_row: true}
+      data_bindings: []
+  - name: column_panel_1
+    properties: {col_widths: '{}'}
+    type: ColumnPanel
+    layout_properties: {width: 100}
+    components:
+    - name: button_visu
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:On Primary', visible: false, text: Voir, font_size: null,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: ''}
+      type: Button
+      layout_properties: {grid_position: 'CFBKGE,IOYJUG'}
+      event_bindings: {click: button_visu_click}
+    - name: spacer_1
+      properties: {height: 7.570526123046875}
+      type: Spacer
+      layout_properties: {grid_position: 'NTPCZZ,UGBRQB'}
+    - name: file_loader_1
+      properties:
+        role: outlined-button
+        show_state: true
+        align: center
+        tooltip: ''
+        border: ''
+        file_types: .jpg
+        enabled: true
+        files: []
+        foreground: theme:On Primary
+        visible: true
+        text: Choisir
+        font_size: null
+        font: ''
+        spacing_above: small
+        icon_align: left
+        spacing_below: small
+        italic: false
+        file: null
+        background: ''
+        bold: false
+        underline: false
+        multiple: false
+        icon: fa:upload
+      type: FileLoader
+      layout_properties: {grid_position: 'GHLKMF,CEYBAC'}
+      event_bindings: {change: file_loader_1_change}
