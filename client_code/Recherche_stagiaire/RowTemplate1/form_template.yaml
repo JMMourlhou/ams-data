@@ -7,7 +7,7 @@ components:
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: 'theme:On
       Primary', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small,
-    col_widths: '{"EKRUKP":30}', spacing_below: none, background: ''}
+    col_widths: '{"EKRUKP":30}', spacing_below: none, background: 'theme:Primary'}
   name: column_panel_1
   layout_properties: {column: 'null'}
   components:
