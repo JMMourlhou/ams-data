@@ -38,7 +38,7 @@ class RowTemplate1(RowTemplate1Template):
             # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
             user_row = app_tables.users.get(email=mel)
-            stagiaire_row = user # pour les pré-requis
+            stagiaire_row = user_row # pour les pré-requis
             self.button_1.text = user_row['nom']+" "+user_row['prenom']
             self.button_3.text = user_row['tel']
             self.button_4.text = user_row['email']
