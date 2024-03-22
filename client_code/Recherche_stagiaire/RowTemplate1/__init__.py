@@ -1,9 +1,6 @@
 from ._anvil_designer import RowTemplate1Template
 from anvil import *
-import stripe.checkout
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -31,9 +28,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_qcm.tag = self.item['email']
             self.button_histo.tag = self.item['email']
             self.drop_down_code_stage.tag = self.item['email']
-            stagiaire_row = app_tables.users.get(email=self.item['email']) # pour pré-requis
-
-           
+            stagiaire_row = app_tables.users.get(email=self.item['email']) # pour pré-requis         
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             mel = self.item['user_email']['email']
             user_row = app_tables.users.get(email=mel)

@@ -12,7 +12,6 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.repeating_panel_1.items = []
         
         self.inscription = inscript
         if self.inscription != "recherche":   # inscription/num_stage
@@ -29,6 +28,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                 #role =q.not_("A")    # on n'affiche pas l'admin !
                 )
         self.text_box_role.text = "S"    # j'affiche le role "S"
+
         
     def text_box_nom_change(self, **event_args):
         """This method is called when the text in this text box is edited"""

@@ -18,16 +18,22 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         self.item_requis = item_requis
         self.label_1.text = self.new_file_name
         self.origine = origine
+       
 
     def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
         stage = self.stage_num['numero']
+        
         if self.origine == "admin":
             from ..Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
             open_form('Pre_R_pour_stagiaire_admin',stage)
         else:     #origine = "stagiaire"
-            from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
-            open_form("Pre_R_pour_stagiaire")
+            if self.origine == "recherche":
+                from ..Recherche_stagiaire import Recherche_stagiaire
+                open_form('Recherche_stagiaire') 
+            else:
+                from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
+                open_form("Pre_R_pour_stagiaire")
             
 
     def download_click(self, **event_args):
