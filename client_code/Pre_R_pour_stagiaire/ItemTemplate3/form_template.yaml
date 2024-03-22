@@ -54,7 +54,7 @@ components:
         align: center
         tooltip: ''
         border: ''
-        file_types: .jpg
+        file_types: ''
         enabled: true
         files: []
         foreground: theme:On Primary
