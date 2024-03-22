@@ -35,7 +35,6 @@ class RowTemplate1(RowTemplate1Template):
 
            
         except: # ***********************************  Liste à partir table Stagiaires inscrits
-            # lecture table users à partir du mail du stagiaire
             mel = self.item['user_email']['email']
             user_row = app_tables.users.get(email=mel)
             stagiaire_row = user_row # pour les pré-requis

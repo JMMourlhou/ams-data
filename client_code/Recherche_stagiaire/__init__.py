@@ -12,6 +12,8 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.repeating_panel_1.items = []
+        
         self.inscription = inscript
         if self.inscription != "recherche":   # inscription/num_stage
             self.drop_down_code_stage.visible = False
