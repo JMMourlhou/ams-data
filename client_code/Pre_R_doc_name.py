@@ -15,4 +15,4 @@ def doc_name_creation(row_stage_num, row_item_requis, row_user):
     
     file_name= stg + "_"+ item +"_"+ name.capitalize() + "-"+ prenom.capitalize()    # l'extension sera ajoutée ds les autres modules
 
-    return file_name
+    return file_name    # file name sans l'extension

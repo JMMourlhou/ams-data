@@ -1,16 +1,15 @@
-from anvil import *
+#from anvil import *
 
 import anvil.files
-from anvil.files import data_files
-import anvil.users
-import anvil.tables as tables
+#from anvil.files import data_files
+#import anvil.users
+#import anvil.tables as tables
 #import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from PIL import Image
 import io
 #import pathlib
-#import Pr_pdf_to_jpg
 import math
 
 @anvil.server.callable
@@ -23,7 +22,7 @@ def path_info(file):
 def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name="pr_rq.jpg", file_extension=".jpg"):
 #def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
 #def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
-    print("new_file-NAME: ", new_file_name)
+    #print("new_file-NAME: ", new_file_name)
     valid=False
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,          # stage row
                                                          stagiaire_email = email,       # user row
@@ -31,15 +30,14 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
                                              ) 
     if pr_requis_row:
         if file_extension == ".jpg":
-            print("serveur Preq: Ce fichier est une image JPG")        
+            #print("serveur Preq: Ce fichier est une image JPG")        
+            new_file_name = new_file_name + file_extension
 
-
-            
             #-------------------------------------------------------------------------------- à Remplacer par 1 B.G. task / loop traitmt images
             # Img file, Convert the 'file' Media object into a Pillow Image
             img = Image.open(io.BytesIO(file.get_bytes()))
             width, height = img.size
-            print('size', width, height)
+            #print('size', width, height)
             # Si img de très haute qualité je divise en deux
             if width >= height:   #landscape
                 if width > 2000:
@@ -54,18 +52,14 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
             # Resize the image to the required size
             img = img.resize((width,height))    
             width, height = img.size
-            print('new_size', width, height)
+            #print('new_size', width, height)
             
             # Convert the Pillow Image into an Anvil Media object and return it
             bs = io.BytesIO()
             img.save(bs, format="JPEG")
     
             file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
-            # -------------------------------------------------------------------------------------  
-
-
-
-            
+            # -------------------------------------------------------------------------------------            
             
             # SAUVEGARDE IMG ds doc1, j'efface pdf_doc1 sinon je risque de télécharger un ancien fichier, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
