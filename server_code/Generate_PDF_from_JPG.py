@@ -23,21 +23,21 @@ def generate_pdf_from_jpg(file, file_name, stage_num, email, item_requis, pr_req
                             scale = 1.0,                                                       
                             quality = "default"       # ok pdf 3300 ko --> pdf 368 ko
                             ).render_form('Pre_Visu_img_Pdf_Generation',file, file_name)
-                    
+    """                
     # save mediaobject in table pre requi du stage si: doc PDF pas encore existant en table (jpg chargé à l'origine) 
     #                                                  ou si le nom du doc pdf pas encore formatté (pdf chargé en 1er)
-               
+    
     media = pr_requis_row['pdf_doc1']   #j'extrai le nom du doc pdf ds la table
     if media != None:
         name_media = media.name[0:3]   
         try:
-            test_if_integer = int(media) # pas d'erreur doc doc pdf a un nom déjà formatté, je ne sauve pas.
+            test_if_integer = int(media) # pas d'erreur donc doc pdf a un nom déjà formatté, je ne sauve pas.
         except:      # si 3 1eres lettres ne sont pas numériques: c'est le doc pdf chargé au départ, et nom d'origine en table, je sauve
             pr_requis_row.update(pdf_doc1 = pdf_object)
     else:  # si pas de doc pdf pour ce doc, je sauve
         pr_requis_row.update(pdf_doc1 = pdf_object)
-        
-    return pdf_object
+    """
+    return pdf_object   # pour download 
 
 
 
