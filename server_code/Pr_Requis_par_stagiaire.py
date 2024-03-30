@@ -23,10 +23,11 @@ def path_info(file):
 def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name="pr_rq.jpg", file_extension=".jpg"):
 #def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
 #def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
+    print("new_file-NAME: ", new_file_name)
     valid=False
-    pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
-                                                         stagiaire_email = email,
-                                                         item_requis = item_requis                                             
+    pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,          # stage row
+                                                         stagiaire_email = email,       # user row
+                                                         item_requis = item_requis      # item_requi row                                      
                                              ) 
     if pr_requis_row:
         if file_extension == ".jpg":
@@ -82,6 +83,6 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
             pr_requis_row.update(check=True,               
                                 pdf_doc1 = file
                                 )
-        return True
+            return True
     else:
         return False

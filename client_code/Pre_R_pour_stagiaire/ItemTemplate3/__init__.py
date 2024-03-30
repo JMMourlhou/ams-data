@@ -25,16 +25,16 @@ class ItemTemplate3(ItemTemplate3Template):
         except:
             pass
         
-        self.stage_num =   self.item['stage_num'] 
-        self.item_requis = self.item['item_requis']
-        self.email =       self.item['stagiaire_email']
+        self.stage_num =   self.item['stage_num']        # Row stage
+        self.item_requis = self.item['item_requis']      # Row Item requis
+        self.email =       self.item['stagiaire_email']  # Row user
 
     def file_loader_1_change(self, file, **event_args):
         if file != None:  #pas d'annulation en ouvrant choix de fichier
             # nouveau nom doc SANS extension
             
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
-            print("new file name: ",new_file_name)
+            #print("new file name: ",new_file_name)
             """
             # Type de fichier ?
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
@@ -47,17 +47,9 @@ class ItemTemplate3(ItemTemplate3Template):
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
             """    
             self.image_1.source = file
-            """
-            # finding the stagiaire's row 
-            pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = self.stage_num,
-                                                         stagiaire_email = self.email,
-                                                         item_requis = self.item_requis                                             
-                                             ) 
             
-            if pr_requis_row:   
-            """
-                # Sauvegarde du 'file' jpg
-                #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
+            # Sauvegarde du 'file' jpg
+            #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
             result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
                 #result = anvil.server.call('modify_pre_r_par_stagiaire', pr_requis_row, file) 
             if result == True:
