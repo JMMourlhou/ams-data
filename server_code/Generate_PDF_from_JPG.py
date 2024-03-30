@@ -1,5 +1,5 @@
 import anvil.tables as tables
-import anvil.tables.query as q
+#import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from anvil.pdf import PDFRenderer
@@ -21,7 +21,7 @@ def generate_pdf_from_jpg(file, file_name, stage_num, email, item_requis, pr_req
                             landscape = False,
                             margins = {'top': 0.3, 'bottom': 0.1, 'left': 0.2, 'right': 0.2},  #  cm
                             scale = 1.0,                                                       
-                            quality =  "printer"   # 'default' ok pdf 3300 ko --> pdf 368 ko
+                            quality = "default"       # ok pdf 3300 ko --> pdf 368 ko
                             ).render_form('Pre_Visu_img_Pdf_Generation',file, file_name)
                     
     # save mediaobject in table pre requi du stage si: doc PDF pas encore existant en table (jpg chargé à l'origine) 

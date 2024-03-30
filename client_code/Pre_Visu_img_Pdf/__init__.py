@@ -1,9 +1,7 @@
 from ._anvil_designer import Pre_Visu_img_PdfTemplate
-from anvil import *
-import stripe.checkout
+from anvil import *  # pour la notification
+
 import anvil.server
-import anvil.tables as tables
-import anvil.tables.query as q
 from anvil.tables import app_tables
 
 class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
@@ -13,9 +11,9 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         # Any code you write here will run before the form opens.
         self.image_1.source = file          
         self.new_file_name = new_file_name
-        self.stage_num = stage_num
-        self.email = email
-        self.item_requis = item_requis
+        self.stage_num = stage_num          # stage row
+        self.email = email                  # user row
+        self.item_requis = item_requis      # item requis row
         self.label_1.text = self.new_file_name
         self.origine = origine
        
@@ -38,14 +36,15 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
 
     def download_click(self, **event_args):
         """This method is called when the button is clicked"""
+        
         # finding the stagiaire's row et envoi du row au serveur
         pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = self.stage_num,
                                               stagiaire_email = self.email,
                                               item_requis = self.item_requis                                             
                                              )                                      
         if not pr_requis_row:
-            alert("Erreur: stagiaire not found !")
-
+            print("Erreur: stagiaire not found !")
+        
         # Si le doc pdf a un nom déjà formatté, je le télécharge direct
         media = pr_requis_row['pdf_doc1']   #j'extrai le nom du doc pdf ds la table
         if media != None:
