@@ -20,7 +20,7 @@ def path_info(file):
 
 @anvil.server.callable
 @anvil.tables.in_transaction
-def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension=".jpg", new_file_name="pr_rq.jpg"):
+def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name="pr_rq.jpg", file_extension=".jpg"):
 #def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
 #def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
     valid=False
