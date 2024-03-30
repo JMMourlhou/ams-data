@@ -46,18 +46,21 @@ class ItemTemplate3(ItemTemplate3Template):
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
             """    
             self.image_1.source = file
+            """
             # finding the stagiaire's row 
             pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = self.stage_num,
                                                          stagiaire_email = self.email,
                                                          item_requis = self.item_requis                                             
-                                             )                                      
-            if pr_requis_row:         
+                                             ) 
+            
+            if pr_requis_row:   
+            """
                 # Sauvegarde du 'file' jpg
                 #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
-                result = anvil.server.call('modify_pre_r_par_stagiaire', pr_requis_row, file) 
-                if result == True:
-                    #print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
-                    print(f"Fichier de jpg en jpg, sauvé")
+            result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file) 
+                #result = anvil.server.call('modify_pre_r_par_stagiaire', pr_requis_row, file) 
+            if result == True:
+                print(f"Fichier de jpg en jpg, sauvé")
                     
                 """
                 # si 'file' est pdf, je l'affiche, après traitement, au format jpg

@@ -4,14 +4,14 @@ import anvil.files
 from anvil.files import data_files
 import anvil.users
 import anvil.tables as tables
-import anvil.tables.query as q
+#import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-from PIL import Image
-import io
-import pathlib
-import Pr_pdf_to_jpg
-import math
+#from PIL import Image
+#import io
+#import pathlib
+#import Pr_pdf_to_jpg
+#import math
 
 @anvil.server.callable
 def path_info(file):
@@ -20,9 +20,14 @@ def path_info(file):
 
 @anvil.server.callable
 @anvil.tables.in_transaction
+def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension=".jpg"):
 #def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
-def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
+#def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
     valid=False
+    pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
+                                                         stagiaire_email = email,
+                                                         item_requis = item_requis                                             
+                                             ) 
     if pr_requis_row:
         if file_extension == ".jpg":
             print("serveur Preq: Ce fichier est une image JPG")        
