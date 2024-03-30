@@ -7,11 +7,11 @@ import anvil.tables as tables
 #import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-#from PIL import Image
-#import io
+from PIL import Image
+import io
 #import pathlib
 #import Pr_pdf_to_jpg
-#import math
+import math
 
 @anvil.server.callable
 def path_info(file):
@@ -20,7 +20,7 @@ def path_info(file):
 
 @anvil.server.callable
 @anvil.tables.in_transaction
-def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension=".jpg"):
+def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension=".jpg", new_file_name="pr_rq.jpg"):
 #def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
 #def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
     valid=False
@@ -31,8 +31,10 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
     if pr_requis_row:
         if file_extension == ".jpg":
             print("serveur Preq: Ce fichier est une image JPG")        
-            """
-            #-------------------------------------------------------------------------------- Remplacé par1 B.G. task / pression bt loop traitmt images
+
+
+            
+            #-------------------------------------------------------------------------------- à Remplacer par 1 B.G. task / loop traitmt images
             # Img file, Convert the 'file' Media object into a Pillow Image
             img = Image.open(io.BytesIO(file.get_bytes()))
             width, height = img.size
@@ -59,7 +61,10 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extensi
     
             file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
             # -------------------------------------------------------------------------------------  
-            """
+
+
+
+            
             
             # SAUVEGARDE IMG ds doc1, j'efface pdf_doc1 sinon je risque de télécharger un ancien fichier, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
