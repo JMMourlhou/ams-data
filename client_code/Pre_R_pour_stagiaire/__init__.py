@@ -1,9 +1,8 @@
 from ._anvil_designer import Pre_R_pour_stagiaireTemplate
 from anvil import *
-import stripe.checkout
+
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -21,7 +20,8 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         if user_pr:
             self.label_1.text = "Documents à fournir pour " + user_pr['prenom'] + " " + user_pr['nom']
             # Drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(user_email=user_pr)
+            liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only(""),           # <----------------------  A AJOUTER
+                                                            user_email=user_pr)
             print("nb; ", len(liste0))
             liste_drop_d = []
             for row in liste0:
