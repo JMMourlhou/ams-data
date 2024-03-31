@@ -23,6 +23,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # j'affiche tous les stagiaires
         self.repeating_panel_1.items = app_tables.users.search(
+                q.fetch_only("nom","prenom","email","tel","role"),
                 tables.order_by("nom", ascending=True),
                 role ="S"    # on affiche les stagiaires uniqt
                 #role =q.not_("A")    # on n'affiche pas l'admin !
@@ -74,6 +75,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # création de la liste triée par nom qui répond aux critères
         self.repeating_panel_1.items = app_tables.users.search(
+                q.fetch_only("nom","prenom","email","tel","role"),
                 tables.order_by("nom", ascending=True),
                 q.all_of                  # all of queries must match
                 (

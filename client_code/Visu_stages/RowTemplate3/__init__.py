@@ -1,9 +1,9 @@
 from ._anvil_designer import RowTemplate3Template
 from anvil import *
-import stripe.checkout
+
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
+
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -94,7 +94,7 @@ class RowTemplate3(RowTemplate3Template):
         # lecture du stage
         stage_row = app_tables.stages.get(numero=num_stage_int)
         if stage_row:
-            print("stage: ", stage_row['numero'])
+            #print("stage: ", stage_row['numero'])
             from ...QCM_Results import QCM_Results
             open_form('QCM_Results', stage_row)
 

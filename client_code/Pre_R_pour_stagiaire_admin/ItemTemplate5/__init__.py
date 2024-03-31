@@ -13,7 +13,8 @@ class ItemTemplate5(ItemTemplate5Template):
 
         # Any code you write here will run before the form opens.
         # lecture fichier père users 
-        user_row=app_tables.users.get(email=self.item['user_email']['email'])
+        user_row=app_tables.users.get(q.fetch_only("nom","prenom"),
+                                      email=self.item['user_email']['email'])
         self.button_1.text=self.item['name'].capitalize()+" "+user_row['prenom']
         
         # lecture du fichier des pré requis pour ce stagiaire

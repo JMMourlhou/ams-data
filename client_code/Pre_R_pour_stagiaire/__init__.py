@@ -20,17 +20,22 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         if user_pr:
             self.label_1.text = "Documents à fournir pour " + user_pr['prenom'] + " " + user_pr['nom']
             # Drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only(""),           # <----------------------  A AJOUTER
+            liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email","stage"),           # <----------------------  A AJOUTER
                                                             user_email=user_pr)
-            print("nb; ", len(liste0))
+            #print("nb; ", len(liste0))
             liste_drop_d = []
             for row in liste0:
                 #lecture fichier père stage
-                stage=app_tables.stages.get(numero=row['stage']['numero'])
+                stage=app_tables.stages.get(q.fetch_only("date_debut"),
+                                                            numero=row['stage']['numero']
+                                            )
                 #lecture fichier père type de stage
-                type=app_tables.codes_stages.get(code=stage['code']['code'])
+                type=app_tables.codes_stages.get(q.fetch_only("code"),
+                                                    code=stage['code']['code']
+                                                )
+                #liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
                 liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
-            print(liste_drop_d)
+            #print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
 
     def button_annuler_click(self, **event_args):
@@ -46,8 +51,11 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
             row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
             # lecture des pré requis pour ce stage et pour ce stagiaire
             global user_pr
-            liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=user_pr,
+            liste_pr = app_tables.pre_requis_stagiaire.search(q.fetch_only("item_requis","doc1"),
+                                                            stagiaire_email=user_pr,
                                                             stage_num=row_stage
                                                             )
+            for row in liste_pr:
+                print(row)
             self.repeating_panel_1.items = liste_pr
         
