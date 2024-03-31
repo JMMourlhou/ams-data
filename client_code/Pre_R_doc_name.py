@@ -1,3 +1,4 @@
+import anvil.server
 import anvil.tables as tables
 
 # DETERMINATION DU NOM DU DOC REQUIS, utilisé par plusieurs modules

@@ -1,3 +1,4 @@
+import anvil.server
 from ._anvil_designer import Pre_Visu_img_Pdf_GenerationTemplate
 
 
