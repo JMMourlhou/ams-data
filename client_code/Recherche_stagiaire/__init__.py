@@ -28,7 +28,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                 role ="S"    # on affiche les stagiaires uniqt
                 #role =q.not_("A")    # on n'affiche pas l'admin !
                 )
-        self.text_box_role.text = "S"    # j'affiche le role "S"
+        #self.text_box_role.text = "S"    # j'affiche le role "S"
 
         
     def text_box_nom_change(self, **event_args):
@@ -74,19 +74,32 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         c_tel = self.text_box_tel.text + "%"  # critere tel
         
         # création de la liste triée par nom qui répond aux critères
-        self.repeating_panel_1.items = app_tables.users.search(
-                q.fetch_only("nom","prenom","email","tel","role"),
-                tables.order_by("nom", ascending=True),
-                q.all_of                  # all of queries must match
-                (
-                    role =q.ilike(c_role),   # ET
-                    nom=q.ilike(c_nom),       # ET
-                    prenom=q.ilike(c_prenom),  # ET
-                    email=q.ilike(c_email),    # ET
-                    tel=q.ilike(c_tel),    # ET
-                    #role =q.not_("A")   # on n'affiche pas l'admin !                 
+        if self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "":
+            self.repeating_panel_1.items = app_tables.users.search(
+                    q.fetch_only("nom","prenom","email","tel","role"),
+                    tables.order_by("nom", ascending=True),
+                    q.all_of                  # all of queries must match
+                    (
+                        #role   = q.ilike(c_role),   # ET
+                        nom    = q.ilike(c_nom),    # ET
+                        #role =q.not_("A")   # on n'affiche pas l'admin !                 
+                    )
                 )
-            )
+        else:
+            self.repeating_panel_1.items = app_tables.users.search(
+                    q.fetch_only("nom","prenom","email","tel","role"),
+                    tables.order_by("nom", ascending=True),
+                    q.all_of                  # all of queries must match
+                    (
+                        role   = q.ilike(c_role),   # ET
+                        nom    = q.ilike(c_nom),    # ET
+                        prenom = q.ilike(c_prenom), # ET
+                        email  = q.ilike(c_email),  # ET
+                        tel    = q.ilike(c_tel),    # ET
+                        #role =q.not_("A")   # on n'affiche pas l'admin !                 
+                    )
+                )
+            
     def filtre_type_stage(self):
         # Récupération du critère stage
         row_type = self.drop_down_code_stage.selected_value
