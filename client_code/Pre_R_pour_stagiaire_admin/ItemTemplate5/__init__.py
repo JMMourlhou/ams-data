@@ -12,20 +12,13 @@ class ItemTemplate5(ItemTemplate5Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        # lecture fichier père users 
-        user_row=app_tables.users.get(q.fetch_only("nom","prenom"),
-                                      email=self.item['user_email']['email'])
-        self.button_1.text=self.item['name'].capitalize()+" "+user_row['prenom']
+        self.button_1.text=self.item['name'].capitalize()+" "+self.item['user_email']['prenom']
         
-        # lecture du fichier des pré requis pour ce stagiaire
-        # lecture fichier père stages
-        row_stage = app_tables.stages.get(numero=self.item['stage']['numero'])
-        liste_pr = app_tables.pre_requis_stagiaire.search(
-                                                         stagiaire_email=user_row,        # user
-                                                         stage_num=row_stage               # stage
-                                                         )
-        
-        list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis 
+        # search des pré-requis de chaque tagiaire de ce stage en SERVEUR
+        #     Pour lecture fichier père users: user row
+        #     Pour lecture fichier père stages: stage row
+        liste_pr = anvil.server.call('preparation_liste_pour_panels_pr', self.item['user_email'], self.item['stage'])
+        #list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis 
         self.repeating_panel_1.items = liste_pr
 
     def button_1_click(self, **event_args):

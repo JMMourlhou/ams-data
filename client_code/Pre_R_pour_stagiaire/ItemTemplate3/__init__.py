@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.media
 from ...import Pre_R_doc_name        # Pour générer un nouveau nom au document chargé
-# test
+
 class ItemTemplate3(ItemTemplate3Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -29,7 +29,6 @@ class ItemTemplate3(ItemTemplate3Template):
     def file_loader_1_change(self, file, **event_args):
         if file != None:  #pas d'annulation en ouvrant choix de fichier
             # nouveau nom doc SANS extension
-            
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
             #print("new file name: ",new_file_name)
             """
@@ -48,7 +47,7 @@ class ItemTemplate3(ItemTemplate3Template):
             # Sauvegarde du 'file' jpg
             #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
             result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
-                #result = anvil.server.call('modify_pre_r_par_stagiaire', pr_requis_row, file) 
+            #result = anvil.server.call('modify_pre_r_par_stagiaire', pr_requis_row, file) 
             if result == True:
                 print(f"Fichier de jpg en jpg, sauvé")
                     

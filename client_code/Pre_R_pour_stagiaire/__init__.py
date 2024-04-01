@@ -20,7 +20,7 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
         if user_pr:
             self.label_1.text = "Documents à fournir pour " + user_pr['prenom'] + " " + user_pr['nom']
             # Drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email","stage"),           # <----------------------  A AJOUTER
+            liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email","stage"),           # <----------------------  A Modifier? 
                                                             user_email=user_pr)
             #print("nb; ", len(liste0))
             liste_drop_d = []

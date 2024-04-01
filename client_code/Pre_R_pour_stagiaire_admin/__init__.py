@@ -19,9 +19,8 @@ class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
        
         self.label_1.text = "Gestion des pré-Requis, stage " + row_stage['code']['code'] + " du " + str(row_stage['date_debut'].strftime("%d/%m/%Y"))
 
-        # lecture des stagiaires de ce stage
-        liste_stagiaires = app_tables.stagiaires_inscrits.search(stage=row_stage
-                                                         )
+        # search des stagiaires de ce stage en SERVEUR
+        liste_stagiaires = anvil.server.call('preparation_liste_pour_panels_stagiaires', row_stage)
         self.repeating_panel_1.items = liste_stagiaires
 
     def button_annuler_click(self, **event_args):

@@ -1,15 +1,11 @@
 #from anvil import *
 
 import anvil.files
-#from anvil.files import data_files
-#import anvil.users
-#import anvil.tables as tables
-#import anvil.tables.query as q
+import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from PIL import Image
 import io
-#import pathlib
 import math
 
 @anvil.server.callable
@@ -17,11 +13,40 @@ def path_info(file):
     path = pathlib.Path(file)
     return str(path.parent), str(path.name), str(path.suffix)  # path, file name, extension
 
+# ===============================================================================================================
+# liste des STAGIAIRES (ADMIN  pour afficher ts les stagiaires d'1 stage et ensuite voir leurs docs prérequis 
+#     Pour lecture fichier père users: self.item['user_email']
+#     Pour lecture fichier père stages: self.item['stage']
+@anvil.server.callable
+def preparation_liste_pour_panels_stagiaires(row_stage):
+    # lecture des stagiaires de ce stage
+    liste_stagiaires = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email", "name"),
+                                                            stage=row_stage
+                                                            )
+    return liste_stagiaires
+
+
+
+
+# ===============================================================================================================
+# PRE-REQUIS STAGIAIRES (ADMIN  voir leurs docs prérequis)
+#     Pour lecture fichier père users: self.item['user_email']
+#     Pour lecture fichier père stages: self.item['stage']
+@anvil.server.callable
+def preparation_liste_pour_panels_pr(user_email, stage):
+    liste_pr = app_tables.pre_requis_stagiaire.search( q.fetch_only("item_requis", "doc1", "stagiaire_email"),
+                                                        stagiaire_email = user_email,        # user_email row
+                                                        stage_num = stage                    # stage      row
+                                                        )
+    list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis
+    return liste_pr
+
+
+
 @anvil.server.callable
 @anvil.tables.in_transaction
 def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name="pr_rq.jpg", file_extension=".jpg"):
-#def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, file_extension, thumb_file, new_file_name):
-#def modify_pre_r_par_stagiaire(pr_requis_row, file, file_extension=".jpg"):             
+    
     #print("new_file-NAME: ", new_file_name)
     valid=False
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,          # stage row
