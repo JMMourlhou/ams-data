@@ -91,7 +91,7 @@ components:
   layout_properties: {column: 'null'}
 - name: repeating_panel_2
   properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate9, role: outlined-card,
-    visible: false, foreground: 'theme:On Primary', background: 'theme:Primary Container'}
+    visible: false, foreground: '', background: 'theme:Primary'}
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 - name: repeating_panel_3
