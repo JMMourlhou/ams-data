@@ -35,18 +35,13 @@ class ItemTemplate11(ItemTemplate11Template):
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file != None:  #pas d'annulation en ouvrant choix de fichier
-
             self.image_1.source = file
-            # finding the stagiaire's row 
-            pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = self.stage_num,
-                                                         stagiaire_email = self.email,
-                                                         item_requis = self.item_requis                                             
-                                             )                                      
-            if pr_requis_row:         
-                # Sauvegarde du 'file' jpg
-                #result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, file_extension, thumb_file, new_file_name) 
-                result = anvil.server.call('modify_pre_r_par_stagiaire', pr_requis_row, file) 
-                if result == True:
-                    #print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
-                    print(f"Fichier de jpg en jpg, sauvé")
+            # nouveau nom doc SANS extension
+            new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
+            # Sauvegarde du 'file' jpg
+            result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
+            if result == True:
+                #print(f"Fichier {new_file_name} de jpg en jpg, sauvé")
+                print(f"Fichier de jpg en jpg, sauvé")
+
                 
