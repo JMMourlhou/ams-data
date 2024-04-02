@@ -85,7 +85,8 @@ components:
       - {property: border, code: '', writeback: false}
   event_bindings: {}
 - name: repeating_panel_1
-  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card}
+  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card,
+    spacing_below: large}
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 - name: repeating_panel_2
@@ -94,7 +95,8 @@ components:
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 - name: repeating_panel_3
-  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate11, visible: false}
+  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate11, visible: false,
+    spacing_below: large}
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 is_package: true
