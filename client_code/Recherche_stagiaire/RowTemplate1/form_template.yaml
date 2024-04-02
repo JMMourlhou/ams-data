@@ -86,12 +86,12 @@ components:
   event_bindings: {}
 - name: repeating_panel_1
   properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card,
-    spacing_below: small}
+    spacing_below: small, background: 'theme:Primary'}
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 - name: repeating_panel_2
   properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate9, role: outlined-card,
-    visible: false, foreground: 'theme:Error'}
+    visible: false, foreground: 'theme:On Primary', background: 'theme:Primary Container'}
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 - name: repeating_panel_3
