@@ -86,7 +86,7 @@ components:
   event_bindings: {}
 - name: repeating_panel_1
   properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card,
-    spacing_below: large}
+    spacing_below: small}
   type: RepeatingPanel
   layout_properties: {column: 'null'}
 - name: repeating_panel_2
