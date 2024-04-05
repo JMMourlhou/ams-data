@@ -74,8 +74,30 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         c_tel = self.text_box_tel.text + "%"            #         tel
         
         # création de la liste triée par nom qui répond aux critères
-        if self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "":
+        if self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" and self.text_box_nom.text == "":
+            # j'affiche tous les stagiaires
+            self.repeating_panel_1.items = app_tables.users.search(
+                                                                    q.fetch_only("nom","prenom","email","tel","role"),
+                                                                    tables.order_by("nom", ascending=True),
+                                                                    #role ="S"    # on affiche les stagiaires uniqt
+                                                                    #role =q.not_("A")    # on n'affiche pas l'admin !
+                                                                )
+        if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :
            self.repeating_panel_1.items = anvil.server.call("search_on_name_only", c_nom)
+        if self.text_box_prenom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_role.text == "":   
+            self.repeating_panel_1.items = anvil.server.call("search_on_prenom_only", c_prenom)
+        if self.text_box_role.text != "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" :   
+            self.repeating_panel_1.items = anvil.server.call("search_on_role_only", c_role)
+        if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text == "" :   
+            self.repeating_panel_1.items = anvil.server.call("search_on_role_nom", c_role, c_nom)
+        if self.text_box_role.text == "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
+            self.repeating_panel_1.items = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)
+        if self.text_box_tel.text != "" and self.text_box_email.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
+            self.repeating_panel_1.items = anvil.server.call("search_on_tel_only", c_tel)
+        if self.text_box_email.text != "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
+            self.repeating_panel_1.items = anvil.server.call("search_on_email_only", c_email)
+        
+        """
         else:
             self.repeating_panel_1.items = app_tables.users.search(
                     q.fetch_only("nom","prenom","email","tel","role"),
@@ -90,7 +112,8 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                         #role =q.not_("A")   # on n'affiche pas l'admin !                 
                     )
                 )
-            
+        """
+        
     def filtre_type_stage(self):
         # Récupération du critère stage
         row_type = self.drop_down_code_stage.selected_value
@@ -144,6 +167,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+
+
+
 
   
 

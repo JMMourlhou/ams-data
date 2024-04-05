@@ -198,7 +198,7 @@ db_schema:
     server: full
     columns:
     - name: stage
-      admin_ui: {order: 0, width: 90}
+      admin_ui: {order: 0, width: 105}
       type: link_single
       target: stages
     - name: financement

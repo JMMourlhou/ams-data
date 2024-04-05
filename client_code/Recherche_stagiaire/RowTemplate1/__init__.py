@@ -23,12 +23,15 @@ class RowTemplate1(RowTemplate1Template):
                     self.button_1.foreground = "red"
             else:
                 self.button_1.text = self.item['nom']
+                
             self.button_3.text = self.item['tel']
             self.button_4.text = self.item['email']
             self.button_qcm.tag = self.item['email']
             self.button_histo.tag = self.item['email']
             self.drop_down_code_stage.tag = self.item['email']
-            stagiaire_row = app_tables.users.get(email=self.item['email']) # pour pré-requis         
+            stagiaire_row = app_tables.users.get(email=self.item['email']) # pour pré-requis
+            #stagiaire_row = app_tables.users.get(q.fetch_only("email", "nom", "prenom", "tel"),
+            #                                        email=self.item['email']) # pour pré-requis         
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             mel = self.item['user_email']['email']
             user_row = app_tables.users.get(email=mel)
@@ -40,16 +43,12 @@ class RowTemplate1(RowTemplate1Template):
             self.drop_down_code_stage.tag = user_row['email']
             
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
-        liste0 = app_tables.stagiaires_inscrits.search(user_email=stagiaire_row)
-        #print("nb; ", len(liste0))
+        liste0 = app_tables.stagiaires_inscrits.search( q.fetch_only("stage"),
+                                                           user_email=stagiaire_row)
+        
         liste_drop_d = []
         for row in liste0:
-            #lecture fichier père stage
-            stage=app_tables.stages.get(numero=row['stage']['numero'])
-            #lecture fichier père type de stage
-            type=app_tables.codes_stages.get(code=stage['code']['code'])
-            liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
-        #print(liste_drop_d)
+            liste_drop_d.append((str(row['stage']['code']['code'])+"  du "+str(row['stage']['date_debut']), row))
         self.drop_down_code_stage.items = liste_drop_d   
         
             
