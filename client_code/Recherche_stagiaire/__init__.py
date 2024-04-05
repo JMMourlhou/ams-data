@@ -68,23 +68,14 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def filtre(self):
         # Récupération des critères
         c_role = self.text_box_role.text + "%"          # critère role
-        c_nom = self.text_box_nom.text + "%"       # critere nom
-        c_prenom = self.text_box_prenom.text + "%"  # critere prenom
-        c_email = self.text_box_email.text + "%"  # critere email
-        c_tel = self.text_box_tel.text + "%"  # critere tel
+        c_nom = self.text_box_nom.text + "%"            #         nom
+        c_prenom = self.text_box_prenom.text + "%"      #         prenom
+        c_email = self.text_box_email.text + "%"        #         email
+        c_tel = self.text_box_tel.text + "%"            #         tel
         
         # création de la liste triée par nom qui répond aux critères
         if self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "":
-            self.repeating_panel_1.items = app_tables.users.search(
-                    q.fetch_only("nom","prenom","email","tel","role"),
-                    tables.order_by("nom", ascending=True),
-                    q.all_of                  # all of queries must match
-                    (
-                        #role   = q.ilike(c_role),   # ET
-                        nom    = q.ilike(c_nom),    # ET
-                        #role =q.not_("A")   # on n'affiche pas l'admin !                 
-                    )
-                )
+           self.repeating_panel_1.items = anvil.server.call("search_on_name_only", c_nom)
         else:
             self.repeating_panel_1.items = app_tables.users.search(
                     q.fetch_only("nom","prenom","email","tel","role"),
