@@ -20,7 +20,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
-        
+        """
         # j'affiche tous les stagiaires
         self.repeating_panel_1.items = app_tables.users.search(
                 q.fetch_only("nom","prenom","email","tel","role"),
@@ -28,6 +28,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                 #role ="S"    # on affiche les stagiaires uniqt
                 #role =q.not_("A")    # on n'affiche pas l'admin !
                 )
+        """
         #self.text_box_role.text = "S"    # j'affiche le role "S"
 
         
@@ -72,35 +73,43 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         c_prenom = self.text_box_prenom.text + "%"      #         prenom
         c_email = self.text_box_email.text + "%"        #         email
         c_tel = self.text_box_tel.text + "%"            #         tel
-        """
-        # création de la liste triée par nom qui répond aux critères
+        
+       # Aucun critères: j'efface
         if self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" and self.text_box_nom.text == "":
-            # j'affiche tous les stagiaires
-            self.repeating_panel_1.items = app_tables.users.search(
+            # j'efface
+            self.repeating_panel_1.items = app_tables.users.search( 
                                                                     q.fetch_only("nom","prenom","email","tel","role"),
                                                                     tables.order_by("nom", ascending=True),
-                                                                    #role ="S"    # on affiche les stagiaires uniqt
-                                                                    #role =q.not_("A")    # on n'affiche pas l'admin !
+                                                                    role ="z"    
                                                                 )
-        """                                                       
-        if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :
-            self.repeating_panel_1.items = anvil.server.call("search_on_name_only", c_nom)
-            """
+        # Nom    
+        if len(self.text_box_nom.text)>1:
+            if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :
+                self.repeating_panel_1.items = anvil.server.call("search_on_name_only", c_nom)
+        # Prénom
+        if len(self.text_box_prenom.text)>1:
             if self.text_box_prenom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_role.text == "":   
                 self.repeating_panel_1.items = anvil.server.call("search_on_prenom_only", c_prenom)
-            if self.text_box_role.text != "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" :   
-                self.repeating_panel_1.items = anvil.server.call("search_on_role_only", c_role)
-            if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text == "" :   
-                self.repeating_panel_1.items = anvil.server.call("search_on_role_nom", c_role, c_nom)
-            if self.text_box_role.text == "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
-                self.repeating_panel_1.items = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)
+        # Role
+        if self.text_box_role.text != "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" :   
+            self.repeating_panel_1.items = anvil.server.call("search_on_role_only", c_role)
+        # Role & Nom
+        if self.text_box_role.text != "" and len(self.text_box_nom.text) >1 and self.text_box_prenom.text == "" :   
+            #if len(self.text_box_nom.text)>1:
+            self.repeating_panel_1.items = anvil.server.call("search_on_role_nom", c_role, c_nom)
+        # Nom & Prénom
+        if self.text_box_role.text == "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
+            self.repeating_panel_1.items = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)
+        # Tel
+        if len(self.text_box_tel.text)>3:
             if self.text_box_tel.text != "" and self.text_box_email.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
                 self.repeating_panel_1.items = anvil.server.call("search_on_tel_only", c_tel)
-            if self.text_box_email.text != "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
-                self.repeating_panel_1.items = anvil.server.call("search_on_email_only", c_email)
-            """
-        
+        # Mail
+        if self.text_box_email.text != "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
+            self.repeating_panel_1.items = anvil.server.call("search_on_email_only", c_email)
+        """
         else:
+            if len(self.text_box_nom.text)>1 :
             self.repeating_panel_1.items = app_tables.users.search(
                     q.fetch_only("nom","prenom","email","tel","role"),
                     tables.order_by("nom", ascending=True),
@@ -114,7 +123,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                         #role =q.not_("A")   # on n'affiche pas l'admin !                 
                     )
                 )
-
+        """
         
     def filtre_type_stage(self):
         # Récupération du critère stage

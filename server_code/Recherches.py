@@ -10,7 +10,7 @@ import anvil.server
 def search_on_name_only(critere):
     liste = app_tables.users.search(
                                         q.fetch_only("nom","prenom","email","tel","role"),
-                                        #tables.order_by("nom", ascending=True),
+                                        tables.order_by("nom", ascending=True),
                                         nom    = q.ilike(critere),    # ET
                                     )
     return liste
@@ -19,7 +19,7 @@ def search_on_name_only(critere):
 def search_on_prenom_only(critere):
     liste = app_tables.users.search(
                                         q.fetch_only("nom","prenom","email","tel","role"),
-                                        #tables.order_by("nom", ascending=True),
+                                        tables.order_by("nom", ascending=True),
                                        
                                         prenom    = q.ilike(critere),    # ET
                                     )
@@ -29,7 +29,7 @@ def search_on_prenom_only(critere):
 def search_on_role_only(critere):
     liste = app_tables.users.search(
                                         q.fetch_only("nom","prenom","email","tel","role"),
-                                        #tables.order_by("nom", ascending=True),
+                                        tables.order_by("nom", ascending=True),
                                             role   = q.ilike(critere)
                                     )
     return liste
