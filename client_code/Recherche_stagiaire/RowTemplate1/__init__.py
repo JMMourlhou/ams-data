@@ -19,8 +19,10 @@ class RowTemplate1(RowTemplate1Template):
         try: # *********************************          Liste à partir table users
             if self.item['prenom'] != None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
-                if self.item['role'] != "S":
+                if self.item['role'] == "A":          # Admin en rouge
                     self.button_1.foreground = "red"
+                if self.item['role'] == "F":
+                    self.button_1.foreground = "blue"  # Formateur en bleu
             else:
                 self.button_1.text = self.item['nom']
                 
@@ -76,8 +78,8 @@ class RowTemplate1(RowTemplate1Template):
             mel = self.item['email']
             stagiaire_row = app_tables.users.get(email=mel)
             #alert(stagiaire_row['email'])
-            stage = contenu[12:15]
-
+            stage = contenu[12:16]
+            print("stage en inscription", stage)
             # Choix du mode de financement / Création d'une box incluant le drop down mode de fi
             def show_results(self, result):
                 #alert(result)
@@ -144,8 +146,12 @@ class RowTemplate1(RowTemplate1Template):
                     self.repeating_panel_1.items = qcm_results
         else:
             self.repeating_panel_1.visible = False
-            self.button_1.foreground = "theme:Tertiary"               #yellow
+            #self.button_1.foreground = "theme:Tertiary"               #yellow
             #self.button_1.background = "theme:On Primary Container"
+            if self.item['role'] == "A":          # Admin en rouge
+                self.button_1.foreground = "red"
+            if self.item['role'] == "F":
+                self.button_1.foreground = "blue"  # Formateur en bleu
 
     def button_histo_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -161,8 +167,12 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_2.items = app_tables.stagiaires_inscrits.search(user_email = stagiaire)
         else:
             self.repeating_panel_2.visible = False
-            self.button_1.foreground = "theme:Tertiary"               #yellow
+            #self.button_1.foreground = "theme:Tertiary"               #yellow
             #self.button_1.background = "theme:On Primary Container"
+            if self.item['role'] == "A":          # Admin en rouge
+                self.button_1.foreground = "red"
+            if self.item['role'] == "F":
+                self.button_1.foreground = "blue"  # Formateur en bleu
 
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""

@@ -74,6 +74,7 @@ class RowTemplate3(RowTemplate3Template):
         if r== "Oui" :   
             from ...Recherche_stagiaire import Recherche_stagiaire
             num_stage = self.text_box_1.text
+            #print("test inscription;",num_stage)
             inscription = "inscription/"+str(num_stage)
             
             table_temp = app_tables.temp.search()[0]

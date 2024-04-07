@@ -173,7 +173,6 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                                         stage=selection
                                       )
 
-
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
