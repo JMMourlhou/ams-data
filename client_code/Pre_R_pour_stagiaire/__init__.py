@@ -33,8 +33,11 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
                 type=app_tables.codes_stages.get(q.fetch_only("code"),
                                                     code=stage['code']['code']
                                                 )
-                #liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
-                liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
+                if type['code'][0]!="F":    # Si formateur, je n'affiche pas la date
+                    liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), row))
+                else:
+                    liste_drop_d.append((type['code'], row))
+                    
             #print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
 

@@ -1,5 +1,5 @@
 #from anvil import *
-
+import pathlib
 import anvil.files
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -45,9 +45,9 @@ def preparation_liste_pour_panels_pr(user_email, stage):
 
 @anvil.server.callable
 @anvil.tables.in_transaction
-def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name="pr_rq.jpg", file_extension=".jpg"):
-    
-    #print("new_file-NAME: ", new_file_name)
+def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name, file_extension):
+    print("file_extension", file_extension)
+    print("new_file-NAME: ", new_file_name)
     valid=False
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,          # stage row
                                                          stagiaire_email = email,       # user row
@@ -55,7 +55,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
                                              ) 
     if pr_requis_row:
         if file_extension == ".jpg":
-            #print("serveur Preq: Ce fichier est une image JPG")        
+            print("serveur Preq: Ce fichier est une image JPG")        
             new_file_name = new_file_name + file_extension
 
             #-------------------------------------------------------------------------------- à Remplacer par 1 B.G. task / loop traitmt images
