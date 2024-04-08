@@ -1,9 +1,8 @@
 from ._anvil_designer import ItemTemplate4Template
 from anvil import *
-import stripe.checkout
+
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -55,7 +54,7 @@ class ItemTemplate4(ItemTemplate4Template):
             self.vrai_numero_qcm = user['temp3']
             if user['temp2']!="test":            # si le concepteur du qcm a demandé un test (bt 'test' en QCM_visu_modif_Main) 
                 self.admin = user['role']
-                if self.admin[0:1]!="S":         # si pas stagiaire
+                if self.admin[0:1]=="A":         # si Admin
                     self.mode= "creation"        # "creation" = mode création/MAJ pas de test stagiaire
                 else:
                     self.mode = "test"
