@@ -53,18 +53,14 @@ class ItemTemplate3(ItemTemplate3Template):
                     self.button_visu.visible = True  
                     
             if file_extension == ".pdf":      
-                # si 'file' est pdf, je l'affiche, après traitement, au format jpg
-                print("PDF loaded")
-            
+               
                 # Sauvegarde du 'file'
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file,  new_file_name, ".pdf") 
                 if result == False:
                     alert("Fichier PDF non sauvé")   
                 else:
-                    alert("Fichier PDF sauvé")
-                
-                    
-                      
+                    print("Fichier PDF sauvé")
+                     
                 # génération du JPG à partir du pdf
                 liste_images = anvil.server.call('pdf_into_jpg', self.stage_num, self.item_requis, self.email, new_file_name)
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
