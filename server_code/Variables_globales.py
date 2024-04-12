@@ -17,11 +17,15 @@ def get_variable_value(variable_name):
         return None
 
 
-# Pour avoir en mémoire toutes les variables (si je veux les afficher par ex) PAS ENCORE UTILISé
+# Pour avoir en mémoire toutes les variables sous forme de dict
 @anvil.server.callable
 def get_variable_names():
-    return [row['name'] for row in app_tables.global_variables.search()]
-
+    liste = app_tables.global_variables.search(q.fetch_only("name","value"))
+    dict = {}
+    for var_glob in liste:
+        dict[var_glob['name']]=var_glob['value']
+    return(dict)
+        
 
 """
 # pour mettre à jour éventuellement les variables par programme
