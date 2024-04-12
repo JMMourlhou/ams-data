@@ -8,7 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Stage_visu_modif
-from .. import constant_parameters  # importation du module contenant mes variables globales
+
 from anvil.js import window # to gain access to the window object (taille fenêtre)
 global screen_size
 screen_size = window.innerWidth
