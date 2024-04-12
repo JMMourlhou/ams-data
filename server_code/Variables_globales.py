@@ -21,9 +21,11 @@ def get_variable_value(variable_name):
 @anvil.server.callable
 def get_variable_names():
     liste = app_tables.global_variables.search(q.fetch_only("name","value"))
+    print("liste",liste)
     dict = {}
     for var_glob in liste:
         dict[var_glob['name']]=var_glob['value']
+    print(dict)
     return(dict)
         
 
