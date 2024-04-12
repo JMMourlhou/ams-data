@@ -37,7 +37,7 @@ class QrCode_display(QrCode_displayTemplate):
             param = ""
             self.label_titre.text = "Flachez pour vous connecter à l'appli AMSdata "
 
-        # Lecture de la variable globale App "AMS Data"
+        # Lecture de la variable globale "code_app1" ds table variables_globales
         app = anvil.server.call('get_variable_value', "code_app1")
         code_app1 = app + param  # App "AMS Data"  + code stage
         print("code",code_app1)
