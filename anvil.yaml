@@ -60,7 +60,7 @@ db_schema:
       admin_ui: {order: 0.5, width: 200}
       type: string
     - name: pre_r_pour_stage
-      admin_ui: {width: 200, order: 1.5}
+      admin_ui: {order: 1.5, width: 537}
       type: simpleObject
     - name: media
       admin_ui: {order: 2.5, width: 282}

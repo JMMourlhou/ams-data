@@ -22,7 +22,7 @@ components:
     layout_properties: {width: null, expand: true}
   - type: Button
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: '', font_size: null, font: '',
+      foreground: 'theme:Tertiary', visible: true, text: '', font_size: 21, font: '',
       spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:Primary',
       bold: false, underline: false, icon: 'fa:minus-square'}
     name: button_annuler
