@@ -90,3 +90,11 @@ class ItemTemplate3(ItemTemplate3Template):
             from ...Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
             open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis, origine="stagiaire")
 
+    def button_del_click(self,  **event_args):
+        """This method is called when the button is clicked"""
+        result = anvil.server.call('pr_stagiaire_del',self.email, self.stage_num, self.item_requis )
+        if result:
+            self.image_1.source = None
+            self.button_visu.visible = False
+        else:
+            alert("Pré Requis non enlevé")

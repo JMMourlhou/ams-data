@@ -46,8 +46,8 @@ def preparation_liste_pour_panels_pr(user_email, stage):
 @anvil.server.callable
 @anvil.tables.in_transaction
 def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name, file_extension):
-    print("file_extension", file_extension)
-    print("new_file-NAME: ", new_file_name)
+    #print("file_extension", file_extension)
+    #print("new_file-NAME: ", new_file_name)
     valid=False
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,          # stage row
                                                          stagiaire_email = email,       # user row
@@ -103,5 +103,23 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
                                 pdf_doc1 = file
                                 )
             return True
+    else:
+        return False
+
+
+# ===============================================================================================================
+# PRE-REQUIS STAGIAIRES, Effacement d'un pré-requis
+@anvil.server.callable
+def pr_stagiaire_del(user_email, stage, item_requis):
+    pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage,          # stage row
+                                                         stagiaire_email = user_email,       # user row
+                                                         item_requis = item_requis      # item_requi row                                      
+                                             ) 
+    if pr_requis_row:
+        pr_requis_row.update(check=False,               
+                                doc1 = None,
+                                pdf_doc1 = None
+                                )
+        return True
     else:
         return False
