@@ -47,7 +47,7 @@ class RowTemplate3(RowTemplate3Template):
             lg = len(self.text_box_2.text)
             espace = 10-lg
             espace_caractère = " "
-            while lg+len(espace_caractère)<11:
+            while lg+len(espace_caractère)<10:
                 espace_caractère = espace_caractère + " "
             self.text_box_2.text = self.item['code']['code'] + espace_caractère
 
