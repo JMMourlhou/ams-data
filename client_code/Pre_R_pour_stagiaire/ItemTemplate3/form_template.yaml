@@ -36,10 +36,11 @@ components:
     components:
     - name: button_visu
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary', visible: false, text: '', font_size: 27, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:eye'}
+        foreground: 'theme:Secondary 500', visible: false, text: '', font_size: 27,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: 'fa:binoculars'}
       type: Button
+      layout_properties: {}
       event_bindings: {click: button_visu_click}
     - name: file_loader_1
       properties:
@@ -51,7 +52,7 @@ components:
         file_types: ''
         enabled: true
         files: []
-        foreground: theme:On Primary
+        foreground: theme:On Primary Container
         visible: true
         text: ''
         font_size: 24
@@ -67,12 +68,14 @@ components:
         multiple: false
         icon: fa:upload
       type: FileLoader
+      layout_properties: {}
       event_bindings: {change: file_loader_1_change}
     - name: button_del
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
         foreground: 'theme:Tertiary', visible: true, text: '   ', font_size: 22, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:minus-square'}
+        background: '', bold: false, underline: false, icon: 'fa:remove'}
       type: Button
+      layout_properties: {}
       event_bindings: {click: button_del_click}
       data_bindings: []
