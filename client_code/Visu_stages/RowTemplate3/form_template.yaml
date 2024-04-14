@@ -15,7 +15,7 @@ components:
   - name: flow_panel_2
     properties: {spacing: none, vertical_align: middle}
     type: FlowPanel
-    layout_properties: {width: 125.935791015625}
+    layout_properties: {width: 87.27141650390625}
     components:
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
