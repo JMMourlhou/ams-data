@@ -42,7 +42,7 @@ class RowTemplate3(RowTemplate3Template):
         stage = self.item['code']['code']
         stage = stage.strip()
         if len(self.item['commentaires'])>2:
-            self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:4]                  # ajout des 3 1eres lettres du commentaire (pour quel stage)
+            self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:5]                  # ajout des 3 1eres lettres du commentaire (pour quel stage)
         else:
             self.text_box_2.text = self.item['code']['code']
 
