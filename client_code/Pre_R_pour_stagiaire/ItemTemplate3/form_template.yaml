@@ -33,13 +33,13 @@ components:
   - name: column_panel_1
     properties: {col_widths: '{}', col_spacing: none}
     type: ColumnPanel
-    layout_properties: {width: 146.929734375}
+    layout_properties: {width: 322.918}
     components:
     - name: button_visu
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary', visible: false, text: '      Voir   ', font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
+        foreground: 'theme:On Primary', visible: false, text: '', font_size: 27, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: 'fa:eye'}
       type: Button
       layout_properties: {grid_position: 'CFBKGE,IOYJUG'}
       event_bindings: {click: button_visu_click}
