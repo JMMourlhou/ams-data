@@ -44,7 +44,7 @@ class RowTemplate3(RowTemplate3Template):
         if len(self.item['commentaires'])>2:
             self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:5]                  # ajout des 3 1eres lettres du commentaire (pour quel stage)
         else:
-            
+            # pour aligner correctement les boutons
             lg = len(self.text_box_2.text)
             espace = 10-lg
             espace_caractère = " "
