@@ -160,6 +160,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_histo.foreground = "red"
             self.button_1.foreground = "red"
             #self.button_1.background = "theme:On Primary Container"
+            
             try:  # si recherche sur la table users
                 stagiaire = app_tables.users.get(email=self.item['email'])
             except:

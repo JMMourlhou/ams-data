@@ -73,7 +73,7 @@ components:
               bold: false, underline: false}
             name: text_box_nom
             layout_properties: {grid_position: 'UJSBSH,RIYYHY'}
-            event_bindings: {change: text_box_nom_change}
+            event_bindings: {change: text_box_nom_change, pressed_enter: text_box_nom_pressed_enter}
           - type: TextBox
             properties: {role: outlined, align: left, hide_text: false, tooltip: '',
               placeholder: Prenom, border: '', enabled: true, foreground: 'theme:On

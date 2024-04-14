@@ -41,7 +41,10 @@ class RowTemplate3(RowTemplate3Template):
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']
         stage = stage.strip()
-        self.text_box_2.text = self.item['code']['code']                     # link key
+        if len(self.item['commentaires'])>2:
+            self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:3]                  # ajout des 3 1eres lettres du commentaire (pour quel stage)
+        else:
+            self.text_box_2.text = self.item['code']['code']
 
     # récupération par l'event:
     def text_box_3_click(self, **event_args):   # Click sur date

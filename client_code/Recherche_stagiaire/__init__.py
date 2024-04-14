@@ -181,7 +181,6 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
 
 
 
-
   
 
 

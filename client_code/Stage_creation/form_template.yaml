@@ -130,9 +130,12 @@ components:
     event_bindings: {change: text_box_nb_stagiaires_diplom_change}
   - type: TextArea
     properties: {role: null, align: left, height: '', tooltip: '', placeholder: Commentaires,
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: 'XXX  <---
+        Pour quel stage ?
+
+        Autres commentaires: ', font_size: null, auto_expand: false, font: '', spacing_above: small,
+      spacing_below: small, italic: false, background: 'theme:Primary', bold: false,
+      underline: false}
     name: text_area_commentaires
     layout_properties: {grid_position: 'KVEZRN,ZQLFGM'}
     event_bindings: {change: text_area_commentaires_change}
