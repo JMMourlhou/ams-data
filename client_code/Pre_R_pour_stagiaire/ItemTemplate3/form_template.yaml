@@ -1,7 +1,7 @@
 is_package: true
 container:
   type: ColumnPanel
-  properties: {role: null, col_spacing: large}
+  properties: {role: elevated-card, col_spacing: large}
 components:
 - name: flow_panel_1
   properties: {align: center, vertical_align: middle, spacing: small, spacing_above: medium,
@@ -44,7 +44,7 @@ components:
       event_bindings: {click: button_visu_click}
     - name: file_loader_1
       properties:
-        role: null
+        role: outlined-button
         show_state: false
         align: center
         tooltip: ''
@@ -52,7 +52,7 @@ components:
         file_types: ''
         enabled: true
         files: []
-        foreground: theme:Tertiary
+        foreground: theme:On Primary Container
         visible: true
         text: ''
         font_size: 40
