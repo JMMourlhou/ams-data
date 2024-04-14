@@ -36,7 +36,7 @@ components:
     components:
     - name: button_visu
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:Secondary 500', visible: false, text: '', font_size: 27,
+        foreground: 'theme:On Primary Container', visible: false, text: '', font_size: 27,
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: false, underline: false, icon: 'fa:binoculars'}
       type: Button
@@ -55,7 +55,7 @@ components:
         foreground: theme:On Primary Container
         visible: true
         text: ''
-        font_size: 24
+        font_size: 30
         font: ''
         spacing_above: none
         icon_align: left
@@ -72,7 +72,7 @@ components:
       event_bindings: {change: file_loader_1_change}
     - name: button_del
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:Tertiary', visible: true, text: '   ', font_size: 22, font: '',
+        foreground: 'theme:Error', visible: true, text: '   ', font_size: 27, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: false, underline: false, icon: 'fa:remove'}
       type: Button
