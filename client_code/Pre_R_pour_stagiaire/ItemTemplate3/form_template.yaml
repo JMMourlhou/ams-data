@@ -52,7 +52,7 @@ components:
         file_types: ''
         enabled: true
         files: []
-        foreground: theme:On Primary Container
+        foreground: theme:Tertiary
         visible: true
         text: ''
         font_size: 40
