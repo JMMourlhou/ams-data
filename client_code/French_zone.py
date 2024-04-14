@@ -9,7 +9,7 @@ from anvil import *  #pour les alertes
 import anvil.tz
 # Pour le calcul de l'heure en France
 from datetime import datetime
-from sign_in_for_AMS_Data.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
+#from sign_in_for_AMS_Data.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
 
 #Get the time now, local time FOR CLIENT SIDE (date from browser)
 def french_zone_time():
