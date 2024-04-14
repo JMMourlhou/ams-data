@@ -44,15 +44,15 @@ class RowTemplate3(RowTemplate3Template):
         if len(self.item['commentaires'])>2:
             self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:5]                  # ajout des 3 1eres lettres du commentaire (pour quel stage)
         else:
-            """
+            
             lg = len(self.text_box_2.text)
             espace = 10-lg
             espace_caractère = " "
             while espace+len(espace_caractère)<10:
                 espace_caractère = espace_caractère + " "
             self.text_box_2.text = self.item['code']['code'] + espace_caractère
-            """
-            self.text_box_2.text = self.item['code']['code']
+            
+            #self.text_box_2.text = self.item['code']['code']
 
     # récupération par l'event:
     def text_box_3_click(self, **event_args):   # Click sur date
