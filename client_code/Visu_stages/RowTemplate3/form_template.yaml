@@ -18,7 +18,7 @@ components:
     layout_properties: {width: 87.27141650390625}
     components:
     - type: Button
-      properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      properties: {role: null, align: full, tooltip: '', border: '', enabled: true,
         foreground: 'theme:Tertiary', visible: true, text: type, font_size: null,
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: true, underline: false, icon: ''}
