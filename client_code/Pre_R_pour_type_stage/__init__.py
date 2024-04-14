@@ -1,8 +1,6 @@
 from ._anvil_designer import Pre_R_pour_type_stageTemplate
 from anvil import *
-
 import anvil.server
-
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q

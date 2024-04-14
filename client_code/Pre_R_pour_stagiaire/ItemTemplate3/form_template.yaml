@@ -31,22 +31,27 @@ components:
       layout_properties: {grid_position: 'LSIOOU,UOWYNL', full_width_row: true}
       data_bindings: []
   - name: column_panel_1
-    properties: {col_widths: '{}'}
+    properties: {col_widths: '{}', col_spacing: none}
     type: ColumnPanel
-    layout_properties: {width: 100}
+    layout_properties: {width: 146.929734375}
     components:
     - name: button_visu
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary', visible: false, text: Voir, font_size: null,
+        foreground: 'theme:On Primary', visible: false, text: '      Voir   ', font_size: null,
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: false, underline: false, icon: ''}
       type: Button
       layout_properties: {grid_position: 'CFBKGE,IOYJUG'}
       event_bindings: {click: button_visu_click}
-    - name: spacer_1
-      properties: {height: 7.570526123046875}
-      type: Spacer
-      layout_properties: {grid_position: 'NTPCZZ,UGBRQB'}
+    - name: button_del
+      properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:Tertiary', visible: true, text: '   ', font_size: 22, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: 'fa:minus-square'}
+      type: Button
+      layout_properties: {grid_position: 'CFBKGE,SZLLYF'}
+      event_bindings: {click: button_del_click}
+      data_bindings: []
     - name: file_loader_1
       properties:
         role: null
@@ -73,14 +78,5 @@ components:
         multiple: false
         icon: fa:upload
       type: FileLoader
-      layout_properties: {grid_position: 'GHLKMF,CEYBAC'}
+      layout_properties: {grid_position: 'CFBKGE,LSIUSX'}
       event_bindings: {change: file_loader_1_change}
-    - name: button_del
-      properties: {role: filled-button, align: left, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:Tertiary', visible: true, text: '', font_size: 22, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:minus-square'}
-      type: Button
-      layout_properties: {grid_position: 'GHLKMF,SGUMSI'}
-      event_bindings: {click: button_del_click}
-      data_bindings: []
