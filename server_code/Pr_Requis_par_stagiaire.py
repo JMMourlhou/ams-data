@@ -102,6 +102,7 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
             pr_requis_row.update(check=True,               
                                 pdf_doc1 = file
                                 )
+            valid=True
             return True
     else:
         return False

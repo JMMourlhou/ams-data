@@ -72,7 +72,7 @@ components:
       event_bindings: {change: file_loader_1_change}
     - name: button_del
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:Error', visible: true, text: '   ', font_size: 27, font: '',
+        foreground: 'theme:Error', visible: false, text: '   ', font_size: 27, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: false, underline: false, icon: 'fa:remove'}
       type: Button
