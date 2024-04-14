@@ -55,7 +55,7 @@ components:
         foreground: theme:On Primary Container
         visible: true
         text: ''
-        font_size: 30
+        font_size: 40
         font: ''
         spacing_above: none
         icon_align: left
