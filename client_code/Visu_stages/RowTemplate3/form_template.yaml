@@ -12,14 +12,19 @@ components:
   name: flow_panel_1
   layout_properties: {column: null}
   components:
-  - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: type, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: true, underline: false, icon: ''}
-    name: text_box_2
-    layout_properties: {}
-    event_bindings: {click: text_box_2_click}
+  - name: flow_panel_2
+    properties: {}
+    type: FlowPanel
+    layout_properties: {width: 80.61468505859375}
+    components:
+    - type: Button
+      properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:Tertiary', visible: true, text: type, font_size: null,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: true, underline: false, icon: ''}
+      name: text_box_2
+      layout_properties: {}
+      event_bindings: {click: text_box_2_click}
   - type: Button
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:On Primary', visible: true, text: 'dates               ',
