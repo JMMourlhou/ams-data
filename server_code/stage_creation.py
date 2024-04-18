@@ -1,7 +1,5 @@
 import anvil.files
 from anvil.files import data_files
-import anvil.email
-
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -9,11 +7,12 @@ from anvil.tables import app_tables
 import anvil.server
 from anvil import *  #pour les alertes
 
-@anvil.server.callable           #Création d'un nouveau stage
-def add_stage(code,
+#Création d'un nouveau stage
+@anvil.server.callable 
+def add_stage(code_stage,     # row codes_stage concernée
               code_txt,
-              numero,   # attention numero est txt
-              lieu,
+              numero,         # numéro de stage en clair: txt
+              lieu_stage,     # row lieux concerné
               date_debut,
               nb_stagiaires_deb,
               date_fin,
@@ -22,23 +21,10 @@ def add_stage(code,
               commentaires
              ):
     #print("lieu: ",lieu)         
-    numero=int(numero)
-
-    # lecture fichier père code stages
-    code_stage = app_tables.codes_stages.get(code=code)
-    if not code_stage :
-        alert("Code stage non trouvé ds fichier param Code_stages")
-        valid=False
-        return valid
-    # lecture fichier père lieux
-    lieu_stage = app_tables.lieux.get(lieu=lieu)    
-    if not lieu_stage :
-        alert("Lieu stage non trouvé ds fichier param lieux")
-        valid=False
-        return valid   
-        
+    numero=int(numero)   
     new_row=app_tables.stages.add_row(
-                              code = code_stage,,
+                              code = code_stage,
+                              code_txt = code_stage['code'],
                               numero = numero,
                               lieu = lieu_stage,
                               date_debut = date_debut,

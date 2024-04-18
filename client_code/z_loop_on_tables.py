@@ -187,3 +187,25 @@ def del_pre_requis():
     for pr in liste_a_enlever:
         print(pr['stagiaire_email']," ",pr['item_requis'])
         pr.delete()
+
+#boucle sur la table stage pour mettre  en clair (txt) le type de stage (ex PSC1) 
+def maj_stages_txt():
+    liste = app_tables.stages.search()
+    for stage in liste:
+        #lecture fichier père type stage
+        row_stage = app_tables.codes_stages.get(code=stage['code']['code'])
+        stage.update(code_txt=row_stage['code'])
+        print(stage['numero'], stage['code_txt'])
+
+#boucle sur la tablle stagiaire inscrits pour  en clair txt 
+def maj_stagiaires_inscrits_txt():
+    # Drop down stages inscrits du user
+    liste_stagiaires = app_tables.stagiaires_inscrits.search()
+    
+    for row in liste_stagiaires:
+        #lecture fichier père stage
+        stage=app_tables.stages.get(q.fetch_only("date_debut"),
+                                                    numero=row['stage']['numero']
+                                    )
+        row.update(stage_txt=stage['code_txt'],
+                  numero=stage['numero'])

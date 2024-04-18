@@ -227,8 +227,14 @@ db_schema:
       admin_ui: {order: 1.5, width: 133}
       type: string
     - name: droits_stagiaire_qcms
-      admin_ui: {order: 5, width: 908}
+      admin_ui: {order: 5, width: 432}
       type: simpleObject
+    - name: stage_txt
+      admin_ui: {order: 0.5, width: 107}
+      type: string
+    - name: numero
+      admin_ui: {order: 0.75, width: 114}
+      type: number
     title: Stagiaires_inscrits
   files:
     client: none

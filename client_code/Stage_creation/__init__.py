@@ -42,7 +42,10 @@ class Stage_creation(Stage_creationTemplate):
         """This method is called when the selected date changes"""
         date1 = self.date_picker_to.date
         date2 = self.date_picker_from.date
-        if date1 < date2:
+        if date2 == None:  # 1ere date vide
+            alert("La date de fin est inférieure à la date de début !")
+            self.date_picker_from.focus()
+        if date1 < date2 :
             alert("La date de fin est inférieure à la date de début !")
             self.date_picker_to.focus()
     
@@ -81,9 +84,11 @@ class Stage_creation(Stage_creationTemplate):
             alert("Le numéro de stage existe déjà !")
             self.button_annuler_click()
             
-        result = anvil.server.call("add_stage", row['code'],         #num du stage  de la ligne 
+        #result = anvil.server.call("add_stage", row['code'],         #num du stage  de la ligne 
+        result = anvil.server.call("add_stage", row,         # row  table codes_stages
+                                                row['code'], # code stage en clair, txt (ex: 'PSC1')
                                                 self.text_box_num_stage.text,
-                                                row2['lieu'],
+                                                row2,        # row table lieu
                                                 self.date_picker_from.date,
                                                 self.text_box_nb_stagiaires_deb.text,
                                                 self.date_picker_to.date,
