@@ -1,9 +1,6 @@
 from ._anvil_designer import RowTemplate3Template
 from anvil import *
-
 import anvil.server
-
-
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -41,7 +38,18 @@ class RowTemplate3(RowTemplate3Template):
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']
         stage = stage.strip()
-        self.text_box_2.text = self.item['code']['code']                     # link key
+        if len(self.item['commentaires'])>2:
+            self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:5]                  # ajout des 3 1eres lettres du commentaire (pour quel stage)
+        else:
+            # pour aligner correctement les boutons
+            lg = len(self.text_box_2.text)
+            espace = 10-lg
+            espace_caractère = " "
+            while espace+len(espace_caractère)<10:
+                espace_caractère = espace_caractère + " "
+            self.text_box_2.text = self.item['code']['code'] + espace_caractère
+            
+            #self.text_box_2.text = self.item['code']['code']
 
     # récupération par l'event:
     def text_box_3_click(self, **event_args):   # Click sur date

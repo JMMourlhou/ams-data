@@ -1,9 +1,8 @@
 from ._anvil_designer import ItemTemplate1Template
 from anvil import *
-import stripe.checkout
+
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -39,6 +38,12 @@ class ItemTemplate1(ItemTemplate1Template):
             alert(clef_a_annuler, "n'existe plus")
             
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
-        #alert("Pré requis annulé")
+        r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires ?",buttons=[("oui",True),("non",False)])
+        if r :   # Oui
+            #lecture du fichier père stages
+            stage_row = app_tables.codes_stages.get(code=code_stage)
+            # lecture des stages impliqués (code stage)
+            liste = app_tables.stages.search(code=stage_row)
+                
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)

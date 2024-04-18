@@ -1,8 +1,7 @@
 from ._anvil_designer import Plot_avec_barsTemplate
 from anvil import *
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
+
 import plotly.graph_objects as go
 import anvil.server
 import anvil.users

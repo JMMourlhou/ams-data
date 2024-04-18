@@ -9,7 +9,7 @@ from anvil import *  #pour les alertes
 import anvil.tz
 # Pour le calcul de l'heure en France
 from datetime import datetime
-from sign_in_for_AMS_Data.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
+#from sign_in_for_AMS_Data.var_globales import timedelay_url_in_min    # Je crée ansi une var globale ds mon module
 
 #Get the time now, local time FOR CLIENT SIDE (date from browser)
 def french_zone_time():
@@ -20,7 +20,6 @@ def french_zone_time():
 
 # Calculate the difference beetween now time  and  't' (the str url time)
 def time_over(t):
-    #from Fitness_d import var_globales #to get the URL delay
     bool=True #time is over
 
     #time now
@@ -42,8 +41,10 @@ def time_over(t):
     # difference in minutes
     diff = (time_now - date_url)
     diff_in_minutes = diff.seconds/60
-    #alert(diff_in_minutes)
+
+    # Lecture de la variable globale "timedelay_url_in_min" ds table variables_globales
+    timedelay_url_in_min = anvil.server.call('get_variable_value', "timedelay_url_in_min")
     #to get the URL delay
-    if diff_in_minutes < timedelay_url_in_min: # J'utilise ici ma var globale ds ce module (voir import)
+    if diff_in_minutes < timedelay_url_in_min: # J
         bool = False # time not over
     return bool

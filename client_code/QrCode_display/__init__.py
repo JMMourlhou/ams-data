@@ -36,8 +36,9 @@ class QrCode_display(QrCode_displayTemplate):
             # si log_in =True, appel du qr_code pour que les stagiaires log in ds l'appli, donc pas de num stage
             param = ""
             self.label_titre.text = "Flachez pour vous connecter à l'appli AMSdata "
-            
-        app = constant_parameters.code_app1
+
+        # Lecture de la variable globale "code_app1" ds table variables_globales
+        app = anvil.server.call('get_variable_value', "code_app1")
         code_app1 = app + param  # App "AMS Data"  + code stage
         print("code",code_app1)
         media=anvil.server.call('mk_qr_code',code_app1)

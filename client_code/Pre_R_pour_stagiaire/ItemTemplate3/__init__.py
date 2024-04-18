@@ -15,7 +15,12 @@ class ItemTemplate3(ItemTemplate3Template):
 
         # Any code you write here will run before the form opens.
         self.text_box_1.text = self.item['item_requis']['requis']
-        self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
+        if self.image_1.source != None:
+            self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
+            self.button_del.visible = True
+        else:
+            self.button_del.visible = False
+            
         try:     # si pas de doc en table, erreur
             media = self.item['doc1'].name
             self.button_visu.visible = True
@@ -49,8 +54,12 @@ class ItemTemplate3(ItemTemplate3Template):
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
                 if result == True:
                     print(f"Fichier de jpg en jpg, sauvé")
-                else:
                     self.button_visu.visible = True  
+                    self.button_del.visible = True
+                else:
+                    alert(f"Fichier de jpg non sauvé")
+                    self.button_visu.visible = False  
+                    self.button_del.visible = False
                     
             if file_extension == ".pdf":      
                
@@ -76,7 +85,7 @@ class ItemTemplate3(ItemTemplate3Template):
                     alert("Fichier jpg non sauvé") 
                 self.image_1.source = file
 
-                
+                self.button_del.visible = True
                 self.button_visu.visible = True     
 
 
@@ -90,3 +99,12 @@ class ItemTemplate3(ItemTemplate3Template):
             from ...Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
             open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis, origine="stagiaire")
 
+    def button_del_click(self,  **event_args):
+        """This method is called when the button is clicked"""
+        result = anvil.server.call('pr_stagiaire_del',self.email, self.stage_num, self.item_requis )
+        if result:
+            self.image_1.source = None
+            self.button_visu.visible = False
+            self.button_del.visible = False
+        else:
+            alert("Pré Requis non enlevé")
