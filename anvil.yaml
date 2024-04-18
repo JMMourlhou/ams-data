@@ -212,7 +212,7 @@ db_schema:
     server: full
     columns:
     - name: stage
-      admin_ui: {order: 0, width: 105}
+      admin_ui: {order: 0, width: 125}
       type: link_single
       target: stages
     - name: financement
@@ -435,6 +435,9 @@ db_schema:
     - name: visu_qcm
       admin_ui: {width: 200, order: 14}
       type: simpleObject
+    - name: code_txt
+      admin_ui: {order: 0.5, width: 84}
+      type: string
     title: Stages
   cpt_stages:
     client: search

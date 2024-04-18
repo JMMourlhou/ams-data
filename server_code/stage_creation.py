@@ -11,6 +11,7 @@ from anvil import *  #pour les alertes
 
 @anvil.server.callable           #Création d'un nouveau stage
 def add_stage(code,
+              code_txt,
               numero,   # attention numero est txt
               lieu,
               date_debut,
@@ -37,7 +38,7 @@ def add_stage(code,
         return valid   
         
     new_row=app_tables.stages.add_row(
-                              code = code_stage,
+                              code = code_stage,,
                               numero = numero,
                               lieu = lieu_stage,
                               date_debut = date_debut,

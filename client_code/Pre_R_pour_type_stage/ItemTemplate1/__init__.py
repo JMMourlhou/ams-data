@@ -43,7 +43,7 @@ class ItemTemplate1(ItemTemplate1Template):
             #lecture du fichier père stages
             stage_row = app_tables.codes_stages.get(code=code_stage)
             # lecture des stages impliqués (code stage)
-            liste = app_tables.stages.search(code=stage_row)
+            liste = app_tables.pre_requis_stagiaire.search(code=stage_row)
                 
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)
