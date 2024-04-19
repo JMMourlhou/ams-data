@@ -16,7 +16,7 @@ ADD & EFFACEMENT d'1 stagiaire du stage
 
 @anvil.server.callable           # ADD d'un nouveau stagiaire ds le stage
 @anvil.tables.in_transaction
-def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):
+def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):   # Stage num pas row
     valid=""
     # lecture fichier père stages
     code_stage = app_tables.stages.get(numero=int(stage))
