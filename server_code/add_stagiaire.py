@@ -68,7 +68,9 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):   # Stage num pas
                               user_email = user,
                               name = user['nom'].lower(),    # nom pour permettre le tri sur le nom
                               financement = mode_fin,
-                              droits_stagiaire_qcms = dico_droits_qcm
+                              droits_stagiaire_qcms = dico_droits_qcm,
+                              stage_txt = code_stage['code_txt'],
+                              numero =code_stage['numero'] 
                               )
              
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
