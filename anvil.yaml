@@ -81,7 +81,7 @@ db_schema:
       admin_ui: {order: 1, width: 238}
       type: string
     - name: code_pre_requis
-      admin_ui: {order: -1, width: 200}
+      admin_ui: {order: -1, width: 141}
       type: string
     - name: doc
       admin_ui: {width: 200, order: 2}
@@ -227,7 +227,7 @@ db_schema:
       admin_ui: {order: 1.5, width: 133}
       type: string
     - name: droits_stagiaire_qcms
-      admin_ui: {order: 5, width: 432}
+      admin_ui: {order: 5, width: 692}
       type: simpleObject
     - name: stage_txt
       admin_ui: {order: 0.5, width: 107}
@@ -377,7 +377,7 @@ db_schema:
       admin_ui: {order: 5, width: 60}
       type: bool
     - name: doc1
-      admin_ui: {order: 6, width: 200}
+      admin_ui: {order: 6, width: 189}
       type: media
     - name: item_requis
       admin_ui: {order: 5.5, width: 145}
@@ -386,13 +386,28 @@ db_schema:
     - name: pdf_doc1
       admin_ui: {width: 200, order: 7.5}
       type: media
+    - name: code_txt
+      admin_ui: {order: 0, width: 94}
+      type: string
+    - name: numero
+      admin_ui: {order: 0.5, width: 123}
+      type: number
+    - name: requis_txt
+      admin_ui: {order: 5.75, width: 202}
+      type: string
+    - name: nom
+      admin_ui: {order: 8.5, width: 200}
+      type: string
+    - name: prenom
+      admin_ui: {width: 200, order: 9.5}
+      type: string
     title: Pre_Requis_stagiaire
   stages:
     client: search
     server: full
     columns:
     - name: numero
-      admin_ui: {order: 1, width: 87.17}
+      admin_ui: {order: 1, width: 115.17}
       type: number
     - name: date_debut
       admin_ui: {order: 2, width: 101.17}
@@ -442,7 +457,7 @@ db_schema:
       admin_ui: {width: 200, order: 14}
       type: simpleObject
     - name: code_txt
-      admin_ui: {order: 0.5, width: 84}
+      admin_ui: {order: 0.5, width: 100}
       type: string
     title: Stages
   cpt_stages:

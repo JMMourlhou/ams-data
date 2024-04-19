@@ -197,7 +197,7 @@ def maj_stages_txt():
         stage.update(code_txt=row_stage['code'])
         print(stage['numero'], stage['code_txt'])
 
-#boucle sur la tablle stagiaire inscrits pour  en clair txt 
+#boucle sur la table stagiaire inscrits pour  en clair txt 
 def maj_stagiaires_inscrits_txt():
     # Drop down stages inscrits du user
     liste_stagiaires = app_tables.stagiaires_inscrits.search()
@@ -209,3 +209,34 @@ def maj_stagiaires_inscrits_txt():
                                     )
         row.update(stage_txt=stage['code_txt'],
                   numero=stage['numero'])
+
+#boucle sur la table pre_requis_stagiaire pour  en clair txt 
+def maj_pr_stagiaires_txt():
+    # Drop down stages inscrits du user
+    liste_pr_stagiaires = app_tables.pre_requis_stagiaire.search()
+    
+    for row in liste_pr_stagiaires:
+        #lecture fichier père stage
+        stage = app_tables.stages.get(q.fetch_only("date_debut"),
+                                                    numero=row['stage_num']['numero']
+                                    )
+        
+        #lecture fichier père pré_requis
+        pr = app_tables.pre_requis.get(code_pre_requis=row['item_requis']['code_pre_requis'])
+
+        
+        #lecture fichier père user
+        try:
+            usr = app_tables.users.get(email=row['stagiaire_email']['email'])
+            row.update(code_txt=stage['code_txt'],
+                  numero=stage['numero'],
+                  nom=usr['nom'],
+                  prenom=usr['prenom'],
+                  requis_txt=pr['requis'])
+        except:   # si user non trouvé, effact des pré requis
+            print("row deleted for: ", row['stagiaire_email'])
+            #row.delete()
+
+        
+        
+        
