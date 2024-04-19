@@ -228,14 +228,16 @@ def maj_pr_stagiaires_txt():
         #lecture fichier père user
         try:
             usr = app_tables.users.get(email=row['stagiaire_email']['email'])
+            
             row.update(code_txt=stage['code_txt'],
                   numero=stage['numero'],
                   nom=usr['nom'],
                   prenom=usr['prenom'],
                   requis_txt=pr['requis'])
+            
         except:   # si user non trouvé, effact des pré requis
             print("row deleted for: ", row['stagiaire_email'])
-            #row.delete()
+            row.delete()
 
         
         
