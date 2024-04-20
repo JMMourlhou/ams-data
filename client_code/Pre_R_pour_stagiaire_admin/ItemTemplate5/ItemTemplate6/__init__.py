@@ -1,8 +1,6 @@
 from ._anvil_designer import ItemTemplate6Template
 from anvil import *
-
 import anvil.server
-
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -17,8 +15,8 @@ class ItemTemplate6(ItemTemplate6Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        txt2 = self.item['item_requis']['code_pre_requis']
-        txt1 = self.item['item_requis']['requis']
+        txt2 = self.item['code_txt']
+        txt1 = self.item['requis_txt']
         self.label_1.text = txt1 +" / "+ txt2
         self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
         try:

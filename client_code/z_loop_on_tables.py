@@ -201,14 +201,20 @@ def maj_stages_txt():
 def maj_stagiaires_inscrits_txt():
     # Drop down stages inscrits du user
     liste_stagiaires = app_tables.stagiaires_inscrits.search()
-    
     for row in liste_stagiaires:
-        #lecture fichier père stage
+        #lecture fichier père 'stages'
         stage=app_tables.stages.get(q.fetch_only("date_debut"),
-                                                    numero=row['stage']['numero']
+                                        numero=row['stage']['numero']
                                     )
+        #lecture fichier père 'users'
+        usr = app_tables.users.get(q.fetch_only("prenom"),
+                                        email = row['user_email']['email']
+                                  )
+                                   
         row.update(stage_txt=stage['code_txt'],
-                  numero=stage['numero'])
+                  numero=stage['numero'],
+                  prenom = usr['prenom']
+                  )
 
 #boucle sur la table pre_requis_stagiaire pour  en clair txt 
 def maj_pr_stagiaires_txt():

@@ -233,8 +233,11 @@ db_schema:
       admin_ui: {order: 0.5, width: 107}
       type: string
     - name: numero
-      admin_ui: {order: 0.75, width: 114}
+      admin_ui: {order: 0.75, width: 106}
       type: number
+    - name: prenom
+      admin_ui: {order: 1.75, width: 84}
+      type: string
     title: Stagiaires_inscrits
   files:
     client: none
@@ -283,28 +286,28 @@ db_schema:
     server: full
     columns:
     - name: email
+      admin_ui: {order: 0, width: 196}
       type: string
-      admin_ui: {order: 0, width: 200}
     - name: enabled
+      admin_ui: {order: 1, width: 90}
       type: bool
-      admin_ui: {order: 1, width: 200}
     - name: last_login
       type: datetime
       admin_ui: {order: 2, width: 200}
     - name: password_hash
-      admin_ui: {order: 3, width: 548}
+      admin_ui: {order: 3, width: 131}
       type: string
     - name: n_password_failures
       type: number
       admin_ui: {order: 4, width: 200}
     - name: confirmed_email
+      admin_ui: {order: 5, width: 137}
       type: bool
-      admin_ui: {order: 5, width: 200}
     - name: nom
       admin_ui: {order: 2.5, width: 200}
       type: string
     - name: api_key
-      admin_ui: {order: 8, width: 200}
+      admin_ui: {order: 3.5, width: 88}
       type: string
     - name: signed_up
       admin_ui: {order: 1.5, width: 253}
@@ -328,7 +331,7 @@ db_schema:
       admin_ui: {order: 15, width: 200}
       type: string
     - name: tel
-      admin_ui: {order: 17, width: 200}
+      admin_ui: {order: 17, width: 94}
       type: string
     - name: photo
       admin_ui: {order: 18, width: 200}
@@ -337,7 +340,7 @@ db_schema:
       admin_ui: {order: 19, width: 200}
       type: string
     - name: email2
-      admin_ui: {order: 20, width: 200}
+      admin_ui: {order: 18, width: 67}
       type: string
     - name: code_postal_naissance
       admin_ui: {order: 21, width: 200}
@@ -390,7 +393,7 @@ db_schema:
       admin_ui: {order: 0, width: 82}
       type: string
     - name: numero
-      admin_ui: {order: 0.5, width: 123}
+      admin_ui: {order: 0.5, width: 106}
       type: number
     - name: requis_txt
       admin_ui: {order: 5.75, width: 179}
