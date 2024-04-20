@@ -399,7 +399,7 @@ db_schema:
       admin_ui: {order: 3, width: 81}
       type: string
     - name: prenom
-      admin_ui: {order: 4, width: 200}
+      admin_ui: {order: 4, width: 89}
       type: string
     title: Pre_Requis_stagiaire
   stages:
