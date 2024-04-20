@@ -245,6 +245,22 @@ def maj_pr_stagiaires_txt():
             print("row deleted for: ", row['stagiaire_email'])
             row.delete()
 
+#boucle sur la table QCM results pour nom/prenom en clair txt 
+def maj_qcm_results_txt():
+    # liste des résulltats
+    liste_results = app_tables.qcm_result.search()
+    for row in liste_results:
+        #lecture fichier père 'users'
+        usr = app_tables.users.get(q.fetch_only("nom","prenom"),
+                                        email = row['user_qcm']['email']
+                                  )
+        #lecture fichier père QCM_descro
+        qcm = app_tables.qcm_description.get(qcm_nb=row['qcm_number']['qcm_nb'])             
+        row.update(name = usr['nom'],
+                  prenom = usr['prenom'],
+                   intitule= qcm['destination']
+                  )
+
         
         
         

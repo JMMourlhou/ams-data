@@ -227,7 +227,7 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         
         from .. import z_loop_on_tables
-        result=z_loop_on_tables.maj_stagiaires_inscrits_txt()
+        result=z_loop_on_tables.maj_qcm_results_txt()
         alert(result)
         
 

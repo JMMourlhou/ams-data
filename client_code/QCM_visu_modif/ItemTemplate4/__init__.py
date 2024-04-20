@@ -8,7 +8,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
 global ancien_num_ligne    # pour pouvoir rendre un bt inactif si perte de focus  
 ancien_num_ligne = 0
 
@@ -18,7 +17,6 @@ cpt = 0
 global nb   # pour l'affichage du num de la question
 nb = 0  # initialisé en init   (pour l'affichage du numéro de la question, notemment qd qcm extrait de plusieurs qcm
         # ex: exam blanc tiré de plusieurs parties
-
 
 global nb_bonnes_rep
 nb_bonnes_rep = 0
@@ -97,8 +95,6 @@ class ItemTemplate4(ItemTemplate4Template):
         self.rep4.tag.nom = "rep4"
         self.rep5.tag.nom = "rep5"
         
-        
-
         # Récupération de chaque réponse corrigée pour chaque option de la question
         self.rep1.tag.correction = ""
         self.rep2.tag.correction = ""
@@ -158,8 +154,6 @@ class ItemTemplate4(ItemTemplate4Template):
             self.rep3.tag.numero = self.item['num']
             self.rep4.tag.numero = self.item['num']
             self.rep5.tag.numero = self.item['num']
-        
-
         
         self.label_2.tag.numero = self.item['num']
         self.label_2.tag.nom = "num"

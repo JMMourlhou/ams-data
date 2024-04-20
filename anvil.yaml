@@ -177,7 +177,7 @@ db_schema:
       type: string
     title: Qcm
   qcm_result:
-    client: search
+    client: full
     server: full
     columns:
     - name: user_qcm
@@ -185,7 +185,7 @@ db_schema:
       type: link_single
       target: users
     - name: qcm_number
-      admin_ui: {order: 1, width: 171}
+      admin_ui: {order: 1, width: 121}
       type: link_single
       target: qcm_description
     - name: time
@@ -204,8 +204,17 @@ db_schema:
       admin_ui: {order: 6, width: 144}
       type: number
     - name: success
-      admin_ui: {width: 200, order: 8}
+      admin_ui: {order: 8, width: 130}
       type: bool
+    - name: name
+      admin_ui: {order: 0.5, width: 86}
+      type: string
+    - name: prenom
+      admin_ui: {order: 0.75, width: 95}
+      type: string
+    - name: intitule
+      admin_ui: {order: 1.5, width: 200}
+      type: string
     title: Qcm_result
   stagiaires_inscrits:
     client: search

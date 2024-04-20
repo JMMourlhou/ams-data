@@ -162,7 +162,10 @@ def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):  
     
     app_tables.qcm_result.add_row(
                                     user_qcm= user,
+                                    name = user['nom'],
+                                    prenom = user['prenom'],
                                     qcm_number=qcm_row,
+                                    intitule=qcm_row['destination'],
                                     time= French_zone_server_side.time_french_zone(),
                                     liste_rep = reponses,
                                     nb_rep_ok = nb_bonnes_rep,
