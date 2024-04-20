@@ -12,7 +12,6 @@ import anvil.server
 @anvil.tables.in_transaction
 def modif_pre_requis_codes_stages(code_stage, pr_requis_dico):
 
-    
     valid=""
     # lecture fichier père stages
     stage_r = app_tables.codes_stages.get(code=code_stage)
