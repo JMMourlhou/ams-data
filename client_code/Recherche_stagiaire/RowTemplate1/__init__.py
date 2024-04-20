@@ -132,26 +132,31 @@ class RowTemplate1(RowTemplate1Template):
             self.button_1.foreground = "red"
             try:  # si recherche sur la table users
                 stagiaire = app_tables.users.get(email=self.item['email'])
-                qcm_results = app_tables.qcm_result.search(
+                qcm_results = app_tables.qcm_result.search( 
                                                             tables.order_by("time", ascending=False),
                                                             user_qcm = stagiaire
                                                             )
-            except: # si recherche sur la table
+                if self.item['role'] == "A":          # Admin en rouge
+                    self.button_1.foreground = "red"
+                if self.item['role'] == "F":
+                    self.button_1.foreground = "blue"  # Formateur en bleu
+            except: # si recherche sur la table stagiaire_inscrit
                 stagiaire = app_tables.users.get(email=self.item['user_email']['email'])
                 qcm_results = app_tables.qcm_result.search(
                                                             tables.order_by("time", ascending=False),
                                                             user_qcm = stagiaire
                                                             )
+                if stagiaire['role'] == "A":          # Admin en rouge
+                    self.button_1.foreground = "red"
+                if stagiaire['role'] == "F":
+                    self.button_1.foreground = "blue"  # Formateur en bleu
             if len(qcm_results)>0:      # qcm trouvés pour ce user
                     self.repeating_panel_1.items = qcm_results
         else:
             self.repeating_panel_1.visible = False
             #self.button_1.foreground = "theme:Tertiary"               #yellow
             #self.button_1.background = "theme:On Primary Container"
-            if self.item['role'] == "A":          # Admin en rouge
-                self.button_1.foreground = "red"
-            if self.item['role'] == "F":
-                self.button_1.foreground = "blue"  # Formateur en bleu
+            
 
     def button_histo_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -163,17 +168,22 @@ class RowTemplate1(RowTemplate1Template):
             
             try:  # si recherche sur la table users
                 stagiaire = app_tables.users.get(email=self.item['email'])
+                if self.item['role'] == "A":          # Admin en rouge
+                    self.button_1.foreground = "red"
+                if self.item['role'] == "F":
+                    self.button_1.foreground = "blue"  # Formateur en bleu
             except:
                 stagiaire = app_tables.users.get(email=self.item['user_email']['email'])
+                if stagiaire['role'] == "A":          # Admin en rouge
+                    self.button_1.foreground = "red"
+                if stagiaire['role'] == "F":
+                    self.button_1.foreground = "blue"  # Formateur en bleu
             self.repeating_panel_2.items = app_tables.stagiaires_inscrits.search(user_email = stagiaire)
         else:
             self.repeating_panel_2.visible = False
             #self.button_1.foreground = "theme:Tertiary"               #yellow
             #self.button_1.background = "theme:On Primary Container"
-            if self.item['role'] == "A":          # Admin en rouge
-                self.button_1.foreground = "red"
-            if self.item['role'] == "F":
-                self.button_1.foreground = "blue"  # Formateur en bleu
+            
 
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""

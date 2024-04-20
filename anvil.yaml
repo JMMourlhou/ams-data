@@ -216,7 +216,7 @@ db_schema:
       type: link_single
       target: stages
     - name: financement
-      admin_ui: {order: 2, width: 187}
+      admin_ui: {order: 2, width: 70}
       type: link_single
       target: mode_financement
     - name: user_email
@@ -227,7 +227,7 @@ db_schema:
       admin_ui: {order: 1.5, width: 133}
       type: string
     - name: droits_stagiaire_qcms
-      admin_ui: {order: 5, width: 692}
+      admin_ui: {order: 5, width: 736}
       type: simpleObject
     - name: stage_txt
       admin_ui: {order: 0.5, width: 107}
@@ -366,7 +366,7 @@ db_schema:
     server: full
     columns:
     - name: stage_num
-      admin_ui: {order: -1, width: 116}
+      admin_ui: {order: -1, width: 99}
       type: link_single
       target: stages
     - name: stagiaire_email
@@ -377,29 +377,29 @@ db_schema:
       admin_ui: {order: 5, width: 60}
       type: bool
     - name: doc1
-      admin_ui: {order: 6, width: 189}
+      admin_ui: {order: 6, width: 110}
       type: media
     - name: item_requis
       admin_ui: {order: 5.5, width: 145}
       type: link_single
       target: pre_requis
     - name: pdf_doc1
-      admin_ui: {width: 200, order: 7.5}
+      admin_ui: {order: 7.5, width: 105}
       type: media
     - name: code_txt
-      admin_ui: {order: 0, width: 94}
+      admin_ui: {order: 0, width: 82}
       type: string
     - name: numero
       admin_ui: {order: 0.5, width: 123}
       type: number
     - name: requis_txt
-      admin_ui: {order: 5.75, width: 202}
+      admin_ui: {order: 5.75, width: 179}
       type: string
     - name: nom
-      admin_ui: {order: 8.5, width: 200}
+      admin_ui: {order: 3, width: 81}
       type: string
     - name: prenom
-      admin_ui: {width: 200, order: 9.5}
+      admin_ui: {order: 4, width: 200}
       type: string
     title: Pre_Requis_stagiaire
   stages:

@@ -45,7 +45,8 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):   # Stage num pas
 
     #vérification si user pas déjà inscrit ds fichier stagiaire inscrit, POUR CE STAGE:
     
-    test = app_tables.stagiaires_inscrits.search(user_email=user,                 # ce user
+    test = app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt"),
+                                                 user_email=user,                 # ce user
                                                  stage=code_stage)                # ET pour ce stage
     if len(test)>0:
         valid="Stagiaire déjà inscrit à ce stage !"
@@ -113,13 +114,18 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):   # Stage num pas
                  dico_pre_requis_trié[key] = dico_pre_requis[key]
             
             for clef,value in dico_pre_requis_trié.items():
-                print("clef: ",clef)
+                #print("clef: ",clef)
                 pr_row = app_tables.pre_requis.get(code_pre_requis=clef)
                 new_row_pr = app_tables.pre_requis_stagiaire.add_row(
                               stage_num = code_stage,  
                               stagiaire_email = user,
                               item_requis = pr_row,
-                              check=False
+                              check=False,
+                              code_txt = code_stage['code_txt'],
+                              numero = code_stage['numero'],
+                              requis_txt = pr_row['requis'],
+                              nom = user['nom'],
+                              prenom = user['prenom']
                 )    
     return valid
 
