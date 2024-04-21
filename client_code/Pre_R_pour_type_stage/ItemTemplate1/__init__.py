@@ -39,19 +39,27 @@ class ItemTemplate1(ItemTemplate1Template):
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
         r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
         if r :   # Oui
-            #lecture du fichier père stages
-            type_stage_row = app_tables.codes_stages.get(code=code_stage)
-            #lecture du pré_requis à enlever
-            pr = app_tables.pre_requis.get(requis=clef_a_annuler)
-            # lecture des stages et pr impliqués
-            liste = app_tables.pre_requis_stagiaire.search(stage_num = type_stage_row,
-                                                           item_requis = pr
-                                                          )
-            # Pour chq stagiaire, lecture du dico
-            for pr_stagiaire in liste:
-                #lecture du dico
-                pr_stagiaire.delete()
-                
-                
+            # lecture row du item_requis à annuler
+            row = app_tables.pre_requis.get(code_pre_requis=clef_a_annuler)
+            # lecture du fichier père type de stage
+            type_stage = app_tables.codes_stages.get(code=code_stage)
+            #lecture des stages impliqués, ceux qui sont des stages du type de stage sélectionné
+            liste_stages = app_tables.stages.search(code=type_stage)
+            # lecture des stagiaires inscrits à ces stages
+            for stage in liste_stages:
+                liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage)       
+                # Pour chq stagiaire, effact du pré_requis
+                for stagiaire in liste_stagiaires:
+                    # effact du pré_requis si existant
+                    test = app_tables.pre_requis_stagiaire.search(stage_num = stage,
+                                                                 item_requis = row,
+                                                                 stagiaire_email = stagiaire['stagiaire_email'])
+                    if len(test) != 0:
+                        print("existant")
+                        stagiaire.delete()
+                        #result = anvil.server.call("add_1_pre_requis", stage, stagiaire['stagiaire_email']['email'], row)
+                        print(result)
+        
+        # =======================================================       
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)

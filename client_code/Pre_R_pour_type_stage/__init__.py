@@ -96,10 +96,12 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         # =================================================================================================
         r=alert("Voulez-vous ajouter ce pré-requis pour tous les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
         if r :   # Oui
+            
             #lecture des stages impliqués, ceux qui sont des stages du type de stage sélectionné
             liste_stages = app_tables.stages.search(code=self.drop_down_code_stage.selected_value)
             # lecture des stagiaires inscrits à ces stages
             for stage in liste_stages:
+                print(stage['code']['code'])
                 liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage)       
                 # Pour chq stagiaire, ajout du pré_requis
                 for stagiaire in liste_stagiaires:
@@ -107,12 +109,12 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
                     test = app_tables.pre_requis_stagiaire.search(stage_num = stage,
                                                                  item_requis = row,
                                                                  stagiaire_email = stagiaire['stagiaire_email'])
+                    print("lg: ", len(test))
                     if len(test) == 0:
                         print("non existant")
                         result = anvil.server.call("add_1_pre_requis", stage, stagiaire['stagiaire_email']['email'], row)
                         print(result)
-                    else:
-                        print("existant")
+                    
                 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

@@ -374,7 +374,7 @@ db_schema:
       type: string
     title: Users
   pre_requis_stagiaire:
-    client: search
+    client: full
     server: full
     columns:
     - name: stage_num
