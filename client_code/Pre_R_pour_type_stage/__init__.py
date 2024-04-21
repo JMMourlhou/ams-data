@@ -102,9 +102,11 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
             # lecture des stagiaires inscrits à ces stages
             for stage in liste_stages:
                 print(stage['code']['code'])
-                liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage)       
+                liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage)  
+                print(len(liste_stagiaires))
                 # Pour chq stagiaire, ajout du pré_requis
                 for stagiaire in liste_stagiaires:
+                    print(stagiaire["nom"])
                     # ajout du pré_requis si pas existant
                     test = app_tables.pre_requis_stagiaire.search(stage_num = stage,
                                                                  item_requis = row,
