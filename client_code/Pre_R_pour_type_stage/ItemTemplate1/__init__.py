@@ -47,18 +47,13 @@ class ItemTemplate1(ItemTemplate1Template):
             liste_stages = app_tables.stages.search(code=type_stage)
             # lecture des stagiaires inscrits à ces stages
             for stage in liste_stages:
-                liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage)       
-                # Pour chq stagiaire, effact du pré_requis
+                liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage,
+                                                                         item_requis = row
+                                                                          )
                 for stagiaire in liste_stagiaires:
-                    # effact du pré_requis si existant
-                    test = app_tables.pre_requis_stagiaire.search(stage_num = stage,
-                                                                 item_requis = row,
-                                                                 stagiaire_email = stagiaire['stagiaire_email'])
-                    if len(test) != 0:
-                        print("existant")
-                        stagiaire.delete()
-                        #result = anvil.server.call("add_1_pre_requis", stage, stagiaire['stagiaire_email']['email'], row)
-                        print(result)
+                    # Pour chq stagiaire, effact du pré_requis                      
+                    stagiaire.delete()
+                    #result = anvil.server.call("add_1_pre_requis", stage, stagiaire['stagiaire_email']['email'], row)
         
         # =======================================================       
         # réaffichage complet 
