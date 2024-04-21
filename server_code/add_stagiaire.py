@@ -130,6 +130,28 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):   # Stage num pas
                 )    
     return valid
 
+# =========================================================================================================================================
+@anvil.server.callable           #AJOUT d'un pré_requis pour un stagiaire d'un stage 
+@anvil.tables.in_transaction
+def add_1_pre_requis(code_stage, mail_text, pr_row):
+    valid = False
+    #lecture du stagiaire
+    user = app_tables.users.get(q.fetch_only("nom","prenom"),
+                                email=mail_text)
+    
+    new_row_pr = app_tables.pre_requis_stagiaire.add_row(
+                                stage_num = code_stage,  
+                                stagiaire_email = user,
+                                item_requis = pr_row,
+                                check=False,
+                                code_txt = code_stage['code_txt'],
+                                numero = code_stage['numero'],
+                                requis_txt = pr_row['requis'],
+                                nom = user['nom'],
+                                prenom = user['prenom']
+                    )    
+    valid = True
+    return valid
 
 # =========================================================================================================================================
 @anvil.server.callable           #DEL d'1 stagiaire du stage

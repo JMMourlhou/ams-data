@@ -66,7 +66,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         
     def drop_down_pre_requis_change(self, **event_args):
         """This method is called when an item is selected"""
-        row = self.drop_down_pre_requis.selected_value
+        row = self.drop_down_pre_requis.selected_value       # row du pre_requis 
         if row == None :
             alert("Vous devez sélectionner un pré-requis !")
             self.drop_down_code_stage.focus()
@@ -92,8 +92,21 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         global code_stage
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico_pre_requis)
 
-        self.sov_dico_ds_temp()   # sauvegarde du dico ds TABLE TEMP       
-        
+        self.sov_dico_ds_temp()   # sauvegarde du dico ds TABLE TEMP   
+        # =================================================================================================
+        r=alert("Voulez-vous ajouter ce pré-requis pour tous les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
+        if r :   # Oui
+            #lecture des stages impliqués, ceux qui sont des stages du type de stage sélectionné
+            liste_stages = app_tables.stages.search(code=self.drop_down_code_stage.selected_value)
+            # lecture des stagiaires inscrits à ces stages
+            for stage in liste_stages:
+                liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage)       
+                # Pour chq stagiaire, ajout du pré_requis
+                for stagiaire in liste_stagiaires:
+                    # ajout du pré_requis
+                    result = anvil.server.call("add_1_pre_requis", stage, stagiaire['stagiaire_email']['email'], self.drop_down_pre_requis.selected_value)
+                    print(result)
+                
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_stages import Visu_stages
