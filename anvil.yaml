@@ -284,7 +284,7 @@ db_schema:
       admin_ui: {order: 1, width: 196.49}
       type: string
     - name: pre_requis
-      admin_ui: {width: 200, order: 2}
+      admin_ui: {order: 2, width: 745}
       type: simpleObject
     - name: droit_qcm
       admin_ui: {order: 3, width: 1102}
