@@ -106,7 +106,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
                     # ajout du pré_requis si pas existant
                     test = app_tables.pre_requis_stagiaire.search(stage_num = stage,
                                                                  item_requis = row,
-                                                                 stagiaire_email = stagiaire['stagiaire_email']['email'])
+                                                                 stagiaire_email = stagiaire['stagiaire_email'])
                     if len(test) == 0:
                         print("non existant")
                         result = anvil.server.call("add_1_pre_requis", stage, stagiaire['stagiaire_email']['email'], row)
