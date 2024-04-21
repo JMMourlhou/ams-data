@@ -37,14 +37,14 @@ class ItemTemplate1(ItemTemplate1Template):
             alert(clef_a_annuler, "n'existe plus")
             
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
-        r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
         if r :   # Oui
             #lecture du fichier père stages
-            stage_row = app_tables.codes_stages.get(code=code_stage)
+            type_stage_row = app_tables.codes_stages.get(code=code_stage)
             #lecture du pré_requis à enlever
             pr = app_tables.pre_requis.get(requis=clef_a_annuler)
             # lecture des stages et pr impliqués
-            liste = app_tables.pre_requis_stagiaire.search(code = stage_row,
+            liste = app_tables.pre_requis_stagiaire.search(stage_num = type_stage_row,
                                                            item_requis = pr
                                                           )
             # Pour chq stagiaire, lecture du dico
