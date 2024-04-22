@@ -67,7 +67,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
     def drop_down_pre_requis_change(self, **event_args):
         """This method is called when an item is selected"""
         row = self.drop_down_pre_requis.selected_value       # row du pre_requis 
-        if row == None :
+        if row == None:
             alert("Vous devez sélectionner un pré-requis !")
             self.drop_down_code_stage.focus()
             return
