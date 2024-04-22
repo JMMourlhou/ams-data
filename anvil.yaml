@@ -479,8 +479,5 @@ db_schema:
     - name: compteur
       admin_ui: {order: 0, width: 120}
       type: number
-    - name: cpt_qcm
-      admin_ui: {order: 1, width: 124}
-      type: number
     title: Cpt_stages
 renamed: true

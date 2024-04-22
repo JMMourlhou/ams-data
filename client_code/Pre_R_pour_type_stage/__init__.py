@@ -54,10 +54,11 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
             self.drop_down_pre_requis.visible = True
             
             dico_pre_requis = row['pre_requis']
+            
             # affichage des prérequis à partir du dico que je transforme  en liste
         list_keys = dico_pre_requis.keys()
+        list_keys = sorted(list_keys)  # création de la liste triée des clefs du dictionaires prérequis
         # j'affiche tous les pré requis 
-        
         print(len(list_keys))
         self.repeating_panel_1.items = list(list_keys)   # liste des clefs (pré requis)
             
