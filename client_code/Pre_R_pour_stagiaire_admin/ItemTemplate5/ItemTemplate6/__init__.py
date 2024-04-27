@@ -18,12 +18,13 @@ class ItemTemplate6(ItemTemplate6Template):
         txt2 = self.item['code_txt']
         txt1 = self.item['requis_txt']
         self.label_1.text = txt1 +" / "+ txt2
-        self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
-        try:
-            media = self.item['doc1'].name
+        
+        if self.item['doc1'] is not None:
+            self.image_1.source = self.item['doc1']              # DISPLAY L'image haute qualité 
             self.button_visu.visible = True
-        except:
-            pass
+            self.button_del.visible = True
+        else:
+            self.button_del.visible = False
         
         self.stage_num =   self.item['stage_num'] 
         self.item_requis = self.item['item_requis']
@@ -50,7 +51,7 @@ class ItemTemplate6(ItemTemplate6Template):
             self.image_1.source = file
             # Sauvegarde du 'file' jpg
             result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
-            if result == True:
+            if result is True:
                 print(f"Fichier de jpg en jpg, sauvé")
             else:
                 self.button_visu.visible = True  
@@ -58,7 +59,7 @@ class ItemTemplate6(ItemTemplate6Template):
         if file_extension == ".pdf":      
             # Sauvegarde du 'file'
             result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file,  new_file_name, ".pdf") 
-            if result == False:
+            if result is False:
                 alert("Fichier PDF non sauvé")   
             else:
                 print("Fichier PDF sauvé")
@@ -70,14 +71,15 @@ class ItemTemplate6(ItemTemplate6Template):
             file = liste_images[0]
             #thumb_file =  anvil.image.generate_thumbnail(file, 640)
             # renvoi en écriture des images générées ds table
-            file_ext = ".jpg"
+            #file_ext = ".jpg"
             new_file_name = new_file_name + ".jpg"
             print("new_file_name ",new_file_name)
             result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg")
-            if result != True:
+            if result is not True:
                 alert("Fichier jpg non sauvé") 
             self.image_1.source = file
-            self.button_visu.visible = True    
+            self.button_visu.visible = True   
+            self.button_del.visible = True
             
     def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -88,6 +90,16 @@ class ItemTemplate6(ItemTemplate6Template):
             self.button_visu.visible = True
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
             open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis, origine="admin")
+
+    def button_del_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        result = anvil.server.call('pr_stagiaire_del',self.item['stagiaire_email'], self.item['stage_num'], self.item['item_requis'] )
+        if result:
+            self.image_1.source = None
+            self.button_visu.visible = False
+            self.button_del.visible = False
+        else:
+            alert("Pré Requis non enlevé")
         
 
 

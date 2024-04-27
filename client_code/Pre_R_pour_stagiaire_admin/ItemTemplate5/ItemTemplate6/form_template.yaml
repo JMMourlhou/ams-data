@@ -5,7 +5,7 @@ components:
   properties: {font_size: 13, align: center, spacing_above: none, spacing_below: none,
     icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary', bold: true}
   type: Label
-  layout_properties: {grid_position: 'SJMHPD,ZJEVOW', full_width_row: false}
+  layout_properties: {grid_position: 'FTXXGY,EQFIKJ'}
 - name: flow_panel_1
   properties: {role: null, vertical_align: middle, spacing: medium, align: center,
     tooltip: '', border: '', foreground: '', visible: true, spacing_above: none, spacing_below: none,
@@ -59,21 +59,18 @@ components:
       type: FileLoader
       event_bindings: {change: file_loader_1_change}
       layout_properties: {grid_position: 'TFBXFH,DLPMVB'}
-    - name: spacer_1
-      properties: {height: 8.001739501953125}
-      type: Spacer
-      layout_properties: {grid_position: 'LZJODH,QJETZV'}
     - name: button_visu
       properties: {text: '   Voir / PDF', foreground: 'theme:On Primary', icon: 'fa:window-restore',
         visible: false, role: filled-button, background: 'theme:Primary', icon_align: left}
       type: Button
       layout_properties: {grid_position: 'QJKZUK,XPKLKS'}
       event_bindings: {click: button_visu_click}
-  - name: button_del
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Error', visible: false, text: '   ', font_size: 27, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: 'fa:remove'}
-    type: Button
-    event_bindings: {click: button_del_click}
-    data_bindings: []
+    - name: button_del
+      properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:Error', visible: false, text: '   Effacer', font_size: 14,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: 'fa:remove'}
+      type: Button
+      event_bindings: {click: button_del_click}
+      data_bindings: []
+      layout_properties: {grid_position: 'ENGWUU,HGHNQN'}
