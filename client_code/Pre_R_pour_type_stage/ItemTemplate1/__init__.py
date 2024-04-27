@@ -37,24 +37,12 @@ class ItemTemplate1(ItemTemplate1Template):
             alert(clef_a_annuler, "n'existe plus")
             
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
-        r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
-        if r :   # Oui
-            # lecture row du item_requis à annuler
-            row = app_tables.pre_requis.get(code_pre_requis=clef_a_annuler)
-            # lecture du fichier père type de stage
-            type_stage = app_tables.codes_stages.get(code=code_stage)
-            #lecture des stages impliqués, ceux qui sont des stages du type de stage sélectionné
-            liste_stages = app_tables.stages.search(code=type_stage)
-            # lecture des stagiaires inscrits à ces stages
-            for stage in liste_stages:
-                liste_stagiaires = app_tables.pre_requis_stagiaire.search(stage_num = stage,
-                                                                         item_requis = row
-                                                                          )
-                for stagiaire in liste_stagiaires:
-                    # Pour chq stagiaire, effact du pré_requis                      
-                    stagiaire.delete()
-                    #result = anvil.server.call("add_1_pre_requis", stage, stagiaire['stagiaire_email']['email'], row)
-        
+        if result:
+            r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
+            if r :   # Oui
+                anvil.server.call("del_1pr",clef_a_annuler,code_stage)
+                
+            
         # =======================================================       
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)

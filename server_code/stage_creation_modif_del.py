@@ -48,6 +48,56 @@ def add_stage(code_stage,     # row codes_stage concernée
         valid=False
     return valid
 
+
+# ==========================================================================================
+@anvil.server.callable           #modif d'un stage
+@anvil.tables.in_transaction
+def modif_stage(code,
+              numero,   # attention numero est txt
+              lieu,
+              date_debut,
+              nb_stagiaires_deb,
+              date_fin,
+              nb_stagiaires_fin,
+              nb_stagiaires_diplomes,
+              commentaires,
+              allow_bgt_generation
+             ):
+    numero=int(numero)
+
+    # lecture fichier père code stages
+    code_stage = app_tables.codes_stages.get(code=code)
+    if not code_stage:   
+        alert("Code stage non trouvé ds fichier param Code_stages")
+        valid=False
+        return valid             
+    # lecture fichier père lieux
+    lieu_stage = app_tables.lieux.get(lieu=lieu)    
+    if not lieu_stage :
+        alert("Lieu stage non trouvé ds fichier param lieux")
+        valid=False
+        return valid    
+
+    # lecture du stage à modifier par son numéro             
+    stage = app_tables.stages.get(numero=numero) 
+    if not stage:
+        alert("Lieu stage non trouvé ds fichier param lieux")
+        valid=False
+    else:   
+        stage.update(lieu = lieu_stage,
+                    date_debut = date_debut,
+                    nb_stagiaires_deb = nb_stagiaires_deb,
+                    date_fin = date_fin,
+                    nb_stagiaires_fin = nb_stagiaires_fin,
+                    nb_stagiaires_diplomes = nb_stagiaires_diplomes,
+                    commentaires = commentaires,
+                    allow_bgt_generation = allow_bgt_generation
+                    )
+        valid=True
+    return valid
+
+
+# ==========================================================================================
 #Effact d'un stage existant (si pas de stagiaires), le test a été effectué en client side
 @anvil.server.callable 
 def del_stage(stage_num):   # stage_num: num de stage en txt
@@ -63,5 +113,4 @@ def del_stage(stage_num):   # stage_num: num de stage en txt
         if stage_num ==  cpt_num_stage_row['compteur']:
             cpt=int(cpt_num_stage_row['compteur'])-1 
             cpt_num_stage_row.update(compteur=cpt)
-    
     return result
