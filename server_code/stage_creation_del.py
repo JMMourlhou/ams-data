@@ -47,3 +47,21 @@ def add_stage(code_stage,     # row codes_stage concernée
     else:
         valid=False
     return valid
+
+#Effact d'un stage existant (si pas de stagiaires), le test a été effectué en client side
+@anvil.server.callable 
+def del_stage(stage_num):   # stage_num: num de stage en txt
+    result = False
+    #lecture du row du stage:
+    stage_row = app_tables.stages.get(numero=stage_num)
+    if stage_row:
+        stage_row.delete()
+        result = True
+       
+        #décrément du compteur de stages si c'est le dernier stage créé
+        cpt_num_stage_row = app_tables.cpt_stages.search()[0]
+        if stage_num ==  cpt_num_stage_row['compteur']:
+            cpt=int(cpt_num_stage_row['compteur'])-1 
+            cpt_num_stage_row.update(compteur=cpt)
+    
+    return result

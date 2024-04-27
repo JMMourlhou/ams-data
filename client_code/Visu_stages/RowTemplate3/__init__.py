@@ -25,13 +25,14 @@ class RowTemplate3(RowTemplate3Template):
         self.button_qcm.tag.stage = self.item['numero']  #numero de stage en tag du bouton self.button_qcm
         if screen_size < 800:
             self.text_box_1.visible = False
-            if self.item['date_debut'] != None:
+            self.button_del_stage.visible = False
+            if self.item['date_debut'] is not None:
                 self.text_box_3.text = self.item['date_debut'].strftime("%m/%Y")   # format date française avec fonction Python strftime
         else:
             self.text_box_1.visible = True
             self.button_inscription.text = "Inscription"
             self.button_pre_requis.text = "Pré-requis"
-            if self.item['date_debut'] != None:
+            if self.item['date_debut'] is not None:
                 self.text_box_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
             self.button_qcm.text = "Résultats des QCM"
             
@@ -39,7 +40,7 @@ class RowTemplate3(RowTemplate3Template):
         stage = self.item['code']['code']
         stage = stage.strip()
         if len(self.item['commentaires'])>2:
-            self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:5]                  # ajout des 3 1eres lettres du commentaire (pour quel stage)
+            self.text_box_2.text = self.item['code']['code']+" "+self.item['commentaires'][0:5] # ajout des 5 1eres lettres du commentaire (pour quel stage)
         else:
             # pour aligner correctement les boutons
             lg = len(self.text_box_2.text)
@@ -106,6 +107,20 @@ class RowTemplate3(RowTemplate3Template):
             #print("stage: ", stage_row['numero'])
             from ...QCM_Results import QCM_Results
             open_form('QCM_Results', stage_row)
+
+    def button_del_stage_click(self, **event_args):     # Effact du stage si pas de stagiaire
+        """This method is called when the button is clicked"""
+        # Stagiaires ds le stage ?
+        liste_test = app_tables.stagiaires_inscrits.search(numero=self.item['numero'])
+        if len(liste_test) == 0:
+            result = anvil.server.call('del_stage',self.item['numero'])
+            if result is True:
+                alert("Stage annulé !")
+                open_form('Visu_stages')
+            else:
+                alert("Stage non trouvé, annulation impossible")
+        else:
+            alert("Ce stage contient des stagiaires, vous ne pouvez pas l'annuler !")    
 
   
 
