@@ -8,7 +8,6 @@ import anvil.server
 
 
 @anvil.server.callable           #modif du dico pré_requis pour un type de stage
-@anvil.tables.in_transaction
 def modif_pre_requis_codes_stages(code_stage, pr_requis_dico):
     valid=""
     # lecture fichier père stages
@@ -22,7 +21,6 @@ def modif_pre_requis_codes_stages(code_stage, pr_requis_dico):
 
 # =========================================================================
 @anvil.server.callable           #del du pré_requis (pour un type de stage) ds tous les stages impliqués
-@anvil.tables.in_transaction
 def del_1pr(clef_a_annuler,code_stage):
     result = False
     # lecture row du item_requis à annuler
@@ -39,8 +37,8 @@ def del_1pr(clef_a_annuler,code_stage):
                                                                 item_requis = row
                                                                 )
         for stagiaire in liste_stagiaires:
-            # Pour chq stagiaire, effact du pré_requis                      
-            stagiaire.delete()
+            # Pour chq stagiaire, effact du pré_requis SI VIDE                    
+            if stagiaire['doc1'] is None:
+                stagiaire.delete()
             result = True
-            
     return result

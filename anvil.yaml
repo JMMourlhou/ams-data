@@ -295,14 +295,14 @@ db_schema:
     server: full
     columns:
     - name: email
-      admin_ui: {order: 0, width: 196}
+      admin_ui: {order: 0, width: 145}
       type: string
     - name: enabled
-      admin_ui: {order: 1, width: 90}
+      admin_ui: {order: 1, width: 50}
       type: bool
     - name: last_login
+      admin_ui: {order: 2, width: 100}
       type: datetime
-      admin_ui: {order: 2, width: 200}
     - name: password_hash
       admin_ui: {order: 3, width: 131}
       type: string
@@ -310,40 +310,40 @@ db_schema:
       type: number
       admin_ui: {order: 4, width: 200}
     - name: confirmed_email
-      admin_ui: {order: 5, width: 137}
+      admin_ui: {order: 5, width: 97}
       type: bool
     - name: nom
-      admin_ui: {order: 2.5, width: 200}
+      admin_ui: {order: 2.5, width: 77}
       type: string
     - name: api_key
       admin_ui: {order: 3.5, width: 88}
       type: string
     - name: signed_up
-      admin_ui: {order: 1.5, width: 253}
+      admin_ui: {order: 1.5, width: 101}
       type: datetime
     - name: prenom
-      admin_ui: {order: 2.75, width: 200}
+      admin_ui: {order: 2.75, width: 77}
       type: string
     - name: date_naissance
-      admin_ui: {order: 11, width: 200}
+      admin_ui: {order: 11, width: 86}
       type: date
     - name: ville_naissance
       admin_ui: {order: 12, width: 200}
       type: string
     - name: pays_naissance
-      admin_ui: {order: 13, width: 200}
+      admin_ui: {order: 13, width: 60}
       type: string
     - name: adresse_rue
-      admin_ui: {order: 14, width: 279}
+      admin_ui: {order: 14, width: 104}
       type: string
     - name: adresse_ville
-      admin_ui: {order: 15, width: 200}
+      admin_ui: {order: 15, width: 80}
       type: string
     - name: tel
       admin_ui: {order: 17, width: 94}
       type: string
     - name: photo
-      admin_ui: {order: 18, width: 200}
+      admin_ui: {order: 10.5, width: 101}
       type: media
     - name: commentaires
       admin_ui: {order: 19, width: 200}
@@ -352,10 +352,10 @@ db_schema:
       admin_ui: {order: 18, width: 67}
       type: string
     - name: code_postal_naissance
-      admin_ui: {order: 21, width: 200}
+      admin_ui: {order: 12.5, width: 54}
       type: string
     - name: adresse_code_postal
-      admin_ui: {order: 21, width: 200}
+      admin_ui: {order: 16, width: 57}
       type: string
     - name: accept_data
       admin_ui: {order: 22, width: 200}
@@ -382,7 +382,7 @@ db_schema:
       type: link_single
       target: stages
     - name: stagiaire_email
-      admin_ui: {width: 200}
+      admin_ui: {order: 1, width: 126}
       type: link_single
       target: users
     - name: check
@@ -392,26 +392,26 @@ db_schema:
       admin_ui: {order: 6, width: 110}
       type: media
     - name: item_requis
-      admin_ui: {order: 5.5, width: 145}
+      admin_ui: {order: 5.5, width: 100}
       type: link_single
       target: pre_requis
     - name: pdf_doc1
       admin_ui: {order: 7.5, width: 105}
       type: media
     - name: code_txt
-      admin_ui: {order: 0, width: 82}
+      admin_ui: {order: 0, width: 76}
       type: string
     - name: numero
-      admin_ui: {order: 0.5, width: 106}
+      admin_ui: {order: 0.5, width: 68}
       type: number
     - name: requis_txt
-      admin_ui: {order: 5.75, width: 179}
+      admin_ui: {order: 5.75, width: 157}
       type: string
     - name: nom
       admin_ui: {order: 3, width: 81}
       type: string
     - name: prenom
-      admin_ui: {order: 4, width: 89}
+      admin_ui: {order: 4, width: 63}
       type: string
     title: Pre_Requis_stagiaire
   stages:
