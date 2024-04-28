@@ -59,7 +59,7 @@ components:
           layout_properties: {grid_position: 'FGPZGZ,ETASBM'}
           components:
           - name: text_box_role
-            properties: {placeholder: Role, background: 'theme:Primary', spacing_above: none,
+            properties: {placeholder: '', background: 'theme:Primary', spacing_above: none,
               spacing_below: none, hide_text: false, font_size: 12, align: left, foreground: 'theme:On
                 Primary'}
             type: TextBox
@@ -107,16 +107,16 @@ components:
             name: text_box_email
             layout_properties: {grid_position: 'OPUFKC,RBHOTT'}
             event_bindings: {}
-      - name: column_panel_st_inscrits
-        properties: {wrap_on: never, col_spacing: small, spacing_above: none, spacing_below: none,
-          col_widths: '{"JCWCIU":25,"JJFGBN":35}'}
+      - name: column_panel_7
+        properties: {col_widths: '{"GDMMNK":29,"JKUPIX":31}', spacing_below: none,
+          spacing_above: small, wrap_on: never}
         type: ColumnPanel
-        layout_properties: {grid_position: 'GAHVSD,IFLVSE'}
+        layout_properties: {grid_position: 'GAHVSD,CXBXCA'}
         components:
         - type: DropDown
           properties:
             role: outlined
-            align: full
+            align: center
             tooltip: ''
             placeholder: Stage
             border: ''
@@ -134,12 +134,12 @@ components:
             underline: false
             include_placeholder: true
           name: drop_down_code_stage
-          layout_properties: {grid_position: 'XHABUA,JCWCIU'}
           event_bindings: {change: drop_down_code_stage_change}
+          layout_properties: {grid_position: 'SGQLAI,GDMMNK'}
         - type: DropDown
           properties:
             role: null
-            align: full
+            align: center
             tooltip: ''
             placeholder: Date
             border: ''
@@ -157,26 +157,35 @@ components:
             underline: false
             include_placeholder: true
           name: drop_down_num_stages
-          layout_properties: {grid_position: 'XHABUA,JJFGBN'}
           event_bindings: {change: drop_down_num_stages_change}
-        - name: button_recherche
-          properties: {role: elevated-button, align: center, tooltip: '', border: '',
-            enabled: true, foreground: 'theme:Tertiary', visible: true, text: Go !,
-            font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-            italic: false, background: 'theme:Error', bold: true, underline: false,
-            icon: ''}
-          type: Button
-          layout_properties: {grid_position: 'XHABUA,RDILWJ'}
-          event_bindings: {click: button_recherche_click}
-        - name: button_efface
-          properties: {role: elevated-button, align: center, tooltip: '', border: '',
-            enabled: true, foreground: 'theme:Tertiary', visible: true, text: '  X  ',
-            font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-            italic: false, background: 'theme:Error', bold: true, underline: false,
-            icon: ''}
-          type: Button
-          layout_properties: {grid_position: 'XHABUA,IVBAWV'}
-          event_bindings: {click: button_efface_click}
+          layout_properties: {grid_position: 'SGQLAI,JKUPIX'}
+      - name: column_panel_st_inscrits
+        properties: {wrap_on: never, col_spacing: small, spacing_above: none, spacing_below: none,
+          col_widths: '{}'}
+        type: ColumnPanel
+        layout_properties: {grid_position: 'GAHVSD,IFLVSE'}
+        components:
+        - name: flow_panel_1
+          properties: {vertical_align: middle, align: center}
+          type: FlowPanel
+          layout_properties: {grid_position: 'UOCGTC,EPHYXM'}
+          components:
+          - name: button_recherche
+            properties: {role: elevated-button, align: center, tooltip: '', border: '',
+              enabled: true, foreground: 'theme:Tertiary', visible: true, text: Go !,
+              font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+              italic: false, background: 'theme:Error', bold: true, underline: false,
+              icon: ''}
+            type: Button
+            event_bindings: {click: button_recherche_click}
+          - name: button_efface
+            properties: {role: elevated-button, align: center, tooltip: '', border: '',
+              enabled: true, foreground: 'theme:Tertiary', visible: true, text: '  X  ',
+              font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+              italic: false, background: 'theme:Error', bold: true, underline: false,
+              icon: ''}
+            type: Button
+            event_bindings: {click: button_efface_click}
     - type: ColumnPanel
       properties: {col_widths: '{}', spacing_above: small}
       name: column_panel_4
@@ -190,7 +199,7 @@ components:
           tooltip: ''
           border: ''
           foreground: ''
-          rows_per_page: 3
+          rows_per_page: 5
           visible: true
           wrap_on: mobile
           show_page_controls: true

@@ -95,7 +95,14 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             for row in l:                      # pour chaque stagiaire du stage
                 liste_finale.append(row)
         self.repeating_panel_1.items = liste_finale
-
+        
+    def drop_down_code_stage_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.text_box_nom.text=""       # critere nom
+        self.text_box_prenom.text=""  # critere prenom
+        self.text_box_email.text=""  # critere email
+        self.text_box_tel.text=""  # critere tel
+        self.filtre_type_stage()   
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
         selection=self.drop_down_num_stages.selected_value

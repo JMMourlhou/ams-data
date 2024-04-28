@@ -24,8 +24,8 @@ class RowTemplate1(RowTemplate1Template):
                     self.button_1.foreground = "blue"  # Formateur en bleu
             else:
                 self.button_1.text = self.item['nom']
-                
-            self.button_3.text = self.item['tel']
+
+            tel = self.item['tel']
             self.button_4.text = self.item['email']
             self.button_qcm.tag = self.item['email']
             self.button_histo.tag = self.item['email']
@@ -38,11 +38,16 @@ class RowTemplate1(RowTemplate1Template):
                                             email=mel)
             #stagiaire_row = user_row # pour les pré-requi
             self.button_1.text = user_row['nom']+" "+user_row['prenom']
-            self.button_3.text = user_row['tel']
+            tel = user_row['tel']
             self.button_4.text = user_row['email']
             self.button_histo.tag = user_row['email']
             self.drop_down_code_stage.tag = user_row['email']
-            
+        a = tel[0:2]   # mise en forme du tel
+        b = tel[2:4]
+        c = tel[4:6]
+        d = tel[6:8]
+        e = tel[8:10]
+        self.button_3.text = a+"-"+b+"-"+c+"-"+d+"-"+e    
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
         liste0 = app_tables.stagiaires_inscrits.search( q.fetch_only("stage_txt"),
                                                            user_email=user_row)
