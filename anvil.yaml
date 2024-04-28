@@ -221,7 +221,7 @@ db_schema:
     server: full
     columns:
     - name: stage
-      admin_ui: {order: 0, width: 125}
+      admin_ui: {order: 0, width: 98}
       type: link_single
       target: stages
     - name: financement
@@ -229,7 +229,7 @@ db_schema:
       type: link_single
       target: mode_financement
     - name: user_email
-      admin_ui: {width: 200}
+      admin_ui: {order: 1, width: 99}
       type: link_single
       target: users
     - name: name
@@ -239,10 +239,10 @@ db_schema:
       admin_ui: {order: 5, width: 736}
       type: simpleObject
     - name: stage_txt
-      admin_ui: {order: 0.5, width: 107}
+      admin_ui: {order: 0.5, width: 96}
       type: string
     - name: numero
-      admin_ui: {order: 0.75, width: 106}
+      admin_ui: {order: 0.75, width: 74}
       type: number
     - name: prenom
       admin_ui: {order: 1.75, width: 84}
@@ -419,7 +419,7 @@ db_schema:
     server: full
     columns:
     - name: numero
-      admin_ui: {order: 1, width: 115.17}
+      admin_ui: {order: 1, width: 77.17}
       type: number
     - name: date_debut
       admin_ui: {order: 2, width: 101.17}
@@ -469,7 +469,7 @@ db_schema:
       admin_ui: {width: 200, order: 14}
       type: simpleObject
     - name: code_txt
-      admin_ui: {order: 0.5, width: 100}
+      admin_ui: {order: 0.5, width: 63}
       type: string
     title: Stages
   cpt_stages:

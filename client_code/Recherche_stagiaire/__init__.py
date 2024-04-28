@@ -20,52 +20,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
-        """
-        # j'affiche tous les stagiaires
-        self.repeating_panel_1.items = app_tables.users.search(
-                q.fetch_only("nom","prenom","email","tel","role"),
-                tables.order_by("nom", ascending=True),
-                #role ="S"    # on affiche les stagiaires uniqt
-                #role =q.not_("A")    # on n'affiche pas l'admin !
-                )
-        """
-        #self.text_box_role.text = "S"    # j'affiche le role "S"
 
-        
-    def text_box_nom_change(self, **event_args):
-        """This method is called when the text in this text box is edited"""
-        self.drop_down_code_stage.selected_value = None
-        self.drop_down_num_stages.visible = False
-        self.filtre()
-    def text_box_prenom_change(self, **event_args):
-        """This method is called when the text in this text box is edited"""
-        self.drop_down_code_stage.selected_value = None
-        self.drop_down_num_stages.visible = False
-        self.filtre()
-    def text_box_tel_change(self, **event_args):
-        """This method is called when the text in this text box is edited"""
-        self.drop_down_code_stage.selected_value = None
-        self.drop_down_num_stages.visible = False
-        self.filtre()
-    def text_box_email_change(self, **event_args):
-        """This method is called when the text in this text box is edited"""
-        self.drop_down_code_stage.selected_value = None
-        self.drop_down_num_stages.visible = False
-        self.filtre()
-    def drop_down_code_stage_change(self, **event_args):
-        """This method is called when an item is selected"""
-        self.text_box_nom.text=""       # critere nom
-        self.text_box_prenom.text=""  # critere prenom
-        self.text_box_email.text=""  # critere email
-        self.text_box_tel.text=""  # critere tel
-        self.filtre_type_stage()   
-        
-    def text_box_role_change(self, **event_args):
-        """This method is called when the user presses Enter in this text box"""
-        self.drop_down_code_stage.selected_value = None
-        self.drop_down_num_stages.visible = False
-        self.filtre()
-    
     def filtre(self):
         # Récupération des critères
         c_role = self.text_box_role.text + "%"          # critère role
@@ -74,68 +29,45 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         c_email = self.text_box_email.text + "%"        #         email
         c_tel = self.text_box_tel.text + "%"            #         tel
         
-       # Aucun critères: j'efface
-        if self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" and self.text_box_nom.text == "":
-            # j'efface
-            self.repeating_panel_1.items = app_tables.users.search( 
-                                                                    q.fetch_only("nom","prenom","email","tel","role"),
-                                                                    tables.order_by("nom", ascending=True),
-                                                                    role ="z"    
-                                                                )
         # Nom    
-        if len(self.text_box_nom.text)>1:
-            if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :
-                self.repeating_panel_1.items = anvil.server.call("search_on_name_only", c_nom)
+        if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :
+            self.repeating_panel_1.items = anvil.server.call("search_on_name_only", c_nom)
         # Prénom
-        if len(self.text_box_prenom.text)>1:
-            if self.text_box_prenom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_role.text == "":   
-                self.repeating_panel_1.items = anvil.server.call("search_on_prenom_only", c_prenom)
+        if self.text_box_prenom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_role.text == "":   
+            self.repeating_panel_1.items = anvil.server.call("search_on_prenom_only", c_prenom)
         # Role
         if self.text_box_role.text != "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" :   
             self.repeating_panel_1.items = anvil.server.call("search_on_role_only", c_role)
         # Role & Nom
-        if self.text_box_role.text != "" and len(self.text_box_nom.text) >1 and self.text_box_prenom.text == "" :   
-            #if len(self.text_box_nom.text)>1:
+        if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text == "" :   
             self.repeating_panel_1.items = anvil.server.call("search_on_role_nom", c_role, c_nom)
         # Nom & Prénom
         if self.text_box_role.text == "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
             self.repeating_panel_1.items = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)
+
+        
+        # Role & Nom & Prénom
+        if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
+            self.repeating_panel_1.items = anvil.server.call("search_on_role_nom_prenom", c_role, c_nom, c_prenom)
+
+        
         # Tel
-        if len(self.text_box_tel.text)>3:
-            if self.text_box_tel.text != "" and self.text_box_email.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
-                self.repeating_panel_1.items = anvil.server.call("search_on_tel_only", c_tel)
+        if self.text_box_tel.text != "" and self.text_box_email.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
+            self.repeating_panel_1.items = anvil.server.call("search_on_tel_only", c_tel)
         # Mail
         if self.text_box_email.text != "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
             self.repeating_panel_1.items = anvil.server.call("search_on_email_only", c_email)
-        """
-        else:
-            if len(self.text_box_nom.text)>1 :
-            self.repeating_panel_1.items = app_tables.users.search(
-                    q.fetch_only("nom","prenom","email","tel","role"),
-                    tables.order_by("nom", ascending=True),
-                    q.all_of                  # all of queries must match
-                    (
-                        role   = q.ilike(c_role),   # ET
-                        nom    = q.ilike(c_nom),    # ET
-                        prenom = q.ilike(c_prenom), # ET
-                        email  = q.ilike(c_email),  # ET
-                        tel    = q.ilike(c_tel),    # ET
-                        #role =q.not_("A")   # on n'affiche pas l'admin !                 
-                    )
-                )
-        """
         
     def filtre_type_stage(self):
         # Récupération du critère stage
         row_type = self.drop_down_code_stage.selected_value
 
         #lecture du fichier stages et sélection des stages correspond au type de stage choisit
-        list1 = app_tables.stages.search(code=row_type)     # recherche ds les stages
+        list1 = app_tables.stages.search(q.fetch_only("date_debut", "numero"),       # recherche ds les stages
+                                            code=row_type)                        
         if len(list1)==0:
             from anvil import open_form       # j'initialise la forme principale avec le choix du qcm ds la dropdown
-            open_form("Recherche_stagiaire")
-            
-        
+            open_form("Recherche_stagiaire") 
         # Initialisation du Drop down num_stages et dates
         self.drop_down_num_stages.items = [(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list1]
         self.drop_down_num_stages.visible = True
@@ -143,15 +75,16 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         for r in self.drop_down_num_stages.items:           # Je peux boucler ds ma dropdown
             print(r, r[0], r[1])                            # je peux extraire 0 ce qui est affiché, 1 row stage
         """    
+        
         #affichage de tous les stagiaires de ces stages du type choisit
         liste_intermediaire1=[]
         for st in list1:               # boucle sur les stages de même type (ex psc1)                
-            date = st["date_debut"]    #DATE DU STAGE
+            #date = st["date_debut"]    #DATE DU STAGE
             # lecture du fichier stagiaires_inscrits sur le stage et création d'1 liste par stage
-            temp =  app_tables.stagiaires_inscrits.search(
-                        tables.order_by("name", ascending=True),
-                        stage=st
-                    )
+            temp =  app_tables.stagiaires_inscrits.search(  q.fetch_only(),
+                                                            tables.order_by("name", ascending=True),
+                                                            stage=st
+                                                         )
             liste_intermediaire1.append(temp)   # ajout de la liste (iterator object)du stage
             
         #print("nb de listes créées: ",len(liste_intermediaire1))
@@ -177,6 +110,17 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+    def button_recherche_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.drop_down_code_stage.selected_value = None
+        self.drop_down_num_stages.visible = False
+        self.filtre()
+
+    def button_efface_click(self, **event_args):    # # j'efface les critères
+        """This method is called when the button is clicked"""
+        open_form('Recherche_stagiaire')
+       
 
 
 

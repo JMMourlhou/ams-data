@@ -5,9 +5,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
 from InputBox.input_box import InputBox, alert2, input_box, multi_select_dropdown
-
+import time
 
 class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
@@ -17,7 +16,7 @@ class RowTemplate1(RowTemplate1Template):
         # Any code you write here will run before the form opens.
         self.repeating_panel_1.visible = False  #qcm non visibles tant que pas de click sur bt Qcm
         try: # *********************************          Liste à partir table users
-            if self.item['prenom'] != None:    # si prénom None, erreur
+            if self.item['prenom'] is not None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
                 if self.item['role'] == "A":          # Admin en rouge
                     self.button_1.foreground = "red"
@@ -31,13 +30,13 @@ class RowTemplate1(RowTemplate1Template):
             self.button_qcm.tag = self.item['email']
             self.button_histo.tag = self.item['email']
             self.drop_down_code_stage.tag = self.item['email']
-            stagiaire_row = app_tables.users.get(email=self.item['email']) # pour pré-requis
-            #stagiaire_row = app_tables.users.get(q.fetch_only("email", "nom", "prenom", "tel"),
-            #                                        email=self.item['email']) # pour pré-requis         
+            user_row = app_tables.users.get(q.fetch_only("nom","prenom","tel","email"),
+                                            email=self.item['email']) # pour pré-requis  
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             mel = self.item['user_email']['email']
-            user_row = app_tables.users.get(email=mel)
-            stagiaire_row = user_row # pour les pré-requis
+            user_row = app_tables.users.get(q.fetch_only("nom","prenom","tel","email"),
+                                            email=mel)
+            #stagiaire_row = user_row # pour les pré-requi
             self.button_1.text = user_row['nom']+" "+user_row['prenom']
             self.button_3.text = user_row['tel']
             self.button_4.text = user_row['email']
@@ -45,12 +44,11 @@ class RowTemplate1(RowTemplate1Template):
             self.drop_down_code_stage.tag = user_row['email']
             
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
-        liste0 = app_tables.stagiaires_inscrits.search( q.fetch_only("stage"),
-                                                           user_email=stagiaire_row)
-        
+        liste0 = app_tables.stagiaires_inscrits.search( q.fetch_only("stage_txt"),
+                                                           user_email=user_row)
         liste_drop_d = []
         for row in liste0:
-            liste_drop_d.append((str(row['stage']['code']['code'])+"  du "+str(row['stage']['date_debut']), row))
+            liste_drop_d.append((row["stage_txt"], row))
         self.drop_down_code_stage.items = liste_drop_d   
         
             
@@ -126,7 +124,7 @@ class RowTemplate1(RowTemplate1Template):
 
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.repeating_panel_1.visible == False:
+        if self.repeating_panel_1.visible is False:
             self.repeating_panel_1.visible = True
             self.button_qcm.foreground = "red"
             self.button_1.foreground = "red"
@@ -160,7 +158,7 @@ class RowTemplate1(RowTemplate1Template):
 
     def button_histo_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.repeating_panel_2.visible == False:
+        if self.repeating_panel_2.visible is False:
             self.repeating_panel_2.visible = True
             self.button_histo.foreground = "red"
             self.button_1.foreground = "red"
