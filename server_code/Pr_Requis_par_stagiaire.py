@@ -49,7 +49,8 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
     #print("file_extension", file_extension)
     #print("new_file-NAME: ", new_file_name)
     valid=False
-    pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,          # stage row
+    pr_requis_row = app_tables.pre_requis_stagiaire.get( q.fetch_only(),
+                                                         stage_num = stage_num,          # stage row
                                                          stagiaire_email = email,       # user row
                                                          item_requis = item_requis      # item_requi row                                      
                                              ) 

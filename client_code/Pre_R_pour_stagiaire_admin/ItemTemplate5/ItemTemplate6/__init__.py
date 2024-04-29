@@ -52,9 +52,11 @@ class ItemTemplate6(ItemTemplate6Template):
             # Sauvegarde du 'file' jpg
             result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
             if result is True:
-                print(f"Fichier de jpg en jpg, sauvé")
-            else:
+                print("Fichier de jpg en jpg, sauvé")
                 self.button_visu.visible = True  
+                self.button_del.visible = True
+            else:
+                alert("Fichier PDF non sauvé")
                 
         if file_extension == ".pdf":      
             # Sauvegarde du 'file'
