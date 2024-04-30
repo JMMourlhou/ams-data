@@ -6,7 +6,7 @@ components:
     wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: none,
     background: ''}
   type: ColumnPanel
-  layout_properties: {grid_position: 'PTRBEP,IRGSPC'}
+  layout_properties: {grid_position: 'VUODRS,AADDRB'}
   components:
   - name: image_1
     properties: {role: null, vertical_align: center, height: 149.83486938476562, tooltip: '',
