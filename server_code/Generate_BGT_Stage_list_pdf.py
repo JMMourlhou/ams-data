@@ -36,9 +36,10 @@ def create_list_pdf(num_stage, intitule):
     #lecture du fichier stages sur le num de stage
     stage_row = app_tables.stages.get(numero=int(num_stage))
     if not stage_row:   
-        print("stage non trouvé à partir de num_stageds server module: Stagiaires_list_pdf")
+        print("stage non trouvé à partir de num_stage ds server module: Stagiaires_list_pdf")
     else:
         # sauvegarde de la liste pdf ds le stage_row
+        print("sov")
         stage_row.update(list_media = media_object,
                         list_time = French_zone_server_side.time_french_zone()
                         ) 

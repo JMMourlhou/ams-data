@@ -1,14 +1,12 @@
 from ._anvil_designer import ItemTemplate2Template
 from anvil import *
 import anvil.server
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from anvil_extras.PageBreak import PageBreak
 
 class ItemTemplate2(ItemTemplate2Template):
     def __init__(self, **properties):
@@ -46,11 +44,11 @@ class ItemTemplate2(ItemTemplate2Template):
 
 
     def image_1_show(self, **event_args):
-        """This method is called when the Image is shown on the screen"""
+        #This method is called when the Image is shown on the screen
     
         global cpt  # Cpt le nb de form imprimée
         cpt += 1
-        #récup du param 
-        nb_stag_par_page = constant_parameters.nb_fiche_stagiaire_pdf
+        # Lecture de la variable globale "nb_fiche_stagiaire_pdf" ds table variables_globales
+        nb_stag_par_page = anvil.server.call('get_variable_value', "nb_fiche_stagiaire_pdf")
         if (cpt // nb_stag_par_page) * nb_stag_par_page == cpt:          # ts les 1 ou 5 stagiaires, selon param global
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les n stagiares 

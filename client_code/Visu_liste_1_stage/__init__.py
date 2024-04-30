@@ -21,17 +21,18 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         self.num_stage = num_stage
         self.intitule = intitule
         self.pdf_mode = pdf_mode
-        if self.pdf_mode == True:
+        if self.pdf_mode is True:
             self.button_annuler.visible = False
             self.button_pdf.visible = False
             self.button_trombi.visible = False
         
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
-        self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(
-            tables.order_by("name", ascending=True),
-            stage=stage_row
-        )
+        stagiaires_liste =  app_tables.stagiaires_inscrits.search(
+                                                                    tables.order_by("name", ascending=True),
+                                                                    stage=stage_row
+                                                                )
+        self.repeating_panel_1.items = stagiaires_liste
         """ Je peux créer une liste à partir de l'objet créé par search ( avec list() )
              et accéder ensuite à chaque row et column:
              

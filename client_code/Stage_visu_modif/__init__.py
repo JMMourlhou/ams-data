@@ -15,7 +15,7 @@ global intitul
 intitul=""
 
 class Stage_visu_modif(Stage_visu_modifTemplate):
-    def __init__(self, provenance="", num_stage=0, bg_task=True, **properties):
+    def __init__(self, provenance="", num_stage=0, bg_task=True, **properties):     # bg_task True: je crée les bg task en entrée de stage visu modif
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.provenance = provenance
@@ -72,7 +72,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
             """ ***********************************************************************"""            
-            if self.check_box_allow_bg_task.checked == False or self.bg_task == False:     # ex: en retour de trombi, pas besoin de re-générer les listes
+            if self.check_box_allow_bg_task.checked is False or self.bg_task is False:     # ex: en retour de trombi, pas besoin de re-générer les listes
                 students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
                 #alert(len(students_rows))
                 if students_rows:    # stagiaires existants
@@ -222,7 +222,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                     anvil.media.download(pdf)
                     alert("Liste téléchargée")
                 else:
-                    alert("Liste du trombi non trouvée")
+                    alert("Liste 'fiches du stage' non trouvée")
         except:  #sinon, j'utise les existentes, créées en table stage, (revient de trombi ou stage_row['allow_bgt_generation']=False)
             stage_row = app_tables.stages.get(numero=int(self.num_stage))
             pdf = stage_row['list_media']
