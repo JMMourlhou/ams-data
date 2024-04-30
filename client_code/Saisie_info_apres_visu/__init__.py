@@ -201,8 +201,9 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         if not user:
             print("user non trouvé à partir de son mail en saisie après trombi")
         else:
-            anvil.media.download(user['photo'])
-            alert("Photo téléchargée")
+            if self.image_photo.source is not None:
+                anvil.media.download(user['photo'])
+                alert("Photo téléchargée")
 
     def button_annuler_copy_click(self, **event_args):
         """This method is called when the button is clicked"""
