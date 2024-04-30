@@ -8,7 +8,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import French_zone
-from .. import constant_parameters
 from anvil import open_form 
 
 class QrCode_display(QrCode_displayTemplate):
