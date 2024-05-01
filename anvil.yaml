@@ -304,7 +304,7 @@ db_schema:
       admin_ui: {order: 2, width: 100}
       type: datetime
     - name: password_hash
-      admin_ui: {order: 3, width: 131}
+      admin_ui: {order: 3, width: 104}
       type: string
     - name: n_password_failures
       type: number
