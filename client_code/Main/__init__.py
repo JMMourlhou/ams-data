@@ -144,11 +144,11 @@ class Main(MainTemplate):
             self.bt_user_mail.enabled = True
             self.button_qcm.visible = True
             self.button_pre_requis.visible = True
-            if user['role'] == "A":  # Administrator
+            if user['role'] == "A" or user['role'] == "B": # 'A'dministrator ou 'B'ureau
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
                 self.bt_gestion_stages.visible = True
-            else:                      # user connected,but no admin
+            else:                      # user connected,but not admin
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
         

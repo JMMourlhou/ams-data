@@ -25,9 +25,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         
         #initialisation du drop down des qcm créés et barêmes, n'affiche que les qcm visibles ET ds dict d'autorisations du stqgiaire (stagiaires inscrits)
         dict = {}  # dict contenant en clef le num qcm autorisé 
-        liste_temp_visible = [(r['destination'], r) for r in app_tables.qcm_description.search(
-                                                                                        visible=True      # Je prends tous les qcm visibles
-                                                                                        )]
+        
         #lecture du ou des dictionaires du stagiaire (il peut être inscrit à plusieurs stages)
         liste_temp_dictionaires = app_tables.stagiaires_inscrits.search(user_email=user)
         if  liste_temp_dictionaires:
@@ -48,12 +46,12 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             print(clef)
             # lecture sur la clef
             qcm_row = app_tables.qcm_description.get(qcm_nb=int(clef))
-            if qcm_row['visible']==True:                               # SI QCM VISIBLE
+            if qcm_row['visible'] is True:                               # SI QCM VISIBLE
                 liste_qcm_rows.append(qcm_row)                           #  INSERERE LA ROW PAS UNIQT la destination 
         if liste_qcm_rows:    
             self.drop_down_qcm_row.items = [(r['destination'],r) for r in liste_qcm_rows]     # initialisation de la drop down par "compréhension de liste"
         
-        if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
+        if qcm_descro_nb is not None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
             # j'affiche le drop down du qcm
             self.drop_down_qcm_row.selected_value = qcm_descro_nb
@@ -69,7 +67,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         print("dropD change :",qcm_row["qcm_nb"],qcm_row["qcm_source"])
         # Pour les lignes QCM déjà crée du qcm choisi
         global liste  
-        if qcm_row["qcm_source"] == None:                                  # si source est null : Qcm unique, non sous élement d'un QCM master
+        if qcm_row["qcm_source"] is None:                                  # si source est null : Qcm unique, non sous élement d'un QCM master
             liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
         else:                                                              # si source non null : QCM master, créer à partir de qcm enfants
             dico = {}
@@ -82,7 +80,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         # acquisition du user et modif de son temp (nb de questions de son qcm)
         user=anvil.users.get_user()
         r = anvil.server.call("temp_user_qcm", user, nb_questions, qcm_row["qcm_nb"])
-        if r == False:
+        if r is False:
             alert("user non MAJ")
             return
         # affiche le titre
