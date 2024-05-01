@@ -22,6 +22,7 @@ class ItemTemplate3(ItemTemplate3Template):
         else:
             self.button_del.visible = False
             
+            
         try:     # si pas de doc en table, erreur
             #media = self.item['doc1'].name
             self.button_visu.visible = True
@@ -33,7 +34,7 @@ class ItemTemplate3(ItemTemplate3Template):
         self.email =       self.item['stagiaire_email']  # Row user
 
     def file_loader_1_change(self, file, **event_args):
-        if file != None:  #pas d'annulation en ouvrant choix de fichier
+        if file is not None:  #pas d'annulation en ouvrant choix de fichier
             # nouveau nom doc SANS extension
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
             #print("new file name: ",new_file_name)
@@ -53,12 +54,12 @@ class ItemTemplate3(ItemTemplate3Template):
                 self.image_1.source = file
                 # Sauvegarde du 'file' jpg
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
-                if result == True:
-                    print(f"Fichier de jpg en jpg, sauvé")
+                if result is True:
+                    print("Fichier de jpg en jpg, sauvé")
                     self.button_visu.visible = True  
                     self.button_del.visible = True
                 else:
-                    alert(f"Fichier de jpg non sauvé")
+                    alert("Fichier de jpg non sauvé")
                     self.button_visu.visible = False  
                     self.button_del.visible = False
                     
@@ -66,7 +67,7 @@ class ItemTemplate3(ItemTemplate3Template):
                
                 # Sauvegarde du 'file'
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file,  new_file_name, ".pdf") 
-                if result == False:
+                if result is False:
                     alert("Fichier PDF non sauvé")   
                 else:
                     print("Fichier PDF sauvé")
@@ -78,11 +79,10 @@ class ItemTemplate3(ItemTemplate3Template):
                 file = liste_images[0]
                 #thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 # renvoi en écriture des images générées ds table
-                file_ext = ".jpg"
                 new_file_name = new_file_name + ".jpg"
                 print("new_file_name ",new_file_name)
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg")
-                if result != True:
+                if result is not True:
                     alert("Fichier jpg non sauvé") 
                 self.image_1.source = file
 
@@ -107,5 +107,6 @@ class ItemTemplate3(ItemTemplate3Template):
             self.image_1.source = None
             self.button_visu.visible = False
             self.button_del.visible = False
+            self.file_loader_1.visible = True
         else:
             alert("Pré Requis non enlevé")

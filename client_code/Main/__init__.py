@@ -198,7 +198,12 @@ class Main(MainTemplate):
         self.bt_se_deconnecter.visible = False
         self.bt_sign_in.visible = False
         # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
-        self.content_panel.add_component(Saisie_info_de_base(prem_util), full_width_row=True)
+        #self.content_panel.add_component(Saisie_info_de_base(prem_util), full_width_row=True)
+        user=anvil.users.get_user()
+        if not user:  
+            self.content_panel.clear()
+        else:
+            open_form('Saisie_info_apres_visu',user["email"])
 
     def button_create_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""

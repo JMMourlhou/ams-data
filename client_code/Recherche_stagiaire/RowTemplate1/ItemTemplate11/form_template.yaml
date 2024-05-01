@@ -29,30 +29,26 @@ components:
     components:
     - name: button_visu
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary', visible: true, text: Voir, font_size: null,
+        foreground: 'theme:On Primary Container', visible: true, text: '', font_size: 18,
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
+        background: '', bold: false, underline: false, icon: 'fa:binoculars'}
       type: Button
       layout_properties: {grid_position: 'CFBKGE,IOYJUG'}
       event_bindings: {click: button_visu_click}
-    - name: spacer_1
-      properties: {height: 7.570526123046875}
-      type: Spacer
-      layout_properties: {grid_position: 'NTPCZZ,UGBRQB'}
     - name: file_loader_1
       properties:
         role: outlined-button
-        show_state: true
+        show_state: false
         align: center
         tooltip: ''
         border: ''
         file_types: ''
         enabled: true
         files: []
-        foreground: theme:On Primary
+        foreground: theme:On Primary Container
         visible: true
-        text: Choisir
-        font_size: null
+        text: ''
+        font_size: 18
         font: ''
         spacing_above: small
         icon_align: left
@@ -67,3 +63,12 @@ components:
       type: FileLoader
       layout_properties: {grid_position: 'GHLKMF,CEYBAC'}
       event_bindings: {change: file_loader_1_change}
+    - name: button_del
+      properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
+        foreground: 'theme:Error', visible: true, text: '   ', font_size: 27, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false, icon: 'fa:remove'}
+      type: Button
+      layout_properties: {grid_position: 'DVCURO,NCVZFL'}
+      event_bindings: {click: button_del_click}
+      data_bindings: []

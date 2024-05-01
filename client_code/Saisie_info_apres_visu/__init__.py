@@ -220,6 +220,9 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
+        if self.provenance == "":   # vient de main, click sur le bt user
+            from ..Main import Main
+            open_form('Main',99)
         if self.provenance == "trombi":
             from ..Visu_trombi import Visu_trombi
             open_form('Visu_trombi',self.num_stage, self.intitule, False)
