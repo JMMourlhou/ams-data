@@ -102,7 +102,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.text_box_prenom.text=""  # critere prenom
         self.text_box_email.text=""  # critere email
         self.text_box_tel.text=""  # critere tel
-        self.filtre_type_stage()   
+        self.button_recherche.visible = False
+        self.button_efface.visible = True
+        self.filtre_type_stage()  
+        
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
         selection=self.drop_down_num_stages.selected_value
@@ -122,11 +125,33 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """This method is called when the button is clicked"""
         self.drop_down_code_stage.selected_value = None
         self.drop_down_num_stages.visible = False
+        self.button_recherche.visible = False
+        self.button_efface.visible = True
         self.filtre()
 
     def button_efface_click(self, **event_args):    # # j'efface les critères
         """This method is called when the button is clicked"""
         open_form('Recherche_stagiaire')
+
+    def text_box_nom_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_recherche_click()
+
+    def text_box_role_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_recherche_click()
+
+    def text_box_prenom_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_recherche_click()
+
+    def text_box_tel_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_recherche_click()
+
+    def text_box_email_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_recherche_click()
        
 
 

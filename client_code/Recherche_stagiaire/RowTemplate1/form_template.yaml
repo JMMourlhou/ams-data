@@ -42,7 +42,7 @@ components:
           layout_properties: {}
           event_bindings: {click: button_3_click}
     - name: column_panel_4
-      properties: {}
+      properties: {spacing_above: none, spacing_below: none}
       type: ColumnPanel
       layout_properties: {width: 245.4942626953125}
       components:

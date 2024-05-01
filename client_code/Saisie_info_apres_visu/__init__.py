@@ -63,8 +63,8 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             self.check_box_accept_data_use.checked = stagiaire['accept_data']
             self.text_area_commentaires.text =       stagiaire['commentaires']
             
-            self.text_box_role.text =                stagiaire['role']
-            if stagiaire['role'] == "A":
+            self.text_box_role.text =                stagiaire['role']       # Le role du stagiare 
+            if user['role'] == "A":                                          # si l'utilisateur est l'administrateur,je visualise le role du stagiaire
                 self.text_box_email2.visible = True
                 self.text_area_commentaires.visible = True
                 self.text_box_role.visible = True
@@ -135,9 +135,11 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             alert("utilisateur non trouvé !")
             self.button_annuler_click()
 
-
-
         #js.call_js('showSidebar')
+    
+    def text_box_role_change(self, **event_args):                                    # Role du stagiaire a changé
+        """This method is called when the text in this text box is edited"""
+        self.text_box_nom_change()
 
     def text_box_nom_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
@@ -231,5 +233,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
         self.column_panel_1.scroll_into_view()
+
+   
 
 
