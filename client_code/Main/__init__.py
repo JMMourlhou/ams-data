@@ -12,7 +12,7 @@ from anvil import open_form
 
 
 class Main(MainTemplate):
-    def __init__(self, nb=1, stage_nb=0, **properties):
+    def __init__(self, nb=1, stage_nb=0, msg="", **properties):    # msg pour afficher une alerte si mail erroné en pwreset par ex
         # Set Form properties and Data Bindings.
       
         self.init_components(**properties)
@@ -27,7 +27,14 @@ class Main(MainTemplate):
         self.button_qcm.visible = False
         self.button_pre_requis.visible = False
         self.bt_gestion_stages.visible = False
-        
+        #==========================================================
+        """
+        Affichage de msg en retour de pw reset
+           Si msg pas vide, j'affiche le msg envoyé par return_to_mother_app module de sign up pour AMSdata
+        """
+        if msg != "":
+            alert(msg)
+        #=========================================================
         self.nb=nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
