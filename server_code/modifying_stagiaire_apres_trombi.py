@@ -1,8 +1,6 @@
 
 import anvil.files
 from anvil.files import data_files
-import anvil.email
-import anvil.email
 
 import anvil.users
 import anvil.tables as tables
@@ -26,9 +24,10 @@ def modify_users_after_trombi(mel,
                      tel,
                      mail2,
                      accept_storage,
-                     comments
+                     comments,
+                     role
                 ):
-    # finding the stgiaire's row 
+    # finding the stagiaire's row 
     row = app_tables.users.get(email=mel)
     if not row:
         raise Exception("Erreur: stagiaire not found !")
@@ -47,6 +46,7 @@ def modify_users_after_trombi(mel,
                    tel = tel,
                    email2 = mail2,
                    accept_data = accept_storage,
-                   commentaires = comments
+                   commentaires = comments,
+                   role = role
                             )
         return True

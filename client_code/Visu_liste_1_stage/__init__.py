@@ -1,9 +1,6 @@
 from ._anvil_designer import Visu_liste_1_stageTemplate
 from anvil import *
-import stripe.checkout
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -15,6 +12,7 @@ pdf_mode=False
 
 class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
+        print("pdf_mode ", pdf_mode)
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
