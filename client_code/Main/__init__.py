@@ -237,10 +237,10 @@ class Main(MainTemplate):
         from anvil.js import window
         import anvil.users
         
-         # Déconnecter l'utilisateur
+         # Déconnecter l'utilisateur 
         anvil.users.logout()
         # Afficher un message
-        alert("Vous êtes déconnecté.")   # Close the window in 1 second
+        #alert("Vous êtes déconnecté.")   
         window.close()
 
     # Extraction de fichier texte pour les qcm
