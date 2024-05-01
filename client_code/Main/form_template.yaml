@@ -95,7 +95,7 @@ components:
       components:
       - name: Close
         properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary',
-          visible: false}
+          visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: Close_click}

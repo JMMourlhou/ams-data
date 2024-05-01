@@ -37,7 +37,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_prenom.text =  user['prenom']
 
             #self.image_photo.source =                user["photo"]
-            if user["photo"] != None:
+            if user["photo"] is not None:
                 thumb_pic = anvil.image.generate_thumbnail(user["photo"], 640)
                 self.image_photo.source = thumb_pic
             else:
@@ -56,9 +56,9 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_email2.text =              user['email2']
             self.check_box_accept_data_use.checked = user['accept_data']
             self.text_area_commentaires.text =       user['commentaires']
-            #self.histo =                             user['histo']
+            
                 
-            if user['role'] == "A":
+            if user['role'] != "S":   # Admin ou Formateur ou Bureaux
                self.text_box_email2.visible = True
                self.text_area_commentaires.visible = True
         else:
@@ -97,7 +97,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
             alert("Le numéro de teléphone n'est pas valide !")
             return   
-        if self.date_naissance.date == None :           # dateN vide ?
+        if self.date_naissance.date is None :           # dateN vide ?
             alert("Entrez la date de naissance !")
             return   
         if self.text_box_v_naissance.text == "" :    # ville N vide ?
@@ -113,11 +113,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             alert("Entrez votre adresse (Code Postal) !")
             return
         # Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
-        if self.drop_down_fi.selected_value == None and self.first_entry==True: 
+        if self.drop_down_fi.selected_value is None and self.first_entry is True: 
             alert("Vous devez sélectionner un mode de financement !")
             return
             
-        if self.check_box_accept_data_use.checked != True:
+        if self.check_box_accept_data_use.checked is not True:
             r=alert("Voulez-vous valider l'utilisation de vos données par AMsport ?",buttons=[("oui",True),("non",False)])
             if r :   #Non, nom pas correct
                 self.check_box_accept_data_use.checked = True
@@ -140,9 +140,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                     self.text_box_email2.text,
                                                     self.check_box_accept_data_use.checked,
                                                     self.text_area_commentaires.text
-                                                    #self.histo
                                                     )
-            if result == True :
+            if result is True :
                 alert("Renseignements enregistés !")    # *************************************
                 # insertion du stagiaire automatiqt si num_stage != 0
                 user=anvil.users.get_user()
@@ -164,7 +163,6 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 self.button_retour_click()
         else:
             alert("utilisateur non trouvé !")
-            #self.button_retour_click()
             
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""

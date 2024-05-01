@@ -18,7 +18,7 @@ class Main(MainTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.bt_se_deconnecter.visible = False
-        self.bt_user_mail.text = "Vous êtes déconnecté"
+        self.bt_user_mail.text = "Vous êtes déconnecté."
         self.bt_se_deconnecter.visible = False 
         self.bt_user_mail.enabled = False
         self.bt_gestion_stages.visible =False
@@ -59,14 +59,14 @@ class Main(MainTemplate):
              
             if len(h)!=0 :  # a URL has openned this app
                 # lien actif < à 10 min ?
-                url_time_str=""
+                #url_time_str=""
                 url_time=h["t"]
                 url_time_over=French_zone.time_over(url_time)
                 if url_time_over: 
                     alert("Ce lien n'est plus actif !")
                 else:    
                     # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
-                    # si oui je suis en sign in après flash du qr code par le stagiare
+                    # si oui je suis en sign in après flash du qr code par le stagiaire
                     if "stage" in h:
                         self.qr_code()
                         return
@@ -84,7 +84,7 @@ class Main(MainTemplate):
         if not user:  
             self.content_panel.clear()
         else:
-            if user['prenom'] == None:
+            if user['prenom'] is None:
                 self.bt_se_deconnecter.visible = False
                 self.button_qcm.visible = False
                 self.bt_gestion_stages.visible = False
@@ -175,7 +175,6 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
         anvil.users.logout()       #logging out the user
-        user= None
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
             
@@ -225,11 +224,11 @@ class Main(MainTemplate):
 
     def button_loop_click(self, **event_args):
         """This method is called when the button is clicked"""
-        
+        """
         from .. import z_loop_on_tables
         result=z_loop_on_tables.maj_qcm_results_txt()
         alert(result)
-        
+        """
 
     def Close_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -237,11 +236,12 @@ class Main(MainTemplate):
         from anvil.js.window import localStorage
         from anvil.js import window
         import anvil.users
+        
          # Déconnecter l'utilisateur
         anvil.users.logout()
         # Afficher un message
         alert("Vous êtes déconnecté.")   # Close the window in 1 second
-        #anvil.server.wait_forever()
+        window.close()
 
     # Extraction de fichier texte pour les qcm
     def button_1_click(self, **event_args):
