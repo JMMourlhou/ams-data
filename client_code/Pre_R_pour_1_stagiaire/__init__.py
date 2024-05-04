@@ -14,16 +14,23 @@ dico_pre_requis = {}
 
 
 class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
-    def __init__(self,stage_txt, stagiaire_inscrit_row, **properties):  # email du stagiaire: vient de pré_requis_pour stagiaire admin
+    def __init__(self,stagiaire_inscrit_row, **properties):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         nom = stagiaire_inscrit_row['name'].capitalize()
-        self.label_3.text = "Pré-R pour "+nom+" "+stagiaire_inscrit_row['prenom']+"  / "+stagiaire_inscrit_row['stage_txt']
-        global code_stage
-        code_stage = stage_txt
-      
-
+        pr = stagiaire_inscrit_row['prenom'].capitalize()
+        self.label_3.text = "Pré-R pour "+nom+" "+pr+"  / "+stagiaire_inscrit_row['stage_txt']
+       
+        # affichage des pré-requis existants du stagiaire
+        liste_pr_stagiaire = app_tables.pre_requis_stagiaire.search( q.fetch_only("requis_txt",
+                                                                       stagiaire_email=q.fetch_only("email"),
+                                                                       ),
+                                                            numero=int(stagiaire_inscrit_row['numero']),
+                                                            stagiaire_email=stagiaire_inscrit_row["user_email"]
+                                                         )
+        self.repeating_panel_1.items = liste_pr_stagiaire
+        
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         # lecture du dictionaire ds table codes_stages pour le stage sélectionné

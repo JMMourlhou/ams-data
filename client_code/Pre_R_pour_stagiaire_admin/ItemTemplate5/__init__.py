@@ -31,5 +31,6 @@ class ItemTemplate5(ItemTemplate5Template):
     def button_2_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ...Pre_R_pour_1_stagiaire import Pre_R_pour_1_stagiaire
-        open_form('Pre_R_pour_1_stagiaire',self.item['stage_txt'],self.item)
+        open_form('Pre_R_pour_1_stagiaire',self.item)   # j'envoie le row 'stagiaire inscrit' en entier
+        
             

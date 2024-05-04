@@ -73,4 +73,8 @@ components:
       name: drop_down_pre_requis
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
       event_bindings: {change: drop_down_pre_requis_change}
+- name: repeating_panel_1
+  properties: {item_template: Pre_R_pour_1_stagiaire.ItemTemplate12}
+  type: RepeatingPanel
+  layout_properties: {grid_position: 'VTSHJT,EWTXDX'}
 is_package: true
