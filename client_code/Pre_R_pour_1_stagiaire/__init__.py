@@ -1,0 +1,157 @@
+from ._anvil_designer import Pre_R_pour_1_stagiaireTemplate
+from anvil import *
+import anvil.server
+import anvil.users
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+global code_stage
+code_stage = ""
+
+global dico_pre_requis
+dico_pre_requis = {}
+
+
+class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
+    def __init__(self,stage_txt, stagiaire_inscrit_row, **properties):  # email du stagiaire: vient de pré_requis_pour stagiaire admin
+        # Set Form properties and Data Bindings.
+        self.init_components(**properties)
+        # Any code you write here will run before the form opens.
+        nom = stagiaire_inscrit_row['name'].capitalize()
+        self.label_3.text = "Pré-R pour "+nom+" "+stagiaire_inscrit_row['prenom']+"  / "+stagiaire_inscrit_row['stage_txt']
+        global code_stage
+        code_stage = stage_txt
+      
+
+    def drop_down_code_stage_change(self, **event_args):
+        """This method is called when an item is selected"""
+        # lecture du dictionaire ds table codes_stages pour le stage sélectionné
+
+        # row = stage row
+
+        # lecture du dictionaire des pré requis pour ce type de stage
+        global dico_pre_requis
+        dico_pre_requis = row["pre_requis"]
+
+        if (
+            row["pre_requis"] == None
+        ):  # si le dictionaire n'existe pas encore (pas de pré requis encore introduit pour ce type de stage)
+            dico_pre_requis = {}
+            self.drop_down_pre_requis.items = [
+                (r["requis"], r)
+                for r in app_tables.pre_requis.search(
+                    tables.order_by("requis", ascending=True)
+                )
+            ]
+            self.drop_down_pre_requis.visible = True
+
+        # print(type(row['pre_requis']))
+        if isinstance(
+            row["pre_requis"], dict
+        ):  # LE DICT EXISTE DS TABLE CODES STAGE, row du stage
+            # INITIALISATION Drop down pré-requis en fonction des pré requis déjà sélectionnés ds dico
+            self.drop_down_pre_requis.items = [
+                (r["requis"], r)
+                for r in app_tables.pre_requis.search(
+                    tables.order_by("requis", ascending=True)
+                )
+                if not dico_pre_requis.get(r["code_pre_requis"])
+            ]
+            self.drop_down_pre_requis.visible = True
+
+            dico_pre_requis = row["pre_requis"]
+
+            # affichage des prérequis à partir du dico que je transforme  en liste
+        list_keys = dico_pre_requis.keys()
+        list_keys = sorted(
+            list_keys
+        )  # création de la liste triée des clefs du dictionaires prérequis
+        # j'affiche tous les pré requis
+        print(len(list_keys))
+        self.repeating_panel_1.items = list(list_keys)  # liste des clefs (pré requis)
+
+        self.sov_dico_ds_temp()  # sauvegarde du dico ds TABLE TEMP
+
+    def drop_down_pre_requis_change(self, **event_args):
+        """This method is called when an item is selected"""
+        row = self.drop_down_pre_requis.selected_value  # row du pre_requis
+        if row == None:
+            alert("Vous devez sélectionner un pré-requis !")
+            self.drop_down_code_stage.focus()
+            return
+        else:
+            clef = row[
+                "code_pre_requis"
+            ]  # extraction de la clef à ajouter à partir de la row sélectionnée de la dropbox
+        # rajout clef/valeur ds dico
+        global dico_pre_requis
+        dico_pre_requis[clef] = {  # AJOUT DE LA CLEF DS LE DICO
+            "Doc": row["doc"],
+            "Validé": False,
+            "Commentaires": "",
+            "Nom_document": "",
+        }
+
+        # réaffichage des pré requis
+        list_keys = dico_pre_requis.keys()
+        print(list_keys)
+        self.repeating_panel_1.items = list(list_keys)  # liste des clefs (pré requis)
+        # réinitialisation dropdown pré requis
+        self.drop_down_pre_requis.items = [
+            (r["requis"], r)
+            for r in app_tables.pre_requis.search()
+            if not dico_pre_requis.get(r["code_pre_requis"])
+        ]
+
+        global code_stage
+        result = anvil.server.call(
+            "modif_pre_requis_codes_stages", code_stage, dico_pre_requis
+        )
+
+        self.sov_dico_ds_temp()  # sauvegarde du dico ds TABLE TEMP
+        # =================================================================================================
+        r = alert(
+            "Voulez-vous ajouter ce pré-requis pour tous les stagiaires de ce type de stage ?",
+            buttons=[("oui", True), ("non", False)],
+        )
+        if r:  # Oui
+            liste_stages = app_tables.stages.search(code_txt=code_stage)
+            print("nb de stages: ", len(liste_stages))
+            # acquisition des stagiaires inscrits à ces stages
+            for stage in liste_stages:
+                print(stage["numero"])
+                liste_stagiaires = app_tables.stagiaires_inscrits.search(
+                    numero=stage["numero"]
+                )
+                # Pour chq stagiaire, ajout du pré_requis
+                for stagiaire in liste_stagiaires:
+                    print(stagiaire["name"])
+                    # ajout du pré_requis si pas existant
+                    test = app_tables.pre_requis_stagiaire.search(
+                        stage_num=stage,
+                        item_requis=row,
+                        stagiaire_email=stagiaire["user_email"],
+                    )
+                    print("lg: ", len(test))
+                    if len(test) == 0:
+                        print("non existant")
+                        result = anvil.server.call(
+                            "add_1_pre_requis",
+                            stage,
+                            stagiaire["user_email"]["email"],
+                            row,
+                        )
+                        print("ajout: ", result)
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_stages import Visu_stages
+
+        open_form("Visu_stages")
+
+    def sov_dico_ds_temp(self, **event_args):
+        table_temp = app_tables.temp.search()[0]  # sauvegarde du dico ds TABLE TEMP
+        global code_stage
+        global dico_pre_requis
+        table_temp.update(pre_r_pour_stage=dico_pre_requis, code_stage=code_stage)
