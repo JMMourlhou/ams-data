@@ -1,3 +1,4 @@
+import anvil.server
 
 # Variables globales que j'appelle par:     constant_parameters.logo_client
 code_app1 = "https://sxgqveyu3c2nj5kr.anvil.app/32M6REZ23NPHINCU26GAZBNM"   # App "AMS Data"  

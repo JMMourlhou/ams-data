@@ -1,3 +1,4 @@
+scheduled_tasks: []
 dependencies:
 - dep_id: dep_tf2fn0r0pqdpmc
   version: {dev: false}
@@ -480,4 +481,5 @@ db_schema:
       admin_ui: {order: 0, width: 120}
       type: number
     title: Cpt_stages
+uplink_visible: true
 renamed: true
