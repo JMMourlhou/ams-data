@@ -49,19 +49,9 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        open_form('Visu_stages')
+        from ..Stage_visu_modif import Stage_visu_modif
+        open_form('Stage_visu_modif', "visu_stages", int(self.num_stage), False)  # False: ne pas effectuer les BG tasks
 
-    def button_pdf_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        with anvil.server.no_loading_indicator:
-            media_object = anvil.server.call('run_bg_task',self.num_stage, self.intitule)
-        "lecture du media object que j'ai stocké en server module"
-        stage_row = app_tables.stages.get(numero=int(self.num_stage))
-        if not stage_row:   
-            print("stage non trouvé à partir de num_stages server module: Stagiaires_list_pdf")
-        else:
-            anvil.media.download(stage_row["list_media"])
 
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""

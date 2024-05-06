@@ -72,7 +72,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
             """ ***********************************************************************"""            
-            if self.check_box_allow_bg_task.checked is False or self.bg_task is False:     # ex: en retour de trombi, pas besoin de re-générer les listes
+            if self.check_box_allow_bg_task.checked is False or self.bg_task is True:     # ex: en retour de trombi, pas besoin de re-générer les listes
                 students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
                 #alert(len(students_rows))
                 if students_rows:    # stagiaires existants
@@ -241,6 +241,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
         self.column_panel_header.scroll_into_view()
+
+    def button_visu_fiches_stagiaires_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        global intitul
+        open_form('Visu_liste_1_stage',str(self.num_stage), intitul, False)
 
     
 

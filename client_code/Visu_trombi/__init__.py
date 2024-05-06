@@ -31,7 +31,7 @@ class Visu_trombi(Visu_trombiTemplate):
         larg = 175 # largeur image en pixel
         inter = 4  # Interval entre image
        
-        if self.pdf_mode == True:
+        if self.pdf_mode is True:
             self.button_annuler.visible = False
             self.button_annuler2.visible = False
             
@@ -108,7 +108,7 @@ class Visu_trombi(Visu_trombiTemplate):
             else:
                 """ si pas de stagiaire """
                 print("stagiaire non trouvé par son mail")
-
+        self.column_panel_header.scroll_into_view()
                 
     """ *************************************************************************************************************************************"""
     """ ******************************              Gestion des évenements click sur image ou nom, extraction grace au TAG de l'image ou nom """
@@ -134,7 +134,7 @@ class Visu_trombi(Visu_trombiTemplate):
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_visu_modif import Stage_visu_modif
-        open_form('Stage_visu_modif', "visu_stages", int(self.num_stage), False)  # False: ne pas effectuer 
+        open_form('Stage_visu_modif', "visu_stages", int(self.num_stage), False)  # False: ne pas effectuer les BG tasks
 
     def button_retour2_click(self, **event_args):
         """This method is called when the button is clicked"""
