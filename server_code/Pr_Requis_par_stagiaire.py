@@ -110,18 +110,22 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
 
 
 # ===============================================================================================================
-# PRE-REQUIS STAGIAIRES, Effacement d'un pré-requis
+# PRE-REQUIS STAGIAIRES, Effacement d'un pré-requis OU destruction
 @anvil.server.callable
-def pr_stagiaire_del(user_email, stage, item_requis):
+def pr_stagiaire_del(user_email, stage, item_requis, mode="efface"):
     pr_requis_row = app_tables.pre_requis_stagiaire.get(stage_num = stage,          # stage row
                                                          stagiaire_email = user_email,       # user row
                                                          item_requis = item_requis      # item_requi row                                      
                                              ) 
-    if pr_requis_row:
+    if pr_requis_row and mode=="efface":
         pr_requis_row.update(check=False,               
                                 doc1 = None,
                                 pdf_doc1 = None
                                 )
         return True
-    else:
-        return False
+    if pr_requis_row and mode=="destruction":
+        pr_requis_row.delete()
+        return True
+    return False
+    
+

@@ -83,7 +83,7 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
     def drop_down_pre_requis_change(self, **event_args):
         """This method is called when an item is selected"""
         row = self.drop_down_pre_requis.selected_value  # row du pre_requis
-        if row == None:
+        if row is None:
             alert("Vous devez sélectionner un pré-requis !")
             self.drop_down_code_stage.focus()
             return
@@ -154,7 +154,6 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Visu_stages import Visu_stages
-
         open_form("Visu_stages")
 
     def sov_dico_ds_temp(self, **event_args):

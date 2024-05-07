@@ -1,9 +1,6 @@
 from ._anvil_designer import ItemTemplate12Template
 from anvil import *
 import anvil.server
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -17,3 +14,13 @@ class ItemTemplate12(ItemTemplate12Template):
 
         # Any code you write here will run before the form opens.
         self.text_box_1.text = "  " + self.item['requis_txt']
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        r=alert("Voulez-vous détruire ce pré-requis pour ce stagiaire ou formateur ?",buttons=[("oui",True),("non",False)])
+        if r :   # Oui
+            result = anvil.server.call('pr_stagiaire_del',self.item['stagiaire_email'], self.item['stage_num'], self.item['item_requis'], "destruction" )  # mode  destruction de PR pour ce stgiaire
+            if result:
+                alert("Pré Requis enlevé pour ce stagiaire")
+            else:
+                alert("Pré Requis non enlevé pour ce stgiaire")

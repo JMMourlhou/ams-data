@@ -60,7 +60,7 @@ components:
         enabled: true
         foreground: theme:On Primary Container
         items: []
-        visible: false
+        visible: true
         font_size: 16
         font: ''
         spacing_above: small

@@ -95,7 +95,7 @@ class ItemTemplate6(ItemTemplate6Template):
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
-        result = anvil.server.call('pr_stagiaire_del',self.item['stagiaire_email'], self.item['stage_num'], self.item['item_requis'] )
+        result = anvil.server.call('pr_stagiaire_del',self.item['stagiaire_email'], self.item['stage_num'], self.item['item_requis'], "efface" )  # mode effact du pr, pas de destruction
         if result:
             self.image_1.source = None
             self.button_visu.visible = False
