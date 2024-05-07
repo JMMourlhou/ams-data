@@ -60,7 +60,7 @@ components:
           components:
           - name: text_box_role
             properties: {align: center, hide_text: false, placeholder: R, foreground: 'theme:On
-                Primary', font_size: 11, spacing_above: none, spacing_below: none,
+                Primary', font_size: 12, spacing_above: none, spacing_below: none,
               background: 'theme:Primary', bold: false}
             type: TextBox
             layout_properties: {grid_position: 'UJSBSH,OAMGMA'}
@@ -68,7 +68,7 @@ components:
           - type: TextBox
             properties: {role: outlined, align: left, hide_text: false, tooltip: '',
               placeholder: Nom, border: '', enabled: true, foreground: 'theme:On Primary',
-              visible: true, text: '', font_size: 11, font: '', spacing_above: none,
+              visible: true, text: '', font_size: 12, font: '', spacing_above: none,
               type: text, spacing_below: none, italic: false, background: 'theme:Primary',
               bold: false, underline: false}
             name: text_box_nom
@@ -77,7 +77,7 @@ components:
           - type: TextBox
             properties: {role: outlined, align: left, hide_text: false, tooltip: '',
               placeholder: Prénom, border: '', enabled: true, foreground: 'theme:On
-                Primary', visible: true, text: '', font_size: 11, font: '', spacing_above: none,
+                Primary', visible: true, text: '', font_size: 12, font: '', spacing_above: none,
               type: text, spacing_below: none, italic: false, background: 'theme:Primary',
               bold: false, underline: false}
             name: text_box_prenom
@@ -108,15 +108,15 @@ components:
             layout_properties: {grid_position: 'OPUFKC,RBHOTT'}
             event_bindings: {pressed_enter: text_box_email_pressed_enter}
       - name: column_panel_7
-        properties: {col_widths: '{"GDMMNK":35,"JKUPIX":25}', spacing_below: none,
-          spacing_above: small, wrap_on: never, col_spacing: medium}
+        properties: {col_widths: '{"GDMMNK":23,"JKUPIX":41,"OZDORT":11,"SNGQDN":15}',
+          spacing_below: none, spacing_above: small, wrap_on: never, col_spacing: medium}
         type: ColumnPanel
         layout_properties: {grid_position: 'GAHVSD,CXBXCA'}
         components:
         - type: DropDown
           properties:
             role: outlined
-            align: left
+            align: center
             tooltip: ''
             placeholder: Stage
             border: ''
@@ -136,6 +136,24 @@ components:
           name: drop_down_code_stage
           event_bindings: {change: drop_down_code_stage_change}
           layout_properties: {grid_position: 'SGQLAI,GDMMNK'}
+        - name: button_recherche
+          properties: {role: elevated-button, align: center, tooltip: '', border: '',
+            enabled: true, foreground: 'theme:Tertiary', visible: true, text: ' ',
+            font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+            italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
+            icon: 'fa:arrow-right'}
+          type: Button
+          event_bindings: {click: button_recherche_click}
+          layout_properties: {grid_position: 'SGQLAI,OZDORT'}
+        - name: button_efface
+          properties: {role: elevated-button, align: center, tooltip: '', border: '',
+            enabled: true, foreground: 'theme:Tertiary', visible: false, text: '',
+            font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+            italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
+            icon: 'fa:arrow-left'}
+          type: Button
+          event_bindings: {click: button_efface_click}
+          layout_properties: {grid_position: 'SGQLAI,SNGQDN'}
         - type: DropDown
           properties:
             role: null
@@ -159,36 +177,6 @@ components:
           name: drop_down_num_stages
           event_bindings: {change: drop_down_num_stages_change}
           layout_properties: {grid_position: 'SGQLAI,JKUPIX', full_width_row: false}
-      - name: column_panel_st_inscrits
-        properties: {wrap_on: never, col_spacing: small, spacing_above: none, spacing_below: none,
-          col_widths: '{}'}
-        type: ColumnPanel
-        layout_properties: {grid_position: 'GAHVSD,IFLVSE'}
-        components:
-        - name: flow_panel_1
-          properties: {vertical_align: middle, align: center}
-          type: FlowPanel
-          layout_properties: {grid_position: 'UOCGTC,EPHYXM', row_background: 'theme:Tertiary',
-            full_width_row: true}
-          components:
-          - name: button_recherche
-            properties: {role: elevated-button, align: center, tooltip: '', border: '',
-              enabled: true, foreground: 'theme:Tertiary', visible: true, text: '',
-              font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-              italic: false, background: 'theme:On Primary Container', bold: true,
-              underline: false, icon: 'fa:angle-double-right'}
-            type: Button
-            event_bindings: {click: button_recherche_click}
-            layout_properties: {}
-          - name: button_efface
-            properties: {role: elevated-button, align: center, tooltip: '', border: '',
-              enabled: true, foreground: 'theme:Tertiary', visible: false, text: '',
-              font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-              italic: false, background: 'theme:On Primary Container', bold: true,
-              underline: false, icon: 'fa:angle-double-left'}
-            type: Button
-            event_bindings: {click: button_efface_click}
-            layout_properties: {}
     - type: ColumnPanel
       properties: {col_widths: '{}', spacing_above: small}
       name: column_panel_4
