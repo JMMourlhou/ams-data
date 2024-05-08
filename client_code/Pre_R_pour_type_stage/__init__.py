@@ -42,7 +42,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         global dico_pre_requis
         dico_pre_requis = row["pre_requis"]
         
-        if row['pre_requis'] == None:  # si le dictionaire n'existe pas encore (pas de pré requis encore introduit pour ce type de stage)
+        if row['pre_requis'] is None:  # si le dictionaire n'existe pas encore (pas de pré requis encore introduit pour ce type de stage)
             dico_pre_requis = {}
             self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("requis", ascending=True))]
             self.drop_down_pre_requis.visible = True

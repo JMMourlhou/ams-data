@@ -5,13 +5,13 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
 global code_stage
 code_stage = ""
 
-global dico_pre_requis
+global dico_pre_requis     # dico de tous les pr existants
 dico_pre_requis = {}
-
+global dico_pre_requis_stg  # dico des pr pour ce stgiaire
+dico_pre_requis_stg = {}
 
 class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
     def __init__(self,stagiaire_inscrit_row, **properties):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
@@ -21,64 +21,46 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
         nom = stagiaire_inscrit_row['name'].capitalize()
         pr = stagiaire_inscrit_row['prenom'].capitalize()
         self.label_3.text = "Pré-R pour "+nom+" "+pr+"  / "+stagiaire_inscrit_row['stage_txt']
-       
-        # affichage des pré-requis existants du stagiaire
+
+        # liste des pré-requis existants du stagiaire
         liste_pr_stagiaire = app_tables.pre_requis_stagiaire.search( q.fetch_only("requis_txt",
                                                                        stagiaire_email=q.fetch_only("email"),
                                                                        ),
                                                             numero=int(stagiaire_inscrit_row['numero']),
                                                             stagiaire_email=stagiaire_inscrit_row["user_email"]
                                                          )
-        self.repeating_panel_1.items = liste_pr_stagiaire
+        # Création du dict des pr du stagiaire
+        global dico_pre_requis_stg  # dico des pr pour ce stgiaire
+        dico_pre_requis_stg = {}
+        for pr_st in liste_pr_stagiaire:
+            clef = pr_st['requis_txt']
+            valeur = ""
+            dico_pre_requis_stg[clef] = valeur
+            print(dico_pre_requis_stg.keys())
         
-    def drop_down_code_stage_change(self, **event_args):
-        """This method is called when an item is selected"""
-        # lecture du dictionaire ds table codes_stages pour le stage sélectionné
-
-        # row = stage row
-
-        # lecture du dictionaire des pré requis pour ce type de stage
+        # INITIALISATION Drop down pré-requis possible du stagiaire, je ne prends pas un pré requis déjà sélectionné pour ce stagiaire
+        liste_drop_d = []
         global dico_pre_requis
-        dico_pre_requis = row["pre_requis"]
+        dico_pre_requis = {}
+        
+        # search de tous les pré-requis existants
+        liste_tous_pr = app_tables.pre_requis.search()
+        for pr in liste_tous_pr:
+            clef_search = dico_pre_requis_stg.get(pr['requis'])
+            if clef_search is None:
+                liste_drop_d.append((pr['requis'], pr))
+                dico_pre_requis[pr['code_pre_requis']] = pr['requis']
+                print("non existant: ", pr['requis'])
+            else:
+                print("existant: ", pr['requis'])
+                
+        self.drop_down_pre_requis.items = liste_drop_d
+       
+        
+        
+        # affichage des pré-requis du stagiaire
+        self.repeating_panel_1.items = liste_pr_stagiaire
 
-        if (
-            row["pre_requis"] == None
-        ):  # si le dictionaire n'existe pas encore (pas de pré requis encore introduit pour ce type de stage)
-            dico_pre_requis = {}
-            self.drop_down_pre_requis.items = [
-                (r["requis"], r)
-                for r in app_tables.pre_requis.search(
-                    tables.order_by("requis", ascending=True)
-                )
-            ]
-            self.drop_down_pre_requis.visible = True
-
-        # print(type(row['pre_requis']))
-        if isinstance(
-            row["pre_requis"], dict
-        ):  # LE DICT EXISTE DS TABLE CODES STAGE, row du stage
-            # INITIALISATION Drop down pré-requis en fonction des pré requis déjà sélectionnés ds dico
-            self.drop_down_pre_requis.items = [
-                (r["requis"], r)
-                for r in app_tables.pre_requis.search(
-                    tables.order_by("requis", ascending=True)
-                )
-                if not dico_pre_requis.get(r["code_pre_requis"])
-            ]
-            self.drop_down_pre_requis.visible = True
-
-            dico_pre_requis = row["pre_requis"]
-
-            # affichage des prérequis à partir du dico que je transforme  en liste
-        list_keys = dico_pre_requis.keys()
-        list_keys = sorted(
-            list_keys
-        )  # création de la liste triée des clefs du dictionaires prérequis
-        # j'affiche tous les pré requis
-        print(len(list_keys))
-        self.repeating_panel_1.items = list(list_keys)  # liste des clefs (pré requis)
-
-        self.sov_dico_ds_temp()  # sauvegarde du dico ds TABLE TEMP
 
     def drop_down_pre_requis_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -156,8 +138,3 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
         from ..Visu_stages import Visu_stages
         open_form("Visu_stages")
 
-    def sov_dico_ds_temp(self, **event_args):
-        table_temp = app_tables.temp.search()[0]  # sauvegarde du dico ds TABLE TEMP
-        global code_stage
-        global dico_pre_requis
-        table_temp.update(pre_r_pour_stage=dico_pre_requis, code_stage=code_stage)
