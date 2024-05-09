@@ -24,3 +24,5 @@ class ItemTemplate12(ItemTemplate12Template):
                 alert("Pré Requis enlevé pour ce stagiaire")
             else:
                 alert("Pré Requis non enlevé pour ce stgiaire")
+            # réaffichage des pré requis : Trouver le row du stagiaire inscrit
+            # open_form("Pre_R_pour_1_stagiaire",)
