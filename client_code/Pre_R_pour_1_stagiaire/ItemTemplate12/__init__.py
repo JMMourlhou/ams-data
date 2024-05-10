@@ -20,9 +20,11 @@ class ItemTemplate12(ItemTemplate12Template):
         r=alert("Voulez-vous détruire ce pré-requis pour ce stagiaire ou formateur ?",buttons=[("oui",True),("non",False)])
         if r :   # Oui
             result = anvil.server.call('pr_stagiaire_del',self.item['stagiaire_email'], self.item['stage_num'], self.item['item_requis'], "destruction" )  # mode  destruction de PR pour ce stgiaire
-            if result:
-                alert("Pré Requis enlevé pour ce stagiaire")
-            else:
-                alert("Pré Requis non enlevé pour ce stgiaire")
-            # réaffichage des pré requis : Trouver le row du stagiaire inscrit
-            # open_form("Pre_R_pour_1_stagiaire",)
+            if not result:
+                alert("Pré Requis non enlevé pour ce stagiaire")
+            # réaffichage des pré requis : Trouver le row du stagiaire inscrit puis réouverture de la form "Pre_R_pour_1_stagiaire"
+            row = app_tables.stagiaires_inscrits.get(   numero =     self.item['numero'],
+                                                        user_email = self.item['stagiaire_email']
+                                                        )
+            open_form("Pre_R_pour_1_stagiaire",row)
+            

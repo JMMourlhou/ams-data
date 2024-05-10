@@ -18,13 +18,23 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        
+        #import anvil.js    # pour screen size
+        from anvil.js import window # to gain access to the window object
+        global screen_size
+        screen_size = window.innerWidth
+        
         self.stagiaire_inscrit_row = stagiaire_inscrit_row
         self.stagiaire_email = stagiaire_inscrit_row['user_email']
         self.stage = stagiaire_inscrit_row['stage']
         nom = stagiaire_inscrit_row['name'].capitalize()
-        pr = stagiaire_inscrit_row['prenom'].capitalize()
-        self.label_3.text = "Pré-R pour "+nom+" "+pr+"  / "+stagiaire_inscrit_row['stage_txt']
-
+        if screen_size < 800:
+            pr = stagiaire_inscrit_row['prenom'][0].capitalize()   # 1ere lettre du prénom
+            self.label_3.text = "Pré-R perso pour "+nom+" "+pr+"  / "+stagiaire_inscrit_row['stage_txt']
+        else:
+            pr = stagiaire_inscrit_row['prenom'].capitalize()
+            self.label_3.text = "Pré-Requis personnalisés pour "+nom+" "+pr+"  / "+stagiaire_inscrit_row['stage_txt']
+            
         # liste des pré-requis existants du stagiaire
         liste_pr_stagiaire = app_tables.pre_requis_stagiaire.search( q.fetch_only("requis_txt",
                                                                        stagiaire_email=q.fetch_only("email"),
@@ -47,7 +57,7 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
         dico_pre_requis = {}
         
         # search de tous les pré-requis existants
-        liste_tous_pr = app_tables.pre_requis.search()
+        liste_tous_pr = app_tables.pre_requis.search(tables.order_by("requis", ascending=True),)
         for pr in liste_tous_pr:
             clef_search = dico_pre_requis_stg.get(pr['requis'])
             if clef_search is None:
