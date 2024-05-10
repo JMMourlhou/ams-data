@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Visu_stages
 from anvil import open_form
-
+from ...Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
 from InputBox.input_box import InputBox, alert2, input_box, multi_select_dropdown
 
 #import anvil.js    # pour screen size
@@ -93,7 +93,6 @@ class RowTemplate3(RowTemplate3Template):
 
     def button_pr_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ...Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
         num_stage = int(self.text_box_1.text)
         open_form('Pre_R_pour_stagiaire_admin',num_stage)
 

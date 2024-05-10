@@ -46,10 +46,11 @@ class ItemTemplate11(ItemTemplate11Template):
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
             # nouveau nom doc SANS extension
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
-            #print("new file name: ",new_file_name)
+            print("new file name: ",new_file_name)
             
             # Type de fichier ?
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
+            print("ext: ",file_extension)
 
             """
             thumb_file = None
@@ -59,7 +60,7 @@ class ItemTemplate11(ItemTemplate11Template):
                 new_file_name = new_file_name + ".jpg" # rajout extension
                 thumb_file =  anvil.image.generate_thumbnail(file, 640)
             """  
-            if file_extension == ".jpg":
+            if file_extension == ".jpg" or file_extension == ".JPG":
                 self.image_1.source = file
                 # Sauvegarde du 'file' jpg
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
@@ -89,7 +90,7 @@ class ItemTemplate11(ItemTemplate11Template):
                 #thumb_file =  anvil.image.generate_thumbnail(file, 640)
                 # renvoi en écriture des images générées ds table
                 new_file_name = new_file_name + ".jpg"
-                print("new_file_name ",new_file_name)
+                #print("new_file_name ",new_file_name)
                 result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg")
                 if result is not True:
                     alert("Fichier jpg non sauvé") 

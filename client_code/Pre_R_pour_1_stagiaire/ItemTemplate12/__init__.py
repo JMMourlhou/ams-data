@@ -17,8 +17,11 @@ class ItemTemplate12(ItemTemplate12Template):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous détruire ce pré-requis pour ce stagiaire ou formateur ?",buttons=[("oui",True),("non",False)])
-        if r :   # Oui
+        if self.item['doc1'] is not None or self.item['pdf_doc1'] is not None:
+            r=alert("Ce pré-requis n'est pas vide, Voulez-vous vraiment le détruire ?",buttons=[("oui",True),("non",False)])
+        else:
+            r=alert("Voulez-vous détruire ce pré-requis ?",buttons=[("oui",True),("non",False)])
+        if r :   # Oui               
             result = anvil.server.call('pr_stagiaire_del',self.item['stagiaire_email'], self.item['stage_num'], self.item['item_requis'], "destruction" )  # mode  destruction de PR pour ce stgiaire
             if not result:
                 alert("Pré Requis non enlevé pour ce stagiaire")

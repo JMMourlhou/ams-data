@@ -57,16 +57,15 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
         dico_pre_requis = {}
         
         # search de tous les pré-requis existants
-        liste_tous_pr = app_tables.pre_requis.search(tables.order_by("requis", ascending=True),)
+        liste_tous_pr = app_tables.pre_requis.search(tables.order_by("requis", ascending=True),
+                                                    q.fetch_only("requis","code_pre_requis")
+                                                    )
         for pr in liste_tous_pr:
             clef_search = dico_pre_requis_stg.get(pr['requis'])
             if clef_search is None:
                 liste_drop_d.append((pr['requis'], pr))
                 dico_pre_requis[pr['code_pre_requis']] = pr['requis']
-                print("non existant: ", pr['requis'])
-            else:
-                print("existant: ", pr['requis'])
-                
+               
         self.drop_down_pre_requis.items = liste_drop_d
         # affichage des pré-requis du stagiaire
         self.repeating_panel_1.items = liste_pr_stagiaire
@@ -90,7 +89,6 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
 
         # réaffichage des pré requis
         open_form("Pre_R_pour_1_stagiaire",self.stagiaire_inscrit_row)
-        
                         
 
     def button_annuler_click(self, **event_args):
