@@ -36,7 +36,7 @@ class ItemTemplate2(ItemTemplate2Template):
             self.rich_text_1.bold=False
             self.rich_text_1.italic=False
             self.rich_text_1.align="center"
-            self.rich_text_1.font="Noto"
+            #self.rich_text_1.font="Noto"
             date_naiss_format = stagiaire['date_naissance'].strftime("%d/%m/%Y")
             #self.rich_text_1.background="theme:Primary"
             #self.rich_text_1.foreground="theme:On Primary"
