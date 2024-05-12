@@ -111,24 +111,29 @@ components:
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
-    - type: Button
-      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary Container', visible: true, text: '  Stages  ',
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-        icon: ''}
-      name: bt_gestion_stages
-      layout_properties: {grid_position: 'WDMJDM,WHUDPU'}
-      event_bindings: {click: bt_gestion_stages_click}
-    - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Stagiaires,
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-        icon: ''}
-      name: button_create_recherche
-      layout_properties: {grid_position: 'XIVNPX,PHPRXV'}
-      event_bindings: {click: button_create_recherche_click}
+    - name: column_panel_1
+      properties: {wrap_on: never, col_spacing: none}
+      type: ColumnPanel
+      layout_properties: {grid_position: 'YROLRC,HBDKLU'}
+      components:
+      - type: Button
+        properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+          foreground: 'theme:On Primary Container', visible: true, text: '  Stages  ',
+          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+          icon: 'fa:users'}
+        name: bt_gestion_stages
+        layout_properties: {grid_position: 'EAREMG,IFZQQT'}
+        event_bindings: {click: bt_gestion_stages_click}
+      - type: Button
+        properties: {role: elevated-button, align: center, tooltip: '', border: '',
+          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Stagiaires,
+          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+          icon: 'fa:user'}
+        name: button_create_recherche
+        layout_properties: {grid_position: 'EAREMG,JJXUAK'}
+        event_bindings: {click: button_create_recherche_click}
     - name: flow_panel_2
       properties: {align: center}
       type: FlowPanel

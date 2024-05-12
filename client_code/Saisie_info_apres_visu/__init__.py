@@ -128,7 +128,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             if result is True :
                 self.button_validation_copy.visible = False
                 self.button_validation.visible = False
-                n=Notification("Modifications enregistées !",timeout=1.5)
+                n=Notification("Modifications enregistées !",timeout=1)
                 n.show()
             else :
                 alert("Renseignements non sauvés !", title="Erreur")
