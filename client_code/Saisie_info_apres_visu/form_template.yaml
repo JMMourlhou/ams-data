@@ -1,6 +1,6 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{"QVMEKS":56,"RMIUTP":4}'}
+  properties: {col_widths: '{"QVMEKS":55,"RMIUTP":5}'}
   event_bindings: {show: form_show}
 components:
 - type: ColumnPanel

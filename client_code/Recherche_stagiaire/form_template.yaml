@@ -1,6 +1,6 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{}', col_spacing: none}
+  properties: {col_widths: '{}', col_spacing: none, wrap_on: mobile}
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
@@ -108,14 +108,14 @@ components:
             layout_properties: {grid_position: 'OPUFKC,RBHOTT'}
             event_bindings: {pressed_enter: text_box_email_pressed_enter}
       - name: column_panel_7
-        properties: {col_widths: '{"GDMMNK":23,"JKUPIX":41,"OZDORT":11,"SNGQDN":15}',
+        properties: {col_widths: '{"GDMMNK":24,"JKUPIX":40,"OZDORT":10,"SNGQDN":16}',
           spacing_below: none, spacing_above: small, wrap_on: never, col_spacing: medium}
         type: ColumnPanel
         layout_properties: {grid_position: 'GAHVSD,CXBXCA'}
         components:
         - type: DropDown
           properties:
-            role: outlined
+            role: null
             align: center
             tooltip: ''
             placeholder: Stage
@@ -139,18 +139,18 @@ components:
         - name: button_recherche
           properties: {role: elevated-button, align: center, tooltip: '', border: '',
             enabled: true, foreground: 'theme:Tertiary', visible: true, text: ' ',
-            font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-            italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
-            icon: 'fa:arrow-right'}
+            font_size: null, font: '', spacing_above: none, icon_align: left_edge,
+            spacing_below: none, italic: false, background: 'theme:On Primary Container',
+            bold: true, underline: false, icon: 'fa:arrow-right'}
           type: Button
           event_bindings: {click: button_recherche_click}
           layout_properties: {grid_position: 'SGQLAI,OZDORT'}
         - name: button_efface
           properties: {role: elevated-button, align: center, tooltip: '', border: '',
             enabled: true, foreground: 'theme:Tertiary', visible: false, text: '',
-            font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-            italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
-            icon: 'fa:arrow-left'}
+            font_size: null, font: '', spacing_above: none, icon_align: left_edge,
+            spacing_below: none, italic: false, background: 'theme:On Primary Container',
+            bold: true, underline: false, icon: 'fa:arrow-left'}
           type: Button
           event_bindings: {click: button_efface_click}
           layout_properties: {grid_position: 'SGQLAI,SNGQDN'}

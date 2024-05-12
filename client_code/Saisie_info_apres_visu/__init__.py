@@ -1,7 +1,6 @@
 from ._anvil_designer import Saisie_info_apres_visuTemplate
 from anvil import *
 import anvil.server
-
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -32,18 +31,18 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         if stagiaire:
             self.text_box_id.text = "Id = "+ str(stagiaire.get_id())
             self.text_box_mail.text = stagiaire['email']
-            if stagiaire['nom'] != None :
+            if stagiaire['nom'] is not None :
                 nm = stagiaire["nom"].capitalize()
                 nm = nm.strip()
                 self.text_box_nom.text = nm
            
-            if stagiaire['prenom'] != None:
+            if stagiaire['prenom'] is not None:
                 pn = stagiaire["prenom"].capitalize()
                 pn = pn.strip()
                 self.text_box_prenom.text =  pn        
                 
             #self.image_photo.source =                stagiaire["photo"]
-            if stagiaire["photo"] != None:
+            if stagiaire["photo"] is not None:
                 thumb_pic = anvil.image.generate_thumbnail(stagiaire["photo"], 640)
                 self.image_photo.source = thumb_pic
             else:
@@ -53,7 +52,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             self.text_box_cp_naissance.text =        stagiaire["code_postal_naissance"]
             self.date_naissance.date =               stagiaire["date_naissance"]
             self.text_box_pays_naissance.text =      stagiaire["pays_naissance"]
-            if stagiaire["pays_naissance"] == None :
+            if stagiaire["pays_naissance"] is None :
                 self.text_box_pays_naissance.text = "France"
             self.text_area_rue.text =                stagiaire["adresse_rue"]
             self.text_box_ville.text =               stagiaire["adresse_ville"]
@@ -127,12 +126,16 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
                                                     self.text_box_role.text
                                                     )
             if result is True :
-                alert("Renseignements enregistés !")
+                self.button_validation_copy.visible = False
+                self.button_validation.visible = False
+                n=Notification("Modifications enregistées !",timeout=1.5)
+                n.show()
             else :
-                alert("Renseignements non enregistés !")
-            self.button_annuler_click()
+                alert("Renseignements non sauvés !", title="Erreur")
+            
+            # self.button_annuler_click()
         else:
-            alert("utilisateur non trouvé !")
+            alert("Utilisateur non trouvé !", title="Erreur")
             self.button_annuler_click()
 
         #js.call_js('showSidebar')
