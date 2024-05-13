@@ -1,8 +1,6 @@
 from ._anvil_designer import QCM_visu_modif_MainTemplate
 from anvil import *
-
 import anvil.server
-
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -46,7 +44,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # acquisition du user et modif de son temp (nb de questions de son qcm)
         user=anvil.users.get_user()
         r = anvil.server.call("temp_user_qcm", user, nb_questions,qcm_row["qcm_nb"])
-        if r == False:
+        if r is False:
             alert("user non MAJ")
             return
             

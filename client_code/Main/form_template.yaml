@@ -134,6 +134,15 @@ components:
         name: button_create_recherche
         layout_properties: {grid_position: 'EAREMG,JJXUAK'}
         event_bindings: {click: button_create_recherche_click}
+      - name: button_maj_pr
+        properties: {role: elevated-button, align: center, tooltip: '', border: '',
+          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Pré Requis,
+          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
+          icon: 'fa:user'}
+        type: Button
+        layout_properties: {grid_position: 'EAREMG,HDTPZU'}
+        event_bindings: {click: button_maj_pr_click}
     - name: flow_panel_2
       properties: {align: center}
       type: FlowPanel

@@ -253,6 +253,11 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         result = anvil.server.call("file_reading")
         print(result)
+
+    def button_maj_pr_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Table_Pre_R_MAJ import Table_Pre_R_MAJ
+        open_form('Table_Pre_R_MAJ')
         
     
         
