@@ -87,6 +87,30 @@ db_schema:
     - name: doc
       admin_ui: {width: 200, order: 2}
       type: bool
+  stage_satisf:
+    client: none
+    server: full
+    columns:
+    - name: stage_row
+      admin_ui: {order: 0, width: 109}
+      type: link_single
+      target: stages
+    - name: stage_num_txt
+      admin_ui: {order: 1, width: 132}
+      type: string
+    - name: stage_type_txt
+      admin_ui: {order: 2, width: 129}
+      type: string
+    - name: date_heure
+      admin_ui: {order: 3, width: 155}
+      type: datetime
+    - name: rep_dico_rep_ferm
+      admin_ui: {order: 4, width: 200}
+      type: simpleObject
+    - name: rep_dico_rep_ouv
+      admin_ui: {width: 200, order: 5}
+      type: simpleObject
+    title: Stage_satisf
   global_variables:
     client: none
     server: full
@@ -248,6 +272,9 @@ db_schema:
     - name: prenom
       admin_ui: {order: 1.75, width: 84}
       type: string
+    - name: enquete_satisf
+      admin_ui: {width: 200, order: 6}
+      type: bool
     title: Stagiaires_inscrits
   files:
     client: none
@@ -374,6 +401,11 @@ db_schema:
       admin_ui: {order: 23.75, width: 200}
       type: string
     title: Users
+  table_17:
+    client: none
+    server: full
+    columns: []
+    title: Table 17
   pre_requis_stagiaire:
     client: full
     server: full
