@@ -10,6 +10,7 @@ user_stagiaire = anvil.users.get_user()
 global stage_row
 stage_row = None
 
+
 class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -67,7 +68,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         dico_q_ferm = stage_row['satis_dico1_q_ferm']
         nb_questions_ferm = int(dico_q_ferm['NBQ'])   # nb de questions fermées ds le dico
 
-        if nb_questions_ferm > 0:
+        if nb_questions_ferm > 0:   # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
             self.label_1.text = dico_q_ferm['1']
         if nb_questions_ferm > 1:
@@ -98,7 +99,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             self.column_panel_10.visible = True
             self.label_10.text = dico_q_ferm['10']
 
-        dico_q_ouv = stage_row['satis_dico2_q_ouv']  # nb de questions ouvertes ds le dico
+        dico_q_ouv = stage_row['satis_dico2_q_ouv']  # check du nb de questions ouvertes à afficher et affectation des questions
         nb_questions_ouvertes = int(dico_q_ouv['NBQ'])
         if nb_questions_ouvertes > 0:
             self.column_panel_a1.visible = True
@@ -131,7 +132,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             self.column_panel_a10.visible = True     
             self.label_a10.text = dico_q_ouv['10']
 
-    def check_box_1_1_change(self, **event_args):
+    def check_box_1_1_change(self, **event_args):             # 1 seule réponse doit être checker
         """This method is called when this checkbox is checked or unchecked"""
         if self.check_box_1_1.checked is True:
             self.check_box_1_2.checked = False
@@ -184,7 +185,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             self.check_box_1_4.checked = False
             self.check_box_1_3.checked = False
             self.check_box_1_5.checked = False
-    #=================================================================================
+    #================================================================================= 2eme ligne
     def check_box_2_1_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         if self.check_box_2_1.checked is True:
@@ -214,15 +215,107 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
 
     def check_box_2_4_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        pass
+        if self.check_box_2_4.checked is True:
+            self.check_box_2_1.checked = False
+            self.check_box_2_3.checked = False
+            self.check_box_2_2.checked = False
+            self.check_box_2_5.checked = False
+            self.check_box_2_6.checked = False
 
     def check_box_2_5_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        pass
+        if self.check_box_2_5.checked is True:
+            self.check_box_2_1.checked = False
+            self.check_box_2_2.checked = False
+            self.check_box_2_4.checked = False
+            self.check_box_2_3.checked = False
+            self.check_box_2_6.checked = False
 
     def check_box_2_6_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        pass
+        if self.check_box_2_6.checked is True:
+            self.check_box_2_1.checked = False
+            self.check_box_2_2.checked = False
+            self.check_box_2_4.checked = False
+            self.check_box_2_3.checked = False
+            self.check_box_2_5.checked = False
+
+    #================================================================================= 3eme ligne
+    def check_box_3_1_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_3_1.checked is True:
+            self.check_box_3_2.checked = False
+            self.check_box_3_3.checked = False
+            self.check_box_3_4.checked = False
+            self.check_box_3_5.checked = False
+            self.check_box_3_6.checked = False
+
+    def check_box_3_2_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_3_2.checked is True:
+            self.check_box_3_1.checked = False
+            self.check_box_3_3.checked = False
+            self.check_box_3_4.checked = False
+            self.check_box_3_5.checked = False
+            self.check_box_3_6.checked = False
+
+    def check_box_3_3_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_3_3.checked is True:
+            self.check_box_3_1.checked = False
+            self.check_box_3_2.checked = False
+            self.check_box_3_4.checked = False
+            self.check_box_3_5.checked = False
+            self.check_box_3_6.checked = False
+
+    def check_box_3_4_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_3_4.checked is True:
+            self.check_box_3_1.checked = False
+            self.check_box_3_3.checked = False
+            self.check_box_3_2.checked = False
+            self.check_box_3_5.checked = False
+            self.check_box_3_6.checked = False
+
+    def check_box_3_5_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_3_5.checked is True:
+            self.check_box_3_1.checked = False
+            self.check_box_3_2.checked = False
+            self.check_box_3_4.checked = False
+            self.check_box_3_3.checked = False
+            self.check_box_3_6.checked = False
+
+    def check_box_3_6_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_3_6.checked is True:
+            self.check_box_3_1.checked = False
+            self.check_box_3_2.checked = False
+            self.check_box_3_4.checked = False
+            self.check_box_3_3.checked = False
+            self.check_box_3_5.checked = False
+
+    def button_valider_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # check si une reponse par ligne
+        nb = 0
+        if (self.check_box_1_1.checked is True) or \
+            (self.check_box_1_2.checked is True) or \
+            (self.check_box_1_3.checked is True) or \
+            (self.check_box_1_4.checked is True) or \
+            (self.check_box_1_5.checked is True) or \
+            (self.check_box_1_6.checked is True):
+            nb += 1
+        if (self.check_box_2_1.checked is True) or \
+            (self.check_box_2_2.checked is True) or \
+            (self.check_box_2_3.checked is True) or \
+            (self.check_box_2_4.checked is True) or \
+            (self.check_box_2_5.checked is True) or \
+            (self.check_box_2_6.checked is True):
+            nb += 1
+        print(nb)
+            
+
         
        
         
