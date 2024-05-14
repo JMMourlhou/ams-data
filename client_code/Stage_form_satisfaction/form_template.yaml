@@ -87,12 +87,12 @@ components:
     components:
     - name: button_bad
       properties: {text: '', role: null, font_size: 24, icon: 'fa:thumbs-down', foreground: 'theme:Error',
-        bold: false, enabled: false}
+        bold: false, enabled: false, background: 'theme:Surface'}
       type: Button
       layout_properties: {grid_position: 'HRJSWS,AEXQWF'}
     - name: button_bad_copy
-      properties: {text: '', role: null, font_size: 24, icon: 'fa:thumbs-up', foreground: 'theme:On
-          Primary Container', bold: false, enabled: false}
+      properties: {text: '', role: null, font_size: 24, icon: 'fa:thumbs-up', foreground: 'theme:Green',
+        bold: false, enabled: false, background: 'theme:Surface'}
       type: Button
       layout_properties: {grid_position: 'HRJSWS,GSRIRY'}
   - name: flow_panel_1
