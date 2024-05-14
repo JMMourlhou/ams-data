@@ -258,6 +258,11 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Table_Pre_R_MAJ import Table_Pre_R_MAJ
         open_form('Table_Pre_R_MAJ')
+
+    def button_form_satisf_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Stage_form_satisfaction import Stage_form_satisfaction
+        open_form('Stage_form_satisfaction')
         
     
         
