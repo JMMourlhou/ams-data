@@ -288,7 +288,7 @@ class ItemTemplate4(ItemTemplate4Template):
         self.text_area_question_focus()
 
         if self.item["type"] == "V/F":
-            if self.rep2.checked == True:   # question V/F
+            if self.rep2.checked is True:   # question V/F
                 self.rep1.checked = False
             else:
                 self.rep1.checked = True
@@ -376,14 +376,14 @@ class ItemTemplate4(ItemTemplate4Template):
                         for repo in cpnt1.get_components():
                             if repo.tag.nom == "rep1-true": 
                                 print(f"rep1 trouvé {repo.checked}")   
-                                if repo.checked == True:
+                                if repo.checked is True:
                                     rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                 else:
                                     rep_multi_stagiaire = rep_multi_stagiaire + "0"
                                 
                             if repo.tag.nom == "rep2-false":
                                 print(f"rep2 trouvé {repo.checked}")
-                                if repo.checked == True:
+                                if repo.checked is True:
                                     rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                 else:
                                     rep_multi_stagiaire = rep_multi_stagiaire + "0"
@@ -391,7 +391,7 @@ class ItemTemplate4(ItemTemplate4Template):
                             if self.nb_options == 3:
                                 if repo.tag.nom == "rep3":
                                     print(f"rep3 trouvé {repo.checked}")
-                                    if repo.checked == True:
+                                    if repo.checked is True:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                     else:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "0"
@@ -399,13 +399,13 @@ class ItemTemplate4(ItemTemplate4Template):
                             if self.nb_options == 4:
                                 if repo.tag.nom == "rep3":
                                     print(f"rep3 trouvé {repo.checked}")
-                                    if repo.checked == True:
+                                    if repo.checked is True:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                     else:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "0"
                                 if repo.tag.nom == "rep4":
                                     print(f"rep4 trouvé {repo.checked}")
-                                    if repo.checked == True:
+                                    if repo.checked is True:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                     else:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "0"
@@ -413,19 +413,19 @@ class ItemTemplate4(ItemTemplate4Template):
                             if self.nb_options == 5:
                                 if repo.tag.nom == "rep3":
                                     print(f"rep3 trouvé {repo.checked}")
-                                    if repo.checked == True:
+                                    if repo.checked is True:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                     else:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "0"
                                 if repo.tag.nom == "rep4":
                                     print(f"rep4 trouvé {repo.checked}")
-                                    if repo.checked == True:
+                                    if repo.checked is True:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                     else:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "0"
                                 if repo.tag.nom == "rep5":
                                     print(f"rep5 trouvé {repo.checked}")
-                                    if repo.checked == True:
+                                    if repo.checked is True:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "1"
                                     else:
                                         rep_multi_stagiaire = rep_multi_stagiaire + "0"

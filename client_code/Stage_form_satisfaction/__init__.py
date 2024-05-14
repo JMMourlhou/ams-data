@@ -27,20 +27,22 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             #self.label_0.text = "Documents à fournir pour " + user_pr['prenom'] + " " + user_pr['nom']
             # Drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email","stage"),           # <----------------------  A Modifier? 
-                                                            user_email=user_stagiaire)
+                                                            user_email=user_stagiaire
+                                                          )
             print("nb; ", len(liste0))
             liste_drop_d = []
             for row in liste0:
                 #lecture fichier père stage
                 stage=app_tables.stages.get(numero=row['stage']['numero'])
-                #lecture fichier père type de stage
-                type=app_tables.codes_stages.get(q.fetch_only("code"),
-                                                    code=stage['code']['code']
-                                                )
-                if type['code'][0]!="F":    # Si formateur, je n'affiche pas la date
-                    liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), stage))
-                else:
-                    liste_drop_d.append((type['code'], stage))
+                if isinstance(stage['satis_dico1_q_ferm'], dict): # si dict ds table 
+                    #lecture fichier père type de stage
+                    type=app_tables.codes_stages.get(q.fetch_only("code"),
+                                                        code=stage['code']['code']
+                                                    )
+                    if type['code'][0]!="F":    # Si formateur, je n'affiche pas la dat
+                        liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), stage))
+                    else:
+                        liste_drop_d.append((type['code'], stage))
                     
             #print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
@@ -64,20 +66,6 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         dico_q_ouv = {}
         dico_q_ferm = stage_row['satis_dico1_q_ferm']
         nb_questions_ferm = int(dico_q_ferm['NBQ'])   # nb de questions fermées ds le dico
-        print("nbq: ", nb_questions_ferm)
-        dico_q_ouv = stage_row['satis_dico2_q_ouv']  # nb de questions ouvertes ds le dico
-        nb_questions_ouvertes = dico_q_ouv['NBQ']
-
-        self.label_a1.text = dico_q_ouv['1']
-        self.label_a2.text = dico_q_ouv['2']
-        self.label_a3.text = dico_q_ouv['3']
-        self.label_a4.text = dico_q_ouv['4']
-        self.label_a5.text = dico_q_ouv['5']
-        self.label_a6.text = dico_q_ouv['6']
-        self.label_a7.text = dico_q_ouv['7']
-        self.label_a8.text = dico_q_ouv['8']
-        self.label_a9.text = dico_q_ouv['9']
-        self.label_a10.text = dico_q_ouv['10']
 
         if nb_questions_ferm > 0:
             self.column_panel_1.visible = True
@@ -109,6 +97,132 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         if nb_questions_ferm > 9:
             self.column_panel_10.visible = True
             self.label_10.text = dico_q_ferm['10']
+
+        dico_q_ouv = stage_row['satis_dico2_q_ouv']  # nb de questions ouvertes ds le dico
+        nb_questions_ouvertes = int(dico_q_ouv['NBQ'])
+        if nb_questions_ouvertes > 0:
+            self.column_panel_a1.visible = True
+            self.label_a1.text = dico_q_ouv['1']
+        if nb_questions_ouvertes > 1:
+            self.column_panel_a2.visible = True
+            self.label_a2.text = dico_q_ouv['2']
+        if nb_questions_ouvertes > 2:
+            self.column_panel_a3.visible = True   
+            self.label_a3.text = dico_q_ouv['3']
+        if nb_questions_ouvertes > 3:
+            self.column_panel_a4.visible = True   
+            self.label_a4.text = dico_q_ouv['4']
+        if nb_questions_ouvertes > 4:
+            self.column_panel_a5.visible = True      
+            self.label_a5.text = dico_q_ouv['5']
+        if nb_questions_ouvertes > 5:
+            self.column_panel_a6.visible = True   
+            self.label_a6.text = dico_q_ouv['6']
+        if nb_questions_ouvertes > 6:
+            self.column_panel_a7.visible = True  
+            self.label_a7.text = dico_q_ouv['7']
+        if nb_questions_ouvertes > 7:
+            self.column_panel_a8.visible = True 
+            self.label_a8.text = dico_q_ouv['8']
+        if nb_questions_ouvertes > 8:
+            self.column_panel_a9.visible = True     
+            self.label_a9.text = dico_q_ouv['9']
+        if nb_questions_ouvertes > 9:
+            self.column_panel_a10.visible = True     
+            self.label_a10.text = dico_q_ouv['10']
+
+    def check_box_1_1_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_1_1.checked is True:
+            self.check_box_1_2.checked = False
+            self.check_box_1_3.checked = False
+            self.check_box_1_4.checked = False
+            self.check_box_1_5.checked = False
+            self.check_box_1_6.checked = False
+
+    def check_box_1_2_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_1_2.checked is True:
+            self.check_box_1_1.checked = False
+            self.check_box_1_3.checked = False
+            self.check_box_1_4.checked = False
+            self.check_box_1_5.checked = False
+            self.check_box_1_6.checked = False
+
+    def check_box_1_3_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_1_3.checked is True:
+            self.check_box_1_1.checked = False
+            self.check_box_1_2.checked = False
+            self.check_box_1_4.checked = False
+            self.check_box_1_5.checked = False
+            self.check_box_1_6.checked = False
+
+    def check_box_1_4_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_1_4.checked is True:
+            self.check_box_1_1.checked = False
+            self.check_box_1_3.checked = False
+            self.check_box_1_2.checked = False
+            self.check_box_1_5.checked = False
+            self.check_box_1_6.checked = False
+
+    def check_box_1_5_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_1_5.checked is True:
+            self.check_box_1_1.checked = False
+            self.check_box_1_2.checked = False
+            self.check_box_1_4.checked = False
+            self.check_box_1_3.checked = False
+            self.check_box_1_6.checked = False
+
+    def check_box_1_6_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_1_6.checked is True:
+            self.check_box_1_1.checked = False
+            self.check_box_1_2.checked = False
+            self.check_box_1_4.checked = False
+            self.check_box_1_3.checked = False
+            self.check_box_1_5.checked = False
+    #=================================================================================
+    def check_box_2_1_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_2_1.checked is True:
+            self.check_box_2_2.checked = False
+            self.check_box_2_3.checked = False
+            self.check_box_2_4.checked = False
+            self.check_box_2_5.checked = False
+            self.check_box_2_6.checked = False
+
+    def check_box_2_2_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_2_2.checked is True:
+            self.check_box_2_1.checked = False
+            self.check_box_2_3.checked = False
+            self.check_box_2_4.checked = False
+            self.check_box_2_5.checked = False
+            self.check_box_2_6.checked = False
+
+    def check_box_2_3_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_2_3.checked is True:
+            self.check_box_2_1.checked = False
+            self.check_box_2_2.checked = False
+            self.check_box_2_4.checked = False
+            self.check_box_2_5.checked = False
+            self.check_box_2_6.checked = False
+
+    def check_box_2_4_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        pass
+
+    def check_box_2_5_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        pass
+
+    def check_box_2_6_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        pass
         
        
         

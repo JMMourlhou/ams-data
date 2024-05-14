@@ -161,23 +161,23 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             image = None
         # creation de la réponse multi en fonction du nb d'options choisies +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         reponse = ""
-        if self.rep1.checked == True:
+        if self.rep1.checked is True:
             r1 = "1"
         else: 
             r1 = "0"
-        if self.rep2.checked == True:
+        if self.rep2.checked is True:
             r2 = "1"
         else: 
             r2 = "0"
-        if self.rep3.checked == True:
+        if self.rep3.checked is True:
             r3 = "1"
         else: 
             r3 = "0"
-        if self.rep4.checked == True:
+        if self.rep4.checked is True:
             r4 = "1"
         else: 
             r4 = "0"
-        if self.rep5.checked == True:
+        if self.rep5.checked is True:
             r5 = "1"
         else: 
             r5 = "0"
@@ -213,7 +213,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def rep1_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         if self.drop_down_nb_options.selected_value == 1:    # option vrai/faux
-            if self.rep1.checked == True:   
+            if self.rep1.checked is True:   
                 self.rep2.checked = False
             else:
                 self.rep2.checked = True
@@ -221,7 +221,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def rep2_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         if self.drop_down_nb_options.selected_value == 1:    # option vrai/faux
-            if self.rep2.checked == True:   
+            if self.rep2.checked is True:   
                 self.rep1.checked = False
             else:
                 self.rep1.checked = True
