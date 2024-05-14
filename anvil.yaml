@@ -472,6 +472,12 @@ db_schema:
     - name: code_txt
       admin_ui: {order: 0.5, width: 63}
       type: string
+    - name: satis_dico1_q_ferm
+      admin_ui: {order: 15, width: 200}
+      type: simpleObject
+    - name: satis_dico2_q_ouv
+      admin_ui: {width: 200, order: 16}
+      type: simpleObject
     title: Stages
   cpt_stages:
     client: search
