@@ -21,6 +21,40 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.column_panel_header.tag = "header"
+        self.column_panel_0.tag = 0
+        self.column_panel_1.tag = 1
+        self.column_panel_2.tag = 2
+        self.column_panel_3.tag = 3
+        self.column_panel_4.tag = 4
+        self.column_panel_5.tag = 5
+        self.column_panel_6.tag = 6
+        self.column_panel_7.tag = 7
+        self.column_panel_8.tag = 8
+        self.column_panel_9.tag = 9
+        self.column_panel_10.tag = 10
+        self.flow_panel_1.tag = "fp"
+        self.flow_panel_2.tag = "fp"
+        self.flow_panel_3.tag = "fp"
+        self.flow_panel_4.tag = "fp"
+        self.flow_panel_5.tag = "fp"
+        self.flow_panel_6.tag = "fp"
+        self.flow_panel_7.tag = "fp"
+        self.flow_panel_8.tag = "fp"
+        self.flow_panel_9.tag = "fp"
+        self.flow_panel_10.tag = "fp"
+        self.label_1.tag = "label"
+        self.label_2.tag = "label"
+        self.label_3.tag = "label"
+        self.label_4.tag = "label"
+        self.label_5.tag = "label"
+        self.label_6.tag = "label"
+        self.label_7.tag = "label"
+        self.label_8.tag = "label"
+        self.label_9.tag = "label"
+        self.label_10.tag = "label"
+       
+        
         global user_stagiaire
         if user_stagiaire:
             # Drop down stages inscrits du user
@@ -473,7 +507,84 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         else:
             print("test ok")
             
+        """
+                          CREATION DES DICT REPONSES
+        """
+        dico_rep_q_ferm = {}  #     clé:num question   valeur: = question txt,reponse (0 à 5)
+        dico_rep_q_ouv = {}   #     clé:num question   valeur: = question txt,reponse (txt)
+        
+        for cp in self.get_components(): # column panels in form self
+            if cp.tag != 0 and cp.tag != "header": # si pas les col panel du haut de la forme, ce sont des cp des questions
+                num_question = cp.tag
+                if num_question <= nb_questions_ferm:
+                    try:
+                        for objet in cp.get_components():    # objets ds column panel
+                            try: 
+                                if objet.tag == "label":
+                                    question = objet.text
+                                if objet.tag == "fp":
+                                    cpt = 0
+                                    rep = ""
+                                    for box in objet.get_components():
+                                        if box.checked is True:
+                                            rep=cpt    # si rep1 est 2, indique 1
+                                            clef = num_question
+                                            valeur = (question,rep)
+                                            dico_rep_q_ferm[clef]=valeur
+                                            break
+                                        else:
+                                            cpt += 1
+                                    print("question : ",num_question, "rep :",rep )
+                            except:
+                                pass
+                    except:
+                        pass
+                else: # nb de questions atteint, on sort
+                    break
+        print(dico_rep_q_ferm)
 
+        # Création du dict réponses ouvertes
+        clef = 1
+        if clef <= nb_questions_ouvertes:
+            valeur = (self.label_a1.text,self.text_area_a1.text)
+            dico_rep_q_ouv[clef]=valeur
+
+        clef = 2
+        if clef <= nb_questions_ouvertes:
+            valeur = (self.label_a2.text,self.text_area_a2.text)
+            dico_rep_q_ouv[clef]=valeur
+
+        clef = 3
+        if clef <= nb_questions_ouvertes:
+            valeur = (self.label_a3.text,self.text_area_a3.text)
+            dico_rep_q_ouv[clef]=valeur
+
+        clef = 4
+        if clef <= nb_questions_ouvertes:
+            valeur = (self.label_a4.text,self.text_area_a4.text)
+            dico_rep_q_ouv[clef]=valeur
+
+        clef = 5
+        if clef <= nb_questions_ouvertes:
+            valeur = (self.label_a5.text,self.text_area_a5.text)
+            dico_rep_q_ouv[clef]=valeur
+
+        clef = 6
+        if clef <= nb_questions_ouvertes:
+            valeur = (self.label_a6.text,self.text_area_a6.text)
+            dico_rep_q_ouv[clef]=valeur
+
+        clef = 7
+        if clef <= nb_questions_ouvertes:
+            valeur = (self.label_a7.text,self.text_area_a7.text)
+            dico_rep_q_ouv[clef]=valeur
+            
+        print(dico_rep_q_ouv)
+        
+        
+        
+        
+            
         
        
         
