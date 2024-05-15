@@ -14,6 +14,7 @@ nb_questions_ferm = 0
 global nb_questions_ouvertes  # nb questions ouvertes 
 nb_questions_ouvertes = 0
 
+
 class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -67,68 +68,108 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
 
         if nb_questions_ferm > 0:   # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
-            self.label_1.text = dico_q_ferm['1']
+            self.label_1.text = dico_q_ferm['1'][0]    # Je prend le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
         if nb_questions_ferm > 1:
             self.column_panel_2.visible = True
-            self.label_2.text = dico_q_ferm['2']
+            self.label_2.text = dico_q_ferm['2'][0]
         if nb_questions_ferm > 2:
             self.column_panel_3.visible = True
-            self.label_3.text = dico_q_ferm['3']
+            self.label_3.text = dico_q_ferm['3'][0]
         if nb_questions_ferm > 3:
             self.column_panel_4.visible = True
-            self.label_4.text = dico_q_ferm['4']
+            self.label_4.text = dico_q_ferm['4'][0]
         if nb_questions_ferm > 4:
             self.column_panel_5.visible = True
-            self.label_5.text = dico_q_ferm['5']
+            self.label_5.text = dico_q_ferm['5'][0]
         if nb_questions_ferm > 5:
             self.column_panel_6.visible = True
-            self.label_6.text = dico_q_ferm['6']
+            self.label_6.text = dico_q_ferm['6'][0]
         if nb_questions_ferm > 6:
             self.column_panel_7.visible = True
-            self.label_7.text = dico_q_ferm['7']
+            self.label_7.text = dico_q_ferm['7'][0]
         if nb_questions_ferm > 7:
             self.column_panel_8.visible = True
-            self.label_8.text = dico_q_ferm['8']
+            self.label_8.text = dico_q_ferm['8'][0]
         if nb_questions_ferm > 8:
             self.column_panel_9.visible = True
-            self.label_9.text = dico_q_ferm['9']
+            self.label_9.text = dico_q_ferm['9'][0]
         if nb_questions_ferm > 9:
             self.column_panel_10.visible = True
-            self.label_10.text = dico_q_ferm['10']
+            self.label_10.text = dico_q_ferm['10'][0]
 
         dico_q_ouv = stage_row['satis_dico2_q_ouv']  # check du nb de questions ouvertes à afficher et affectation des questions
         global nb_questions_ouvertes  # nb questions ouvertes
         nb_questions_ouvertes = int(dico_q_ouv['NBQ'])
         if nb_questions_ouvertes > 0:
             self.column_panel_a1.visible = True
-            self.label_a1.text = dico_q_ouv['1']
+            self.label_a1.text = dico_q_ouv['1'][0]
+            if dico_q_ouv['1'][1] == "obligatoire":
+                self.text_area_a1.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a1.placeholder = "Votre réponse ... (facultative)"
         if nb_questions_ouvertes > 1:
             self.column_panel_a2.visible = True
-            self.label_a2.text = dico_q_ouv['2']
+            self.label_a2.text = dico_q_ouv['2'][0]
+            if dico_q_ouv['2'][1] == "obligatoire":
+                self.text_area_a2.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a1.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 2:
             self.column_panel_a3.visible = True   
-            self.label_a3.text = dico_q_ouv['3']
+            self.label_a3.text = dico_q_ouv['3'][0]
+            if dico_q_ouv['3'][1] == "obligatoire":
+                self.text_area_a3.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a3.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 3:
             self.column_panel_a4.visible = True   
-            self.label_a4.text = dico_q_ouv['4']
+            self.label_a4.text = dico_q_ouv['4'][0]
+            if dico_q_ouv['4'][1] == "obligatoire":
+                self.text_area_a4.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a4.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 4:
             self.column_panel_a5.visible = True      
-            self.label_a5.text = dico_q_ouv['5']
+            self.label_a5.text = dico_q_ouv['5'][0]
+            if dico_q_ouv['5'][1] == "obligatoire":
+                self.text_area_a5.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a5.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 5:
             self.column_panel_a6.visible = True   
-            self.label_a6.text = dico_q_ouv['6']
+            self.label_a6.text = dico_q_ouv['6'][0]
+            if dico_q_ouv['6'][1] == "obligatoire":
+                self.text_area_a6.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a6.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 6:
             self.column_panel_a7.visible = True  
-            self.label_a7.text = dico_q_ouv['7']
+            self.label_a7.text = dico_q_ouv['7'][0]
+            if dico_q_ouv['7'][1] == "obligatoire":
+                self.text_area_a7.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a7.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 7:
             self.column_panel_a8.visible = True 
-            self.label_a8.text = dico_q_ouv['8']
+            self.label_a8.text = dico_q_ouv['8'][0]
+            if dico_q_ouv['8'][1] == "obligatoire":
+                self.text_area_a8.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a8.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 8:
             self.column_panel_a9.visible = True     
-            self.label_a9.text = dico_q_ouv['9']
+            self.label_a9.text = dico_q_ouv['9'][0]
+            if dico_q_ouv['9'][1] == "obligatoire":
+                self.text_area_a9.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a9.placeholder = "Votre réponse ... (facultative)" 
         if nb_questions_ouvertes > 9:
             self.column_panel_a10.visible = True     
-            self.label_a10.text = dico_q_ouv['10']
+            self.label_a10.text = dico_q_ouv['10'][0]
+            if dico_q_ouv['10'][1] == "obligatoire":
+                self.text_area_a10.placeholder = "Votre réponse ... (obligatoire)"
+            else:
+                self.text_area_a10.placeholder = "Votre réponse ... (facultative)" 
 
     def check_box_1_1_change(self, **event_args):             # 1 seule réponse doit être checker
         """This method is called when this checkbox is checked or unchecked"""
@@ -298,6 +339,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         # check si une reponse par ligne
         nb = 0
         nb_ouv = 0
+        nb_ouv_obligatoires = 0
         if (self.check_box_1_1.checked is True) or \
             (self.check_box_1_2.checked is True) or \
             (self.check_box_1_3.checked is True) or \
@@ -368,53 +410,68 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             (self.check_box_10_5.checked is True) or \
             (self.check_box_10_6.checked is True):
             nb += 1  
-        # tests si questions ouvertes obligatoires sont répondues   
-        if self.text_area_a1.text != "" and \
-            self.column_panel_a1.visible is True:
-            nb_ouv += 1
-        if self.text_area_a2.text != "" and \
-            self.column_panel_a2.visible is True:
-            nb_ouv += 1
-        if self.text_area_a3.text != "" and \
-            self.column_panel_a3.visible is True:
-            nb_ouv += 1
-        if self.text_area_a4.text != "" and \
-            self.column_panel_a4.visible is True:
-            nb_ouv += 1
-        if self.text_area_a5.text != "" and \
-            self.column_panel_a5.visible is True:
-            nb_ouv += 1
-        if self.text_area_a6.text != "" and \
-            self.column_panel_a6.visible is True:
-            nb_ouv += 1
-        if self.text_area_a7.text != "" and \
-            self.column_panel_a7.visible is True:
-            nb_ouv += 1
-        if self.text_area_a8.text != "" and \
-            self.column_panel_a8.visible is True:
-            nb_ouv += 1
-        if self.text_area_a9.text != "" and \
-            self.column_panel_a9.visible is True:
-            nb_ouv += 1
-        if self.text_area_a10.text != "" and \
-            self.column_panel_a10.visible is True:
-            nb_ouv += 1
-            
-        
         print("test nb questions fermées répondues: ",nb)
         global nb_questions_ferm
         print("test nb questions fermées dico: ",nb_questions_ferm)
         if nb != nb_questions_ferm:
-            alert("Répondez à chaque question bleue svp !")
+            alert("Répondez à toutes les questions bleues svp !")
             return
 
+        
+        # tests si questions ouvertes obligatoires sont répondues  
+        global stage_row
+        dico_ouv = stage_row['satis_dico2_q_ouv']
+        
+        if self.column_panel_a1.visible is True and dico_ouv['1'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a1.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a2.visible is True and dico_ouv['2'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a2.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a3.visible is True and dico_ouv['3'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a3.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a4.visible is True and dico_ouv['4'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a4.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a5.visible is True and dico_ouv['5'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a5.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a6.visible is True and dico_ouv['6'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a6.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a7.visible is True and dico_ouv['7'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a7.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a8.visible is True and dico_ouv['8'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a8.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a9.visible is True and dico_ouv['9'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a9.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues
+        if self.column_panel_a10.visible is True and dico_ouv['10'][1] == "obligatoire":    # existe ds dico et obligatoire ?
+            nb_ouv_obligatoires += 1 # cumul nb questions ouvertes obligatoires
+            if self.text_area_a10.text != "":
+                nb_ouv += 1          # Cumul nb questions ouvertes obligatoires répondues       
         print("test nb questions ouvertes répondues: ",nb_ouv)
         
         global nb_questions_ouvertes
         print("test nb questions ouvertes dico: ",nb_questions_ouvertes)
-        if nb_ouv != nb_questions_ouvertes:
-            alert("Répondez à chaque question verte svp !")
+        print("test nb questions ouvertes dico obligatoires: ",nb_ouv_obligatoires)
+        if nb_ouv != nb_ouv_obligatoires :
+            alert("Répondez à toutes les questions vertes obligatoires svp !")
             return
+        else:
+            print("test ok")
             
 
         

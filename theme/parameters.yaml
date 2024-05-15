@@ -337,5 +337,5 @@ color_scheme:
   - {name: Secondary 700, color: '#AFB42B'}
   - {name: transparent, color: '#FF000000'}
   - {name: '', color: '#000000'}
-  - {name: White, color: '#FFFFFF'}
+  - {name: Olive, color: '#5B9B35'}
   - {name: Green, color: '#00FF00'}
