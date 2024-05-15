@@ -336,6 +336,10 @@ color_scheme:
   - {name: Secondary 500, color: '#fff905'}
   - {name: Secondary 700, color: '#AFB42B'}
   - {name: transparent, color: '#FF000000'}
-  - {name: '', color: '#000000'}
+  - {name: Vert Foncé, color: '#3E8607'}
   - {name: Olive, color: '#5B9B35'}
   - {name: Green, color: '#00FF00'}
+  - {name: Orange, color: '#FF7B22'}
+  - {name: Jaune Orangé, color: '#FFD707'}
+  - {name: Jaune Vert, color: '#CEFF07'}
+  - {name: Vert Clair, color: '#61D007'}

@@ -81,18 +81,24 @@ components:
     type: Label
     layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
   - name: column_panel_11
-    properties: {}
+    properties: {wrap_on: never, col_widths: '{"AEXQWF":9,"FYTCZV":42,"GSRIRY":9}',
+      col_spacing: tiny, spacing_above: none, spacing_below: none}
     type: ColumnPanel
-    layout_properties: {grid_position: 'LIPPSJ,JPIDBL'}
+    layout_properties: {grid_position: 'LIPPSJ,JPIDBL', full_width_row: false}
     components:
     - name: button_bad
-      properties: {text: '', role: null, font_size: 24, icon: 'fa:thumbs-down', foreground: 'theme:Error',
-        bold: false, enabled: false, background: 'theme:Surface'}
+      properties: {role: null, align: center, enabled: false, foreground: 'theme:Error',
+        text: ' ', font_size: 30, background: 'theme:Surface', bold: false, icon: 'fa:thumbs-down'}
       type: Button
       layout_properties: {grid_position: 'HRJSWS,AEXQWF'}
+    - name: label_11
+      properties: {align: center, text: '----- >', bold: true, font_size: 40, foreground: 'theme:On
+          Primary'}
+      type: Label
+      layout_properties: {grid_position: 'HRJSWS,FYTCZV'}
     - name: button_bad_copy
-      properties: {text: '', role: null, font_size: 24, icon: 'fa:thumbs-up', foreground: 'theme:Green',
-        bold: false, enabled: false, background: 'theme:Surface'}
+      properties: {role: null, align: center, enabled: false, foreground: 'theme:Green',
+        text: ' ', font_size: 30, background: 'theme:Surface', bold: false, icon: 'fa:thumbs-up'}
       type: Button
       layout_properties: {grid_position: 'HRJSWS,GSRIRY'}
   - name: flow_panel_1
@@ -102,32 +108,32 @@ components:
     layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
     components:
     - name: check_box_1_1
-      properties: {text: '0', foreground: '', checked: false}
+      properties: {text: '0', foreground: '', checked: false, background: 'theme:Error'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_1_change}
     - name: check_box_1_2
-      properties: {text: '1'}
+      properties: {text: '1', background: 'theme:Orange'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_2_change}
     - name: check_box_1_3
-      properties: {text: '2'}
+      properties: {text: '2', background: 'theme:Jaune Orangé'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_3_change}
     - name: check_box_1_4
-      properties: {text: '3'}
+      properties: {text: '3', background: 'theme:Vert Foncé'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_4_change}
     - name: check_box_1_5
-      properties: {text: '4'}
+      properties: {text: '4', background: 'theme:Vert Clair'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_5_change}
     - name: check_box_1_6
-      properties: {text: '5'}
+      properties: {text: '5', foreground: '', background: 'theme:Green'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_6_change}
@@ -246,26 +252,32 @@ components:
       properties: {text: '0', foreground: ''}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_4_1_change}
     - name: check_box_4_2
       properties: {text: '1'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_4_2_change}
     - name: check_box_4_3
       properties: {text: '2'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_4_3_change}
     - name: check_box_4_4
       properties: {text: '3'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_4_4_change}
     - name: check_box_4_5
       properties: {text: '4'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_4_5_change}
     - name: check_box_4_6
       properties: {text: '5'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_4_6_change}
 - name: column_panel_5
   properties: {col_widths: '{"YMLJWU":5}', col_spacing: tiny, role: elevated-card,
     background: 'theme:Primary', visible: false}
