@@ -9,7 +9,10 @@ global user_stagiaire
 user_stagiaire = anvil.users.get_user()
 global stage_row
 stage_row = None
-
+global nb_questions_ferm  # nb questions fermées (check 0 à 5)
+nb_questions_ferm = 0
+global nb_questions_ouvertes  # nb questions ouvertes 
+nb_questions_ouvertes = 0
 
 class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
     def __init__(self, **properties):
@@ -17,15 +20,8 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-
-        
-        #if isinstance(stage_row['satis_dico1_q_ferm'], dict): 
-        #n'afficher que les stages ayant un dico 
-
-        
         global user_stagiaire
         if user_stagiaire:
-            #self.label_0.text = "Documents à fournir pour " + user_pr['prenom'] + " " + user_pr['nom']
             # Drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email","stage"),           # <----------------------  A Modifier? 
                                                             user_email=user_stagiaire
@@ -61,11 +57,12 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             alert("Vous devez sélectionner un pré-requis !")
             self.drop_down_code_stage.focus()
             return
-        #self.column_panel_2.visible = True
+        self.text_area_a1.text = None
         # extraction des 2 dictionnaires du stage
         dico_q_ferm = {}
         dico_q_ouv = {}
         dico_q_ferm = stage_row['satis_dico1_q_ferm']
+        global nb_questions_ferm                   # nb questions fermées (testé en validation)
         nb_questions_ferm = int(dico_q_ferm['NBQ'])   # nb de questions fermées ds le dico
 
         if nb_questions_ferm > 0:   # Check du nb de questions fermées à afficher et affectation des questions
@@ -100,6 +97,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             self.label_10.text = dico_q_ferm['10']
 
         dico_q_ouv = stage_row['satis_dico2_q_ouv']  # check du nb de questions ouvertes à afficher et affectation des questions
+        global nb_questions_ouvertes  # nb questions ouvertes
         nb_questions_ouvertes = int(dico_q_ouv['NBQ'])
         if nb_questions_ouvertes > 0:
             self.column_panel_a1.visible = True
@@ -299,6 +297,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         """This method is called when the button is clicked"""
         # check si une reponse par ligne
         nb = 0
+        nb_ouv = 0
         if (self.check_box_1_1.checked is True) or \
             (self.check_box_1_2.checked is True) or \
             (self.check_box_1_3.checked is True) or \
@@ -313,7 +312,109 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             (self.check_box_2_5.checked is True) or \
             (self.check_box_2_6.checked is True):
             nb += 1
-        print(nb)
+        if (self.check_box_3_1.checked is True) or \
+            (self.check_box_3_2.checked is True) or \
+            (self.check_box_3_3.checked is True) or \
+            (self.check_box_3_4.checked is True) or \
+            (self.check_box_3_5.checked is True) or \
+            (self.check_box_3_6.checked is True):
+            nb += 1
+        if (self.check_box_4_1.checked is True) or \
+            (self.check_box_4_2.checked is True) or \
+            (self.check_box_4_3.checked is True) or \
+            (self.check_box_4_4.checked is True) or \
+            (self.check_box_4_5.checked is True) or \
+            (self.check_box_4_6.checked is True):
+            nb += 1
+        if (self.check_box_5_1.checked is True) or \
+            (self.check_box_5_2.checked is True) or \
+            (self.check_box_5_3.checked is True) or \
+            (self.check_box_5_4.checked is True) or \
+            (self.check_box_5_5.checked is True) or \
+            (self.check_box_5_6.checked is True):
+            nb += 1
+        if (self.check_box_6_1.checked is True) or \
+            (self.check_box_6_2.checked is True) or \
+            (self.check_box_6_3.checked is True) or \
+            (self.check_box_6_4.checked is True) or \
+            (self.check_box_6_5.checked is True) or \
+            (self.check_box_6_6.checked is True):
+            nb += 1
+        if (self.check_box_7_1.checked is True) or \
+            (self.check_box_7_2.checked is True) or \
+            (self.check_box_7_3.checked is True) or \
+            (self.check_box_7_4.checked is True) or \
+            (self.check_box_7_5.checked is True) or \
+            (self.check_box_7_6.checked is True):
+            nb += 1
+        if (self.check_box_8_1.checked is True) or \
+            (self.check_box_8_2.checked is True) or \
+            (self.check_box_8_3.checked is True) or \
+            (self.check_box_8_4.checked is True) or \
+            (self.check_box_8_5.checked is True) or \
+            (self.check_box_8_6.checked is True):
+            nb += 1
+        if (self.check_box_9_1.checked is True) or \
+            (self.check_box_9_2.checked is True) or \
+            (self.check_box_9_3.checked is True) or \
+            (self.check_box_9_4.checked is True) or \
+            (self.check_box_9_5.checked is True) or \
+            (self.check_box_9_6.checked is True):
+            nb += 1
+        if (self.check_box_10_1.checked is True) or \
+            (self.check_box_10_2.checked is True) or \
+            (self.check_box_10_3.checked is True) or \
+            (self.check_box_10_4.checked is True) or \
+            (self.check_box_10_5.checked is True) or \
+            (self.check_box_10_6.checked is True):
+            nb += 1  
+        # tests si questions ouvertes obligatoires sont répondues   
+        if self.text_area_a1.text != "" and \
+            self.column_panel_a1.visible is True:
+            nb_ouv += 1
+        if self.text_area_a2.text != "" and \
+            self.column_panel_a2.visible is True:
+            nb_ouv += 1
+        if self.text_area_a3.text != "" and \
+            self.column_panel_a3.visible is True:
+            nb_ouv += 1
+        if self.text_area_a4.text != "" and \
+            self.column_panel_a4.visible is True:
+            nb_ouv += 1
+        if self.text_area_a5.text != "" and \
+            self.column_panel_a5.visible is True:
+            nb_ouv += 1
+        if self.text_area_a6.text != "" and \
+            self.column_panel_a6.visible is True:
+            nb_ouv += 1
+        if self.text_area_a7.text != "" and \
+            self.column_panel_a7.visible is True:
+            nb_ouv += 1
+        if self.text_area_a8.text != "" and \
+            self.column_panel_a8.visible is True:
+            nb_ouv += 1
+        if self.text_area_a9.text != "" and \
+            self.column_panel_a9.visible is True:
+            nb_ouv += 1
+        if self.text_area_a10.text != "" and \
+            self.column_panel_a10.visible is True:
+            nb_ouv += 1
+            
+        
+        print("test nb questions fermées répondues: ",nb)
+        global nb_questions_ferm
+        print("test nb questions fermées dico: ",nb_questions_ferm)
+        if nb != nb_questions_ferm:
+            alert("Répondez à chaque question bleue svp !")
+            return
+
+        print("test nb questions ouvertes répondues: ",nb_ouv)
+        
+        global nb_questions_ouvertes
+        print("test nb questions ouvertes dico: ",nb_questions_ouvertes)
+        if nb_ouv != nb_questions_ouvertes:
+            alert("Répondez à chaque question verte svp !")
+            return
             
 
         
