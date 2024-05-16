@@ -1,4 +1,5 @@
 from ._anvil_designer import Stage_form_satisfactionTemplate
+from .. import French_zone # POur acquisition de date et heure Francaise (Browser time)
 from anvil import *
 import anvil.server
 import anvil.users
@@ -8,7 +9,7 @@ from anvil.tables import app_tables
 global user_stagiaire
 user_stagiaire = anvil.users.get_user()
 global stage_row
-stage_row = None
+stage_row = ()
 global nb_questions_ferm  # nb questions fermées (check 0 à 5)
 nb_questions_ferm = 0
 global nb_questions_ouvertes  # nb questions ouvertes 
@@ -590,7 +591,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                                     for box in objet.get_components():
                                         if box.checked is True:
                                             rep=cpt    # si rep1 est 2, indique 1
-                                            clef = num_question
+                                            clef = str(num_question)    # la clé doit être str qd j'envoie le dico en server-side
                                             valeur = (question,rep)
                                             dico_rep_q_ferm[clef]=valeur
                                             break
@@ -603,60 +604,86 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                         pass
                 else: # nb de questions atteint, on sort
                     break
-        print(dico_rep_q_ferm)
 
         # Création du dict réponses ouvertes
-        clef = 1
-        if clef <= nb_questions_ouvertes:
+        clef = "1"          # num question ,  la clé doit être str qd j'envoie le dico en server-side
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a1.text,self.text_area_a1.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 2
-        if clef <= nb_questions_ouvertes:
+        clef = "2"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a2.text,self.text_area_a2.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 3
-        if clef <= nb_questions_ouvertes:
+        clef = "3"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a3.text,self.text_area_a3.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 4
-        if clef <= nb_questions_ouvertes:
+        clef = "4"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a4.text,self.text_area_a4.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 5
-        if clef <= nb_questions_ouvertes:
+        clef = "5"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a5.text,self.text_area_a5.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 6
-        if clef <= nb_questions_ouvertes:
+        clef = "6"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a6.text,self.text_area_a6.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 7
-        if clef <= nb_questions_ouvertes:
+        clef = "7"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a7.text,self.text_area_a7.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 8
-        if clef <= nb_questions_ouvertes:
+        clef = "8"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a8.text,self.text_area_a8.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 9
-        if clef <= nb_questions_ouvertes:
+        clef = "9"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a9.text,self.text_area_a9.text)
             dico_rep_q_ouv[clef]=valeur
 
-        clef = 10
-        if clef <= nb_questions_ouvertes:
+        clef = "10"
+        if int(clef) <= nb_questions_ouvertes:
             valeur = (self.label_a10.text,self.text_area_a10.text)
             dico_rep_q_ouv[clef]=valeur
-        
+            
+        # Print pour vérif des 2 dicos    
+        print()    
+        print("============== Dict reponses fermées: ")
+        print(dico_rep_q_ferm)   
+        print()
+        print("============== Dict reponses ouvertes: ")
         print(dico_rep_q_ouv)
+        
+        date_time = ""
+        date_time = French_zone.french_zone_time()  # importé en ht de ce script, 
+        print()
+        date_time = str(date_time)[0:19]   # je prends les 19 1ers caract
+        print(date_time)
+        
+        global user_stagiaire
+        result = anvil.server.call("add_1_formulaire_satisfaction", user_stagiaire,              
+                                                                    stage_row,
+                                                                    dico_rep_q_ferm,
+                                                                    dico_rep_q_ouv,
+                                                                    date_time
+                                   )
+        if result is True:
+            alert("Le formulaire a été enregistré")
+            self.button_annuler_click()
+        else:
+            alert("Le formulaire n'a pas été enregistré correctement !")
+       
+            
         
         
         

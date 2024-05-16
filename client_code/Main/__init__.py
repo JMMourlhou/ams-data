@@ -1,7 +1,6 @@
 from ._anvil_designer import MainTemplate
 from anvil import *
 import anvil.server
-
 from anvil.tables import app_tables
 from .. import French_zone
 from ..Saisie_info_de_base import Saisie_info_de_base

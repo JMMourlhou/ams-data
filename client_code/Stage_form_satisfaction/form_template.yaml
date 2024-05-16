@@ -108,12 +108,13 @@ components:
     layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
     components:
     - name: check_box_1_1
-      properties: {text: '0', foreground: '', checked: false, background: 'theme:Error'}
+      properties: {text: '0', foreground: '', checked: false, background: 'theme:Error',
+        align: left}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_1_change}
     - name: check_box_1_2
-      properties: {text: '1', background: 'theme:Orange'}
+      properties: {text: '1', background: 'theme:Orange', align: left}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_2_change}
