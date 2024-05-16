@@ -101,15 +101,15 @@ db_schema:
     - name: stage_type_txt
       admin_ui: {order: 2, width: 129}
       type: string
-    - name: date_heure
-      admin_ui: {order: 3, width: 155}
-      type: datetime
     - name: rep_dico_rep_ferm
-      admin_ui: {order: 4, width: 200}
+      admin_ui: {order: 4, width: 212}
       type: simpleObject
     - name: rep_dico_rep_ouv
       admin_ui: {width: 200, order: 5}
       type: simpleObject
+    - name: date_heure
+      admin_ui: {order: 3, width: 134}
+      type: string
     title: Stage_satisf
   global_variables:
     client: none
@@ -497,7 +497,7 @@ db_schema:
       admin_ui: {width: 200, order: 14}
       type: simpleObject
     - name: code_txt
-      admin_ui: {order: 0.5, width: 63}
+      admin_ui: {order: 0.5, width: 82}
       type: string
     - name: satis_dico1_q_ferm
       admin_ui: {order: 15, width: 200}
