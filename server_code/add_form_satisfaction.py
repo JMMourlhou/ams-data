@@ -36,12 +36,12 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
     
     if re_read_row:  
         # check de la formule de satisfaction pour que le stgiaire ne puisse pas y revenir
-        """
+        
         row = app_tables.stagiaires_inscrits.get(   numero =     stage_row['numero'],
                                                     user_email = user_stagiaire
                                                 )
         row.update(enquete_satisf=True)
-        """
+    
         return(True)
     else:
         return(False)

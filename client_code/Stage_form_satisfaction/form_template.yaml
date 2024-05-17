@@ -97,8 +97,9 @@ components:
       type: Label
       layout_properties: {grid_position: 'HRJSWS,FYTCZV'}
     - name: button_bad_copy
-      properties: {role: null, align: center, enabled: false, foreground: 'theme:Green',
-        text: ' ', font_size: 30, background: 'theme:Surface', bold: false, icon: 'fa:thumbs-up'}
+      properties: {role: null, align: center, enabled: false, foreground: 'theme:Vert
+          Foncé', text: ' ', font_size: 30, background: 'theme:Surface', bold: false,
+        icon: 'fa:thumbs-up'}
       type: Button
       layout_properties: {grid_position: 'HRJSWS,GSRIRY'}
   - name: flow_panel_1
@@ -124,7 +125,7 @@ components:
       layout_properties: {}
       event_bindings: {change: check_box_1_3_change}
     - name: check_box_1_4
-      properties: {text: '3', background: 'theme:Vert Foncé'}
+      properties: {text: '3', background: 'theme:Vers Très Clair'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_4_change}
@@ -134,7 +135,7 @@ components:
       layout_properties: {}
       event_bindings: {change: check_box_1_5_change}
     - name: check_box_1_6
-      properties: {text: '5', foreground: '', background: 'theme:Green'}
+      properties: {text: '5', foreground: '', background: 'theme:Vert Foncé'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_6_change}
@@ -394,26 +395,32 @@ components:
       properties: {text: '0', foreground: ''}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_7_1_change}
     - name: check_box_7_2
       properties: {text: '1'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_7_2_change}
     - name: check_box_7_3
       properties: {text: '2'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_7_3_change}
     - name: check_box_7_4
       properties: {text: '3'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_7_4_change}
     - name: check_box_7_5
       properties: {text: '4'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_7_5_change}
     - name: check_box_7_6
       properties: {text: '5'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_7_6_change}
 - name: column_panel_8
   properties: {col_widths: '{"YMLJWU":5}', col_spacing: tiny, role: elevated-card,
     background: 'theme:Primary', visible: false}
@@ -435,26 +442,32 @@ components:
       properties: {text: '0', foreground: ''}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_8_1_change}
     - name: check_box_8_2
       properties: {text: '1'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_8_2_change}
     - name: check_box_8_3
       properties: {text: '2'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_8_3_change}
     - name: check_box_8_4
       properties: {text: '3'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_8_4_change}
     - name: check_box_8_5
       properties: {text: '4'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_8_5_change}
     - name: check_box_8_6
       properties: {text: '5'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_8_6_change}
 - name: column_panel_9
   properties: {col_widths: '{"YMLJWU":5}', col_spacing: tiny, role: elevated-card,
     background: 'theme:Primary', visible: false}
@@ -476,26 +489,32 @@ components:
       properties: {text: '0', foreground: ''}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_9_1_change}
     - name: check_box_9_2
       properties: {text: '1'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_9_2_change}
     - name: check_box_9_3
       properties: {text: '2'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_9_3_change}
     - name: check_box_9_4
       properties: {text: '3'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_9_4_change}
     - name: check_box_9_5
       properties: {text: '4'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_9_5_change}
     - name: check_box_9_6
       properties: {text: '5'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_9_6_change}
 - name: column_panel_10
   properties: {col_widths: '{"YMLJWU":5}', col_spacing: tiny, role: elevated-card,
     background: 'theme:Primary', visible: false}
@@ -517,26 +536,32 @@ components:
       properties: {text: '0', foreground: ''}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_10_1_change}
     - name: check_box_10_2
       properties: {text: '1'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_10_2_change}
     - name: check_box_10_3
       properties: {text: '2'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_10_3_change}
     - name: check_box_10_4
       properties: {text: '3'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_10_4_change}
     - name: check_box_10_5
       properties: {text: '4'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_10_5_change}
     - name: check_box_10_6
       properties: {text: '5'}
       type: CheckBox
       layout_properties: {}
+      event_bindings: {change: check_box_10_6_change}
 - name: column_panel_a1
   properties: {col_widths: '{"YMLJWU":5}', col_spacing: tiny, role: elevated-card,
     background: 'theme:Olive', visible: false}
