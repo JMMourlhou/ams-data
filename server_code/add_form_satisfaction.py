@@ -8,8 +8,8 @@ import anvil.server
 
 @anvil.server.callable           #AJOUT d'un formulaire ds table _transaction, anonyme
 @anvil.tables.in_transaction
-def add_1_formulaire_satisfaction(  user_stagiaire,              
-                                    stage_row,
+def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
+                                    stage_row,                   # stages row
                                     dico_rep_q_ferm,
                                     dico_rep_q_ouv,
                                     date_time    
@@ -30,11 +30,16 @@ def add_1_formulaire_satisfaction(  user_stagiaire,
                                     rep_dico_rep_ferm=dico_rep_q_ferm,
                                     rep_dico_rep_ouv=dico_rep_q_ouv
                                    )
+    id=new_row.get_id()
     #relecture du row:
-    re_read_row = app_tables.stage_satisf.get(stage_row=new_row["stage_row"],
-                                            date_heure=new_row["date_heure"],
-                                            rep_dico_rep_ferm=new_row["rep_dico_rep_ouv"])
-    if re_read_row:                        
+    re_read_row= app_tables.stage_satisf.get_by_id(id)
+    
+    if re_read_row:  
+        # check de la formule de satisfaction pour que le stgiaire ne puisse pas y revenir
+        row = app_tables.stagiaires_inscrits.get(   numero =     stage_row['numero'],
+                                                    user_email = user_stagiaire
+                                                )
+        row.update(enquete_satisf=True)
         return(True)
     else:
         return(False)
