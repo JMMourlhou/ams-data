@@ -9,6 +9,9 @@ dependencies:
 - dep_id: dep_j1klhpbxdpr373
   version: {dev: false}
   resolution_hints: {app_id: NRVII2QKUF7NSGEP, name: FastPDF, package_name: fast_pdf}
+- dep_id: dep_7cjrxpuwlnf9l
+  version: {dev: false}
+  resolution_hints: {app_id: T2N6YY2X6Z3W26OE, name: Clone of InputBox, package_name: InputBox}
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}
