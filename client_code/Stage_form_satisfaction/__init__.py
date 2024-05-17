@@ -428,58 +428,111 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
     #================================================================================= 5eme ligne
     def check_box_5_1_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        if self.check_box_4_1.checked is True:
-            self.check_box_4_2.checked = False
-            self.check_box_4_3.checked = False
-            self.check_box_4_4.checked = False
-            self.check_box_4_5.checked = False
-            self.check_box_4_6.checked = False
+        if self.check_box_5_1.checked is True:
+            self.check_box_5_2.checked = False
+            self.check_box_5_3.checked = False
+            self.check_box_5_4.checked = False
+            self.check_box_5_5.checked = False
+            self.check_box_5_6.checked = False
 
     def check_box_5_2_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        if self.check_box_4_2.checked is True:
-            self.check_box_4_1.checked = False
-            self.check_box_4_3.checked = False
-            self.check_box_4_4.checked = False
-            self.check_box_4_5.checked = False
-            self.check_box_4_6.checked = False
+        if self.check_box_5_2.checked is True:
+            self.check_box_5_1.checked = False
+            self.check_box_5_3.checked = False
+            self.check_box_5_4.checked = False
+            self.check_box_5_5.checked = False
+            self.check_box_5_6.checked = False
 
     def check_box_5_3_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        if self.check_box_4_3.checked is True:
-            self.check_box_4_1.checked = False
-            self.check_box_4_2.checked = False
-            self.check_box_4_4.checked = False
-            self.check_box_4_5.checked = False
-            self.check_box_4_6.checked = False
+        if self.check_box_5_3.checked is True:
+            self.check_box_5_1.checked = False
+            self.check_box_5_2.checked = False
+            self.check_box_5_4.checked = False
+            self.check_box_5_5.checked = False
+            self.check_box_5_6.checked = False
 
     def check_box_5_4_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        if self.check_box_4_4.checked is True:
-            self.check_box_4_1.checked = False
-            self.check_box_4_3.checked = False
-            self.check_box_4_2.checked = False
-            self.check_box_4_5.checked = False
-            self.check_box_4_6.checked = False
+        if self.check_box_5_4.checked is True:
+            self.check_box_5_1.checked = False
+            self.check_box_5_3.checked = False
+            self.check_box_5_2.checked = False
+            self.check_box_5_5.checked = False
+            self.check_box_5_6.checked = False
 
     def check_box_5_5_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        if self.check_box_4_5.checked is True:
-            self.check_box_4_1.checked = False
-            self.check_box_4_2.checked = False
-            self.check_box_4_4.checked = False
-            self.check_box_4_3.checked = False
-            self.check_box_4_6.checked = False
+        if self.check_box_5_5.checked is True:
+            self.check_box_5_1.checked = False
+            self.check_box_5_2.checked = False
+            self.check_box_5_4.checked = False
+            self.check_box_5_3.checked = False
+            self.check_box_5_6.checked = False
 
     def check_box_5_6_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        if self.check_box_4_6.checked is True:
-            self.check_box_4_1.checked = False
-            self.check_box_4_2.checked = False
-            self.check_box_4_4.checked = False
-            self.check_box_4_3.checked = False
-            self.check_box_4_5.checked = False
-    
+        if self.check_box_5_6.checked is True:
+            self.check_box_5_1.checked = False
+            self.check_box_5_2.checked = False
+            self.check_box_5_4.checked = False
+            self.check_box_5_3.checked = False
+            self.check_box_5_5.checked = False
+    #================================================================================= 6eme ligne
+    def check_box_6_1_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_6_1.checked is True:
+            self.check_box_6_2.checked = False
+            self.check_box_6_3.checked = False
+            self.check_box_6_4.checked = False
+            self.check_box_6_5.checked = False
+            self.check_box_6_6.checked = False
+
+    def check_box_6_2_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_6_2.checked is True:
+            self.check_box_6_1.checked = False
+            self.check_box_6_3.checked = False
+            self.check_box_6_4.checked = False
+            self.check_box_6_5.checked = False
+            self.check_box_6_6.checked = False
+
+    def check_box_6_3_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_6_3.checked is True:
+            self.check_box_6_1.checked = False
+            self.check_box_6_2.checked = False
+            self.check_box_6_4.checked = False
+            self.check_box_6_5.checked = False
+            self.check_box_6_6.checked = False
+
+    def check_box_6_4_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_6_4.checked is True:
+            self.check_box_6_1.checked = False
+            self.check_box_6_3.checked = False
+            self.check_box_6_2.checked = False
+            self.check_box_6_5.checked = False
+            self.check_box_6_6.checked = False
+
+    def check_box_6_5_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_6_5.checked is True:
+            self.check_box_6_1.checked = False
+            self.check_box_6_2.checked = False
+            self.check_box_6_4.checked = False
+            self.check_box_6_3.checked = False
+            self.check_box_6_6.checked = False
+
+    def check_box_6_6_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_6_6.checked is True:
+            self.check_box_6_1.checked = False
+            self.check_box_6_2.checked = False
+            self.check_box_6_4.checked = False
+            self.check_box_6_3.checked = False
+            self.check_box_6_5.checked = False
     
     
     
