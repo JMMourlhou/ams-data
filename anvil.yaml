@@ -6,9 +6,6 @@ dependencies:
 - dep_id: dep_s1ab3kmc49opgj
   version: {dev: false}
   resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_in_for_AMS_Data}
-- dep_id: dep_1b6m345gr6tpp
-  version: {dev: false}
-  resolution_hints: {app_id: 5PSA5XWRBNOHKUCJ, name: InputBox, package_name: InputBox}
 - dep_id: dep_j1klhpbxdpr373
   version: {dev: false}
   resolution_hints: {app_id: NRVII2QKUF7NSGEP, name: FastPDF, package_name: fast_pdf}
