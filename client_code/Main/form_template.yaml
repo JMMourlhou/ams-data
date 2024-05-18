@@ -184,6 +184,7 @@ components:
           foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
         type: Button
         event_bindings: {click: button_form_satisf_click}
+        layout_properties: {}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: content_panel
