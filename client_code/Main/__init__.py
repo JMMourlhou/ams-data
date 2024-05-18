@@ -286,5 +286,9 @@ class Main(MainTemplate):
     def button_form_satisf_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_form_satisfaction import Stage_form_satisfaction
-
         open_form("Stage_form_satisfaction")
+
+    def button_satisf_result_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Stage_satisf_statistics import Stage_satisf_statistics
+        open_form("Stage_satisf_statistics")

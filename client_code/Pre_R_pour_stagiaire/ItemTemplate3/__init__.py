@@ -16,18 +16,17 @@ class ItemTemplate3(ItemTemplate3Template):
         # Any code you write here will run before the form opens.
         self.text_box_1.text = self.item['requis_txt']
         
-        if self.image_1.source is not None:
+        if self.item['doc1'] is not None:    # Si doc existant
             self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
             self.button_del.visible = True
-        else:
-            self.button_del.visible = False
-            
-            
-        try:     # si pas de doc en table, erreur
-            #media = self.item['doc1'].name
             self.button_visu.visible = True
-        except:
-            pass
+        else:
+            self.button_del.visible = False            
+            try:     # si pas de doc en table, erreur
+                #media = self.item['doc1'].name
+                self.button_visu.visible = False
+            except:
+                pass
         
         self.stage_num =   self.item['stage_num']        # Row stage
         self.item_requis = self.item['item_requis']      # Row Item requis

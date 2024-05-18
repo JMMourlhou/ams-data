@@ -156,6 +156,15 @@ components:
           underline: false, icon: ''}
         name: button_create_qcm
         event_bindings: {click: button_create_qcm_click}
+      - name: button_satisf_result
+        properties: {role: elevated-button, align: center, tooltip: '', border: '',
+          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Enquêtes
+            satisfaction', font_size: null, font: '', spacing_above: small, icon_align: left,
+          spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
+          underline: false, icon: ''}
+        type: Button
+        event_bindings: {click: button_satisf_result_click}
+        layout_properties: {}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_others
