@@ -102,7 +102,7 @@ db_schema:
       admin_ui: {order: 2, width: 129}
       type: string
     - name: rep_dico_rep_ferm
-      admin_ui: {order: 4, width: 212}
+      admin_ui: {order: 4, width: 443}
       type: simpleObject
     - name: rep_dico_rep_ouv
       admin_ui: {width: 200, order: 5}

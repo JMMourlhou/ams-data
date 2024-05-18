@@ -49,31 +49,182 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
+       
+        
+        dico_rep_ferm = {}
+        dico_rep_ouv = {}
+
+        # Création des dico des réponses cumulées
+        rep0_cumul = {}                                                 # Cumil Réponses 0
+        rep0_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep0_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep0_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep0_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep0_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep0_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep0_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep0_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep0_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep0_cumul["10"] =  0        # Cumul des réponses 0, question 10   
+
+        # Création des dico des réponses cumulées
+        rep1_cumul = {}                                                 # Cumul Réponses 1
+        rep1_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep1_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep1_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep1_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep1_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep1_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep1_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep1_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep1_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep1_cumul["10"] =  0        # Cumul des réponses 0, question 10   
+
+        # Création des dico des réponses cumulées
+        rep2_cumul = {}                                                 # Cumul Réponses 2
+        rep2_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep2_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep2_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep2_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep2_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep2_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep2_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep2_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep2_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep2_cumul["10"] =  0        # Cumul des réponses 0, question 10   
+        
+         # Création des dico des réponses cumulées
+        rep3_cumul = {}                                                 # Cumil Réponses 3
+        rep3_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep3_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep3_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep3_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep3_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep3_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep3_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep3_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep3_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep3_cumul["10"] =  0        # Cumul des réponses 0, question 10   
+
+        # Création des dico des réponses cumulées
+        rep4_cumul = {}                                                 # Cumul Réponses 4
+        rep4_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep4_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep4_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep4_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep4_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep4_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep4_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep4_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep4_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep4_cumul["10"] =  0        # Cumul des réponses 0, question 10   
+
+        # Création des dico des réponses cumulées
+        rep5_cumul = {}                                                 # Cumul Réponses 5
+        rep5_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep5_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep5_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep5_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep5_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep5_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep5_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep5_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep5_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep5_cumul["10"] =  0        # Cumul des réponses 0, question 10
+
         # lecture des formulaires du stage choisi
+        cpt_formulaire = 0
         liste_formulaires = app_tables.stage_satisf.search(stage_row=row)
         print(len(liste_formulaires), 'formulaires à traiter')
-        #cumuls
-        nb_rep_0 = 0
-        nb_rep_1 = 0
-        nb_rep_2 = 0
-        nb_rep_3 = 0
-        nb_rep_4 = 0
-        nb_rep_5 = 0
-        dico_rep_fermées = {}
-        dico_rep_ouvertes = {}
         
         for formulaire in liste_formulaires:
+            cpt_formulaire += 1
+            print("==========================FORMULAIRE", cpt_formulaire)
             # dico questions fermées
             dico_rep_ferm = formulaire["rep_dico_rep_ferm"]
             # dico questions ouvertes
             dico_rep_ouv = formulaire["rep_dico_rep_ferm"]
             
-            for cle in dico_rep_ferm.items():
-                resultat = cle="1"
-                if cle["1"] == "0": 
-                    nb_rep_0 += 1
-            print("nb de rep 0: ",  nb_rep_0)
+            # Boucle sur le dictionaire fermé du formulaire
+            
+            # ex du contenu du dico en table qd lu:   ('1', ["Conditions d'accueil sur les lieux de formation:", 0])
+            #                                          cle   valeur
+            #                             indices;      0    1 
+            #                                                tuple [question, reponse]    
+            for clef in dico_rep_ferm.items():     
+                cle    = clef[0]  # num question
+                valeur = clef[1]  # indice 1: donc reponse
 
+                l=(1,2)     # A MODIFIER EN FONCTION DU NB DE QUESTIONS FERMEES
+                for question in l:
+                    
+                    print("======= QUESTION ", question)
+                    if int(cle) == question:  # ex si question 1        
+                        print("cle/question: ",cle)
+                        print("valeur/reponse: ",valeur)
+                        if valeur[question] == 0:                                  # le stagiaire a répondu 0 à la question 
+                            # lecture dico des cumuls pour la question, réponse 0
+                            temp = int(rep0_cumul[str(question)])
+                            temp += 1    # cumul de la reponse 0    à la question 
+                            rep0_cumul[str(question)]=temp
+                            print(rep0_cumul[str(question)])
+                        if valeur[question] == 1:                                  # le stagiaire a répondu 1 à la question 
+                            # lecture dico des cumuls pour la question, réponse 0
+                            temp = int(rep1_cumul[str(question)])
+                            temp += 1    # cumul de la reponse 1    à la question 
+                            rep1_cumul[str(question)]=temp
+                            print(rep1_cumul[str(question)])     
+                        if valeur[question] == 2:                                  # le stagiaire a répondu 2 à la question 
+                            # lecture dico des cumuls pour la question, réponse 0
+                            temp = int(rep2_cumul[str(question)])
+                            temp += 1    # cumul de la reponse 2    à la question 
+                            rep2_cumul[str(question)]=temp
+                            print(rep2_cumul[str(question)]) 
+                        if valeur[question] == 3:                                  # le stagiaire a répondu 3 à la question 
+                            # lecture dico des cumuls pour la question, réponse 0
+                            temp = int(rep3_cumul[str(question)])
+                            temp += 1    # cumul de la reponse 3    à la question 
+                            rep3_cumul[str(question)]=temp
+                            print(rep3_cumul[str(question)]) 
+                        if valeur[question] == 4:                                  # le stagiaire a répondu 4 à la question 
+                            # lecture dico des cumuls pour la question, réponse 0
+                            temp = int(rep4_cumul[str(question)])
+                            temp += 1    # cumul de la reponse 3    à la question 
+                            rep4_cumul[str(question)]=temp
+                            print(rep4_cumul[str(question)]) 
+                        if valeur[question] == 5:                     # le stagiaire a répondu 5 à la question 
+                            # lecture dico des cumuls pour la question, réponse 0
+                            temp = int(rep5_cumul[str(question)])
+                            temp += 1    # cumul de la reponse 3    à la question 
+                            rep5_cumul[str(question)]=temp
+                            print("cumul5 ", rep5_cumul[str(question)]) 
+                    
+            
+        print("nb de rep 0/1: ", rep0_cumul["1"])
+        print("nb de rep 1/1: ", rep1_cumul["1"])
+        print("nb de rep 2/1: ", rep2_cumul["1"])
+        print("nb de rep 3/1: ", rep3_cumul["1"])
+        print("nb de rep 4/1: ", rep4_cumul["1"])
+        print("nb de rep 5/1: ", rep5_cumul["1"])
+        print()
+
+
+
+
+
+
+
+        """
+        print("nb de rep 0/2: ", rep0_cumul["2"])
+        print("nb de rep 0/3: ", rep0_cumul["3"])
+        print("nb de rep 0/4: ", rep0_cumul["4"])
+        print("nb de rep 0/5: ", rep0_cumul["5"])
+        print("nb de rep 0/6: ", rep0_cumul["6"])
+        print("nb de rep 0/7: ", rep0_cumul["7"])
+        print("nb de rep 0/8: ", rep0_cumul["8"])
+        print("nb de rep 0/9: ", rep0_cumul["9"])
+        print("nb de rep 0/10: ", rep0_cumul["10"])
+        """
 
 
 
