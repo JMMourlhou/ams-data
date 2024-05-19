@@ -49,8 +49,10 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
-        #self.label_titre.text = row["code_txt"]+" du "+str(row["date_debut"]
-        self.label_titre.text = row
+        self.label_titre.text = "Stage n°"+str(row["numero"])+" "+row["code_txt"]+" du "+str(row["date_debut"])
+        self.column_panel_titres.visible = True
+        self.drop_down_code_stages.visible = False
+        self.column_panel_header.visible = False
         dico_rep_ferm = {}
         dico_rep_ouv = {}
 
