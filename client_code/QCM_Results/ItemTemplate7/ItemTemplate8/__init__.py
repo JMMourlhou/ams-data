@@ -18,7 +18,7 @@ class ItemTemplate8(ItemTemplate8Template):
         self.button_qcm_descro.tag.num_qcm = self.item['qcm_number']
         
         self.button_qcm_time.text = "le " + str(self.item['time'].strftime("%d/%m/%Y")) + " à " + str(self.item['time'].strftime("%Hh%M")) 
-        if self.item['success'] == True:
+        if self.item['success'] is True:
             self.button_qcm_result.background = "green"
             self.button_qcm_time.background = "green"
         else:
@@ -35,7 +35,7 @@ class ItemTemplate8(ItemTemplate8Template):
     def button_qcm_descro_click(self, **event_args):
         """This method is called when the button is clicked"""
         
-        if self.column_panel_plot.visible == False:
+        if self.column_panel_plot.visible is False:
             self.button_qcm_descro.foreground = "yellow"
             # Affichage du plot
             self.column_panel_plot.clear()

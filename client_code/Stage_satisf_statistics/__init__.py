@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..Stage_satisf_ligne import Stage_satisf_ligne
 
 class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
     def __init__(
@@ -26,6 +27,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         liste_stage = [] # cette liste me permet de tester l'existence du num stage ds celle-ci
         
         liste_formulaires = app_tables.stage_satisf.search(q.fetch_only("stage_num_txt","stage_row"))                                                              
+        
         print(len(liste_formulaires), 'formulaires lus')
         for formulaire in liste_formulaires:
             test_num_stage = formulaire['stage_num_txt']
@@ -142,6 +144,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         for formulaire in liste_formulaires:
             cpt_formulaire += 1
             print("==========================FORMULAIRE", cpt_formulaire)
+
             # dico questions fermées
             dico_rep_ferm = formulaire["rep_dico_rep_ferm"]  # dico questions fermées du formulaire
             nb_questions_ferm = len(dico_rep_ferm) #nb questions ds formulaire questions fermées 
@@ -157,7 +160,8 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             #                                          cle   valeur
             #                             indices valeur;    0                                                    1
             #                                                tuple [question, reponse]    
-            for cle, val in dico_rep_ferm.items():     
+            for cle, val in dico_rep_ferm.items():
+                
                 reponse = val[1]  # indice 1: donc reponse (int)
                 
                 for q in range(1,nb_questions_ferm+1): # boucle sur nb questionsfermées de 1 à nb_questions_fermées (exclusif)
@@ -246,14 +250,55 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         print("nb de rep 4/6: ", rep4_cumul["6"])
         print("nb de rep 5/6: ", rep5_cumul["6"])
 
-        liste_panels = 
-
-
-
-
-
-
-    
+        # à partir du dico  j'extrai les questions pour les afficher 
+        
+        cpt_questions = 0
+        for cle, val in dico_rep_ferm.items():
+            cpt_questions += 1
+            qt = val[0]  # indice 0: donc question
+            if cpt_questions == 1:
+                r0 = rep0_cumul["1"]
+                r1 = rep1_cumul["1"]
+                r2 = rep2_cumul["1"]
+                r3 = rep3_cumul["1"]
+                r4 = rep4_cumul["1"]
+                r5 = rep5_cumul["1"]
+            if cpt_questions == 2:
+                r0 = rep0_cumul["2"]
+                r1 = rep1_cumul["2"]
+                r2 = rep2_cumul["2"]
+                r3 = rep3_cumul["2"]
+                r4 = rep4_cumul["2"]
+                r5 = rep5_cumul["2"]
+            if cpt_questions == 3:
+                r0 = rep0_cumul["3"]
+                r1 = rep1_cumul["3"]
+                r2 = rep2_cumul["3"]
+                r3 = rep3_cumul["3"]
+                r4 = rep4_cumul["3"]
+                r5 = rep5_cumul["3"]
+            if cpt_questions == 4:
+                r0 = rep0_cumul["4"]
+                r1 = rep1_cumul["4"]
+                r2 = rep2_cumul["4"]
+                r3 = rep3_cumul["4"]
+                r4 = rep4_cumul["4"]
+                r5 = rep5_cumul["4"]
+            if cpt_questions == 5:
+                r0 = rep0_cumul["5"]
+                r1 = rep1_cumul["5"]
+                r2 = rep2_cumul["5"]
+                r3 = rep3_cumul["5"]
+                r4 = rep4_cumul["5"]
+                r5 = rep5_cumul["5"]
+            if cpt_questions == 6:
+                r0 = rep0_cumul["6"]
+                r1 = rep1_cumul["6"]
+                r2 = rep2_cumul["6"]
+                r3 = rep3_cumul["6"]
+                r4 = rep4_cumul["6"]
+                r5 = rep5_cumul["6"]
+            self.column_panel_content.add_component(Stage_satisf_ligne(qt,r0,r1,r2,r3,r4,r5))   
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

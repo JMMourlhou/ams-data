@@ -95,8 +95,9 @@ components:
         Primary', background: 'theme:On Primary Container'}
     type: Label
     layout_properties: {grid_position: 'FDNKGK,JTMMCR'}
-- name: repeating_panel_1
-  properties: {item_template: Stage_satisf_statistics.ItemTemplate14}
-  type: RepeatingPanel
-  layout_properties: {grid_position: 'WSNCMW,EZUNSL'}
+- name: column_panel_content
+  properties: {}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'XKKEBK,WVGULR'}
+  components: []
 is_package: true

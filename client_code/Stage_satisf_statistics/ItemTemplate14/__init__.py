@@ -13,3 +13,4 @@ class ItemTemplate14(ItemTemplate14Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.label_question.text = self.item
