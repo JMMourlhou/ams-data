@@ -105,7 +105,7 @@ db_schema:
       admin_ui: {order: 4, width: 443}
       type: simpleObject
     - name: rep_dico_rep_ouv
-      admin_ui: {width: 200, order: 5}
+      admin_ui: {order: 5, width: 538}
       type: simpleObject
     - name: date_heure
       admin_ui: {order: 3, width: 134}
