@@ -246,6 +246,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         print("nb de rep 4/6: ", rep4_cumul["6"])
         print("nb de rep 5/6: ", rep5_cumul["6"])
 
+        liste_panels = 
 
 
 
