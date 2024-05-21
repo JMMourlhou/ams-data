@@ -206,6 +206,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                 self.text_area_a10.placeholder = "Votre réponse ... (obligatoire)"
             else:
                 self.text_area_a10.placeholder = "Votre réponse ... (facultative)" 
+        self.button_valider.visible = True
 
     def check_box_1_1_change(self, **event_args):             # 1 seule réponse doit être checker
         """This method is called when this checkbox is checked or unchecked"""
