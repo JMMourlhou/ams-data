@@ -136,6 +136,71 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         rep5_cumul["9"] =  0        # Cumul des réponses 0, question 9   
         rep5_cumul["10"] =  0        # Cumul des réponses 0, question 10
 
+         # Création des dico des réponses cumulées
+        rep6_cumul = {}                                                 # Cumul Réponses 6
+        rep6_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep6_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep6_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep6_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep6_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep6_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep6_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep6_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep6_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep6_cumul["10"] =  0        # Cumul des réponses 0, question 10
+
+         # Création des dico des réponses cumulées
+        rep7_cumul = {}                                                 # Cumul Réponses 7
+        rep7_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep7_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep7_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep7_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep7_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep7_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep7_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep7_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep7_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep7_cumul["10"] =  0        # Cumul des réponses 0, question 10
+
+         # Création des dico des réponses cumulées
+        rep8_cumul = {}                                                 # Cumul Réponses 8
+        rep8_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep8_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep8_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep8_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep8_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep8_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep8_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep8_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep8_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep8_cumul["10"] =  0        # Cumul des réponses 0, question 10
+
+         # Création des dico des réponses cumulées
+        rep9_cumul = {}                                                 # Cumul Réponses 9
+        rep9_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep9_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep9_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep9_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep9_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep9_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep9_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep9_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep9_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep9_cumul["10"] =  0        # Cumul des réponses 0, question 10
+
+         # Création des dico des réponses cumulées
+        rep10_cumul = {}                                                 # Cumul Réponses 10
+        rep10_cumul["1"] =  0        # Cumul des réponses 0, question 1   
+        rep10_cumul["2"] =  0        # Cumul des réponses 0, question 2  
+        rep10_cumul["3"] =  0        # Cumul des réponses 0, question 3   
+        rep10_cumul["4"] =  0        # Cumul des réponses 0, question 4   
+        rep10_cumul["5"] =  0        # Cumul des réponses 0, question 5   
+        rep10_cumul["6"] =  0        # Cumul des réponses 0, question 6   
+        rep10_cumul["7"] =  0        # Cumul des réponses 0, question 7   
+        rep10_cumul["8"] =  0        # Cumul des réponses 0, question 8   
+        rep10_cumul["9"] =  0        # Cumul des réponses 0, question 9   
+        rep10_cumul["10"] = 0        # Cumul des réponses 0, question 10
+        
         # lecture des formulaires du stage choisi
         cpt_formulaire = 0
         liste_formulaires = app_tables.stage_satisf.search(stage_row=row)
@@ -249,7 +314,34 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         print("nb de rep 3/6: ", rep3_cumul["6"])
         print("nb de rep 4/6: ", rep4_cumul["6"])
         print("nb de rep 5/6: ", rep5_cumul["6"])
-
+        print()
+        print("nb de rep 0/7: ", rep0_cumul["7"])
+        print("nb de rep 1/7: ", rep1_cumul["7"])
+        print("nb de rep 2/7: ", rep2_cumul["7"])
+        print("nb de rep 3/7: ", rep3_cumul["7"])
+        print("nb de rep 4/7: ", rep4_cumul["7"])
+        print("nb de rep 5/7: ", rep5_cumul["7"])
+        print()
+        print("nb de rep 0/8: ", rep0_cumul["8"])
+        print("nb de rep 1/8: ", rep1_cumul["8"])
+        print("nb de rep 2/8: ", rep2_cumul["8"])
+        print("nb de rep 3/8: ", rep3_cumul["8"])
+        print("nb de rep 4/8: ", rep4_cumul["8"])
+        print("nb de rep 5/8: ", rep5_cumul["8"])
+        print()
+        print("nb de rep 0/9: ", rep0_cumul["9"])
+        print("nb de rep 1/9: ", rep1_cumul["9"])
+        print("nb de rep 2/9: ", rep2_cumul["9"])
+        print("nb de rep 3/9: ", rep3_cumul["9"])
+        print("nb de rep 4/9: ", rep4_cumul["9"])
+        print("nb de rep 5/9: ", rep5_cumul["9"])
+        print()
+        print("nb de rep 0/10: ", rep0_cumul["10"])
+        print("nb de rep 1/10: ", rep1_cumul["10"])
+        print("nb de rep 2/10: ", rep2_cumul["10"])
+        print("nb de rep 3/10: ", rep3_cumul["10"])
+        print("nb de rep 4/10: ", rep4_cumul["10"])
+        print("nb de rep 5/10: ", rep5_cumul["10"])
         # à partir du dico  j'extrai les questions pour les afficher 
         
         cpt_questions = 0
@@ -298,6 +390,34 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 r3 = rep3_cumul["6"]
                 r4 = rep4_cumul["6"]
                 r5 = rep5_cumul["6"]
+            if cpt_questions == 7:
+                r0 = rep0_cumul["7"]
+                r1 = rep1_cumul["7"]
+                r2 = rep2_cumul["7"]
+                r3 = rep3_cumul["7"]
+                r4 = rep4_cumul["7"]
+                r5 = rep5_cumul["7"]
+            if cpt_questions == 8:
+                r0 = rep0_cumul["8"]
+                r1 = rep1_cumul["8"]
+                r2 = rep2_cumul["8"]
+                r3 = rep3_cumul["8"]
+                r4 = rep4_cumul["8"]
+                r5 = rep5_cumul["8"]
+            if cpt_questions == 9:
+                r0 = rep0_cumul["9"]
+                r1 = rep1_cumul["9"]
+                r2 = rep2_cumul["9"]
+                r3 = rep3_cumul["9"]
+                r4 = rep4_cumul["9"]
+                r5 = rep5_cumul["9"]
+            if cpt_questions == 10:
+                r0 = rep0_cumul["10"]
+                r1 = rep1_cumul["10"]
+                r2 = rep2_cumul["10"]
+                r3 = rep3_cumul["10"]
+                r4 = rep4_cumul["10"]
+                r5 = rep5_cumul["10"]
             self.column_panel_content.add_component(Stage_satisf_ligne(qt,r0,r1,r2,r3,r4,r5))   
             
     def button_annuler_click(self, **event_args):
