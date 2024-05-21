@@ -5,7 +5,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..Stage_satisf_ligne import Stage_satisf_ligne
+from ..Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée (add component) 
+
 
 class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
     def __init__(
@@ -418,7 +419,8 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 r3 = rep3_cumul["10"]
                 r4 = rep4_cumul["10"]
                 r5 = rep5_cumul["10"]
-            self.column_panel_content.add_component(Stage_satisf_ligne(qt,r0,r1,r2,r3,r4,r5))   
+   
+            self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5))  
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

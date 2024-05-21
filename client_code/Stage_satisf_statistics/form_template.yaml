@@ -95,9 +95,9 @@ components:
         Primary', background: 'theme:On Primary Container'}
     type: Label
     layout_properties: {grid_position: 'FDNKGK,JTMMCR'}
-- name: column_panel_content
-  properties: {}
-  type: ColumnPanel
-  layout_properties: {grid_position: 'XKKEBK,WVGULR'}
-  components: []
+  - name: column_panel_content
+    properties: {}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'UUYLMH,JHQYOM'}
+    components: []
 is_package: true

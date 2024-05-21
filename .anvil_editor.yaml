@@ -1,6 +1,5 @@
 unique_ids:
   forms:
-    Stage_satisf_ligne: '1716232625882667713307242.7742'
     Pre_R_pour_stagiaire_admin.ItemTemplate5.ItemTemplate6: '1700066714657677743233482.224'
     QCM_Results.ItemTemplate7: '1709411190926512680003793.4809'
     Visu_stages.RowTemplate3: '169661758663527359500775.635094'
@@ -14,7 +13,6 @@ unique_ids:
     QCM_visu_modif.ItemTemplate4: '1695333232517463781858688.78296'
     Pre_R_pour_stagiaire: '1699202225666940199047086.69'
     QCM_visu_modif_ST_Main: '1704213717676115424615741.90633'
-    Stage_satisf_statistics.ItemTemplate14: '171614966255139863915486.61427'
     Visu_stages: '1696617496144193209880821.08047'
     Stage_form_satisfaction: '1715687708085269221711040.39606'
     Visu_liste_1_stage.ItemTemplate2: '1714494952761916470702771.2946'
