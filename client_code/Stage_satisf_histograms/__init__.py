@@ -31,7 +31,8 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
             go.Bar(x=listx,
                    y=data,
                    marker=dict(color="rgb(16, 32, 77)" ),    # couleur des barres 
-                   #marker_color=['Red', 'Orange', 'Yellow' 'Grey' 'LightGreen', 'DarkGreen' ] 
+                   #marker=dict(color="rgb(16, 32, 77)" ),    # couleur des barres 
+                   #marker_color=["red"]
                    text=[t0,t1,t2,t3,t4,t5])                 # texte ds les barres
         ]
         # Configure the plot layout
