@@ -25,16 +25,27 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
         t3 = f"{r3} rép."
         t4 = f"{r4} rép."
         t5 = f"{r5} rép."
-        
+        def SetColor(x):
+            if x == 0:
+                return "red"
+            elif x == 1:
+                return "yellow"
+            elif x == 2:
+                return "green"
+            if x == 3:
+                return "blue"
+            elif x == 4:
+                return "black"
+            elif x == 5:
+                return "green"   
         # Plot some data
         self.plot_1.data = [
             go.Bar(x=listx,
                    y=data,
-                   marker=dict(color="rgb(16, 32, 77)" ),    # couleur des barres 
-                   #marker=dict(color="rgb(16, 32, 77)" ),    # couleur des barres 
-                   #marker_color=["red"]
+                   marker=dict(color=list(map(SetColor, x))),
                    text=[t0,t1,t2,t3,t4,t5])                 # texte ds les barres
         ]
+        #marker=dict(color="rgb(16, 32, 77)" ),    # couleur des barres 
         # Configure the plot layout
         titre = qt
         self.plot_1.layout = {
