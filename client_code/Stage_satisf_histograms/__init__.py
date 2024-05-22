@@ -1,12 +1,10 @@
 from ._anvil_designer import Stage_satisf_histogramsTemplate
 from anvil import *
-import plotly.graph_objects as go
-
 
 from plotly import graph_objects as go
 
 # AFFICHAGE DES RESULTATS d pour 1 question fermée du formulaire de satisfaction
-# APPELE PAR LA FORM 'STAGE_SATISF_TATITICS' par add component: 
+# APPELE PAR LA FORM 'STAGE_SATISF_Statistics' par add component: 
 #   (  self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5)) )
 
 
@@ -25,27 +23,16 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
         t3 = f"{r3} rép."
         t4 = f"{r4} rép."
         t5 = f"{r5} rép."
-        def SetColor(x):
-            if x == 0:
-                return "red"
-            elif x == 1:
-                return "yellow"
-            elif x == 2:
-                return "green"
-            if x == 3:
-                return "blue"
-            elif x == 4:
-                return "black"
-            elif x == 5:
-                return "green"   
+        
         # Plot some data
         self.plot_1.data = [
             go.Bar(x=listx,
                    y=data,
-                   marker=dict(color=("red", "yellow","green","blue","black","white")),
+                   #marker=dict(color="rgb(16, 32, 77)" ),    # couleur de toutes les barres 
+                   marker=dict(color=("red", "orangered","orange","greenyellow","lime","green")),     # couleurs css de chaque barre ( https://lucidar.me/fr/web-dev/css-color-list/ )
                    text=[t0,t1,t2,t3,t4,t5])                 # texte ds les barres
         ]
-        #marker=dict(color="rgb(16, 32, 77)" ),    # couleur des barres 
+       
         # Configure the plot layout
         titre = qt
         self.plot_1.layout = {

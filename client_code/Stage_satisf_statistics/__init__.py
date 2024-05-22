@@ -208,6 +208,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         print(len(liste_formulaires), 'formulaires à traiter')
         
         for formulaire in liste_formulaires:
+            date = formulaire['date_heure']
             cpt_formulaire += 1
             print("==========================FORMULAIRE", cpt_formulaire)
 
@@ -419,9 +420,65 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 r3 = rep3_cumul["10"]
                 r4 = rep4_cumul["10"]
                 r5 = rep5_cumul["10"]
-   
-            self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5))  
+
+            self.rich_text_info.content = f"Enquête lancée le {date}\nsur {len(liste_formulaires)} formulaires\n(Remplis anonynements, une seule fois.)"
+            self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5))
+        #=================================================================================================
+        # affichage des réponses pour chaque question
+        #=================================================================================================
+        # Initialisation des clefs: valeur du dictionnaire des réponses
+        q_rep = {"1":[],   
+                 "2":[],
+                 "3":[],
+                 "4":[],
+                 "5":[],        # cle: num_question   valeur: liste [] des réponses ouvertes pour cette question
+                 "6":[],
+                 "7":[],
+                 "8":[],
+                 "9":[],
+                 "10":[]  
+                }          
+       
+        # Boucle sur tous les formulaires du stage
+        cpt_formulaire = 0
+        for formulaire in liste_formulaires:
+            cpt_formulaire += 1
+            print("==========================FORMULAIRE", cpt_formulaire)
+
+            # lecture dico questions ouvertes du formulaire
+            dico_rep_ouv = formulaire["rep_dico_rep_ouv"]  # dico questions ouvertes du formulaire
+            nb_questions_ouv = len(dico_rep_ouv) #nb questions ds formulaire questions fermées 
+            print("nb_q_ouvertes: ", nb_questions_ouv)
+
+            # lecture des 10 réponses de ce formulaire
+            for cle,valeur in dico_rep_ouv.items():
+                liste_rep=[]   # liste cumul des réponses d'1 question
+                rep = ""       # la réponse à question de ce formulaire
+                for q in range(1,11):  # q= num question
+                    print("===========================  question ",q )
+                    print()
+                    #recherche de la clef q_rep
+                    liste_rep = q_rep[str(q)]
+                    #print("liste_rep sauvegardée", liste_rep)
+                    # si 1er formulaire, je met les questions ds le dict des reponses q_rep
+                    if cpt_formulaire == 1:
+                        quest = dico_rep_ouv[str(q)][0]  # la question
+                         #sauvegarde ds la clef 
+                        q_rep[str(q)]=quest
+                    #recherche de la réponse du formulaire pour cette question num q
+                    rep = dico_rep_ouv[str(q)][1]# la réponse
+                    #rajout de la réponse de ce formulaire à la liste de réponses
+                    liste_rep.append(rep)
+                    #sauvegarde ds la clef 
+                    q_rep[str(q)]=liste_rep
+                print(q_rep)
+                print()
+                print()
+                        
+                
             
+    
+    
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
