@@ -68,18 +68,21 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
             for row in liste0:
                 #lecture fichier père stage
                 stage=app_tables.stages.get(numero=row['stage']['numero'])
-                
-                #if isinstance(stage['satis_dico1_q_ferm'], dict): # si dict ds table 
-                if stage['satis_dico1_q_ferm'] is not None: # si dict ds table 
-                    #lecture fichier père type de stage
-                    type=app_tables.codes_stages.get(q.fetch_only("code"),
-                                                        code=stage['code']['code']
-                                                    )
-                    if type['code'][0]!="F":    # Si formateur, je n'affiche pas la dat
-                        liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), stage))
-                    else:
-                        liste_drop_d.append((type['code'], stage))
-                    
+                if stage:
+                    print("stage lu")
+                    #if isinstance(stage['satis_dico1_q_ferm'], dict): # si dict ds table 
+                    if stage['satis_dico1_q_ferm'] is not None: # si dict ds table 
+                        #lecture fichier père type de stage
+                        type=app_tables.codes_stages.get(q.fetch_only("code"),
+                                                            code=stage['code']['code']
+                                                        )
+                        le
+                        if type['code'][0]!="F":    # Si formateur, je n'affiche pas la dat
+                            liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), stage))
+                        else:
+                            liste_drop_d.append((type['code'], stage))
+                else:
+                    print("stage non lu")
             #print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
 
