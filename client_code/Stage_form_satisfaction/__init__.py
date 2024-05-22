@@ -70,9 +70,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                 stage=app_tables.stages.get(numero=row['stage']['numero'])
                 if stage:
                     print("stage lu")
-                    print ("si TRue, dicoisinstance(stage['satis_dico1_q_ferm'], dict) # si dict ds table 
-                    if isinstance(stage['satis_dico1_q_ferm'], dict): # si dict ds table 
-                    #if stage['satis_dico1_q_ferm'] is not None: # si dict ds table
+
                         #lecture fichier père type de stage
                         type=app_tables.codes_stages.get(q.fetch_only("code"),
                                                             code=stage['code']['code']
