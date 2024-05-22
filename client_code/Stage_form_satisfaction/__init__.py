@@ -72,6 +72,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                     #if isinstance(stage['satis_dico1_q_ferm'], dict): # si dict ds table 
                     if stage['satis_dico1_q_ferm'] is not None: # si dict ds table 
                         #lecture fichier père type de stage
+                        pri
                         type=app_tables.codes_stages.get(q.fetch_only("code"),
                                                             code=stage['code']['code']
                                                         )
@@ -79,7 +80,8 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                             liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), stage))
                         else:
                             liste_drop_d.append((type['code'], stage))
-                    
+                else:
+                    print("Stage non trouvé en initialisation de dropdwn)
             #print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
 
