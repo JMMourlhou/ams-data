@@ -42,7 +42,7 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
         self.plot_1.data = [
             go.Bar(x=listx,
                    y=data,
-                   marker=dict(color=list(map(SetColor, x))),
+                   marker=dict(color=("red", "yellow","green","blue","black","white")),
                    text=[t0,t1,t2,t3,t4,t5])                 # texte ds les barres
         ]
         #marker=dict(color="rgb(16, 32, 77)" ),    # couleur des barres 
