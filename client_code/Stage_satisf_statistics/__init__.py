@@ -451,33 +451,41 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             print("nb_q_ouvertes: ", nb_questions_ouv)
 
             # lecture des 10 réponses de ce formulaire
-            for cle,valeur in dico_rep_ouv.items():
+            for cle_num_question,val in dico_rep_ouv.items():
+                quest = val[0]
+                rep = val[1]
                 liste_rep=[]   # liste cumul des réponses d'1 question
-                rep = ""       # la réponse à question de ce formulaire
-                for q in range(1,11):  # q= num question
-                    print("===========================  question ",q )
-                    print()
-                    #recherche de la clef q_rep
-                    liste_rep = q_rep[str(q)]
-                    #print("liste_rep sauvegardée", liste_rep)
-                    # si 1er formulaire, je met les questions ds le dict des reponses q_rep
-                    if cpt_formulaire == 1:
-                        quest = dico_rep_ouv[str(q)][0]  # la question
-                         #sauvegarde ds la clef 
-                        q_rep[str(q)]=quest
-                    #recherche de la réponse du formulaire pour cette question num q
-                    rep = dico_rep_ouv[str(q)][1]# la réponse
-                    #rajout de la réponse de ce formulaire à la liste de réponses
-                    liste_rep.append(rep)
-                    #sauvegarde ds la clef 
-                    q_rep[str(q)]=liste_rep
-                print(q_rep)
+                print("===========================  question n° ",cle_num_question )
+                print("===========================  question ", quest )
+                print(" ========================== rep ", rep)
                 print()
-                print()
-                        
                 
+                #recherche de la clef q_rep déjà constituée
+                liste_rep = q_rep[cle_num_question]
             
-    
+                # si 1er formulaire, je met les questions ds le dict des reponses q_rep
+                if cpt_formulaire == 1:
+                    print("-------------------------------------------------------------------------- Ajout de q°", quest )
+                    #ajout de la question ds la valeur 
+                    liste_rep.append(quest)
+                    
+                #rajout de la réponse de ce formulaire à la liste de réponses
+                liste_rep.append(rep)
+                
+                #réecriture de la question et de ses réponses ds le dictionaires des réponses
+                q_rep[cle_num_question]=liste_rep
+
+        print(q_rep)
+        print()
+        print()
+        # Boucle sur le dictionaire des questions/réponses
+        for cle_num_question,val in q_rep.items():
+            qt = val[0]   # question est la premiere info
+            for x in range(1,nb_questions_ouv+1):
+                rep = val[x]
+                
+                self.column_panel_content.add_component(Stage_satisf_rep_ouvertes(qt,rep))
+            #boucle sur chaque réponse
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
