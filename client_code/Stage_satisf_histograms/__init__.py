@@ -38,11 +38,11 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
         self.plot_1.layout = {
                 #'title': titre,    # titre du graphique
                 'title':   {
-                        'text' : <b>titre</b>,
+                        'text' : titre,
                           },
                 'title_font_color' : "darkblue",
-                'title_font_size'  : 14,
-                
+                'title_font_size'  : 16,
+                'title_font_family'     : "Arial, bold",
                 'xaxis':  {
                     'title': "(0:Très insatisfait à 5:Très satisfait)",
                             },
