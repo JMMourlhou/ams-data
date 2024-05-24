@@ -32,11 +32,14 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
                    marker=dict(color=("red", "orangered","orange","greenyellow","lime","green")),     # couleurs css de chaque barre ( https://lucidar.me/fr/web-dev/css-color-list/ )
                    text=[t0,t1,t2,t3,t4,t5])                 # texte ds les barres
         ]
-       
+        #'title': titre,    # titre du graphique
         # Configure the plot layout
         titre = qt
         self.plot_1.layout = {
-                'title': titre,    # titre du graphique
+                'title': {titre,    # titre du graphique
+                'title_text': {
+                    'title_font': {"size" : 18, "color" : 'blue'},
+                          },
             
                 'xaxis':  {
                     'title': "(0:Très insatisfait à 5:Très satisfait)",
@@ -46,7 +49,7 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
                     "title": 'Nb de réponses',
                     "visible": False,  # Montre l'axe y et son titre  !!
                     'tickmode': 1,           # de 1 en 1
-                },
+                        },
                 "plot_bgcolor": "lightblue",  # Couleur de fond personnalisée
                 "showlegend": False,  # True pour montrer la légende (false par défaut voir l'init)
-            }
+                        }

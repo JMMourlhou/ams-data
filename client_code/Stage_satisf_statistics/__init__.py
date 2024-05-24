@@ -5,8 +5,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée (add component) 
-
+from ..Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée pour questions fermées histogrammes (add component) 
+from ..Stage_satisf_rep_ouvertes import Stage_satisf_rep_ouvertes  #  Forme ajoutée pour questions ouvertes
 
 class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
     def __init__(
@@ -423,8 +423,10 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
 
             self.rich_text_info.content = f"Enquête lancée le {date}\nsur {len(liste_formulaires)} formulaires\n(Remplis anonynements, une seule fois.)"
             self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5))
+        
+        
         #=================================================================================================
-        # affichage des réponses pour chaque question
+        # affichage des réponses OUVERTES pour chaque question
         #=================================================================================================
         # Initialisation des clefs: valeur du dictionnaire des réponses
         q_rep = {"1":[],   
@@ -478,13 +480,17 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         print(q_rep)
         print()
         print()
+        
         # Boucle sur le dictionaire des questions/réponses
         for cle_num_question,val in q_rep.items():
-            qt = val[0]   # question est la premiere info
-            for x in range(1,nb_questions_ouv+1):
-                rep = val[x]
-                
-                self.column_panel_content.add_component(Stage_satisf_rep_ouvertes(qt,rep))
+            nb_reponses = len(val)-1  # nb d'éléments - 1 (le 1er élément (la question))
+            qt = val[0]   # question (1er élément) 
+            # Boucle sur les réponses pour création de la liste des reponses de la question
+            liste_rep = []
+            for x in range(1,nb_reponses+1):  # 0:question, 1,2,3 ... les réponses
+                liste_rep.append(val[x])
+            self.column_panel_q_ouv.visible=True
+            self.column_panel_q_ouv.add_component(Stage_satisf_rep_ouvertes(qt,liste_rep))
             #boucle sur chaque réponse
     
     def button_annuler_click(self, **event_args):
