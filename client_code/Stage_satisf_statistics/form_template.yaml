@@ -2,6 +2,11 @@ container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
 components:
+- name: timer_1
+  properties: {}
+  type: Timer
+  layout_properties: {grid_position: 'MDYDZS,ZECFJY'}
+  event_bindings: {tick: timer_1_tick}
 - type: ColumnPanel
   properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
@@ -99,12 +104,12 @@ components:
     properties: {align: center}
     type: RichText
     layout_properties: {grid_position: 'FNUZZW,KUKWHT'}
-  - name: column_panel_content
-    properties: {}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'UUYLMH,JHQYOM', full_width_row: true}
-    components: []
-    event_bindings: {}
+- name: column_panel_content
+  properties: {role: outlined-card, background: 'theme:Primary', visible: false}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'ONMGNU,VESNQQ'}
+  components: []
+  event_bindings: {}
 - name: column_panel_q_ouv
   properties: {role: outlined-card, background: 'theme:Primary', visible: false}
   type: ColumnPanel

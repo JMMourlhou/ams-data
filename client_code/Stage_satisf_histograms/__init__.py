@@ -67,7 +67,7 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
         global cpt  # Cpt le nb d'images imprimées
         cpt += 1
         print("compteur :",cpt)
-        if cpt == 1 or cpt == 5 or cpt == 8 :   
+        if cpt == 1 or cpt == 4 or cpt == 7 or cpt ==10 :   
            print("Page Break", cpt)
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!
 

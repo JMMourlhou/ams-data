@@ -15,6 +15,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.pdf_mode = pdf_mode
+        self.timer_1.interval=0
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
 
@@ -24,7 +25,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         global cpt
         cpt = 0   
         if self.pdf_mode is True:
-            self.button_annuler.visible = False
+            self.column_panel_a.visible = False
             self.button_annuler2.visible = False
             self.drop_down_code_stages_change(row)
             
@@ -58,6 +59,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
+        self.row = row
         self.label_titre.text = "Stage n°"+str(row["numero"])+" "+row["code_txt"]+" du "+str(row["date_debut"])
         self.column_panel_titres.visible = True
         self.drop_down_code_stages.visible = False
@@ -428,6 +430,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 r5 = rep5_cumul["10"]
 
             self.rich_text_info.content = f"Enquête lancée le {date}\nsur {len(liste_formulaires)} formulaires\n(Remplis anonynements, une seule fois.)"
+            self.column_panel_content.visible = True
             self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5))
         
         
@@ -499,21 +502,30 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             self.column_panel_q_ouv.add_component(Stage_satisf_rep_ouvertes(qt,liste_rep))
 
         with anvil.server.no_loading_indicator:
+            self.timer_1.interval=0.5
             self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)
-            if self.task_satisf.is_completed():
-                stage_row = app_tables.stages.get(numero=row["numero"])
-                pdf = stage_row['satis_pdf']
-                if pdf:
-                    anvil.media.download(pdf)
-                    alert("Trombinoscope téléchargé")
-                else:
-                    alert("Pdf du trombi non trouvé")
+            
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
 
+    def timer_1_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        try:
+            if self.task_satisf.is_completed():
+                    stage_row = app_tables.stages.get(numero=self.row["numero"])
+                    pdf = stage_row['satis_pdf']
+                    if pdf:
+                        anvil.media.download(pdf)
+                        alert("Enquête téléchargée")
+                    else:
+                        alert("Pdf non trouvé en table Stages")
+                    anvil.server.call('task_killer',self.task_satisf)
+                    self.timer_1.interval=0
+        except:
+            pass
 
 
 

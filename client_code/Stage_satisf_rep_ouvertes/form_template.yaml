@@ -10,20 +10,17 @@ components:
   layout_properties: {grid_position: 'AGWGLN,VIMPZF'}
   components:
   - name: label_question
-    properties: {align: center, background: '', foreground: 'theme:On Tertiary', spacing_above: large,
+    properties: {align: center, background: '', foreground: 'theme:On Tertiary', spacing_above: none,
       spacing_below: small, bold: false, font: arial, font_size: 16}
     type: Label
     layout_properties: {grid_position: 'IFGQFL,SLYLWR', full_width_row: true}
   - name: column_panel_reponses
     properties: {visible: true, background: 'theme:On Primary', role: outlined-card,
-      foreground: 'theme:Primary', col_spacing: none}
+      foreground: 'theme:Primary', col_spacing: none, spacing_above: none}
     type: ColumnPanel
     layout_properties: {grid_position: 'SMMIHX,NARGZY', full_width_row: false}
     components: []
-  - name: rich_text_1
-    properties: {}
-    type: RichText
-    layout_properties: {grid_position: 'YFTDEG,YKVROM'}
 container:
   type: ColumnPanel
-  properties: {spacing_above: none}
+  properties: {spacing_above: none, spacing_below: none}
+  event_bindings: {show: form_show}
