@@ -505,6 +505,9 @@ db_schema:
     - name: satis_dico2_q_ouv
       admin_ui: {width: 200, order: 16}
       type: simpleObject
+    - name: satis_pdf
+      admin_ui: {width: 200, order: 17}
+      type: media
     title: Stages
   cpt_stages:
     client: search

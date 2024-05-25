@@ -7,16 +7,14 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée pour questions fermées histogrammes (add component) 
 from ..Stage_satisf_rep_ouvertes import Stage_satisf_rep_ouvertes  #  Forme ajoutée pour questions ouvertes
-from anvil_extras.PageBreak import PageBreak
-global    cpt # Compte le nb d'images visualisées pour le page Break
-cpt = 0
+
 
 class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
-    def __init__(self,pdf_mode=False, **properties):  
+    def __init__(self,pdf_mode=False, row=None, **properties):  # si pdf=True, cette forme  appellée par pdf renderer  
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-
+        self.pdf_mode = pdf_mode
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
 
@@ -28,6 +26,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         if self.pdf_mode is True:
             self.button_annuler.visible = False
             self.button_annuler2.visible = False
+            self.drop_down_code_stages_change(row)
             
         # Drop down codes stages
         #création du dictionaire des stages ds tables formulaires de satisfaction
@@ -50,10 +49,11 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 liste_stage_drop_down.append((row_stage["code_txt"]+" du "+str(row_stage["date_debut"]),row_stage))
         self.drop_down_code_stages.items = liste_stage_drop_down
         
-
-    def drop_down_code_stages_change(self, **event_args):
+    # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
+    def drop_down_code_stages_change(self, row=None,**event_args):
         """This method is called when an item is selected"""
-        row = self.drop_down_code_stages.selected_value  # row du stage
+        if row is None: 
+            row = self.drop_down_code_stages.selected_value  # row du stage sélectionné ds le drop down
         if row is None:
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
@@ -497,10 +497,24 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 liste_rep.append(val[x])
             self.column_panel_q_ouv.visible=True
             self.column_panel_q_ouv.add_component(Stage_satisf_rep_ouvertes(qt,liste_rep))
-            #boucle sur chaque réponse
+
+        with anvil.server.no_loading_indicator:
+            self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)
+            if self.task_satisf.is_completed():
+                stage_row = app_tables.stages.get(numero=row["numero"])
+                pdf = stage_row['satis_pdf']
+                if pdf:
+                    anvil.media.download(pdf)
+                    alert("Trombinoscope téléchargé")
+                else:
+                    alert("Pdf du trombi non trouvé")
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+
+
+
 
