@@ -7,11 +7,12 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée pour questions fermées histogrammes (add component) 
 from ..Stage_satisf_rep_ouvertes import Stage_satisf_rep_ouvertes  #  Forme ajoutée pour questions ouvertes
+from anvil_extras.PageBreak import PageBreak
+global    cpt # Compte le nb d'images visualisées pour le page Break
+cpt = 0
 
 class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
-    def __init__(
-        self, **properties
-    ):  
+    def __init__(self,pdf_mode=False, **properties):  
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
@@ -22,7 +23,12 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         global screen_size
         screen_size = window.innerWidth
 
-        
+        global cpt
+        cpt = 0   
+        if self.pdf_mode is True:
+            self.button_annuler.visible = False
+            self.button_annuler2.visible = False
+            
         # Drop down codes stages
         #création du dictionaire des stages ds tables formulaires de satisfaction
         liste_stage = [] # cette liste me permet de tester l'existence du num stage ds celle-ci
@@ -497,3 +503,4 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
