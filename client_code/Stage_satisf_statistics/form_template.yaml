@@ -105,7 +105,7 @@ components:
     type: RichText
     layout_properties: {grid_position: 'FNUZZW,KUKWHT'}
 - name: column_panel_content
-  properties: {role: outlined-card, background: 'theme:Primary', visible: false}
+  properties: {role: outlined-card, background: '', visible: false}
   type: ColumnPanel
   layout_properties: {grid_position: 'ONMGNU,VESNQQ'}
   components: []

@@ -5,8 +5,7 @@ import anvil.server
 
 from plotly import graph_objects as go
 from anvil_extras.PageBreak import PageBreak
-global    cpt # Compte le nb d'images visualisées pour le page Break
-cpt = 10
+
 
 # AFFICHAGE DES RESULTATS d pour 1 question fermée du formulaire de satisfaction
 # APPELE PAR LA FORM 'STAGE_SATISF_Statistics' par add component: 
@@ -57,18 +56,13 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
                     "visible": False,  # Montre l'axe y et son titre  !!
                     'tickmode': 1,           # de 1 en 1
                         },
-                "plot_bgcolor": "white",  # Couleur de fond personnalisée
+                "plot_bgcolor": "lightgrey",  # Couleur de fond personnalisée
                 "showlegend": False,  # True pour montrer la légende (false par défaut voir l'init)
 
                         }
         
     def form_show(self, **event_args):
         """This method is called when the Image is shown on the screen"""
-        global cpt  # Cpt le nb d'images imprimées
-        cpt -= 1
-        print("compteur :",cpt)
-        if cpt == 2 or cpt == 5 or cpt == 8 :   
-           print("Page Break", cpt)
-           self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!
+        self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!
 
  

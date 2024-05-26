@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée pour questions fermées histogrammes (add component) 
 from ..Stage_satisf_rep_ouvertes import Stage_satisf_rep_ouvertes  #  Forme ajoutée pour questions ouvertes
-
+import fast_pdf
 
 class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
     def __init__(self,pdf_mode=False, row=None, **properties):  # si pdf=True, cette forme  appellée par pdf renderer  
@@ -500,33 +500,41 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 liste_rep.append(val[x])
             self.column_panel_q_ouv.visible=True
             self.column_panel_q_ouv.add_component(Stage_satisf_rep_ouvertes(qt,liste_rep))
-
-        with anvil.server.no_loading_indicator:
-            self.timer_1.interval=0.5
-            self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)
             
-    
-    def button_annuler_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main',99)
-
+        """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT """
+        # Génération du pdf
+        with anvil.server.no_loading_indicator:
+            self.timer_1.interval=1
+            self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)
+        
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         try:
             if self.task_satisf.is_completed():
                     stage_row = app_tables.stages.get(numero=self.row["numero"])
                     pdf = stage_row['satis_pdf']
+                    """
                     if pdf:
                         anvil.media.download(pdf)
                         alert("Enquête téléchargée")
                     else:
                         alert("Pdf non trouvé en table Stages")
+                    """
                     anvil.server.call('task_killer',self.task_satisf)
                     self.timer_1.interval=0
+                
+                    doc = fast_pdf.Document()
+                    
+                
+                    pdf_prev = pdf.get_doc()
+                    pdf_prev.preview()
         except:
             pass
 
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form('Main',99)
 
 
 
