@@ -504,37 +504,33 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT """
         # Génération du pdf
         with anvil.server.no_loading_indicator:
-            self.timer_1.interval=1
+            self.timer_1.interval=0.5
             self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)
         
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         try:
             if self.task_satisf.is_completed():
-                    stage_row = app_tables.stages.get(numero=self.row["numero"])
-                    pdf = stage_row['satis_pdf']
-                    """
-                    if pdf:
-                        anvil.media.download(pdf)
-                        alert("Enquête téléchargée")
-                    else:
-                        alert("Pdf non trouvé en table Stages")
-                    """
-                    anvil.server.call('task_killer',self.task_satisf)
-                    self.timer_1.interval=0
-                
-                    doc = fast_pdf.Document()
-                    
-                
-                    pdf_prev = pdf.get_doc()
-                    pdf_prev.preview()
+                self.button_downl_pdf_click.visible = True
         except:
             pass
-
+            
+    def button_downl_pdf_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        stage_row = app_tables.stages.get(numero=self.row["numero"])
+        pdf = stage_row['satis_pdf']
+        if pdf:
+            anvil.media.download(pdf)
+            alert("Enquête téléchargée")
+        else:
+            alert("Pdf non trouvé en table Stages")
+        
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+    
 
 
 
