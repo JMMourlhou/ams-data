@@ -19,7 +19,7 @@ class Stage_satisf_rep_ouvertes(Stage_satisf_rep_ouvertesTemplate):
             self.tb = RichText(
                              content=rep,
                              align = "left",
-                             spacing_above = "small",
+                             spacing_above = "none",
                              background="",
                              foreground="black",
                              #bold=False,

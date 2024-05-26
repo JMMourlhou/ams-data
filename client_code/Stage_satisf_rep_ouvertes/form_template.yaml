@@ -15,7 +15,7 @@ components:
     type: Label
     layout_properties: {grid_position: 'IFGQFL,SLYLWR', full_width_row: true}
   - name: column_panel_reponses
-    properties: {visible: true, background: 'theme:On Primary', role: outlined-card,
+    properties: {visible: true, background: 'theme:Gray 300', role: outlined-card,
       foreground: 'theme:Primary', col_spacing: none, spacing_above: none}
     type: ColumnPanel
     layout_properties: {grid_position: 'SMMIHX,NARGZY', full_width_row: false}

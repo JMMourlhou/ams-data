@@ -60,6 +60,14 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             self.drop_down_code_stage.focus()
             return
         self.row = row
+        
+        # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement
+        stage_row = app_tables.stages.get(numero=self.row["numero"])
+        pdf = stage_row['satis_pdf']
+        if pdf:
+            self.button_downl_pdf0.visible = True
+            self.button_downl_pdf1.visible = True
+       
         self.label_titre.text = "Stage n°"+str(row["numero"])+" "+row["code_txt"]+" du "+str(row["date_debut"])
         self.column_panel_titres.visible = True
         self.drop_down_code_stages.visible = False
@@ -511,11 +519,14 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         try:
             if self.task_satisf.is_completed():
-                self.button_downl_pdf_click.visible = True
+                self.button_downl_pdf0.visible = True
+                self.button_downl_pdf1.visible = True
+                self.timer_1.interval=0
+                anvil.server.call('task_killer',self.task_satisf)
         except:
             pass
             
-    def button_downl_pdf_click(self, **event_args):
+    def button_downl_pdf1_click(self, **event_args):
         """This method is called when the button is clicked"""
         stage_row = app_tables.stages.get(numero=self.row["numero"])
         pdf = stage_row['satis_pdf']
@@ -529,6 +540,8 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+ 
 
     
 

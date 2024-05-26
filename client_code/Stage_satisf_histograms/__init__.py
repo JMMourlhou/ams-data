@@ -58,11 +58,11 @@ class Stage_satisf_histograms(Stage_satisf_histogramsTemplate):
                         },
                 "plot_bgcolor": "lightgrey",  # Couleur de fond personnalisée
                 "showlegend": False,  # True pour montrer la légende (false par défaut voir l'init)
-
+                "displayModeBar": False, # Cache la barre des outils  
                         }
         
     def form_show(self, **event_args):
         """This method is called when the Image is shown on the screen"""
-        self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!
+        self.add_component(PageBreak())     # st de page à chaque histogramme
 
  
