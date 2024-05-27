@@ -27,6 +27,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         if self.pdf_mode is True:
             self.column_panel_a.visible = False
             self.button_annuler2.visible = False
+            self.button_downl_pdf1.visible = False
             self.drop_down_code_stages_change(row)
             
         # Drop down codes stages
