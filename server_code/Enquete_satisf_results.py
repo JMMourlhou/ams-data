@@ -2,6 +2,7 @@ from anvil.tables import app_tables
 import anvil.server
 from anvil.pdf import PDFRenderer
 import time   # Pour calculer le tps de traitement
+from datetime import datetime  # pour mettre la date et heure ds nomde fichier pdf (temporaire pour test)
 """
     quality :
     "original": All images will be embedded at original resolution. Output file can be very large.
@@ -13,9 +14,11 @@ import time   # Pour calculer le tps de traitement
 # Calculer la taille du file et ajuster la qualité (screen : pas assez bon)
 @anvil.server.background_task
 def generate_satisf_results(stage_num, type, row):
-    start = time.time()
+    start = time.time()   # pour calcul du tpsde traitement (environ 25 se)
+    
     pdf_object = PDFRenderer(page_size ='A4',
                             filename = f"Enquete_satisf_{type}_{stage_num}.pdf",
+                            #filename = f"Enquete_satisf_{type}_{stage_num}.pdf",
                             landscape = False,
                             margins = {'top': 0.3, 'bottom': 0.1, 'left': 0.2, 'right': 0.2},  #  cm
                             scale = 1.0,                                                       
