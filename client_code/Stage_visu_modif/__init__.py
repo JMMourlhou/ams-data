@@ -15,7 +15,7 @@ global intitul
 intitul=""
 
 class Stage_visu_modif(Stage_visu_modifTemplate):
-    def __init__(self, provenance="", num_stage=0, bg_task=True, **properties):     # bg_task True: je crée les bg task en entrée de stage visu modif
+    def __init__(self, provenance="", num_stage=0, bg_task=False, **properties):     # bg_task True: je crée les bg task en entrée de stage visu modif
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.provenance = provenance
@@ -154,7 +154,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                                                 self.text_area_commentaires.text,
                                                 self.check_box_allow_bg_task.checked
                                                  )
-        if result == True :
+        if result is True :
             alert("Stage enregisté !")
             self.button_qr_code_display.visible = True
             self.button_validation.visible = False

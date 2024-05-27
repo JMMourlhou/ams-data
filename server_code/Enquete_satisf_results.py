@@ -38,6 +38,5 @@ def generate_satisf_results(stage_num, type, row):
 # A FAIRE APPELER from client side
 @anvil.server.callable
 def run_bg_task_satisf(stage_num, type, row):
-    
     task = anvil.server.launch_background_task('generate_satisf_results',stage_num, type, row)
     return task

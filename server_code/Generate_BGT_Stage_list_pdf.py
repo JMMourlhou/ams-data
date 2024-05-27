@@ -29,7 +29,7 @@ def create_list_pdf(num_stage, intitule):
                                landscape = False,
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1.0,
-                               quality =  "default"
+                               quality =  "screen"
                               ).render_form('Visu_liste_1_stage',num_stage, intitule, True)
     
     " sauvegarde du media_object ds la table "
@@ -48,18 +48,6 @@ def create_list_pdf(num_stage, intitule):
 @anvil.server.callable
 def run_bg_task_stage_list(num_stage, intitule):
     task = anvil.server.launch_background_task('create_list_pdf',num_stage, intitule)
-
-    """  Pour gagner du tps de bg task, je ne sauve pas l'ID de la task 
-    
-    #lecture du fichier stages sur le num de stage pour sauver la task
-    stage_row = app_tables.stages.get(numero=int(num_stage))
-    if not stage_row:   
-        print("stage non trouvé à partir de num_stageds server module: Stagiaires_list_pdf")
-    else:
-        # sauvegarde de la liste pdf ds le stage_row
-        stage_row.update(list_task_id = task.get_id()        
-                        ) 
-    """                    
     return task
         
 

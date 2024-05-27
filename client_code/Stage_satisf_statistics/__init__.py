@@ -16,6 +16,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         # Any code you write here will run before the form opens.
         self.pdf_mode = pdf_mode    # appel du pdf renderer ?
         self.timer_1.interval=0     # neutralise le timer
+        self.test_existence_pdf = False
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
 
@@ -68,7 +69,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         if pdf and self.pdf_mode is not True:
             self.button_downl_pdf0.visible = True
             self.button_downl_pdf1.visible = True
-            test_existence_pdf = True
+            self.test_existence_pdf = True
        
         self.label_titre.text = "Stage n°"+str(row["numero"])+" "+row["code_txt"]+" du "+str(row["date_debut"])
         self.column_panel_titres.visible = True
@@ -513,7 +514,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT """
         # Génération du pdf si non existant A CHANGER QD L'ENQUETE EST COMPLETE
-        if test_existence_pdf is not True or test_existence_pdf is True:
+        if self.test_existence_pdf is not True or self.test_existence_pdf is True:
             with anvil.server.no_loading_indicator:
                 self.timer_1.interval=0.5
                 self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)
