@@ -21,7 +21,6 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         self.pdf_mode = pdf_mode
         if self.pdf_mode is True:
             self.button_annuler.visible = False
-            #self.button_pdf.visible = False
             self.button_trombi.visible = False
         
         #lecture du fichier père stages
