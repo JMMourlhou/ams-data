@@ -65,7 +65,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
         stage_row = app_tables.stages.get(numero=self.row["numero"])
         pdf = stage_row['satis_pdf']
-        if pdf:
+        if pdf and self.pdf_mode is not True:
             self.button_downl_pdf0.visible = True
             self.button_downl_pdf1.visible = True
             test_existence_pdf = True
