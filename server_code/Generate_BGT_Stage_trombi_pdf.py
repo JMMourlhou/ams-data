@@ -25,7 +25,7 @@ def create_trombi_pdf(num_stage, intitule):
                                landscape = False,
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 0.0, 'right': 0.0},  # en cm
                                scale = 0.60,
-                               quality =  "screen"
+                               quality =  "default"
                               ).render_form('Visu_trombi',num_stage, intitule, True)
     
     

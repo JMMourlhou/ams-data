@@ -504,13 +504,16 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         # Boucle sur le dictionaire des questions/réponses
         for cle_num_question,val in q_rep.items():
             nb_reponses = len(val)-1  # nb d'éléments - 1 (le 1er élément (la question))
-            qt = val[0]   # question (1er élément) 
-            # Boucle sur les réponses pour création de la liste des reponses de la question
-            liste_rep = []
-            for x in range(1,nb_reponses+1):  # 0:question, 1,2,3 ... les réponses
-                liste_rep.append(val[x])
-            self.column_panel_q_ouv.visible=True
-            self.column_panel_q_ouv.add_component(Stage_satisf_rep_ouvertes(qt,liste_rep))
+            try:
+                qt = val[0]   # question (1er élément) 
+                # Boucle sur les réponses pour création de la liste des reponses de la question
+                liste_rep = []
+                for x in range(1,nb_reponses+1):  # 0:question, 1,2,3 ... les réponses
+                    liste_rep.append(val[x])
+                self.column_panel_q_ouv.visible=True
+                self.column_panel_q_ouv.add_component(Stage_satisf_rep_ouvertes(qt,liste_rep))
+            except:
+                pass
             
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT """
         # Génération du pdf si non existant A CHANGER QD L'ENQUETE EST COMPLETE

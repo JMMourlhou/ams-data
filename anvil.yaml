@@ -447,7 +447,7 @@ db_schema:
     server: full
     columns:
     - name: numero
-      admin_ui: {order: 1, width: 91.17}
+      admin_ui: {order: 1, width: 119.17}
       type: number
     - name: date_debut
       admin_ui: {order: 2, width: 101.17}

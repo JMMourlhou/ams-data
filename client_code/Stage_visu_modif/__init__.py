@@ -1,15 +1,13 @@
 from ._anvil_designer import Stage_visu_modifTemplate
 from anvil import *
-
 import anvil.server
-
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime
 from .. import French_zone
-from anvil import open_form
+#from anvil import open_form
 
 global intitul
 intitul=""
@@ -34,9 +32,12 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
         #lecture du stage
         stage_row=app_tables.stages.get(numero=num_stage)
+
         #lecture des stagiaires inscrits
-        liste_stagiaires = app_tables.stagiaires_inscrits.search(tables.order_by("name", ascending=True),
-                                                                            stage=stage_row
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", 
+                                                                                 user_email=q.fetch_only("email", "tel")),
+                                                                    tables.order_by("name", ascending=True),
+                                                                    stage=stage_row
                                                                            )
         if len(liste_stagiaires) > 0:                      # des stagiaires sont déjà inscrits ds stage
             self.repeating_panel_1.items = liste_stagiaires
@@ -44,7 +45,14 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.button_trombi.visible = False
             self.button_trombi_pdf.visible = False
             self.button_fiches_stagiaires.visible = False
-        
+            self.button_visu_fiches_stagiaires.visible = False
+
+        if stage_row['allow_bgt_generation'] is False:
+            self.button_fiches_stagiaires.visible = False
+            self.button_trombi_pdf.visible = False
+        else:
+            self.button_fiches_stagiaires.visible = True
+            self.button_trombi_pdf.visible = True
         #lecture intitulé stage
         global intitul
         intitul = stage_row['code']['code']
@@ -73,7 +81,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
             """ ***********************************************************************"""            
             if self.check_box_allow_bg_task.checked is False or self.bg_task is True:     # ex: en retour de trombi, pas besoin de re-générer les listes
-                students_rows = list(app_tables.stagiaires_inscrits.search(stage=stage_row))
+                students_rows = list(app_tables.stagiaires_inscrits.search( q.fetch_only(),
+                                                                            stage=stage_row))
                 #alert(len(students_rows))
                 if students_rows:    # stagiaires existants
                     with anvil.server.no_loading_indicator:
@@ -156,11 +165,9 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                                                  )
         if result is True :
             alert("Stage enregisté !")
-            self.button_qr_code_display.visible = True
-            self.button_validation.visible = False
         else :
             alert("Stage non enregisté !")
-            self.button_annuler_click()
+        self.button_annuler_click()
 
    
     def drop_down_lieux_change(self, **event_args):
@@ -194,43 +201,23 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def button_trombi_pdf_click(self, **event_args):
         """This method is called when the button is clicked"""
-        try:  # si les BG tasks de génération des listes trombi pdf / list pdf existent
-            if self.task_trombi.is_completed():
-                stage_row = app_tables.stages.get(numero=int(self.num_stage))
-                pdf = stage_row['trombi_media']
-                if pdf:
-                    anvil.media.download(pdf)
-                    alert("Trombinoscope téléchargé")
-                else:
-                    alert("Pdf du trombi non trouvé")
-        except: #sinon, j'utise les existentes, créées en table stage, (revient de trombi ou stage_row['allow_bgt_generation']=False)
-            stage_row = app_tables.stages.get(numero=int(self.num_stage))
-            pdf = stage_row['trombi_media']
-            if pdf:
-                anvil.media.download(pdf)
-                alert("Trombinoscope téléchargé")
-            else:
-                alert("Pdf du trombi non trouvé")
+        stage_row = app_tables.stages.get(numero=int(self.num_stage))
+        pdf = stage_row["trombi_media"]
+        if pdf:
+            anvil.media.download(pdf)
+            alert("Trombinoscope téléchargé")
+        else:
+            alert("Pdf du trombi non trouvé")
        
     def button_list_pdf_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        try:  # si les BG tasks de génération des listes trombi pdf / list pdf existent 
-            if self.task_list.is_completed():
-                stage_row = app_tables.stages.get(numero=int(self.num_stage))
-                pdf = stage_row['list_media']
-                if pdf:
-                    anvil.media.download(pdf)
-                    alert("Liste téléchargée")
-                else:
-                    alert("Liste 'fiches du stage' non trouvée")
-        except:  #sinon, j'utise les existentes, créées en table stage, (revient de trombi ou stage_row['allow_bgt_generation']=False)
-            stage_row = app_tables.stages.get(numero=int(self.num_stage))
-            pdf = stage_row['list_media']
-            if pdf:
-                anvil.media.download(pdf)
-                alert("Liste téléchargée")
-            else:
-                alert("Liste du trombi non trouvée")
+        stage_row = app_tables.stages.get(numero=int(self.num_stage))
+        pdf = stage_row['list_media']
+        if pdf:
+            anvil.media.download(pdf)
+            alert("Liste téléchargée")
+        else:
+            alert("Liste du trombi non trouvée")
 
     def button_qr_code_display_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -246,6 +233,27 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         """This method is called when the button is clicked"""
         global intitul
         open_form('Visu_liste_1_stage',str(self.num_stage), intitul, False)
+
+    def timer_1_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        try:
+            if self.task_list.is_completed():
+                self.button_fiches_stagiaires.visible = True
+                self.timer_1.interval=0
+                anvil.server.call('task_killer',self.task_list)
+        except:
+            pass
+            
+    def timer_2_tick(self, **event_args):
+        try:
+            if self.task_trombi.is_completed():
+                self.button_trombi_pdf.visible = True
+                self.timer_2.interval=0
+                anvil.server.call('task_killer',self.task_trombi)
+        except:
+            pass
+
+        
 
     
 

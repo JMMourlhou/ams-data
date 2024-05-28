@@ -19,13 +19,15 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         self.num_stage = num_stage
         self.intitule = intitule
         self.pdf_mode = pdf_mode
-        if self.pdf_mode is True:
+        if self.pdf_mode is True:                 # mode pdf renderer
             self.button_annuler.visible = False
             self.button_trombi.visible = False
         
         #lecture du fichier père stages
-        stage_row = app_tables.stages.get(numero=int(num_stage))    
-        stagiaires_liste =  app_tables.stagiaires_inscrits.search(
+        stage_row = app_tables.stages.get(  q.fetch_only("code_txt"),
+                                            numero=int(num_stage))    
+        stagiaires_liste =  app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", 
+                                                                                  user_email=q.fetch_only()),
                                                                     tables.order_by("name", ascending=True),
                                                                     stage=stage_row
                                                                 )
@@ -42,7 +44,7 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         print(list1[0]['name'])     row 1, column 'nom'
         """
 
-        cod = stage_row["code"]['code']
+        cod = stage_row["code_txt"]
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
         self.label_titre.text = "Fiches stagiaires " + cod + " du " + date + "   (num " +num_stage+")"
 

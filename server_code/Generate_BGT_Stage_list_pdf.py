@@ -29,7 +29,7 @@ def create_list_pdf(num_stage, intitule):
                                landscape = False,
                                margins = {'top': 1.0, 'bottom': 1.0, 'left': 1.0, 'right': 1.0},  # en cm
                                scale = 1.0,
-                               quality =  "screen"
+                               quality =  "default"
                               ).render_form('Visu_liste_1_stage',num_stage, intitule, True)
     
     " sauvegarde du media_object ds la table "
