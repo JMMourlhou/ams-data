@@ -315,7 +315,13 @@ db_schema:
       admin_ui: {order: 2, width: 745}
       type: simpleObject
     - name: droit_qcm
-      admin_ui: {order: 3, width: 1102}
+      admin_ui: {order: 3, width: 410}
+      type: simpleObject
+    - name: satisf_q_ferm_template
+      admin_ui: {order: 4, width: 200}
+      type: simpleObject
+    - name: satisf_q_ouv_template
+      admin_ui: {width: 200, order: 5}
       type: simpleObject
     title: Codes_stages
   users:

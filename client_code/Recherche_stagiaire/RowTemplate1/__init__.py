@@ -7,6 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from InputBox.input_box import InputBox, alert2, input_box, multi_select_dropdown
 import time
+from ... import French_zone # calcul tps traitement
 
 class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
@@ -49,14 +50,19 @@ class RowTemplate1(RowTemplate1Template):
             d = tel[6:8]
             e = tel[8:10]
             self.button_3.text = a+"-"+b+"-"+c+"-"+d+"-"+e    
+            
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
+        start = French_zone.french_zone_time()  # pour calcul du tpsde traitement
+        
         liste0 = app_tables.stagiaires_inscrits.search( q.fetch_only("stage_txt"),
                                                            user_email=user_row)
         liste_drop_d = []
         for row in liste0:
             liste_drop_d.append((row["stage_txt"], row))
-        self.drop_down_code_stage.items = liste_drop_d   
+        self.drop_down_code_stage.items = liste_drop_d
         
+        end = French_zone.french_zone_time()
+        print("Temps de traitement init drop dwn: ", end-start)
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
