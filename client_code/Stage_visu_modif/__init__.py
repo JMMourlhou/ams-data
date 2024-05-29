@@ -76,6 +76,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.text_area_commentaires.text = stage_row['commentaires']
             self.drop_down_lieux.selected_value = stage_row['lieu']
             self.check_box_allow_bg_task.checked = stage_row['allow_bgt_generation']
+            self.check_box_allow_satisf.checked = stage_row['saisie_satisf_ok']
             
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
@@ -161,7 +162,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                                                 self.text_box_nb_stagiaires_fin.text,
                                                 self.text_box_nb_stagiaires_diplom.text,
                                                 self.text_area_commentaires.text,
-                                                self.check_box_allow_bg_task.checked
+                                                self.check_box_allow_bg_task.checked,
+                                                self.check_box_allow_satisf.checked
                                                  )
         if result is True :
             alert("Stage enregisté !")
@@ -193,6 +195,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     def check_box_allow_bg_task_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         self.button_validation.visible = True   
+
+    def check_box_allow_satisf_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_validation.visible = True
 
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -252,6 +258,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 anvil.server.call('task_killer',self.task_trombi)
         except:
             pass
+
+
 
         
 

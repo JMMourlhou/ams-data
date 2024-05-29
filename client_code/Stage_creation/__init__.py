@@ -61,18 +61,18 @@ class Stage_creation(Stage_creationTemplate):
         """ Tests avant validation """     
                
         row = self.drop_down_code_stage.selected_value    # Récupération de la ligne stage sélectionnée
-        if row == None:
+        if row is None:
             alert("Entrez le code du stage")
             return
         row2 = self.drop_down_lieux.selected_value         # Récupération du lieu sélectionné
-        if row2 == None:
+        if row2 is None:
             alert("Entrez le lieu du stage")
             return
 
-        if self.date_picker_to.date == None :           # dates vides ?
+        if self.date_picker_to.date is None :           # dates vides ?
             alert("Entrez la date de fin du stage")
             return
-        if self.date_picker_from.date == None :     
+        if self.date_picker_from.date is None :     
             alert("Entrez la date de début du stage")
             return
         self.drop_down_code_stage_change()      #test si date fin > date début
@@ -96,7 +96,7 @@ class Stage_creation(Stage_creationTemplate):
                                                 self.text_box_nb_stagiaires_diplom.text,
                                                 self.text_area_commentaires.text
                                                  )
-        if result == True :
+        if result is True :
             alert("Stage enregisté !")
             self.button_qr_code_display.visible = True
             self.button_validation.visible = False

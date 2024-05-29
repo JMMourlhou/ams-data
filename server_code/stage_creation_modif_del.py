@@ -33,7 +33,10 @@ def add_stage(code_stage,     # row codes_stage concernée
                               nb_stagiaires_fin = 0,
                               nb_stagiaires_diplomes = 0,
                               commentaires = commentaires,
-                              allow_bgt_generation = False
+                              allow_bgt_generation = False,
+                              saisie_satisf_ok = False,                                 # Ne pas saisir le form de stisfaction            
+                              satis_dico1_q_ferm=code_stage["satisf_q_ferm_template"],  # copie du template de la table "code_stages", questions fermées
+                              satis_dico2_q_ouv=code_stage["satisf_q_ouv_template"]     # copie du template de la table "code_stages", questions ouvertes
                              )
         
                  
@@ -61,7 +64,8 @@ def modif_stage(code,
               nb_stagiaires_fin,
               nb_stagiaires_diplomes,
               commentaires,
-              allow_bgt_generation
+              allow_bgt_generation,    # True/False
+              allow_form_satisf        # True/False   
              ):
     numero=int(numero)
 
@@ -91,7 +95,8 @@ def modif_stage(code,
                     nb_stagiaires_fin = nb_stagiaires_fin,
                     nb_stagiaires_diplomes = nb_stagiaires_diplomes,
                     commentaires = commentaires,
-                    allow_bgt_generation = allow_bgt_generation
+                    allow_bgt_generation = allow_bgt_generation,
+                    saisie_satisf_ok=allow_form_satisf
                     )
         valid=True
     return valid

@@ -514,6 +514,9 @@ db_schema:
     - name: satis_pdf
       admin_ui: {width: 200, order: 17}
       type: media
+    - name: saisie_satisf_ok
+      admin_ui: {width: 200, order: 18}
+      type: bool
     title: Stages
   cpt_stages:
     client: search
