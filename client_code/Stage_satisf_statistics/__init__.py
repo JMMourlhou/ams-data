@@ -5,8 +5,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée pour questions fermées histogrammes (add component) 
-from ..Stage_satisf_rep_ouvertes import Stage_satisf_rep_ouvertes  #  Forme ajoutée pour questions ouvertes
+from .Stage_satisf_histograms import Stage_satisf_histograms   # Forme ajoutée pour questions fermées histogrammes (add component) 
+from .Stage_satisf_rep_ouvertes import Stage_satisf_rep_ouvertes  #  Forme ajoutée pour questions ouvertes
 import fast_pdf
 
 class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
@@ -44,7 +44,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 liste_stage.append(test_num_stage) 
         print(len(liste_stage), "stage(s)")
         
-        # création de la drop down
+        # création de la drop down codes stages
         liste_stage_drop_down = []
         for stage in liste_stage:
             row_stage = app_tables.stages.get(numero=int(stage))
@@ -55,13 +55,23 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
     # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
     def drop_down_code_stages_change(self, row=None,**event_args):
         """This method is called when an item is selected"""
-        if row is None: 
+        if row is not None:   # *********************************************** A TESTER
             row = self.drop_down_code_stages.selected_value  # row du stage sélectionné ds le drop down
         if row is None:
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
         self.row = row
+
+        """
+                    INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
+        """
+        liste_no_response = app_tables.stagiaires_inscrits.search(q.fetch_only("name", "prenom"),
+                                             numero = row["numero"],
+                                             enquete_satisf = False
+                                             )
+        self.repeating_panel_no_response.items = liste_no_response
+
         
         # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
         stage_row = app_tables.stages.get(numero=self.row["numero"])

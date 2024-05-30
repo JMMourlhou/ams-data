@@ -86,6 +86,10 @@ components:
       name: drop_down_code_stages
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
       event_bindings: {change: drop_down_code_stages_change}
+  - name: repeating_panel_no_response
+    properties: {item_template: Stage_satisf_statistics.ItemTemplate14}
+    type: RepeatingPanel
+    layout_properties: {grid_position: 'SYPXWU,TRMHJH'}
 - name: column_panel_titres
   properties: {background: 'theme:Primary', role: outlined-card, visible: false, spacing_above: none}
   type: ColumnPanel
