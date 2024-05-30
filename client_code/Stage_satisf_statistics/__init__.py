@@ -55,7 +55,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
     # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
     def drop_down_code_stages_change(self, row=None,**event_args):
         """This method is called when an item is selected"""
-        if row is not None:   # *********************************************** A TESTER
+        if row is None:   # *********************************************** A TESTER
             row = self.drop_down_code_stages.selected_value  # row du stage sélectionné ds le drop down
         if row is None:
             alert("Vous devez sélectionner un stage !")
@@ -66,12 +66,15 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         """
                     INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
         """
-        liste_no_response = app_tables.stagiaires_inscrits.search(q.fetch_only("name", "prenom"),
-                                             numero = row["numero"],
-                                             enquete_satisf = False
-                                             )
-        self.repeating_panel_no_response.items = liste_no_response
-
+        liste_no_response = app_tables.stagiaires_inscrits.search(
+                                                                numero = row["numero"],
+                                                                enquete_satisf = False
+                                                                )
+        if liste_no_response:
+            self.repeating_panel_no_response.items = liste_no_response
+        else:
+            self.label_titre_no_response.visible = False
+            self.repeating_panel_no_response.visible = False
         
         # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
         stage_row = app_tables.stages.get(numero=self.row["numero"])
