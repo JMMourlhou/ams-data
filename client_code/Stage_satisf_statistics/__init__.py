@@ -30,21 +30,8 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             self.button_annuler2.visible = False
             self.button_downl_pdf1.visible = False
             self.drop_down_code_stages_change(row)
-        """    
-        # Drop down codes stages
-        #création du dictionaire des stages ds tables formulaires de satisfaction
-        liste_stage = [] # cette liste me permet de tester l'existence du num stage ds celle-ci
         
-        liste_formulaires = app_tables.stage_satisf.search(q.fetch_only("stage_num_txt","stage_row"))                                                              
-        
-        print(len(liste_formulaires), 'formulaires lus')
-        for formulaire in liste_formulaires:
-            test_num_stage = formulaire['stage_num_txt']
-            if test_num_stage not in liste_stage: #le stage n'existe pas encore ds la liste, je l'ajoute
-                liste_stage.append(test_num_stage) 
-        print(len(liste_stage), "stage(s)")
-        """
-        # sélection d'1 stage si j'ai validé la saisie du formulaire
+        # sélection des stages si la saisie du formulaire a été validée (saisie_satisf_ok=True)
         liste_stage_drop_down =[]
         liste_stages = app_tables.stages.search(tables.order_by("numero", ascending=False),
                                                 saisie_satisf_ok=True)

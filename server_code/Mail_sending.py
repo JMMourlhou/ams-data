@@ -18,7 +18,7 @@ from . import Variables_globales # importation du module de lecture des variable
 
 """Send an email to the specified user"""
 @anvil.server.callable
-def _send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
+def send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
     time=French_zone_server_side.time_french_zone() # time will be text form 
     # Récupération des variables globales
     dict_var_glob = Variables_globales.get_variable_names()   # var_globale du mail d'AMS, stockées ds table 

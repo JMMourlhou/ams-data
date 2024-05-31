@@ -20,4 +20,10 @@ class ItemTemplate14(ItemTemplate14Template):
 
     def button_mail_click(self, **event_args):
         """This method is called when the button is clicked"""
+        stagiaire_email = self.button_mail.tag
+        rich_text = "Formulaire de satisfaction à entrer \n \n Voici le lien à clicker: "
+        subject_txt = "Formulaire de satisfaction"
         
+        result = anvil.server.call("send_mail",stagiaire_email, subject_txt, rich_text)
+        if result:
+            alert("mail envoyé")
