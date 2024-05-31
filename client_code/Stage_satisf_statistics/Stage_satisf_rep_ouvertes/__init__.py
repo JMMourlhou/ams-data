@@ -1,5 +1,6 @@
 from ._anvil_designer import Stage_satisf_rep_ouvertesTemplate
 from anvil import *
+import anvil.server
 from anvil_extras.PageBreak import PageBreak
 
 
