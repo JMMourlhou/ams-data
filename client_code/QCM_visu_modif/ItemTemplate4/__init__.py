@@ -167,6 +167,7 @@ class ItemTemplate4(ItemTemplate4Template):
             """
             self.text_area_question.text = qst
             self.text_area_question.enabled = False
+            self.text_box_correction.enabled = False
             self.button_delete.visible = False
         else:                                       # Mode Création/MAJ 
             self.text_area_question.text = qst

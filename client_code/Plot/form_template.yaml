@@ -15,7 +15,7 @@ components:
     type: RichText
     layout_properties: {grid_position: 'UPVFXD,AFZIQR'}
 - name: plot_1
-  properties: {interactive: true, spacing_above: none, spacing_below: none}
+  properties: {interactive: false, spacing_above: none, spacing_below: none}
   type: Plot
   layout_properties: {grid_position: 'SHINHL,XWBYBZ'}
   event_bindings: {click: plot_1_click}
