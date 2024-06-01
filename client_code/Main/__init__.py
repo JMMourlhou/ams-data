@@ -2,6 +2,8 @@ from ._anvil_designer import MainTemplate
 from anvil import *
 import anvil.server
 from anvil.tables import app_tables
+import anvil.tables.query as q
+
 from .. import French_zone
 from ..Saisie_info_de_base import Saisie_info_de_base
 from ..Stage_creation import Stage_creation
@@ -11,11 +13,10 @@ from anvil import open_form
 
 
 class Main(MainTemplate):
-    def __init__(
-        self, nb=1, stage_nb=0, **properties
-    ):  # msg pour afficher une alerte si mail erroné en pwreset par ex
+    def __init__(self, nb=1, stage_nb=0, **properties):  # msg pour afficher une alerte si mail erroné en pwreset par ex
         # Set Form properties and Data Bindings.
-
+        
+        
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.bt_se_deconnecter.visible = False
@@ -32,9 +33,7 @@ class Main(MainTemplate):
         self.nb = nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
-        if (
-            self.nb >= 99
-        ):  # retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
+        if self.nb >= 99:  # retour de création de fiche renseignement, j'efface l'url pour arrêter la boucle
             h = {}
 
         """ cas 2: soit ouverture de l'app """
@@ -82,17 +81,16 @@ class Main(MainTemplate):
         # handling buttons display
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
-        # renseignements du user pour savoir si on est en 1ere utilisation (on va en maj des renseignements)
-        user = anvil.users.get_user()
+        
+        # renseignements du user 
+        user = anvil.users.get_user(q.fetch_only("prenom"))
+        #self.user = anvil.users.get_user(q.fetch_only("prenom"))
         if not user:
             self.content_panel.clear()
         else:
-            if user["prenom"] is None:
-                self.bt_se_deconnecter.visible = False
-                self.button_qcm.visible = False
-                self.bt_gestion_stages.visible = False
-                self.button_pre_requis.visible = False
-                self.bt_user_mail_click(True)  # 1ere utilisation True
+            if user["prenom"] == None or user["prenom"] == "":
+                self.column_panel_header.visible = False
+                self.content_panel.add_component(Saisie_info_de_base(True), full_width_row=True)
 
     def pwreset(self, **event_args):
         # handling buttons display
@@ -129,7 +127,7 @@ class Main(MainTemplate):
     """ ***********************************************************************************************"""
 
     def display_bt_mail(self, **event_args):
-        user = anvil.users.get_user()
+        user = anvil.users.get_user(q.fetch_only("nom"))
         if user:
             self.bt_user_mail.text = user["email"]
             self.bt_se_connecter.visible = False
@@ -149,15 +147,13 @@ class Main(MainTemplate):
             self.button_pre_requis.visible = False
 
     def display_admin_or_other_buttons(self, **event_args):
-        user = anvil.users.get_user()
+        user = anvil.users.get_user(q.fetch_only("nom"))
         if user:
             self.bt_sign_in.visible = False
             self.bt_user_mail.enabled = True
             self.button_qcm.visible = True
             self.button_pre_requis.visible = True
-            if (
-                user["role"] == "A" or user["role"] == "B"
-            ):  # 'A'dministrator ou 'B'ureau
+            if user["role"] == "A" or user["role"] == "B":  # 'A'dministrator ou 'B'ureau
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
                 self.bt_gestion_stages.visible = True
@@ -167,7 +163,6 @@ class Main(MainTemplate):
 
     def bt_gestion_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
-
         open_form("Visu_stages")
 
     def bt_sign_in_click(
@@ -209,16 +204,13 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         open_form("QrCode_display", True)
 
-    def bt_user_mail_click(
-        self, prem_util=False, **event_args
-    ):  # True=1ere utilisation
+    def bt_user_mail_click(self, prem_util=False, **event_args):  # True=1ere utilisation
         """This method is called when the button is clicked"""
         self.content_panel.clear()
         self.bt_se_deconnecter.visible = False
         self.bt_sign_in.visible = False
         # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
-        # self.content_panel.add_component(Saisie_info_de_base(prem_util), full_width_row=True)
-        user = anvil.users.get_user()
+        user = anvil.users.get_user(q.fetch_only("email"))
         if not user:
             self.content_panel.clear()
         else:
@@ -227,13 +219,11 @@ class Main(MainTemplate):
     def button_create_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..QCM_visu_modif import QCM_visu_modif
-
         open_form("QCM_visu_modif_Main")
 
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..QCM_visu_modif_ST_Main import QCM_visu_modif_ST_Main
-
         open_form("QCM_visu_modif_ST_Main")
 
     def button_create_recherche_click(self, **event_args):
@@ -241,13 +231,11 @@ class Main(MainTemplate):
         table_temp = app_tables.temp.search()[0]
         table_temp.update(text="recherche")
         from ..Recherche_stagiaire import Recherche_stagiaire
-
         open_form("Recherche_stagiaire")
 
     def button_pre_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
-
         open_form("Pre_R_pour_stagiaire")
 
     def button_loop_click(self, **event_args):
@@ -280,7 +268,6 @@ class Main(MainTemplate):
     def button_maj_pr_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Table_Pre_R_MAJ import Table_Pre_R_MAJ
-
         open_form("Table_Pre_R_MAJ")
 
     def button_form_satisf_click(self, **event_args):

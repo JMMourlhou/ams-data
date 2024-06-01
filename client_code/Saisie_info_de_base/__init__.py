@@ -148,7 +148,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 if user and self.first_entry:          # 1ERE ENTREE 
                     stage=str(user['temp'])
                     if  user['temp']==0:
-                        alert("Pas d'inscription à un stage prévue, en inscription.")
+                        alert("Votre compte est à jour,\n Vous n'êtes pas insrit à un stage.")
                         self.button_retour_click()
                     else:
                         row = self.drop_down_fi.selected_value
@@ -230,6 +230,8 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def drop_down_fi_change(self, **event_args):
         """This method is called when an item is selected"""
         self.text_box_nom_change()
+
+ 
             
 
 
