@@ -16,7 +16,7 @@ class QrCode_display(QrCode_displayTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens
         # si log_in = False, appel du qr_code pour que les stagiaires s'inscrivent au stage
-        if log_in == False:
+        if log_in is False:
             # lecture du stage par son numéro si pas de log_in normal
             stage = app_tables.stages.get(numero=int(num_stage)) 
             if not stage:
@@ -52,11 +52,9 @@ class QrCode_display(QrCode_displayTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        
         from ..Main import Main
         open_form('Main',99)
 
-        event_args
         
 
 

@@ -262,8 +262,8 @@ class Main(MainTemplate):
     # Extraction de fichier texte pour les qcm
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        result = anvil.server.call("file_reading")
-        print(result)
+        from ..QrCode_Generator import QrCode_Generator
+        open_form("QrCode_Generator")
 
     def button_maj_pr_click(self, **event_args):
         """This method is called when the button is clicked"""

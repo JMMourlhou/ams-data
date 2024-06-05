@@ -1,4 +1,3 @@
-
 import anvil.files
 from anvil.files import data_files
 import anvil.server
@@ -6,6 +5,8 @@ import qrcode
 import qrcode.image.svg
 from io import BytesIO
 import anvil.media
+from anvil.pdf import PDFRenderer
+
 
 @anvil.server.callable
 def mk_qr_code(qr_code_data, **params):
@@ -20,3 +21,16 @@ def mk_qr_code(qr_code_data, **params):
     
     b = anvil.BlobMedia("image/svg+xml", svg_text, name="qrcode.svg")
     return b
+
+
+# Génère un pdf d'un fichier
+@anvil.server.callable
+def generate_pdf(file, file_name="document"):
+    pdf_object = PDFRenderer(page_size ='A4',
+                            filename = f"{file_name}.pdf",
+                            landscape = False,
+                            margins = {'top': 0.3, 'bottom': 0.1, 'left': 0.2, 'right': 0.2},  #  cm
+                            scale = 1.0,                                                       
+                            quality = "default"       # ok pdf 3300 ko --> pdf 368 ko
+                            ).render_form('QrCode_Generator',file)
+    return pdf_object   # pour download 

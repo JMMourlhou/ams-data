@@ -41,3 +41,6 @@ def generate_pdf_from_jpg(file, file_name, stage_num, email, item_requis, pr_req
 
 
 
+
+
+
