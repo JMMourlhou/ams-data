@@ -26,7 +26,7 @@ services:
 - source: /runtime/services/anvil/email.yml
   client_config: {}
   server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com,
-    smtp_encryption: starttls, test_mode: false, smtp_password: nAXYvzwq3FmarO5BBDgkRvxzEptF03wZ7Vpl97u2SA5/r0cJkdXV2qh3cWXJqEDpb0maFlWx4+g49cKhVIrxe/odNbMAQJKiMr3I9oh4mdiUi37UyuUTubKYU+5kgFT12iqZ3SVCacKdBim5FDo6YrxjHlYyQYSCLi889fhYkdW1LC+YGWLxxycAO/M=}
+    smtp_encryption: ssl, test_mode: false, smtp_password: BpQJkxqyVvXRC/KYmzoTLEhhSiVtbB05Ulyr2YqNHc9L8/4PrZx5YWxiDckHWeySXrAau8w8LymMVP8s70m+wAfKeKBaIY0wVqqv6Qt8Dic1iNe6xOl9vwLCLYZKz3/oM7Pqfgv28U42ClNdtEBUHtI+MQ/6D8gT9doOOWM7SqYEkvDG9+gZ2Sloh8Q=}
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
@@ -47,7 +47,8 @@ runtime_options:
       qrcode==7.4.2
 
       pdf2image==1.17.0'}
-metadata: {title: 'Gestion de données, AMS', logo_img: 'asset:logo_fs_small.png'}
+metadata: {title: 'Gestion de données, AMS', logo_img: 'asset:logo_fs_small.png',
+  description: jmmourlhou@gmail.com}
 startup_form: null
 db_schema:
   temp:
