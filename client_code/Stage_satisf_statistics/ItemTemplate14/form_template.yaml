@@ -16,7 +16,7 @@ components:
     properties: {role: outlined, align: center, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: 'theme:On Primary', visible: true, text: '',
       font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+      italic: false, background: 'theme:Orange', bold: true, underline: false}
     type: TextBox
     layout_properties: {width: null, expand: true}
   - name: button_mail

@@ -54,9 +54,7 @@ components:
     wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small,
     background: 'theme:Primary'}
   name: column_panel_a
-  layout_properties:
-    col_widths: {}
-    grid_position: HVXSKI,IUEAZJ
+  layout_properties: {grid_position: 'HVXSKI,PITKNE'}
   components:
   - type: ColumnPanel
     properties: {col_widths: '{}'}
@@ -89,7 +87,7 @@ components:
         placeholder: Stages
         border: ''
         enabled: true
-        foreground: theme:On Primary Container
+        foreground: theme:Tertiary
         items: []
         visible: true
         font_size: 16
@@ -97,22 +95,33 @@ components:
         spacing_above: small
         spacing_below: small
         italic: false
-        background: theme:Tertiary
+        background: theme:On Primary Container
         bold: false
         underline: false
         include_placeholder: true
       name: drop_down_code_stages
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
       event_bindings: {change: drop_down_code_stages_change}
-  - name: label_titre_no_response
-    properties: {align: center, text: 'Stagiaires n''ayant pas encore répondu:', foreground: 'theme:On
-        Primary'}
-    type: Label
-    layout_properties: {grid_position: 'ZJLSEY,HRIONZ'}
-  - name: repeating_panel_no_response
-    properties: {item_template: Stage_satisf_statistics.ItemTemplate14}
-    type: RepeatingPanel
-    layout_properties: {grid_position: 'SYPXWU,TRMHJH'}
+  - name: column_panel_mailing
+    properties: {role: outlined-card, background: 'theme:Primary'}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'SSTCFN,RTZDKI'}
+    components:
+    - name: button_mailing
+      properties: {text: Envoi de rappels par mail, foreground: 'theme:On Primary',
+        background: 'theme:Error', visible: true}
+      type: Button
+      layout_properties: {grid_position: 'KJGDDH,HELMOM'}
+      event_bindings: {click: button_mailing_click}
+    - name: label_titre_no_response
+      properties: {align: center, text: 'Stagiaires n''ayant pas encore répondu:',
+        foreground: 'theme:On Primary', background: 'theme:Error'}
+      type: Label
+      layout_properties: {grid_position: 'LIXFIT,CNWGUQ'}
+    - name: repeating_panel_no_response
+      properties: {item_template: Stage_satisf_statistics.ItemTemplate14}
+      type: RepeatingPanel
+      layout_properties: {grid_position: 'ZHDLPE,AYATBI'}
   - name: button_downl_pdf0
     properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
       foreground: 'theme:Tertiary', visible: false, text: Télécharger en Pdf, font_size: null,

@@ -19,7 +19,8 @@ from . import _Constant_parameters_public_ok
 """Send an email to the specified user"""
 @anvil.server.callable
 def send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
-    time=French_zone_server_side.time_french_zone() # time will be text form 
+    time=str(French_zone_server_side.time_french_zone())[0:16] # time will be text form 
+    
     # Récupération des variables globales
     dict_var_glob = Variables_globales.get_variable_names()   # var_globale du mail d'AMS, stockées ds table 
         
@@ -36,17 +37,18 @@ def send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
         to=user_row['email'],
         subject=subject_txt,
         html=f"""
-            <p><img src = {logo_address} width="200" height="100"> </p> 
-            <b> {user_row["prenom"]},</b><br>
-            <br>
-            <b>{rich_text}</b>
-             <br>
-            <b>  https://sxgqveyu3c2nj5kr.anvil.app/32M6REZ23NPHINCU26GAZBNM   </b><br><br>
-            <b><i>         L'équipe d'AMSport,</i></b>
+            <p><img src = {logo_address} width="200" height="100"> </p>
+            Bonjour <b>{user_row["prenom"]},</b>
+            <br><br>
+            {rich_text}
+            <br> <br>
+            Lien à cliquer:
+            https://sxgqveyu3c2nj5kr.anvil.app/32M6REZ23NPHINCU26GAZBNM 
+            <br><br>
+            <i>         L'équipe d'AMSport,</i>
             <br>
             <b>{client_mail}</b> <br>
-            <br>
-            <b>(Mail envoyé le {time})</b>
+             
         """
     )
       

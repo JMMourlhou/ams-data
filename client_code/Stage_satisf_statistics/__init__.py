@@ -13,6 +13,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
     def __init__(self,pdf_mode=False, row=None, **properties):  # si pdf=True, cette forme  appellée par pdf renderer  
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        self.column_panel_mailing.visible = False
         # Any code you write here will run before the form opens.
         self.pdf_mode = pdf_mode    # appel du pdf renderer ?
         self.timer_1.interval=0     # neutralise le timer
@@ -53,19 +54,20 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             return
         self.row = row
 
-        """
+        """ ------------------------------------------------------------------------
                     INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
-        """
-        liste_no_response = app_tables.stagiaires_inscrits.search(
+        """ 
+        self.liste_no_response = app_tables.stagiaires_inscrits.search(
                                                                 numero = row["numero"],
                                                                 enquete_satisf = False
                                                                 )
-        if liste_no_response:
-            self.repeating_panel_no_response.items = liste_no_response
+        if self.liste_no_response:
+            self.repeating_panel_no_response.items = self.liste_no_response
+            self.column_panel_mailing.visible = True
         else:
             self.label_titre_no_response.visible = False
             self.repeating_panel_no_response.visible = False
-        
+
         # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
         stage_row = app_tables.stages.get(numero=self.row["numero"])
         pdf = stage_row['satis_pdf']
@@ -552,6 +554,21 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         from ..Main import Main
         open_form('Main',99)
 
+    def button_mailing_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        for mail in self.liste_no_response:
+            stagiaire_email = mail['user_email']
+            subject_txt = "Formulaire de satisfaction"
+            rich_text = """
+                            S'il te plaît, effectue l'enquête de satisfaction de fin de stage !
+    
+                        """
+            result = anvil.server.call("send_mail",stagiaire_email, subject_txt, rich_text)
+            if result:
+                msg = "Mail envoyé à " + mail['user_email']['email']
+                n=Notification(msg,timeout=1)
+                n.show()
+        
  
 
     
