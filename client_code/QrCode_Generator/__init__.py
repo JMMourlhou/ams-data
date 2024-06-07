@@ -22,8 +22,9 @@ class QrCode_Generator(QrCode_GeneratorTemplate):
 
     def text_box_1_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
-        text = self.text_box_1.text
-        print("code",text)
+        #text = self.text_box_1.text
+        link = self.text_link_1.text
+        print("code",link)
         media=anvil.server.call('mk_qr_code',text)
         self.image_1.source=media
         self.image_1.visible = True

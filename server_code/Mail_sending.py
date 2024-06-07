@@ -19,7 +19,7 @@ from . import _Constant_parameters_public_ok
 """Send an email to the specified user"""
 @anvil.server.callable
 def send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
-    time=str(French_zone_server_side.time_french_zone())[0:16] # time will be text form 
+    #time=str(French_zone_server_side.time_french_zone())[0:16] # time will be text form 
     
     # Récupération des variables globales
     dict_var_glob = Variables_globales.get_variable_names()   # var_globale du mail d'AMS, stockées ds table 
