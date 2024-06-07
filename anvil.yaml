@@ -519,6 +519,14 @@ db_schema:
       admin_ui: {width: 200, order: 18}
       type: bool
     title: Stages
+  mail_templates:
+    client: none
+    server: full
+    columns:
+    - name: text
+      admin_ui: {width: 200, order: 0}
+      type: simpleObject
+    title: Mail_templates
   cpt_stages:
     client: search
     server: full
