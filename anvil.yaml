@@ -26,7 +26,7 @@ services:
 - source: /runtime/services/anvil/email.yml
   client_config: {}
   server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou,
-    smtp_encryption: '', test_mode: false, smtp_password: cL1hXmt7duyv+SFc8/OFjNYNFojaFvLKVEtd2jgF/KNhp3praAdhtuJbtX5HR+FyOTcyrr3+CIa41ij1/qUwLHVr2b+n3CXv49Eja/Sb+TVTPh2xuB74NKy4pS6TBpL4K330ou0e2NX6QnrRY6JjhSCqTGl/JJ91kUlOGbMO9Xo6AyPv1Z53ckgJ7OI=}
+    smtp_encryption: starttls, test_mode: false, smtp_password: cL1hXmt7duyv+SFc8/OFjNYNFojaFvLKVEtd2jgF/KNhp3praAdhtuJbtX5HR+FyOTcyrr3+CIa41ij1/qUwLHVr2b+n3CXv49Eja/Sb+TVTPh2xuB74NKy4pS6TBpL4K330ou0e2NX6QnrRY6JjhSCqTGl/JJ91kUlOGbMO9Xo6AyPv1Z53ckgJ7OI=}
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}

@@ -26,10 +26,6 @@ def send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
         
     client_mail = dict_var_glob["client_mail"]   # var globalenMail ams
     code_app2 = dict_var_glob["code_app2"]      # var_globale de l'apli AMS DATA
-    logo = app_tables.files.get(path="Logo_F_S_small.png")
-    #logo = dict_var_glob["logo_client"]         # var_globale du logo AMSport
-    #logo_address = code_app2+logo
-    #logo_address = code_app1+"/_/theme/"+logo['path']
     logo_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_logo
     print(logo_address)
     
@@ -38,10 +34,9 @@ def send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
         subject=subject_txt,
         html=f"""
             <p><img src = {logo_address} width="200" height="100"> </p>
-            Bonjour <b>{user_row["prenom"]},</b>
-            <p style="color:red;"> This is a red paragraph. </p>
+            <b><p style="color:blue;"> {user_row["prenom"]}, </p></b>
 
-            <br><br>
+            <br>
             {rich_text}
             <br> <br>
             Lien à cliquer:
