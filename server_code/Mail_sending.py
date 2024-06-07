@@ -39,6 +39,8 @@ def send_mail(user_row, subject_txt, rich_text="Rich_text à insérer"):
         html=f"""
             <p><img src = {logo_address} width="200" height="100"> </p>
             Bonjour <b>{user_row["prenom"]},</b>
+            <p style="color:red;"> This is a red paragraph. </p>
+
             <br><br>
             {rich_text}
             <br> <br>
