@@ -27,12 +27,12 @@ class Signature(SignatureTemplate):
     def canvas_1_mouse_move (self, x, y, **event_args):
         # This method is called when the mouse cursor moves over this component
         if self.pen_down:
-        self.canvas_1.begin_path()
-        self.canvas_1.move_to(self.lastx, self.lasty)
-        self.canvas_1.line_to(x, y)
-        self.canvas_1.stroke()
-        self.lastx = x
-        self.lasty = y
+            self.canvas_1.begin_path()
+            self.canvas_1.move_to(self.lastx, self.lasty)
+            self.canvas_1.line_to(x, y)
+            self.canvas_1.stroke()
+            self.lastx = x
+            self.lasty = y
     
     def canvas_1_mouse_up (self, x, y, button, **event_args):
         # This method is called when a mouse button is released on this component
@@ -52,10 +52,10 @@ class Signature(SignatureTemplate):
     
     def button_save_click (self, **event_args):
     # This method is called when the button is clicked
-    self.column_panel_2.visible = True    # contient l'image sauvée
-    self.image_1.source = self.get_image()    # Image à sauver
-    self.clear()
+        self.column_panel_2.visible = True    # contient l'image sauvée
+        self.image_1.source = self.get_image()    # Image à sauver
+        self.clear()
 
-  def button_erase_click(self, **event_args):
-      """This method is called when the button is clicked"""
-      self.clear()
+    def button_erase_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.clear()
