@@ -12,6 +12,9 @@ dependencies:
 - dep_id: dep_7cjrxpuwlnf9l
   version: {dev: false}
   resolution_hints: {app_id: T2N6YY2X6Z3W26OE, name: Clone of InputBox, package_name: InputBox}
+- dep_id: dep_udqdokkjeas71e
+  version: {dev: false}
+  resolution_hints: {app_id: 57MLJNQRNTSXZ6TD, name: Signature Capture, package_name: signature_widget}
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}
