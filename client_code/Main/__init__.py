@@ -279,3 +279,8 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Stage_satisf_statistics import Stage_satisf_statistics
         open_form("Stage_satisf_statistics")
+
+    def button_sign_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Signature import Signature
+        open_form("Signature")

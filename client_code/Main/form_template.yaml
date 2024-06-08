@@ -117,6 +117,12 @@ components:
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
+      - name: button_sign
+        properties: {text: Sign, background: 'theme:Primary', foreground: 'theme:On
+            Primary', visible: true}
+        type: Button
+        layout_properties: {}
+        event_bindings: {click: button_sign_click}
     - name: column_panel_1
       properties: {wrap_on: never, col_spacing: none}
       type: ColumnPanel
