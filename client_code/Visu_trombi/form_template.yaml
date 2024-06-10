@@ -3,43 +3,30 @@ container:
   properties: {col_widths: '{}'}
 components:
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: ''}
   name: column_panel_header
   layout_properties:
     col_widths: {}
     grid_position: FGMIAO,XFJRAR
   components:
   - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
-        Tertiary', visible: true, text: '', font_size: 16, font: '', spacing_above: none,
-      icon_align: left, spacing_below: none, italic: false, background: 'theme:On
-        Primary', bold: true, underline: false, icon: ''}
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On Tertiary', visible: true, text: '', font_size: 16, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:On Primary', bold: true, underline: false, icon: ''}
     name: label_titre
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - type: Button
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
-    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On
-      Primary Container', bold: true, underline: false, icon: ''}
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
   name: button_annuler2
   layout_properties:
     col_widths: {}
     grid_position: GBIDKZ,MRHCGT
   event_bindings: {click: button_retour2_click}
 - type: XYPanel
-  properties: {role: outlined-card, width: 850, align: left, height: '1500', tooltip: '',
-    border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small,
-    background: ''}
+  properties: {role: outlined-card, width: 850, align: left, height: '1500', tooltip: '', border: '', foreground: '', visible: true, spacing_above: small, spacing_below: small, background: ''}
   name: xy_panel
   layout_properties: {grid_position: 'XJQNSR,OTEJTD'}
   components: []
 - type: Button
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-    foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '',
-    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On
-      Primary Container', bold: true, underline: false, icon: ''}
+  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
   name: button_annuler
   layout_properties:
     col_widths: {}

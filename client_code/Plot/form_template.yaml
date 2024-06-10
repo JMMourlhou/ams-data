@@ -10,8 +10,7 @@ components:
   layout_properties: {grid_position: 'FYHKZF,LNOYEI'}
   components:
   - name: rich_text_infos_plot
-    properties: {align: center, background: 'theme:On Primary Container', foreground: 'theme:On
-        Primary', spacing_above: none, spacing_below: none, font_size: 16}
+    properties: {align: center, background: 'theme:On Primary Container', foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, font_size: 16}
     type: RichText
     layout_properties: {grid_position: 'UPVFXD,AFZIQR'}
 - name: plot_1
@@ -25,8 +24,7 @@ components:
   layout_properties: {grid_position: 'CVHTYN,IMTDAP'}
   components:
   - name: rich_text_next_qcm
-    properties: {align: center, background: 'theme:On Primary Container', foreground: 'theme:Tertiary',
-      spacing_above: none, spacing_below: none, font_size: 14, visible: true}
+    properties: {align: center, background: 'theme:On Primary Container', foreground: 'theme:Tertiary', spacing_above: none, spacing_below: none, font_size: 14, visible: true}
     type: RichText
     layout_properties: {grid_position: 'UPVFXD,AFZIQR'}
 container: {type: ColumnPanel}

@@ -1,13 +1,9 @@
 container:
   type: ColumnPanel
-  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: 'theme:Light Overlay 2'}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: 'theme:Light Overlay 2'}
 components:
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: 'theme:On Primary'}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: 'theme:On Primary'}
   name: column_panel_2
   layout_properties: {grid_position: 'RWOULO,XCYIBK', row_background: ''}
   components:

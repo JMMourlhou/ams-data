@@ -1,14 +1,9 @@
 container:
   type: DataRowPanel
-  properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-    auto_display_data: false, visible: true, font_size: null, font: '', spacing_above: none,
-    spacing_below: none, italic: false, background: 'theme:On Primary', bold: false,
-    underline: false}
+  properties: {role: null, align: center, tooltip: '', border: '', foreground: '', auto_display_data: false, visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none, italic: false, background: 'theme:On Primary', bold: false, underline: false}
 components:
 - type: FlowPanel
-  properties: {role: null, vertical_align: middle, spacing: tiny, align: center, tooltip: '',
-    border: '', foreground: '', visible: true, spacing_above: small, spacing_below: none,
-    background: 'theme:Primary'}
+  properties: {role: null, vertical_align: middle, spacing: tiny, align: center, tooltip: '', border: '', foreground: '', visible: true, spacing_above: small, spacing_below: none, background: 'theme:Primary'}
   name: flow_panel_1
   layout_properties: {column: null}
   components:
@@ -18,58 +13,37 @@ components:
     layout_properties: {width: 87.27141650390625}
     components:
     - type: Button
-      properties: {role: null, align: full, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:Tertiary', visible: true, text: type, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: true, underline: false, icon: ''}
+      properties: {role: null, align: full, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: type, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: true, underline: false, icon: ''}
       name: text_box_2
       layout_properties: {}
       event_bindings: {click: text_box_2_click}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary', visible: true, text: 'dates               ',
-      font_size: 10, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: ''}
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: 'dates               ', font_size: 10, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: ''}
     name: text_box_3
     layout_properties: {}
     event_bindings: {click: text_box_3_click}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:On Primary', visible: true, text: num stage, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: num stage, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: ''}
     name: text_box_1
     layout_properties: {}
     event_bindings: {click: text_box_1_click}
   - type: Button
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: +, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, underline: false, icon: ''}
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: +, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false, icon: ''}
     name: button_inscription
     layout_properties: {}
     event_bindings: {click: button_inscription_click}
   - name: button_pre_requis
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: P.Rq., font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, underline: false, icon: ''}
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: P.Rq., font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false, icon: ''}
     type: Button
     layout_properties: {}
     event_bindings: {click: button_pr_requis_click}
   - name: button_qcm
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Qcm, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, underline: false, icon: ''}
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Qcm, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false, icon: ''}
     type: Button
     layout_properties: {}
     event_bindings: {click: button_qcm_click}
   - name: button_del_stage
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Error', visible: true, text: Annulation du stage, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, underline: false, icon: ''}
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Error', visible: true, text: Annulation du stage, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false, icon: ''}
     type: Button
     layout_properties: {}
     event_bindings: {click: button_del_stage_click}

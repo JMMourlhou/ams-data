@@ -2,8 +2,7 @@ is_package: true
 container: {type: ColumnPanel}
 components:
 - name: label_1
-  properties: {font_size: 13, align: center, spacing_above: none, spacing_below: none,
-    icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary', bold: true}
+  properties: {font_size: 13, align: center, spacing_above: none, spacing_below: none, icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary', bold: true}
   type: Label
   layout_properties: {grid_position: 'VNKSZB,IPZCLL'}
 - name: flow_panel_2
@@ -17,8 +16,7 @@ components:
     layout_properties: {width: 210.978, expand: false}
     components:
     - name: image_1
-      properties: {height: '50', role: null, spacing_above: small, spacing_below: medium,
-        display_mode: original_size}
+      properties: {height: '50', role: null, spacing_above: small, spacing_below: medium, display_mode: original_size}
       type: Image
       layout_properties: {grid_position: 'LSIOOU,UOWYNL', full_width_row: true}
       data_bindings: []
@@ -28,10 +26,7 @@ components:
     layout_properties: {width: 100}
     components:
     - name: button_visu
-      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary Container', visible: true, text: '', font_size: 18,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:binoculars'}
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary Container', visible: true, text: '', font_size: 18, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: 'fa:binoculars'}
       type: Button
       layout_properties: {grid_position: 'CFBKGE,IOYJUG'}
       event_bindings: {click: button_visu_click}
@@ -64,10 +59,7 @@ components:
       layout_properties: {grid_position: 'GHLKMF,CEYBAC'}
       event_bindings: {change: file_loader_1_change}
     - name: button_del
-      properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:Error', visible: true, text: '   ', font_size: 27, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:remove'}
+      properties: {role: null, align: right, tooltip: '', border: '', enabled: true, foreground: 'theme:Error', visible: true, text: '   ', font_size: 27, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: 'fa:remove'}
       type: Button
       layout_properties: {grid_position: 'DVCURO,NCVZFL'}
       event_bindings: {click: button_del_click}

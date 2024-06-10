@@ -3,19 +3,14 @@ container:
   properties: {col_widths: '{}', visible: true}
 components:
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: ''}
   name: column_panel_header
   layout_properties:
     col_widths: {}
     grid_position: DGXGMW,VQVVNA
   components:
   - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
-        Tertiary', visible: true, text: Création / MAJ du QCM, font_size: 16, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On Tertiary', visible: true, text: Création / MAJ du QCM, font_size: 16, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - name: flow_panel_3
@@ -47,15 +42,12 @@ components:
     layout_properties: {width: 305.4136850585937}
     event_bindings: {change: drop_down_qcm_row_change}
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small,
-    background: 'theme:On Primary Container'}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small, background: 'theme:On Primary Container'}
   name: column_panel_1
   layout_properties: {grid_position: 'XGRXOA,LZLTYL'}
   components:
   - type: ColumnPanel
-    properties: {col_widths: '{"QAOCRN":15,"BESKSH":15}', background: 'theme:On Primary
-        Container'}
+    properties: {col_widths: '{"QAOCRN":15,"BESKSH":15}', background: 'theme:On Primary Container'}
     name: column_panel_6
     layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
     components:
@@ -65,14 +57,12 @@ components:
       layout_properties: {grid_position: 'WOTOGW,QAOCRN HVZJDO,AYPITW'}
       components:
       - name: label_6
-        properties: {text: Création d'une question, align: center, bold: true, font_size: 20,
-          italic: false, underline: false, foreground: 'theme:On Primary'}
+        properties: {text: Création d'une question, align: center, bold: true, font_size: 20, italic: false, underline: false, foreground: 'theme:On Primary'}
         type: Label
         layout_properties: {}
       data_bindings: []
     - name: column_panel_3
-      properties: {col_widths: '{}', role: outlined-card, background: 'theme:On Primary
-          Container', col_spacing: huge}
+      properties: {col_widths: '{}', role: outlined-card, background: 'theme:On Primary Container', col_spacing: huge}
       type: ColumnPanel
       layout_properties: {grid_position: 'WOTOGW,QAOCRN XRGEML,IVCNFU', full_width_row: true}
       components:
@@ -118,8 +108,7 @@ components:
           layout_properties: {}
           event_bindings: {change: drop_down_bareme_change}
     - name: column_panel_options
-      properties: {col_spacing: none, visible: false, role: outlined-card, background: 'theme:On
-          Primary Container'}
+      properties: {col_spacing: none, visible: false, role: outlined-card, background: 'theme:On Primary Container'}
       type: ColumnPanel
       layout_properties: {grid_position: 'WOTOGW,QAOCRN PVVWTX,HISDLN'}
       components:
@@ -129,43 +118,32 @@ components:
         layout_properties: {grid_position: 'FOLJCY,VQUWUB', full_width_row: false}
         components:
         - name: rep1
-          properties: {align: center, foreground: 'theme:On Primary', visible: true,
-            text: A, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On
-              Primary Container', bold: true, checked: false}
+          properties: {align: center, foreground: 'theme:On Primary', visible: true, text: A, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On Primary Container', bold: true, checked: false}
           type: CheckBox
           event_bindings: {change: rep1_change}
           layout_properties: {}
         - name: rep2
-          properties: {align: center, foreground: 'theme:On Primary', visible: true,
-            text: B, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On
-              Primary Container', bold: true, checked: false}
+          properties: {align: center, foreground: 'theme:On Primary', visible: true, text: B, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On Primary Container', bold: true, checked: false}
           type: CheckBox
           event_bindings: {change: rep2_change}
           layout_properties: {}
         - name: rep3
-          properties: {align: center, foreground: 'theme:On Primary', visible: true,
-            text: C, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On
-              Primary Container', bold: true}
+          properties: {align: center, foreground: 'theme:On Primary', visible: true, text: C, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On Primary Container', bold: true}
           type: CheckBox
           event_bindings: {change: rep3_change}
           layout_properties: {}
         - name: rep4
-          properties: {align: center, foreground: 'theme:On Primary', visible: true,
-            text: D, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On
-              Primary Container', bold: true}
+          properties: {align: center, foreground: 'theme:On Primary', visible: true, text: D, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On Primary Container', bold: true}
           type: CheckBox
           event_bindings: {change: rep4_change}
           layout_properties: {}
         - name: rep5
-          properties: {align: center, foreground: 'theme:On Primary', visible: true,
-            text: E, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On
-              Primary Container', bold: true}
+          properties: {align: center, foreground: 'theme:On Primary', visible: true, text: E, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:On Primary Container', bold: true}
           type: CheckBox
           layout_properties: {}
           event_bindings: {change: rep5_change}
     - name: column_panel_img
-      properties: {role: outlined-card, background: 'theme:On Primary Container',
-        visible: false}
+      properties: {role: outlined-card, background: 'theme:On Primary Container', visible: false}
       type: ColumnPanel
       layout_properties: {grid_position: 'WOTOGW,BESKSH'}
       components:
@@ -211,26 +189,17 @@ components:
           layout_properties: {width: 94.85434931640626}
           event_bindings: {change: file_loader_photo_change}
       - name: image_1
-        properties: {height: 103.63302612304688, role: null, spacing_above: small,
-          spacing_below: medium, display_mode: shrink_to_fit, background: 'theme:Primary'}
+        properties: {height: 103.63302612304688, role: null, spacing_above: small, spacing_below: medium, display_mode: shrink_to_fit, background: 'theme:Primary'}
         type: Image
         layout_properties: {grid_position: 'LSIOOU,UOWYNL', full_width_row: true}
         data_bindings: []
   - name: text_box_question
-    properties: {role: null, align: left, height: 82.52047729492188, tooltip: '',
-      placeholder: Question, border: '', enabled: true, foreground: 'theme:On Primary',
-      visible: false, text: '', font_size: 14, auto_expand: true, font: '', spacing_above: none,
-      spacing_below: small, italic: false, background: 'theme:Primary 700', bold: true,
-      underline: false}
+    properties: {role: null, align: left, height: 82.52047729492188, tooltip: '', placeholder: Question, border: '', enabled: true, foreground: 'theme:On Primary', visible: false, text: '', font_size: 14, auto_expand: true, font: '', spacing_above: none, spacing_below: small, italic: false, background: 'theme:Primary 700', bold: true, underline: false}
     type: TextArea
     layout_properties: {grid_position: 'OQBWAL,EOAWPD'}
     event_bindings: {change: text_box_question_change}
   - name: text_box_correction
-    properties: {role: null, align: left, height: 83.68646240234375, tooltip: '',
-      placeholder: Correction, border: '', enabled: true, foreground: 'theme:On Primary
-        Container', visible: false, text: '', font_size: 14, auto_expand: true, font: '',
-      spacing_above: none, spacing_below: small, italic: false, background: 'theme:Secondary
-        700', bold: true, underline: false}
+    properties: {role: null, align: left, height: 83.68646240234375, tooltip: '', placeholder: Correction, border: '', enabled: true, foreground: 'theme:On Primary Container', visible: false, text: '', font_size: 14, auto_expand: true, font: '', spacing_above: none, spacing_below: small, italic: false, background: 'theme:Secondary 700', bold: true, underline: false}
     type: TextArea
     layout_properties: {grid_position: 'OQBWAL,KUNSFE'}
     event_bindings: {change: text_box_correction_change}
@@ -240,33 +209,22 @@ components:
     layout_properties: {grid_position: 'CWYLSB,IXFVSQ'}
     components:
     - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour,
-        font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:On Primary Container', bold: true, underline: false,
-        icon: ''}
+      properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
       name: button_annuler
       event_bindings: {click: button_annuler_click}
       layout_properties: {}
     - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: false, foreground: 'theme:On Primary', visible: true, text: 'Insérer ',
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:On Primary Container', bold: false, underline: false,
-        icon: ''}
+      properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: false, foreground: 'theme:On Primary', visible: true, text: 'Insérer ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: false, underline: false, icon: ''}
       name: button_creer
       event_bindings: {click: button_creer_click}
       layout_properties: {}
     - name: button_test
-      properties: {text: Test Qcm, background: 'theme:On Primary Container', foreground: 'theme:Tertiary',
-        visible: false}
+      properties: {text: Test Qcm, background: 'theme:On Primary Container', foreground: 'theme:Tertiary', visible: false}
       type: Button
       layout_properties: {}
       event_bindings: {click: button_test_click}
 - type: ColumnPanel
-  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '', spacing_below: small,
-    background: ''}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '', spacing_below: small, background: ''}
   name: column_panel_content
   layout_properties: {grid_position: 'JKQKWS,BTYCFD'}
 is_package: true

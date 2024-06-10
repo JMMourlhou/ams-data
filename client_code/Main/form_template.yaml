@@ -3,9 +3,7 @@ container:
   properties: {col_widths: '{}'}
 components:
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{"OGGYPZ":44,"HIDJEX":18,"HEHEYJ":18}',
-    spacing_below: none, background: 'theme:Primary'}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{"OGGYPZ":44,"HIDJEX":18,"HEHEYJ":18}', spacing_below: none, background: 'theme:Primary'}
   name: column_panel_header
   layout_properties:
     col_widths: {}
@@ -16,24 +14,16 @@ components:
     name: spacer_1
     layout_properties: {grid_position: 'YMEUZM,HEHEYJ'}
   - type: Image
-    properties: {role: null, vertical_align: center, height: 60, tooltip: '', border: '',
-      foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: none,
-      source: _/theme/Logo_AMS.png, spacing_below: small, background: '', horizontal_align: center}
+    properties: {role: null, vertical_align: center, height: 60, tooltip: '', border: '', foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: none, source: _/theme/Logo_AMS.png, spacing_below: small, background: '', horizontal_align: center}
     name: Logo
     layout_properties: {grid_position: 'YMEUZM,OGGYPZ'}
   - type: Button
-    properties: {role: filled-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: '', font_size: 40, font: '', spacing_above: none,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:qrcode'}
+    properties: {role: filled-button, align: center, tooltip: '', border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 40, font: '', spacing_above: none, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: 'fa:qrcode'}
     name: button_qr
     layout_properties: {grid_position: 'YMEUZM,HIDJEX'}
     event_bindings: {click: button_qr_click}
   - type: Button
-    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: false,
-      foreground: 'theme:Tertiary', visible: true, text: '', font_size: 14, font: '',
-      spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '',
-      bold: true, underline: false, icon: 'fa:user'}
+    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: false, foreground: 'theme:Tertiary', visible: true, text: '', font_size: 14, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '', bold: true, underline: false, icon: 'fa:user'}
     name: bt_user_mail
     layout_properties:
       col_widths: {}
@@ -50,33 +40,21 @@ components:
       layout_properties: {grid_position: 'YOXQOW,UEQISO'}
       components:
       - type: Button
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Primary', visible: true, text: ' Se
-            déconnecter ', font_size: null, font: '', spacing_above: small, icon_align: left,
-          spacing_below: small, italic: false, background: 'theme:On Primary Container',
-          bold: false, underline: false, icon: ''}
+        properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: ' Se déconnecter ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: false, underline: false, icon: ''}
         name: bt_se_deconnecter
         layout_properties:
           col_widths: {}
           grid_position: GXBZDW,UYTBFE
         event_bindings: {click: bt_se_deconnecter_click}
       - type: Button
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Se
-            connecter ', font_size: null, font: '', spacing_above: small, icon_align: left,
-          spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
-          underline: false, icon: ''}
+        properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Se connecter ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
         name: bt_se_connecter
         layout_properties:
           col_widths: {}
           grid_position: OPHTMO,HRACXZ
         event_bindings: {click: button_se_connecter_click}
     - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Créer
-          son compte ', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
-        underline: false, icon: ''}
+      properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Créer son compte ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
       name: bt_sign_in
       layout_properties:
         col_widths: {}
@@ -88,38 +66,32 @@ components:
     layout_properties: {grid_position: 'CWEFOY,ECORVD'}
     components:
     - name: flow_panel_1
-      properties: {background: 'theme:On Primary Container', vertical_align: middle,
-        align: center}
+      properties: {background: 'theme:On Primary Container', vertical_align: middle, align: center}
       type: FlowPanel
       layout_properties: {grid_position: 'AOZXYS,RPVEJB'}
       components:
       - name: Close
-        properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary',
-          visible: false}
+        properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary', visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: Close_click}
       - name: button_loop
-        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On
-            Primary', bold: true, visible: false}
+        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_loop_click}
       - name: button_1
-        properties: {text: extraction Txt, background: 'theme:Primary', foreground: 'theme:On
-            Primary', visible: false}
+        properties: {text: extraction Txt, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
       - name: button_qr_code_generator
-        properties: {text: Qr Code Generator, background: 'theme:Primary', foreground: 'theme:On
-            Primary', visible: true}
+        properties: {text: Qr Code Generator, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
       - name: button_sign
-        properties: {text: Sign, background: 'theme:Primary', foreground: 'theme:On
-            Primary', visible: true}
+        properties: {text: Sign, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_sign_click}
@@ -129,29 +101,17 @@ components:
       layout_properties: {grid_position: 'YROLRC,HBDKLU'}
       components:
       - type: Button
-        properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-          foreground: 'theme:On Primary Container', visible: true, text: '  Stages  ',
-          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-          icon: 'fa:users'}
+        properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary Container', visible: true, text: '  Stages  ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: 'fa:users'}
         name: bt_gestion_stages
         layout_properties: {grid_position: 'EAREMG,IFZQQT'}
         event_bindings: {click: bt_gestion_stages_click}
       - type: Button
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Stagiaires,
-          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-          icon: 'fa:user'}
+        properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Stagiaires, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: 'fa:user'}
         name: button_create_recherche
         layout_properties: {grid_position: 'EAREMG,JJXUAK'}
         event_bindings: {click: button_create_recherche_click}
       - name: button_maj_pr
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Pré Requis,
-          font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-          italic: false, background: 'theme:Tertiary', bold: true, underline: false,
-          icon: 'fa:user'}
+        properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Tertiary', visible: true, text: Pré Requis, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: 'fa:user'}
         type: Button
         layout_properties: {grid_position: 'EAREMG,HDTPZU'}
         event_bindings: {click: button_maj_pr_click}
@@ -161,19 +121,11 @@ components:
       layout_properties: {grid_position: 'TYYBCY,QDBBUT'}
       components:
       - type: Button
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Création
-            / Modif QCM    ', font_size: null, font: '', spacing_above: small, icon_align: left,
-          spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
-          underline: false, icon: ''}
+        properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Création / Modif QCM    ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
         name: button_create_qcm
         event_bindings: {click: button_create_qcm_click}
       - name: button_satisf_result
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Enquêtes
-            satisfaction', font_size: null, font: '', spacing_above: small, icon_align: left,
-          spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
-          underline: false, icon: ''}
+        properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Tertiary', visible: true, text: ' Enquêtes satisfaction', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
         type: Button
         event_bindings: {click: button_satisf_result_click}
         layout_properties: {}
@@ -188,21 +140,15 @@ components:
       layout_properties: {grid_position: 'GNREGM,RYTGXA'}
       components:
       - name: button_pre_requis
-        properties: {text: '   Documents à entrer   ', background: 'theme:Primary',
-          foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
+        properties: {text: '   Documents à entrer   ', background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
         type: Button
         event_bindings: {click: button_pre_requis_click}
       - type: Button
-        properties: {role: elevated-button, align: center, tooltip: '', border: '',
-          enabled: true, foreground: 'theme:On Primary', visible: true, text: '        Effectuer
-            un QCM        ', font_size: null, font: '', spacing_above: small, icon_align: left,
-          spacing_below: small, italic: false, background: 'theme:Primary', bold: true,
-          underline: false, icon: ''}
+        properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '        Effectuer un QCM        ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: true, underline: false, icon: ''}
         name: button_qcm
         event_bindings: {click: button_qcm_click}
       - name: button_form_satisf
-        properties: {text: Formulaire de satisfaction, background: 'theme:Primary',
-          foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
+        properties: {text: Formulaire de satisfaction, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
         type: Button
         event_bindings: {click: button_form_satisf_click}
         layout_properties: {}

@@ -1,8 +1,6 @@
 container:
   type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: 'theme:Primary'}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: 'theme:Primary'}
   event_bindings: {}
 components:
 - name: flow_panel_num
@@ -11,8 +9,7 @@ components:
   layout_properties: {grid_position: 'QCTQTJ,CDGXYX'}
   components:
   - name: label_2
-    properties: {foreground: 'theme:On Primary', text: '#', font_size: 14, align: center,
-      role: null, spacing_above: none, spacing_below: none}
+    properties: {foreground: 'theme:On Primary', text: '#', font_size: 14, align: center, role: null, spacing_above: none, spacing_below: none}
     type: Label
     layout_properties: {}
   - name: label_3
@@ -24,9 +21,7 @@ components:
     type: Label
     layout_properties: {}
   - name: file_loader_1
-    properties: {background: 'theme:On Primary Container', text: Choix de l'image,
-      visible: true, foreground: 'theme:On Primary', role: null, spacing_above: none,
-      spacing_below: none}
+    properties: {background: 'theme:On Primary Container', text: Choix de l'image, visible: true, foreground: 'theme:On Primary', role: null, spacing_above: none, spacing_below: none}
     type: FileLoader
     event_bindings: {change: file_loader_1_change}
     layout_properties: {}
@@ -41,8 +36,7 @@ components:
     layout_properties: {grid_position: 'HWSCUQ,YYYUYU'}
     components:
     - name: image_1
-      properties: {height: 224.0885009765625, role: null, spacing_above: small, spacing_below: medium,
-        display_mode: shrink_to_fit}
+      properties: {height: 224.0885009765625, role: null, spacing_above: small, spacing_below: medium, display_mode: shrink_to_fit}
       type: Image
       layout_properties: {grid_position: 'NJZSBG,MVJVXU'}
       data_bindings: []
@@ -52,64 +46,46 @@ components:
     layout_properties: {grid_position: 'VWBXEW,BIJGKW'}
     components:
     - name: text_area_question
-      properties: {align: left, height: 56.981689453125, placeholder: Question, enabled: false,
-        foreground: 'theme:On Primary', font_size: 14, auto_expand: true, spacing_below: small,
-        background: 'theme:Primary 700', bold: true}
+      properties: {align: left, height: 56.981689453125, placeholder: Question, enabled: false, foreground: 'theme:On Primary', font_size: 14, auto_expand: true, spacing_below: small, background: 'theme:Primary 700', bold: true}
       type: TextArea
       layout_properties: {grid_position: 'JRGWCO,EAZFGY'}
-      event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus,
-        focus: text_area_question_focus, show: text_area_question_show}
+      event_bindings: {change: text_area_question_change, lost_focus: text_area_question_lost_focus, focus: text_area_question_focus, show: text_area_question_show}
     - name: cp_options
       properties: {col_spacing: tiny}
       type: ColumnPanel
       layout_properties: {grid_position: 'JRGWCO,SNTWTT'}
       components:
       - name: rep1
-        properties: {align: center, foreground: 'theme:On Primary', text: V, font_size: 10,
-          spacing_above: none, spacing_below: none, background: 'theme:Primary 700',
-          bold: true, checked: false}
+        properties: {align: center, foreground: 'theme:On Primary', text: V, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary 700', bold: true, checked: false}
         type: CheckBox
         layout_properties: {grid_position: 'JSZRDP,EICFQK', full_width_row: false}
         event_bindings: {change: rep1_change}
       - name: rep2
-        properties: {align: center, foreground: 'theme:On Primary', text: F, font_size: 10,
-          spacing_above: none, spacing_below: none, background: 'theme:Primary 700',
-          bold: true, checked: false}
+        properties: {align: center, foreground: 'theme:On Primary', text: F, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary 700', bold: true, checked: false}
         type: CheckBox
         layout_properties: {grid_position: 'YEFAGY,IYUETY'}
         event_bindings: {change: rep2_change}
       - name: rep3
-        properties: {align: center, foreground: 'theme:On Primary', visible: false,
-          text: C, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
-            700', bold: true}
+        properties: {align: center, foreground: 'theme:On Primary', visible: false, text: C, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary 700', bold: true}
         type: CheckBox
         layout_properties: {grid_position: 'UNTKDO,VKZZDN'}
         event_bindings: {change: rep3_change}
       - name: rep4
-        properties: {align: center, foreground: 'theme:On Primary', visible: false,
-          text: D, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
-            700', bold: true}
+        properties: {align: center, foreground: 'theme:On Primary', visible: false, text: D, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary 700', bold: true}
         type: CheckBox
         layout_properties: {grid_position: 'EIBGWA,IJOGUK'}
         event_bindings: {change: rep4_change}
       - name: rep5
-        properties: {align: center, foreground: 'theme:On Primary', visible: false,
-          text: E, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary
-            700', bold: true}
+        properties: {align: center, foreground: 'theme:On Primary', visible: false, text: E, font_size: 10, spacing_above: none, spacing_below: none, background: 'theme:Primary 700', bold: true}
         type: CheckBox
         layout_properties: {grid_position: 'PPWLBL,TJKTNJ'}
         event_bindings: {change: rep5_change}
       data_bindings: []
   - name: text_box_correction
-    properties: {role: null, align: left, height: 63.784912109375, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: 'theme:On Primary Container', visible: false,
-      text: '', font_size: null, auto_expand: true, font: '', spacing_above: none,
-      spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true,
-      underline: false}
+    properties: {role: null, align: left, height: 63.784912109375, tooltip: '', placeholder: '', border: '', enabled: true, foreground: 'theme:On Primary Container', visible: false, text: '', font_size: null, auto_expand: true, font: '', spacing_above: none, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false}
     type: TextArea
     layout_properties: {grid_position: ''}
-    event_bindings: {focus: text_box_correction_focus, lost_focus: text_box_correction_lost_focus,
-      change: text_box_correction_change}
+    event_bindings: {focus: text_box_correction_focus, lost_focus: text_box_correction_lost_focus, change: text_box_correction_change}
   - name: fp_vf_barem
     properties: {align: center, spacing: tiny, vertical_align: middle}
     type: FlowPanel
@@ -143,23 +119,17 @@ components:
       type: Spacer
       layout_properties: {width: 19.66973876953125}
   - name: fp_modif
-    properties: {align: center, background: 'theme:Primary', vertical_align: middle,
-      spacing: huge}
+    properties: {align: center, background: 'theme:Primary', vertical_align: middle, spacing: huge}
     type: FlowPanel
     layout_properties: {grid_position: 'JDGSTY,OFZKXW'}
     components:
     - name: button_delete
-      properties: {text: Enlever, background: 'theme:On Primary Container', foreground: 'theme:On
-          Primary'}
+      properties: {text: Enlever, background: 'theme:On Primary Container', foreground: 'theme:On Primary'}
       type: Button
       layout_properties: {}
       event_bindings: {click: button_delete_click}
     - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '',
-        enabled: false, foreground: 'theme:On Primary', visible: true, text: Modif,
-        font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-        italic: false, background: 'theme:On Primary Container', bold: false, underline: false,
-        icon: ''}
+      properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: false, foreground: 'theme:On Primary', visible: true, text: Modif, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: false, underline: false, icon: ''}
       name: button_modif
       event_bindings: {click: button_modif_click}
       layout_properties: {}
@@ -170,14 +140,12 @@ components:
   layout_properties: {grid_position: 'MSXBMZ,NBNYDO'}
   event_bindings: {click: button_fin_qcm_click, show: button_fin_qcm_show}
 - name: column_panel_results
-  properties: {background: 'theme:On Primary Container', role: outlined-card, visible: false,
-    spacing_below: none, spacing_above: none}
+  properties: {background: 'theme:On Primary Container', role: outlined-card, visible: false, spacing_below: none, spacing_above: none}
   type: ColumnPanel
   layout_properties: {grid_position: 'RBTWZY,SNUAFS'}
   components:
   - name: label_nb_quest_ok
-    properties: {text: 'XX questions exactes sur XX, soit xx %', foreground: 'theme:On
-        Primary', align: center, visible: false}
+    properties: {text: 'XX questions exactes sur XX, soit xx %', foreground: 'theme:On Primary', align: center, visible: false}
     type: Label
     layout_properties: {grid_position: 'WTMNTD,OYYUQY'}
   - name: column_panel_plot
@@ -186,13 +154,11 @@ components:
     layout_properties: {grid_position: 'MDFWJT,QOACBK'}
     components: []
   - name: label_nb_points
-    properties: {text: 'XX points obtenus sur  XX , soit XX %', foreground: 'theme:On
-        Primary', align: center, font_size: 12, visible: false}
+    properties: {text: 'XX points obtenus sur  XX , soit XX %', foreground: 'theme:On Primary', align: center, font_size: 12, visible: false}
     type: Label
     layout_properties: {grid_position: 'MEUEPA,WTTGBQ'}
   - name: button_enregistrer_et_sortir
-    properties: {text: Sortir du QCM, foreground: 'theme:Tertiary', bold: true, role: outlined-button,
-      visible: false}
+    properties: {text: Sortir du QCM, foreground: 'theme:Tertiary', bold: true, role: outlined-button, visible: false}
     type: Button
     layout_properties: {grid_position: 'ILCZMZ,OEJJCE'}
     event_bindings: {click: button_enregistrer_et_sortir_click}

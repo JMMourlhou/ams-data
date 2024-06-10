@@ -11,20 +11,17 @@ components:
     layout_properties: {grid_position: 'NHBMTC,WPLHEV'}
     components:
     - name: download
-      properties: {text: Téléchargement, background: 'theme:Primary', foreground: 'theme:Tertiary',
-        visible: true}
+      properties: {text: Téléchargement, background: 'theme:Primary', foreground: 'theme:Tertiary', visible: true}
       type: Button
       layout_properties: {grid_position: 'LSXOEP,ZQNCZV'}
       event_bindings: {click: download_click}
     - name: retour
-      properties: {text: Retour, background: 'theme:Primary', foreground: 'theme:Tertiary',
-        visible: true}
+      properties: {text: Retour, background: 'theme:Primary', foreground: 'theme:Tertiary', visible: true}
       type: Button
       layout_properties: {grid_position: 'LSXOEP,WHUOGR'}
       event_bindings: {click: retour_click}
   - name: label_1
-    properties: {foreground: 'theme:On Primary Container', role: null, align: center,
-      bold: true, font_size: 12}
+    properties: {foreground: 'theme:On Primary Container', role: null, align: center, bold: true, font_size: 12}
     type: Label
     layout_properties: {grid_position: 'YAFXUA,QQFHDB'}
   - name: image_1

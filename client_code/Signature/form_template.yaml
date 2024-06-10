@@ -1,23 +1,17 @@
 container: {type: ColumnPanel}
 components:
 - name: canvas_1
-  properties: {role: null, width: default, height: 332.48114013671875, border: '1px
-      solid #888', foreground: '', visible: true, spacing_above: small, spacing_below: small,
-    background: ''}
+  properties: {role: null, width: default, height: 332.48114013671875, border: '1px solid #888', foreground: '', visible: true, spacing_above: small, spacing_below: small, background: ''}
   type: Canvas
   layout_properties: {grid_position: 'OWAAKG,BITZDR'}
-  event_bindings: {mouse_leave: canvas_1_mouse_leave, mouse_down: canvas_1_mouse_down,
-    mouse_move: canvas_1_mouse_move, mouse_up: canvas_1_mouse_up}
+  event_bindings: {mouse_leave: canvas_1_mouse_leave, mouse_down: canvas_1_mouse_down, mouse_move: canvas_1_mouse_move, mouse_up: canvas_1_mouse_up}
 - name: column_panel_3
   properties: {wrap_on: never}
   type: ColumnPanel
   layout_properties: {grid_position: 'TAXIDJ,IMRDJY'}
   components:
   - name: button_save
-    properties: {role: null, width: default, align: center, border: '', enabled: true,
-      foreground: '', visible: true, text: Validation, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
+    properties: {role: null, width: default, align: center, border: '', enabled: true, foreground: '', visible: true, text: Validation, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: ''}
     type: Button
     layout_properties: {grid_position: 'EXGGGB,MPCGDB'}
     event_bindings: {click: button_save_click}
@@ -32,9 +26,7 @@ components:
     layout_properties: {grid_position: 'EXGGGB,KTHGHM'}
     event_bindings: {click: button_retour_click}
 - name: column_panel_2
-  properties: {role: null, width: default, border: '', foreground: '', visible: false,
-    row_spacing: 10, wrap_on: mobile, spacing_above: small, col_widths: '{}', spacing_below: small,
-    background: ''}
+  properties: {role: null, width: default, border: '', foreground: '', visible: false, row_spacing: 10, wrap_on: mobile, spacing_above: small, col_widths: '{}', spacing_below: small, background: ''}
   type: ColumnPanel
   layout_properties: {grid_position: 'GSYNBD,KUFWSY'}
   components:

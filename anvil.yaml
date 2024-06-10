@@ -17,16 +17,14 @@ services:
   client_config: {enable_v2: true}
   server_config: {}
 - source: /runtime/services/anvil/users.yml
-  client_config: {allow_signup: false, enable_automatically: true, use_email: true,
-    confirm_email: true}
+  client_config: {allow_signup: false, enable_automatically: true, use_email: true, confirm_email: true}
   server_config: {user_table: users}
 - source: /runtime/services/google.yml
   client_config: {}
   server_config: {enc_delegation_refresh_token: hpOFXpFvivlCtjXrhtAWx4r0B41C+gLgl7cGOjQhndVAlL+qXXey8uW2EQLRIunkYvBVpT4JxxeYiLwgUMPL9toRFzWNJBJQA0+J60ztN8XdPYr8qTHm8MxzjTwyJhA+V0e1CNA5Yy4BI0t+5mWzhbF/jJFrSPAAe59p1yZD9R1Vn4GYV3iXmsdxrO+MRZ+Oi0ePYr/0IGihj+F4UbaVwJTcg3d8+4YthD43Ycju27LD2b6hSrjb3OVRkt7o4FWbEiHR+m0tlKWriCGeUVnqPjyBl76NCtKqSGQnbE8nm88UjFBMDV/B8T3sjl//MA==}
 - source: /runtime/services/anvil/email.yml
   client_config: {}
-  server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou,
-    smtp_encryption: starttls, test_mode: false, smtp_password: cL1hXmt7duyv+SFc8/OFjNYNFojaFvLKVEtd2jgF/KNhp3praAdhtuJbtX5HR+FyOTcyrr3+CIa41ij1/qUwLHVr2b+n3CXv49Eja/Sb+TVTPh2xuB74NKy4pS6TBpL4K330ou0e2NX6QnrRY6JjhSCqTGl/JJ91kUlOGbMO9Xo6AyPv1Z53ckgJ7OI=}
+  server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou, smtp_encryption: starttls, test_mode: false, smtp_password: cL1hXmt7duyv+SFc8/OFjNYNFojaFvLKVEtd2jgF/KNhp3praAdhtuJbtX5HR+FyOTcyrr3+CIa41ij1/qUwLHVr2b+n3CXv49Eja/Sb+TVTPh2xuB74NKy4pS6TBpL4K330ou0e2NX6QnrRY6JjhSCqTGl/JJ91kUlOGbMO9Xo6AyPv1Z53ckgJ7OI=}
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
@@ -42,13 +40,13 @@ runtime_options:
   client_version: '3'
   server_version: python3-full
   server_spec: null
-  server_spec_disabled: {base: python310-datascience, requirements: 'bcrypt==4.0.1
-
+  server_spec_disabled:
+    base: python310-datascience
+    requirements: |-
+      bcrypt==4.0.1
       qrcode==7.4.2
-
-      pdf2image==1.17.0'}
-metadata: {title: 'Gestion de données, AMS', logo_img: 'asset:logo_fs_small.png',
-  description: jmmourlhou@gmail.com}
+      pdf2image==1.17.0
+metadata: {title: 'Gestion de données, AMS', logo_img: 'asset:logo_fs_small.png', description: jmmourlhou@gmail.com}
 startup_form: null
 db_schema:
   temp:
@@ -71,104 +69,76 @@ db_schema:
       admin_ui: {order: 3.5, width: 200}
       type: number
     title: Temp
-  pre_requis:
-    title: Pre_Requis
+  stages:
     client: search
     server: full
     columns:
-    - name: requis
-      admin_ui: {order: 0, width: 264.17}
-      type: string
-    - name: commentaires
-      admin_ui: {order: 1, width: 238}
-      type: string
-    - name: code_pre_requis
-      admin_ui: {order: -1, width: 141}
-      type: string
-    - name: doc
-      admin_ui: {width: 200, order: 2}
-      type: bool
-  stage_satisf:
-    client: search
-    server: full
-    columns:
-    - name: stage_row
-      admin_ui: {order: 0, width: 109}
+    - name: numero
+      admin_ui: {order: 1, width: 119.17}
+      type: number
+    - name: date_debut
+      admin_ui: {order: 2, width: 101.17}
+      type: date
+    - name: date_fin
+      admin_ui: {order: 3, width: 95}
+      type: date
+    - name: nb_stagiaires_deb
+      admin_ui: {order: 2.5, width: 152.33}
+      type: number
+    - name: code
+      admin_ui: {order: 0, width: 131}
       type: link_single
-      target: stages
-    - name: stage_num_txt
-      admin_ui: {order: 1, width: 132}
-      type: string
-    - name: stage_type_txt
-      admin_ui: {order: 2, width: 129}
-      type: string
-    - name: rep_dico_rep_ferm
-      admin_ui: {order: 4, width: 443}
-      type: simpleObject
-    - name: rep_dico_rep_ouv
-      admin_ui: {order: 5, width: 538}
-      type: simpleObject
-    - name: date_heure
-      admin_ui: {order: 3, width: 134}
-      type: string
-    title: Stage_satisf
-  global_variables:
-    client: none
-    server: full
-    columns:
-    - name: name
-      admin_ui: {width: 200, order: 0}
-      type: string
-    - name: value
-      admin_ui: {order: 1, width: 444}
-      type: simpleObject
-    - name: Commentaires
-      admin_ui: {order: 2, width: 301}
-      type: string
-    title: Global_variables
-  qcm_description:
-    client: search
-    server: full
-    columns:
-    - name: qcm_nb
-      admin_ui: {order: 0, width: 116}
+      target: codes_stages
+    - name: nb_stagiaires_fin
+      admin_ui: {order: 6, width: 136.17}
       type: number
-    - name: destination
-      admin_ui: {order: 1, width: 288}
-      type: string
-    - name: type
-      admin_ui: {order: 2, width: 103}
-      type: string
-    - name: visible
-      admin_ui: {order: 4, width: 133}
-      type: bool
-    - name: timing
-      admin_ui: {order: 6, width: 115}
+    - name: nb_stagiaires_diplomes
+      admin_ui: {order: 7, width: 103.12}
       type: number
-    - name: taux_success
-      admin_ui: {order: 8, width: 138}
-      type: number
-    - name: qcm_source
-      admin_ui: {order: 2.5, width: 355}
-      type: simpleObject
-    - name: next_qcm
-      admin_ui: {order: 2.75, width: 117}
-      type: number
-    title: Qcm_description
-  lieux:
-    client: search
-    server: full
-    columns:
     - name: lieu
-      admin_ui: {order: 0, width: 200}
+      admin_ui: {order: 1.5, width: 144}
+      type: link_single
+      target: lieux
+    - name: commentaires
+      admin_ui: {order: 8, width: 200}
       type: string
-    - name: adresse
-      admin_ui: {order: 1, width: 200}
+    - name: list_media
+      type: media
+      admin_ui: {width: 200, order: 9}
+    - name: trombi_media
+      type: media
+      admin_ui: {width: 200, order: 10}
+    - name: trombi_time
+      type: datetime
+      admin_ui: {width: 200, order: 11}
+    - name: list_time
+      admin_ui: {order: 9.5, width: 200}
+      type: datetime
+    - name: allow_bgt_generation
+      admin_ui: {order: 12, width: 200}
+      type: bool
+    - name: diplomes
+      admin_ui: {width: 200, order: 13}
+      type: media
+    - name: visu_qcm
+      admin_ui: {width: 200, order: 14}
+      type: simpleObject
+    - name: code_txt
+      admin_ui: {order: 0.5, width: 82}
       type: string
-    - name: remarques
-      admin_ui: {order: 2, width: 200}
-      type: string
-    title: Lieux
+    - name: satis_dico1_q_ferm
+      admin_ui: {order: 15, width: 200}
+      type: simpleObject
+    - name: satis_dico2_q_ouv
+      admin_ui: {width: 200, order: 16}
+      type: simpleObject
+    - name: satis_pdf
+      admin_ui: {width: 200, order: 17}
+      type: media
+    - name: saisie_satisf_ok
+      admin_ui: {width: 200, order: 18}
+      type: bool
+    title: Stages
   qcm:
     client: search
     server: full
@@ -202,6 +172,244 @@ db_schema:
       admin_ui: {order: 3.75, width: 94}
       type: string
     title: Qcm
+  qcm_description:
+    client: search
+    server: full
+    columns:
+    - name: qcm_nb
+      admin_ui: {order: 0, width: 116}
+      type: number
+    - name: destination
+      admin_ui: {order: 1, width: 288}
+      type: string
+    - name: type
+      admin_ui: {order: 2, width: 103}
+      type: string
+    - name: visible
+      admin_ui: {order: 4, width: 133}
+      type: bool
+    - name: timing
+      admin_ui: {order: 6, width: 115}
+      type: number
+    - name: taux_success
+      admin_ui: {order: 8, width: 138}
+      type: number
+    - name: qcm_source
+      admin_ui: {order: 2.5, width: 355}
+      type: simpleObject
+    - name: next_qcm
+      admin_ui: {order: 2.75, width: 117}
+      type: number
+    title: Qcm_description
+  codes_stages:
+    client: search
+    server: full
+    columns:
+    - name: code
+      admin_ui: {order: 0, width: 89.96}
+      type: string
+    - name: intitulé
+      admin_ui: {order: 1, width: 196.49}
+      type: string
+    - name: pre_requis
+      admin_ui: {order: 2, width: 745}
+      type: simpleObject
+    - name: droit_qcm
+      admin_ui: {order: 3, width: 410}
+      type: simpleObject
+    - name: satisf_q_ferm_template
+      admin_ui: {order: 4, width: 200}
+      type: simpleObject
+    - name: satisf_q_ouv_template
+      admin_ui: {width: 200, order: 5}
+      type: simpleObject
+    title: Codes_stages
+  pre_requis_stagiaire:
+    client: full
+    server: full
+    columns:
+    - name: stage_num
+      admin_ui: {order: -1, width: 99}
+      type: link_single
+      target: stages
+    - name: stagiaire_email
+      admin_ui: {order: 1, width: 126}
+      type: link_single
+      target: users
+    - name: check
+      admin_ui: {order: 5, width: 60}
+      type: bool
+    - name: doc1
+      admin_ui: {order: 6, width: 110}
+      type: media
+    - name: item_requis
+      admin_ui: {order: 5.5, width: 100}
+      type: link_single
+      target: pre_requis
+    - name: pdf_doc1
+      admin_ui: {order: 7.5, width: 105}
+      type: media
+    - name: code_txt
+      admin_ui: {order: 0, width: 76}
+      type: string
+    - name: numero
+      admin_ui: {order: 0.5, width: 68}
+      type: number
+    - name: requis_txt
+      admin_ui: {order: 5.75, width: 261}
+      type: string
+    - name: nom
+      admin_ui: {order: 3, width: 81}
+      type: string
+    - name: prenom
+      admin_ui: {order: 4, width: 63}
+      type: string
+    title: Pre_Requis_stagiaire
+  pre_requis:
+    title: Pre_Requis
+    client: search
+    server: full
+    columns:
+    - name: requis
+      admin_ui: {order: 0, width: 264.17}
+      type: string
+    - name: commentaires
+      admin_ui: {order: 1, width: 238}
+      type: string
+    - name: code_pre_requis
+      admin_ui: {order: -1, width: 141}
+      type: string
+    - name: doc
+      admin_ui: {width: 200, order: 2}
+      type: bool
+  mail_templates:
+    client: none
+    server: full
+    columns:
+    - name: text
+      admin_ui: {width: 200, order: 0}
+      type: simpleObject
+    title: Mail_templates
+  stagiaires_inscrits:
+    client: search
+    server: full
+    columns:
+    - name: stage
+      admin_ui: {order: 0, width: 98}
+      type: link_single
+      target: stages
+    - name: financement
+      admin_ui: {order: 2, width: 70}
+      type: link_single
+      target: mode_financement
+    - name: user_email
+      admin_ui: {order: 1, width: 99}
+      type: link_single
+      target: users
+    - name: name
+      admin_ui: {order: 1.5, width: 133}
+      type: string
+    - name: droits_stagiaire_qcms
+      admin_ui: {order: 5, width: 704}
+      type: simpleObject
+    - name: stage_txt
+      admin_ui: {order: 0.5, width: 96}
+      type: string
+    - name: numero
+      admin_ui: {order: 0.75, width: 74}
+      type: number
+    - name: prenom
+      admin_ui: {order: 1.75, width: 84}
+      type: string
+    - name: enquete_satisf
+      admin_ui: {width: 200, order: 6}
+      type: bool
+    title: Stagiaires_inscrits
+  global_variables:
+    client: none
+    server: full
+    columns:
+    - name: name
+      admin_ui: {width: 200, order: 0}
+      type: string
+    - name: value
+      admin_ui: {order: 1, width: 444}
+      type: simpleObject
+    - name: Commentaires
+      admin_ui: {order: 2, width: 301}
+      type: string
+    title: Global_variables
+  mode_financement:
+    client: search
+    server: full
+    columns:
+    - name: code_fi
+      admin_ui: {order: 0, width: 121}
+      type: string
+    - name: intitule_fi
+      admin_ui: {order: 1, width: 249}
+      type: string
+    title: Mode_Financement
+  files:
+    client: none
+    server: full
+    columns:
+    - name: path
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: file
+      admin_ui: {order: 1, width: 200}
+      type: media
+    - name: file_version
+      admin_ui: {order: 2, width: 290}
+      type: string
+    title: Files
+  cpt_stages:
+    client: search
+    server: full
+    columns:
+    - name: compteur
+      admin_ui: {order: 0, width: 120}
+      type: number
+    title: Cpt_stages
+  lieux:
+    client: search
+    server: full
+    columns:
+    - name: lieu
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: adresse
+      admin_ui: {order: 1, width: 200}
+      type: string
+    - name: remarques
+      admin_ui: {order: 2, width: 200}
+      type: string
+    title: Lieux
+  stage_satisf:
+    client: search
+    server: full
+    columns:
+    - name: stage_row
+      admin_ui: {order: 0, width: 109}
+      type: link_single
+      target: stages
+    - name: stage_num_txt
+      admin_ui: {order: 1, width: 132}
+      type: string
+    - name: stage_type_txt
+      admin_ui: {order: 2, width: 129}
+      type: string
+    - name: rep_dico_rep_ferm
+      admin_ui: {order: 4, width: 443}
+      type: simpleObject
+    - name: rep_dico_rep_ouv
+      admin_ui: {order: 5, width: 538}
+      type: simpleObject
+    - name: date_heure
+      admin_ui: {order: 3, width: 134}
+      type: string
+    title: Stage_satisf
   qcm_result:
     client: full
     server: full
@@ -242,89 +450,6 @@ db_schema:
       admin_ui: {order: 1.5, width: 200}
       type: string
     title: Qcm_result
-  stagiaires_inscrits:
-    client: search
-    server: full
-    columns:
-    - name: stage
-      admin_ui: {order: 0, width: 98}
-      type: link_single
-      target: stages
-    - name: financement
-      admin_ui: {order: 2, width: 70}
-      type: link_single
-      target: mode_financement
-    - name: user_email
-      admin_ui: {order: 1, width: 99}
-      type: link_single
-      target: users
-    - name: name
-      admin_ui: {order: 1.5, width: 133}
-      type: string
-    - name: droits_stagiaire_qcms
-      admin_ui: {order: 5, width: 704}
-      type: simpleObject
-    - name: stage_txt
-      admin_ui: {order: 0.5, width: 96}
-      type: string
-    - name: numero
-      admin_ui: {order: 0.75, width: 74}
-      type: number
-    - name: prenom
-      admin_ui: {order: 1.75, width: 84}
-      type: string
-    - name: enquete_satisf
-      admin_ui: {width: 200, order: 6}
-      type: bool
-    title: Stagiaires_inscrits
-  files:
-    client: none
-    server: full
-    columns:
-    - name: path
-      admin_ui: {order: 0, width: 200}
-      type: string
-    - name: file
-      admin_ui: {order: 1, width: 200}
-      type: media
-    - name: file_version
-      admin_ui: {order: 2, width: 290}
-      type: string
-    title: Files
-  mode_financement:
-    client: search
-    server: full
-    columns:
-    - name: code_fi
-      admin_ui: {order: 0, width: 121}
-      type: string
-    - name: intitule_fi
-      admin_ui: {order: 1, width: 249}
-      type: string
-    title: Mode_Financement
-  codes_stages:
-    client: search
-    server: full
-    columns:
-    - name: code
-      admin_ui: {order: 0, width: 89.96}
-      type: string
-    - name: intitulé
-      admin_ui: {order: 1, width: 196.49}
-      type: string
-    - name: pre_requis
-      admin_ui: {order: 2, width: 745}
-      type: simpleObject
-    - name: droit_qcm
-      admin_ui: {order: 3, width: 410}
-      type: simpleObject
-    - name: satisf_q_ferm_template
-      admin_ui: {order: 4, width: 200}
-      type: simpleObject
-    - name: satisf_q_ouv_template
-      admin_ui: {width: 200, order: 5}
-      type: simpleObject
-    title: Codes_stages
   users:
     client: search
     server: full
@@ -333,7 +458,7 @@ db_schema:
       admin_ui: {order: 0, width: 145}
       type: string
     - name: enabled
-      admin_ui: {order: 1, width: 50}
+      admin_ui: {order: 1, width: 99}
       type: bool
     - name: last_login
       admin_ui: {order: 2, width: 100}
@@ -408,132 +533,5 @@ db_schema:
       admin_ui: {order: 23.75, width: 200}
       type: string
     title: Users
-  pre_requis_stagiaire:
-    client: full
-    server: full
-    columns:
-    - name: stage_num
-      admin_ui: {order: -1, width: 99}
-      type: link_single
-      target: stages
-    - name: stagiaire_email
-      admin_ui: {order: 1, width: 126}
-      type: link_single
-      target: users
-    - name: check
-      admin_ui: {order: 5, width: 60}
-      type: bool
-    - name: doc1
-      admin_ui: {order: 6, width: 110}
-      type: media
-    - name: item_requis
-      admin_ui: {order: 5.5, width: 100}
-      type: link_single
-      target: pre_requis
-    - name: pdf_doc1
-      admin_ui: {order: 7.5, width: 105}
-      type: media
-    - name: code_txt
-      admin_ui: {order: 0, width: 76}
-      type: string
-    - name: numero
-      admin_ui: {order: 0.5, width: 68}
-      type: number
-    - name: requis_txt
-      admin_ui: {order: 5.75, width: 261}
-      type: string
-    - name: nom
-      admin_ui: {order: 3, width: 81}
-      type: string
-    - name: prenom
-      admin_ui: {order: 4, width: 63}
-      type: string
-    title: Pre_Requis_stagiaire
-  stages:
-    client: search
-    server: full
-    columns:
-    - name: numero
-      admin_ui: {order: 1, width: 119.17}
-      type: number
-    - name: date_debut
-      admin_ui: {order: 2, width: 101.17}
-      type: date
-    - name: date_fin
-      admin_ui: {order: 3, width: 95}
-      type: date
-    - name: nb_stagiaires_deb
-      admin_ui: {order: 2.5, width: 152.33}
-      type: number
-    - name: code
-      admin_ui: {order: 0, width: 131}
-      type: link_single
-      target: codes_stages
-    - name: nb_stagiaires_fin
-      admin_ui: {order: 6, width: 136.17}
-      type: number
-    - name: nb_stagiaires_diplomes
-      admin_ui: {order: 7, width: 103.12}
-      type: number
-    - name: lieu
-      admin_ui: {order: 1.5, width: 144}
-      type: link_single
-      target: lieux
-    - name: commentaires
-      admin_ui: {order: 8, width: 200}
-      type: string
-    - name: list_media
-      type: media
-      admin_ui: {width: 200, order: 9}
-    - name: trombi_media
-      type: media
-      admin_ui: {width: 200, order: 10}
-    - name: trombi_time
-      type: datetime
-      admin_ui: {width: 200, order: 11}
-    - name: list_time
-      admin_ui: {order: 9.5, width: 200}
-      type: datetime
-    - name: allow_bgt_generation
-      admin_ui: {order: 12, width: 200}
-      type: bool
-    - name: diplomes
-      admin_ui: {width: 200, order: 13}
-      type: media
-    - name: visu_qcm
-      admin_ui: {width: 200, order: 14}
-      type: simpleObject
-    - name: code_txt
-      admin_ui: {order: 0.5, width: 82}
-      type: string
-    - name: satis_dico1_q_ferm
-      admin_ui: {order: 15, width: 200}
-      type: simpleObject
-    - name: satis_dico2_q_ouv
-      admin_ui: {width: 200, order: 16}
-      type: simpleObject
-    - name: satis_pdf
-      admin_ui: {width: 200, order: 17}
-      type: media
-    - name: saisie_satisf_ok
-      admin_ui: {width: 200, order: 18}
-      type: bool
-    title: Stages
-  mail_templates:
-    client: none
-    server: full
-    columns:
-    - name: text
-      admin_ui: {width: 200, order: 0}
-      type: simpleObject
-    title: Mail_templates
-  cpt_stages:
-    client: search
-    server: full
-    columns:
-    - name: compteur
-      admin_ui: {order: 0, width: 120}
-      type: number
-    title: Cpt_stages
 uplink_visible: true
 renamed: true

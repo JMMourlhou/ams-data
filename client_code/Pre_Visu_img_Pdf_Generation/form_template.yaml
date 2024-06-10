@@ -10,8 +10,7 @@ components:
   layout_properties: {grid_position: 'YFJPWI,QCLWMH'}
   components:
   - name: image_1
-    properties: {display_mode: shrink_to_fit, height: '1060', spacing_above: none,
-      spacing_below: none}
+    properties: {display_mode: shrink_to_fit, height: '1060', spacing_above: none, spacing_below: none}
     type: Image
     layout_properties: {grid_position: 'VISMCM,DEKXKB'}
 is_package: true

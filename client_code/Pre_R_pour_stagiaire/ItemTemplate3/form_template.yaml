@@ -4,14 +4,12 @@ container:
   properties: {role: elevated-card, col_spacing: large}
 components:
 - name: flow_panel_1
-  properties: {align: center, vertical_align: middle, spacing: small, spacing_above: medium,
-    spacing_below: none, background: 'theme:Primary'}
+  properties: {align: center, vertical_align: middle, spacing: small, spacing_above: medium, spacing_below: none, background: 'theme:Primary'}
   type: FlowPanel
   layout_properties: {grid_position: 'DDHRJP,ARCTWR'}
   components:
   - name: text_box_1
-    properties: {background: 'theme:Primary', role: null, foreground: 'theme:On Primary',
-      align: center}
+    properties: {background: 'theme:Primary', role: null, foreground: 'theme:On Primary', align: center}
     type: TextBox
     layout_properties: {width: 420.462}
 - name: flow_panel_2
@@ -25,8 +23,7 @@ components:
     layout_properties: {width: 210.978, expand: false}
     components:
     - name: image_1
-      properties: {height: '50', role: null, spacing_above: small, spacing_below: medium,
-        display_mode: original_size}
+      properties: {height: '50', role: null, spacing_above: small, spacing_below: medium, display_mode: original_size}
       type: Image
       layout_properties: {grid_position: 'LSIOOU,UOWYNL', full_width_row: true}
       data_bindings: []
@@ -35,10 +32,7 @@ components:
     type: FlowPanel
     components:
     - name: button_visu
-      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:On Primary Container', visible: false, text: '', font_size: 27,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:binoculars'}
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary Container', visible: false, text: '', font_size: 27, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: 'fa:binoculars'}
       type: Button
       layout_properties: {}
       event_bindings: {click: button_visu_click}
@@ -71,10 +65,7 @@ components:
       layout_properties: {}
       event_bindings: {change: file_loader_1_change}
     - name: button_del
-      properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-        foreground: 'theme:Error', visible: false, text: '   ', font_size: 27, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:remove'}
+      properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: 'theme:Error', visible: false, text: '   ', font_size: 27, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: 'fa:remove'}
       type: Button
       layout_properties: {}
       event_bindings: {click: button_del_click}

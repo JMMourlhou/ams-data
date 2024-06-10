@@ -1,14 +1,10 @@
 container:
   type: ColumnPanel
-  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: none, background: ''}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: none, background: ''}
   event_bindings: {show: form_show}
 components:
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: ''}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: ''}
   name: column_panel_header
   layout_properties:
     col_widths: {}
@@ -25,10 +21,7 @@ components:
     layout_properties: {grid_position: 'PNCZFT,CMMHDJ'}
     event_bindings: {tick: timer_2_tick}
   - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On
-        Tertiary', visible: true, text: Modif stage / QR code, font_size: 16, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On Tertiary', visible: true, text: Modif stage / QR code, font_size: 16, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
     name: label_3
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - type: ColumnPanel
@@ -37,37 +30,26 @@ components:
   layout_properties: {grid_position: 'VWNVBO,TMPNWJ'}
   components:
   - type: Button
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
     name: button_annuler
     layout_properties:
       col_widths: {}
       grid_position: CUXSWV,BPXIVZ
     event_bindings: {click: button_annuler_click}
   - type: Button
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: false, text: Valider, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Error', bold: true, underline: false, icon: ''}
+    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: false, text: Valider, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Error', bold: true, underline: false, icon: ''}
     name: button_validation
     layout_properties:
       col_widths: {}
       grid_position: CUXSWV,KPZRQN
     event_bindings: {click: button_validation_click}
   - type: Button
-    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Inscription par Qr code,
-      font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: true, underline: false, icon: ''}
+    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Inscription par Qr code, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: true, underline: false, icon: ''}
     name: button_qr_code_display
     layout_properties: {grid_position: 'CUXSWV,CERSES'}
     event_bindings: {click: button_qr_code_display_click}
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: tiny, spacing_above: none, col_widths: '{}', spacing_below: none,
-    background: 'theme:On Primary'}
+  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: tiny, spacing_above: none, col_widths: '{}', spacing_below: none, background: 'theme:On Primary'}
   name: column_panel_bloc
   layout_properties: {grid_position: 'IWAHJZ,GMRZDC'}
   components:
@@ -95,34 +77,20 @@ components:
     layout_properties: {grid_position: 'YZUQOI,ZBDZNC'}
     event_bindings: {}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Intitulé,
-      border: '', enabled: false, foreground: 'theme:Tertiary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Intitulé, border: '', enabled: false, foreground: 'theme:Tertiary', visible: true, text: '', font_size: null, font: '', spacing_above: small, type: text, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_intitule
     layout_properties: {grid_position: 'YZUQOI,QMUKZS'}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: num,
-      border: '', enabled: false, foreground: 'theme:Tertiary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: small, type: text, spacing_below: small,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: num, border: '', enabled: false, foreground: 'theme:Tertiary', visible: true, text: '', font_size: null, font: '', spacing_above: small, type: text, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_num_stage
     layout_properties: {grid_position: 'YZUQOI,WOBQLI'}
   - type: DatePicker
-    properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',
-      placeholder: 'Du ', border: '', enabled: true, foreground: 'theme:On Primary',
-      visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
-      italic: false, date: '', min_date: '', background: 'theme:Primary', bold: true,
-      underline: false, format: '%d %m %Y'}
+    properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '', placeholder: 'Du ', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none, italic: false, date: '', min_date: '', background: 'theme:Primary', bold: true, underline: false, format: '%d %m %Y'}
     name: date_picker_from
     layout_properties: {grid_position: 'NCHHTY,EWWKQU'}
     event_bindings: {change: date_picker_from_change}
   - type: DatePicker
-    properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',
-      placeholder: Au, border: '', enabled: true, foreground: 'theme:On Primary',
-      visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
-      italic: false, date: '', min_date: '', background: 'theme:Primary', bold: true,
-      underline: false, format: '%d %m %Y'}
+    properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '', placeholder: Au, border: '', enabled: true, foreground: 'theme:On Primary', visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none, italic: false, date: '', min_date: '', background: 'theme:Primary', bold: true, underline: false, format: '%d %m %Y'}
     name: date_picker_to
     layout_properties: {grid_position: 'NCHHTY,HWRLON'}
     event_bindings: {change: date_picker_to_change}
@@ -150,26 +118,17 @@ components:
     layout_properties: {grid_position: 'NCHHTY,BODYND'}
     event_bindings: {change: drop_down_lieux_change}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires début,
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: none, type: number, spacing_below: none,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires début, border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '', font_size: null, font: '', spacing_above: none, type: number, spacing_below: none, italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_nb_stagiaires_deb
     layout_properties: {grid_position: 'PNQOFK,VUQDOO'}
     event_bindings: {change: text_box_nb_stagiaires_deb_change}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires fin,
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: none, type: number, spacing_below: none,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires fin, border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '', font_size: null, font: '', spacing_above: none, type: number, spacing_below: none, italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_nb_stagiaires_fin
     layout_properties: {grid_position: 'PNQOFK,MAKWWD'}
     event_bindings: {change: text_box_nb_stagiaires_fin_change}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires diplômés,
-      border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '',
-      font_size: null, font: '', spacing_above: none, type: number, spacing_below: none,
-      italic: false, background: 'theme:Primary', bold: false, underline: false}
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Nb stagiaires diplômés, border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '', font_size: null, font: '', spacing_above: none, type: number, spacing_below: none, italic: false, background: 'theme:Primary', bold: false, underline: false}
     name: text_box_nb_stagiaires_diplom
     layout_properties: {grid_position: 'PNQOFK,QFPUNN'}
     event_bindings: {change: text_box_nb_stagiaires_diplom_change}
@@ -179,11 +138,7 @@ components:
     layout_properties: {grid_position: 'ZAAEXD,BBKYES'}
     components:
     - type: TextArea
-      properties: {role: null, align: left, height: 85.93682861328125, tooltip: '',
-        placeholder: Commentaires, border: '', enabled: true, foreground: 'theme:On
-          Primary', visible: true, text: '', font_size: null, auto_expand: false,
-        font: '', spacing_above: none, spacing_below: none, italic: false, background: 'theme:Primary',
-        bold: false, underline: false}
+      properties: {role: null, align: left, height: 85.93682861328125, tooltip: '', placeholder: Commentaires, border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '', font_size: null, auto_expand: false, font: '', spacing_above: none, spacing_below: none, italic: false, background: 'theme:Primary', bold: false, underline: false}
       name: text_area_commentaires
       layout_properties: {grid_position: 'WSXPGK,CIIGDL'}
       event_bindings: {change: text_area_commentaires_change}
@@ -193,14 +148,12 @@ components:
       layout_properties: {grid_position: 'WSXPGK,NNNVVG MHMDWW,SXBDKJ'}
       components:
       - name: check_box_allow_bg_task
-        properties: {text: Stable, background: 'theme:Primary', foreground: 'theme:On
-            Primary', align: center, font_size: 9, spacing_above: small}
+        properties: {text: Stable, background: 'theme:Primary', foreground: 'theme:On Primary', align: center, font_size: 9, spacing_above: small}
         type: CheckBox
         event_bindings: {change: check_box_allow_bg_task_change}
         layout_properties: {grid_position: 'VYMLVS,NMOJYX'}
       - name: check_box_allow_satisf
-        properties: {text: F_Satisf, font_size: 9, background: 'theme:Primary', align: center,
-          foreground: 'theme:On Primary'}
+        properties: {text: F_Satisf, font_size: 9, background: 'theme:Primary', align: center, foreground: 'theme:On Primary'}
         type: CheckBox
         layout_properties: {grid_position: 'SVABCQ,ADBMLK'}
         event_bindings: {change: check_box_allow_satisf_change}
@@ -210,36 +163,24 @@ components:
   layout_properties: {grid_position: 'WXMZQM,ZGWPYK'}
   components:
   - type: Button
-    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: false, text: Pdf Fiches stagiaires, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, underline: false, icon: ''}
+    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: false, text: Pdf Fiches stagiaires, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false, icon: ''}
     name: button_fiches_stagiaires
     layout_properties: {grid_position: 'YGLAJE,YISRGZ'}
     event_bindings: {click: button_list_pdf_stagiaires_click}
   - name: button_visu_fiches_stagiaires
-    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Fiches stagiaires, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: false, underline: false, icon: ''}
+    properties: {role: outlined-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Fiches stagiaires, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: false, underline: false, icon: ''}
     type: Button
     layout_properties: {grid_position: 'YGLAJE,ZILJNN'}
     event_bindings: {click: button_visu_fiches_stagiaires_click}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: false, text: Trombi_pdf, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: false, text: Trombi_pdf, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: true, underline: false, icon: ''}
     name: button_trombi_pdf
     layout_properties:
       col_widths: {}
       grid_position: YGLAJE,DXPHQQ
     event_bindings: {click: button_trombi_pdf_click}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: 'theme:Tertiary', visible: true, text: Trombi, font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: 'theme:Primary', bold: true, underline: false, icon: ''}
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Trombi, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Primary', bold: true, underline: false, icon: ''}
     name: button_trombi
     layout_properties:
       col_widths: {}
@@ -264,9 +205,7 @@ components:
   layout_properties: {grid_position: 'BVFDTB,ETVGBJ'}
   components:
   - type: RepeatingPanel
-    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', items: null,
-      visible: true, spacing_above: none, spacing_below: none, item_template: Stage_visu_modif.RowTemplate4,
-      background: ''}
+    properties: {role: outlined-card, tooltip: '', border: '', foreground: '', items: null, visible: true, spacing_above: none, spacing_below: none, item_template: Stage_visu_modif.RowTemplate4, background: ''}
     name: repeating_panel_1
     layout_properties: {}
 is_package: true
