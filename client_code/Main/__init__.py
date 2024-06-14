@@ -284,3 +284,8 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Signature import Signature
         open_form("Signature")
+
+    def button_mails_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Mail_subject_attach_txt import Mail_subject_attach_txt
+        open_form("Mail_subject_attach_txt")

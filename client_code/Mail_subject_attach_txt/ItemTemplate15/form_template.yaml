@@ -4,15 +4,64 @@ container:
   properties: {wrap_on: never}
 components:
 - name: column_panel_1
-  properties: {col_widths: '{"PZZRUX":13,"IVRCDS":4}', background: 'theme:Primary', role: outlined-card}
+  properties: {col_widths: '{}', background: 'theme:Primary', role: outlined-card, spacing_below: none, spacing_above: none}
   type: ColumnPanel
-  layout_properties: {grid_position: 'EYLATA,AIQFXS'}
+  layout_properties: {grid_position: 'IFEFJY,AVMTNA'}
   components:
-  - name: text_box_subject
-    properties: {role: outlined, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: false, font_size: null, tooltip: '', text: ''}
-    type: TextBox
-    layout_properties: {grid_position: 'RFFHKR,PZZRUX'}
-  - name: text_area_text
-    properties: {height: 41.80633544921875, auto_expand: true, enabled: false, role: outlined}
-    type: TextArea
-    layout_properties: {grid_position: 'RFFHKR,VSWTBH'}
+  - name: outlined_card_detail
+    properties: {role: outlined-card, background: 'theme:On Primary Container', visible: false}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'UHQLML,BMOXPH'}
+    components:
+    - name: label_1
+      properties: {text: 'Objet :', foreground: 'theme:On Primary', spacing_below: none}
+      type: Label
+      layout_properties: {grid_position: 'VVSHYF,AIECUG'}
+    - name: text_box_subject_detail
+      properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: Sujet du mail, text: Objet du mail, spacing_above: none, spacing_below: none}
+      type: TextBox
+      layout_properties: {grid_position: 'NDADYJ,LPGRDB'}
+      event_bindings: {change: text_area_text_detail_change}
+    - name: label_2
+      properties: {foreground: 'theme:On Primary', text: 'Texte :', spacing_above: large, spacing_below: none}
+      type: Label
+      layout_properties: {grid_position: 'XTSYDW,DGKENY'}
+    - name: text_area_text_detail
+      properties: {height: 91.49847412109375, background: 'theme:Primary', foreground: 'theme:On Primary', text: Texte, auto_expand: true, role: outlined, spacing_above: none}
+      type: TextArea
+      layout_properties: {grid_position: 'IVBGLR,YYYGMZ'}
+      event_bindings: {change: text_area_text_detail_change}
+    - name: button_1
+      properties: {text: Attachements, font_size: 20, icon: 'fa:upload', foreground: 'theme:Tertiary'}
+      type: Button
+      layout_properties: {grid_position: 'KQBYYX,QPARWJ'}
+    - name: button_modif
+      properties: {role: outlined-button, bold: false, align: center, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 20, tooltip: '', text: Sauver la modif}
+      type: Button
+      layout_properties: {grid_position: 'KQBYYX,ETVKCC'}
+      event_bindings: {click: button_modif_click}
+    - name: button_valid
+      properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 20, tooltip: '', text: Envoi}
+      type: Button
+      layout_properties: {grid_position: 'KQBYYX,GHGHIU'}
+      event_bindings: {}
+  - name: column_panel_2
+    properties: {col_widths: '{"HNAOPQ":20,"QSHXEY":35,"EGGCGG":5}'}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'XWYBXO,OJHLIU'}
+    components:
+    - name: text_box_subject
+      properties: {role: outlined, bold: false, align: left, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
+      type: TextBox
+      layout_properties: {grid_position: 'MNHJLB,HNAOPQ'}
+      event_bindings: {focus: text_box_subject_click}
+    - name: text_area_text
+      properties: {height: 43.73089599609375, auto_expand: true, enabled: true, role: outlined, foreground: 'theme:On Primary'}
+      type: TextArea
+      layout_properties: {grid_position: 'MNHJLB,QSHXEY'}
+      event_bindings: {focus: text_box_subject_click}
+    - name: button_del
+      properties: {role: null, bold: false, align: center, spacing_above: small, background: '', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: ''}
+      type: Button
+      layout_properties: {grid_position: 'MNHJLB,EGGCGG'}
+      event_bindings: {click: button_del_click}
