@@ -22,8 +22,9 @@ class ItemTemplate14(ItemTemplate14Template):
         """This method is called when the button is clicked"""
         stagiaire_email = self.button_mail.tag
         subject_txt = "Formulaire de satisfaction"
+        # Envoi au module de choix/modif du texte
         rich_text = """
-                        S'il te plaît, effectue l'enquête de satisfaction de fin de stage !
+                        S'il te plaît, effectue l'enquête de satisfaction !
 
                     """
         result = anvil.server.call("send_mail",stagiaire_email, subject_txt, rich_text)

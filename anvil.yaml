@@ -283,12 +283,19 @@ db_schema:
       admin_ui: {width: 200, order: 2}
       type: bool
   mail_templates:
-    client: none
+    client: search
     server: full
     columns:
-    - name: text
-      admin_ui: {width: 200, order: 0}
-      type: simpleObject
+    - name: type
+      admin_ui: {order: -1, width: 200}
+      type: link_single
+      target: mail_type
+    - name: mail_subject
+      admin_ui: {order: -0.5, width: 200}
+      type: string
+    - name: mail_text
+      admin_ui: {order: 0.5, width: 339}
+      type: string
     title: Mail_templates
   stagiaires_inscrits:
     client: search
@@ -364,6 +371,14 @@ db_schema:
       admin_ui: {order: 2, width: 290}
       type: string
     title: Files
+  mail_type:
+    client: search
+    server: full
+    columns:
+    - name: type_mail
+      admin_ui: {width: 200, order: 0}
+      type: string
+    title: Mail_type
   cpt_stages:
     client: search
     server: full
