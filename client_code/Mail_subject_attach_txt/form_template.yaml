@@ -33,7 +33,7 @@ components:
         grid_position: COGJPP,SACJUA
       event_bindings: {click: button_annuler_click}
   - name: column_panel_2
-    properties: {}
+    properties: {wrap_on: never, col_widths: '{"BRBANT":50,"AVJTLK":10}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'LNDSHV,HTJYMV'}
     components:
@@ -43,12 +43,12 @@ components:
         include_placeholder: true
         bold: false
         align: full
-        placeholder: Modèles de mails
+        placeholder: Mail existants
         spacing_above: small
-        background: theme:Tertiary
+        background: theme:Primary
         underline: false
         font: ''
-        foreground: theme:On Primary Container
+        foreground: theme:On Primary
         items: []
         spacing_below: small
         visible: true
@@ -61,11 +61,48 @@ components:
       layout_properties: {grid_position: 'DQSDAX,BRBANT'}
       event_bindings: {change: drop_down_pre_requis_change}
     - name: button_new
-      properties: {text: button_1}
+      properties: {text: Nouveau Mail, foreground: 'theme:On Primary'}
       type: Button
       layout_properties: {grid_position: 'DQSDAX,AVJTLK'}
-- name: repeating_panel_1
-  properties: {item_template: Mail_subject_attach_txt.ItemTemplate15}
-  type: RepeatingPanel
-  layout_properties: {grid_position: 'ERPKFE,QKRXMB'}
+- name: column_panel_content
+  properties: {}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'YZRMIT,YYSHFC'}
+  components:
+  - name: outlined_card_detail
+    properties: {role: outlined-card, background: 'theme:On Primary Container'}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'NPWKHR,WLBNNR'}
+    components:
+    - name: text_box_subject
+      properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: Sujet du mail, text: Objet du mail}
+      type: TextBox
+      layout_properties: {grid_position: 'NDADYJ,LPGRDB'}
+    - name: text_area_text
+      properties: {height: 91.49847412109375, background: 'theme:Primary', foreground: 'theme:On Primary', text: Texte, auto_expand: true, role: outlined}
+      type: TextArea
+      layout_properties: {grid_position: 'IVBGLR,YYYGMZ'}
+    - name: button_1
+      properties: {text: Attachements, font_size: 21, icon: 'fa:upload', foreground: 'theme:Tertiary'}
+      type: Button
+      layout_properties: {grid_position: 'KQBYYX,QPARWJ'}
+    - name: button_modif
+      properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiar', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: Modif}
+      type: Button
+      layout_properties: {grid_position: 'KQBYYX,ETVKCC'}
+      event_bindings: {click: button_annuler_click}
+    - name: button_del
+      properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Tert', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: ''}
+      type: Button
+      layout_properties: {grid_position: 'KQBYYX,IILENV'}
+      event_bindings: {click: button_annuler_click}
+    - name: button_valid
+      properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: Envoi}
+      type: Button
+      layout_properties: {grid_position: 'KQBYYX,GHGHIU'}
+      event_bindings: {click: button_annuler_click}
+  - name: repeating_panel_1
+    properties: {item_template: Mail_subject_attach_txt.ItemTemplate15}
+    type: RepeatingPanel
+    layout_properties: {grid_position: 'LWXMVM,HDHQYF'}
 is_package: true
