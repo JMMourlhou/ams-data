@@ -32,8 +32,8 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
                                                         )
         #self.column_panel_headers.visible = True
         for mail in liste_mails:
-            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text']))
-            self.column_panel_content.raise_event_on_children("x-click", **event_args)
+            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id()))
+            #self.column_panel_content.raise_event_on_children("x-click", **event_args)
         self.button_new.visible = False
         
 
@@ -44,3 +44,27 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
 
     def x_click(self, **event_args):
         alert("essai")
+
+
+   
+
+    def button_modif_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        alert("Sauver la modif")
+
+    def button_attachments_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
+
+    def button_sending_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
+
+    def text_box_subject_detail_change(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_modif.visible = True
+        alert("modif à executer")
+        
+    def text_area_text_detail_change(self, **event_args):
+        """This method is called when the text in this text area is edited"""
+        self.text_box_subject_detail_change()
