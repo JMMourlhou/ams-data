@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from .mail_model import mail_model   # la forme à ajouter par add component
 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     def __init__(self, **properties): 
@@ -30,7 +31,8 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
                                                         type = type_mail_row
                                                         )
         #self.column_panel_headers.visible = True
-        self.repeating_panel_1.items = liste_mails
+        for mail in liste_mails:
+            self.column_panel_content.add_component(mail_model,mail['mail_subject'], mail['mail_text'])
         self.button_new.visible = False
         
 

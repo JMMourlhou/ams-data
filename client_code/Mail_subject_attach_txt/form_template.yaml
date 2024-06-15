@@ -16,9 +16,7 @@ components:
 - type: ColumnPanel
   properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
   name: column_panel_1
-  layout_properties:
-    col_widths: {}
-    grid_position: HVXSKI,IUEAZJ
+  layout_properties: {grid_position: 'IINVTV,AAOSMG'}
   components:
   - type: ColumnPanel
     properties: {col_widths: '{}'}
@@ -69,13 +67,50 @@ components:
         name: drop_down_type_mails
         layout_properties: {}
         event_bindings: {change: drop_down_type_mails_change}
+  - name: column_panel_detail
+    properties: {col_widths: '{}', background: 'theme:Primary', role: outlined-card, spacing_below: none, spacing_above: none, visible: false}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'PYAOBI,QABJGJ'}
+    components:
+    - name: outlined_card_detail
+      properties: {role: outlined-card, background: 'theme:On Primary Container', visible: false}
+      type: ColumnPanel
+      layout_properties: {grid_position: 'UHQLML,BMOXPH'}
+      components:
+      - name: label_1
+        properties: {text: 'Objet :', foreground: 'theme:On Primary', spacing_below: none}
+        type: Label
+        layout_properties: {grid_position: 'VVSHYF,AIECUG'}
+      - name: text_box_subject_detail
+        properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: Sujet du mail, text: Objet du mail, spacing_above: none, spacing_below: none}
+        type: TextBox
+        layout_properties: {grid_position: 'NDADYJ,LPGRDB'}
+        event_bindings: {change: text_area_text_detail_change}
+      - name: label_2
+        properties: {foreground: 'theme:On Primary', text: 'Texte :', spacing_above: large, spacing_below: none}
+        type: Label
+        layout_properties: {grid_position: 'XTSYDW,DGKENY'}
+      - name: text_area_text_detail
+        properties: {height: 91.49847412109375, background: 'theme:Primary', foreground: 'theme:On Primary', text: Texte, auto_expand: true, role: outlined, spacing_above: none}
+        type: TextArea
+        layout_properties: {grid_position: 'IVBGLR,YYYGMZ'}
+        event_bindings: {change: text_area_text_detail_change}
+      - name: button_1
+        properties: {text: Attachements, font_size: 20, icon: 'fa:upload', foreground: 'theme:Tertiary'}
+        type: Button
+        layout_properties: {grid_position: 'KQBYYX,QPARWJ'}
+      - name: button_modif
+        properties: {role: outlined-button, bold: false, align: center, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 20, tooltip: '', text: Sauver la modif}
+        type: Button
+        layout_properties: {grid_position: 'KQBYYX,ETVKCC'}
+        event_bindings: {click: button_modif_click}
+      - name: button_valid
+        properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 20, tooltip: '', text: Envoi}
+        type: Button
+        layout_properties: {grid_position: 'KQBYYX,GHGHIU'}
+        event_bindings: {}
 - name: column_panel_content
   properties: {}
   type: ColumnPanel
-  layout_properties: {grid_position: 'SOOFJZ,XNZIQR'}
-  components:
-  - name: repeating_panel_1
-    properties: {item_template: Mail_subject_attach_txt.ItemTemplate15}
-    type: RepeatingPanel
-    layout_properties: {grid_position: 'LWXMVM,HDHQYF'}
+  layout_properties: {grid_position: 'AFICJW,IFQTAV'}
 is_package: true
