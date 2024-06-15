@@ -39,6 +39,7 @@ components:
       properties: {text: Nouveau modèle, foreground: 'theme:Tertiary', align: center, role: outlined-button, background: 'theme:On Primary Container'}
       type: Button
       layout_properties: {grid_position: 'XBNYNJ,DCUFTY'}
+      event_bindings: {click: button_new_click}
     - name: flow_panel_1
       properties: {align: center}
       type: FlowPanel
@@ -87,40 +88,40 @@ components:
           type: Label
           layout_properties: {grid_position: 'PJDNWO,FWWXDR'}
         - name: label_id
-          properties: {foreground: 'theme:On Primary', background: 'theme:Error'}
+          properties: {foreground: 'theme:On Primary', background: 'theme:Error', visible: false}
           type: Label
           layout_properties: {grid_position: 'PJDNWO,LMMICU'}
       - name: text_box_subject_detail
-        properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: Sujet du mail, text: Objet du mail, spacing_above: none, spacing_below: none}
+        properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: Objet du mail, text: '', spacing_above: none, spacing_below: none}
         type: TextBox
         layout_properties: {grid_position: 'NDADYJ,LPGRDB'}
-        event_bindings: {change: text_area_text_detail_change, pressed_enter: text_box_subject_detail_pressed_enter}
+        event_bindings: {change: text_area_text_detail_change}
       - name: label_2
         properties: {foreground: 'theme:On Primary', text: 'Texte :', spacing_above: large, spacing_below: none}
         type: Label
         layout_properties: {grid_position: 'XTSYDW,DGKENY'}
       - name: text_area_text_detail
-        properties: {height: 91.49847412109375, background: 'theme:Primary', foreground: 'theme:On Primary', text: Texte, auto_expand: true, role: outlined, spacing_above: none}
+        properties: {height: 91.49847412109375, background: 'theme:Primary', foreground: 'theme:On Primary', text: '', auto_expand: true, role: outlined, spacing_above: none, placeholder: Texte du mail}
         type: TextArea
         layout_properties: {grid_position: 'IVBGLR,YYYGMZ'}
         event_bindings: {change: text_area_text_detail_change}
       - name: button_attachments
-        properties: {text: Attachements, font_size: 20, icon: 'fa:upload', foreground: 'theme:Tertiary'}
+        properties: {text: Attachements, font_size: 15, icon: 'fa:upload', foreground: 'theme:Tertiary', visible: false}
         type: Button
         layout_properties: {grid_position: 'KQBYYX,QPARWJ'}
         event_bindings: {click: button_attachments_click}
       - name: button_modif
-        properties: {role: outlined-button, bold: false, align: center, spacing_above: none, background: 'theme:Error', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 20, tooltip: '', text: Sauver la modif}
+        properties: {role: outlined-button, bold: false, align: center, spacing_above: none, background: 'theme:Error', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Sauver ce modèle}
         type: Button
         layout_properties: {grid_position: 'KQBYYX,ETVKCC'}
         event_bindings: {click: button_modif_click}
       - name: button_sending
-        properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 20, tooltip: '', text: Envoi}
+        properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Envoi}
         type: Button
         layout_properties: {grid_position: 'KQBYYX,GHGHIU'}
         event_bindings: {click: button_sending_click}
 - name: column_panel_content
-  properties: {role: outlined-card, visible: true}
+  properties: {role: outlined-card, visible: false}
   type: ColumnPanel
   layout_properties: {grid_position: 'AFICJW,IFQTAV'}
 is_package: true

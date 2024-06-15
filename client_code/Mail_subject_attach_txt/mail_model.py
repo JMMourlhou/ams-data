@@ -1,9 +1,6 @@
 from ._anvil_designer import mail_modelTemplate
 from anvil import *
 import anvil.server
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -24,11 +21,20 @@ class mail_model(mail_modelTemplate):
         
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
-        alert(" à faire, annuler ce modèle")
-
+        r=alert("Voulez-vous enlever ce modèle de mail ?",buttons=[("oui",True),("non",False)])
+        if r :   # Oui               
+            result = anvil.server.call('del_mails', self.text_box_subject.tag) 
+            if not result:
+                alert("Mail type non enlevé")
+            else:
+                alert("Ce modèle de mail a été enlevé")   
+        f = get_open_form()   # récupération de la forme mère
+        f.column_panel_content.clear()
+        f.drop_down_type_mails_change() #retour ds la forme mère et réaffichage
+        
     def text_box_subject_focus(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
-        f = get_open_form()
+        f = get_open_form()  # récupération de la forme mère
         f.column_panel_detail.visible = True
         f.text_box_subject_detail.text = self.text_box_subject.text
         f.text_area_text_detail.text = self.text_area_text.text
