@@ -16,8 +16,8 @@ class mail_model(mail_modelTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.text_box_subject.text = self.subject
-        self.text_area_text.text = self.text
+        self.text_box_subject.text = subject
+        self.text_area_text.text = text
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""

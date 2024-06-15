@@ -32,7 +32,8 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
                                                         )
         #self.column_panel_headers.visible = True
         for mail in liste_mails:
-            self.column_panel_content.add_component(mail_model,mail['mail_subject'], mail['mail_text'])
+            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text']))
+            self.column_panel_content.raise_event_on_children("x-click", **event_args)
         self.button_new.visible = False
         
 
@@ -40,3 +41,6 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99) 
+
+    def x_click(self, **event_args):
+        alert("essai")

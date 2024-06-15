@@ -287,14 +287,14 @@ db_schema:
     server: full
     columns:
     - name: type
-      admin_ui: {order: -1, width: 200}
+      admin_ui: {order: -1, width: 275}
       type: link_single
       target: mail_type
     - name: mail_subject
-      admin_ui: {order: -0.5, width: 200}
+      admin_ui: {order: -0.5, width: 223}
       type: string
     - name: mail_text
-      admin_ui: {order: 0.5, width: 339}
+      admin_ui: {order: 0.5, width: 556}
       type: string
     title: Mail_templates
   stagiaires_inscrits:
@@ -376,7 +376,7 @@ db_schema:
     server: full
     columns:
     - name: type_mail
-      admin_ui: {width: 200, order: 0}
+      admin_ui: {order: 0, width: 298}
       type: string
     title: Mail_type
   cpt_stages:

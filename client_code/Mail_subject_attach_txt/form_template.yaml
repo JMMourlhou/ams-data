@@ -36,7 +36,7 @@ components:
     layout_properties: {grid_position: 'LNDSHV,HTJYMV'}
     components:
     - name: button_new
-      properties: {text: Nouveau modèle, foreground: 'theme:On Primary', align: center, role: outlined-button}
+      properties: {text: Nouveau modèle, foreground: 'theme:Tertiary', align: center, role: outlined-button, background: 'theme:On Primary Container'}
       type: Button
       layout_properties: {grid_position: 'XBNYNJ,DCUFTY'}
     - name: flow_panel_1
@@ -52,10 +52,10 @@ components:
           align: full
           placeholder: Choix d'un type de modèle
           spacing_above: small
-          background: theme:Primary
+          background: theme:On Primary Container
           underline: false
           font: ''
-          foreground: theme:On Primary
+          foreground: theme:Tertiary
           items: []
           spacing_below: small
           visible: true
@@ -110,7 +110,7 @@ components:
         layout_properties: {grid_position: 'KQBYYX,GHGHIU'}
         event_bindings: {}
 - name: column_panel_content
-  properties: {}
+  properties: {role: outlined-card}
   type: ColumnPanel
   layout_properties: {grid_position: 'AFICJW,IFQTAV'}
 is_package: true
