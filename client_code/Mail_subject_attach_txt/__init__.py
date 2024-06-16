@@ -9,11 +9,12 @@ from anvil.tables import app_tables
 from .mail_model import mail_model   # la forme à ajouter par add component
 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
-    def __init__(self, **properties): 
+    def __init__(self, emails_liste=["jmmourlhou@gmail.com"], **properties):    # emails_liste liste des mails
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.mode_creation = False
+        self.emails_liste = emails_liste # liste des mails
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
 
@@ -80,7 +81,9 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
 
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text)
+        if result:
+            alert("mail envoyé")
 
     def text_box_subject_detail_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""

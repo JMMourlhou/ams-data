@@ -15,7 +15,7 @@ components:
     type: TextBox
     layout_properties: {width: null, expand: true}
   - name: button_mail
-    properties: {role: null, bold: false, align: center, spacing_above: none, background: 'theme:Primary', icon: 'fa:mail-reply', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: ''}
+    properties: {role: null, bold: false, align: center, spacing_above: none, background: 'theme:Primary', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: ''}
     type: Button
     layout_properties: {grid_position: 'PJIZXA,HIXLGT'}
     event_bindings: {click: button_mail_click}

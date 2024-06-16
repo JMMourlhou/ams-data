@@ -9,6 +9,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from ...Mail_subject_attach_txt import Mail_subject_attach_txt
+
 
 class ItemTemplate14(ItemTemplate14Template):
     def __init__(self, **properties):
@@ -20,6 +22,16 @@ class ItemTemplate14(ItemTemplate14Template):
 
     def button_mail_click(self, **event_args):
         """This method is called when the button is clicked"""
+        liste_email = []
+        liste_email.append(self.button_mail.tag)
+        
+        open_form("Mail_subject_attach_txt",  liste_email)
+
+
+
+
+        
+    def temp(self, **event_args):
         stagiaire_email = self.button_mail.tag
         subject_txt = "Formulaire de satisfaction"
         # Envoi au module de choix/modif du texte
@@ -30,3 +42,6 @@ class ItemTemplate14(ItemTemplate14Template):
         result = anvil.server.call("send_mail",stagiaire_email, subject_txt, rich_text)
         if result:
             alert("mail envoyé")
+
+        
+        
