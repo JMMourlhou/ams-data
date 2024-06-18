@@ -34,12 +34,12 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
             type_mail_row = app_tables.mail_type.get(ref=self.ref_model)
             print("ok: ", type_mail_row['type_mail'])
             if type_mail_row:
-                self.drop_down_type_mails_change.selected_value = type_mail_row
+                self.drop_down_type_mails.selected_value = type_mail_row
                 self.drop_down_type_mails_change(type_mail_row)
     
        
 
-    def drop_down_type_mails_change(self, type_mail_row=None, **event_args): v
+    def drop_down_type_mails_change(self, type_mail_row=None, **event_args): 
         #si j'ai court circuiter le dropdown (car vient de qcm, form satisf, recherche stag, ...) 
         if type_mail_row is None:
             type_mail_row = self.drop_down_type_mails.selected_value

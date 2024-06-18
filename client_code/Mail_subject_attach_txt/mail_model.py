@@ -8,12 +8,13 @@ from anvil.tables import app_tables
 
 
 class mail_model(mail_modelTemplate):
-    def __init__(self, subject, text, id, **properties):
+    def __init__(self, subject, text, id, **properties):   
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
         self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+        print("Form originale :",  self.f)
         self.text_box_subject.text = subject
         self.text_box_subject.tag = id # je sauve l'id du modele mail row 
         self.text_area_text.text = text
