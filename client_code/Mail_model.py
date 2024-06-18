@@ -1,4 +1,4 @@
-from ._anvil_designer import mail_modelTemplate
+from ._anvil_designer import Mail_modelTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -7,14 +7,15 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class mail_model(mail_modelTemplate):
-    def __init__(self, subject, text, id, **properties):   
+
+class Mail_model(Mail_modelTemplate):
+    def __init__(self, subject, text, id, ref_model, **properties):   
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
         self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
-        print("Form originale :",  self.f)
+        #print("Form originale :",  self.f)
         self.text_box_subject.text = subject
         self.text_box_subject.tag = id # je sauve l'id du modele mail row 
         self.text_area_text.text = text
@@ -31,18 +32,22 @@ class mail_model(mail_modelTemplate):
             else:
                 alert("Ce modèle de mail a été enlevé")  
             """
-        self.f.column_panel_content.clear()
-        self.f.drop_down_type_mails_change() #retour ds la forme mère et réaffichage
+        #self.f.column_panel_content.clear()
+        # autre facon de récupérer la forme mere et d'effacer le col panel content
+        from . import Mail_subject_attach_txt
+        self.Mail_subject_attach_txt.column_panel_content.clear() 
+        Mail_subject_attach_txt.drop_down_type_mails_change() #retour ds la forme mère et réaffichage
         
     def text_box_subject_focus(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
-        # récupération de la forme mère self.f (voir init       self.f = get_open_form() )
-        self.f.column_panel_detail.visible = True
-        self.f.text_box_subject_detail.text = self.text_box_subject.text
-        self.f.text_area_text_detail.text = self.text_area_text.text
-        self.f.label_id.text =  self.text_box_subject.tag
-        self.f.column_panel_content.clear()
-        self.f.column_panel_content.visible = False
+        # récupération de la forme mère 
+        from . import Mail_subject_attach_txt
+        Mail_subject_attach_txt.column_panel_detail.visible = True
+        Mail_subject_attach_txt.text_box_subject_detail.text = self.text_box_subject.text
+        Mail_subject_attach_txt.text_area_text_detail.text = self.text_area_text.text
+        Mail_subject_attach_txt.label_id.text =  self.text_box_subject.tag
+        Mail_subject_attach_txt.column_panel_content.clear()
+        Mail_subject_attach_txt.column_panel_content.visible = False
 
     def text_area_text_focus(self, **event_args):
         """This method is called when the text area gets focus"""
@@ -55,7 +60,8 @@ class mail_model(mail_modelTemplate):
         row_model = app_tables.mail_templates.get_by_id(id)
         if row_model:
             # récupération de la forme mère self.f.emails_liste       (voir init       self.f = get_open_form() )
-            result = anvil.server.call("send_mail",self.f.emails_liste, row_model['mail_subject'], row_model['mail_text'])
+            from . import Mail_subject_attach_txt
+            result = anvil.server.call("send_mail",Mail_subject_attach_txt.emails_liste, row_model['mail_subject'], row_model['mail_text'])
             if result:
                 alert("mail envoyé")
         else:

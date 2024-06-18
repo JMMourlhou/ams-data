@@ -5,12 +5,13 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+
 from .mail_model import mail_model
-   
+
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     def __init__(self, emails_liste=["jmmourlhou@gmail.com"], ref_model = "", **properties): 
         # emails_liste liste des mails
-        # ref_model contient lea ref du modelel si vient de qcm ou formul etc...du permet de court circuiter la drop down du choix du modèle 
+        # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)
                 
@@ -53,8 +54,8 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         self.column_panel_content.visible = True
         self.column_panel_content.clear()   
         for mail in liste_mails:
-            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), ))
-            #self.column_panel_content.raise_event_on_children("x-click", **event_args)
+            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), self.ref_model))
+
 
         self.button_attachments.visible = True
         self.button_sending.visible = True
