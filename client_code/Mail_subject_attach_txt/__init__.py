@@ -6,20 +6,23 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from .mail_model import mail_model
+from ..Mail_model import Mail_model
+
 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     def __init__(self, emails_liste=["jmmourlhou@gmail.com"], ref_model = "", **properties): 
+        # Set Form properties and Data Bindings.
+        self.init_components(**properties)
+        # Any code you write here will run before the form opens.
+        
         # emails_liste liste des mails
         # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)
-                
-        # Set Form properties and Data Bindings.
-        self.init_components(**properties)
-        # Any code you write here will run before the form opens.
+        
         self.mode_creation = False
         self.emails_liste = emails_liste # liste des mails
+        self.label_emails_liste.text = emails_liste
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
 
@@ -44,8 +47,9 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         #si j'ai court circuiter le dropdown (car vient de qcm, form satisf, recherche stag, ...) 
         if type_mail_row is None:
             type_mail_row = self.drop_down_type_mails.selected_value
+            self.ref_model = type_mail_row['ref']
         else:
-            alert(type_mail_row)
+            alert("vient de module externe avec ce type:", type_mail_row)
             
         liste_mails =  app_tables.mail_templates.search(
                                                         tables.order_by("mail_subject", ascending=True),
@@ -54,13 +58,13 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         self.column_panel_content.visible = True
         self.column_panel_content.clear()   
         for mail in liste_mails:
-            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), self.ref_model))
+            self.column_panel_content.add_component(Mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), self.ref_model, self.emails_liste))
 
 
         self.button_attachments.visible = True
         self.button_sending.visible = True
         self.button_new.visible = True
-        self.button_modif.visible = False
+        #self.button_modif.visible = False
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

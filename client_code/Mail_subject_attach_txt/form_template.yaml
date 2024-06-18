@@ -87,6 +87,10 @@ components:
           properties: {text: 'Objet :', foreground: 'theme:On Primary', spacing_below: none}
           type: Label
           layout_properties: {grid_position: 'PJDNWO,FWWXDR'}
+        - name: label_emails_liste
+          properties: {background: 'theme:Error', foreground: 'theme:On Primary'}
+          type: Label
+          layout_properties: {grid_position: 'PJDNWO,MPPYSP'}
         - name: label_id
           properties: {foreground: 'theme:On Primary', background: 'theme:Error', visible: false}
           type: Label
