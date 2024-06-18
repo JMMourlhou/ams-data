@@ -3,7 +3,7 @@ container:
   properties: {background: 'theme:Primary', role: tonal-card}
 components:
 - name: column_panel_1
-  properties: {col_widths: '{"WVKNHQ":22,"NGDSUX":48,"JIAPNC":10}', col_spacing: tiny, role: null}
+  properties: {col_widths: '{"WVKNHQ":22,"NGDSUX":48}', col_spacing: tiny, role: null}
   type: ColumnPanel
   layout_properties: {grid_position: 'IQYFRT,CQKDFM'}
   components:
@@ -17,9 +17,14 @@ components:
     type: TextArea
     layout_properties: {grid_position: 'ZVISZF,NGDSUX'}
     event_bindings: {focus: text_area_text_focus}
-  - name: button_del
-    properties: {role: null, bold: false, align: center, spacing_above: small, background: '', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: ''}
+  - name: button_sending
+    properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Envoi}
     type: Button
-    layout_properties: {grid_position: 'ZVISZF,JIAPNC'}
+    layout_properties: {grid_position: 'ZVISZF,BVFGCJ GXVWCB,HXJZRJ'}
+    event_bindings: {click: button_sending_click}
+  - name: button_del
+    properties: {role: null, bold: false, align: center, spacing_above: small, background: '', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Enlever}
+    type: Button
+    layout_properties: {grid_position: 'ZVISZF,BVFGCJ KPVAWC,CUPHCM'}
     event_bindings: {click: button_del_click}
 is_package: false

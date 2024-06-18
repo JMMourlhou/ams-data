@@ -5,11 +5,15 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
-from .mail_model import mail_model   # la forme à ajouter par add component
-
+from .mail_model import mail_model
+   
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
-    def __init__(self, emails_liste=["jmmourlhou@gmail.com"], **properties):    # emails_liste liste des mails
+    def __init__(self, emails_liste=["jmmourlhou@gmail.com"], ref_model = "", **properties): 
+        # emails_liste liste des mails
+        # ref_model contient lea ref du modelel si vient de qcm ou formul etc...du permet de court circuiter la drop down du choix du modèle 
+        self.ref_model = ref_model
+        print('ref_model: ',self.ref_model)
+                
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
@@ -23,10 +27,25 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
 
         # INITIALISATION Drop down   drop_down_type_mails
         self.drop_down_type_mails.items = [(r['type_mail'], r) for r in app_tables.mail_type.search()]
+        
+        # ref_model en init contient la ref du modelel si vient de qcm ou formul etc...du permet de court circuiter la drop down du choix du modèle 
+        if self.ref_model != "":
+            # lecture du modele pour court circuiter la drop down du choix du modèle 
+            type_mail_row = app_tables.mail_type.get(ref=self.ref_model)
+            print("ok: ", type_mail_row['type_mail'])
+            if type_mail_row:
+                self.drop_down_type_mails_change.selected_value = type_mail_row
+                self.drop_down_type_mails_change(type_mail_row)
+    
        
 
-    def drop_down_type_mails_change(self, **event_args):
-        type_mail_row = self.drop_down_type_mails.selected_value
+    def drop_down_type_mails_change(self, type_mail_row=None, **event_args): v
+        #si j'ai court circuiter le dropdown (car vient de qcm, form satisf, recherche stag, ...) 
+        if type_mail_row is None:
+            type_mail_row = self.drop_down_type_mails.selected_value
+        else:
+            alert(type_mail_row)
+            
         liste_mails =  app_tables.mail_templates.search(
                                                         tables.order_by("mail_subject", ascending=True),
                                                         type = type_mail_row
@@ -34,7 +53,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         self.column_panel_content.visible = True
         self.column_panel_content.clear()   
         for mail in liste_mails:
-            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id()))
+            self.column_panel_content.add_component(mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), ))
             #self.column_panel_content.raise_event_on_children("x-click", **event_args)
 
         self.button_attachments.visible = True

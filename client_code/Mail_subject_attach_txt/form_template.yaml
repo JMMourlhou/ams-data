@@ -106,7 +106,7 @@ components:
         layout_properties: {grid_position: 'IVBGLR,YYYGMZ'}
         event_bindings: {change: text_area_text_detail_change}
       - name: button_attachments
-        properties: {text: Attachements, font_size: 15, icon: 'fa:upload', foreground: 'theme:Tertiary', visible: false}
+        properties: {text: Attachements, font_size: 15, icon: 'fa:upload', foreground: 'theme:Tertiary', visible: true}
         type: Button
         layout_properties: {grid_position: 'KQBYYX,QPARWJ'}
         event_bindings: {click: button_attachments_click}
@@ -116,7 +116,7 @@ components:
         layout_properties: {grid_position: 'KQBYYX,ETVKCC'}
         event_bindings: {click: button_modif_click}
       - name: button_sending
-        properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Envoi}
+        properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Envoi}
         type: Button
         layout_properties: {grid_position: 'KQBYYX,GHGHIU'}
         event_bindings: {click: button_sending_click}

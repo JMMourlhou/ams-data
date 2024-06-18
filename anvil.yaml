@@ -378,6 +378,9 @@ db_schema:
     - name: type_mail
       admin_ui: {order: 0, width: 298}
       type: string
+    - name: ref
+      admin_ui: {order: -1, width: 101}
+      type: string
     title: Mail_type
   cpt_stages:
     client: search

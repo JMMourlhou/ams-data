@@ -25,23 +25,12 @@ class ItemTemplate14(ItemTemplate14Template):
         liste_email = []
         liste_email.append(self.button_mail.tag)   # user row
         
-        open_form("Mail_subject_attach_txt",  liste_email)
+        open_form("Mail_subject_attach_txt",  liste_email, 'formul')
 
 
 
 
-        
-    def temp(self, **event_args):
-        row_stagiaire = self.button_mail.tag
-        subject_txt = "Formulaire de satisfaction"
-        # Envoi au module de choix/modif du texte
-        rich_text = """
-                        S'il te plaît, effectue l'enquête de satisfaction !
 
-                    """
-        result = anvil.server.call("send_mail",row_stagiaire, subject_txt, rich_text)
-        if result:
-            alert("mail envoyé")
 
         
         
