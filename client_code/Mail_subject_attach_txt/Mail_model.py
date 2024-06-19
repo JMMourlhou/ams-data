@@ -9,19 +9,21 @@ from anvil.tables import app_tables
 
 
 class Mail_model(Mail_modelTemplate):
-    def __init__(self, subject, text, id, ref_model, emails_liste, provenance="", **properties):   # passer  ref_model et emails liste permet la réouverture de mail_subject en del d'un modèle 
+    def __init__(self, subject, text, id, ref_model, emails_liste, **properties):   # passer  ref_model et emails liste permet la réouverture de mail_subject en del d'un modèle 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
         self.ref_model = ref_model
         self.emails_liste = emails_liste
-        self.provenance = provenance
-        if  self.provenance = "":
+        if  self.ref_model == "":
             self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
             print("provenance: ", self.f)
-        else 
-            self.f = self.parent.
+        else: 
+            
+            print("Provenace autre form peut pas utiliser get_open_form(),  ref_model: ", ref_model)
+            for elmt in self.parent.get_components():
+                print(elmt.name)
         
         self.text_box_subject.text = subject
         self.text_box_subject.tag = id # je sauve l'id du modele mail row 
