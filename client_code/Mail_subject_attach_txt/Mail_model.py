@@ -9,16 +9,19 @@ from anvil.tables import app_tables
 
 
 class Mail_model(Mail_modelTemplate):
-    def __init__(self, subject, text, id, ref_model, emails_liste, **properties):   # passer  ref_model et emails liste permet la réouverture de mail_subject en del d'un modèle 
+    def __init__(self, subject, text, id, ref_model, emails_liste, provenance="", **properties):   # passer  ref_model et emails liste permet la réouverture de mail_subject en del d'un modèle 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
         self.ref_model = ref_model
         self.emails_liste = emails_liste
-        #self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
-        self.f = self.parent.get_components()
-        print("Form originale :",  self.f)
+        self.provenance = provenance
+        if  self.provenance = "":
+            self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+            print("provenance: ", self.f)
+        else 
+            self.f = self.parent.
         
         self.text_box_subject.text = subject
         self.text_box_subject.tag = id # je sauve l'id du modele mail row 
@@ -46,7 +49,9 @@ class Mail_model(Mail_modelTemplate):
     def text_box_subject_focus(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         # récupération de la forme mère 
-        from .Mail_subject_attach_txt import Mail_subject_attach_txt
+        
+        # si provenance de mail, provenance = "" alors je peux utiliser 
+        
         Mail_subject_attach_txt.column_panel_detail.visible = True
         Mail_subject_attach_txt.text_box_subject_detail.text = self.text_box_subject.text
         Mail_subject_attach_txt.text_area_text_detail.text = self.text_area_text.text

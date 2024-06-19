@@ -6,7 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ..Mail_model import Mail_model
+from .Mail_model import Mail_model
 
 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
