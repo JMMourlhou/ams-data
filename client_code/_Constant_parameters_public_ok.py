@@ -5,5 +5,5 @@ mon_logo = "logo_fs_small.png"
 ams_logo = "Logo_AMS.png"
 
 # pour mails:
-emails_liste =[]
-ref_model = ""
+emails_l = [] # emails  liste
+ref_mod = ""  # ref_modèle

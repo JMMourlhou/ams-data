@@ -6,9 +6,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
-
-
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
@@ -69,11 +66,10 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
                                                         type = type_mail_row
                                                         )
         self.repeating_panel_1.visible = True
-        
-        from .._Constant_parameters_public_ok import emails_liste
-        from .._Constant_parameters_public_ok import ref_model
-        _Constant_parameters_public_ok.emails_liste = self.emails_liste
-        _Constant_parameters_public_ok.ref_model = self.ref_model
+
+        from .._Constant_parameters_public_ok import emails_l, ref_mod
+        emails_l = self.emails_liste
+        ref_model = self.ref_model
         
         self.repeating_panel_1.items = liste_mails
         #for mail in liste_mails:

@@ -6,8 +6,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Mail_subject_attach_txt
-from ..._Constant_parameters_public_ok import emails_liste   # liste des emails  
-from ..._Constant_parameters_public_ok import ref_model   # type de modèles de mail 
+
+from ..._Constant_parameters_public_ok import emails_l, ref_mod
 
 class ItemTemplate15(ItemTemplate15Template):
     def __init__(self, **properties):
@@ -15,7 +15,10 @@ class ItemTemplate15(ItemTemplate15Template):
         self.init_components(**properties)
          # Any code you write here will run before the form opens.
         
-        self.f = Mail_subject_attach_txt(emails_liste,ref_model, 2)
+        self.f = Mail_subject_attach_txt(emails_l,ref_mod, 2)
+        print('email_l', emails_l)
+        print('ref_mod', ref_mod)
+        
         #self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
         print("form mère récupérable: ", self.f)
        
@@ -36,7 +39,7 @@ class ItemTemplate15(ItemTemplate15Template):
         # Je lis la liste d'emails et le ref du modèle pour réaffichage    
         emails_liste = self.f.label_emails_liste.text
         ref_model = self.f.label_ref_model.text
-        open_form('Mail_subject_attach_txt', emails_liste, ref_model) # réouverture pour réaffichage sans le modèle enlevé 
+        open_form('Mail_subject_attach_txt', emails_liste, ref_model, 2) # réouverture pour réaffichage sans le modèle enlevé 
 
     def text_box_subject_focus(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
@@ -66,4 +69,6 @@ class ItemTemplate15(ItemTemplate15Template):
                 alert("mail envoyé")
         else:
             alert("Modèle non trouvé")
+
+
 
