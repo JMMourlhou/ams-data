@@ -39,12 +39,9 @@ class Mail_model(Mail_modelTemplate):
             else:
                 alert("Ce modèle de mail a été enlevé")  
             """
-        #self.f.column_panel_content.clear()
-        # autre facon de récupérer la forme mere et d'effacer le col panel content
         from .Mail_subject_attach_txt import Mail_subject_attach_txt
         open_form('Mail_subject_attach_txt', self.emails_liste, self.ref_model)
-        #Mail_subject_attach_txt.column_panel_content.clear() 
-        #Mail_subject_attach_txt.drop_down_type_mails_change() #retour ds la forme mère et réaffichage
+        
         
     def text_box_subject_focus(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
@@ -52,12 +49,14 @@ class Mail_model(Mail_modelTemplate):
         
         # si provenance de mail, provenance = "" alors je peux utiliser 
         
-        self.f.column_panel_detail.visible = True
+        self.f.column_panel_detail.visible = True # montre la form création/modif de modèle
+        self.f.repeating_panel_1.visible = False # cache les modèles 
+        self.f.label_id.text =  self.text_box_subject.tag # récupère l'id du modele mail row 
+        
         self.f.text_box_subject_detail.text = self.text_box_subject.text
         self.f.text_area_text_detail.text = self.text_area_text.text
-        self.f.label_id.text =  self.text_box_subject.tag
-        self.f.column_panel_content.clear()
-        self.f.column_panel_content.visible = False
+        
+       
 
     def text_area_text_focus(self, **event_args):
         """This method is called when the text area gets focus"""

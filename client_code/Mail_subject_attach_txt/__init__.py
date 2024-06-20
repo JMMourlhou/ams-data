@@ -6,27 +6,38 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from .Mail_model import Mail_model
 
 
+
+# emails_liste liste des mails
+# ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
-    def __init__(self, emails_liste=["jmmourlhou@gmail.com"], ref_model = "", **properties): 
+    def __init__(self, emails_liste, ref_model = "", nb=1,**properties): 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        open_form("Mail_subject_attach_txt",emails_liste,ref_model)
         # Any code you write here will run before the form opens.
-        self.mode_creation = False
-        # emails_liste liste des mails
-        # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
         
+        #réouverture de la forme une fois pour initialiser get_open_form,  
+        # <qui ne se réinitialise pas si appel de satisf ou qcm ou recherche.... !!!
+        print(nb)
+        if nb == 1:
+            alert("réouverture")
+            open_form("Mail_subject_attach_txt", emails_liste, ref_model, 2)
+        else:
+            print("pas de réouverture nb", nb)
+            
         self.ref_model = ref_model
+        print('ref_model: ',self.ref_model)   
+        self.mode_creation = False
+
+        self.label_ref_model.text = ref_model # sauve la ref de modèle de mail
+        
         self.emails_liste = emails_liste # liste des mails
-        print('ref_model: ',self.ref_model)
+        self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
         
+
+        self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
         
-        
-        
-        self.label_emails_liste.text = emails_liste
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
 
@@ -40,7 +51,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         if self.ref_model != "":
             # lecture du modele pour court circuiter la drop down du choix du modèle 
             type_mail_row = app_tables.mail_type.get(ref=self.ref_model)
-            print("ok: ", type_mail_row['type_mail'])
+            #print("ok: ", type_mail_row['type_mail'])
             if type_mail_row:
                 self.drop_down_type_mails.selected_value = type_mail_row
                 self.drop_down_type_mails_change(type_mail_row)
@@ -52,14 +63,18 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         if type_mail_row is None:
             type_mail_row = self.drop_down_type_mails.selected_value
             #self.ref_model = type_mail_row['ref']
-        else:
-            alert("vient de module externe avec ce type:", type_mail_row['ref'])
             
         liste_mails =  app_tables.mail_templates.search(
                                                         tables.order_by("mail_subject", ascending=True),
                                                         type = type_mail_row
                                                         )
         self.repeating_panel_1.visible = True
+        
+        from .._Constant_parameters_public_ok import emails_liste
+        from .._Constant_parameters_public_ok import ref_model
+        _Constant_parameters_public_ok.emails_liste = self.emails_liste
+        _Constant_parameters_public_ok.ref_model = self.ref_model
+        
         self.repeating_panel_1.items = liste_mails
         #for mail in liste_mails:
         #    self.column_panel_content.add_component(Mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), self.ref_model, self.emails_liste))
@@ -97,10 +112,9 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
             if self.mode_creation is True:  # Création du modèle
                 alert("Modèle de mail créé")
             else:
-                alert("Modèle de mail modifié")
-        self.column_panel_content.clear()       
+                alert("Modèle de mail modifié")      
         self.drop_down_type_mails_change()
-        self.column_panel_detail.visible = False
+        self.column_panel_detail.visible = False   # effact du panel de création/modif
         self.mode_creation = False
         
     def button_attachments_click(self, **event_args):

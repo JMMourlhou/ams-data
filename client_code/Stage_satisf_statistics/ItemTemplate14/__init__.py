@@ -25,7 +25,9 @@ class ItemTemplate14(ItemTemplate14Template):
         liste_email = []
         liste_email.append(self.button_mail.tag)   # user row
         
-        open_form("Mail_subject_attach_txt",  liste_email, 'formul')
+        # 'formul' indique l'origine, ici 'formulaire de satisfaction'
+        # '1' indiquera à la forme Mail_subject_attach_txt de se réinitialiser pour mettre à jour get_open_form
+        open_form("Mail_subject_attach_txt",  liste_email, 'formul', 1) 
 
 
 

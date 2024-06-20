@@ -17,7 +17,7 @@ components:
     layout_properties: {grid_position: 'ZVISZF,NGDSUX'}
     event_bindings: {focus: text_area_text_focus}
   - name: button_sending
-    properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Envoi}
+    properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Envoi}
     type: Button
     layout_properties: {grid_position: 'ZVISZF,BVFGCJ GXVWCB,HXJZRJ'}
     event_bindings: {click: button_sending_click}
