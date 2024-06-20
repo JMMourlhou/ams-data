@@ -19,10 +19,9 @@ class Mail_model(Mail_modelTemplate):
             self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
             print("provenance: ", self.f)
         else: 
-            self.form = 
+            
             print("Provenace autre form peut pas utiliser get_open_form(),  ref_model: ", ref_model)
-            #for elmt in self.parent.get_components(:
-            #    print(elmt.name)
+
         
         self.text_box_subject.text = subject
         self.text_box_subject.tag = id # je sauve l'id du modele mail row 
