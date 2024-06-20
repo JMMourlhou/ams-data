@@ -19,7 +19,7 @@ class Mail_model(Mail_modelTemplate):
             self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
             print("provenance: ", self.f)
         else: 
-            
+            self.form = 
             print("Provenace autre form peut pas utiliser get_open_form(),  ref_model: ", ref_model)
             #for elmt in self.parent.get_components(:
             #    print(elmt.name)
@@ -53,12 +53,12 @@ class Mail_model(Mail_modelTemplate):
         
         # si provenance de mail, provenance = "" alors je peux utiliser 
         
-        Mail_subject_attach_txt.column_panel_detail.visible = True
-        Mail_subject_attach_txt.text_box_subject_detail.text = self.text_box_subject.text
-        Mail_subject_attach_txt.text_area_text_detail.text = self.text_area_text.text
-        Mail_subject_attach_txt.label_id.text =  self.text_box_subject.tag
-        Mail_subject_attach_txt.column_panel_content.clear()
-        Mail_subject_attach_txt.column_panel_content.visible = False
+        self.f.column_panel_detail.visible = True
+        self.f.text_box_subject_detail.text = self.text_box_subject.text
+        self.f.text_area_text_detail.text = self.text_area_text.text
+        self.f.label_id.text =  self.text_box_subject.tag
+        self.f.column_panel_content.clear()
+        self.f.column_panel_content.visible = False
 
     def text_area_text_focus(self, **event_args):
         """This method is called when the text area gets focus"""
@@ -71,9 +71,11 @@ class Mail_model(Mail_modelTemplate):
         row_model = app_tables.mail_templates.get_by_id(id)
         if row_model:
             # récupération de la forme mère self.f.emails_liste       (voir init       self.f = get_open_form() )
-            from .Mail_subject_attach_txt import Mail_subject_attach_txt
-            result = anvil.server.call("send_mail",Mail_subject_attach_txt.label_emails_liste, row_model['mail_subject'], row_model['mail_text'])
-            if result:
+            if  self.ref_model == "":
+                result = anvil.server.call("send_mail", self.f.label_emails_liste, row_model['mail_subject'], row_model['mail_text'])
+            else:
+                result = anvil.server.call("send_mail", self.f.label_emails_liste, row_model['mail_subject'], row_model['mail_text'])
+        if result:
                 alert("mail envoyé")
         else:
             alert("Modèle non trouvé")
