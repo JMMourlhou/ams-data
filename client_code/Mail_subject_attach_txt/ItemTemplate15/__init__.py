@@ -50,21 +50,24 @@ class ItemTemplate15(ItemTemplate15Template):
 
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
-        id = self.text_box_subject.tag.id # récup de l'id du modèle cliqué par son TAG      self.text_box_subject.tag 
-        # lecture du modèle
-        row_model = app_tables.mail_templates.get_by_id(id)
-        if row_model:
-            # récupération de la forme mère self.f.emails_liste       (voir init       self.f = get_open_form() )
-            self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
-            print("email liste (sending mail): ", self.f.label_emails_liste.text) 
-            result = anvil.server.call("send_mail", self.f.label_emails_liste.text, row_model['mail_subject'], row_model['mail_text'])
-        if result:
-                if result:
-                msg = "Mail envoyé  "
-                n=Notification(msg,timeout=1)
-                n.show()
-        else:
-            alert("Modèle non trouvé")
+        r=alert("Envoi du mailing ?",buttons=[("oui",True),("non",False)])
+        if r :   # Oui
+    
+            id = self.text_box_subject.tag.id # récup de l'id du modèle cliqué par son TAG      self.text_box_subject.tag 
+            # lecture du modèle
+            row_model = app_tables.mail_templates.get_by_id(id)
+            if row_model:
+                # récupération de la forme mère self.f.emails_liste       (voir init       self.f = get_open_form() )
+                self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+                print("email liste (sending mail): ", self.f.label_emails_liste.text) 
+                result = anvil.server.call("send_mail", self.f.label_emails_liste.text, row_model['mail_subject'], row_model['mail_text'])
+            if result:
+                    if result:
+                        msg = "Mail envoyé ! "
+                        n=Notification(msg,timeout=1)
+                        n.show()
+            else:
+                alert("Modèle non trouvé")
 
 
 

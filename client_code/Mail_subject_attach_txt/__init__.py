@@ -13,16 +13,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        """
-        #réouverture de la forme une fois pour initialiser get_open_form,  
-        # <qui ne se réinitialise pas si appel de satisf ou qcm ou recherche.... !!!
-        print(nb)
-        if nb == 1:
-            alert("réouverture")
-            open_form("Mail_subject_attach_txt", emails_liste, ref_model, 2)
-        else:
-            print("pas de réouverture nb", nb)
-        """    
+        
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)   
         self.mode_creation = False
@@ -31,7 +22,6 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         
         self.emails_liste = emails_liste # liste des mails
         self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
-        
 
         self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
         
@@ -52,8 +42,6 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
             if type_mail_row:
                 self.drop_down_type_mails.selected_value = type_mail_row
                 self.drop_down_type_mails_change(type_mail_row)
-    
-       
 
     def drop_down_type_mails_change(self, type_mail_row=None, **event_args): 
         #si j'ai court circuiter le dropdown (car vient de qcm, form satisf, recherche stag, ...) 

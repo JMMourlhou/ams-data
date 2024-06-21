@@ -25,20 +25,20 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[]):
     logo_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_logo
     print("logo address ok: ",logo_address)
 
-    for user_row in emails_list:
+    for email, prenom in emails_list:
         anvil.email.send(
-            to=user_row['email'],
+            to=email,
             subject=subject_txt,
             attachments=attachments,
             html=f"""
                 <p><img src = {logo_address} width="150" height="75"> </p>
-                <b>{user_row["prenom"]},</b><br>
+                <b>{prenom},</b><br>
                 <br>
                 {rich_text} <br>
                 <br>
                 <i>L'équipe d'AMSport,</i>
                 <br>
-                <b>{client_mail}</b> <br>
+                {client_mail} <br>
                 
             """
         )

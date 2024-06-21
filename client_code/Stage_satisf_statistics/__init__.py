@@ -57,8 +57,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         """ ------------------------------------------------------------------------
                     INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
         """ 
-        self.liste_no_response = app_tables.stagiaires_inscrits.search(q.fetch_only("name","prenom",
-                                                                                    user_email="email"), 
+        self.liste_no_response = app_tables.stagiaires_inscrits.search(
                                                                 numero = row["numero"],
                                                                 enquete_satisf = False
                                                                 )
@@ -558,10 +557,14 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
 
     def button_mailing_to_all_click(self, **event_args):
         """This method is called when the button is clicked"""
-        
+        # Transformation de la liste "self.liste_no_response" (stagiaires inscrits) en liste de table user 
+        liste_email = []
+        for stagiaire in self.liste_no_response:
+            #lecture table user
+            liste_email.append((stagiaire['user_email']['email'],stagiaire['user_email']['prenom']))
+            
         # 'formul' indique l'origine, ici 'formulaire de satisfaction'
-        
-        open_form("Mail_subject_attach_txt",  self.liste_no_response, 'formul') 
+        open_form("Mail_subject_attach_txt",  liste_email, 'formul') 
  
 
     
