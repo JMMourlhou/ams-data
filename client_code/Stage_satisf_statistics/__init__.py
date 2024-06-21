@@ -57,7 +57,8 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         """ ------------------------------------------------------------------------
                     INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
         """ 
-        self.liste_no_response = app_tables.stagiaires_inscrits.search(
+        self.liste_no_response = app_tables.stagiaires_inscrits.search(q.fetch_only("name","prenom",
+                                                                                    user_email="email"), 
                                                                 numero = row["numero"],
                                                                 enquete_satisf = False
                                                                 )
@@ -67,7 +68,8 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         else:
             self.label_titre_no_response.visible = False
             self.repeating_panel_no_response.visible = False
-
+        # ------------------------------------------------------------------------
+        
         # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
         stage_row = app_tables.stages.get(numero=self.row["numero"])
         pdf = stage_row['satis_pdf']
@@ -554,21 +556,12 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         from ..Main import Main
         open_form('Main',99)
 
-    def button_mailing_click(self, **event_args):
+    def button_mailing_to_all_click(self, **event_args):
         """This method is called when the button is clicked"""
-        for mail in self.liste_no_response:
-            stagiaire_email = mail['user_email']
-            subject_txt = "Formulaire de satisfaction"
-            rich_text = """
-                            S'il te plaît, effectue l'enquête de satisfaction de fin de stage !
-    
-                        """
-            result = anvil.server.call("send_mail",stagiaire_email, subject_txt, rich_text)
-            if result:
-                msg = "Mail envoyé à " + mail['user_email']['email']
-                n=Notification(msg,timeout=1)
-                n.show()
         
+        # 'formul' indique l'origine, ici 'formulaire de satisfaction'
+        
+        open_form("Mail_subject_attach_txt",  self.liste_no_response, 'formul') 
  
 
     

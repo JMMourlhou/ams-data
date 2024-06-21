@@ -23,7 +23,7 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[]):
     client_mail = dict_var_glob["client_mail"]   # var globale Mail AMS
     code_app2 = dict_var_glob["code_app2"]      # var_globale de l'apli AMS DATA
     logo_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_logo
-    print(logo_address)
+    print("logo address ok: ",logo_address)
 
     for user_row in emails_list:
         anvil.email.send(

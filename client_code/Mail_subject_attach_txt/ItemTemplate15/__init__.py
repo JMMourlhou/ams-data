@@ -7,35 +7,25 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import Mail_subject_attach_txt
 
-from ..._Constant_parameters_public_ok import emails_l, ref_mod
-
 class ItemTemplate15(ItemTemplate15Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
          # Any code you write here will run before the form opens.
-        
-        self.f = Mail_subject_attach_txt(emails_l,ref_mod, 2)
-        print('email_l', emails_l)
-        print('ref_mod', ref_mod)
-        
-        #self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
-        print("form mère récupérable: ", self.f)
-       
         self.text_box_subject.text = self.item['mail_subject']
         self.text_box_subject.tag.id = self.item.get_id() # je sauve l'id du modele mail row 
         self.text_area_text.text = self.item['mail_text']
 
-        # j'affiche bt envoi de mail sila liste de mail non vide
-        if self.f.label_emails_liste.text != "":
-            self.button_sending.visible = True
+        # j'affiche bt envoi de mail 
+        self.button_sending.visible = True
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous enlever ce modèle de mail ?",buttons=[("oui",True),("non",False)])
         if r :   # Oui               
             anvil.server.call('del_mails', self.text_box_subject.tag.id) 
-            
+        self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+        print("form mère récupérable (delete): ", self.f)   
         # Je lis la liste d'emails et le ref du modèle pour réaffichage    
         emails_liste = self.f.label_emails_liste.text
         ref_model = self.f.label_ref_model.text
@@ -44,7 +34,8 @@ class ItemTemplate15(ItemTemplate15Template):
     def text_box_subject_focus(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         # récupération de la forme mère par  self.f = get_open_form() en init
-        
+        self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+        print("form mère récupérable (modif): ", self.f) 
         self.f.column_panel_detail.visible = True # montre la form création/modif de modèle
         self.f.repeating_panel_1.visible = False # cache les modèles 
         self.f.label_id.text =  self.text_box_subject.tag # récupère l'id du modele mail row (pour la modif en serveur)
@@ -64,9 +55,14 @@ class ItemTemplate15(ItemTemplate15Template):
         row_model = app_tables.mail_templates.get_by_id(id)
         if row_model:
             # récupération de la forme mère self.f.emails_liste       (voir init       self.f = get_open_form() )
-            result = anvil.server.call("send_mail", self.f.label_emails_liste, row_model['mail_subject'], row_model['mail_text'])
+            self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+            print("email liste (sending mail): ", self.f.label_emails_liste.text) 
+            result = anvil.server.call("send_mail", self.f.label_emails_liste.text, row_model['mail_subject'], row_model['mail_text'])
         if result:
-                alert("mail envoyé")
+                if result:
+                msg = "Mail envoyé  "
+                n=Notification(msg,timeout=1)
+                n.show()
         else:
             alert("Modèle non trouvé")
 

@@ -9,11 +9,11 @@ from anvil.tables import app_tables
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
-    def __init__(self, emails_liste, ref_model = "", nb=1,**properties): 
+    def __init__(self, emails_liste, ref_model = "",**properties): 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        
+        """
         #réouverture de la forme une fois pour initialiser get_open_form,  
         # <qui ne se réinitialise pas si appel de satisf ou qcm ou recherche.... !!!
         print(nb)
@@ -22,7 +22,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
             open_form("Mail_subject_attach_txt", emails_liste, ref_model, 2)
         else:
             print("pas de réouverture nb", nb)
-            
+        """    
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)   
         self.mode_creation = False
@@ -66,11 +66,6 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
                                                         type = type_mail_row
                                                         )
         self.repeating_panel_1.visible = True
-
-        from .._Constant_parameters_public_ok import emails_l, ref_mod
-        emails_l = self.emails_liste
-        ref_model = self.ref_model
-        
         self.repeating_panel_1.items = liste_mails
         #for mail in liste_mails:
         #    self.column_panel_content.add_component(Mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), self.ref_model, self.emails_liste))

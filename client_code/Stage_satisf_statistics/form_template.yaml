@@ -8,14 +8,14 @@ components:
   layout_properties: {grid_position: 'MDYDZS,ZECFJY'}
   event_bindings: {tick: timer_1_tick}
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: ''}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
   name: column_panel_header
   layout_properties:
     col_widths: {}
     grid_position: DGXGMW,VQVVNA
   components:
   - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On Tertiary', visible: true, text: Résultats Enquête de Satisfaction, font_size: 16, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Résultats Enquête de Satisfaction}
     name: label_haut
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - name: column_panel_titres
@@ -24,11 +24,11 @@ components:
   layout_properties: {grid_position: 'QJKCMM,LYKZQO'}
   components:
   - name: Logo
-    properties: {role: null, vertical_align: center, height: 60, tooltip: '', border: '', foreground: '', visible: true, display_mode: shrink_to_fit, spacing_above: none, source: _/theme/Logo%20AMS.JPG, spacing_below: small, background: '', horizontal_align: center}
+    properties: {role: null, vertical_align: center, spacing_above: none, background: '', horizontal_align: center, source: _/theme/Logo%20AMS.JPG, foreground: '', display_mode: shrink_to_fit, spacing_below: small, visible: true, border: '', tooltip: '', height: 60}
     type: Image
     layout_properties: {grid_position: 'BYJJLH,YNLCPA'}
   - name: titre
-    properties: {role: title, align: center, foreground: 'theme:On Primary', text: Résultat Enquête De Satisfaction, font_size: 18, font: '', spacing_below: none, italic: false, background: 'theme:On Primary Container', bold: false}
+    properties: {role: title, bold: false, align: center, background: 'theme:On Primary Container', font: '', foreground: 'theme:On Primary', spacing_below: none, italic: false, font_size: 18, text: Résultat Enquête De Satisfaction}
     type: Label
     layout_properties: {grid_position: 'VKQLMA,YEXVEN'}
   - name: label_titre
@@ -40,7 +40,7 @@ components:
     type: RichText
     layout_properties: {grid_position: 'FNUZZW,KUKWHT'}
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small, background: 'theme:Primary'}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
   name: column_panel_a
   layout_properties: {grid_position: 'HVXSKI,PITKNE'}
   components:
@@ -50,37 +50,37 @@ components:
     layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
     components:
     - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
       name: button_annuler
       layout_properties:
         col_widths: {}
         grid_position: COGJPP,SACJUA
       event_bindings: {click: button_annuler_click}
   - type: FlowPanel
-    properties: {role: null, vertical_align: full, spacing: medium, align: center, tooltip: '', border: '', foreground: '', visible: true, spacing_above: none, spacing_below: none, background: ''}
+    properties: {role: null, vertical_align: full, align: center, spacing_above: none, background: '', foreground: '', spacing_below: none, visible: true, border: '', tooltip: '', spacing: medium}
     name: flow_panel_1
     layout_properties: {grid_position: 'BWKGSA,VNTBFV'}
     components:
     - type: DropDown
       properties:
         role: null
+        include_placeholder: true
+        bold: false
         align: full
-        tooltip: ''
         placeholder: Stages
-        border: ''
-        enabled: true
+        spacing_above: small
+        background: theme:On Primary Container
+        underline: false
+        font: ''
         foreground: theme:Tertiary
         items: []
-        visible: true
-        font_size: 16
-        font: ''
-        spacing_above: small
         spacing_below: small
+        visible: true
+        border: ''
         italic: false
-        background: theme:On Primary Container
-        bold: false
-        underline: false
-        include_placeholder: true
+        enabled: true
+        font_size: 16
+        tooltip: ''
       name: drop_down_code_stages
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
       event_bindings: {change: drop_down_code_stages_change}
@@ -89,11 +89,11 @@ components:
     type: ColumnPanel
     layout_properties: {grid_position: 'SSTCFN,RTZDKI'}
     components:
-    - name: button_mailing
-      properties: {text: Envoi de rappels par mail, foreground: 'theme:On Primary', background: 'theme:Error', visible: true}
+    - name: button_mailing_to_all
+      properties: {text: Envoi des rappels par mails, foreground: 'theme:Tertiary', background: 'theme:Primary', visible: true, icon: 'fa:send'}
       type: Button
       layout_properties: {grid_position: 'KJGDDH,HELMOM'}
-      event_bindings: {click: button_mailing_click}
+      event_bindings: {click: button_mailing_to_all_click}
     - name: label_titre_no_response
       properties: {align: center, text: 'Stagiaires n''ayant pas encore répondu:', foreground: 'theme:On Primary', background: 'theme:Error'}
       type: Label
@@ -103,7 +103,7 @@ components:
       type: RepeatingPanel
       layout_properties: {grid_position: 'ZHDLPE,AYATBI'}
   - name: button_downl_pdf0
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: false, text: Télécharger en Pdf, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+    properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Télécharger en Pdf}
     type: Button
     layout_properties: {grid_position: 'SYJRUO,YKHFIF'}
     event_bindings: {click: button_downl_pdf1_click}
@@ -119,12 +119,12 @@ components:
   layout_properties: {grid_position: 'RMMVFP,CNPEIT'}
   components: []
 - name: button_downl_pdf1
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: false, text: Télécharger en Pdf, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: none, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+  properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Télécharger en Pdf}
   type: Button
   layout_properties: {grid_position: 'ETWIEF,XWCMQV'}
   event_bindings: {click: button_downl_pdf1_click}
 - name: button_annuler2
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: none, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+  properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
   type: Button
   layout_properties: {grid_position: 'WSETDM,HKFMCD'}
   event_bindings: {click: button_annuler_click}
