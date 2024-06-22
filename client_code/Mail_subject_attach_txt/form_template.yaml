@@ -118,10 +118,11 @@ components:
         type: FlowPanel
         layout_properties: {grid_position: 'MJKMAD,SEFAOH'}
         components:
-        - name: button_attachments
-          properties: {text: Attachements, font_size: 15, icon: 'fa:upload', foreground: 'theme:Tertiary', visible: true}
-          type: Button
-          event_bindings: {click: button_attachments_click}
+        - name: file_loader_attachments
+          properties: {text: Attachement(s)}
+          type: FileLoader
+          event_bindings: {change: file_loader_attachments_change}
+          layout_properties: {}
         - name: button_modif
           properties: {role: outlined-button, bold: false, align: center, spacing_above: none, background: 'theme:Error', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Sauver ce modèle}
           type: Button
@@ -134,6 +135,10 @@ components:
           properties: {role: null, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:send', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Envoi}
           type: Button
           event_bindings: {click: button_sending_click}
+      - name: repeating_panel_2
+        properties: {item_template: Mail_subject_attach_txt.ItemTemplate16}
+        type: RepeatingPanel
+        layout_properties: {grid_position: 'NGWYOJ,ERTUPD'}
 - name: repeating_panel_1
   properties: {item_template: Mail_subject_attach_txt.ItemTemplate15, visible: false, role: outlined-card}
   type: RepeatingPanel

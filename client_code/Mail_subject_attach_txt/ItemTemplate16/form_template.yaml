@@ -1,0 +1,21 @@
+is_package: true
+container: {type: ColumnPanel}
+components:
+- name: column_panel_1
+  properties: {col_widths: '{"GUBFJG":30,"WSHSYV":35,"ALJCSH":5}', background: 'theme:On Primary Container', foreground: '', role: outlined-card}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'DPDYAW,FEWTSU'}
+  components:
+  - name: label_address_doc
+    properties: {foreground: 'theme:On Primary'}
+    type: Label
+    layout_properties: {grid_position: 'DGLHTH,GUBFJG'}
+  - name: image_doc
+    properties: {height: 45.947021484375}
+    type: Image
+    layout_properties: {grid_position: 'DGLHTH,WSHSYV'}
+  - name: button_del
+    properties: {role: null, bold: false, align: center, spacing_above: small, background: '', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: ''}
+    type: Button
+    layout_properties: {grid_position: 'DGLHTH,ALJCSH'}
+    event_bindings: {click: button_del_click}

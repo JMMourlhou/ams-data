@@ -6,6 +6,9 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+global list_attachements  # initilisation de la liste des attachements
+liste_attachements = {}
+
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
@@ -13,7 +16,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        
+        self.list_atach = []
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)   
         self.mode_creation = False
@@ -59,7 +62,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         #    self.column_panel_content.add_component(Mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), self.ref_model, self.emails_liste))
 
 
-        self.button_attachments.visible = True
+        self.file_loader_attachments.visible = True
         self.button_sending.visible = True
         self.button_new.visible = True
         #self.button_modif.visible = False
@@ -92,13 +95,11 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
                 alert("Modèle de mail créé")
             else:
                 alert("Modèle de mail modifié")      
-        self.drop_down_type_mails_change()
-        self.column_panel_detail.visible = False   # effact du panel de création/modif
-        self.mode_creation = False
+        #self.drop_down_type_mails_change()
+        #self.column_panel_detail.visible = False   # effact du panel de création/modif
+        self.button_modif.visible = False
+        self.file_loader_attachments.visible = True
         
-    def button_attachments_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
 
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -129,6 +130,18 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         self.button_new.visible = True
         self.column_panel_detail.visible = False # cache la form création/modif de modèle
         self.repeating_panel_1.visible = True # remontre les modèles 
-        
-        
+
+    def file_loader_attachments_change(self, file, **event_args):
+        """This method is called when a new file is loaded into this FileLoader"""
+        global liste_attachements
+        if file is not None:  #pas d'annulation en ouvrant choix de fichier
+            liste_attachements[file]=file
+            clef = file           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
+            valeur = ""
+            print("clef: ",clef)
+            liste_attachements[clef] = valeur   # je mets à jour la liste des attachements
+            self.list_atach = list(liste_attachements.keys()) 
+            
+            #affichage image
+            
         
