@@ -121,5 +121,14 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         self.mode_creation = True
         self.text_box_subject_detail.text = ""
         self.text_area_text_detail.text = ""
+
+    def button_retour_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # Abandon en création ou modif de modèle
+        self.button_annuler.visible = True
+        self.button_new.visible = True
+        self.column_panel_detail.visible = False # cache la form création/modif de modèle
+        self.repeating_panel_1.visible = True # remontre les modèles 
+        
         
         

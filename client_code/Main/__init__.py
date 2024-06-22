@@ -20,7 +20,7 @@ class Main(MainTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.bt_se_deconnecter.visible = False
-        self.bt_user_mail.text = "Vous êtes déconnecté."
+        self.bt_user_mail.text = "Connectez vous !"
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.enabled = False
         self.bt_gestion_stages.visible = False
@@ -133,7 +133,7 @@ class Main(MainTemplate):
             self.bt_se_connecter.visible = False
             self.bt_se_deconnecter.visible = True
         else:
-            self.bt_user_mail.text = "Vous n'êtes pas connecté."
+            self.bt_user_mail.text = "Connectez vous !"
             self.bt_se_connecter.visible = True
             self.bt_sign_in.visible = True
 
@@ -288,4 +288,4 @@ class Main(MainTemplate):
     def button_mails_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Mail_subject_attach_txt import Mail_subject_attach_txt
-        open_form("Mail_subject_attach_txt",[],"",1)
+        open_form("Mail_subject_attach_txt",[],"")

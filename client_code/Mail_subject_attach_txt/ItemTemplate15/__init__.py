@@ -17,7 +17,15 @@ class ItemTemplate15(ItemTemplate15Template):
         self.text_area_text.text = self.item['mail_text']
 
         # j'affiche bt envoi de mail 
-        self.button_sending.visible = True
+        # récupération de la forme mère par  self.f = get_open_form() en init 
+        self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+        print("form mère atteingnable (en visu): ", self.f) 
+        try: # ne fonctionera que si envoi par option mail du menu
+            if self.f.label_emails_liste == []:
+                self.f.button_sending.visible = False # cache envoi de mail ds forme mere
+                self.button_sending = False           # cache envoi de mail ds cette forme
+        except:
+            pass
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -33,13 +41,24 @@ class ItemTemplate15(ItemTemplate15Template):
 
     def text_box_subject_focus(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
+        # Appui sur objet ou texte du modèle pour le modifier
+        
         # récupération de la forme mère par  self.f = get_open_form() en init
         self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
-        print("form mère récupérable (modif): ", self.f) 
+        print("form mère atteingnable (en modif): ", self.f) 
+
+        # si pas d'email liste, provenance mail du menu principal, je ne permets pas d'envoi de mail ou attachements
+        
+        if self.f.label_emails_liste.text == []:
+            self.f.button_sending.visible = False # cache envoi de mail ds forme mere
+            self.f.button_attachments.visible = False
+            
+        self.f.button_annuler.visible = False
+        self.f.button_new.visible = False
         self.f.column_panel_detail.visible = True # montre la form création/modif de modèle
         self.f.repeating_panel_1.visible = False # cache les modèles 
-        self.f.label_id.text =  self.text_box_subject.tag # récupère l'id du modele mail row (pour la modif en serveur)
         
+        self.f.label_id.text =  self.item.get_id() # récupère l'id du modele mail row (pour la modif en serveur)
         self.f.text_box_subject_detail.text = self.text_box_subject.text
         self.f.text_area_text_detail.text = self.text_area_text.text
        
