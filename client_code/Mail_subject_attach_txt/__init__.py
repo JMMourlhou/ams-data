@@ -6,8 +6,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-global list_attachements  # initilisation de la liste des attachements
-liste_attachements = {}
 
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
@@ -16,7 +14,9 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.list_atach = []
+        self.liste_attachements = {}  # initialisation du dict des attachements
+        self.list_atach = []          # initialisation de la liste des attachements
+        
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)   
         self.mode_creation = False
@@ -133,15 +133,16 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
 
     def file_loader_attachments_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
-        global liste_attachements
+
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            liste_attachements[file]=file
+            self.liste_attachements[file]=file
             clef = file           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
             valeur = ""
             print("clef: ",clef)
-            liste_attachements[clef] = valeur   # je mets à jour la liste des attachements
-            self.list_atach = list(liste_attachements.keys()) 
+            self.liste_attachements[clef] = valeur   # je mets à jour la liste des attachements
+            self.list_atach = list(self.liste_attachements.keys()) # transformation dict en liste pour le repeating panel
             
             #affichage image
-            
+            self.repeating_panel_2.visible = True
+            self.repeating_panel_2.items = self.list_atach
         
