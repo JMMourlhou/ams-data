@@ -89,17 +89,22 @@ components:
     type: ColumnPanel
     layout_properties: {grid_position: 'SSTCFN,RTZDKI'}
     components:
+    - name: flow_panel_2
+      properties: {align: center, vertical_align: middle, spacing_below: none, spacing_above: none}
+      type: FlowPanel
+      layout_properties: {grid_position: 'AMIBTN,CNQDYF'}
+      components:
+      - name: label_titre_no_response
+        properties: {role: body, bold: false, align: center, spacing_above: none, background: 'theme:Orange', foreground: 'theme:On Primary', spacing_below: none, visible: true, italic: true, text: '  Stagiaires n''ayant pas encore répondu:  '}
+        type: Label
+        layout_properties: {}
     - name: button_mailing_to_all
-      properties: {text: Envoi des rappels par mails, foreground: 'theme:Tertiary', background: 'theme:Primary', visible: true, icon: 'fa:send'}
+      properties: {text: 'Rappels à tous les retardataires ', foreground: 'theme:Tertiary', background: 'theme:Primary', visible: false, icon: 'fa:send'}
       type: Button
       layout_properties: {grid_position: 'KJGDDH,HELMOM'}
       event_bindings: {click: button_mailing_to_all_click}
-    - name: label_titre_no_response
-      properties: {align: center, text: 'Stagiaires n''ayant pas encore répondu:', foreground: 'theme:On Primary', background: 'theme:Error'}
-      type: Label
-      layout_properties: {grid_position: 'LIXFIT,CNWGUQ'}
     - name: repeating_panel_no_response
-      properties: {item_template: Stage_satisf_statistics.ItemTemplate14}
+      properties: {item_template: Stage_satisf_statistics.ItemTemplate14, foreground: 'theme:On Primary'}
       type: RepeatingPanel
       layout_properties: {grid_position: 'ZHDLPE,AYATBI'}
   - name: button_downl_pdf0

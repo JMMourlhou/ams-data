@@ -61,10 +61,12 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                                                                 numero = row["numero"],
                                                                 enquete_satisf = False
                                                                 )
-        if self.liste_no_response:
+        if self.liste_no_response:   # retardataires
             self.repeating_panel_no_response.items = self.liste_no_response
             self.column_panel_mailing.visible = True
-        else:
+            if len(self.liste_no_response) > 1:   # plusieurs retardataires
+                self.button_mailing_to_all.visible = True
+        else:  # pas de retardataires
             self.label_titre_no_response.visible = False
             self.repeating_panel_no_response.visible = False
         # ------------------------------------------------------------------------

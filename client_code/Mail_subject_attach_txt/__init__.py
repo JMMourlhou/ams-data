@@ -96,14 +96,15 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
             else:
                 alert("Modèle de mail modifié")      
         #self.drop_down_type_mails_change()
-        #self.column_panel_detail.visible = False   # effact du panel de création/modif
+        self.column_panel_detail.visible = False   # effact du panel de création/modif
         self.button_modif.visible = False
         self.file_loader_attachments.visible = True
-        
+        self.drop_down_type_mails_change(self.drop_down_type_mails.selected_value)
 
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
-        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, self.list_atach)
+        liste_des_attachements = list(self.dico_attachements.keys()) # extraction des clefs du dico des attachements
+        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements)
         if result:
             alert("mail envoyé")
 
@@ -118,10 +119,15 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     def button_new_click(self, **event_args):
         """This method is called when the button is clicked"""
         
-        self.column_panel_detail.visible = True
+        self.column_panel_detail.visible = True # panel création visible
+        self.repeating_panel_1.visible = False      # panel des modèles invisible
+        self.repeating_panel_2.visible = False      # panel des attachements invisible
+        self.file_loader_attachments.visible = False
+        self.button_sending.visible = False
         self.mode_creation = True
         self.text_box_subject_detail.text = ""
         self.text_area_text_detail.text = ""
+        
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""

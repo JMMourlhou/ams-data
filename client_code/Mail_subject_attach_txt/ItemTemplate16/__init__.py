@@ -13,8 +13,8 @@ class ItemTemplate16(ItemTemplate16Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.image_doc.source = self.item[0]
-        self.label_address_doc.text = self.item[1]
+        self.image_doc.source = self.item[0]        # 1er élément de l'item
+        self.label_address_doc.text = self.item[1]  # 2eme élément de l'item
        
         
     def button_del_click(self, **event_args):
@@ -22,8 +22,8 @@ class ItemTemplate16(ItemTemplate16Template):
         self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
         print("form mère atteingnable (en modif): ", self.f) 
         
-        self.list_attach = [] # réinitialisation de la liste pour le repeating panel
-        del  self.f.dico_attachements[self.item]
+        self.f.list_attach = [] # réinitialisation de la liste pour le repeating panel
+        del  self.f.dico_attachements[self.item[0]]
         
         for clef, valeur in self.f.dico_attachements.items():
                 self.f.list_attach.append((clef,valeur))  # transformation dict en liste pour le repeating panel
