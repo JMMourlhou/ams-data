@@ -103,7 +103,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
 
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
-        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text)
+        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, self.list_atach)
         if result:
             alert("mail envoyé")
 
