@@ -14,9 +14,9 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.liste_attachements = {}  # initialisation du dict des attachements
-        self.list_atach = []          # initialisation de la liste des attachements
-        
+        self.dico_attachements = {}                # initialisation du dict des attachements
+        self.list_attach = []          # initialisation de la liste des attachements
+    
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)   
         self.mode_creation = False
@@ -135,14 +135,17 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         """This method is called when a new file is loaded into this FileLoader"""
 
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            self.liste_attachements[file]=file
-            clef = file           # clé du dict de questions     Comme il ne peut y avoir 2 même clé, si random prend 2 fois la même question, elle écrase l'autre
-            valeur = ""
-            print("clef: ",clef)
-            self.liste_attachements[clef] = valeur   # je mets à jour la liste des attachements
-            self.list_atach = list(self.liste_attachements.keys()) # transformation dict en liste pour le repeating panel
+            self.list_attach = [] # réinitialisation de la liste pour le repeating panel
+            # insertion ds le dictionaire liste_attachements et création de la liste correspondante pour le repeating panel
+            clef = file         # media object du fichier est la clé du dict 
+            valeur = file.name   # valeur est le nom du dict
+            print("clef: ",clef, "     valeur: ", valeur)
+            self.dico_attachements[clef] = valeur   # je mets à jour le dico des attachements media_file : file_name_txt
+
+            for clef, valeur in self.dico_attachements.items():
+                self.list_attach.append((clef,valeur))  # transformation dict en liste pour le repeating panel
             
             #affichage image
             self.repeating_panel_2.visible = True
-            self.repeating_panel_2.items = self.list_atach
+            self.repeating_panel_2.items = self.list_attach
         
