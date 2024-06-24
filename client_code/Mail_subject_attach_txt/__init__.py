@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import anvil.media
 
 
 # emails_liste liste des mails
@@ -143,6 +144,8 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
             self.list_attach = [] # réinitialisation de la liste pour le repeating panel
             # insertion ds le dictionaire liste_attachements et création de la liste correspondante pour le repeating panel
+            
+            
             clef = file         # media object du fichier est la clé du dict 
             valeur = file.name   # valeur est le nom du dict
             print("clef: ",clef, "     valeur: ", valeur)

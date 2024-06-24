@@ -5,7 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
+import anvil.js
 
 class ItemTemplate16(ItemTemplate16Template):
     def __init__(self, **properties):
@@ -15,7 +15,10 @@ class ItemTemplate16(ItemTemplate16Template):
         # Any code you write here will run before the form opens.
         self.image_doc.source = self.item[0]        # 1er élément de l'item
         self.label_address_doc.text = self.item[1]  # 2eme élément de l'item
-       
+        
+        url = anvil.server.call('get_pdf_url', self.item[0]) 
+        print(url)
+        self.image_doc.source =   anvil.js.call_js('show_pdf',url)
         
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
