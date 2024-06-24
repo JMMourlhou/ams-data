@@ -46,7 +46,7 @@ class ItemTemplate15(ItemTemplate15Template):
         else:
             self.f.file_loader_attachments.visible = True
             
-        #self.f.button_annuler.visible = False
+        self.f.button_annuler.visible = False
         self.f.mode_creation = False
         self.f.button_new.visible = False
         self.f.column_panel_detail.visible = True # montre la form création/modif de modèle
