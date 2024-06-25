@@ -8,6 +8,7 @@ from anvil.tables import app_tables
 import anvil.media
 
 
+
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
@@ -15,6 +16,12 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        
+         # Récupération des icones ds files pour afficher les icones en template 16
+        self.icone_xls = app_tables.files.get(path="logo_xls.jpg")
+        self.icone_word = app_tables.files.get(path="logo word.jpg")
+        self.icone_xls = app_tables.files.get(path="logo_ppt.jpg")
+    
         self.dico_attachements = {}                # initialisation du dict des attachements
         self.list_attach = []          # initialisation de la liste des attachements
     

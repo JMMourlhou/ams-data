@@ -5,7 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import anvil.js
+
 
 class ItemTemplate16(ItemTemplate16Template):
     def __init__(self, **properties):
@@ -13,6 +13,9 @@ class ItemTemplate16(ItemTemplate16Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+        print("form mère atteingnable (en modif): ", self.f) 
+        
         #self.image_doc.source = self.item[0]        # 1er élément de l'item, le media file choisit pour téléchargement (si pdf, le transfomer en jpg)
         self.label_address_doc.text = self.item[1]  # 2eme élément de l'item, le nom du fichier en txt
         
@@ -25,9 +28,14 @@ class ItemTemplate16(ItemTemplate16Template):
             print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
             file = liste_images[0]
             self.image_doc.source =  file
-        else:
+        if file_extension == ".jpg":
             self.image_doc.source = self.item[0]        # 1er élément de l'item, le media file choisit pour téléchargement (si pdf, le transfomer en jpg)
-        
+        if file_extension == ".xls":
+            self.image_doc.source = self.f.self.icone_xls
+        if file_extension == ".doc":
+            pass
+        if file_extension == ".ppsx":
+            pass
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
