@@ -18,10 +18,11 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         # Any code you write here will run before the form opens.
         
          # Récupération des icones ds files pour afficher les icones en template 16
-        self.icone_xls = app_tables.files.get(path="logo_xls.jpg")
-        self.icone_word = app_tables.files.get(path="logo word.jpg")
-        self.icone_xls = app_tables.files.get(path="logo_ppt.jpg")
-    
+        self.icone_xls = app_tables.files.get(path="logo_xls.jpg")['file'] # lit la colonne 'file', media object
+        self.icone_doc = app_tables.files.get(path="logo word.jpg")['file']
+        self.icone_ppt = app_tables.files.get(path="logo_ppt.jpg")['file']
+        self.icone_pdf = app_tables.files.get(path="logo pdf.jpg")['file']
+        
         self.dico_attachements = {}                # initialisation du dict des attachements
         self.list_attach = []          # initialisation de la liste des attachements
     

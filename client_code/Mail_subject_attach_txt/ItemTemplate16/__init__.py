@@ -21,6 +21,9 @@ class ItemTemplate16(ItemTemplate16Template):
         
         # Type de fichier en attachement ?
         path_parent, file_name, file_extension = anvil.server.call('path_info', str(self.item[0].name))
+        file_extension = file_extension[0:4].lower() # 4 1ers caract en minuscule   ex;    .XLSX > .xls
+        print(file_extension)
+        """
         if file_extension == ".pdf":
             liste_images = anvil.server.call('display_pdf', self.item[0]) 
         
@@ -28,14 +31,30 @@ class ItemTemplate16(ItemTemplate16Template):
             print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
             file = liste_images[0]
             self.image_doc.source =  file
+        """
         if file_extension == ".jpg":
             self.image_doc.source = self.item[0]        # 1er élément de l'item, le media file choisit pour téléchargement (si pdf, le transfomer en jpg)
+        if file_extension == ".png":
+            self.image_doc.source = self.item[0]
+        if file_extension == ".jpe":
+            self.image_doc.source = self.item[0]  # pas d'affichage
+        if file_extension == ".hei":
+            self.image_doc.source = self.item[0] # pas d'affichage
+        if file_extension == ".gif":
+            self.image_doc.source = self.item[0] 
+        if file_extension == ".bmp":
+            self.image_doc.source = self.item[0] 
+            
         if file_extension == ".xls":
-            self.image_doc.source = self.f.self.icone_xls
+            self.image_doc.source = self.f.icone_xls
         if file_extension == ".doc":
-            pass
-        if file_extension == ".ppsx":
-            pass
+            self.image_doc.source = self.f.icone_doc
+        if file_extension == ".pps":
+            self.image_doc.source = self.f.icone_ppt
+        if file_extension == ".pdf":
+            self.image_doc.source = self.f.icone_pdf  
+
+    
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
