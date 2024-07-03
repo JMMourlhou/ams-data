@@ -35,7 +35,8 @@ def send_mail_css(emails_list, subject_txt, rich_text, attachments=[]):
             attachments=attachments,
             html= f"""
                 <p><img src = {logo_address} width='150' height='75'> </p>
-                <p><class='jm'>{prenom},</p><br>
+                <p><p style="background-image: {logo_address}" </p>
+                <p><p style="color:blue;">{prenom},</p><br>
                 <br>
                 {rich_text} <br>
                 <br>
