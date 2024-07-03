@@ -113,7 +113,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
         liste_des_attachements = list(self.dico_attachements.keys()) # extraction des clefs du dico des attachements
-        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements)
+        result = anvil.server.call("send_mail_css",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements)
         if result:
             alert("mail envoyé")
 

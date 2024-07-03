@@ -17,6 +17,9 @@ textarea {
   box-shadow:         inset 0 0 1px 1px rgb(0 0 0 / 20%), 0 1px 2px 1px rgb(0 0 0 / 10%) !important;
   -webkit-box-shadow: inset 0 0 0px 0px rgb(0 0 0 / 10%), 0 1px 2px 1px rgb(0 0 0 / 10%) !important;
 }
+.jm {
+     color: red;
+}
 /*****  end of custom css  *****/
 
 
