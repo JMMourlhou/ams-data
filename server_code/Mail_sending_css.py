@@ -27,25 +27,22 @@ def send_mail_css(emails_list, subject_txt, rich_text, attachments=[]):
     code_app2 = dict_var_glob["code_app2"]      # var_globale de l'apli AMS DATA
     logo_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_logo
     print("logo address ok: ",logo_address)
-    ht = f"<p><img src = {logo_address} width='150' height='75'> </p>
-                <p><class = 'jm'>{prenom},</p><br>
-                <br>
-                {rich_text} <br>
-                <br>
-                <i>"L'équipe d'AMSport,"</i>
-                <br>
-                {client_mail} <br>   
-        "
-
-
-
     
     for email, prenom in emails_list:
         anvil.email.send(
             to=email,
             subject=subject_txt,
             attachments=attachments,
-            html= ht
+            html= f"""
+                <p><img src = {logo_address} width='150' height='75'> </p>
+                <p><class='jm'>{prenom},</p><br>
+                <br>
+                {rich_text} <br>
+                <br>
+                <i>"L'équipe d'AMSport,"</i>
+                <br>
+                {client_mail} <br>   
+        """
         )
         # possible de changer la couleur d'un texte:   <b><p style="color:blue;"> {user_row["prenom"]}, </p></b>
         
