@@ -17,6 +17,7 @@ components:
     properties: {role: null, vertical_align: center, spacing_above: none, background: '', horizontal_align: center, source: _/theme/Logo_AMS.png, foreground: '', display_mode: shrink_to_fit, spacing_below: small, visible: true, border: '', tooltip: '', height: 60}
     name: Logo
     layout_properties: {grid_position: 'YMEUZM,OGGYPZ'}
+    data_bindings: []
   - type: Button
     properties: {role: filled-button, bold: false, align: center, spacing_above: none, background: '', icon: 'fa:qrcode', underline: false, font: '', icon_align: left, foreground: '', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: 40, tooltip: '', text: ''}
     name: button_qr
