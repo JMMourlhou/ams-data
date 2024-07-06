@@ -45,7 +45,7 @@ def send_mail_css(emails_list, subject_txt, rich_text, attachments=[]):
                     <style>
                         .top-two-backgrounds {
                             background-image: url(_/theme/Logo_AMS.png), 
-                                            url(_/theme/AMS_ext_flou.png);
+                                              url(_/theme/AMS_ext_flou.png);
                             width: 100% auto;
                             height: 300px;
                             background-position: left top, center center;

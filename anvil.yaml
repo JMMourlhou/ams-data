@@ -24,7 +24,7 @@ services:
   server_config: {enc_delegation_refresh_token: hpOFXpFvivlCtjXrhtAWx4r0B41C+gLgl7cGOjQhndVAlL+qXXey8uW2EQLRIunkYvBVpT4JxxeYiLwgUMPL9toRFzWNJBJQA0+J60ztN8XdPYr8qTHm8MxzjTwyJhA+V0e1CNA5Yy4BI0t+5mWzhbF/jJFrSPAAe59p1yZD9R1Vn4GYV3iXmsdxrO+MRZ+Oi0ePYr/0IGihj+F4UbaVwJTcg3d8+4YthD43Ycju27LD2b6hSrjb3OVRkt7o4FWbEiHR+m0tlKWriCGeUVnqPjyBl76NCtKqSGQnbE8nm88UjFBMDV/B8T3sjl//MA==}
 - source: /runtime/services/anvil/email.yml
   client_config: {}
-  server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com, smtp_encryption: starttls, test_mode: false, smtp_password: f0dWTvMdIo758EtL0Z6XKgvYjr2O/zez4gp5gt3NrvGF5AUh5RANne8XjYxDw75nD9i2FUk5hYSPvSFKasWLOmwoECt0PSWvEnkhXC7jAOBwiUG63wVwy06/Lyzgw/xcqAX4Bxh4DsbEseMfrWRpDNoIHpHz7LDjS1DfwZCjTCBnMdkOECtD3oa1DGc=}
+  server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com, smtp_encryption: starttls, test_mode: false, smtp_password: Be3T1g0OIpwdmSs4QLYzhsuOj3dj0zSfnVCEXhbQRy4W23p0V6cP0BYX8vZUfMGDUMPNVpKYJOS2ah77xkGShd0mXzPKq2wWYweplb+Fd55Bqs2B3oTEMTOVQEdfZw5PZ+Ea9OGFSxHSHj261ndfuwJLZXE40m4YLQ3bL1ERsf2t1Bjqyn+G+brM/zY=}
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
@@ -46,7 +46,7 @@ runtime_options:
       bcrypt==4.0.1
       qrcode==7.4.2
       pdf2image==1.17.0
-metadata: {title: 'Gestion de données, AMS', logo_img: 'asset:logo_fs_small.png', description: jmmourlhou@gmail.com}
+metadata: {title: AMS Data, logo_img: 'asset:logo_fs_small.png', description: 'Gestion de données, pour AMSport'}
 startup_form: null
 db_schema:
   temp:
