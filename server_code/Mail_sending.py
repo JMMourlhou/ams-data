@@ -23,6 +23,7 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[]):
     client_mail = dict_var_glob["client_mail"]   # var globale Mail AMS
     code_app2 = dict_var_glob["code_app2"]      # var_globale de l'apli AMS DATA
     logo_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_logo
+    en_tete_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_en_tete
     print("logo address ok: ",logo_address)
 
     for email, prenom in emails_list:
@@ -31,7 +32,7 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[]):
             subject=subject_txt,
             attachments=attachments,
             html=f"""
-                <p><img src = {logo_address} width="150" height="75"> </p>
+                <p><img src = {en_tete_address} width="772" height="263"> </p>
                 <b>{prenom},</b><br>
                 <br>
                 {rich_text} <br>
@@ -43,6 +44,6 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[]):
             """
         )
         # possible de changer la couleur d'un texte:   <b><p style="color:blue;"> {user_row["prenom"]}, </p></b>
-        
+        # insertion du logo     <p><img src = {en_tete_address} width="150" height="75"> </p>
         return True
 
