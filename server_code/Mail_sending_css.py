@@ -30,12 +30,42 @@ def send_mail_css(emails_list, subject_txt, rich_text, attachments=[]):
     
     for email, prenom in emails_list:
         anvil.email.send(
+            
             to=email,
             subject=subject_txt,
             attachments=attachments,
-            html= f"""
-                <p><img src = {logo_address} width='150' height='75'> </p>
-                <p><p style="background-image: {logo_address}" </p>
+
+            
+            html= """
+                <!DOCTYPE html>
+                <html lang="fr">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        .top-two-backgrounds {
+                            background-image: url(_/theme/Logo_AMS.png), 
+                                            url(_/theme/AMS_ext_flou.png);
+                            width: 100% auto;
+                            height: 300px;
+                            background-position: left top, center center;
+                            background-size: 120px 60px, cover;
+                            background-repeat: no-repeat, no-repeat;
+                        }
+                        .background-bottom {
+                            background: url(_/theme/fonds_bleu_marin.png);
+                            background-size: cover; /* Couvre toute la zone */ 
+                            height: 100vh; /* 100% de la hauteur de la fenêtre */
+                        }      
+                    </style>
+                    <title>Multiple Backgrounds</title>
+                </head>
+                <body>
+                    <div class="top-two-backgrounds"></div>
+                    <div class="background-bottom"></div>
+                    
+                </body>
+                </html>
                 <p><p style="color:blue;">{prenom},</p><br>
                 <br>
                 {rich_text} <br>
@@ -43,7 +73,8 @@ def send_mail_css(emails_list, subject_txt, rich_text, attachments=[]):
                 <i>"L'équipe d'AMSport,"</i>
                 <br>
                 {client_mail} <br>   
-        """
+             """   
+        
         )
         # possible de changer la couleur d'un texte:   <b><p style="color:blue;"> {user_row["prenom"]}, </p></b>
         
