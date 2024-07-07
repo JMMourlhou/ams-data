@@ -14,7 +14,7 @@ class XLS_reader(XLS_readerTemplate):
 
         # Any code you write here will run before the form opens.
         # Lecture de la variable globale "code_app1" ds table variables_globales
-        xls_file = "Diplômés PSE Extranet FNMNS 2016-2020.xlsx"
+        xls_file = "Diplômés PSE Extranet FNMNS 2016-2020.csv"
         mail1 = anvil.server.call('xls_file_reader', xls_file)
         alert(mail1)
         

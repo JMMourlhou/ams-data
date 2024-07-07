@@ -1,33 +1,41 @@
 import anvil.server
-import pandas as pd
 import anvil.tables as tables
+import anvil.tables.query as q
 from anvil.tables import app_tables
 
-@anvil.server.callable
-def xls_file_reader(xls_file_name):
+import anvil.files
+from anvil.files import data_files
 
-  with open(xls_file_name, "r") as f:
-    df = pd.read_excel(f)
-    for d in df.to_dict(orient="records"):
-        # d is now a dict of {columnname -> value} for this row
-        # We use Python's **kwargs syntax to pass the whole dict as keyword arguments
-        app_tables.from_xls.add_row(**d)
-
-
-
-
-
-
-
-"""
-import openpyxl
-from openpyxl import load_workbook
 
 @anvil.server.callable
-def xls_file_reader(xls_file_name):
-    wb = openpyxl.load_workbook(xls_file_name)
+def xls_file_reader(csv_file_name):
+    
+    f = open(data_files[csv_file_name])    
+    x = True
+
+    while x:
+        ligne = []
+        text=f.readline()  # lecture  1 ligne
+        if not text:                                        # FIN DE FICHIER TEXT           #rep = rep + dernier_caract
+            print('Fin du fichier')
+            break
+        
+        #remplacement ; par , 
+        ligne = text.split(';')
+        # extraction du mail
+        mail=ligne[1]
+        #extraction du num
+        num=ligne[0]
+        app_tables.stagiaires_histo.add_row(mail=mail,
+                                            num=num)
+    
+
+
+
+    """
+    wb = openpyxl.load_workbook(f)
     sheet = wb[wb.sheetnames[0]]
     print("feuille 1:", sheet)
-    cell=sheet(["M2"])
+    cell=sheet(["A1"])
     return cell
-"""
+    """
