@@ -93,6 +93,11 @@ components:
         type: Button
         layout_properties: {}
         event_bindings: {click: button_mails_click}
+      - name: button_xls
+        properties: {text: Xls, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        type: Button
+        layout_properties: {}
+        event_bindings: {click: button_xls_click}
     - name: column_panel_1
       properties: {wrap_on: never, col_spacing: none}
       type: ColumnPanel
