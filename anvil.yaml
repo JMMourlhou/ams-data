@@ -338,10 +338,43 @@ db_schema:
     server: full
     columns:
     - name: num
-      admin_ui: {width: 200, order: 0}
+      admin_ui: {order: 0, width: 72}
       type: string
     - name: mail
       admin_ui: {width: 200, order: 1}
+      type: string
+    - name: diplome
+      admin_ui: {order: 2, width: 103}
+      type: string
+    - name: lieu_diplome
+      admin_ui: {order: 3, width: 116}
+      type: string
+    - name: date_diplome
+      admin_ui: {order: 4, width: 120}
+      type: string
+    - name: nom
+      admin_ui: {order: 5, width: 107}
+      type: string
+    - name: prenom
+      admin_ui: {order: 6, width: 99}
+      type: string
+    - name: date_n
+      admin_ui: {width: 200, order: 7}
+      type: string
+    - name: lieu_n
+      admin_ui: {order: 8, width: 91}
+      type: string
+    - name: rue
+      admin_ui: {width: 200, order: 9}
+      type: string
+    - name: cp
+      admin_ui: {order: 10, width: 97}
+      type: string
+    - name: ville
+      admin_ui: {order: 11, width: 123}
+      type: string
+    - name: tel
+      admin_ui: {order: 12, width: 118}
       type: string
   global_variables:
     title: Global_variables
