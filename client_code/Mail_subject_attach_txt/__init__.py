@@ -11,11 +11,11 @@ import anvil.media
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
-    def __init__(self, emails_liste, ref_model = "",**properties): 
+    def __init__(self, emails_liste, ref_model = "", old_stagiaires = False,**properties): 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        
+        self.old_stagiaires = old_stagiaires
          # Récupération des icones ds files pour afficher les icones en template 16
         self.icone_xls = app_tables.files.get(path="logo_xls.jpg")['file'] # lit la colonne 'file', media object
         self.icone_doc = app_tables.files.get(path="logo word.jpg")['file']
@@ -112,7 +112,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
         liste_des_attachements = list(self.dico_attachements.keys()) # extraction des clefs du dico des attachements
-        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements)
+        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements, self.old_stagiaires)
         if result:
             alert("mail envoyé")
 

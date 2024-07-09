@@ -382,6 +382,9 @@ db_schema:
     - name: Date_time_envoi
       admin_ui: {order: 1.75, width: 200}
       type: datetime
+    - name: erreur_mail
+      admin_ui: {order: 1.875, width: 200}
+      type: bool
   global_variables:
     title: Global_variables
     client: none

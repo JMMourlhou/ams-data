@@ -27,7 +27,7 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
             liste_email.append((stagiaire["mail"], stagiaire["prenom"]))
             
         # 'formul' indique l'origine, ici 'formulaire de satisfaction'
-        open_form("Mail_subject_attach_txt",  liste_email, 'formul') 
+        open_form("Mail_subject_attach_txt",  liste_email, 'next_stages', True) # True, old stagiaires
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
