@@ -1,0 +1,36 @@
+container: {type: ColumnPanel}
+components:
+- name: column_panel_header
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'ZWRYQL,YAPQID'}
+  event_bindings: {}
+  components:
+  - name: spacer_1
+    properties: {height: -3.9891357421875, visible: false}
+    type: Spacer
+    layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
+  - name: label_3
+    properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Mailing aux Anciens stagiaires}
+    type: Label
+    layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+  - name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'FDLYLV,AWJPVU'}
+    components:
+    - name: button_annuler
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
+      type: Button
+      layout_properties: {grid_position: 'SIHWFU,NFPFQW'}
+      event_bindings: {click: button_annuler_click}
+    - name: button_mailing
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Mail to all}
+      type: Button
+      layout_properties: {grid_position: 'SIHWFU,EJSHDV'}
+      event_bindings: {click: button_mailing_click}
+- name: repeating_panel_1
+  properties: {item_template: Mail_to_old_stagiaires.ItemTemplate17}
+  type: RepeatingPanel
+  layout_properties: {grid_position: 'YWGBJD,ZCMZXL'}
+is_package: true

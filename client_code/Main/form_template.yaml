@@ -98,6 +98,10 @@ components:
         type: Button
         layout_properties: {}
         event_bindings: {click: button_xls_click}
+      - name: button_mail_histo
+        properties: {text: Mail to Histo, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        type: Button
+        event_bindings: {click: button_mail_histo_click}
     - name: column_panel_1
       properties: {wrap_on: never, col_spacing: none}
       type: ColumnPanel

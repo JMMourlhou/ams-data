@@ -294,3 +294,8 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..XLS_reader import XLS_reader
         open_form("XLS_reader")
+
+    def button_mail_histo_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Mail_to_old_stagiaires import Mail_to_old_stagiaires
+        open_form("Mail_to_old_stagiaires")

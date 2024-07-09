@@ -334,7 +334,7 @@ db_schema:
       type: bool
   stagiaires_histo:
     title: Stagiaires_histo
-    client: none
+    client: search
     server: full
     columns:
     - name: num
@@ -376,6 +376,12 @@ db_schema:
     - name: tel
       admin_ui: {order: 12, width: 118}
       type: string
+    - name: envoi
+      admin_ui: {order: 1.5, width: 200}
+      type: bool
+    - name: Date_time_envoi
+      admin_ui: {order: 1.75, width: 200}
+      type: datetime
   global_variables:
     title: Global_variables
     client: none
@@ -421,7 +427,7 @@ db_schema:
     server: full
     columns:
     - name: ref
-      admin_ui: {width: 101}
+      admin_ui: {order: -1, width: 104}
       type: string
     - name: type_mail
       admin_ui: {width: 298}
