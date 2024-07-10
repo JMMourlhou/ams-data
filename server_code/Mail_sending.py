@@ -15,7 +15,8 @@ from . import _Constant_parameters_public_ok
 """Send an email to the specified user"""
 @anvil.server.callable
 def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaires=False):
-    #time=str(French_zone_server_side.time_french_zone())[0:16] # time will be text form 
+    # recup de date heure de l'envoi
+    time=French_zone_server_side.time_french_zone() # time is a datetime format 
     
     # Récupération des variables globales
     dict_var_glob = Variables_globales.get_variable_names()   # var_globale du mail d'AMS, stockées ds table 
@@ -27,7 +28,8 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
     print("logo address ok: ",logo_address)
     
     print(emails_list)
-    for email, prenom in emails_list:
+    for email, prenom, id in emails_list:
+        print()
         try:
             anvil.email.send(
                 to=email,
@@ -46,13 +48,20 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                 """
             )
             if old_stagiaires is True:
-                print("ok", email)
                 # sauver la date et l'heure
-        
-        except:
+                row_old_stagiaire = app_tables.stagiaires_histo.get_by_id(id)
+                if row_old_stagiaire:
+                    row_old_stagiaire.update(envoi=True, Date_time_envoi=time)
+                    print(row_old_stagiaire['mail'], "envoyé pour", prenom)
+                else:
+                    print(row_old_stagiaire['mail'], "row non trouvé en maj")
+        except Exception as e:
+            print("Une exception a été déclenchée :", e)
             if old_stagiaires is True:
-                print("Email erroné", email)
                 # sauver l'erreur
+                row_old_stagiaire = app_tables.stagiaires_histo.get_by_id(id)
+                row_old_stagiaire.update(envoi=False, erreur_mail=True)
+                
             
         # possible de changer la couleur d'un texte:   <b><p style="color:blue;"> {user_row["prenom"]}, </p></b>
         # insertion du logo     <p><img src = {en_tete_address} width="150" height="75"> </p>
