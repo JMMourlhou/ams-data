@@ -20,6 +20,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
+       
 
     def filtre(self):
         # Récupération des critères
@@ -152,6 +153,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def text_box_email_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_recherche_click()
+
+    def form_show(self, **event_args):
+        """This method is called when the form is shown on the page"""
+        self.text_box_nom.focus()
        
 
 

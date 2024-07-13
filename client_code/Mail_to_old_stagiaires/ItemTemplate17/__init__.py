@@ -13,9 +13,9 @@ class ItemTemplate17(ItemTemplate17Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.label_email.text = self.item['mail']
+        self.label_mail.text = self.item['mail']
         try:
-            nom_p = self.item['nom'] + " " + self.item['prenom'][0]   # cas où nom prenom vides
+            nom_p = self.item['nom'] + " " + self.item['prenom']   # cas où nom prenom vides
         except:
             pass
         self.label_nom.text = nom_p
@@ -24,7 +24,7 @@ class ItemTemplate17(ItemTemplate17Template):
             self.label_date_heure.text = str(self.item['Date_time_envoi'])[0:16]  # cas où date encore vide
         except:
             pass
-        self.label_annee.text = self.item['date_diplome']
+        self.label_date.text = self.item['date_diplome']
 
 
     def check_box_envoi_change(self, **event_args):

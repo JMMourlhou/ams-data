@@ -10,7 +10,7 @@ components:
     grid_position: OFJBPV,VKAECL
   components:
   - type: Image
-    properties: {role: null, vertical_align: center, spacing_above: none, background: 'theme:On Primary Container', horizontal_align: center, source: _/theme/en_tete.png, foreground: '', display_mode: shrink_to_fit, spacing_below: small, visible: true, border: solid white 1px, tooltip: '', height: 202.75433349609375}
+    properties: {role: null, vertical_align: center, spacing_above: none, background: 'theme:On Primary Container', horizontal_align: center, source: _/theme/en_tete_small.png, foreground: '', display_mode: shrink_to_fit, spacing_below: small, visible: true, border: solid white 1px, tooltip: '', height: 202.75433349609375}
     name: Logo
     layout_properties: {grid_position: 'YMEUZM,OGGYPZ'}
     data_bindings: []
