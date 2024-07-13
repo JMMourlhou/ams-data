@@ -11,7 +11,7 @@ components:
     type: Label
     layout_properties: {grid_position: 'WXWRQL,KAVXHW'}
   - name: check_box_envoi
-    properties: {text: check_box_1, foreground: 'theme:On Primary'}
+    properties: {text: Envoi, foreground: 'theme:On Primary'}
     type: CheckBox
     layout_properties: {grid_position: 'WXWRQL,DEBRKP'}
   - name: label_date_heure
