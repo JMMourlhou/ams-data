@@ -2,19 +2,33 @@ is_package: true
 container: {type: ColumnPanel}
 components:
 - name: column_panel_1
-  properties: {role: outlined-card, background: 'theme:Primary'}
+  properties: {role: outlined-card, background: 'theme:Primary', col_spacing: tiny, wrap_on: never}
   type: ColumnPanel
   layout_properties: {grid_position: 'WEWSPK,BMIUEE'}
   components:
+  - name: check_box_envoi
+    properties: {text: Envoi le, foreground: 'theme:On Primary', align: right, spacing_above: small}
+    type: CheckBox
+    layout_properties: {grid_position: 'WXWRQL,LCNGRD'}
+    event_bindings: {change: check_box_envoi_change}
+  - name: label_date_heure
+    properties: {foreground: 'theme:On Primary'}
+    type: Label
+    layout_properties: {grid_position: 'WXWRQL,GQKHVL'}
+  - name: label_nom
+    properties: {foreground: 'theme:On Primary'}
+    type: Label
+    layout_properties: {grid_position: 'WXWRQL,GZPUQX'}
+  - name: label_annee
+    properties: {foreground: 'theme:On Primary'}
+    type: Label
+    layout_properties: {grid_position: 'WXWRQL,VAUQSU'}
   - name: label_email
     properties: {foreground: 'theme:On Primary'}
     type: Label
     layout_properties: {grid_position: 'WXWRQL,KAVXHW'}
-  - name: check_box_envoi
-    properties: {text: Envoi, foreground: 'theme:On Primary'}
-    type: CheckBox
-    layout_properties: {grid_position: 'WXWRQL,DEBRKP'}
-  - name: label_date_heure
-    properties: {foreground: 'theme:On Primary'}
-    type: Label
-    layout_properties: {grid_position: 'WXWRQL,XTYFRL'}
+  - name: button_del
+    properties: {text: '', role: outlined-button, foreground: 'theme:Error', icon: 'fa:minus'}
+    type: Button
+    layout_properties: {grid_position: 'WXWRQL,ZGFRPC'}
+    event_bindings: {click: button_del_click}

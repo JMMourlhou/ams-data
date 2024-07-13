@@ -59,3 +59,15 @@ def xls_file_reader(csv_file_name):
     cell=sheet(["A1"])
     return cell
     """
+
+# MAJ du l'envoi à partir de Mai_to_old_stagiaires (Coche Envoi a changé)
+@anvil.server.callable
+def maj_histo_envoi(item, envoi):   # item de l'enregistrement d'un ancien stagiare 
+    item.update(envoi=envoi)
+    return True
+
+# del d'une row d'un ancien stgiaire  à partir de  Mai_to_old_stagiaires
+@anvil.server.callable
+def del_histo(item):   # item de l'enregistrement d'un ancien stagiare 
+    item.delete()
+    return True
