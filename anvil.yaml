@@ -260,10 +260,13 @@ db_schema:
       admin_ui: {width: 261}
       type: string
     - name: doc1
-      admin_ui: {width: 110}
+      admin_ui: {order: 6, width: 362}
       type: media
     - name: pdf_doc1
       admin_ui: {width: 105}
+      type: media
+    - name: thumb
+      admin_ui: {width: 200, order: 8.5}
       type: media
   pre_requis:
     title: Pre_Requis
