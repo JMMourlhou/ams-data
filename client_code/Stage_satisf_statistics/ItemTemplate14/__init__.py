@@ -18,7 +18,7 @@ class ItemTemplate14(ItemTemplate14Template):
     def button_mail_click(self, **event_args):
         """This method is called when the button is clicked"""
         liste_email = []
-        liste_email.append((self.button_mail.tag['email'],self.button_mail.tag['prenom']))   # mail et prénom
+        liste_email.append((self.button_mail.tag['email'],self.button_mail.tag['prenom'],""))   # mail et prénom, id pas besoin
        
         # 'formul' indique l'origine, ici 'formulaire de satisfaction'
         from ...Mail_subject_attach_txt import Mail_subject_attach_txt

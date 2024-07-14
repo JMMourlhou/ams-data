@@ -199,7 +199,7 @@ class RowTemplate1(RowTemplate1Template):
         """This method is called when an item is selected"""
         self.repeating_panel_3.visible = True
         row_stagiaire_inscrit = self.drop_down_code_stage.selected_value   # Stage sélectionné du user ds drop_down (row table stagiaire inscrit)
-        if row_stagiaire_inscrit != None:
+        if row_stagiaire_inscrit is not None:
             # lecture fichier père stages
             row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
             print(row_stage['numero'])
@@ -213,6 +213,13 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_3.items = liste_pr
         else:
             self.repeating_panel_3.visible = False
+
+    def button_mail_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        liste_email = []
+        liste_email.append((self.button_histo.tag,self.item['prenom'],""))   # mail et prénom, id pas besoin
+        open_form('Mail_subject_attach_txt',liste_email,"stagiaire_1")
+        
             
 
 

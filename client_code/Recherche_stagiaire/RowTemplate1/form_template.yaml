@@ -1,9 +1,9 @@
 container:
   type: DataRowPanel
-  properties: {role: null, align: center, tooltip: '', border: '', foreground: '', auto_display_data: false, visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none, italic: false, background: '', bold: false, underline: false}
+  properties: {role: null, bold: false, align: center, spacing_above: none, background: '', underline: false, font: '', auto_display_data: false, foreground: '', spacing_below: none, visible: true, border: '', italic: false, font_size: null, tooltip: ''}
 components:
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: 'theme:On Primary', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: none, background: 'theme:Primary'}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', tooltip: ''}
   name: column_panel_1
   layout_properties: {column: 'null'}
   components:
@@ -23,11 +23,11 @@ components:
         layout_properties: {grid_position: 'KJLNPO,GIRVHA'}
         components:
         - type: Button
-          properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: button_1, font_size: 14, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '', bold: true, underline: false, icon: ''}
+          properties: {role: null, bold: true, align: left, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: button_1}
           name: button_1
           event_bindings: {click: button_1_click}
         - type: Button
-          properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: button_3, font_size: 14, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '', bold: true, underline: false, icon: ''}
+          properties: {role: null, bold: true, align: left, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: button_3}
           name: button_3
           layout_properties: {}
           event_bindings: {click: button_3_click}
@@ -41,7 +41,7 @@ components:
         type: FlowPanel
         components:
         - type: Button
-          properties: {role: null, align: right, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: button_4, font_size: 14, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '', bold: true, underline: false, icon: ''}
+          properties: {role: null, bold: true, align: right, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: button_4}
           name: button_4
           layout_properties: {expand: false}
           event_bindings: {click: button_4_click}
@@ -52,7 +52,7 @@ components:
       layout_properties: {width: 248.54674023437502}
       components:
       - name: flow_panel_1
-        properties: {spacing_above: medium, spacing_below: none, vertical_align: middle, spacing: large, align: center}
+        properties: {spacing_above: medium, spacing_below: none, vertical_align: middle, spacing: tiny, align: center}
         type: FlowPanel
         layout_properties: {grid_position: 'UCWVOA,MGNXEX', full_width_row: false}
         components:
@@ -68,28 +68,33 @@ components:
         - name: drop_down_code_stage
           properties:
             role: null
+            include_placeholder: true
+            bold: false
             align: center
-            tooltip: ''
             placeholder: PR
-            border: ''
-            enabled: true
+            spacing_above: small
+            background: theme:On Primary Container
+            underline: false
+            font: ''
             foreground: theme:Tertiary
             items: []
-            visible: true
-            font_size: 12
-            font: ''
-            spacing_above: small
             spacing_below: none
+            visible: true
+            border: ''
             italic: false
-            background: theme:On Primary Container
-            bold: false
-            underline: false
-            include_placeholder: true
+            enabled: true
+            font_size: 12
+            tooltip: ''
           type: DropDown
           layout_properties: {expand: false}
           event_bindings: {change: drop_down_code_stage_change}
           data_bindings:
           - {property: border, code: '', writeback: false}
+        - name: button_mail
+          properties: {text: '', foreground: 'theme:Tertiary', align: center, background: 'theme:On Primary Container', spacing_above: none, spacing_below: none, font_size: 12, icon: 'fa:send'}
+          type: Button
+          layout_properties: {}
+          event_bindings: {click: button_mail_click}
   event_bindings: {}
 - name: repeating_panel_1
   properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card, spacing_below: small, background: 'theme:Primary'}

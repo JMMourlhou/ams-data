@@ -27,11 +27,13 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     
         self.ref_model = ref_model
         print('ref_model: ',self.ref_model)   
+      
         self.mode_creation = False
 
         self.label_ref_model.text = ref_model # sauve la ref de modèle de mail
         
         self.emails_liste = emails_liste # liste des mails
+        print('emails liste: ', self.emails_liste)
         self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
 
         self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
@@ -112,9 +114,20 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
         liste_des_attachements = list(self.dico_attachements.keys()) # extraction des clefs du dico des attachements
-        result = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements, self.old_stagiaires)
+        """
+        print("Avant envoi server pour mailing")
+        print("email liste:",self.emails_liste)
+        print("subject:",self.text_box_subject_detail.text)
+        print("texte: ",self.text_area_text_detail.text)
+        """
+        result, nb_mails = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements, self.old_stagiaires)
         if result:
-            alert("mail envoyé")
+            if nb_mails == 1:
+                msg = "1 mail envoyé"
+            else:
+                msg = str(nb_mails)+" mails envoyés"
+            alert(msg)
+            self.button_retour_click()
 
     def text_box_subject_detail_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
