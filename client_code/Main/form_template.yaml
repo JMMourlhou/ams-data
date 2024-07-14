@@ -102,6 +102,11 @@ components:
         properties: {text: Mail to Histo, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         event_bindings: {click: button_mail_histo_click}
+      - name: button_rsz_img
+        properties: {text: Resize IMG, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        type: Button
+        event_bindings: {click: button_rsz_img_click}
+        layout_properties: {}
     - name: column_panel_1
       properties: {wrap_on: never, col_spacing: none}
       type: ColumnPanel

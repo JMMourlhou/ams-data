@@ -299,3 +299,8 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Mail_to_old_stagiaires import Mail_to_old_stagiaires
         open_form("Mail_to_old_stagiaires")
+
+    def button_rsz_img_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from .._Resize_IMG import _Resize_IMG
+        open_form("_Resize_IMG")
