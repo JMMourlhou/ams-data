@@ -8,17 +8,18 @@ from anvil.files import data_files
 
 
 @anvil.server.callable
-def xls_file_reader(csv_file_name):
+def xls_file_reader(csv_file):
     
-    f = open(data_files[csv_file_name])    
+    f = open(data_files[csv_file.name])    # csv_file est : file du file loader. RAJOUTER .name ici pour obtenir on nom
     x = True
+    nb = 0 # Nb de mails ajoutés
 
     while x:
         ligne = []
         text=f.readline()  # lecture  1 ligne
         if not text:                                        # FIN DE FICHIER TEXT           #rep = rep + dernier_caract
             print('Fin du fichier')
-            break
+            return('Fin du fichier',nb)
         
         # création d'une liste, à prtir du séparateur ";"
         ligne = text.split(';')
@@ -36,22 +37,30 @@ def xls_file_reader(csv_file_name):
         cp=ligne[10]             # extraction cp
         ville=ligne[11]          # extraction ville
         tel=ligne[12]            # extraction du tel
-       
-        if lieu_diplome == "CARNON":
-            app_tables.stagiaires_histo.add_row(mail=mail,
-                                                num=num,
-                                                diplome=diplome,
-                                                lieu_diplome=lieu_diplome,
-                                                date_diplome=date_diplome,
-                                                nom=nom,
-                                                prenom=prenom,
-                                                date_n=date_naissance,
-                                                lieu_n=lieu_naissance,
-                                                rue=rue,
-                                                ville=ville,
-                                                cp=cp,
-                                                tel=tel
-                                            )
+
+        # je recherche si un doublon existe déjà
+        row = app_tables.stagiaires_histo.get(mail=mail)
+        if row:                            # DOUBLON, le mail existe déjà
+            if diplome == "PSE2":
+                # je mets à jour le diplome
+                row.update(diplome="PSE2")
+        else:                              # mail innexistant, je l'ajoute
+            if lieu_diplome == "CARNON":
+                nb += 1
+                app_tables.stagiaires_histo.add_row(mail=mail,
+                                                    num=num,
+                                                    diplome=diplome,
+                                                    lieu_diplome=lieu_diplome,
+                                                    date_diplome=date_diplome,
+                                                    nom=nom,
+                                                    prenom=prenom,
+                                                    date_n=date_naissance,
+                                                    lieu_n=lieu_naissance,
+                                                    rue=rue,
+                                                    ville=ville,
+                                                    cp=cp,
+                                                    tel=tel
+                                                )
     """
     wb = openpyxl.load_workbook(f)
     sheet = wb[wb.sheetnames[0]]
@@ -70,4 +79,10 @@ def maj_histo_envoi(item, envoi):   # item de l'enregistrement d'un ancien stagi
 @anvil.server.callable
 def del_histo(item):   # item de l'enregistrement d'un ancien stagiare 
     item.delete()
+    return True
+
+# MAJ de la sélection à partir de Mai_to_old_stagiaires (Coche Envoi a changé)
+@anvil.server.callable
+def maj_selection(item, select):   # item de l'enregistrement d'un ancien stagiare 
+    item.update(select=select)
     return True

@@ -2,8 +2,37 @@ container:
   type: ColumnPanel
   properties: {role: outlined-card}
 components:
-- name: text_box_1
-  properties: {placeholder: Entrez le nom du fichier XLS à lire}
-  type: TextBox
-  layout_properties: {grid_position: 'TBGTHY,VSPAKG'}
+- name: column_panel_header
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'JXHURK,KBKZBH'}
+  event_bindings: {}
+  components:
+  - name: spacer_1
+    properties: {height: -3.9891357421875, visible: false}
+    type: Spacer
+    layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
+  - name: label_titre
+    properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Insertion d'anciens stagiaires par lecture fichier CSV}
+    type: Label
+    layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+  - name: label_nb_rows
+    properties: {}
+    type: Label
+    layout_properties: {grid_position: 'JHZLGZ,GATSDH'}
+  - name: file_loader_1
+    properties: {text: Choisir le fichier csv, role: outlined-button, file_types: .csv}
+    type: FileLoader
+    layout_properties: {grid_position: 'IQRXPT,ZKHKII'}
+    event_bindings: {change: file_loader_1_change}
+  - name: column_panel_1
+    properties: {wrap_on: never, col_spacing: large}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'FDLYLV,AWJPVU'}
+    components:
+    - name: button_annuler
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
+      type: Button
+      layout_properties: {grid_position: 'SIHWFU,NFPFQW'}
+      event_bindings: {click: button_annuler_click}
 is_package: true

@@ -42,3 +42,10 @@ class ItemTemplate17(ItemTemplate17Template):
             if result is not True:
                 alert("Item non retiré")
         open_form('Mail_to_old_stagiaires')
+
+    def check_box_selection_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        # Récup de l'id pour MAJ de l'item
+        result = anvil.server.call("maj_selection",self.item,self.check_box_selection.checked)
+        if result is not True:
+            alert("Erreur de MAJ")

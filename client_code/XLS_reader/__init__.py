@@ -13,9 +13,19 @@ class XLS_reader(XLS_readerTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        # Lecture de la variable globale "code_app1" ds table variables_globales
-        xls_file = "Diplômés PSE Extranet FNMNS 2016-2020.csv"
-        mail1 = anvil.server.call('xls_file_reader', xls_file)
-        alert(mail1)
+        #xls_file = "Diplômés PSE Extranet FNMNS 2016-2020.csv"
+        
+
+    def file_loader_1_change(self, file, **event_args):
+        """This method is called when a new file is loaded into this FileLoader"""
+        result,nb = anvil.server.call('xls_file_reader', file)
+        msg = f"Fin de fichiers, {nb} mails ajoutés ds le fichier des anciens stagiaires"
+        alert(msg)
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form('Main',99)
+        
         
         

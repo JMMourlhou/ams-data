@@ -16,6 +16,7 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
         self.liste_old_stagiaires = app_tables.stagiaires_histo.search(
                                                                     tables.order_by("nom", ascending=True),
                                                                      )
+        self.label_nb_rows.text = str(len(self.liste_old_stagiaires))
         self.repeating_panel_1.items = self.liste_old_stagiaires
 
     def button_mailing_click(self, **event_args):
