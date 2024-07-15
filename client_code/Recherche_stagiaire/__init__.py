@@ -32,29 +32,30 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # Nom    
         if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :
-            self.repeating_panel_1.items = anvil.server.call("search_on_name_only", c_nom)
+            liste = anvil.server.call("search_on_name_only", c_nom)
         # Prénom
         if self.text_box_prenom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_role.text == "":   
-            self.repeating_panel_1.items = anvil.server.call("search_on_prenom_only", c_prenom)
+            liste = anvil.server.call("search_on_prenom_only", c_prenom)
         # Role
         if self.text_box_role.text != "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" :   
-            self.repeating_panel_1.items = anvil.server.call("search_on_role_only", c_role)
+            liste = anvil.server.call("search_on_role_only", c_role)
         # Role & Nom
         if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text == "" :   
-            self.repeating_panel_1.items = anvil.server.call("search_on_role_nom", c_role, c_nom)
+            liste = anvil.server.call("search_on_role_nom", c_role, c_nom)
         # Nom & Prénom
         if self.text_box_role.text == "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
-            self.repeating_panel_1.items = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)        
+            liste = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)        
         # Role & Nom & Prénom
         if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
-            self.repeating_panel_1.items = anvil.server.call("search_on_role_nom_prenom", c_role, c_nom, c_prenom)        
+            liste = anvil.server.call("search_on_role_nom_prenom", c_role, c_nom, c_prenom)        
         # Tel
         if self.text_box_tel.text != "" and self.text_box_email.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
-            self.repeating_panel_1.items = anvil.server.call("search_on_tel_only", c_tel)
+            liste = anvil.server.call("search_on_tel_only", c_tel)
         # Mail
         if self.text_box_email.text != "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
-            self.repeating_panel_1.items = anvil.server.call("search_on_email_only", c_email)
-        
+            liste = anvil.server.call("search_on_email_only", c_email)
+        self.label_titre.text = str(len(liste))+" résultats"
+        self.repeating_panel_1.items = liste
     def filtre_type_stage(self):
         # Récupération du critère stage
         row_type = self.drop_down_code_stage.selected_value
@@ -153,6 +154,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
         self.text_box_nom.focus()
+
+    def text_box_role_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_recherche.visible = True
        
 
 
