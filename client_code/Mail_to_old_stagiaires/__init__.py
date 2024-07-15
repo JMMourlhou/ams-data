@@ -25,7 +25,7 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
         for stagiaire in self.liste_old_stagiaires:
             #lecture table user
             id = stagiaire.get_id()
-            if stagiaire['envoi'] is not True:
+            if stagiaire['select'] is True:
                 liste_email.append((stagiaire["mail"], stagiaire["prenom"], id))
             
         # 'formul' indique l'origine, ici 'formulaire de satisfaction'

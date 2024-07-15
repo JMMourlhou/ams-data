@@ -29,7 +29,7 @@ components:
       layout_properties: {grid_position: 'SIHWFU,NFPFQW'}
       event_bindings: {click: button_annuler_click}
     - name: button_mailing
-      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Mail to all}
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Mailing}
       type: Button
       layout_properties: {grid_position: 'SIHWFU,EJSHDV'}
       event_bindings: {click: button_mailing_click}

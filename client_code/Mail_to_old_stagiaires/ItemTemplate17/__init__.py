@@ -25,6 +25,7 @@ class ItemTemplate17(ItemTemplate17Template):
         except:
             pass
         self.label_date.text = self.item['date_diplome']
+        self.check_box_selection.checked = self.item['select']
 
 
     def check_box_envoi_change(self, **event_args):
