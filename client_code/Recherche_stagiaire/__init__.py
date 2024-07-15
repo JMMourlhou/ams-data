@@ -44,14 +44,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             self.repeating_panel_1.items = anvil.server.call("search_on_role_nom", c_role, c_nom)
         # Nom & Prénom
         if self.text_box_role.text == "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
-            self.repeating_panel_1.items = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)
-
-        
+            self.repeating_panel_1.items = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)        
         # Role & Nom & Prénom
         if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
-            self.repeating_panel_1.items = anvil.server.call("search_on_role_nom_prenom", c_role, c_nom, c_prenom)
-
-        
+            self.repeating_panel_1.items = anvil.server.call("search_on_role_nom_prenom", c_role, c_nom, c_prenom)        
         # Tel
         if self.text_box_tel.text != "" and self.text_box_email.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
             self.repeating_panel_1.items = anvil.server.call("search_on_tel_only", c_tel)
