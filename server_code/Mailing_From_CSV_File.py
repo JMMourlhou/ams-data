@@ -25,24 +25,20 @@ def xls_file_reader(csv_file):
         ligne = text.split(';')
         
         num=ligne[0]           # extraction du num ligne excel
-        mail=ligne[1]          # extraction du mail
-        date_diplome=ligne[2]  # extraction date du diplome
-        nom=ligne[3]           # extraction du nom
-        prenom=ligne[4]        # extraction du prenom
-        date_naissance=ligne[5]  # extraction date N
-        lieu_naissance=ligne[6]  # extraction lieu N
-        rue=ligne[7]             # extraction rue
-        cp=ligne[8]             # extraction cp
-        ville=ligne[9]          # extraction ville
-        tel=ligne[10]            # extraction du tel
-
+        date_diplome=ligne[1]  # extraction date du diplome
+        nom=ligne[2]           # extraction du nom
+        prenom=ligne[3]        # extraction du prenom
+        date_naissance=ligne[4]  # extraction date N
+        lieu_naissance=ligne[5]  # extraction lieu N
+        rue=ligne[6]             # extraction rue
+        cp=ligne[7]             # extraction cp
+        ville=ligne[8]          # extraction ville
+        tel=ligne[9]            # extraction du tel
+        mail=ligne[10]          # extraction du mail
+        
         # je recherche si un doublon existe déjà
         row = app_tables.stagiaires_histo.get(mail=mail)
-        if row:                            # DOUBLON, le mail existe déjà
-            if diplome == "PSE2":
-                # je mets à jour le diplome
-                row.update(diplome="PSE2")
-        else:                              # mail innexistant, je l'ajoute
+        if not row:                             # mail innexistant, je l'ajoute                   
             nb += 1
             app_tables.stagiaires_histo.add_row(mail=mail,
                                                 num=num,
