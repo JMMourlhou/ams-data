@@ -7,9 +7,8 @@ import anvil.files
 from anvil.files import data_files
 
 
-@anvil.server.callable
-def xls_file_reader(csv_file):
-    
+@anvil.server.background_task
+def csv_file_reader(csv_file):
     f = open(data_files[csv_file.name])    # csv_file est : file du file loader. RAJOUTER .name ici pour obtenir on nom
     x = True
     nb = 0 # Nb de mails ajoutés
@@ -52,13 +51,14 @@ def xls_file_reader(csv_file):
                                                 cp=cp,
                                                 tel=tel
                                             )
-    """
-    wb = openpyxl.load_workbook(f)
-    sheet = wb[wb.sheetnames[0]]
-    print("feuille 1:", sheet)
-    cell=sheet(["A1"])
-    return cell
-    """
+
+@anvil.server.callable
+def run_bg_task_csv_reader(csv_file):
+    task = anvil.server.launch_background_task('csv_file_reader',csv_file)
+    return task
+
+
+
 
 # MAJ du l'envoi à partir de Mai_to_old_stagiaires (Coche Envoi a changé)
 @anvil.server.callable

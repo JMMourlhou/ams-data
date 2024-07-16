@@ -420,7 +420,7 @@ db_schema:
     server: full
     columns:
     - name: path
-      admin_ui: {width: 200}
+      admin_ui: {order: 0, width: 288}
       type: string
     - name: file
       admin_ui: {width: 200}
