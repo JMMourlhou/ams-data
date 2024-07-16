@@ -26,17 +26,15 @@ def xls_file_reader(csv_file):
         
         num=ligne[0]           # extraction du num ligne excel
         mail=ligne[1]          # extraction du mail
-        diplome=ligne[2]       # extraction du diplome
-        lieu_diplome=ligne[3]  # extraction du lieu diplome
-        date_diplome=ligne[4]  # extraction date du diplome
-        nom=ligne[5]           # extraction du nom
-        prenom=ligne[6]        # extraction du prenom
-        date_naissance=ligne[7]  # extraction date N
-        lieu_naissance=ligne[8]  # extraction lieu N
-        rue=ligne[9]             # extraction rue
-        cp=ligne[10]             # extraction cp
-        ville=ligne[11]          # extraction ville
-        tel=ligne[12]            # extraction du tel
+        date_diplome=ligne[2]  # extraction date du diplome
+        nom=ligne[3]           # extraction du nom
+        prenom=ligne[4]        # extraction du prenom
+        date_naissance=ligne[5]  # extraction date N
+        lieu_naissance=ligne[6]  # extraction lieu N
+        rue=ligne[7]             # extraction rue
+        cp=ligne[8]             # extraction cp
+        ville=ligne[9]          # extraction ville
+        tel=ligne[10]            # extraction du tel
 
         # je recherche si un doublon existe déjà
         row = app_tables.stagiaires_histo.get(mail=mail)
@@ -45,22 +43,19 @@ def xls_file_reader(csv_file):
                 # je mets à jour le diplome
                 row.update(diplome="PSE2")
         else:                              # mail innexistant, je l'ajoute
-            if lieu_diplome == "CARNON":
-                nb += 1
-                app_tables.stagiaires_histo.add_row(mail=mail,
-                                                    num=num,
-                                                    diplome=diplome,
-                                                    lieu_diplome=lieu_diplome,
-                                                    date_diplome=date_diplome,
-                                                    nom=nom,
-                                                    prenom=prenom,
-                                                    date_n=date_naissance,
-                                                    lieu_n=lieu_naissance,
-                                                    rue=rue,
-                                                    ville=ville,
-                                                    cp=cp,
-                                                    tel=tel
-                                                )
+            nb += 1
+            app_tables.stagiaires_histo.add_row(mail=mail,
+                                                num=num,
+                                                date_diplome=date_diplome,
+                                                nom=nom,
+                                                prenom=prenom,
+                                                date_n=date_naissance,
+                                                lieu_n=lieu_naissance,
+                                                rue=rue,
+                                                ville=ville,
+                                                cp=cp,
+                                                tel=tel
+                                            )
     """
     wb = openpyxl.load_workbook(f)
     sheet = wb[wb.sheetnames[0]]
@@ -81,7 +76,7 @@ def del_histo(item):   # item de l'enregistrement d'un ancien stagiare
     item.delete()
     return True
 
-# MAJ de la sélection à partir de Mai_to_old_stagiaires (Coche Envoi a changé)
+# MAJ de la sélection à partir de Mail_to_old_stagiaires (Coche Envoi a changé)
 @anvil.server.callable
 def maj_selection(item, select):   # item de l'enregistrement d'un ancien stagiare 
     item.update(select=select)
