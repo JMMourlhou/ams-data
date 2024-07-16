@@ -29,12 +29,12 @@ class XLS_reader(XLS_readerTemplate):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         try:
             if self.task_csv.is_completed():
-                self.button_fiches_stagiaires.visible = True
                 self.timer_1.interval=0
                 anvil.server.call('task_killer',self.task_csv)
                 alert("Fin de tache")
                 list = app_tables.stagiaires_histo.search()
                 msg = f"Le fichier des anciens stagiaires contient {len(list)} lignes"
+                alert(msg)
         except:
             pass
 

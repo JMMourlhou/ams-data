@@ -6,7 +6,9 @@ from anvil.tables import app_tables
 import anvil.files
 from anvil.files import data_files
 
-
+"""
+**************************************************** LECTURE FICHIER CSV EN BGT 
+"""
 @anvil.server.background_task
 def csv_file_reader(csv_file):
     f = open(data_files[csv_file.name])    # csv_file est : file du file loader. RAJOUTER .name ici pour obtenir on nom
@@ -56,6 +58,10 @@ def csv_file_reader(csv_file):
 def run_bg_task_csv_reader(csv_file):
     task = anvil.server.launch_background_task('csv_file_reader',csv_file)
     return task
+
+"""
+**************************************************************** FIN DU PRECESSUS BGT
+"""
 
 
 
