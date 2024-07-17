@@ -300,7 +300,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                             temp += 1    # cumul de la reponse 3    à la question 
                             rep5_cumul[str(question)]=temp
                             print("cumul5 ", rep5_cumul[str(question)]) 
-                    
+        """            
         print(f"Résultat pour les {len(liste_formulaires)} formulaires:")  
         print("nb de rep 0/1: ", rep0_cumul["1"])
         print("nb de rep 1/1: ", rep1_cumul["1"])
@@ -371,8 +371,9 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         print("nb de rep 3/10: ", rep3_cumul["10"])
         print("nb de rep 4/10: ", rep4_cumul["10"])
         print("nb de rep 5/10: ", rep5_cumul["10"])
-        # à partir du dico  j'extrai les questions pour les afficher 
+        """
         
+        # à partir du dico  j'extrai les questions pour les afficher 
         cpt_questions = 0
         for cle, val in dico_rep_ferm.items():
             cpt_questions += 1
@@ -525,7 +526,9 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT """
         # Génération du pdf si non existant A CHANGER QD L'ENQUETE EST COMPLETE
-        if self.test_existence_pdf is not True or self.test_existence_pdf is True:
+        print("génération du pdf")
+        #if self.test_existence_pdf is not True or self.test_existence_pdf is True:
+        if self.pdf_mode is False:
             with anvil.server.no_loading_indicator:
                 self.timer_1.interval=0.5
                 self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)

@@ -16,7 +16,7 @@ components:
       grid_position: GXKYQU,JIABHP
     components:
     - type: ColumnPanel
-      properties: {role: null, col_widths: '{"GETJRU":27,"CXBXCA":18,"IFLVSE":15}', spacing_above: none, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
+      properties: {role: null, col_widths: '{"GETJRU":26,"CXBXCA":23}', spacing_above: none, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: none, visible: true, border: '', tooltip: ''}
       name: column_panel_criteres
       layout_properties: {grid_position: 'VFRGMW,CGVGSJ'}
       components:
@@ -35,12 +35,12 @@ components:
           layout_properties: {grid_position: 'TVFLYD,TSDRJZ', row_background: '', full_width_row: false}
           event_bindings: {click: button_retour_click}
       - name: column_panel_users
-        properties: {wrap_on: mobile, col_widths: '{"ETASBM":38,"ZUHOMU":22}', col_spacing: small}
+        properties: {wrap_on: mobile, col_widths: '{"ETASBM":35,"ZUHOMU":25}', col_spacing: small}
         type: ColumnPanel
         layout_properties: {grid_position: 'GAHVSD,GETJRU'}
         components:
         - name: column_panel_3
-          properties: {wrap_on: never, col_widths: '{"OAMGMA":10,"RIYYHY":18,"WOUGSC":32}', col_spacing: tiny, spacing_above: none, spacing_below: none}
+          properties: {wrap_on: never, col_widths: '{"OAMGMA":10,"RIYYHY":23,"WOUGSC":27}', col_spacing: tiny, spacing_above: none, spacing_below: none}
           type: ColumnPanel
           layout_properties: {grid_position: 'FGPZGZ,ETASBM'}
           components:
@@ -60,22 +60,22 @@ components:
             layout_properties: {grid_position: 'UJSBSH,WOUGSC'}
             event_bindings: {pressed_enter: text_box_prenom_pressed_enter, change: text_box_role_change}
         - name: column_panel_5
-          properties: {wrap_on: never, col_widths: '{"CKNCUI":28,"RBHOTT":32}', col_spacing: tiny, spacing_above: none, spacing_below: none}
+          properties: {wrap_on: never, col_widths: '{"CKNCUI":23,"RBHOTT":37}', col_spacing: tiny, spacing_above: none, spacing_below: none}
           type: ColumnPanel
           layout_properties: {grid_position: 'FGPZGZ,ZUHOMU'}
           components:
           - type: TextBox
-            properties: {role: outlined, bold: false, align: left, placeholder: Tel, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 10, tooltip: '', text: ''}
+            properties: {role: outlined, bold: false, align: left, placeholder: Tel, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 12, tooltip: '', text: ''}
             name: text_box_tel
             layout_properties: {grid_position: 'OPUFKC,CKNCUI'}
             event_bindings: {pressed_enter: text_box_tel_pressed_enter, change: text_box_role_change}
           - type: TextBox
-            properties: {role: outlined, bold: false, align: left, placeholder: Mail, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 10, tooltip: '', text: ''}
+            properties: {role: outlined, bold: false, align: left, placeholder: Mail, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 12, tooltip: '', text: ''}
             name: text_box_email
             layout_properties: {grid_position: 'OPUFKC,RBHOTT'}
             event_bindings: {pressed_enter: text_box_email_pressed_enter, change: text_box_role_change}
       - name: column_panel_7
-        properties: {col_widths: '{"GDMMNK":20,"JKUPIX":25,"OZDORT":20,"SNGQDN":25}', spacing_below: none, spacing_above: none, wrap_on: never, col_spacing: medium}
+        properties: {col_widths: '{"GDMMNK":20,"JKUPIX":27,"OZDORT":16,"SNGQDN":27}', spacing_below: none, spacing_above: none, wrap_on: never, col_spacing: tiny}
         type: ColumnPanel
         layout_properties: {grid_position: 'GAHVSD,CXBXCA'}
         components:
@@ -86,7 +86,7 @@ components:
             bold: false
             align: center
             placeholder: Stage
-            spacing_above: none
+            spacing_above: small
             background: theme:Tertiary
             underline: false
             font: ''

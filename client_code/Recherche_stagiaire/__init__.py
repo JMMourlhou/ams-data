@@ -20,8 +20,19 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
-       
 
+        #import anvil.js    # pour screen size: Si tel: 3 data grid 3 rows sinon 8 pour ordinateur
+        from anvil.js import window # to gain access to the window objec
+        screen_size = window.innerWidth
+        print("screen: ", screen_size)
+        if screen_size > 800:
+            self.data_grid_1.rows_per_page = 8
+        
+    # Focus on nom en ouverture de form
+    def form_show(self, **event_args):
+        """This method is called when the form is shown on the page"""
+        self.text_box_nom.focus()
+        
     def filtre(self):
         # Récupération des critères
         c_role = self.text_box_role.text + "%"          # critère role
@@ -56,6 +67,8 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             liste = anvil.server.call("search_on_email_only", c_email)
         self.label_titre.text = str(len(liste))+" résultats"
         self.repeating_panel_1.items = liste
+
+    
     def filtre_type_stage(self):
         # Récupération du critère stage
         row_type = self.drop_down_code_stage.selected_value
@@ -92,6 +105,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         for l in liste_intermediaire1:    #pour chaque liste iterator object
             for row in l:                      # pour chaque stagiaire du stage
                 liste_finale.append(row)
+        self.label_titre.text = str(len(liste))+" résultats"
         self.repeating_panel_1.items = liste_finale
         
     def drop_down_code_stage_change(self, **event_args):
@@ -151,9 +165,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         """This method is called when the user presses Enter in this text box"""
         self.button_recherche_click()
 
-    def form_show(self, **event_args):
-        """This method is called when the form is shown on the page"""
-        self.text_box_nom.focus()
+
 
     def text_box_role_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
