@@ -35,4 +35,9 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
-        
+
+    def button_comp_stagiaires_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # comparaison avec stgiares inscrits
+        liste_actuelle = app_tables.stagiaires_inscrits.search()
+        msg = f"Nb d"
