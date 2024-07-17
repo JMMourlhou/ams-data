@@ -26,6 +26,7 @@ class RowTemplate3(RowTemplate3Template):
         if screen_size < 800:
             self.text_box_1.visible = False
             self.button_del_stage.visible = False
+            
             if self.item['date_debut'] is not None:
                 self.text_box_3.text = self.item['date_debut'].strftime("%m/%Y")   # format date française avec fonction Python strftime
         else:
@@ -120,6 +121,18 @@ class RowTemplate3(RowTemplate3Template):
                 alert("Stage non trouvé, annulation impossible")
         else:
             alert("Ce stage contient des stagiaires, vous ne pouvez pas l'annuler !")    
+
+    def button_sending_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # Stagiaires ds le stage ?
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(numero=self.item['numero'])
+        if liste_stagiaires:
+            liste_email = []
+            for stagiaire in liste_stagiaires:
+                liste_email.append((stagiaire["user_email"]["email"], stagiaire["prenom"], ""))   # 3 infos given, "" indique qu'il ny a pas d'id (cas des olds stgiaires)
+            
+            # 'formul' indique l'origine, ici 'formulaire de satisfaction'
+            open_form("Mail_subject_attach_txt",  liste_email, 'stagiaire_tous') 
 
   
 

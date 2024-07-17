@@ -34,6 +34,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.text_box_nom.focus()
         
     def filtre(self):
+        liste = []
         # Récupération des critères
         c_role = self.text_box_role.text + "%"          # critère role
         c_nom = self.text_box_nom.text + "%"            #         nom
@@ -79,6 +80,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         if len(list1)==0:
             from anvil import open_form       # j'initialise la forme principale avec le choix du qcm ds la dropdown
             open_form("Recherche_stagiaire") 
+            
         # Initialisation du Drop down num_stages et dates
         self.drop_down_num_stages.items = [(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list1]
         self.drop_down_num_stages.visible = True
@@ -101,12 +103,13 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         #print("nb de listes créées: ",len(liste_intermediaire1))
         
         # Je crée 1 liste à partir de ttes les listes créées:
-        liste_finale = []
+        self.liste_type_stage = []
         for l in liste_intermediaire1:    #pour chaque liste iterator object
             for row in l:                      # pour chaque stagiaire du stage
-                liste_finale.append(row)
-        self.label_titre.text = str(len(liste))+" résultats"
-        self.repeating_panel_1.items = liste_finale
+                self.liste_type_stage.append(row)
+        self.label_titre.text = str(len(self.liste_type_stage))+" résultats"
+        self.button_mail_to_all.visible = True
+        self.repeating_panel_1.items = self.liste_type_stage
         
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -121,12 +124,14 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
         selection=self.drop_down_num_stages.selected_value
-        #print("selection: ",selection)
         #extraction du num stage
-        self.repeating_panel_1.items = app_tables.stagiaires_inscrits.search(
+        self.liste_date = app_tables.stagiaires_inscrits.search(
                                         tables.order_by("name", ascending=True),
                                         stage=selection
                                       )
+        self.label_titre.text = str(len(self.liste_date))+" résultats"
+        self.button_mail_to_all.visible = True
+        self.repeating_panel_1.items = self.liste_date
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -170,6 +175,22 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def text_box_role_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
         self.button_recherche.visible = True
+
+    def button_mail_to_all_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        if self.drop_down_num_stages.selected_value != None:    # si drop down date sélectionnée
+            liste = self.liste_date
+        else:
+            liste = self.liste_type_stage   # sinon je prends la liste par type de stage (PSE1, PSE2...)
+            
+        
+        liste_email = []
+        for stagiaire in liste:
+            liste_email.append((stagiaire["user_email"]["email"], stagiaire["prenom"], ""))   # 3 infos given, "" indique qu'il ny a pas d'id (cas des olds stgiaires)
+        
+        # 'formul' indique l'origine, ici 'formulaire de satisfaction'
+        open_form("Mail_subject_attach_txt",  liste_email, 'stagiaire_tous') 
+                
        
 
 

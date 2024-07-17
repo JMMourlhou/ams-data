@@ -566,7 +566,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         liste_email = []
         for stagiaire in self.liste_no_response:
             #lecture table user
-            liste_email.append((stagiaire['user_email']['email'],stagiaire['user_email']['prenom']))
+            liste_email.append((stagiaire['user_email']['email'],stagiaire['user_email']['prenom'],""))  # 3 infos given "" indique qu'il n'y a pas d'id (cas des old stgiares)
             
         # 'formul' indique l'origine, ici 'formulaire de satisfaction'
         open_form("Mail_subject_attach_txt",  liste_email, 'formul') 
