@@ -40,4 +40,15 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
         """This method is called when the button is clicked"""
         # comparaison avec stgiares inscrits
         liste_actuelle = app_tables.stagiaires_inscrits.search()
-        msg = f"Nb d"
+        msg = f"Nb de stagiares inscrits: {len(liste_actuelle)}"
+        alert(msg)
+        nb = 0
+        for stagiaire in liste_actuelle:
+            exist = app_tables.stagiaires_histo.get(mail=stagiaire['user_email']['email'])
+            if exist:
+                nb += 1
+                print(nb, stagiaire["name"], stagiaire["prenom"])
+                #exist.delete()
+        msg = f"Nb de doublons effacés: {nb}"
+        alert(msg)
+        
