@@ -71,7 +71,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         #for mail in liste_mails:
         #    self.column_panel_content.add_component(Mail_model(mail['mail_subject'], mail['mail_text'], mail.get_id(), self.ref_model, self.emails_liste))
 
-
+        self.column_panel_detail.visible = False
         self.file_loader_attachments.visible = True
         self.button_sending.visible = True
         self.button_new.visible = True
