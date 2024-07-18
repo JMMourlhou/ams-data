@@ -75,7 +75,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         self.file_loader_attachments.visible = True
         self.button_sending.visible = True
         self.button_new.visible = True
-        #self.button_modif.visible = False
+        self.button_annuler.visible = True
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -109,6 +109,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         self.column_panel_detail.visible = False   # effact du panel de création/modif
         self.button_modif.visible = False
         self.file_loader_attachments.visible = True
+
         self.drop_down_type_mails_change(self.drop_down_type_mails.selected_value)
 
     def button_sending_click(self, **event_args):
