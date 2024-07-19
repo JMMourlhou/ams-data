@@ -165,9 +165,7 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         open_form("Visu_stages")
 
-    def bt_sign_in_click(
-        self, h={}, num_stage=0, **event_args
-    ):  # h qd vient de sign in par qr code
+    def bt_sign_in_click(self, h={}, num_stage=0, **event_args):  # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
 
