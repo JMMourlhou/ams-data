@@ -36,7 +36,8 @@ components:
       layout_properties: {grid_position: 'SIHWFU,NFPFQW'}
       event_bindings: {click: button_annuler_click}
 - name: timer_1
-  properties: {}
+  properties: {interval: 0}
   type: Timer
   layout_properties: {grid_position: 'UYOLGT,PVTBJO'}
+  event_bindings: {tick: timer_1_tick}
 is_package: true

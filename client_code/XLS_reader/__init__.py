@@ -23,7 +23,7 @@ class XLS_reader(XLS_readerTemplate):
         """This method is called when a new file is loaded into this FileLoader"""
         with anvil.server.no_loading_indicator:
             self.task_csv = anvil.server.call('run_bg_task_csv_reader',file)
-
+            self.timer_1.interval=0.5
 
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""

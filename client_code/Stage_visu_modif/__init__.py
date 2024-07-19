@@ -88,13 +88,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 if students_rows:    # stagiaires existants
                     with anvil.server.no_loading_indicator:
                         self.task_list = anvil.server.call('run_bg_task_stage_list',self.text_box_num_stage.text, self.text_box_intitule.text)
-                        #alert(self.task_list.get_task_name())
-                        #alert(self.task_list.get_id())
+                        self.timer_1.interval=0.5
                     
                     with anvil.server.no_loading_indicator:
                         self.task_trombi = anvil.server.call('run_bg_task_trombi',self.text_box_num_stage.text, self.text_box_intitule.text)
-                        #alert(self.task_trombi.get_id())
-                        #alert(self.task_trombi.get_task_name())
+                        self.timer_2.interval=0.5
         else:
             alert("Stage non trouvé")
             return
@@ -242,22 +240,18 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-        try:
-            if self.task_list.is_completed():
-                self.button_fiches_stagiaires.visible = True
-                self.timer_1.interval=0
-                anvil.server.call('task_killer',self.task_list)
-        except:
-            pass
+        if self.task_list.is_completed():
+            self.button_fiches_stagiaires.visible = True
+            self.timer_1.interval=0
+            anvil.server.call('task_killer',self.task_list)
+
             
     def timer_2_tick(self, **event_args):
-        try:
-            if self.task_trombi.is_completed():
-                self.button_trombi_pdf.visible = True
-                self.timer_2.interval=0
-                anvil.server.call('task_killer',self.task_trombi)
-        except:
-            pass
+        if self.task_trombi.is_completed():
+            self.button_trombi_pdf.visible = True
+            self.timer_2.interval=0
+            anvil.server.call('task_killer',self.task_trombi)
+
 
 
 

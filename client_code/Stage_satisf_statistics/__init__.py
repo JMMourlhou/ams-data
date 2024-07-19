@@ -530,20 +530,17 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
         #if self.test_existence_pdf is not True or self.test_existence_pdf is True:
         if self.pdf_mode is False:
             with anvil.server.no_loading_indicator:
-                self.timer_1.interval=0.5
                 self.task_satisf = anvil.server.call('run_bg_task_satisf',row["numero"],row["code_txt"], row)
-
+                self.timer_1.interval=0.5
             
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-        try:
-            if self.task_satisf.is_completed():
-                self.button_downl_pdf0.visible = True
-                self.button_downl_pdf1.visible = True
-                self.timer_1.interval=0
-                anvil.server.call('task_killer',self.task_satisf)
-        except:
-            pass
+        if self.task_satisf.is_completed():
+            self.button_downl_pdf0.visible = True
+            self.button_downl_pdf1.visible = True
+            self.timer_1.interval=0
+            anvil.server.call('task_killer',self.task_satisf)
+
             
     def button_downl_pdf1_click(self, **event_args):
         """This method is called when the button is clicked"""

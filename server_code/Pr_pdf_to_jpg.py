@@ -21,8 +21,7 @@ filename=""
 def pdf_into_jpg(pdf_file, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
     global filename
     filename = new_file_name                                   
-    media = pdf_file                       # Lecture du doc pdf ds table
-    return get_pdf_file_images(media=media.name)
+    return get_pdf_file_images(media=pdf_file)
   
 
 @anvil.server.callable
@@ -77,8 +76,9 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    
     for i in range(len(images)):
         # Save pages as images in the pdf
         #im_name = 'page' + str(i) + '.jpg'
-        im_name = filename + str(i) + '.jpg'                  # <--  Ici
-        print("pdfinto img:",im_name)                         # ok
+        #im_name = filename + str(i) + '.jpg'                  # <--  Ici
+        im_name = filename + str(i)                  # <--  Ici
+        #print("pdfinto img:",im_name)                         # ok
         
         path = os.path.join(target_folder_path, im_name)     
         im_paths.append(path)

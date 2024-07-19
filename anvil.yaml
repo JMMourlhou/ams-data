@@ -15,7 +15,7 @@ dependencies:
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}
-  server_config: {auto_create_missing_columns: true}
+  server_config: {auto_create_missing_columns: false}
 - source: /runtime/services/anvil/users.yml
   client_config: {allow_signup: false, enable_automatically: true, use_email: true, confirm_email: true}
   server_config: {user_table: users}
@@ -261,9 +261,6 @@ db_schema:
       type: string
     - name: doc1
       admin_ui: {order: 6, width: 362}
-      type: media
-    - name: pdf_doc1
-      admin_ui: {width: 105}
       type: media
     - name: thumb
       admin_ui: {width: 200, order: 8.5}
