@@ -11,7 +11,7 @@ import math
 @anvil.server.callable
 def path_info(file):
     path = pathlib.Path(file)
-    return str(path.parent), str(path.name), str(path.suffix).lower  # path, file name, extension
+    return str(path.parent), str(path.name), str(path.suffix).lower()  # path, file name, extension
 
 # ===============================================================================================================
 # liste des STAGIAIRES (ADMIN  pour afficher ts les stagiaires d'1 stage et ensuite voir leurs docs prérequis 
@@ -44,12 +44,10 @@ def preparation_liste_pour_panels_pr(user_email, stage):
 
 
 @anvil.server.callable
-@anvil.tables.in_transaction
 def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extension):
     valid=False
-    print("test: ",file_extension)
     if pr_requis_row:
-        if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif" or file_extension == ".png":
+        if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":
             #print("serveur Preq: Ce fichier est une image JPG")        
             new_file_name = new_file_name + file_extension
 
@@ -58,7 +56,7 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
             img = Image.open(io.BytesIO(file.get_bytes()))
             width, height = img.size
             #print('size', width, height)
-            taille = width*height
+            taille = width * height
             #print("taille :", taille)
             if taille > 800000:    # si sup à 1000 x 800 ou   800 x 1000
                 # img de  haute qualité je calcul le ratio pour ramener à 1000 x 800
@@ -67,13 +65,13 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
                 else: 
                     ratio = height/1000
 
-                width = math.floor(width / ratio)            # je ne prends pas les virgules           # A RENTRER DS LES PARAM
+                width = math.floor(width / ratio)            # je ne prends pas les virgules        
                 height = math.floor(height / ratio)
                     
             # Resize the image to the required size
             img = img.resize((width,height))
 
-            width, height = img.size
+            #width, height = img.size
             #print('new_size', width, height)
             
             # Convert the Pillow Image into an Anvil Media object and return it
@@ -99,19 +97,13 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
                                 pdf_doc1 = None,
                                 thumb = file_thumb
                                 )
-            print("MAJ de la table pre recquis par le doc jpg")
+            #print("MAJ de la table pre recquis par le doc jpg")
             
             valid=True    # Sov effectué et None liste_images (car img, pas pdf)   
             return valid, file_thumb
 
         if file_extension == ".pdf":
             print("serveur Preq: Ce fichier est un pdf")
-            # SAUVEGARDE du fichier pdf 'file'
-            pr_requis_row.update(check=True,               
-                                pdf_doc1 = file
-                                )
-            valid=True
-            return True
     else:
         return False
 

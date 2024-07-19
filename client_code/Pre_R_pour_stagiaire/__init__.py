@@ -52,11 +52,9 @@ class Pre_R_pour_stagiaire(Pre_R_pour_stagiaireTemplate):
             row_stage = app_tables.stages.get(numero=row_stagiaire_inscrit['stage']['numero'])
             # lecture des pré requis pour ce stage et pour ce stagiaire
             global user_pr
-            liste_pr = app_tables.pre_requis_stagiaire.search(q.fetch_only("item_requis","doc1"),
+            liste_pr = app_tables.pre_requis_stagiaire.search(q.fetch_only("item_requis","thumb"),
                                                             stagiaire_email=user_pr,
                                                             stage_num=row_stage
                                                             )
-            for row in liste_pr:
-                print(row)
             self.repeating_panel_1.items = liste_pr
         

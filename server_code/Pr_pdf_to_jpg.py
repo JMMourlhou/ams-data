@@ -13,27 +13,17 @@ import requests
 from typing import List
 from io import BytesIO
 from shutil import copyfile
+
 global filename 
 filename=""
 
 @anvil.server.callable
-def pdf_into_jpg(stage_num, item_requis, email, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
+def pdf_into_jpg(pdf_file, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
     global filename
-    filename = new_file_name                                    # essai
-    # finding the stagiaire's row 
-    row = app_tables.pre_requis_stagiaire.get(stage_num = stage_num,
-                                              stagiaire_email = email,
-                                              item_requis = item_requis                                             
-                                             )
-    if not row:
-        print("module pdf_into_images","Erreur: stagiaire not found !")
-        return False
-    else:
-        media = row["pdf_doc1"]                        # Lecture du doc pdf ds table
-        print(media.name)
-        return get_pdf_file_images(media=media)
-        
-    
+    filename = new_file_name                                   
+    media = pdf_file                       # Lecture du doc pdf ds table
+    return get_pdf_file_images(media=media.name)
+  
 
 @anvil.server.callable
 def get_pdf_file_images_from_url(pdf_file_url: str) -> List:
