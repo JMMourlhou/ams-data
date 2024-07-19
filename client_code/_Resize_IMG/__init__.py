@@ -29,3 +29,8 @@ class _Resize_IMG(_Resize_IMGTemplate):
         
         self.label_2.text = file_rezized.length
         self.label_2_nom.text = file_rezized.name
+        if file_rezized:
+            anvil.media.download(file_rezized)
+            alert("img jpg téléchargée !")
+        else:
+            alert("img jpg non générée")

@@ -45,17 +45,11 @@ def preparation_liste_pour_panels_pr(user_email, stage):
 
 @anvil.server.callable
 @anvil.tables.in_transaction
-def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_name, file_extension):
-    #print("file_extension", file_extension)
-    #print("new_file-NAME: ", new_file_name)
+def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extension):
     valid=False
-    pr_requis_row = app_tables.pre_requis_stagiaire.get( q.fetch_only(),
-                                                         stage_num = stage_num,          # stage row
-                                                         stagiaire_email = email,       # user row
-                                                         item_requis = item_requis      # item_requi row                                      
-                                             ) 
+    print("test: ",file_extension)
     if pr_requis_row:
-        if file_extension == ".jpg":
+        if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif":
             print("serveur Preq: Ce fichier est une image JPG")        
             new_file_name = new_file_name + file_extension
 
@@ -63,39 +57,52 @@ def modify_pre_r_par_stagiaire(stage_num, item_requis, email, file, new_file_nam
             # Img file, Convert the 'file' Media object into a Pillow Image
             img = Image.open(io.BytesIO(file.get_bytes()))
             width, height = img.size
-            #print('size', width, height)
-            # Si img de très haute qualité je divise en deux
-            if width >= height:   #landscape
-                if width > 2000:
-                    print("**** w > H")
-                    width = math.floor(width / 2.5)            # je ne prends pas les virgules           # A RENTRER DS LES PARAM
-                    height = math.floor(height / 2.5)
-            if height > width:
-                if height > 2000:
-                    print("**** h > w")
-                    width = math.floor(width / 2.5)
-                    height = math.floor(height / 2.5)
+            print('size', width, height)
+            taille = width*height
+            print("taille :", taille)
+            if taille > 800000:    # si sup à 1000 x 800 ou   800 x 1000
+                # img de  haute qualité je calcul le ratio pour ramener à 1000 x 800
+                if width >= height:   #landscape
+                    ratio = width/1000
+                else: 
+                    ratio = height/1000
+
+                width = math.floor(width / ratio)            # je ne prends pas les virgules           # A RENTRER DS LES PARAM
+                height = math.floor(height / ratio)
+                    
             # Resize the image to the required size
-            img = img.resize((width,height))    
+            img = img.resize((width,height))
+
             width, height = img.size
-            #print('new_size', width, height)
+            print('new_size', width, height)
             
             # Convert the Pillow Image into an Anvil Media object and return it
+
+            img = img.convert("RGB")
+            img_thumb = img                  # Je sauve l'img pour créer la petite img thumbnail
             bs = io.BytesIO()
             img.save(bs, format="JPEG")
-    
-            file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)   
+            file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)
+            
+            width = math.floor(width / 6.666)   # la taille de l'img étant de 1000 x 800 ou   800 x 150 je ramene à 150 px  
+            height = math.floor(height / 6.666)   # 1000 / 150
+            img_thumb = img_thumb.resize((width,height))
+            bs = io.BytesIO()                                                       
+            img_thumb.save(bs, format="JPEG")
+            file_thumb = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)
+               
             # -------------------------------------------------------------------------------------            
             
             # SAUVEGARDE IMG ds doc1, j'efface pdf_doc1 sinon je risque de télécharger un ancien fichier, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file,
-                                pdf_doc1 = None
+                                pdf_doc1 = None,
+                                thumb = file_thumb
                                 )
             print("MAJ de la table pre recquis par le doc jpg")
             
             valid=True    # Sov effectué et None liste_images (car img, pas pdf)   
-            return valid
+            return valid, file_thumb
 
         if file_extension == ".pdf":
             print("serveur Preq: Ce fichier est un pdf")

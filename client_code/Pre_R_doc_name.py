@@ -9,7 +9,7 @@ def doc_name_creation(row_stage_num, row_item_requis, row_user):
     prenom = row_user['prenom'][0:1]          # 1 caract prénom
     
     # Acquisition du num de stage
-    stg = str(row_stage_num['numero'])     # Num de stge
+    stg = str(row_stage_num['numero'])     # Num de stage
 
     # Acquisition de l'item requis
     item = row_item_requis['code_pre_requis']

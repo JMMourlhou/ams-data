@@ -17,7 +17,7 @@ class ItemTemplate3(ItemTemplate3Template):
         self.text_box_1.text = self.item['requis_txt']
         
         if self.item['doc1'] is not None:    # Si doc existant
-            self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
+            self.image_1.source = self.item['thumb']              # DIPLAY L'image thumb
             self.button_del.visible = True
             self.button_visu.visible = True
         else:
@@ -36,23 +36,17 @@ class ItemTemplate3(ItemTemplate3Template):
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
             # nouveau nom doc SANS extension
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
-            #print("new file name: ",new_file_name)
+            print("new file name: ",new_file_name)
             
             # Type de fichier ?
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
 
-            """
-            thumb_file = None
-            # si 'file' est jpg, je l'affiche directement 
-            if file_extension == ".jpg":
-                print("JPG loaded")
-                new_file_name = new_file_name + ".jpg" # rajout extension
-                thumb_file =  anvil.image.generate_thumbnail(file, 640)
-            """  
-            if file_extension == ".jpg":
-                self.image_1.source = file
+            if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif":
+                
                 # Sauvegarde du 'file' jpg
-                result = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
+                #result, thumb = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
+                result, thumb = anvil.server.call('modify_pre_r_par_stagiaire', self.item, file, new_file_name, ".jpg") 
+                self.image_1.source = thumb
                 if result is True:
                     print("Fichier de jpg en jpg, sauvé")
                     self.button_visu.visible = True  
@@ -97,7 +91,7 @@ class ItemTemplate3(ItemTemplate3Template):
         if self.image_1.source != "":
             self.button_visu.visible = True
             from ...Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
-            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis, origine="stagiaire")
+            open_form('Pre_Visu_img_Pdf', self.item["doc1"], new_file_name, self.stage_num, self.email, self.item_requis, origine="stagiaire")
 
     def button_del_click(self,  **event_args):
         """This method is called when the button is clicked"""

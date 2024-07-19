@@ -32,40 +32,40 @@ components:
     type: FlowPanel
     components:
     - name: button_visu
-      properties: {role: null, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:On Primary Container', visible: false, text: '', font_size: 27, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: 'fa:binoculars'}
+      properties: {role: null, bold: false, align: center, spacing_above: small, background: '', icon: 'fa:binoculars', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary Container', spacing_below: small, visible: false, border: '', italic: false, enabled: true, font_size: 27, tooltip: '', text: ''}
       type: Button
       layout_properties: {}
       event_bindings: {click: button_visu_click}
     - name: file_loader_1
       properties:
         role: outlined-button
-        show_state: false
-        align: center
-        tooltip: ''
-        border: ''
+        bold: false
         file_types: ''
-        enabled: true
-        files: []
-        foreground: theme:On Primary Container
-        visible: true
-        text: ''
-        font_size: 40
-        font: ''
+        align: center
         spacing_above: none
-        icon_align: left
-        spacing_below: none
-        italic: false
         file: null
         background: ''
-        bold: false
-        underline: false
-        multiple: false
         icon: fa:upload
+        multiple: false
+        underline: false
+        font: ''
+        icon_align: left
+        foreground: theme:On Primary Container
+        show_state: false
+        files: []
+        spacing_below: none
+        visible: true
+        border: ''
+        italic: false
+        enabled: true
+        font_size: 40
+        tooltip: ''
+        text: ''
       type: FileLoader
       layout_properties: {}
       event_bindings: {change: file_loader_1_change}
     - name: button_del
-      properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: 'theme:Error', visible: false, text: '   ', font_size: 27, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '', bold: false, underline: false, icon: 'fa:remove'}
+      properties: {role: null, bold: false, align: left, spacing_above: small, background: '', icon: 'fa:remove', underline: false, font: '', icon_align: left, foreground: 'theme:Error', spacing_below: small, visible: false, border: '', italic: false, enabled: true, font_size: 27, tooltip: '', text: '   '}
       type: Button
       layout_properties: {}
       event_bindings: {click: button_del_click}
