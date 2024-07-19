@@ -41,7 +41,7 @@ class ItemTemplate3(ItemTemplate3Template):
             # Type de fichier ?
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
 
-            if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif":
+            if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp" or file_extension == ".gif" or file_extension == ".png":
                 
                 # Sauvegarde du 'file' jpg
                 #result, thumb = anvil.server.call('modify_pre_r_par_stagiaire', self.stage_num, self.item_requis, self.email, file, new_file_name, ".jpg") 
