@@ -23,7 +23,7 @@ class ItemTemplate11(ItemTemplate11Template):
         txt1 = self.item['requis_txt']
         self.label_1.text = txt1 +" / "+ txt2
         if self.item['doc1'] is not None:
-            self.image_1.source = self.item['doc1']              # DIPLAY L'image haute qualité 
+            self.image_1.source = self.item['thumb']              # DIPLAY L'image haute qualité 
             self.button_del.visible = True
             self.button_visu.visible = True
             self.file_loader_1.visible = False
@@ -40,7 +40,7 @@ class ItemTemplate11(ItemTemplate11Template):
         if self.image_1.source != "":
             self.button_visu.visible = True
             from ....Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
-            open_form('Pre_Visu_img_Pdf', self.image_1.source, new_file_name, self.stage_num, self.email, self.item_requis, origine="recherche")
+            open_form('Pre_Visu_img_Pdf', self.item["doc1"], new_file_name, self.stage_num, self.email, self.item_requis, origine="recherche")
 
     def file_loader_1_change(self, file, **event_args):
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
