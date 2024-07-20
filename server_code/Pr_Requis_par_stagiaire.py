@@ -2,6 +2,7 @@
 import pathlib
 import anvil.files
 import anvil.tables.query as q
+import anvil.tables as tables
 from anvil.tables import app_tables
 import anvil.server
 from PIL import Image
@@ -34,11 +35,14 @@ def preparation_liste_pour_panels_stagiaires(row_stage):
 #     Pour lecture fichier père stages: self.item['stage']
 @anvil.server.callable
 def preparation_liste_pour_panels_pr(user_email, stage):
-    liste_pr = app_tables.pre_requis_stagiaire.search( q.fetch_only("item_requis", "doc1", "stagiaire_email"),
+    liste_pr = app_tables.pre_requis_stagiaire.search(
+                                                        tables.order_by("requis_txt", ascending=True),
+                                                        q.fetch_only("item_requis", "thumb", "stagiaire_email"),
                                                         stagiaire_email = user_email,        # user_email row
                                                         stage_num = stage                    # stage      row
                                                         )
-    list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis
+    
+    #list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis
     return liste_pr
 
 
