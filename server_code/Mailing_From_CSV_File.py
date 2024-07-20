@@ -22,7 +22,7 @@ def csv_file_reader(csv_file):
             print('Fin du fichier')
             return('Fin du fichier',nb)
         
-        # création d'une liste, à prtir du séparateur ";"
+        # création d'une liste, à partir du séparateur ";"
         ligne = text.split(';')
         
         num=ligne[0]           # extraction du num ligne excel

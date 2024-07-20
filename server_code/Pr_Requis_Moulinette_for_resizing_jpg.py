@@ -7,6 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
+from . import French_zone_server_side
+
 from PIL import Image
 import io
 import math
@@ -15,18 +17,22 @@ import math
 **************************************************** ECRITURE DE L'IMAGE EN BGT 
 """
 @anvil.server.background_task
-def reseize_jpg(row):
+def resize_jpg(row, file_name):
+    
+    
+    
     if row:
-        print(row['stagiaire_email'])
+        print(row['stagiaire_email']['email'])
+        
         file=row['doc1']
-
+        #print(file)
         #-------------------------------------------------------------------------------- à Remplacer par 1 B.G. task / loop traitmt images
         # Img file, Convert the 'file' Media object into a Pillow Image
         img = Image.open(io.BytesIO(file.get_bytes()))
         width, height = img.size
-        name = img.name
-        print('seize', width, height)
-        print('nom', name)
+
+        print('size', width,"x", height)
+        print('nom', file_name)
         taille = width * height
         print("taille :", taille)
         if taille > 800000:    # si sup à 1000 x 800 ou   800 x 1000
@@ -39,11 +45,11 @@ def reseize_jpg(row):
             width = math.floor(width / ratio)            # je ne prends pas les virgules        
             height = math.floor(height / ratio)
                 
-        # Resize the image to the required size
-        img = img.resize((width,height))
+            # Resize the image to the required size
+            img = img.resize((width,height))
 
-        #width, height = img.size
-        #print('new_size', width, height)
+            #width, height = img.size
+            print('new_size', width,"x", height)
         
         # Convert the Pillow Image into an Anvil Media object and return it
 
@@ -51,14 +57,14 @@ def reseize_jpg(row):
         img_thumb = img                  # Je sauve l'img pour créer la petite img thumbnail
         bs = io.BytesIO()
         img.save(bs, format="JPEG")
-        file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=name)
+        file = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=file_name)
         
         width = math.floor(width / 6.666)   # la taille de l'img étant de 1000 x 800 ou   800 x 150 je ramene à 150 px  
         height = math.floor(height / 6.666)   # 1000 / 150
         img_thumb = img_thumb.resize((width,height))
         bs = io.BytesIO()                                                       
         img_thumb.save(bs, format="JPEG")
-        file_thumb = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=new_file_name)
+        file_thumb = anvil.BlobMedia("image/jpeg", bs.getvalue(), name=file_name)
             
         # -------------------------------------------------------------------------------------            
         
@@ -70,9 +76,13 @@ def reseize_jpg(row):
 
 
 @anvil.server.callable
-def run_bg_task_reseize_jpg(row):
-    task = anvil.server.launch_background_task('reseize_jpg',row)
-    return task
+def run_bg_task_resize_jpg(row, file_name):
+    start = French_zone_server_side.time_french_zone()
+    task = anvil.server.launch_background_task('resize_jpg',row, file_name)
+    
+    end = French_zone_server_side.time_french_zone()
+    print(f"Tâche effectuée en {end-start} secondes")
+    return task, str(end-start)
 
 """
 **************************************************************** FIN DU PRECESSUS BGT
