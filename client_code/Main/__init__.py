@@ -300,5 +300,5 @@ class Main(MainTemplate):
 
     def button_rsz_img_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from .._Resize_IMG import _Resize_IMG
-        open_form("_Resize_IMG")
+        from ..Pre_R_Moulinette import Pre_R_Moulinette
+        open_form("Pre_R_Moulinette")

@@ -96,10 +96,9 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
             # SAUVEGARDE IMG ds doc1, j'efface pdf_doc1 sinon je risque de télécharger un ancien fichier, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file,
-                                pdf_doc1 = None,
                                 thumb = file_thumb
                                 )
-            return file_thumb
+            #return file_thumb
 
         if file_extension == ".pdf":
             print("serveur Preq: Ce fichier est un pdf")
