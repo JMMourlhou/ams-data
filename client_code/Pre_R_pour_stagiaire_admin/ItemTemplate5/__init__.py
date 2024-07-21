@@ -12,7 +12,7 @@ class ItemTemplate5(ItemTemplate5Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.button_1.text=self.item['name'].capitalize()+" "+self.item['prenom']
+        self.button_nom.text=self.item['name'].capitalize()+" "+self.item['prenom']
         
         # search des pré-requis de chaque stagiaire de ce stage en SERVEUR
         #     Pour lecture fichier père users: user row
@@ -21,8 +21,14 @@ class ItemTemplate5(ItemTemplate5Template):
         #list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis 
         
 
-    def button_1_click(self, **event_args):          # Click sur le BT nom/prénom pour voir ses pré requis
+    def button_nom_click(self, **event_args):          # Click sur le BT nom/prénom pour voir ses pré requis
         """This method is called when the button is clicked"""
+        if self.button_nom.background == "theme:Tertiary":
+            self.button_nom.background = "red"
+            #self.button_nom.foreground = "black"
+        else:
+            self.button_nom.background = "theme:Tertiary"
+            #self.button_nom.foreground = "black"
         liste_pr = app_tables.pre_requis_stagiaire.search(
                                                         tables.order_by("requis_txt", ascending=True),
                                                         q.fetch_only("item_requis", "thumb", "stagiaire_email"),

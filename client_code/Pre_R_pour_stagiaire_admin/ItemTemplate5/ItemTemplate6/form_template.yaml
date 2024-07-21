@@ -1,8 +1,13 @@
 is_package: true
 container: {type: ColumnPanel}
 components:
-- name: label_1
-  properties: {font_size: 13, align: center, spacing_above: none, spacing_below: none, icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary', bold: true}
+- name: timer_1
+  properties: {interval: 0}
+  type: Timer
+  layout_properties: {grid_position: 'ZKLWHU,ZMHODM'}
+  event_bindings: {tick: timer_1_tick}
+- name: label_en_tete_pr
+  properties: {font_size: 13, align: center, spacing_above: none, spacing_below: none, icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary', bold: false}
   type: Label
   layout_properties: {grid_position: 'FTXXGY,EQFIKJ'}
 - name: flow_panel_1

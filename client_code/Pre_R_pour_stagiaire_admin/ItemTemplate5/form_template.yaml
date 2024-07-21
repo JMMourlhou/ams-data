@@ -1,8 +1,10 @@
 is_package: true
-container: {type: ColumnPanel}
+container:
+  type: ColumnPanel
+  properties: {spacing_below: none, spacing_above: none}
 components:
 - name: column_panel_2
-  properties: {wrap_on: never}
+  properties: {wrap_on: never, spacing_above: none, spacing_below: none}
   type: ColumnPanel
   layout_properties: {grid_position: 'JOLOEV,DKWUFM'}
   components:
@@ -15,12 +17,12 @@ components:
       properties: {}
       type: ColumnPanel
       components:
-      - name: button_1
-        properties: {role: outlined-button, bold: false, align: left, spacing_above: small, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary Container', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: button_nom}
+      - name: button_nom
+        properties: {role: outlined-button, bold: false, align: left, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary Container', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: button_nom}
         type: Button
         layout_properties: {grid_position: 'HLZJDG,FQOFQY'}
-        event_bindings: {click: button_1_click}
-      layout_properties: {width: 299.11847021484374}
+        event_bindings: {click: button_nom_click}
+      layout_properties: {width: 247.3403701171875}
     - name: flow_panel_2
       properties: {align: center}
       type: FlowPanel
@@ -31,6 +33,6 @@ components:
         type: Button
         event_bindings: {click: button_2_click}
 - name: repeating_panel_1
-  properties: {item_template: Pre_R_pour_stagiaire_admin.ItemTemplate5.ItemTemplate6, visible: false, role: null}
+  properties: {item_template: Pre_R_pour_stagiaire_admin.ItemTemplate5.ItemTemplate6, visible: false, role: null, spacing_below: none}
   type: RepeatingPanel
   layout_properties: {grid_position: 'BYERRJ,QFQLRT'}
