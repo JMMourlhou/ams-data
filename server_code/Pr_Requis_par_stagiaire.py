@@ -130,7 +130,7 @@ def pr_stagiaire_del(user_email, stage, item_requis, mode="efface"):
     if pr_requis_row and mode=="efface":
         pr_requis_row.update(check=False,               
                                 doc1 = None,
-                                pdf_doc1 = None
+                                thumb = None
                                 )
         return True
     if pr_requis_row and mode=="destruction":
