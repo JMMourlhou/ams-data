@@ -103,7 +103,7 @@ components:
         type: Button
         event_bindings: {click: button_mail_histo_click}
       - name: button_rsz_img
-        properties: {text: Resize IMG, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        properties: {text: Resize IMG, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
         type: Button
         event_bindings: {click: button_rsz_img_click}
         layout_properties: {}

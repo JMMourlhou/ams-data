@@ -77,7 +77,8 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
             # Resize the image to the required size
             img = img.resize((width,height))
 
-            #width, height = img.size
+            width, height = img.size
+            taille = width * height
             #print('new_size', width, height)
             
             # Convert the Pillow Image into an Anvil Media object and return it
@@ -100,7 +101,8 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
             # SAUVEGARDE IMG ds doc1, j'efface pdf_doc1 sinon je risque de télécharger un ancien fichier, je ne sauve plus le thumb
             pr_requis_row.update(check=True,               
                                 doc1 = file,
-                                thumb = file_thumb
+                                thumb = file_thumb,
+                                size = taille
                                 )
             #return file_thumb
 
@@ -130,7 +132,8 @@ def pr_stagiaire_del(user_email, stage, item_requis, mode="efface"):
     if pr_requis_row and mode=="efface":
         pr_requis_row.update(check=False,               
                                 doc1 = None,
-                                thumb = None
+                                thumb = None,
+                                size = None
                                 )
         return True
     if pr_requis_row and mode=="destruction":
