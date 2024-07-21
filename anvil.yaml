@@ -265,6 +265,9 @@ db_schema:
     - name: thumb
       admin_ui: {width: 200, order: 8.5}
       type: media
+    - name: size
+      admin_ui: {width: 200, order: 9.5}
+      type: number
   pre_requis:
     title: Pre_Requis
     client: search

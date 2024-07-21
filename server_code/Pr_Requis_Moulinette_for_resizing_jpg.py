@@ -87,3 +87,25 @@ def run_bg_task_resize_jpg(row, file_name):
 """
 **************************************************************** FIN DU PRECESSUS BGT
 """
+
+# test taille des img des pr-requis
+@anvil.server.callable
+def size_jpg():
+    result=False
+    liste=app_tables.pre_requis_stagiaire.search()
+    for row in liste:
+        file=row['doc1']
+        if file is not None:
+            # Img file, Convert the 'file' Media object into a Pillow Image
+            try:
+                img = Image.open(io.BytesIO(file.get_bytes()))
+                width, height = img.size
+        
+                print('size', width,"x", height)
+                taille = width * height
+                print("taille :", taille)
+                row.update(size=taille)
+            except:
+                print(f"ERREUR DE LECTURE: {row['stagiaire_email']['email']}, {row['nom']}, {row['requis_txt']}")
+    result = True
+    return result

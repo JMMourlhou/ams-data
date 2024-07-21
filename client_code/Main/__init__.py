@@ -302,3 +302,12 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Pre_R_Moulinette import Pre_R_Moulinette
         open_form("Pre_R_Moulinette")
+
+    def button_size_pr_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        result = anvil.server.call('size_jpg')
+        if result:
+            alert("fin")
+        else:
+            alert("pas de fin normale")
+            
