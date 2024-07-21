@@ -54,8 +54,8 @@ def preparation_liste_pour_panels_pr(user_email, stage):
 def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extension):
     if pr_requis_row:
         if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":
-            #print("serveur Preq: Ce fichier est une image JPG")        
-            new_file_name = new_file_name + file_extension
+            print("serveur Preq: Ce fichier est une image de type ",file_extension)        
+            new_file_name = new_file_name + ".jpg"   # Le fichier sera resized et au format jpg
 
             #-------------------------------------------------------------------------------- à Remplacer par 1 B.G. task / loop traitmt images
             # Img file, Convert the 'file' Media object into a Pillow Image

@@ -14,6 +14,7 @@ class ItemTemplate3(ItemTemplate3Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.test_img_just_loaded = False  # pour savoir si l'image vient d'être chargée (voir visu image)
         self.text_box_1.text = self.item['requis_txt']
         
         if self.item['doc1'] is not None:    # Si doc existant
@@ -65,7 +66,14 @@ class ItemTemplate3(ItemTemplate3Template):
         if self.image_1.source != "":
             self.button_visu.visible = True
             from ...Pre_Visu_img_Pdf import Pre_Visu_img_Pdf  # pour visu du doc
-            open_form('Pre_Visu_img_Pdf', self.item["doc1"], new_file_name, self.stage_num, self.email, self.item_requis, origine="stagiaire")
+            if self.test_img_just_loaded:   # image vient d'etre chargée et self.item['doc1'] n'est pas à jour, re lecture avant affichage
+                row = app_tables.pre_requis_stagiaire.get(stage_num=self.stage_num,
+                                                          stagiaire_email=self.email,
+                                                          item_requis=self.item_requis)
+                if row:
+                    open_form('Pre_Visu_img_Pdf', row['doc1'], new_file_name, self.stage_num, self.email, self.item_requis, origine="admin")
+            else:  
+                open_form('Pre_Visu_img_Pdf', self.item['doc1'], new_file_name, self.stage_num, self.email, self.item_requis, origine="admin")
 
     def button_del_click(self,  **event_args):
         """This method is called when the button is clicked"""
@@ -81,7 +89,7 @@ class ItemTemplate3(ItemTemplate3Template):
     def save_file(self, file, new_file_name, file_extension):
         # Sauvegarde du 'file' jpg
         # Avec loading_indicator, appel BG TASK
-        
+        self.test_img_just_loaded = True  # indique que l'image, donc self.item['doc1'], a changé
         self.task_img = anvil.server.call('run_bg_task_save_jpg', self.item, file, new_file_name, file_extension)    
         self.timer_1.interval=0.5
 
