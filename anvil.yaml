@@ -341,7 +341,7 @@ db_schema:
     server: full
     columns:
     - name: num
-      admin_ui: {order: 0, width: 72}
+      admin_ui: {order: 0, width: 94}
       type: string
     - name: mail
       admin_ui: {width: 200, order: 1}
@@ -388,7 +388,9 @@ db_schema:
     - name: erreur_mail
       admin_ui: {order: 1.875, width: 200}
       type: bool
-    - {name: select, admin_ui: null, type: bool}
+    - name: select
+      admin_ui: {width: 127}
+      type: bool
   global_variables:
     title: Global_variables
     client: none
