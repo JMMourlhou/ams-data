@@ -310,4 +310,8 @@ class Main(MainTemplate):
             alert("fin")
         else:
             alert("pas de fin normale")
+
+    def button_form_suivi_stage_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        alert("à effectuer")
             

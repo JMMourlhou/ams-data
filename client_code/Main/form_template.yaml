@@ -165,9 +165,14 @@ components:
         name: button_qcm
         event_bindings: {click: button_qcm_click}
       - name: button_form_satisf
-        properties: {text: Formulaire de satisfaction, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
+        properties: {text: Formulaire Fin de Stage, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
         type: Button
         event_bindings: {click: button_form_satisf_click}
+        layout_properties: {}
+      - name: button_form_suivi_stage
+        properties: {text: Formulaire suivi de stage, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true, role: elevated-button}
+        type: Button
+        event_bindings: {click: button_form_suivi_stage_click}
         layout_properties: {}
 - type: ColumnPanel
   properties: {col_widths: '{}'}

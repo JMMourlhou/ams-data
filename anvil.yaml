@@ -487,6 +487,12 @@ db_schema:
     - name: rep_dico_rep_ouv
       admin_ui: {width: 538}
       type: simpleObject
+    - name: email
+      admin_ui: {width: 200, order: 6}
+      type: string
+    - name: type
+      admin_ui: {order: 0.5, width: 200}
+      type: string
   qcm_result:
     title: Qcm_result
     client: full
