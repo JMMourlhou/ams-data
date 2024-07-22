@@ -38,9 +38,11 @@ class QrCode_display(QrCode_displayTemplate):
 
         # Lecture de la variable globale "code_app1" ds table variables_globales
         app = anvil.server.call('get_variable_value', "code_app1")
-        code_app1 = app + param  # App "AMS Data"  + code stage
-        print("code",code_app1)
-        media=anvil.server.call('mk_qr_code',code_app1)
+        stage_link = app + param  # App "AMS Data"  + code stage
+        self.text_area_lien.text = stage_link
+        print(stage_link)
+        self.text_area_lien.display = True
+        media=anvil.server.call('mk_qr_code',stage_link)
         self.image_1.source=media
 
     def recup_time(self, **event_args): 
