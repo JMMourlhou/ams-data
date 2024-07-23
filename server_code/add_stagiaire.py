@@ -78,7 +78,8 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):   # Stage num pas
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
     if stagiaire_row:
         # ******************************************************************* EFFACT code stage ds user et INCREMENT du nb de stgiaires ds le stage:
-        user.update(temp = 0
+        user.update(temp = 0,
+                    role = code_stage['type_stage']  # Le user est du type du stage (ex; F_PSE est de type_stage "F", donc user de type 'F', formateur')
                    )
         
         # INCREMENT nb de stagiaires début stage ds fichier père stage

@@ -139,6 +139,9 @@ db_schema:
     - name: saisie_satisf_ok
       admin_ui: {width: 200}
       type: bool
+    - name: type_stage
+      admin_ui: {order: -1, width: 106}
+      type: string
   qcm:
     title: Qcm
     client: search

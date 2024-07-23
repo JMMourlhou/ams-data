@@ -20,6 +20,8 @@ class ItemTemplate17(ItemTemplate17Template):
             pass
         self.label_nom.text = nom_p
         self.check_box_envoi.checked = self.item['envoi']
+        if self.item['envoi'] is True:
+            self.column_panel_1.background = "theme:Vert Foncé"
         try:
             self.label_date_heure.text = str(self.item['Date_time_envoi'])[0:16]  # cas où date encore vide
         except:

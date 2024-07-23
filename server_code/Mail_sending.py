@@ -53,7 +53,7 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                 # sauver la date et l'heure
                 row_old_stagiaire = app_tables.stagiaires_histo.get_by_id(id)
                 if row_old_stagiaire:
-                    row_old_stagiaire.update(envoi=True, Date_time_envoi=time)
+                    row_old_stagiaire.update(envoi=True, Date_time_envoi=time, select=False)
                     print(row_old_stagiaire['mail'], "envoyé pour", prenom)
                 else:
                     print(row_old_stagiaire['mail'], "row non trouvé en maj")
