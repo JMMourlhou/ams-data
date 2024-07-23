@@ -19,7 +19,7 @@ class ItemTemplate10(ItemTemplate10Template):   # Bt QCM results
         self.num_qcm = self.item['qcm_number']['qcm_nb'] #pour l'affichage du plot du stgiaire si bt qcm clicked
         
         self.button_qcm_time.text = "le " + str(self.item['time'].strftime("%d/%m/%Y")) + " à " + str(self.item['time'].strftime("%Hh%M")) 
-        if self.item['success'] == True:
+        if self.item['success'] is True:
             self.button_qcm_result.background = "green"
             self.button_qcm_result.foreground = "white"
             self.button_qcm_time.background = "green"
@@ -34,7 +34,7 @@ class ItemTemplate10(ItemTemplate10Template):   # Bt QCM results
 
     def button_qcm_descro_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.column_panel_plot.visible == False:
+        if self.column_panel_plot.visible is False:
             self.button_qcm_descro.foreground = "red"
             # Affichage du plot
             self.column_panel_plot.clear()

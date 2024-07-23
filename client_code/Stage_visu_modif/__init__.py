@@ -26,7 +26,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             return
         
         # Drop down codes stages
-        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
+        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
 
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]

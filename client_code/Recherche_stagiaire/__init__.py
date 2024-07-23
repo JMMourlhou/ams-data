@@ -19,7 +19,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             self.drop_down_num_stages.visible = False
         
         # Drop down codes stages
-        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
+        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
 
         #import anvil.js    # pour screen size: Si tel: 3 data grid 3 rows sinon 8 pour ordinateur
         from anvil.js import window # to gain access to the window objec

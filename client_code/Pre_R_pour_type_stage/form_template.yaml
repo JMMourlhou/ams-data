@@ -3,18 +3,18 @@ container:
   properties: {col_widths: '{}'}
 components:
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: ''}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
   name: column_panel_header
   layout_properties:
     col_widths: {}
     grid_position: DGXGMW,VQVVNA
   components:
   - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On Tertiary', visible: true, text: Pré-requis par type de stage, font_size: 16, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Pré-requis par type de stage}
     name: label_3
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - type: ColumnPanel
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small, background: 'theme:Primary'}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
   name: column_panel_1
   layout_properties:
     col_widths: {}
@@ -26,60 +26,60 @@ components:
     layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
     components:
     - type: Button
-      properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
       name: button_annuler
       layout_properties:
         col_widths: {}
         grid_position: COGJPP,SACJUA
       event_bindings: {click: button_annuler_click}
   - type: FlowPanel
-    properties: {role: null, vertical_align: full, spacing: medium, align: center, tooltip: '', border: '', foreground: '', visible: true, spacing_above: none, spacing_below: none, background: ''}
+    properties: {role: null, vertical_align: full, align: center, spacing_above: none, background: '', foreground: '', spacing_below: none, visible: true, border: '', tooltip: '', spacing: medium}
     name: flow_panel_1
     layout_properties: {grid_position: 'BWKGSA,VNTBFV'}
     components:
     - type: DropDown
       properties:
         role: outlined
+        include_placeholder: true
+        bold: false
         align: full
-        tooltip: ''
         placeholder: Stage
-        border: ''
-        enabled: true
+        spacing_above: small
+        background: theme:Tertiary
+        underline: false
+        font: ''
         foreground: theme:On Primary Container
         items: []
-        visible: true
-        font_size: 16
-        font: ''
-        spacing_above: small
         spacing_below: small
+        visible: true
+        border: ''
         italic: false
-        background: theme:Tertiary
-        bold: false
-        underline: false
-        include_placeholder: true
+        enabled: true
+        font_size: 16
+        tooltip: ''
       name: drop_down_code_stage
       layout_properties: {grid_position: 'GYKKPW,SDVOPJ', row_background: '', width: 107.566}
       event_bindings: {change: drop_down_code_stage_change}
     - type: DropDown
       properties:
         role: null
+        include_placeholder: true
+        bold: false
         align: full
-        tooltip: ''
         placeholder: Pré-requis à ajouter
-        border: ''
-        enabled: true
+        spacing_above: small
+        background: theme:Tertiary
+        underline: false
+        font: ''
         foreground: theme:On Primary Container
         items: []
-        visible: false
-        font_size: 16
-        font: ''
-        spacing_above: small
         spacing_below: small
+        visible: false
+        border: ''
         italic: false
-        background: theme:Tertiary
-        bold: false
-        underline: false
-        include_placeholder: true
+        enabled: true
+        font_size: 16
+        tooltip: ''
       name: drop_down_pre_requis
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
       event_bindings: {change: drop_down_pre_requis_change}

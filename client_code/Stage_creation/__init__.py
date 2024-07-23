@@ -24,7 +24,7 @@ class Stage_creation(Stage_creationTemplate):
         self.text_box_num_stage.text=cpt
         
         # Drop down codes stages
-        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
+        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
 
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]

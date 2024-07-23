@@ -19,7 +19,9 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         # Any code you write here will run before the form opens.
         
         # Drop down codes stages
-        self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search()]
+        liste = [(r['code'], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]   
+        self.drop_down_code_stage.items = liste
+        
         if code_stage != "":  # si vient d'annulation d'un pré_requis ds R.RowTemplate1, je pre selectionne la dropdown stage
             row = app_tables.codes_stages.get(code=code_stage)
             self.drop_down_code_stage.selected_value = row
@@ -30,7 +32,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         #lecture du dictionaire ds table codes_stages pour le stage sélectionné
         
         row = self.drop_down_code_stage.selected_value
-        if row == None :
+        if row is None :
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
