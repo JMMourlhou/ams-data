@@ -45,7 +45,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         screen_size = window.innerWidth
 
         # INITIALISATION Drop down   drop_down_type_mails
-        self.drop_down_type_mails.items = [(r['type_mail'], r) for r in app_tables.mail_type.search()]
+        self.drop_down_type_mails.items = [(r['type_mail'], r) for r in app_tables.mail_type.search(tables.order_by("type_mail", ascending=True))]
         
         # ref_model en init contient la ref du modele si vient de qcm ou formul etc...du permet de court circuiter la drop down du choix du modèle 
         if self.ref_model != "":
