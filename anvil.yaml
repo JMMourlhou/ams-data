@@ -224,6 +224,12 @@ db_schema:
     - name: satisf_q_ouv_template
       admin_ui: {width: 200}
       type: simpleObject
+    - name: suivi_stage_q_ferm_template
+      admin_ui: {width: 200, order: 6}
+      type: simpleObject
+    - name: suivi_stage_q_ouv_template
+      admin_ui: {width: 200, order: 7}
+      type: simpleObject
   pre_requis_stagiaire:
     title: Pre_Requis_stagiaire
     client: full
@@ -334,6 +340,9 @@ db_schema:
       type: simpleObject
     - name: enquete_satisf
       admin_ui: {width: 200}
+      type: bool
+    - name: enquete_suivi
+      admin_ui: {order: 5.5, width: 200}
       type: bool
   stagiaires_histo:
     title: Stagiaires_histo
