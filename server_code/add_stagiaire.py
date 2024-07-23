@@ -95,7 +95,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi, type_add=""):   # Stage num pas
             code_stage.update(nb_stagiaires_deb=nb)
             #print("passage ds except ok")
             
-        valid="Stagiaire inscrit ! (" + str(nb) + ")"
+        valid="1 inscription effectuée ! (" + str(nb) + " éléments)"
     else:
         valid="Stagiaire non retrouvé dans fichier stagiaires inscrits"
 
