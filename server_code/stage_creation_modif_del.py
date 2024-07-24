@@ -35,8 +35,10 @@ def add_stage(code_stage,     # row codes_stage concernée
                               commentaires = commentaires,
                               allow_bgt_generation = False,
                               saisie_satisf_ok = False,                                 # Ne pas saisir le form de stisfaction            
-                              satis_dico1_q_ferm=code_stage["satisf_q_ferm_template"],  # copie du template de la table "code_stages", questions fermées
-                              satis_dico2_q_ouv=code_stage["satisf_q_ouv_template"]     # copie du template de la table "code_stages", questions ouvertes
+                              satis_dico1_q_ferm=code_stage["satisf_q_ferm_template"],  # copie du template satisf de la table "code_stages", questions fermées
+                              satis_dico2_q_ouv=code_stage["satisf_q_ouv_template"],     # copie du template satisf de la table "code_stages", questions ouvertes
+                              suivi_dico1_q_ferm=code_stage["suivi_stage_q_ferm_template"],  # copie du template suivi de la table "code_stages", questions fermées
+                              suivi_dico2_q_ouv=code_stage["suivi_stage_q_ouv_template"]    # copie du template suivi de la table "code_stages", questions ouvertes
                              )
         
                  

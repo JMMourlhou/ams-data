@@ -142,6 +142,15 @@ db_schema:
     - name: type_stage
       admin_ui: {order: -1, width: 106}
       type: string
+    - name: saisie_suivi_ok
+      admin_ui: {width: 200, order: 19}
+      type: bool
+    - name: suivi_dico1_q_ferm
+      admin_ui: {width: 200, order: 20}
+      type: simpleObject
+    - name: suivi_dico2_q_ouv
+      admin_ui: {width: 200, order: 21}
+      type: simpleObject
   qcm:
     title: Qcm
     client: search
@@ -228,7 +237,7 @@ db_schema:
       admin_ui: {width: 200}
       type: simpleObject
     - name: suivi_stage_q_ferm_template
-      admin_ui: {width: 200, order: 6}
+      admin_ui: {order: 6, width: 230}
       type: simpleObject
     - name: suivi_stage_q_ouv_template
       admin_ui: {width: 200, order: 7}
