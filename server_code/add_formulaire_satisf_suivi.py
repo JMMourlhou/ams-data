@@ -12,7 +12,7 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
                                     stage_row,                   # stages row
                                     dico_rep_q_ferm,
                                     dico_rep_q_ouv,
-                                    date_time    
+                                    date_time
                                 ):
     # Print pour vérif des 2 dicos    
     print("=============== serveur side:")
@@ -23,13 +23,14 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
     print(dico_rep_q_ouv)
     print()
     print(date_time)
+    
     new_row=app_tables.stage_satisf.add_row(stage_row=stage_row,
-                                    stage_type_txt=stage_row["code_txt"],
-                                    stage_num_txt=str(stage_row["numero"]),
-                                    date_heure=date_time,
-                                    rep_dico_rep_ferm=dico_rep_q_ferm,
-                                    rep_dico_rep_ouv=dico_rep_q_ouv
-                                   )
+                                            stage_type_txt=stage_row["code_txt"],
+                                            stage_num_txt=str(stage_row["numero"]),
+                                            date_heure=date_time,
+                                            rep_dico_rep_ferm=dico_rep_q_ferm,
+                                            rep_dico_rep_ouv=dico_rep_q_ouv
+                                         )
     id=new_row.get_id()
     #relecture du row:
     re_read_row= app_tables.stage_satisf.get_by_id(id)
@@ -46,13 +47,16 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
     else:
         return(False)
 
+
+
+
 @anvil.server.callable           #AJOUT d'un formulaire de suivi de stage en base ds table, non anonyme
 @anvil.tables.in_transaction
-def add_1_formulaire_suivi(  user_stagiaire,              # users row
+def add_1_formulaire_suivi( user_stagiaire,              # users row
                             stage_row,                   # stages row
                             dico_rep_q_ferm,
                             dico_rep_q_ouv,
-                            date_time    
+                            date_time
                         ):
     # Print pour vérif des 2 dicos    
     print("=============== serveur side:")
@@ -63,6 +67,8 @@ def add_1_formulaire_suivi(  user_stagiaire,              # users row
     print(dico_rep_q_ouv)
     print()
     print(date_time)
+    print(user_stagiaire["email"])
+    print(stage_row["code_txt"])
     new_row=app_tables.stage_satisf.add_row(
                                     email_si_suivi=user_stagiaire["email"],
                                     stage_row=stage_row,
@@ -72,7 +78,9 @@ def add_1_formulaire_suivi(  user_stagiaire,              # users row
                                     rep_dico_rep_ferm=dico_rep_q_ferm,
                                     rep_dico_rep_ouv=dico_rep_q_ouv
                                    )
+    print("new_row",new_row)
     id=new_row.get_id()
+    print(id)
     #relecture du row:
     re_read_row= app_tables.stage_satisf.get_by_id(id)
     

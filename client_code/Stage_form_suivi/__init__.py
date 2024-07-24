@@ -1073,17 +1073,18 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         date_time = str(date_time)[0:19]  # je prends les 19 1ers caract
         print(date_time)
 
+        global stage_row
         global user_stagiaire
         result = anvil.server.call("add_1_formulaire_suivi",
                                     user_stagiaire,
                                     stage_row,
                                     dico_rep_q_ferm,
                                     dico_rep_q_ouv,
-                                    date_time,
+                                    date_time
                                 )
         if result is True:
             alert(
-                "Merci pour vos réponses ! \n \n Ce formulaire est sauvé, \n (ANONYMEMENT)"
+                "Merci pour vos réponses ! Formulaire sauvé."
             )
             self.button_annuler_click()
         else:
