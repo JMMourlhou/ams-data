@@ -1,4 +1,4 @@
-from ._anvil_designer import Stage_form_satisf_suiviTemplate
+from ._anvil_designer import Stage_form_suiviTemplate
 from .. import French_zone  # POur acquisition de date et heure Francaise (Browser time)
 from anvil import *
 
@@ -18,7 +18,7 @@ global nb_questions_ouvertes  # nb questions ouvertes
 nb_questions_ouvertes = 0
 
 
-class Stage_form_satisf_suivi(Stage_form_satisf_suiviTemplate):
+class Stage_form_suivi(Stage_form_suiviTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
