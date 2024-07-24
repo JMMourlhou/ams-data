@@ -1042,14 +1042,13 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         print(date_time)
 
         global user_stagiaire
-        result = anvil.server.call(
-            "add_1_formulaire_satisfaction",
-            user_stagiaire,
-            stage_row,
-            dico_rep_q_ferm,
-            dico_rep_q_ouv,
-            date_time,
-        )
+        result = anvil.server.call("add_1_formulaire_satisfaction",
+                                    user_stagiaire,
+                                    stage_row,
+                                    dico_rep_q_ferm,
+                                    dico_rep_q_ouv,
+                                    date_time,
+                                )
         if result is True:
             alert(
                 "Merci pour vos réponses ! \n \n Ce formulaire est sauvé, \n (ANONYMEMENT)"
