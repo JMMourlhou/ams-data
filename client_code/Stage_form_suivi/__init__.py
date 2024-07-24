@@ -27,6 +27,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.column_panel_q_ouv.tag = "q_ouvertes"
         self.column_panel_header.tag = "header"
         self.column_panel_0.tag = 0
         self.column_panel_1.tag = 1
@@ -977,7 +978,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         dico_rep_q_ouv = {}  #     clé:num question   valeur: = question txt,reponse (txt)
 
         for cp in self.get_components():  # column panels in form self
-            if (cp.tag != 0 and cp.tag != "header"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
+            if (cp.tag != 0 and cp.tag != "header" and cp.tag != "q_ouvertes"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
                 num_question = cp.tag
                 if num_question <= nb_questions_ferm:
                     try:
