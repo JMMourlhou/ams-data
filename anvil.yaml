@@ -140,7 +140,7 @@ db_schema:
       admin_ui: {width: 200}
       type: bool
     - name: type_stage
-      admin_ui: {order: -1, width: 106}
+      admin_ui: {order: 1.25, width: 106}
       type: string
     - name: saisie_suivi_ok
       admin_ui: {width: 200, order: 19}
@@ -243,7 +243,7 @@ db_schema:
       admin_ui: {width: 200, order: 7}
       type: simpleObject
     - name: type_stage
-      admin_ui: {order: -1, width: 99}
+      admin_ui: {order: 1.5, width: 99}
       type: string
   pre_requis_stagiaire:
     title: Pre_Requis_stagiaire
@@ -511,8 +511,8 @@ db_schema:
     - name: rep_dico_rep_ouv
       admin_ui: {width: 538}
       type: simpleObject
-    - name: email
-      admin_ui: {width: 200, order: 6}
+    - name: email_si_suivi
+      admin_ui: {order: 6, width: 200}
       type: string
     - name: type
       admin_ui: {order: 0.5, width: 74}

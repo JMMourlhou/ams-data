@@ -56,6 +56,34 @@ components:
       type: DropDown
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
       event_bindings: {change: drop_down_code_stage_change}
+  - name: flow_panel_11
+    properties: {align: center}
+    type: FlowPanel
+    layout_properties: {grid_position: 'RAJATX,BQQGDR'}
+    components:
+    - name: drop_down_code_stage_copy
+      properties:
+        role: null
+        include_placeholder: true
+        bold: false
+        align: full
+        placeholder: Choix du stage ....
+        spacing_above: small
+        background: theme:Tertiary
+        underline: false
+        font: ''
+        foreground: theme:On Primary Container
+        items: []
+        spacing_below: small
+        visible: true
+        border: ''
+        italic: false
+        enabled: true
+        font_size: 16
+        tooltip: ''
+      type: DropDown
+      layout_properties: {width: 214.97887084960936}
+      event_bindings: {change: drop_down_code_stage_change}
 - name: column_panel_12
   properties: {}
   type: ColumnPanel

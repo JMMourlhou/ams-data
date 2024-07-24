@@ -46,7 +46,7 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
     else:
         return(False)
 
-@anvil.server.callable           #AJOUT d'un formulaire ds table _transaction, anonyme
+@anvil.server.callable           #AJOUT d'un formulaire de suivi de stage en base ds table, non anonyme
 @anvil.tables.in_transaction
 def add_1_formulaire_suivi(  user_stagiaire,              # users row
                             stage_row,                   # stages row
@@ -64,7 +64,7 @@ def add_1_formulaire_suivi(  user_stagiaire,              # users row
     print()
     print(date_time)
     new_row=app_tables.stage_satisf.add_row(
-                                    
+                                    email_si_suivi=user_stagiaire["email"],
                                     stage_row=stage_row,
                                     stage_type_txt=stage_row["code_txt"],
                                     stage_num_txt=str(stage_row["numero"]),

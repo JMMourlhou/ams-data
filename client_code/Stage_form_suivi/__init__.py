@@ -16,7 +16,10 @@ global nb_questions_ferm  # nb questions fermées (check 0 à 5)
 nb_questions_ferm = 0
 global nb_questions_ouvertes  # nb questions ouvertes
 nb_questions_ouvertes = 0
-
+global dico_q_ferm
+dico_q_ferm = {}
+global dico_q_ouv
+dico_q_ouv = {}
 
 class Stage_form_suivi(Stage_form_suiviTemplate):
     def __init__(self, **properties):
@@ -59,25 +62,41 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
 
         global user_stagiaire
         if user_stagiaire:
+            
             # Drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email", "stage"),  # <----------------------  A Modifier?
-                user_email=user_stagiaire,
-                enquete_satisf=False,
-            )
+            liste0 = app_tables.stagiaires_inscrits.search(
+                                                q.fetch_only("user_email", "stage"),  # <----------------------  A Modifier?
+                                                user_email=user_stagiaire,
+                                                enquete_satisf=False,
+                                                             )
             print("nb de stages où le stagiaire est inscrit; ", len(liste0))
             liste_drop_d = []
-            for row in liste0:
-                # lecture fichier père stage
-                stage = app_tables.stages.get(numero=row["stage"]["numero"])
-                if (stage["saisie_suivi_ok"] is True):  # si autorisé à saisir le formulaire de suivi, je l'affiche
-                    
-                    # lecture fichier père type de stage
-                    type = app_tables.codes_stages.get(q.fetch_only("code"), code=stage["code"]["code"])
-                    if type["type_stage"] == "S":  # Si stagiaire, j'affiche la date
-                        liste_drop_d.append((type["code"] + "  du " + str(stage["date_debut"]), stage))
-                    else:
-                        liste_drop_d.append((type["intitulé"], stage))
-
+            
+            # si user = stagiaire
+            if user_stagiaire["role"]=="S":
+                for row in liste0:
+                    # lecture fichier père stage
+                    stage = app_tables.stages.get(numero=row["stage"]["numero"])
+                    if (stage["saisie_suivi_ok"] is True):  # si autorisé à saisir le formulaire de suivi, je l'affiche
+                        
+                        # lecture fichier père type de stage
+                        type = app_tables.codes_stages.get(q.fetch_only("code"), code=stage["code"]["code"])
+                        if type["type_stage"] == "S":  # Si stagiaire, j'affiche la date
+                            liste_drop_d.append((type["code"] + "  du " + str(stage["date_debut"]), stage))
+                        else:
+                            liste_drop_d.append((type["intitulé"], stage))
+                            
+            # si c'est un tuteur qui a ouvert, il faut savoir pour quel code stage motoN               
+            if user_stagiaire["role"]=="T":
+                # Drop down stages de BPMotoN 
+                code_moto = app_tables.codes_stages.get(code="BPMOTO")
+                liste1 = app_tables.stages.search(
+                                                    tables.order_by("date_debut", ascending=False),
+                                                    code=code_moto
+                                                   )
+                for stage in liste1:
+                    liste_drop_d.append((code_moto["code"] + " débuté le " + str(stage["date_debut"]), stage))
+                
             # print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
 
@@ -95,13 +114,28 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
+           
         self.text_area_a1.text = None
         # extraction des 2 dictionnaires du stage
-        dico_q_ferm = {}
-        dico_q_ouv = {}
-        dico_q_ferm = stage_row["suivi_dico1_q_ferm"]
+        global dico_q_ferm
+        global dico_q_ouv
+        if user_stagiaire["role"]=="S":
+            dico_q_ferm = stage_row["suivi_dico1_q_ferm"]
+            dico_q_ouv = stage_row["suivi_dico2_q_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
+        else:
+            # lecture du template des tuteurs ds table codes_stages
+            row_tuteur = app_tables.codes_stages.get(code="T_BASE_N")
+            if row_tuteur:
+                dico_q_ferm = row_tuteur["suivi_stage_q_ferm_template"]
+                dico_q_ouv = row_tuteur["suivi_stage_q_ouv_template"]
+
+        # AFFICHAGE EN FONCTION DU NB DE QUESTIONS
         global nb_questions_ferm  # nb questions fermées (testé en validation)
         nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
+        
+        global nb_questions_ouvertes  # nb questions ouvertes
+        nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
+        
 
         if (nb_questions_ferm > 0):  # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
@@ -133,10 +167,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         if nb_questions_ferm > 9:
             self.column_panel_10.visible = True
             self.label_10.text = dico_q_ferm["10"][0]
-
-        dico_q_ouv = stage_row["suivi_dico2_q_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
-        global nb_questions_ouvertes  # nb questions ouvertes
-        nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
+        
         if nb_questions_ouvertes > 0:
             self.column_panel_a1.visible = True
             self.label_a1.text = dico_q_ouv["1"][0]
@@ -864,7 +895,9 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
 
         # tests si questions ouvertes obligatoires sont répondues
         global stage_row
-        dico_ouv = stage_row["satis_dico2_q_ouv"]
+        global dico_q_ferm
+        global dico_q_ouv
+        dico_ouv = dico_q_ouv
 
         if (
             self.column_panel_a1.visible is True and dico_ouv["1"][1] == "obligatoire"
@@ -944,9 +977,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         dico_rep_q_ouv = {}  #     clé:num question   valeur: = question txt,reponse (txt)
 
         for cp in self.get_components():  # column panels in form self
-            if (
-                cp.tag != 0 and cp.tag != "header"
-            ):  # si pas les col panel du haut de la forme, ce sont des cp des questions
+            if (cp.tag != 0 and cp.tag != "header"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
                 num_question = cp.tag
                 if num_question <= nb_questions_ferm:
                     try:
@@ -1042,7 +1073,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         print(date_time)
 
         global user_stagiaire
-        result = anvil.server.call("add_1_formulaire_satisfaction",
+        result = anvil.server.call("add_1_formulaire_suivi",
                                     user_stagiaire,
                                     stage_row,
                                     dico_rep_q_ferm,
@@ -1056,3 +1087,4 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             self.button_annuler_click()
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")
+
