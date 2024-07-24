@@ -23,6 +23,7 @@ def add_stage(code_stage,     # row codes_stage concernée
     #print("lieu: ",lieu)         
     numero=int(numero)   
     new_row=app_tables.stages.add_row(
+                              type_stage = code_stage['type_stage'],   # copie du type de stage, S,F,V,T
                               code = code_stage,
                               code_txt = code_stage['code'],
                               numero = numero,

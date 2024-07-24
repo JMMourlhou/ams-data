@@ -60,10 +60,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         global user_stagiaire
         if user_stagiaire:
             # Drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(
-                q.fetch_only(
-                    "user_email", "stage"
-                ),  # <----------------------  A Modifier?
+            liste0 = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email", "stage"),  # <----------------------  A Modifier?
                 user_email=user_stagiaire,
                 enquete_satisf=False,
             )
@@ -72,17 +69,14 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             for row in liste0:
                 # lecture fichier père stage
                 stage = app_tables.stages.get(numero=row["stage"]["numero"])
-                if (stage["saisie_satisf_ok"] is True):  # si autorisé à saisir le formulaire, je l'affiche
+                if (stage["saisie_suivi_ok"] is True):  # si autorisé à saisir le formulaire de suivi, je l'affiche
+                    
                     # lecture fichier père type de stage
-                    type = app_tables.codes_stages.get(
-                        q.fetch_only("code"), code=stage["code"]["code"]
-                    )
-                    if type["code"][0] != "F":  # Si formateur, je n'affiche pas la dat
-                        liste_drop_d.append(
-                            (type["code"] + "  du " + str(stage["date_debut"]), stage)
-                        )
+                    type = app_tables.codes_stages.get(q.fetch_only("code"), code=stage["code"]["code"])
+                    if type["type_stage"] == "S":  # Si stagiaire, j'affiche la date
+                        liste_drop_d.append((type["code"] + "  du " + str(stage["date_debut"]), stage))
                     else:
-                        liste_drop_d.append((type["code"], stage))
+                        liste_drop_d.append((type["intitulé"], stage))
 
             # print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d
@@ -105,21 +99,13 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         # extraction des 2 dictionnaires du stage
         dico_q_ferm = {}
         dico_q_ouv = {}
-        dico_q_ferm = stage_row["satis_dico1_q_ferm"]
+        dico_q_ferm = stage_row["suivi_dico1_q_ferm"]
         global nb_questions_ferm  # nb questions fermées (testé en validation)
-        nb_questions_ferm = int(
-            dico_q_ferm["NBQ"]
-        )  # nb de questions fermées ds le dico
+        nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
 
-        if (
-            nb_questions_ferm > 0
-        ):  # Check du nb de questions fermées à afficher et affectation des questions
+        if (nb_questions_ferm > 0):  # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
-            self.label_1.text = dico_q_ferm[
-                "1"
-            ][
-                0
-            ]  # Je prend le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
+            self.label_1.text = dico_q_ferm["1"][0]  # Je prend le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
         if nb_questions_ferm > 1:
             self.column_panel_2.visible = True
             self.label_2.text = dico_q_ferm["2"][0]
@@ -148,9 +134,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             self.column_panel_10.visible = True
             self.label_10.text = dico_q_ferm["10"][0]
 
-        dico_q_ouv = stage_row[
-            "satis_dico2_q_ouv"
-        ]  # check du nb de questions ouvertes à afficher et affectation des questions
+        dico_q_ouv = stage_row["suivi_dico2_q_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
         global nb_questions_ouvertes  # nb questions ouvertes
         nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
         if nb_questions_ouvertes > 0:

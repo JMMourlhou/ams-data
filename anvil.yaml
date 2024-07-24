@@ -242,6 +242,9 @@ db_schema:
     - name: suivi_stage_q_ouv_template
       admin_ui: {width: 200, order: 7}
       type: simpleObject
+    - name: type_stage
+      admin_ui: {order: -1, width: 99}
+      type: string
   pre_requis_stagiaire:
     title: Pre_Requis_stagiaire
     client: full

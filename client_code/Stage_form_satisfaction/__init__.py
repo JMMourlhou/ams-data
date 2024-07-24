@@ -69,14 +69,13 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                 #lecture fichier père stage
                 stage=app_tables.stages.get(numero=row['stage']['numero'])
                 if stage["saisie_satisf_ok"] is True:                         # si autorisé à saisir le formulaire, je l'affiche 
-                    #lecture fichier père type de stage
-                    type=app_tables.codes_stages.get(q.fetch_only("code"),
-                                                        code=stage['code']['code']
-                                                    )
-                    if type['code'][0]!="F":    # Si formateur, je n'affiche pas la dat
-                        liste_drop_d.append((type['code']+"  du "+str(stage['date_debut']), stage))
+                   # lecture fichier père type de stage
+                    type = app_tables.codes_stages.get(q.fetch_only("code"), code=stage["code"]["code"])
+                    if type["type_stage"] == "S":  # Si stagiaire, j'affiche la date
+                        liste_drop_d.append((type["code"] + "  du " + str(stage["date_debut"]), stage))
                     else:
-                        liste_drop_d.append((type['code'], stage))
+                        liste_drop_d.append((type["intitulé"], stage))
+                   
                     
             #print(liste_drop_d)
             self.drop_down_code_stage.items = liste_drop_d

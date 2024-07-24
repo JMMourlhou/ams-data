@@ -3,16 +3,16 @@ container:
   properties: {visible: true}
 components:
 - name: column_panel_header
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}', spacing_below: small, background: ''}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
   type: ColumnPanel
   layout_properties: {grid_position: 'NDPOEF,AXFLPS'}
   components:
   - name: label_0
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: 'theme:On Tertiary', visible: true, text: 'Questionnaire de satisfaction ', font_size: 16, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:Tertiary', bold: true, underline: false, icon: ''}
+    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: 'Questionnaire de satisfaction '}
     type: Label
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - name: column_panel_0
-  properties: {role: outlined-card, tooltip: '', border: '', foreground: '', visible: true, wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: small, background: 'theme:Primary'}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
   type: ColumnPanel
   layout_properties: {grid_position: 'PCAMBQ,EBKMZZ'}
   components:
@@ -22,37 +22,37 @@ components:
     layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
     components:
     - name: button_annuler
-      properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: Retour, font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
       type: Button
       layout_properties:
         col_widths: {}
         grid_position: COGJPP,SACJUA
       event_bindings: {click: button_annuler_click}
   - name: flow_panel_0
-    properties: {role: null, vertical_align: full, spacing: medium, align: center, tooltip: '', border: '', foreground: '', visible: true, spacing_above: none, spacing_below: none, background: ''}
+    properties: {role: null, vertical_align: full, align: center, spacing_above: none, background: '', foreground: '', spacing_below: none, visible: true, border: '', tooltip: '', spacing: medium}
     type: FlowPanel
     layout_properties: {grid_position: 'BWKGSA,VNTBFV'}
     components:
     - name: drop_down_code_stage
       properties:
         role: null
+        include_placeholder: true
+        bold: false
         align: full
-        tooltip: ''
         placeholder: Choix du stage ....
-        border: ''
-        enabled: true
+        spacing_above: small
+        background: theme:Tertiary
+        underline: false
+        font: ''
         foreground: theme:On Primary Container
         items: []
-        visible: true
-        font_size: 16
-        font: ''
-        spacing_above: small
         spacing_below: small
+        visible: true
+        border: ''
         italic: false
-        background: theme:Tertiary
-        bold: false
-        underline: false
-        include_placeholder: true
+        enabled: true
+        font_size: 16
+        tooltip: ''
       type: DropDown
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
       event_bindings: {change: drop_down_code_stage_change}
@@ -71,7 +71,7 @@ components:
     layout_properties: {grid_position: 'LIPPSJ,JPIDBL', full_width_row: false}
     components:
     - name: button_bad
-      properties: {role: null, align: center, enabled: false, foreground: 'theme:Error', text: ' ', font_size: 30, background: 'theme:Surface', bold: false, icon: 'fa:thumbs-down'}
+      properties: {role: null, bold: false, align: center, background: 'theme:Surface', icon: 'fa:thumbs-down', foreground: 'theme:Error', enabled: false, font_size: 30, text: ' '}
       type: Button
       layout_properties: {grid_position: 'HRJSWS,AEXQWF'}
     - name: label_11
@@ -79,7 +79,7 @@ components:
       type: Label
       layout_properties: {grid_position: 'HRJSWS,FYTCZV'}
     - name: button_bad_copy
-      properties: {role: null, align: center, enabled: false, foreground: 'theme:Vert Foncé', text: ' ', font_size: 30, background: 'theme:Surface', bold: false, icon: 'fa:thumbs-up'}
+      properties: {role: null, bold: false, align: center, background: 'theme:Surface', icon: 'fa:thumbs-up', foreground: 'theme:Vert Foncé', enabled: false, font_size: 30, text: ' '}
       type: Button
       layout_properties: {grid_position: 'HRJSWS,GSRIRY'}
   - name: flow_panel_1
@@ -644,7 +644,7 @@ components:
     type: TextArea
     layout_properties: {grid_position: 'DKFTBM,BWCZLC'}
 - name: button_valider
-  properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: false, text: Valider, font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: 'theme:On Primary Container', bold: true, underline: false, icon: ''}
+  properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Valider}
   type: Button
   layout_properties: {grid_position: 'LMNCXX,CDDPQA'}
   event_bindings: {click: button_valider_click}

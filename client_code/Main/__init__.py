@@ -160,7 +160,10 @@ class Main(MainTemplate):
             else:  # user connected,but not admin
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
-
+            if user["role"] == "T":
+                self.button_qcm.visible = False
+                self.button_form_satisf.visible = False
+                
     def bt_gestion_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
         open_form("Visu_stages")
@@ -313,5 +316,6 @@ class Main(MainTemplate):
 
     def button_form_suivi_stage_click(self, **event_args):
         """This method is called when the button is clicked"""
-        alert("à effectuer")
+        from ..Stage_form_suivi import Stage_form_suivi
+        open_form("Stage_form_suivi")
             
