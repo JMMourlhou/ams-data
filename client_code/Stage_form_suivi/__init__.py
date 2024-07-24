@@ -72,9 +72,10 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                                              )
             print("nb de stages où le stagiaire est inscrit; ", len(liste0))
             liste_drop_d = []
-            
+
             # si user = stagiaire
             if user_stagiaire["role"]=="S":
+
                 for row in liste0:
                     # lecture fichier père stage
                     stage = app_tables.stages.get(numero=row["stage"]["numero"])
@@ -89,6 +90,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                             
             # si c'est un tuteur qui a ouvert, il faut savoir pour quel code stage motoN               
             if user_stagiaire["role"]=="T":
+
                 # Drop down stages de BPMotoN 
                 code_moto = app_tables.codes_stages.get(code="BPMOTO")
                 liste1 = app_tables.stages.search(
@@ -1080,7 +1082,8 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                     stage_row,
                                     dico_rep_q_ferm,
                                     dico_rep_q_ouv,
-                                    date_time
+                                    date_time,
+                                    user_stagiaire["role"]
                                 )
         if result is True:
             alert(

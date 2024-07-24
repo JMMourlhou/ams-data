@@ -47,7 +47,7 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
     else:
         return(False)
 
-
+""" -----------------------------------------------------------------------------------------------------------------------"""
 
 
 @anvil.server.callable           #AJOUT d'un formulaire de suivi de stage en base ds table, non anonyme
@@ -56,7 +56,8 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row
                             stage_row,                   # stages row
                             dico_rep_q_ferm,
                             dico_rep_q_ouv,
-                            date_time
+                            date_time,
+                            user_role   # S ou T 
                         ):
     # Print pour vérif des 2 dicos    
     print("=============== serveur side:")
@@ -70,9 +71,10 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row
     print(user_stagiaire["email"])
     print(stage_row["code_txt"])
     new_row=app_tables.stage_satisf.add_row(
-                                    email_si_suivi=user_stagiaire["email"],
-                                    stage_row=stage_row,
-                                    stage_type_txt=stage_row["code_txt"],
+                                    email_si_suivi = user_stagiaire["email"],
+                                    stage_row      = stage_row,
+                                    stage_type_txt = stage_row["code_txt"],
+                                    type           = user_role,                               # roledu user  S, T, F,... 
                                     stage_num_txt=str(stage_row["numero"]),
                                     date_heure=date_time,
                                     rep_dico_rep_ferm=dico_rep_q_ferm,
@@ -85,13 +87,7 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row
     re_read_row= app_tables.stage_satisf.get_by_id(id)
     
     if re_read_row:  
-        # check de la formule de satisfaction pour que le stgiaire ne puisse pas y revenir
-        
-        row = app_tables.stagiaires_inscrits.get(   numero =     stage_row['numero'],
-                                                    user_email = user_stagiaire
-                                                )
-        row.update(enquete_satisf=True)
-    
+        " pas de check sur le formulaire de suivi pour 1 tuteur "
         return(True)
     else:
         return(False)
