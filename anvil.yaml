@@ -454,6 +454,36 @@ db_schema:
     - name: file_version
       admin_ui: {width: 290}
       type: string
+  stage_suivi:
+    client: none
+    server: full
+    columns:
+    - name: stage_row
+      admin_ui: {width: 200, order: 0}
+      type: link_single
+      target: stages
+    - name: user_role
+      admin_ui: {order: 1, width: 94}
+      type: string
+    - name: stage_num_txt
+      admin_ui: {order: 0.5, width: 131}
+      type: string
+    - name: stage_type_txt
+      admin_ui: {order: 0.75, width: 138}
+      type: string
+    - name: rep_dico_rep_ferm
+      admin_ui: {width: 200, order: 5}
+      type: simpleObject
+    - name: rep_dico_rep_ouv
+      admin_ui: {width: 200, order: 6}
+      type: simpleObject
+    - name: email
+      admin_ui: {order: 1.5, width: 200}
+      type: string
+    - name: date_heure
+      admin_ui: {order: 2.5, width: 200}
+      type: string
+    title: Stage_suivi
   mail_type:
     title: Mail_type
     client: search
@@ -506,17 +536,11 @@ db_schema:
       admin_ui: {width: 134}
       type: string
     - name: rep_dico_rep_ferm
-      admin_ui: {order: 4, width: 183}
+      admin_ui: {order: 4, width: 441}
       type: simpleObject
     - name: rep_dico_rep_ouv
       admin_ui: {width: 538}
       type: simpleObject
-    - name: email_si_suivi
-      admin_ui: {order: 6, width: 200}
-      type: string
-    - name: type
-      admin_ui: {order: 0.5, width: 105}
-      type: string
   qcm_result:
     title: Qcm_result
     client: full

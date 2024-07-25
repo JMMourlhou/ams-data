@@ -70,11 +70,11 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row
     print(date_time)
     print(user_stagiaire["email"])
     print(stage_row["code_txt"])
-    new_row=app_tables.stage_satisf.add_row(
-                                    email_si_suivi = user_stagiaire["email"],
+    new_row=app_tables.stage_suivi.add_row(
+                                    email = user_stagiaire["email"],
                                     stage_row      = stage_row,
                                     stage_type_txt = stage_row["code_txt"],
-                                    type           = user_role,                               # roledu user  S, T, F,... 
+                                    user_role           = user_role,                               # role du user  T: tuteur, S: stagiaire 
                                     stage_num_txt=str(stage_row["numero"]),
                                     date_heure=date_time,
                                     rep_dico_rep_ferm=dico_rep_q_ferm,
@@ -84,7 +84,7 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row
     id=new_row.get_id()
     print(id)
     #relecture du row:
-    re_read_row= app_tables.stage_satisf.get_by_id(id)
+    re_read_row= app_tables.stage_suivi.get_by_id(id)
     
     if re_read_row:  
         " pas de check sur le formulaire de suivi pour 1 tuteur "
