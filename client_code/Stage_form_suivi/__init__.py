@@ -120,13 +120,15 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         if user_stagiaire["role"]=="T": 
             # sélection des stagiaires du stage sélectionné
             liste_stagiaires = app_tables.stagiaires_inscrits.search(tables.order_by("prenom", ascending=True),
-                                                      stage = stage_row)
+                                                                     stage = stage_row
+                                                                    )
+            print(len(liste_stagiaires))
             # création de la drop down codes stages 
             liste_drop_d_stagiaires = []
             for stagiaire in liste_stagiaires:
                 ligne_drop_d_visible = stagiaire["prenom"]+" "+stagiaire["name"]
                 liste_drop_d_stagiaires.append((ligne_drop_d_visible, stagiaire['user_email']))
-                
+            self.drop_down_stagiaires.items = liste_drop_d_stagiaires
             self.text_area_a3.visible = False
             self.drop_down_stagiaires.visible = True
        
