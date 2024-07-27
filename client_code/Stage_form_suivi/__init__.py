@@ -117,7 +117,19 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
-           
+        if user_stagiaire["role"]=="T": 
+            # sélection des stagiaires du stage sélectionné
+            liste_stagiaires = app_tables.stagiaires_inscrits.search(tables.order_by("prenom", ascending=True),
+                                                      stage = stage_row)
+            # création de la drop down codes stages 
+            liste_drop_d_stagiaires = []
+            for stagiaire in liste_stagiaires:
+                ligne_drop_d_visible = stagiaire["prenom"]+" "+stagiaire["name"]
+                liste_drop_d_stagiaires.append((ligne_drop_d_visible, stagiaire['user_email']))
+                
+            self.text_area_a3.visible = False
+            self.drop_down_stagiaires.visible = True
+       
         self.text_area_a1.text = None
         # extraction des 2 dictionnaires du stage
         global dico_q_ferm
