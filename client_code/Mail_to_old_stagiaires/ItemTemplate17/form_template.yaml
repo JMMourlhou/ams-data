@@ -4,17 +4,17 @@ container:
   properties: {col_spacing: tiny, spacing_below: none}
 components:
 - name: column_panel_1
-  properties: {role: outlined-card, background: 'theme:Primary', col_spacing: medium, wrap_on: mobile, col_widths: '{"XIDGGX":21,"QUBBFN":34,"JYEHLH":30,"SKIMYU":10}'}
+  properties: {role: outlined-card, background: 'theme:Primary', col_spacing: medium, wrap_on: mobile, col_widths: '{"XIDGGX":25,"QUBBFN":35,"JYEHLH":25,"SKIMYU":10,"GKBQST":54,"IPGHXW":6}'}
   type: ColumnPanel
   layout_properties: {grid_position: 'WEWSPK,BMIUEE'}
   components:
   - name: check_box_selection
-    properties: {text: '', font: '13', spacing_above: medium, background: 'theme:On Primary Container', align: center}
+    properties: {text: '', font: '13', spacing_above: medium, background: 'theme:On Primary Container', align: center, foreground: 'theme:Error'}
     type: CheckBox
     layout_properties: {grid_position: 'WXWRQL,SKIMYU'}
     event_bindings: {change: check_box_selection_change}
   - name: column_panel_2
-    properties: {col_widths: '{"FJIXBF":20,"BXYVVB":24}', col_spacing: tiny, wrap_on: never}
+    properties: {col_widths: '{"FJIXBF":23,"BXYVVB":23}', col_spacing: tiny, wrap_on: never}
     type: ColumnPanel
     layout_properties: {grid_position: 'WXWRQL,XIDGGX'}
     components:
@@ -41,16 +41,24 @@ components:
       type: Label
       layout_properties: {grid_position: 'FBKSNF,HDNFBU IAMQRW,HJBCYV'}
   - name: column_panel_4
-    properties: {col_widths: '{"GRCCSZ":50,"LSFNWQ":10}', wrap_on: never}
+    properties: {col_widths: '{}', wrap_on: never}
     type: ColumnPanel
     layout_properties: {grid_position: 'WXWRQL,JYEHLH'}
+    components:
+    - name: label_type
+      properties: {foreground: 'theme:On Primary', align: center, background: 'theme:On Primary Container'}
+      type: Label
+      layout_properties: {grid_position: 'HFUAYO,YCHHCN'}
+  - name: flow_panel_1
+    properties: {align: right}
+    type: FlowPanel
+    layout_properties: {grid_position: 'NHMDTQ,GKBQST'}
     components:
     - name: label_mail
       properties: {foreground: 'theme:On Primary'}
       type: Label
-      layout_properties: {grid_position: 'CKMGFR,GRCCSZ PFBGSY,AFUEQD'}
-    - name: button_del
-      properties: {text: '', role: outlined-button, foreground: 'theme:Error', icon: 'fa:minus', align: left}
-      type: Button
-      layout_properties: {grid_position: 'CKMGFR,LSFNWQ'}
-      event_bindings: {click: button_del_click}
+  - name: button_del
+    properties: {text: '', role: outlined-button, foreground: 'theme:Error', icon: 'fa:minus', align: right}
+    type: Button
+    layout_properties: {grid_position: 'NHMDTQ,IPGHXW'}
+    event_bindings: {click: button_del_click}

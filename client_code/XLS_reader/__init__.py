@@ -19,6 +19,7 @@ class XLS_reader(XLS_readerTemplate):
     """
     # si fichier important, il générera l'erreur "anvil.server.TimeoutError: Server code took too long"
     # DONC, UTILISATION DE LA BG TASK avec timer pour tuer la tache à la fin
+    
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         with anvil.server.no_loading_indicator:

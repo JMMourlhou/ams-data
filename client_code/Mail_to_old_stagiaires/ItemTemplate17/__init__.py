@@ -25,9 +25,11 @@ class ItemTemplate17(ItemTemplate17Template):
         try:
             self.label_date_heure.text = str(self.item['Date_time_envoi'])[0:16]  # cas où date encore vide
         except:
-            pass
+            self.label_date_heure.text = " "
+            
         self.label_date.text = self.item['date_diplome']
         self.check_box_selection.checked = self.item['select']
+        self.label_type.text = self.item['type_mail']
 
 
     def check_box_envoi_change(self, **event_args):
@@ -36,6 +38,11 @@ class ItemTemplate17(ItemTemplate17Template):
         result = anvil.server.call("maj_histo_envoi",self.item,self.check_box_envoi.checked)
         if result is not True:
             alert("Erreur de MAJ")
+        if self.item['envoi'] is True:
+            self.column_panel_1.background = "theme:Vert Foncé"
+        else:
+            self.column_panel_1.background = "theme:Primary"
+            
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -52,3 +59,7 @@ class ItemTemplate17(ItemTemplate17Template):
         result = anvil.server.call("maj_selection",self.item,self.check_box_selection.checked)
         if result is not True:
             alert("Erreur de MAJ")
+        if self.check_box_selection.checked is True:
+            self.check_box_selection.background = "theme:Tertiary"
+        else:
+            self.check_box_selection.background = "theme:On Primary Container"

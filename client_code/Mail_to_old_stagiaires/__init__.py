@@ -14,7 +14,7 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
 
         # lecture de tous les anciens stagiaires
         self.liste_old_stagiaires = app_tables.stagiaires_histo.search(
-                                                                    tables.order_by("nom", ascending=True),
+                                                                    tables.order_by("type_mail", ascending=True),
                                                                      )
         self.label_nb_rows.text = str(len(self.liste_old_stagiaires))
         self.repeating_panel_1.items = self.liste_old_stagiaires

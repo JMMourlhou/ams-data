@@ -69,22 +69,22 @@ components:
         layout_properties: {}
         event_bindings: {click: Close_click}
       - name: button_loop
-        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true}
+        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_loop_click}
       - name: button_1
-        properties: {text: extraction Txt, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
+        properties: {text: extraction TXT, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
       - name: button_qr_code_generator
-        properties: {text: Qr Code Generator, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        properties: {text: Qr Code Generator, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
       - name: button_sign
-        properties: {text: Sign, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        properties: {text: Sign, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_sign_click}
@@ -109,7 +109,7 @@ components:
         event_bindings: {click: button_rsz_img_click}
         layout_properties: {}
       - name: button_size_pr
-        properties: {text: Size PR, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        properties: {text: Size PR, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
         type: Button
         event_bindings: {click: button_size_pr_click}
         layout_properties: {}

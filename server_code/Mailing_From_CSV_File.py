@@ -22,9 +22,18 @@ def csv_file_reader(csv_file):
             print('Fin du fichier')
             return('Fin du fichier',nb)
         
-        # création d'une liste, à partir du séparateur ";"
+        # création d'une liste, à partir du séparateur ";" (CSV file)
         ligne = text.split(';')
         
+        #extraction d'1 fichier créé pour INFO COLL 
+        type_mail=ligne[0]           # extraction du type de mail ex: 
+        nom=ligne[1]  # extraction date du diplome
+        prenom=ligne[2]           # extraction du nom
+        mail=ligne[3]        # extraction du prenom
+        
+        
+        """
+        extraction de l'extranet FNMNS
         num=ligne[0]           # extraction du num ligne excel
         date_diplome=ligne[1]  # extraction date du diplome
         nom=ligne[2]           # extraction du nom
@@ -36,22 +45,24 @@ def csv_file_reader(csv_file):
         ville=ligne[8]          # extraction ville
         tel=ligne[9]            # extraction du tel
         mail=ligne[10]          # extraction du mail
-        
+        """
         # je recherche si un doublon existe déjà
         row = app_tables.stagiaires_histo.get(mail=mail)
         if not row:                             # mail innexistant, je l'ajoute                   
             nb += 1
             app_tables.stagiaires_histo.add_row(mail=mail,
-                                                num=num,
-                                                date_diplome=date_diplome,
+                                                type_mail=type_mail,
                                                 nom=nom,
                                                 prenom=prenom,
-                                                date_n=date_naissance,
-                                                lieu_n=lieu_naissance,
-                                                rue=rue,
-                                                ville=ville,
-                                                cp=cp,
-                                                tel=tel
+                                                
+                                                tel=None,
+                                                num=None,
+                                                date_diplome=None,                                              
+                                                date_n=None,
+                                                lieu_n=None,
+                                                rue=None,
+                                                ville=None,
+                                                cp=None
                                             )
 
 @anvil.server.callable
