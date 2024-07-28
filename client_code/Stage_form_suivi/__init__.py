@@ -1116,15 +1116,23 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                         stagiaire_du_tuteur=self.row_stagiaire["email"]   #le stagiaire qui est l'objet du formulaire (si user est Tuteur ou Formateur) 
                                     )
         if result is True:
-            alert("Merci pour vos réponses ! Formulaire sauvé.\n\n Si vous avez un autre tuteur ...\n ... remplissez un autre formulaire pour lui !")
+            alert("Merci pour vos réponses ! Formulaire sauvé.\n\n Si vous êtes Tuteur d'un autre stagiaire ...\n ... remplissez un autre formulaire pour lui !")
             self.button_annuler_click()
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")
 
     def drop_down_stagiaires_change(self, **event_args):
         """This method is called when an item is selected"""
+        global user_row
         self.row_stagiaire = self.drop_down_stagiaires.selected_value
         print("email du stagiaire choisi par le tuteur:",self.row_stagiaire["email"])
         self.text_area_a3.text = self.row_stagiaire["prenom"]+" "+self.row_stagiaire["nom"]
-        #self.text_area_a3.visible = True
-        #self.drop_down_stagiaires.visible = False
+
+        # Recherche si un formulaire a déjà été rempli pour lui
+        test = app_tables.stage_suivi.search(
+            stage_row = self.drop_down_code_stage.selected_value,  # le stage sélectionné
+            user_email = user_row["email"],                        #l'utilisateur du formulaire
+            stagiaire_du_tuteur = self.row_stagiaire["email"]      #le stagiaire qui est l'objet du formulaire   
+                                            )
+        if len(test) >0:
+            alert(f"Attention vous avez déjà rempli un rapport pour {self.text_area_a3.text} ! \n\n Vous pouvez remplir un autre rapport pour lui, nous prendrons en compte le dernier.")

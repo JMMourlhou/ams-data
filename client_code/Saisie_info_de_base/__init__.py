@@ -25,7 +25,6 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         user=anvil.users.get_user()
         self.stage=str(user['temp'])
         
-        alert(self.stage)   
         if int(self.stage) > 998:
             self.column_panel_naissance.visible = False
             self.column_panel_adresse.visible = False
@@ -173,7 +172,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                         txt_msg = anvil.server.call("add_stagiaire", user, self.stage, "???", type_add="")
                         alert(txt_msg)
                         anvil.users.logout()
-                        alert("Si possible, créez un raccourci sur votre tel maintenant... \n\n ... puis ouvrez de nouveau cette application pour entrez vos informations.")
+                        alert("Si possible, créez un raccourci de cette appli sur votre tel maintenant... \n\n ... puis ouvrez la de nouveau pour commencer à l'utiliser.")
                         self.button_retour_click()
             else :
                 alert("Fiche de renseignements non enregistée !")
