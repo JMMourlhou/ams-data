@@ -8,7 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-global user_stagiaire
+global user_row
 user_row = anvil.users.get_user()
 global stage_row
 stage_row = ()
@@ -62,20 +62,20 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         self.label_9.tag = "label"
         self.label_10.tag = "label"
 
-        global user_stagiaire
-        if user_stagiaire:
+        global user_row
+        if user_row:
             
             # Drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(
                                                 q.fetch_only("user_email", "stage"),  # <----------------------  A Modifier?
-                                                user_email=user_stagiaire,
+                                                user_email=user_row,
                                                 enquete_satisf=False,
                                                              )
             print("nb de stages où le stagiaire est inscrit; ", len(liste0))
             liste_drop_d = []
 
             # si user = stagiaire
-            if user_stagiaire["role"]=="S":
+            if user_row["role"]=="S":
 
                 for row in liste0:
                     # lecture fichier père stage
@@ -90,7 +90,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                             liste_drop_d.append((type["intitulé"], stage))
                             
             # si c'est un tuteur qui a ouvert, il faut savoir pour quel code stage motoN               
-            if user_stagiaire["role"]=="T":
+            if user_row["role"]=="T":
 
                 # Drop down stages de BPMotoN 
                 code_moto = app_tables.codes_stages.get(code="BPMOTO")
@@ -120,7 +120,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             return
             
         # Si c'est un tuteur (ou formateur)    
-        if user_stagiaire["role"]=="T" or  user_stagiaire["role"]=="F": 
+        if user_row["role"]=="T" or  user_row["role"]=="F": 
             # sélection des stagiaires du stage sélectionné
             liste_stagiaires = app_tables.stagiaires_inscrits.search(tables.order_by("prenom", ascending=True),
                                                                      stage = stage_row
@@ -139,7 +139,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         # extraction des 2 dictionnaires du stage
         global dico_q_ferm
         global dico_q_ouv
-        if user_stagiaire["role"]=="S":
+        if user_row["role"]=="S":
             dico_q_ferm = stage_row["suivi_dico1_q_ferm"]
             dico_q_ouv = stage_row["suivi_dico2_q_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
         else:
@@ -1093,14 +1093,15 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         print(date_time)
 
         global stage_row
-        global user_stagiaire
+        global user_row
         result = anvil.server.call("add_1_formulaire_suivi",
-                                    user_stagiaire,    # 
+                                    user_row,    # user qui a rempli le formulaire
                                     stage_row,
                                     dico_rep_q_ferm,
                                     dico_rep_q_ouv,
                                     date_time,
-                                    user_stagiaire["role"]
+                                    user_row["role"],  # Type du user qui a rempli le F:    S=stagiaire   T=Tuteur   F=Formateur
+                                    stagiaire_du_tuteur=self.row_stagiaire["email"]   #le stagiaire qui est l'objet du formulaire (si user est Tuteur ou Formateur) 
                                 )
         if result is True:
             alert(

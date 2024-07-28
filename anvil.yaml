@@ -483,8 +483,8 @@ db_schema:
     - name: date_heure
       admin_ui: {order: 2.5, width: 200}
       type: string
-    - name: Stagiaire_du_tuteur
-      admin_ui: {width: 200, order: 7}
+    - name: stagiaire_du_tuteur
+      admin_ui: {order: 7, width: 200}
       type: string
     title: Stage_suivi
   mail_type:

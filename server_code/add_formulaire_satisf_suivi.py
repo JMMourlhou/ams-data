@@ -52,12 +52,13 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
 
 @anvil.server.callable           #AJOUT d'un formulaire de suivi de stage en base ds table, non anonyme
 @anvil.tables.in_transaction
-def add_1_formulaire_suivi( user_stagiaire,              # users row
+def add_1_formulaire_suivi( user_stagiaire,              # users row (celui qui a rempli le formulaire)
                             stage_row,                   # stages row
                             dico_rep_q_ferm,
                             dico_rep_q_ouv,
                             date_time,
-                            user_role   # S ou T 
+                            user_role, # S ou T ou F
+                            stagiaire_du_tuteur  # si tuteur ou formateur a rempli, c'est le mail du stagiaire
                         ):
     # Print pour vérif des 2 dicos    
     print("=============== serveur side:")
@@ -71,14 +72,15 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row
     print(user_stagiaire["email"])
     print(stage_row["code_txt"])
     new_row=app_tables.stage_suivi.add_row(
-                                    email = user_stagiaire["email"],
+                                    user_email = user_stagiaire["email"],
                                     stage_row      = stage_row,
                                     stage_type_txt = stage_row["code_txt"],
                                     user_role           = user_role,                               # role du user  T: tuteur, S: stagiaire 
                                     stage_num_txt=str(stage_row["numero"]),
                                     date_heure=date_time,
                                     rep_dico_rep_ferm=dico_rep_q_ferm,
-                                    rep_dico_rep_ouv=dico_rep_q_ouv
+                                    rep_dico_rep_ouv=dico_rep_q_ouv,
+                                    stagiaire_du_tuteur=stagiaire_du_tuteur
                                    )
     print("new_row",new_row)
     id=new_row.get_id()
