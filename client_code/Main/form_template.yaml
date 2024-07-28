@@ -89,7 +89,7 @@ components:
         layout_properties: {}
         event_bindings: {click: button_sign_click}
       - name: button_mails
-        properties: {text: Mails, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        properties: {text: Param Mails, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_mails_click}
@@ -99,9 +99,10 @@ components:
         layout_properties: {}
         event_bindings: {click: button_xls_click}
       - name: button_mail_histo
-        properties: {text: Mail to Histo, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+        properties: {text: Publipostage, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         event_bindings: {click: button_mail_histo_click}
+        layout_properties: {}
       - name: button_rsz_img
         properties: {text: Resize IMG, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
         type: Button
