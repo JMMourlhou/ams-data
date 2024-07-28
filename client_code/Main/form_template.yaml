@@ -69,7 +69,7 @@ components:
         layout_properties: {}
         event_bindings: {click: Close_click}
       - name: button_loop
-        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: false}
+        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_loop_click}

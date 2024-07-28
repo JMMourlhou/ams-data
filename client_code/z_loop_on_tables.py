@@ -6,6 +6,16 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil import *
 
+#boucle sur la table old_stagiares pour modif rapide d'une colonne, ici sur la col typr de mail
+def loop_old_mails():
+    table_old = app_tables.stagiaires_histo.search()
+    result="erreur"
+    if table_old:
+        for row in table_old:
+            row.update(type_mail="old_pse")
+        result="loop ok"     
+    return result
+
 #boucle sur la table users pour modif rapide d'une colonne, ici sur le role (sauf l'administrateur)
 def loop_users():
     table_users = app_tables.users.search()

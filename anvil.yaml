@@ -380,10 +380,10 @@ db_schema:
       admin_ui: {order: 4, width: 120}
       type: string
     - name: nom
-      admin_ui: {order: 5, width: 107}
+      admin_ui: {order: 1.8125, width: 107}
       type: string
     - name: prenom
-      admin_ui: {order: 6, width: 99}
+      admin_ui: {order: 1.84375, width: 99}
       type: string
     - name: date_n
       admin_ui: {width: 200, order: 7}
@@ -410,13 +410,13 @@ db_schema:
       admin_ui: {order: 1.75, width: 200}
       type: datetime
     - name: erreur_mail
-      admin_ui: {order: 1.875, width: 200}
+      admin_ui: {order: 1.875, width: 125}
       type: bool
     - name: select
       admin_ui: {width: 127}
       type: bool
     - name: type_mail
-      admin_ui: {width: 200, order: 13}
+      admin_ui: {order: -1, width: 200}
       type: string
   global_variables:
     title: Global_variables
