@@ -25,10 +25,18 @@ class ItemTemplate17(ItemTemplate17Template):
         try:
             self.label_date_heure.text = str(self.item['Date_time_envoi'])[0:16]  # cas où date encore vide
         except:
-            self.label_date_heure.text = " "
+            pass
+        if self.item['Date_time_envoi'] is None:
+            self.label_date_heure.text = ""
             
         self.label_date.text = self.item['date_diplome']
+        
         self.check_box_selection.checked = self.item['select']
+        if self.check_box_selection.checked is True:
+            self.check_box_selection.background = "theme:Tertiary"
+        else:
+            self.check_box_selection.background = "theme:On Primary Container"
+            
         self.label_type.text = self.item['type_mail']
 
 

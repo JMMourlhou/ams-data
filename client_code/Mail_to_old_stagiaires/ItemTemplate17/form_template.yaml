@@ -50,7 +50,7 @@ components:
       type: Label
       layout_properties: {grid_position: 'HFUAYO,YCHHCN'}
   - name: flow_panel_1
-    properties: {align: right}
+    properties: {align: left}
     type: FlowPanel
     layout_properties: {grid_position: 'NHMDTQ,GKBQST'}
     components:
