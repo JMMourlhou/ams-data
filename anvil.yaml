@@ -415,6 +415,9 @@ db_schema:
     - name: select
       admin_ui: {width: 127}
       type: bool
+    - name: type_mail
+      admin_ui: {width: 200, order: 13}
+      type: string
   global_variables:
     title: Global_variables
     client: none
