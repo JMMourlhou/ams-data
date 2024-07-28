@@ -88,7 +88,7 @@ class Main(MainTemplate):
         if not user:
             self.content_panel.clear()
         else:
-            if user["prenom"] == None or user["prenom"] == "":
+            if user["prenom"] is None or user["prenom"] == "":
                 self.column_panel_header.visible = False
                 self.content_panel.add_component(Saisie_info_de_base(True), full_width_row=True)
 

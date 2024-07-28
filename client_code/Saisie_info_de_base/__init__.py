@@ -22,16 +22,17 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.button_retour.visible = False
             
         global user
-        if user and self.first_entry:          # 1ERE ENTREE et 1ere saisie , je lis si création de ce user pour un stage
-            self.stage=str(user['temp'])
-        if int(self.stage) < 998:
+        self.stage=str(user['temp'])
+        
+        alert(self.stage)   
+        if int(self.stage) > 998:
             self.column_panel_naissance.visible = False
             self.column_panel_adresse.visible = False
+            self.drop_down_fi.visible = False
             
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
-        if self.first_entry:  # si 1ere entrée ds fiche d'info
-            self.drop_down_fi.visible = True
+ 
 
         if user:
             self.text_box_mail.text =  user['email']
@@ -104,7 +105,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             return
             
         if self.text_box_tel.text == "":    # tel vides ou inf à 10 caract ?
-            alert("Entrez le teléphone !")
+            alert("Entrez votre teléphone !")
             return
         if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
             alert("Le numéro de teléphone n'est pas valide !")
@@ -171,7 +172,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                         txt_msg = anvil.server.call("add_stagiaire", user, self.stage, "???", type_add="")
                         alert(txt_msg)
                         anvil.users.logout()
-                        alert("Reconnectez-vous maintenant.")
+                        alert("Si possible, créez un raccourci sur votre tel maintenant... \n\n ... puis ouvrez de nouveau cette application pour entrez vos informations.")
                         self.button_retour_click()
             else :
                 alert("Fiche de renseignements non enregistée !")
@@ -245,6 +246,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def drop_down_fi_change(self, **event_args):
         """This method is called when an item is selected"""
         self.text_box_nom_change()
+
 
  
             

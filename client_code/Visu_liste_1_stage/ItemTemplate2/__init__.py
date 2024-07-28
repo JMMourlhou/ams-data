@@ -49,11 +49,14 @@ class ItemTemplate2(ItemTemplate2Template):
             self.rich_text_1.italic=False
             self.rich_text_1.align="center"
             #self.rich_text_1.font="Noto"
-            date_naiss_format = stagiaire['date_naissance'].strftime("%d/%m/%Y")
-            #self.rich_text_1.background="theme:Primary"
-            #self.rich_text_1.foreground="theme:On Primary"
-            self.rich_text_1.content=f" **{stagiaire['nom']} {stagiaire['prenom']}** ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
-            self.rich_text_2.content=f" Né le {date_naiss_format} à {stagiaire['ville_naissance']} ({stagiaire['code_postal_naissance']} {stagiaire['pays_naissance']}) \n {stagiaire['adresse_rue']}, {stagiaire['adresse_code_postal']} {stagiaire['adresse_ville']} "
+            try: # si pas date de naissance, (user type T, F, A, )
+                date_naiss_format = stagiaire['date_naissance'].strftime("%d/%m/%Y")
+                self.rich_text_1.content=f" **{stagiaire['nom']} {stagiaire['prenom']}** ({finance['code_fi']}) \n{stagiaire['email']} \n {stagiaire['tel']} "
+                self.rich_text_2.content=f" Né le {date_naiss_format} à {stagiaire['ville_naissance']} ({stagiaire['code_postal_naissance']} {stagiaire['pays_naissance']}) \n {stagiaire['adresse_rue']}, {stagiaire['adresse_code_postal']} {stagiaire['adresse_ville']} "
+                
+            except:
+                self.rich_text_1.content=f" **{stagiaire['nom']} {stagiaire['prenom']}**  \n{stagiaire['email']} \n {stagiaire['tel']} "
+                self.rich_text_2.content= ""
 
 
     def image_1_show(self, **event_args):

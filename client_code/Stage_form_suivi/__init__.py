@@ -1116,9 +1116,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                         stagiaire_du_tuteur=self.row_stagiaire["email"]   #le stagiaire qui est l'objet du formulaire (si user est Tuteur ou Formateur) 
                                     )
         if result is True:
-            alert(
-                "Merci pour vos réponses ! Formulaire sauvé."
-            )
+            alert("Merci pour vos réponses ! Formulaire sauvé.\n\n Si vous avez un autre tuteur ...\n ... remplissez un autre formulaire pour lui !")
             self.button_annuler_click()
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")

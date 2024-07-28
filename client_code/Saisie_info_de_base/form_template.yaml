@@ -156,7 +156,7 @@ components:
         foreground: theme:On Primary
         items: []
         spacing_below: small
-        visible: false
+        visible: true
         border: ''
         italic: false
         enabled: true
@@ -173,7 +173,7 @@ components:
     properties: {role: null, bold: false, align: left, placeholder: 2eme mail, spacing_above: none, background: 'theme:Primary', type: email, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
     name: text_box_email2
     layout_properties: {grid_position: 'HMNWUV,TIORTM'}
-    event_bindings: {change: text_box_email2_change, pressed_enter: text_box_email2_pressed_enter}
+    event_bindings: {change: text_box_email2_change}
   - type: TextArea
     properties: {role: null, bold: false, align: left, placeholder: Commentaires, spacing_above: small, background: 'theme:Primary', underline: false, font: '', foreground: 'theme:On Primary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, auto_expand: false, font_size: null, tooltip: '', height: 85.9083, text: ''}
     name: text_area_commentaires
