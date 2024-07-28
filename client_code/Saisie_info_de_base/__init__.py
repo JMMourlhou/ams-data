@@ -22,6 +22,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.button_retour.visible = False
             
         global user
+        user=anvil.users.get_user()
         self.stage=str(user['temp'])
         
         alert(self.stage)   
