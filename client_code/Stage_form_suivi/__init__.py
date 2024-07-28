@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 global user_stagiaire
-user_stagiaire = anvil.users.get_user()
+user_row = anvil.users.get_user()
 global stage_row
 stage_row = ()
 global nb_questions_ferm  # nb questions fermées (check 0 à 5)
@@ -33,6 +33,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         self.column_panel_1.tag = 1
         self.column_panel_2.tag = 2
         self.column_panel_3.tag = 3
+        self.drop_down_stagiaires.tag= "dropdown"  # je donne un tag quelquonque à la drop down de choix stagiaire si user tuteur ou formateur
         self.column_panel_4.tag = 4
         self.column_panel_5.tag = 5
         self.column_panel_6.tag = 6
@@ -117,7 +118,9 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
-        if user_stagiaire["role"]=="T": 
+            
+        # Si c'est un tuteur (ou formateur)    
+        if user_stagiaire["role"]=="T" or  user_stagiaire["role"]=="F": 
             # sélection des stagiaires du stage sélectionné
             liste_stagiaires = app_tables.stagiaires_inscrits.search(tables.order_by("prenom", ascending=True),
                                                                      stage = stage_row
@@ -992,7 +995,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         """
         dico_rep_q_ferm = {}  #     clé:num question   valeur: = question txt,reponse (0 à 5)
         dico_rep_q_ouv = {}  #     clé:num question   valeur: = question txt,reponse (txt)
-
+        # Questions fermées 
         for cp in self.get_components():  # column panels in form self
             if (cp.tag != 0 and cp.tag != "header" and cp.tag != "q_ouvertes"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
                 num_question = cp.tag
@@ -1092,7 +1095,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         global stage_row
         global user_stagiaire
         result = anvil.server.call("add_1_formulaire_suivi",
-                                    user_stagiaire,
+                                    user_stagiaire,    # 
                                     stage_row,
                                     dico_rep_q_ferm,
                                     dico_rep_q_ouv,
@@ -1107,3 +1110,10 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")
 
+    def drop_down_stagiaires_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.row_stagiaire = self.drop_down_stagiaires.selected_value
+        print("email du stagiaire choisi par le tuteur:",self.row_stagiaire["email"])
+        self.text_area_a3.text = self.row_stagiaire["prenom"]+" "+self.row_stagiaire["nom"]
+        #self.text_area_a3.visible = True
+        #self.drop_down_stagiaires.visible = False

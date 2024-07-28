@@ -477,7 +477,7 @@ db_schema:
     - name: rep_dico_rep_ouv
       admin_ui: {width: 200, order: 6}
       type: simpleObject
-    - name: email
+    - name: user_email
       admin_ui: {order: 1.5, width: 200}
       type: string
     - name: date_heure
