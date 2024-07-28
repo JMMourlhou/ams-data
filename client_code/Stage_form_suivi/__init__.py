@@ -1103,7 +1103,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                         dico_rep_q_ouv,
                                         date_time,
                                         user_row["role"],  # Type du user qui a rempli le F:    S=stagiaire   T=Tuteur   F=Formateur
-                                        stagiaire_du_tuteur=None      #le stagiaire qui est l'objet du formulaire (si user est Tuteur ou Formateur) 
+                                        stagiaire_du_tuteur=user_row["email"]      # le stagiaire qui est l'objet du formulaire 
                                     )
         else:   #user: Tuteur ou Formateur
             result = anvil.server.call("add_1_formulaire_suivi",
