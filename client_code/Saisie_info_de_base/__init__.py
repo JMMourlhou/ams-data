@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 global user
-user = None
+user=anvil.users.get_user()
 
 class Saisie_info_de_base(Saisie_info_de_baseTemplate):
     def __init__(self, first_entry=False, **properties):
@@ -20,15 +20,22 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         self.first_entry = first_entry
         if first_entry is True:
             self.button_retour.visible = False
+            
+        global user
+        if user and self.first_entry:          # 1ERE ENTREE et 1ere saisie , je lis si création de ce user pour un stage
+            self.stage=str(user['temp'])
+        if int(self.stage) < 998:
+            self.column_panel_naissance.visible = False
+            self.column_panel_adresse.visible = False
+            
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
         if self.first_entry:  # si 1ere entrée ds fiche d'info
             self.drop_down_fi.visible = True
 
-        user=anvil.users.get_user()
         if user:
             self.text_box_mail.text =  user['email']
-            if user["nom"] != None:
+            if user["nom"] is not None:
                 nm = user["nom"]
                 nm = nm.strip()
                 nm = nm.capitalize()
@@ -47,7 +54,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_c_naissance.text =         user["code_postal_naissance"]
             self.date_naissance.date =               user["date_naissance"]
             self.text_box_pays_naissance.text =      user["pays_naissance"]
-            if user["pays_naissance"] == None :
+            if user["pays_naissance"] is None :
                 self.text_box_pays_naissance.text = "France"
             self.text_area_rue.text =                user["adresse_rue"]
             self.text_box_ville.text =               user["adresse_ville"]
@@ -57,11 +64,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.check_box_accept_data_use.checked = user['accept_data']
             self.text_area_commentaires.text =       user['commentaires']
             
-                
-            if user['role'] != "S":   # Admin ou Formateur ou Bureaux
+            #affiche mail2 et commentaires si Admin, Bureaux, formateur
+            if user['role'] != "S" and user['role']!="T" and user['role']!="V":   
                self.text_box_email2.visible = True
                self.text_area_commentaires.visible = True
-        else:
+        else: # Admin ou Formateur ou Bureaux 
             self.button_retour_click()
 
     def file_loader_photo_change(self, file, **event_args):
@@ -73,8 +80,9 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
+        global user
         if self.text_box_prenom.text == "" :           # dates vides ?
-            alert("Entrez le prénom !")
+            alert("Entrez votre Prénom !")
             return
         else:
             pn = self.text_box_prenom.text
@@ -83,13 +91,17 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.text_box_prenom.text =  pn  
         
         if self.text_box_nom.text == "" :           # dates vides ?
-            alert("Entrez le nom !")
+            alert("Entrez votre Nom de Famille !")
             return
         else:
             n = self.text_box_nom.text
             n = n.capitalize()
             n = n.strip()
             self.text_box_nom.text =  n  
+
+        if self.image_photo.source is None:
+            alert("Prenez votre Photo svp !")
+            return
             
         if self.text_box_tel.text == "":    # tel vides ou inf à 10 caract ?
             alert("Entrez le teléphone !")
@@ -97,21 +109,24 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
         if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
             alert("Le numéro de teléphone n'est pas valide !")
             return   
-        if self.date_naissance.date is None :           # dateN vide ?
-            alert("Entrez la date de naissance !")
-            return   
-        if self.text_box_v_naissance.text == "" :    # ville N vide ?
-            alert("Entrez la ville de naissance !")
-            return   
-        if self.text_area_rue.text == "":
-            alert("Entrez votre adresse (Rue) !")
-            return  
-        if self.text_box_ville.text == "":
-            alert("Entrez votre adresse (Ville) !")
-            return
-        if self.text_box_code_postal.text == "":
-            alert("Entrez votre adresse (Code Postal) !")
-            return
+            
+        # Si Inscription ds un stage numéro > 998 : F ou T ou QCM pas de test sur Naissance et adresse     
+        if int(self.stage) < 998:
+            if self.date_naissance.date is None :           # dateN vide ?
+                alert("Entrez la date de naissance !")
+                return   
+            if self.text_box_v_naissance.text == "" :    # ville N vide ?
+                alert("Entrez la ville de naissance !")
+                return   
+            if self.text_area_rue.text == "":
+                alert("Entrez votre adresse (Rue) !")
+                return  
+            if self.text_box_ville.text == "":
+                alert("Entrez votre adresse (Ville) !")
+                return
+            if self.text_box_code_postal.text == "":
+                alert("Entrez votre adresse (Code Postal) !")
+                return
             
         """    
         # Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
@@ -126,7 +141,6 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 self.check_box_accept_data_use.checked = True
                 return
         
-        user=anvil.users.get_user()
         if user:
             result = anvil.server.call("modify_users", user,
                                                     self.text_box_nom.text,
@@ -147,16 +161,14 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if result is True :
                 alert("Renseignements enregistés !")    # *************************************
                 # insertion du stagiaire automatiqt si num_stage != 0
-                user=anvil.users.get_user()
                 if user and self.first_entry:          # 1ERE ENTREE 
-                    stage=str(user['temp'])
                     if  user['temp']==0:
                         alert("Votre compte est à jour,\n Vous n'êtes pas insrit à un stage.")
                         self.button_retour_click()
                     else:
                         #row = self.drop_down_fi.selected_value
                         #code_fi=row['code_fi']
-                        txt_msg = anvil.server.call("add_stagiaire", user, stage, "???", type_add="")
+                        txt_msg = anvil.server.call("add_stagiaire", user, self.stage, "???", type_add="")
                         alert(txt_msg)
                         anvil.users.logout()
                         alert("Reconnectez-vous maintenant.")

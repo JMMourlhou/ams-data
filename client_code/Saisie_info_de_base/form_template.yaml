@@ -99,7 +99,7 @@ components:
     layout_properties: {grid_position: 'RMUWJH,FOAKZS'}
     event_bindings: {change: text_box_ville_naissance_change}
   - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Code Postal, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
+    properties: {role: outlined, bold: false, align: left, placeholder: C. Postal, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
     name: text_box_c_naissance
     layout_properties: {grid_position: 'RMUWJH,RUJLLM'}
     event_bindings: {change: text_box_cp_naissance_change}
@@ -110,7 +110,7 @@ components:
     event_bindings: {change: text_box_pays_naissance_change}
 - type: ColumnPanel
   properties: {role: outlined-card, col_widths: '{"LMPSKT":39,"CVKDVN":21}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: medium, visible: true, border: '', tooltip: ''}
-  name: column_panel_4
+  name: column_panel_adresse
   layout_properties: {grid_position: 'FIDNSX,TEDELA'}
   components:
   - type: Label
