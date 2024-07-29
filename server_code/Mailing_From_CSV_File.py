@@ -91,6 +91,10 @@ def del_histo(item):   # item de l'enregistrement d'un ancien stagiare
 
 # MAJ de la sélection à partir de Mail_to_old_stagiaires (Coche Envoi a changé)
 @anvil.server.callable
-def maj_selection(item, select):   # item de l'enregistrement d'un ancien stagiare 
+def maj_selection(item, select, nb):   # item de l'enregistrement d'un ancien stagiare 
+    if select is True:
+        nb += 1
+    else:
+        nb -= 1
     item.update(select=select)
-    return True
+    return True, nb

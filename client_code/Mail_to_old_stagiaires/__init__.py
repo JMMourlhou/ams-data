@@ -11,7 +11,9 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        #lecture des lignes sélectionnées pour envoi
+        nb_select = app_tables.stagiaires_histo.search(select=True)
+        self.label_nb_select.text = len(nb_select)
         # lecture de tous les anciens stagiaires
         self.liste_old_stagiaires = app_tables.stagiaires_histo.search(
                                                                     tables.order_by("type_mail", ascending=True),

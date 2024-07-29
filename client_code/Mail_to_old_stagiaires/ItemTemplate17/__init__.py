@@ -63,11 +63,17 @@ class ItemTemplate17(ItemTemplate17Template):
 
     def check_box_selection_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        # récupération de la forme mère par  self.f = get_open_form() en init
+        self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents
+        nb = int(self.f.label_nb_select.text)
+        print("form mère atteingnable (en modif): ", self.f) 
+        
         # Récup de l'id pour MAJ de l'item
-        result = anvil.server.call("maj_selection",self.item,self.check_box_selection.checked)
+        result, nb = anvil.server.call("maj_selection",self.item,self.check_box_selection.checked, nb)
         if result is not True:
             alert("Erreur de MAJ")
-        if self.check_box_selection.checked is True:
+        if self.check_box_selection.checked is True:  
             self.check_box_selection.background = "theme:Tertiary"
         else:
             self.check_box_selection.background = "theme:On Primary Container"
+        self.f.label_nb_select.text = nb   
