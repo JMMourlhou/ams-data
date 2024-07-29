@@ -14,7 +14,7 @@ def csv_file_reader(csv_file):
     f = open(data_files[csv_file.name])    # csv_file est : file du file loader. RAJOUTER .name ici pour obtenir on nom
     x = True
     nb = 0 # Nb de mails ajoutés
-
+    print("Ouverture du fichier")
     while x:
         ligne = []
         text=f.readline()  # lecture  1 ligne
