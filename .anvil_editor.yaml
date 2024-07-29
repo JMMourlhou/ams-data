@@ -1,5 +1,6 @@
 unique_ids:
   forms:
+    Mail_to_old_stagiaires.RowTemplate6: '1722265157624218370746207.4056'
     Pre_R_pour_stagiaire_admin.ItemTemplate5.ItemTemplate6: '1700066714657677743233482.224'
     Mail_subject_attach_txt.ItemTemplate15: '1718887468288494998764751.1149'
     XLS_reader: '1720361662091559467161220.5573'
@@ -27,7 +28,6 @@ unique_ids:
     Visu_liste_1_stage.ItemTemplate2: '1714494952761916470702771.2946'
     Pre_R_pour_1_stagiaire.ItemTemplate12: '1714840217245669317917841.3502'
     Pre_R_pour_stagiaire_admin: '1700065100404928053444363.2231'
-    Mail_to_old_stagiaires.ItemTemplate17: '1720538943702747145732149.4492'
     Stage_creation: '1692038175242270722241195.8854'
     Stage_visu_modif.RowTemplate4: '1696628765753454352644890.27484'
     Saisie_info_apres_visu: '1696521738011909049555300.1316'

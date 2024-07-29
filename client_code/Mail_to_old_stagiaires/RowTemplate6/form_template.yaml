@@ -1,12 +1,12 @@
 is_package: true
 container:
-  type: ColumnPanel
-  properties: {col_spacing: tiny, spacing_below: none}
+  type: DataRowPanel
+  properties: {auto_display_data: false}
 components:
 - name: column_panel_1
   properties: {role: outlined-card, background: 'theme:Primary', col_spacing: medium, wrap_on: mobile, col_widths: '{"XIDGGX":25,"QUBBFN":35,"JYEHLH":25,"SKIMYU":10,"GKBQST":54,"IPGHXW":6}'}
   type: ColumnPanel
-  layout_properties: {grid_position: 'WEWSPK,BMIUEE'}
+  layout_properties: {}
   components:
   - name: check_box_selection
     properties: {text: '', font: '13', spacing_above: medium, background: 'theme:On Primary Container', align: center, foreground: 'theme:Error'}
