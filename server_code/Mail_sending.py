@@ -26,6 +26,10 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
     code_app2 = dict_var_glob["code_app2"]      # var_globale de l'apli AMS DATA
     logo_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_logo
     en_tete_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_en_tete
+    # ------------------------------------------
+    fin_mail_carte = code_app2+"/_/theme/"+_Constant_parameters_public_ok.carte_ams
+
+    # ------------------------------------------
     print("logo address ok: ",logo_address)
     
     print(emails_list)
@@ -42,11 +46,10 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                     <br>
                     {rich_text} <br>
                     <br>
-                    <i>L'équipe d'AMSport,</i>
                     <br>
+                    <p><img src = {fin_mail_carte} width="772" height="263"> </p>
                     {client_mail} <br>
                     <p><img src = {en_tete_address} width="772" height="263"> </p>
-                    
                 """
             )
             nb_mails += 1 # incrément nb de mails envoyés
