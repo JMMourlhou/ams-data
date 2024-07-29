@@ -45,6 +45,7 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                     <i>L'équipe d'AMSport,</i>
                     <br>
                     {client_mail} <br>
+                    <p><img src = {en_tete_address} width="772" height="263"> </p>
                     
                 """
             )
