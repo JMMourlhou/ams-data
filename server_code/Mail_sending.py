@@ -28,7 +28,7 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
     en_tete_address = code_app2+"/_/theme/"+_Constant_parameters_public_ok.ams_en_tete
     # ------------------------------------------
     fin_mail_carte = code_app2+"/_/theme/"+_Constant_parameters_public_ok.carte_ams
-
+    fin_mail_qualiopi = code_app2+"/_/theme/"+_Constant_parameters_public_ok.logo_qualiopi
     # ------------------------------------------
     print("logo address ok: ",logo_address)
     
@@ -46,10 +46,9 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                     <br>
                     {rich_text} <br>
                     <br>
-                    <br>
-                    <p><img src = {fin_mail_carte} width="772" height="263"> </p>
+                    <p><img src = {fin_mail_carte} width="370" height="188"> </p>
                     {client_mail} <br>
-                    <p><img src = {en_tete_address} width="772" height="263"> </p>
+                    <p><img src = {fin_mail_qualiopi} width="150" height="100"> 
                 """
             )
             nb_mails += 1 # incrément nb de mails envoyés
