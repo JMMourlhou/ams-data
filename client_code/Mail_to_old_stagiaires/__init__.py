@@ -11,6 +11,15 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        
+        #import anvil.js    # pour screen size
+        from anvil.js import window # to gain access to the window object
+        global screen_size
+        screen_size = window.innerWidth
+        print("screen: ", screen_size)
+        if screen_size > 800:
+            self.data_grid_1.rows_per_page = 7
+            
         #lecture des lignes sélectionnées pour envoi
         nb_select = app_tables.stagiaires_histo.search(select=True)
         self.label_nb_select.text = len(nb_select)

@@ -11,7 +11,7 @@ components:
     type: Spacer
     layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
   - name: label_3
-    properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Mailing aux Anciens stagiaires}
+    properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: 'Mailing : Info coll   /  Anciens stagiaires'}
     type: Label
     layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
   - name: flow_panel_1
@@ -55,7 +55,7 @@ components:
     - {id: VJQQOR, title: Column 2, data_key: column_2}
     - {id: OJLQEN, title: Column 3, data_key: column_3}
     auto_header: false
-    rows_per_page: 5
+    rows_per_page: 4
     spacing_below: none
   type: DataGrid
   components:
