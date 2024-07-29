@@ -4,61 +4,43 @@ container:
   properties: {auto_display_data: false}
 components:
 - name: column_panel_1
-  properties: {role: outlined-card, background: 'theme:Primary', col_spacing: medium, wrap_on: mobile, col_widths: '{"XIDGGX":25,"QUBBFN":35,"JYEHLH":25,"SKIMYU":10,"GKBQST":54,"IPGHXW":6}'}
+  properties: {role: outlined-card, background: 'theme:Primary', col_spacing: tiny, wrap_on: mobile, col_widths: '{"XIDGGX":25,"EFVUQX":2}', spacing_below: none}
   type: ColumnPanel
   layout_properties: {}
   components:
-  - name: check_box_selection
-    properties: {text: '', font: '13', spacing_above: medium, background: 'theme:On Primary Container', align: center, foreground: 'theme:Error'}
-    type: CheckBox
-    layout_properties: {grid_position: 'WXWRQL,SKIMYU'}
-    event_bindings: {change: check_box_selection_change}
   - name: column_panel_2
-    properties: {col_widths: '{"FJIXBF":23,"BXYVVB":23}', col_spacing: tiny, wrap_on: never}
+    properties: {col_widths: '{"FJIXBF":5,"YGFXGF":25,"OQZHET":14,"HEUAGG":5,"JKAMGH":17,"EVYGKF":17}', col_spacing: tiny, wrap_on: never}
     type: ColumnPanel
     layout_properties: {grid_position: 'WXWRQL,XIDGGX'}
     components:
+    - name: check_box_selection
+      properties: {text: '', font: '13', spacing_above: medium, background: 'theme:On Primary Container', align: right, foreground: 'theme:Error'}
+      type: CheckBox
+      layout_properties: {grid_position: 'KTWEWF,HEUAGG'}
+      event_bindings: {change: check_box_selection_change}
     - name: check_box_envoi
-      properties: {text: 'Envoi le:', foreground: 'theme:On Primary', align: left, spacing_above: medium, font_size: 13}
+      properties: {text: 'Le:', foreground: 'theme:On Primary', align: left, spacing_above: medium, font_size: 13}
       type: CheckBox
       layout_properties: {grid_position: 'KTWEWF,FJIXBF'}
       event_bindings: {change: check_box_envoi_change}
     - name: label_date_heure
       properties: {foreground: 'theme:On Primary', spacing_above: medium, font_size: 13}
       type: Label
-      layout_properties: {grid_position: 'KTWEWF,BXYVVB'}
-  - name: column_panel_3
-    properties: {wrap_on: never, col_widths: '{"CBPRMG":11,"HDNFBU":14}'}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'WXWRQL,QUBBFN'}
-    components:
+      layout_properties: {grid_position: 'KTWEWF,OQZHET'}
     - name: label_nom
       properties: {foreground: 'theme:On Primary'}
       type: Label
-      layout_properties: {grid_position: 'FBKSNF,CBPRMG'}
-    - name: label_date
-      properties: {foreground: 'theme:On Primary'}
-      type: Label
-      layout_properties: {grid_position: 'FBKSNF,HDNFBU IAMQRW,HJBCYV'}
-  - name: column_panel_4
-    properties: {col_widths: '{}', wrap_on: never}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'WXWRQL,JYEHLH'}
-    components:
-    - name: label_type
-      properties: {foreground: 'theme:On Primary', align: center, background: 'theme:On Primary Container'}
-      type: Label
-      layout_properties: {grid_position: 'HFUAYO,YCHHCN'}
-  - name: flow_panel_1
-    properties: {align: left}
-    type: FlowPanel
-    layout_properties: {grid_position: 'NHMDTQ,GKBQST'}
-    components:
+      layout_properties: {grid_position: 'KTWEWF,YGFXGF'}
     - name: label_mail
       properties: {foreground: 'theme:On Primary'}
       type: Label
+      layout_properties: {grid_position: 'KTWEWF,JKAMGH'}
+    - name: label_type
+      properties: {foreground: 'theme:On Primary', align: center, background: 'theme:On Primary Container'}
+      type: Label
+      layout_properties: {grid_position: 'KTWEWF,EVYGKF'}
   - name: button_del
     properties: {text: '', role: outlined-button, foreground: 'theme:Error', icon: 'fa:minus', align: right}
     type: Button
-    layout_properties: {grid_position: 'NHMDTQ,IPGHXW'}
+    layout_properties: {grid_position: 'WXWRQL,EFVUQX'}
     event_bindings: {click: button_del_click}

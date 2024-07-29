@@ -1,7 +1,7 @@
 container: {type: ColumnPanel}
 components:
 - name: column_panel_header
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: none, visible: true, border: '', tooltip: ''}
   type: ColumnPanel
   layout_properties: {grid_position: 'ZWRYQL,YAPQID'}
   event_bindings: {}
@@ -14,43 +14,40 @@ components:
     properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Mailing aux Anciens stagiaires}
     type: Label
     layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
-  - name: column_panel_2
-    properties: {col_widths: '{"ANDAWQ":28,"NJMGAJ":4,"GKWLMH":28}'}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'HXKHWS,FLNPOU'}
-    components:
-    - name: label_nb_select
-      properties: {align: right, foreground: 'theme:Error', bold: true}
-      type: Label
-      layout_properties: {grid_position: 'IYRVSW,ANDAWQ'}
-    - name: label_2
-      properties: {text: /, align: center}
-      type: Label
-      layout_properties: {grid_position: 'UQTROR,NWVHTU IYRVSW,NJMGAJ'}
-    - name: label_nb_rows
-      properties: {align: left, foreground: 'theme:Primary', bold: true}
-      type: Label
-      layout_properties: {grid_position: 'IYRVSW,GKWLMH'}
-  - name: column_panel_1
-    properties: {wrap_on: never, col_spacing: large}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'FDLYLV,AWJPVU'}
+  - name: flow_panel_1
+    properties: {align: justify, spacing_above: none, spacing_below: none, spacing: medium}
+    type: FlowPanel
+    layout_properties: {grid_position: 'KRLKWV,HDYGOG'}
     components:
     - name: button_annuler
       properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
       type: Button
-      layout_properties: {grid_position: 'SIHWFU,NFPFQW'}
       event_bindings: {click: button_annuler_click}
     - name: button_mailing
       properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Error', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: GO !}
       type: Button
-      layout_properties: {grid_position: 'SIHWFU,EJSHDV'}
       event_bindings: {click: button_mailing_click}
     - name: button_comp_stagiaires
-      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Comparaison}
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Comparaison}
       type: Button
-      layout_properties: {grid_position: 'SIHWFU,FWUBAV'}
       event_bindings: {click: button_comp_stagiaires_click}
+    - name: column_panel_2
+      properties: {col_widths: '{"ANDAWQ":19,"NJMGAJ":17,"GKWLMH":24}', wrap_on: never}
+      type: ColumnPanel
+      layout_properties: {width: 71.84384619140624}
+      components:
+      - name: label_nb_select
+        properties: {align: center, foreground: 'theme:Error', bold: true}
+        type: Label
+        layout_properties: {grid_position: 'IYRVSW,ANDAWQ'}
+      - name: label_2
+        properties: {text: /, align: center}
+        type: Label
+        layout_properties: {grid_position: 'UQTROR,NWVHTU IYRVSW,NJMGAJ'}
+      - name: label_nb_rows
+        properties: {align: center, foreground: 'theme:Primary', bold: true}
+        type: Label
+        layout_properties: {grid_position: 'IYRVSW,GKWLMH'}
 - name: data_grid_1
   properties:
     columns:
@@ -58,10 +55,13 @@ components:
     - {id: VJQQOR, title: Column 2, data_key: column_2}
     - {id: OJLQEN, title: Column 3, data_key: column_3}
     auto_header: false
+    rows_per_page: 5
+    spacing_below: none
   type: DataGrid
   components:
   - name: repeating_panel_1
-    properties: {item_template: Mail_to_old_stagiaires.RowTemplate6}
+    properties: {item_template: Mail_to_old_stagiaires.RowTemplate6, spacing_above: none, spacing_below: none}
     type: RepeatingPanel
+    layout_properties: {}
   layout_properties: {grid_position: 'VRBAVE,TXYJNS'}
 is_package: true
