@@ -46,7 +46,7 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                     <br>
                     {rich_text} <br>
                     <br>
-                    <p><img src = {fin_mail_carte} width="370" height="188"> </p>
+                    <p><img src = {fin_mail_carte} width="370" height="236"> </p>
                     {client_mail} <br>
                     <p><img src = {fin_mail_qualiopi} width="150" height="100"> 
                 """
