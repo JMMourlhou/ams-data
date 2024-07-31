@@ -91,9 +91,8 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                             
             # si c'est un tuteur qui a ouvert, il faut savoir pour quel code stage motoN               
             if user_row["role"]=="T":
-
                 # Drop down stages de BPMotoN 
-                code_moto = app_tables.codes_stages.get(code="BPMOTO")
+                code_moto = app_tables.codes_stages.get(code="T_BASE_N")
                 liste1 = app_tables.stages.search(
                                                     tables.order_by("date_debut", ascending=False),
                                                     code=code_moto
@@ -107,7 +106,6 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-
         open_form("Main", 99)
 
     def drop_down_code_stage_change(self, **event_args):
