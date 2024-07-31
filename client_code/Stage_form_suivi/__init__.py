@@ -76,12 +76,10 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
 
             # si user = stagiaire
             if user_row["role"]=="S":
-
                 for row in liste0:
                     # lecture fichier père stage
                     stage = app_tables.stages.get(numero=row["stage"]["numero"])
                     if (stage["saisie_suivi_ok"] is True):  # si autorisé à saisir le formulaire de suivi, je l'affiche
-                        
                         # lecture fichier père type de stage
                         type = app_tables.codes_stages.get(q.fetch_only("code"), code=stage["code"]["code"])
                         if type["type_stage"] == "S":  # Si stagiaire, j'affiche la date
@@ -92,7 +90,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             # si c'est un tuteur qui a ouvert, il faut savoir pour quel code stage motoN               
             if user_row["role"]=="T":
                 # Drop down stages de BPMotoN 
-                code_moto = app_tables.codes_stages.get(code="T_BASE_N")
+                code_moto = app_tables.codes_stages.get(code="BPMOTO")
                 liste1 = app_tables.stages.search(
                                                     tables.order_by("date_debut", ascending=False),
                                                     code=code_moto
@@ -1115,7 +1113,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                     )
         if result is True:
             if user_row["role"]=="T":
-                alert("Merci pour vos réponses ! Formulaire sauvé.\n\n Si vous êtes Tuteur d'un autre stagiaire, remplissez un autre formulaire pour lui !\n\n SVP, rentrez également votre carte pro !\n(Dans l'acceuil de cette application,\n(Option 'Documents à entrer')")
+                alert("Merci pour vos réponses ! Formulaire sauvé.\n\n Si vous êtes Tuteur d'un autre stagiaire, remplissez un autre formulaire pour lui !\n\n SVP, RENTREZ VOTRE CARTE PRO !\n(Dans l'acceuil de cette application,\noption 'Documents à entrer')")
             else:
                 alert("Merci pour vos réponses ! Formulaire sauvé.")
             self.button_annuler_click()
@@ -1136,4 +1134,4 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
             stagiaire_du_tuteur = self.row_stagiaire["email"]      #le stagiaire qui est l'objet du formulaire   
                                             )
         if len(test) >0:
-            alert(f"Attention vous avez déjà rempli un rapport pour {self.text_area_a3.text} ! \n\n Vous pouvez remplir un autre rapport pour lui, nous prendrons en compte le dernier.")
+            alert(f"Attention vous avez déjà rempli un rapport pour {self.text_area_a3.text} ! \n\n Vous pouvez toutefois remplir un nouveau rapport pour ce ou cette stagiaire.\n Tous les rapports seront conservés.")
