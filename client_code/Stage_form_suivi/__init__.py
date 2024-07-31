@@ -1116,7 +1116,10 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                         stagiaire_du_tuteur=self.row_stagiaire["email"]   #le stagiaire qui est l'objet du formulaire (si user est Tuteur ou Formateur) 
                                     )
         if result is True:
-            alert("Merci pour vos réponses ! Formulaire sauvé.\n\n Si vous êtes Tuteur d'un autre stagiaire ...\n ... remplissez un autre formulaire pour lui !")
+            if user_row["role"]=="T":
+                alert("Merci pour vos réponses ! Formulaire sauvé.\n\n Si vous êtes Tuteur d'un autre stagiaire, remplissez un autre formulaire pour lui !\n\n SVP, rentrez également votre carte pro !\n(Dans l'acceuil de cette application,\n(Option 'Documents à entrer')")
+            else:
+                alert("Merci pour vos réponses ! Formulaire sauvé.")
             self.button_annuler_click()
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")
