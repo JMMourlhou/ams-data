@@ -68,6 +68,11 @@ components:
         name: drop_down_type_mails
         layout_properties: {}
         event_bindings: {change: drop_down_type_mails_change}
+  - name: timer_1
+    properties: {interval: 0}
+    type: Timer
+    layout_properties: {grid_position: 'QHBVKP,BOBLZA'}
+    event_bindings: {tick: timer_1_tick}
   - name: column_panel_detail
     properties: {col_widths: '{}', background: 'theme:Primary', role: outlined-card, spacing_below: none, spacing_above: none, visible: false}
     type: ColumnPanel

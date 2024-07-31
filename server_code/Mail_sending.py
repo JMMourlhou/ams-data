@@ -12,9 +12,13 @@ from . import French_zone_server_side
 from . import Variables_globales # importation du module de lecture des variables globales (sauf mon logo)
 from . import _Constant_parameters_public_ok
 
+
 """Send an email to the specified user"""
-@anvil.server.callable
-def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaires=False):
+"""
+**************************************************** LECTURE FICHIER CSV EN BGT 
+"""
+@anvil.server.background_task
+def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachments=[]):
     # recup de date heure de l'envoi
     time=French_zone_server_side.time_french_zone() # time is a datetime format 
     # Initialisation du nb de mails envoyés
@@ -52,6 +56,11 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                 """
             )
             nb_mails += 1 # incrément nb de mails envoyés
+            
+            # sauve le nb de mails ds table temp
+            table_temp = app_tables.temp.search()[0]
+            table_temp.update(nb_mails_sent=nb_mails)
+            print("old_stgiaires 2",old_stagiaires)
             if old_stagiaires is True:
                 # sauver la date et l'heure
                 row_old_stagiaire = app_tables.stagiaires_histo.get_by_id(id)
@@ -68,5 +77,14 @@ def send_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaire
                 row_old_stagiaire.update(envoi=False, erreur_mail=True)
                 
         # possible de changer la couleur d'un texte:   <b><p style="color:blue;"> {user_row["prenom"]}, </p></b>
-    return True, nb_mails
 
+    
+@anvil.server.callable
+def run_bg_task_mail(emails_list, subject_txt, rich_text, attachments=[], old_stagiaires=False):
+    print("old_stagiaires 1",old_stagiaires)
+    task = anvil.server.launch_background_task('send_mail',emails_list, subject_txt, rich_text, old_stagiaires,attachments)
+    return task
+    
+    """
+    **************************************************************** FIN DU PROCESSUS BGT
+    """

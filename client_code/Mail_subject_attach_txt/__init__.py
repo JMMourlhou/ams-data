@@ -11,11 +11,12 @@ import anvil.media
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
-    def __init__(self, emails_liste, ref_model = "", old_stagiaires = False,**properties): 
+    def __init__(self, emails_liste, ref_model = "", old_stagiaires = False, **properties): 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.old_stagiaires = old_stagiaires
+        
          # Récupération des icones ds files pour afficher les icones en template 16
         self.icone_xls = app_tables.files.get(path="logo_xls.jpg")['file'] # lit la colonne 'file', media object
         self.icone_doc = app_tables.files.get(path="logo word.jpg")['file']
@@ -123,14 +124,10 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
             print("subject:",self.text_box_subject_detail.text)
             print("texte: ",self.text_area_text_detail.text)
             """
-            result, nb_mails = anvil.server.call("send_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements, self.old_stagiaires)
-            if result:
-                if nb_mails == 1:
-                    msg = "1 mail envoyé"
-                else:
-                    msg = str(nb_mails)+" mails envoyés"
-                alert(msg)
-                self.button_retour_click()
+
+            self.task_mail = anvil.server.call("run_bg_task_mail",self.emails_liste, self.text_box_subject_detail.text, self.text_area_text_detail.text, liste_des_attachements, self.old_stagiaires)
+            self.timer_1.interval=0.5
+            
 
     def text_box_subject_detail_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
@@ -180,4 +177,23 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
             #affichage image
             self.repeating_panel_2.visible = True
             self.repeating_panel_2.items = self.list_attach
+
+    def timer_1_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        try:
+            if self.task_mail.is_completed():
+                self.timer_1.interval=0
+                anvil.server.call('task_killer',self.task_mail)
+
+                # lit le nb de mails ds table temp
+                nb_mails = app_tables.temp.search()[0]['nb_mails_sent']
+                if nb_mails == 1:
+                    msg = "1 mail envoyé"
+                else:
+                    msg = str(nb_mails)+" mails traités"
+                alert(msg)
+            self.button_retour_click()
+        except:
+            pass
+       
         

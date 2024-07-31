@@ -69,6 +69,9 @@ db_schema:
     - name: nb_questions_qcm
       admin_ui: {width: 200}
       type: number
+    - name: nb_mails_sent
+      admin_ui: {width: 200, order: 4.5}
+      type: number
   stages:
     title: Stages
     client: search
