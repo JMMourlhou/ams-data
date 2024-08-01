@@ -318,4 +318,5 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Stage_form_suivi import Stage_form_suivi
         open_form("Stage_form_suivi")
+        # essai
             
