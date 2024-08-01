@@ -32,7 +32,6 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
- 
 
         if user:
             self.text_box_mail.text =  user['email']
