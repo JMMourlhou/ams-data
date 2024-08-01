@@ -138,7 +138,7 @@ components:
     layout_properties: {grid_position: 'ZAAEXD,BBKYES'}
     components:
     - type: TextArea
-      properties: {role: null, bold: false, align: left, placeholder: Commentaires, spacing_above: none, background: 'theme:Primary', underline: false, font: '', foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, auto_expand: false, font_size: null, tooltip: '', height: 85.93682861328125, text: ''}
+      properties: {role: null, bold: false, align: left, placeholder: Commentaires, spacing_above: none, background: 'theme:Primary', underline: false, font: '', foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, auto_expand: false, font_size: null, tooltip: '', height: 112.3394775390625, text: ''}
       name: text_area_commentaires
       layout_properties: {grid_position: 'WSXPGK,CIIGDL'}
       event_bindings: {change: text_area_commentaires_change}
@@ -155,8 +155,13 @@ components:
       - name: check_box_allow_satisf
         properties: {text: F_Satisf, font_size: 9, background: 'theme:Primary', align: center, foreground: 'theme:On Primary'}
         type: CheckBox
-        layout_properties: {grid_position: 'SVABCQ,ADBMLK'}
+        layout_properties: {grid_position: 'CLLWAN,JLYXHF'}
         event_bindings: {change: check_box_allow_satisf_change}
+      - name: check_box_allow_suivi
+        properties: {text: F_Suivi, font_size: 9, background: 'theme:Primary', align: center, foreground: 'theme:On Primary'}
+        type: CheckBox
+        layout_properties: {grid_position: 'ORLKAI,KPYLSJ'}
+        event_bindings: {change: check_box_allow_suivi_change}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: column_panel_2

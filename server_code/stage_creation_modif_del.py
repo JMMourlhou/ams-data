@@ -67,8 +67,9 @@ def modif_stage(code,
               nb_stagiaires_fin,
               nb_stagiaires_diplomes,
               commentaires,
-              allow_bgt_generation,    # True/False
-              allow_form_satisf        # True/False   
+              allow_bgt_generation,  # True/False
+              allow_form_satisf,     # True/False 
+              allow_form_suivi       # True/False 
              ):
     numero=int(numero)
 
@@ -99,7 +100,8 @@ def modif_stage(code,
                     nb_stagiaires_diplomes = nb_stagiaires_diplomes,
                     commentaires = commentaires,
                     allow_bgt_generation = allow_bgt_generation,
-                    saisie_satisf_ok=allow_form_satisf
+                    saisie_satisf_ok =allow_form_satisf,         # formulaire de satisf autorisé ? T/F
+                    saisie_suivi_ok = allow_form_suivi           # formulaire de suivi autorisé ? T/F
                     )
         valid=True
     return valid

@@ -66,7 +66,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if stage_row:
             self.text_box_num_stage.text = stage_row['numero']
             self.drop_down_code_stage.selected_value = stage_row['code']
-            typ = stage_row['code']
             self.text_box_intitule.text = intit
             self.date_picker_from.date = stage_row['date_debut']
             self.text_box_nb_stagiaires_deb.text = stage_row['nb_stagiaires_deb']
@@ -77,6 +76,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.drop_down_lieux.selected_value = stage_row['lieu']
             self.check_box_allow_bg_task.checked = stage_row['allow_bgt_generation']
             self.check_box_allow_satisf.checked = stage_row['saisie_satisf_ok']
+            self.check_box_allow_suivi.checked = stage_row['saisie_suivi_ok']
             
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
@@ -129,18 +129,18 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         """ Tests avant validation """
 
         row = self.drop_down_code_stage.selected_value    # Récupération de la ligne stage sélectionnée
-        if row == None:
+        if row is None:
             alert("Entrez le code du stage")
             return
         row2 = self.drop_down_lieux.selected_value         # Récupération du lieu sélectionné
-        if row2 == None:
+        if row2 is None:
             alert("Entrez le lieu du stage")
             return
 
-        if self.date_picker_to.date == None :           # dates vides ?
+        if self.date_picker_to.date is None :           # dates vides ?
             alert("Entrez la date de fin du stage")
             return
-        if self.date_picker_from.date == None :
+        if self.date_picker_from.date is None :
             alert("Entrez la date de début du stage")
             return
 
@@ -161,7 +161,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                                                 self.text_box_nb_stagiaires_diplom.text,
                                                 self.text_area_commentaires.text,
                                                 self.check_box_allow_bg_task.checked,
-                                                self.check_box_allow_satisf.checked
+                                                self.check_box_allow_satisf.checked,
+                                                self.check_box_allow_suivi.checked
                                                  )
         if result is True :
             alert("Stage enregisté !")
@@ -195,6 +196,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         self.button_validation.visible = True   
 
     def check_box_allow_satisf_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_validation.visible = True
+
+    def check_box_allow_suivi_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         self.button_validation.visible = True
 
@@ -251,6 +256,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.button_trombi_pdf.visible = True
             self.timer_2.interval=0
             anvil.server.call('task_killer',self.task_trombi)
+
+
 
 
 
