@@ -68,7 +68,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                     INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
         """
         self.liste_no_response = app_tables.stagiaires_inscrits.search(
-            numero=row["numero"], enquete_satisf=False
+            numero=row["numero"], enquete_suivi=False
         )
         if self.liste_no_response:  # retardataires
             self.repeating_panel_no_response.items = self.liste_no_response
