@@ -26,7 +26,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         screen_size = window.innerWidth
         print("screen: ", screen_size)
         if screen_size > 800:
-            self.data_grid_1.rows_per_page = 7
+            self.data_grid_1.rows_per_page = 6
         if screen_size > 1800:
             self.data_grid_1.rows_per_page = 11
     # Focus on nom en ouverture de form
