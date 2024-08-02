@@ -101,7 +101,7 @@ components:
             layout_properties: {}
             event_bindings: {click: button_mail_click}
           - name: button_del
-            properties: {text: '', foreground: 'theme:Tertiary', align: center, background: 'theme:On Primary Container', spacing_above: none, spacing_below: none, font_size: 12, icon: 'fa:minus'}
+            properties: {align: center, spacing_above: none, background: 'theme:On Primary Container', icon: 'fa:minus', foreground: 'theme:Tertiary', spacing_below: none, visible: false, font_size: 12, text: ''}
             type: Button
             layout_properties: {}
             event_bindings: {click: button_del_click}

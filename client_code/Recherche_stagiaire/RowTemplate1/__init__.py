@@ -20,7 +20,8 @@ class RowTemplate1(RowTemplate1Template):
             if self.item['prenom'] is not None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
                 if self.item['role'] == "A":          # Admin en rouge
-                    self.button_1.foreground = "red"
+                    self.button_1.foreground = "white"
+                    self.button_1.background = "red"
                 if self.item['role'] == "F":
                     self.button_1.foreground = "blue"  # Formateur en bleu
                 if self.item['role'] == "T":
@@ -54,7 +55,12 @@ class RowTemplate1(RowTemplate1Template):
             d = tel[6:8]
             e = tel[8:10]
             self.button_3.text = a+"-"+b+"-"+c+"-"+d+"-"+e    
-        # Si ADMINISTRATEUR je visualise le BT del (effacemen)
+            
+        # Si ADMINISTRATEUR je visualise le BT del (effacement d'un stagiaire, formateur, tuteur)
+        user = anvil.users.get_user()
+        if user["role"] == "A":
+            self.button_del.visible = True
+            
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
         start = French_zone.french_zone_time()  # pour calcul du tpsde traitement
         
@@ -229,7 +235,17 @@ class RowTemplate1(RowTemplate1Template):
         # Effacement du stgiaire/formateur si pas ds un stage et si administrateur
         user = anvil.users.get_user()
         if user["role"] == "A":
+            # Cette personne est-elle inscrite ds un ou plusieurs stages ?
             list = app_tables.stagiaires_inscrits.search(user_email=self.email_pour_del)
+            nb_stages = len(list)
+            if nb_stages != 0:
+                alert(f"Effacement impossible; cette personne est insrite dans {nb_stages} stages")
+                return
+            # Effact de la personne si confirmation
+            r=alert("Voulez-vous vraiment enlever définitivement cette personne ? ",buttons=[("oui",True),("non",False)])
+            if r :   # oui
+                txt_msg = anvil.server.call("del_personne",self.email_pour_del)
+                alert(txt_msg)
 
 
 
