@@ -124,7 +124,7 @@ components:
         layout_properties: {grid_position: 'EAREMG,IFZQQT'}
         event_bindings: {click: bt_gestion_stages_click}
       - type: Button
-        properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: 'fa:user', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Stagiaires}
+        properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: 'fa:user', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Recherche}
         name: button_create_recherche
         layout_properties: {grid_position: 'EAREMG,JJXUAK'}
         event_bindings: {click: button_create_recherche_click}

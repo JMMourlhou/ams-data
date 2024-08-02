@@ -25,9 +25,10 @@ class RowTemplate1(RowTemplate1Template):
                     self.button_1.foreground = "blue"  # Formateur en bleu
                 if self.item['role'] == "T":
                     self.button_1.foreground = "green"  # Formateur en bleu
+                self.email_pour_del = self.item   
             else:
                 self.button_1.text = self.item['nom']
-
+                
             tel = self.item['tel']
             self.button_4.text = self.item['email']
             self.button_qcm.tag = self.item['email']
@@ -37,6 +38,7 @@ class RowTemplate1(RowTemplate1Template):
                                             email=self.item['email']) # pour pré-requis  
         except: # ***********************************  Liste à partir table Stagiaires inscrits
             mel = self.item['user_email']['email']
+            self.email_pour_del = self.item['user_email']
             user_row = app_tables.users.get(q.fetch_only("nom","prenom","tel","email"),
                                             email=mel)
             #stagiaire_row = user_row # pour les pré-requi
@@ -44,7 +46,7 @@ class RowTemplate1(RowTemplate1Template):
             tel = user_row['tel']
             self.button_4.text = user_row['email']
             self.button_histo.tag = user_row['email']
-            self.drop_down_code_stage.tag = user_row['email']
+            self.drop_down_code_stage.tag = user_row
         if tel is not None:    
             a = tel[0:2]   # mise en forme du tel
             b = tel[2:4]
@@ -52,7 +54,7 @@ class RowTemplate1(RowTemplate1Template):
             d = tel[6:8]
             e = tel[8:10]
             self.button_3.text = a+"-"+b+"-"+c+"-"+d+"-"+e    
-            
+        # Si ADMINISTRATEUR je visualise le BT del (effacemen)
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
         start = French_zone.french_zone_time()  # pour calcul du tpsde traitement
         
@@ -221,8 +223,13 @@ class RowTemplate1(RowTemplate1Template):
         liste_email = []
         liste_email.append((self.button_histo.tag,self.item['prenom'],""))   # mail et prénom, id pas besoin
         open_form('Mail_subject_attach_txt',liste_email,"stagiaire_1")
-        
-            
+
+    def button_del_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # Effacement du stgiaire/formateur si pas ds un stage et si administrateur
+        user = anvil.users.get_user()
+        if user["role"] == "A":
+            list = app_tables.stagiaires_inscrits.search(user_email=self.email_pour_del)
 
 
 

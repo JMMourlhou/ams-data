@@ -100,6 +100,11 @@ components:
             type: Button
             layout_properties: {}
             event_bindings: {click: button_mail_click}
+          - name: button_del
+            properties: {text: '', foreground: 'theme:Tertiary', align: center, background: 'theme:On Primary Container', spacing_above: none, spacing_below: none, font_size: 12, icon: 'fa:minus'}
+            type: Button
+            layout_properties: {}
+            event_bindings: {click: button_del_click}
   event_bindings: {}
 - name: repeating_panel_1
   properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card, spacing_below: small, background: 'theme:Primary', spacing_above: small}
