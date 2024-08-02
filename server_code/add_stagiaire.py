@@ -72,7 +72,8 @@ def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add=""):   # Stage n
                               droits_stagiaire_qcms = dico_droits_qcm,
                               stage_txt = code_stage['code_txt'],
                               numero = code_stage['numero'],
-                              enquete_satisf=False
+                              enquete_satisf=False,
+                              enquete_suivi=False
                               )
              
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])

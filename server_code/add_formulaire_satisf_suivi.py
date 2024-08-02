@@ -36,8 +36,7 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
     re_read_row= app_tables.stage_satisf.get_by_id(id)
     
     if re_read_row:  
-        # check de la formule de satisfaction pour que le stgiaire ne puisse pas y revenir
-        
+        # check de la formule de satisfaction pour que le stagiaire ne puisse pas y revenir
         row = app_tables.stagiaires_inscrits.get(   numero =     stage_row['numero'],
                                                     user_email = user_stagiaire
                                                 )
@@ -89,7 +88,18 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row (celui qui 
     re_read_row= app_tables.stage_suivi.get_by_id(id)
     
     if re_read_row:  
-        " pas de check sur le formulaire de suivi pour 1 tuteur "
+        # check sur le formulaire de suivi pour 1 tuteur ou stagiaire pour savoir s'il en a rempli un, pour affichage de ceux qui n'ont pas encore répondu
+        if re_read_row:  
+            # si c'est un stagiaire, j'utilise son propre stage
+            if user_role == "S":
+                row = app_tables.stagiaires_inscrits.get(   numero =     stage_row['numero'],
+                                                            user_email = user_stagiaire
+                                                        )
+            if user_role == "T":
+                row = app_tables.stagiaires_inscrits.get(   numero =     1003,                       # stage Tuteur 
+                                                            user_email = user_stagiaire
+                                                        )
+            row.update(enquete_suivi=True)
         return(True)
     else:
         return(False)

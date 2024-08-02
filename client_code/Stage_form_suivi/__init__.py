@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 global user_row
-user_row = anvil.users.get_user()
+user_row = None
 global stage_row
 stage_row = ()
 global nb_questions_ferm  # nb questions fermées (check 0 à 5)
@@ -63,17 +63,17 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         self.label_10.tag = "label"
 
         global user_row
+        user_row = anvil.users.get_user()
         if user_row:
-            
             # Drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(
                                                 q.fetch_only("user_email", "stage"),  # <----------------------  A Modifier?
                                                 user_email=user_row,
-                                                enquete_suivi=False,
+                                                enquete_suivi = False   
                                                              )
             print("nb de stages où le stagiaire est inscrit; ", len(liste0))
+            
             liste_drop_d = []
-
             # si user = stagiaire
             if user_row["role"]=="S":
                 for row in liste0:
