@@ -16,3 +16,8 @@ class ItemTemplate9(ItemTemplate9Template):                             # bt His
             self.button_detail_histo.text = self.item['stage']['code']['code'] +" du " + str(self.item['stage']['date_debut'])
         else:
             self.button_detail_histo.text = self.item['stage']['code']['code']
+
+    def button_detail_histo_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ....Stage_visu_modif import Stage_visu_modif
+        open_form('Stage_visu_modif', "recherche", int(self.item['numero']), False)  # False: ne pas effectuer les BG tasks

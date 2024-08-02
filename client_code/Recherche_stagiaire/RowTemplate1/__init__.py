@@ -243,11 +243,10 @@ class RowTemplate1(RowTemplate1Template):
         user = anvil.users.get_user()
         if user["role"] == "A":
             # Cette personne est-elle inscrite ds un ou plusieurs stages ?
-            alert(self.email_pour_del)
             list = app_tables.stagiaires_inscrits.search(user_email=self.email_pour_del)
             detail =""
             for stage in list:
-                detail=detail+str(stage['numero'])+" "
+                detail=detail+str(stage['numero'])+"  "
                 
             nb_stages = len(list)
             if nb_stages != 0:
@@ -264,6 +263,7 @@ class RowTemplate1(RowTemplate1Template):
                 if row:
                     txt_msg = anvil.server.call("del_personne",row)
                 alert(txt_msg)
+            open_form("Recherche_stagiaire")
 
 
 
