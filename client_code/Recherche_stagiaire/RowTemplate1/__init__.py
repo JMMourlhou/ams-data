@@ -259,7 +259,10 @@ class RowTemplate1(RowTemplate1Template):
             # Effact de la personne si confirmation
             r=alert("Voulez-vous vraiment enlever définitivement cette personne ? ",buttons=[("oui",True),("non",False)])
             if r :   # oui
-                txt_msg = anvil.server.call("del_personne",self.email_pour_del)
+                # lecture row users
+                row = app_tables.users.get(email=self.email_pour_del['email'])
+                if row:
+                    txt_msg = anvil.server.call("del_personne",row)
                 alert(txt_msg)
 
 

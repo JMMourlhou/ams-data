@@ -12,7 +12,19 @@ import anvil.server
 
 # Effacement d'un stagiaire, formateur, tuteur de la table users
 @anvil.server.callable
-def del_personne(personne_row):   
+def del_personne(personne_row):  
+    msg = "Erreur en effacement"
+    list = app_tables.users.search()   
+    for row in list:
+        if row["email"] == personne_row['email']:
+            row.delete()
+            break
+    row1 = app_tables.users.get(email=personne_row['email'])
+    if not row1:
+        msg = "Effacement effectué !"
+    return msg
+    
+    """
     print(personne_row)
     print(personne_row['email'])
     msg = "Erreur en effacement"
@@ -25,3 +37,4 @@ def del_personne(personne_row):
         if not row:
             msg = "Effacement effectué !"
     return msg
+    """
