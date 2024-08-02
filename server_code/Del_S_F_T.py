@@ -12,8 +12,16 @@ import anvil.server
 
 # Effacement d'un stagiaire, formateur, tuteur de la table users
 @anvil.server.callable
-def del_personne(personne_row):  
+def del_personne(row):  
+    sov_mail_pour_verif = row['email']
     msg = "Erreur en effacement"
+    row.delete()
+    # Vérification
+    row1 = app_tables.users.get(email=sov_mail_pour_verif)
+    if not row1:
+        msg = "Effacement effectué !"
+    return msg
+    """                                                       Module qui fonctionne mais trop lent
     list = app_tables.users.search()   
     for row in list:
         if row["email"] == personne_row['email']:
@@ -23,6 +31,8 @@ def del_personne(personne_row):
     if not row1:
         msg = "Effacement effectué !"
     return msg
+    """
+
     
     """
     print(personne_row)
