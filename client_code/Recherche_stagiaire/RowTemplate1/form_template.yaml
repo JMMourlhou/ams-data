@@ -22,6 +22,11 @@ components:
         type: FlowPanel
         layout_properties: {grid_position: 'KJLNPO,GIRVHA'}
         components:
+        - name: button_role
+          properties: {role: null, bold: true, align: left, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: Role}
+          type: Button
+          event_bindings: {click: button_role_click}
+          layout_properties: {}
         - type: Button
           properties: {role: null, bold: true, align: left, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: button_1}
           name: button_1

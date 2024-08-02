@@ -26,6 +26,7 @@ class RowTemplate1(RowTemplate1Template):
                     self.button_1.foreground = "blue"  # Formateur en bleu
                 if self.item['role'] == "T":
                     self.button_1.foreground = "green"  # Formateur en bleu
+                self.button_role.text = self.item['role']
                 self.email_pour_del = self.item   
             else:
                 self.button_1.text = self.item['nom']
@@ -48,6 +49,8 @@ class RowTemplate1(RowTemplate1Template):
             self.button_4.text = user_row['email']
             self.button_histo.tag = user_row['email']
             self.drop_down_code_stage.tag = user_row
+            self.button_role.text = self.item['user_email']['role']
+            
         if tel is not None:    
             a = tel[0:2]   # mise en forme du tel
             b = tel[2:4]
@@ -135,7 +138,11 @@ class RowTemplate1(RowTemplate1Template):
                 txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
                 alert(txt_msg)
                 open_form('Recherche_stagiaire', contenu)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo
-            
+    
+    def button_role_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_1_click()    
+        
     def button_3_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.button_1_click()
@@ -236,16 +243,26 @@ class RowTemplate1(RowTemplate1Template):
         user = anvil.users.get_user()
         if user["role"] == "A":
             # Cette personne est-elle inscrite ds un ou plusieurs stages ?
+            alert(self.email_pour_del)
             list = app_tables.stagiaires_inscrits.search(user_email=self.email_pour_del)
+            detail =""
+            for stage in list:
+                detail=detail+str(stage['numero'])+" "
+                
             nb_stages = len(list)
             if nb_stages != 0:
-                alert(f"Effacement impossible; cette personne est insrite dans {nb_stages} stages")
+                txt="stage"
+                if nb_stages > 1:
+                    txt = "stages"
+                alert(f"Effacement impossible:\nCette personne est inscrite dans {nb_stages} {txt}\n\n Détail:\n{txt} N°{detail}")
                 return
             # Effact de la personne si confirmation
             r=alert("Voulez-vous vraiment enlever définitivement cette personne ? ",buttons=[("oui",True),("non",False)])
             if r :   # oui
                 txt_msg = anvil.server.call("del_personne",self.email_pour_del)
                 alert(txt_msg)
+
+
 
 
 
