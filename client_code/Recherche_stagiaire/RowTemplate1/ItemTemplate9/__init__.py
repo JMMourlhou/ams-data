@@ -12,5 +12,7 @@ class ItemTemplate9(ItemTemplate9Template):                             # bt His
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
-        self.button_detail_histo.text = self.item['stage']['code']['code'] +" du " + str(self.item['stage']['date_debut'])
+        if self.item['user_email']['role']=="S": 
+            self.button_detail_histo.text = self.item['stage']['code']['code'] +" du " + str(self.item['stage']['date_debut'])
+        else:
+            self.button_detail_histo.text = self.item['stage']['code']['code']

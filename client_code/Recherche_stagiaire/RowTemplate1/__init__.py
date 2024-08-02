@@ -23,6 +23,8 @@ class RowTemplate1(RowTemplate1Template):
                     self.button_1.foreground = "red"
                 if self.item['role'] == "F":
                     self.button_1.foreground = "blue"  # Formateur en bleu
+                if self.item['role'] == "T":
+                    self.button_1.foreground = "green"  # Formateur en bleu
             else:
                 self.button_1.text = self.item['nom']
 
