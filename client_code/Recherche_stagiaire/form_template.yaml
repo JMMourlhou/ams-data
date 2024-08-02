@@ -21,7 +21,7 @@ components:
       layout_properties: {grid_position: 'VFRGMW,CGVGSJ'}
       components:
       - name: column_panel_6
-        properties: {col_widths: '{"SKICUP":31,"TSDRJZ":25,"JMXDJI":24}', wrap_on: never, spacing_above: none, spacing_below: small, background: 'theme:Tertiary'}
+        properties: {col_widths: '{"SKICUP":59,"TSDRJZ":10,"JMXDJI":11}', wrap_on: never, spacing_above: none, spacing_below: small, background: 'theme:Tertiary'}
         type: ColumnPanel
         layout_properties: {grid_position: 'QFBRWM,GTQDWQ'}
         components:
