@@ -51,7 +51,7 @@ components:
           include_placeholder: true
           bold: false
           align: full
-          placeholder: Choix d'un type de modèle
+          placeholder: Mails pour ...
           spacing_above: small
           background: theme:On Primary Container
           underline: false

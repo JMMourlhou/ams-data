@@ -150,7 +150,7 @@ components:
       - name: button_suivi_result
         properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ' Résultats F Suivi'}
         type: Button
-        event_bindings: {click: button_satisf_result_click}
+        event_bindings: {click: button_suivi_result_click}
         layout_properties: {}
   - type: ColumnPanel
     properties: {col_widths: '{}'}

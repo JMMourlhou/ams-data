@@ -278,8 +278,8 @@ class Main(MainTemplate):
 
     def button_satisf_result_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Stage_suivi_results import Stage_suivi_results
-        open_form("Stage_suivi_results")
+        from ..Stage_satisf_statistics import Stage_satisf_statistics
+        open_form("Stage_satisf_statistics")
 
     def button_sign_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -314,9 +314,9 @@ class Main(MainTemplate):
         else:
             alert("pas de fin normale")
 
-    def button_form_suivi_stage_click(self, **event_args):
+
+    def button_suivi_result_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Stage_form_suivi import Stage_form_suivi
-        open_form("Stage_form_suivi")
-        # essai
+        from ..Stage_suivi_results import Stage_suivi_results
+        open_form("Stage_suivi_results")
             
