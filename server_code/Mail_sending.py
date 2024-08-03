@@ -66,7 +66,7 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
                 row_old_stagiaire = app_tables.stagiaires_histo.get_by_id(id)
                 if row_old_stagiaire:
                     row_old_stagiaire.update(envoi=True, Date_time_envoi=time, select=False)
-                    print(row_old_stagiaire['mail'], "envoyé pour", prenom)
+                    #print(row_old_stagiaire['mail'], "envoyé pour", prenom)
                 else:
                     print(row_old_stagiaire['mail'], "row non trouvé en maj")
                     
@@ -95,7 +95,7 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
     time_fin=French_zone_server_side.time_french_zone() # time is a datetime format 
     # Durée de traitement
     time_traitement = time_fin - time_deb
-    print("durée du traitement: ", time_traitement)
+    print(f"durée du traitement: {time_traitement} pour envoyer {nb_mails} mails")
 
 
 @anvil.server.callable
