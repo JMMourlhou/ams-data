@@ -10,7 +10,7 @@ from ..Stage_creation import Stage_creation
 #from ..Visu_stages import Visu_stages
 from ..Visu_stages.RowTemplate3 import RowTemplate3
 from anvil import open_form
-
+import sign_in_for_AMS_Data
 
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):  # msg pour afficher une alerte si mail erroné en pwreset par ex
@@ -171,7 +171,6 @@ class Main(MainTemplate):
     def bt_sign_in_click(self, h={}, num_stage=0, **event_args):  # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
-
         self.bt_se_connecter.visible = False
         self.bt_sign_in.visible = False
         self.bt_gestion_stages.visible = False
