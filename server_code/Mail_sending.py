@@ -61,6 +61,7 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
             table_temp = app_tables.temp.search()[0]
             table_temp.update(nb_mails_sent=nb_mails)
             print("old_stgiaires 2",old_stagiaires)
+            
             if old_stagiaires is True:
                 # sauver la date et l'heure
                 row_old_stagiaire = app_tables.stagiaires_histo.get_by_id(id)
@@ -69,6 +70,20 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
                     print(row_old_stagiaire['mail'], "envoyé pour", prenom)
                 else:
                     print(row_old_stagiaire['mail'], "row non trouvé en maj")
+                    
+            # Log du mail envoyé
+            fichiers_txt = ""
+            if attachments != []:
+                for file in attachments:
+                    print(file)
+                    fichiers_txt = fichiers_txt + file +","
+                
+            app_tables.mails_histo.add_row(
+                                            date_heure=time,
+                                            mail=email,
+                                            objet=subject_txt,
+                                            fichiers_attachés=str(attachments)
+                                            )
         except Exception as e:
             print("Une exception a été déclenchée :", e)
             if old_stagiaires is True:

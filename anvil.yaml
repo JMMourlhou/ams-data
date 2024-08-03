@@ -362,6 +362,23 @@ db_schema:
     - name: enquete_suivi
       admin_ui: {order: 5.5, width: 200}
       type: bool
+  mails_histo:
+    client: search
+    server: full
+    columns:
+    - name: date_heure
+      admin_ui: {width: 200, order: 0}
+      type: datetime
+    - name: mail
+      admin_ui: {order: 1, width: 245}
+      type: string
+    - name: objet
+      admin_ui: {order: 2, width: 494}
+      type: string
+    - name: fichiers_attachés
+      admin_ui: {width: 200, order: 3}
+      type: string
+    title: mails_histo
   stagiaires_histo:
     title: Stagiaires_histo
     client: search
