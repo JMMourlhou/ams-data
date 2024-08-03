@@ -376,7 +376,7 @@ db_schema:
       admin_ui: {order: 2, width: 494}
       type: string
     - name: fichiers_attachés
-      admin_ui: {width: 200, order: 3}
+      admin_ui: {order: 3, width: 225}
       type: string
     title: mails_histo
   stagiaires_histo:
