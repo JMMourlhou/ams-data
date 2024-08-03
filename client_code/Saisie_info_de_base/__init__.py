@@ -171,7 +171,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                         txt_msg = anvil.server.call("add_stagiaire", user, self.stage, "???", type_add="")
                         alert(txt_msg)
                         anvil.users.logout()
-                        alert("Si possible, créez un raccourci de cette appli sur votre tel maintenant... \n\n ... puis ouvrez la de nouveau pour commencer à l'utiliser.")
+                        alert("Si ce n'est pas fait, créez un raccourci de cette appli sur votre tel maintenant... \n\n ... puis ouvrez la de nouveau pour commencer à l'utiliser.")
                         self.button_retour_click()
             else :
                 alert("Fiche de renseignements non enregistée !")
