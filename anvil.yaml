@@ -373,12 +373,12 @@ db_schema:
       admin_ui: {order: 1, width: 245}
       type: string
     - name: objet
-      admin_ui: {order: 2, width: 494}
+      admin_ui: {order: 2, width: 532}
       type: string
     - name: fichiers_attachés
       admin_ui: {order: 3, width: 225}
       type: string
-    title: mails_histo
+    title: Mails_histo
   stagiaires_histo:
     title: Stagiaires_histo
     client: search
