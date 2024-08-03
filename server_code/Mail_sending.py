@@ -76,13 +76,13 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
             if attachments != []:
                 for file in attachments:
                     print(file)
-                    fichiers_txt = fichiers_txt + file +","
+                    fichiers_txt = fichiers_txt + str(file.name) +" , "
                 
             app_tables.mails_histo.add_row(
                                             date_heure=time,
                                             mail=email,
                                             objet=subject_txt,
-                                            fichiers_attachés=str(attachments)
+                                            fichiers_attachés=fichiers_txt
                                             )
         except Exception as e:
             print("Une exception a été déclenchée :", e)
