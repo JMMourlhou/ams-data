@@ -15,25 +15,50 @@ import anvil.server
 
 
 class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
-    def __init__(self, qt, list_rep, **properties):
+    def __init__(self, qt, list_rep, concatenate = False, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.label_question.text = qt
-        for rep in list_rep:
-            self.tb = RichText(
-                content=rep,
-                align="left",
-                spacing_above="none",
-                background="",
-                foreground="black",
-                # bold=False,
-                font_size=12,
-                # enabled = False
-                spacing_below="none",
-            )
-            self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)
+        #self.label_question.text = qt
+        if concatenate is False:       # J"affiche la question sur une ligne et la rep sur la suivante
+            for rep in list_rep:
+                self.tb = RichText(
+                    content=rep,
+                    align="left",
+                    spacing_above="none",
+                    background="",
+                    foreground="black",
+                    # bold=False,
+                    font_size=12,
+                    # enabled = False
+                    spacing_below="none",
+                )
+            self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)   
+            
+        if concatenate is True:
+            text = ""
+            cpt = 0
+            for ligne in list_rep:
+                cpt += 1
+                text = text + str(ligne) + "    "
+                if cpt == 2:            # après avoir lu la rep je peux afficher
+                    self.tb = RichText(
+                                        content=text,
+                                        align="left",
+                                        spacing_above="none",
+                                        background="",
+                                        foreground="black",
+                                        # bold=False,
+                                        font_size=12,
+                                        # enabled = False
+                                        spacing_below="none",
+                                     )
+                    self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)
+                    
+                    
+            
+           
 
 """
     def form_show(self, **event_args):

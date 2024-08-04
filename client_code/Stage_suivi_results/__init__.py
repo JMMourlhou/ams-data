@@ -477,6 +477,8 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                                                     numero=row["numero"], enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
                                                      )
         self.repeating_panel_noms.items = self.liste_response
+
+
         
          # Initialisation des clefs: valeur du dictionnaire des réponses
         q_rep = {
