@@ -9,19 +9,19 @@ import anvil.server
 #from anvil_extras.PageBreak import PageBreak
 
 
-# AFFICHAGE DES RESULTATS d pour 1 question ouverte du formulaire de satisfaction
-# APPELE PAR LA FORM 'STAGE_SATISF_STATISTICS' par add component:
-#   (  self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5)) )
+# AFFICHAGE DES RESULTATS pour le formulaire de suivi
+# APPELE PAR LA FORM 'S.ItemTemplate17' par add component:
 
 
 class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
-    def __init__(self, qt, list_rep, concatenate = False, **properties):
+    def __init__(self, qt, list_rep, concatenate = False, type="ouvertes", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
         # Any code you write here will run before the form opens.
+        self.type = type
+        
         #self.label_question.text = qt
-        if concatenate is False:       # J"affiche la question sur une ligne et la rep sur la suivante
+        if concatenate is False:       # Question ouvertes: J'affiche la question sur une ligne et la rep sur la suivante
             for rep in list_rep:
                 self.tb = RichText(
                     content=rep,
@@ -30,35 +30,57 @@ class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
                     background="",
                     foreground="black",
                     # bold=False,
-                    font_size=12,
+                    font_size=14,
                     # enabled = False
                     spacing_below="none",
                 )
-            self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)   
+                self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)   
             
         if concatenate is True:
             text = ""
             cpt = 0
             for ligne in list_rep:
                 cpt += 1
-                text = text + str(ligne) + "    "
+                text = text + str(ligne) 
                 if cpt == 2:            # après avoir lu la rep je peux afficher
+                    
                     self.tb = RichText(
                                         content=text,
-                                        align="left",
+                                        align=self.alignement(),
                                         spacing_above="none",
-                                        background="",
+                                        background=self.couleur(ligne),
                                         foreground="black",
-                                        # bold=False,
-                                        font_size=12,
+                                        #bold=True,
+                                        font_size=14,
                                         # enabled = False
                                         spacing_below="none",
                                      )
                     self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)
                     
-                    
-            
-           
+    def couleur(self, ligne, **event_args):  
+        if self.type != "ouvertes":   # rep fermées, j'affiche les couleurs correspondant aux réponses
+            bg_couleur = ""
+            if ligne == 0:
+                bg_couleur = "theme:Error"
+            if ligne == 1:
+                bg_couleur = "theme:Orange"    
+            if ligne == 2:
+                bg_couleur = "theme:Jaune Orange"
+            if ligne == 3:
+                bg_couleur = "theme:Vert Tres Clair"
+            if ligne == 4:
+                bg_couleur = "theme:Vert Clair"    
+            if ligne == 5:
+                bg_couleur = "theme:Vert Foncé"
+        else: # rep fermées
+            bg_couleur = "theme:Gray 300"    # gris clair
+        return bg_couleur
+
+    def alignement(self, **event_args):  
+        align = "center"
+        if self.type == "ouvertes":   # rep ouvertes, j'affiche à gauche
+            align = "left"
+        return align  
 
 """
     def form_show(self, **event_args):

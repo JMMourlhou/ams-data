@@ -244,12 +244,12 @@ components:
       layout_properties: {}
       event_bindings: {change: check_box_1_2_change}
     - name: check_box_1_3
-      properties: {text: '2', background: 'theme:Jaune Orangé'}
+      properties: {text: '2', background: 'theme:Jaune Orange'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_3_change}
     - name: check_box_1_4
-      properties: {text: '3', background: 'theme:Vers Très Clair'}
+      properties: {text: '3', background: 'theme:Vert Tres Clair'}
       type: CheckBox
       layout_properties: {}
       event_bindings: {change: check_box_1_4_change}

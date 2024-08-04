@@ -340,7 +340,8 @@ color_scheme:
   - {name: Olive, color: '#5B9B35'}
   - {name: Green, color: '#00FF00'}
   - {name: Orange, color: '#FF7B22'}
-  - {name: Jaune Orangé, color: '#FFD707'}
+  - {name: Jaune Orange, color: '#FFD707'}
   - {name: Jaune Vert, color: '#CEFF07'}
   - {name: Vert Clair, color: '#61D007'}
-  - {name: Vers Très Clair, color: '#DDF9A5'}
+  - {name: Vert Tres Clair, color: '#DDF9A5'}
+  - {name: White, color: '#FFFFFF'}

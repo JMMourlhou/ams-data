@@ -40,7 +40,7 @@ class ItemTemplate17(ItemTemplate17Template):
                 qt = cle_num_question
                 print("qt ", qt)
                 liste_rep = val
-                self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True))   # True; je mets q° et rep sur 2 lignes
+                self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True, "ouvertes"))   # True; je mets q° et rep sur 2 lignes
 
             # Affichage des réponses fermées
             rep_ferm = formulaire['rep_dico_rep_ferm']
@@ -50,7 +50,7 @@ class ItemTemplate17(ItemTemplate17Template):
                 qt = cle_num_question
                 print("qt ", qt)
                 liste_rep = val
-                self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True))   # True; je mets q° et rep sur 1 ligne
+                self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True, "fermées"))   # True; je mets q° et rep sur 1 ligne
 
     def form_show(self, **event_args):
         self.add_component(PageBreak()) 
