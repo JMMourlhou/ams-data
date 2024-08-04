@@ -20,9 +20,9 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         self.pdf_mode = pdf_mode  # appel du pdf renderer ?
         self.timer_1.interval = 0  # neutralise le timer
         self.test_existence_pdf = False
+        
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
-
         global screen_size
         screen_size = window.innerWidth
 
@@ -325,78 +325,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                             temp += 1  # cumul de la reponse 3    à la question
                             rep5_cumul[str(question)] = temp
                             print("cumul5 ", rep5_cumul[str(question)])
-        """            
-        print(f"Résultat pour les {len(liste_formulaires)} formulaires:")  
-        print("nb de rep 0/1: ", rep0_cumul["1"])
-        print("nb de rep 1/1: ", rep1_cumul["1"])
-        print("nb de rep 2/1: ", rep2_cumul["1"])
-        print("nb de rep 3/1: ", rep3_cumul["1"])
-        print("nb de rep 4/1: ", rep4_cumul["1"])
-        print("nb de rep 5/1: ", rep5_cumul["1"])
-        print()
-        print("nb de rep 0/2: ", rep0_cumul["2"])
-        print("nb de rep 1/2: ", rep1_cumul["2"])
-        print("nb de rep 2/2: ", rep2_cumul["2"])
-        print("nb de rep 3/2: ", rep3_cumul["2"])
-        print("nb de rep 4/2: ", rep4_cumul["2"])
-        print("nb de rep 5/2: ", rep5_cumul["2"])
-        print()
-        print("nb de rep 0/3: ", rep0_cumul["3"])
-        print("nb de rep 1/3: ", rep1_cumul["3"])
-        print("nb de rep 2/3: ", rep2_cumul["3"])
-        print("nb de rep 3/3: ", rep3_cumul["3"])
-        print("nb de rep 4/3: ", rep4_cumul["3"])
-        print("nb de rep 5/3: ", rep5_cumul["3"])
-        print()
-        print("nb de rep 0/4: ", rep0_cumul["4"])
-        print("nb de rep 1/4: ", rep1_cumul["4"])
-        print("nb de rep 2/4: ", rep2_cumul["4"])
-        print("nb de rep 3/4: ", rep3_cumul["4"])
-        print("nb de rep 4/4: ", rep4_cumul["4"])
-        print("nb de rep 5/4: ", rep5_cumul["4"])
-        print()
-        print("nb de rep 0/5: ", rep0_cumul["5"])
-        print("nb de rep 1/5: ", rep1_cumul["5"])
-        print("nb de rep 2/5: ", rep2_cumul["5"])
-        print("nb de rep 3/5: ", rep3_cumul["5"])
-        print("nb de rep 4/5: ", rep4_cumul["5"])
-        print("nb de rep 5/5: ", rep5_cumul["5"])
-        print()
-        print("nb de rep 0/6: ", rep0_cumul["6"])
-        print("nb de rep 1/6: ", rep1_cumul["6"])
-        print("nb de rep 2/6: ", rep2_cumul["6"])
-        print("nb de rep 3/6: ", rep3_cumul["6"])
-        print("nb de rep 4/6: ", rep4_cumul["6"])
-        print("nb de rep 5/6: ", rep5_cumul["6"])
-        print()
-        print("nb de rep 0/7: ", rep0_cumul["7"])
-        print("nb de rep 1/7: ", rep1_cumul["7"])
-        print("nb de rep 2/7: ", rep2_cumul["7"])
-        print("nb de rep 3/7: ", rep3_cumul["7"])
-        print("nb de rep 4/7: ", rep4_cumul["7"])
-        print("nb de rep 5/7: ", rep5_cumul["7"])
-        print()
-        print("nb de rep 0/8: ", rep0_cumul["8"])
-        print("nb de rep 1/8: ", rep1_cumul["8"])
-        print("nb de rep 2/8: ", rep2_cumul["8"])
-        print("nb de rep 3/8: ", rep3_cumul["8"])
-        print("nb de rep 4/8: ", rep4_cumul["8"])
-        print("nb de rep 5/8: ", rep5_cumul["8"])
-        print()
-        print("nb de rep 0/9: ", rep0_cumul["9"])
-        print("nb de rep 1/9: ", rep1_cumul["9"])
-        print("nb de rep 2/9: ", rep2_cumul["9"])
-        print("nb de rep 3/9: ", rep3_cumul["9"])
-        print("nb de rep 4/9: ", rep4_cumul["9"])
-        print("nb de rep 5/9: ", rep5_cumul["9"])
-        print()
-        print("nb de rep 0/10: ", rep0_cumul["10"])
-        print("nb de rep 1/10: ", rep1_cumul["10"])
-        print("nb de rep 2/10: ", rep2_cumul["10"])
-        print("nb de rep 3/10: ", rep3_cumul["10"])
-        print("nb de rep 4/10: ", rep4_cumul["10"])
-        print("nb de rep 5/10: ", rep5_cumul["10"])
-        """
+       
 
         # à partir du dico  j'extrai les questions pour les afficher
         cpt_questions = 0
@@ -480,23 +409,20 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                 Stage_suivi_histograms(qt, r0, r1, r2, r3, r4, r5)
             )
 
-        # =================================================================================================
-        # affichage des réponses OUVERTES pour chaque question
-        # =================================================================================================
-        # Initialisation des clefs: valeur du dictionnaire des réponses
-        q_rep = {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],  # cle: num_question   valeur: liste [] des réponses ouvertes pour cette question
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": [],
-        }
 
+
+
+        
+
+        # =================================================================================================
+        # affichage des réponses OUVERTES pour chaque Stagiaire
+        # =================================================================================================
+       
+
+
+
+        
+        """
         # Boucle sur tous les formulaires du stage
         cpt_formulaire = 0
         for formulaire in liste_formulaires:
@@ -543,28 +469,54 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         print(q_rep)
         print()
         print()
-
+        """
+        
+        # Préparation du colun panel des noms de stagaires
+        self.liste_response = app_tables.stagiaires_inscrits.search(
+                                                    tables.order_by("name", ascending=True),
+                                                    numero=row["numero"], enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
+                                                     )
+        self.repeating_panel_noms.items = self.liste_response
+        
+         # Initialisation des clefs: valeur du dictionnaire des réponses
+        q_rep = {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],  # cle: num_question   valeur: liste [] des réponses ouvertes pour cette question
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": [],
+        }
         # Boucle sur le dictionaire des questions/réponses
         for cle_num_question, val in q_rep.items():
-            nb_reponses = (
-                len(val) - 1
-            )  # nb d'éléments - 1 (le 1er élément (la question))
+            nb_reponses = (len(val) - 1)  # nb d'éléments - 1 (le 1er élément (la question))
             try:
                 qt = val[0]  # question (1er élément)
                 # Boucle sur les réponses pour création de la liste des reponses de la question
                 liste_rep = []
-                for x in range(
-                    1, nb_reponses + 1
-                ):  # 0:question, 1,2,3 ... les réponses
+                for x in range(1, nb_reponses + 1):  # 0:question, 1,2,3 ... les réponses
                     liste_rep.append(val[x])
-                self.column_panel_q_ouv.visible = True
-                self.column_panel_q_ouv.add_component(
-                    Stage_suivi_rep_ouvertes(qt, liste_rep)
-                )
+                #self.column_panel_q_ouv.visible = True
+                self.column_panel_q_ouv.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep))
             except:
                 pass
 
-        """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT """
+        """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT GLOBAL des Q Fermées"""
+        
+
+
+
+
+
+
+
+
+        
+        """ ============================================================================================== Fin de l'affichage des résultats par stagiare """
         # Génération du pdf si non existant A CHANGER QD L'ENQUETE EST COMPLETE
         print("génération du pdf")
         # if self.test_existence_pdf is not True or self.test_existence_pdf is True:

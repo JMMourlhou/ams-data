@@ -1,14 +1,12 @@
 from ._anvil_designer import Stage_suivi_rep_ouvertesTemplate
 from anvil import *
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-from anvil_extras.PageBreak import PageBreak
+#from anvil_extras.PageBreak import PageBreak
 
 
 # AFFICHAGE DES RESULTATS d pour 1 question ouverte du formulaire de satisfaction
@@ -35,10 +33,11 @@ class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
                 # enabled = False
                 spacing_below="none",
             )
-
             self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)
 
+"""
     def form_show(self, **event_args):
         self.add_component(
             PageBreak()
         )  # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!
+"""

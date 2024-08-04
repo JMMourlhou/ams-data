@@ -1,0 +1,13 @@
+is_package: true
+container: {type: ColumnPanel}
+components:
+- name: label_1
+  properties: {background: 'theme:Primary', foreground: 'theme:On Primary', text: Prénom Nom, align: center}
+  type: Label
+  layout_properties: {grid_position: 'JEGTOK,OTSBLR'}
+  data_bindings:
+  - {property: tag, code: '', writeback: false}
+- name: column_panel_content
+  properties: {}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'RHAMWU,PEMAHI'}
