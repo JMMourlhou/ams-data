@@ -6,8 +6,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-#from .Stage_satisf_histograms import (Stage_satisf_histograms)  # Forme ajoutée pour questions fermées histogrammes (add component)
-#from .Stage_satisf_rep_ouvertes import (Stage_satisf_rep_ouvertes)   #  Forme ajoutée pour questions ouvertes
+from .Stage_suivi_histograms import (Stage_suivi_histograms)  # Forme ajoutée pour questions fermées histogrammes (add component)
+from .Stage_suivi_rep_ouvertes import (Stage_suivi_rep_ouvertes)   #  Forme ajoutée pour questions ouvertes
 import fast_pdf
 
 
@@ -68,7 +68,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                     INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
         """
         self.liste_no_response = app_tables.stagiaires_inscrits.search(
-            numero=row["numero"], enquete_suivi=False
+            numero=row["numero"], enquete_suivi=False                    # Enquete_suivi ds  table stagiaires_inscrits
         )
         if self.liste_no_response:  # retardataires
             self.repeating_panel_no_response.items = self.liste_no_response
@@ -82,7 +82,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
 
         # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
         stage_row = app_tables.stages.get(numero=self.row["numero"])
-        pdf = stage_row["satis_pdf"]
+        pdf = stage_row["suivi_pdf"]
         if pdf and self.pdf_mode is not True:
             self.button_downl_pdf0.visible = True
             self.button_downl_pdf1.visible = True
@@ -249,7 +249,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
 
         # lecture des formulaires du stage choisi
         cpt_formulaire = 0
-        liste_formulaires = app_tables.stage_satisf.search(stage_row=row)
+        liste_formulaires = app_tables.stage_suivi.search(stage_row=row)
         print(len(liste_formulaires), "formulaires à traiter")
 
         for formulaire in liste_formulaires:
@@ -474,10 +474,10 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                 r4 = rep4_cumul["10"]
                 r5 = rep5_cumul["10"]
 
-            self.rich_text_info.content = f"Enquête lancée le {date}\nsur {len(liste_formulaires)} formulaires\n(Remplis anonynements, une seule fois.)"
+            self.rich_text_info.content = f"Enquête lancée le {date}\nsur {len(liste_formulaires)} formulaires."
             self.column_panel_content.visible = True
             self.column_panel_content.add_component(
-                Stage_satisf_histograms(qt, r0, r1, r2, r3, r4, r5)
+                Stage_suivi_histograms(qt, r0, r1, r2, r3, r4, r5)
             )
 
         # =================================================================================================
@@ -559,7 +559,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                     liste_rep.append(val[x])
                 self.column_panel_q_ouv.visible = True
                 self.column_panel_q_ouv.add_component(
-                    Stage_satisf_rep_ouvertes(qt, liste_rep)
+                    Stage_suivi_rep_ouvertes(qt, liste_rep)
                 )
             except:
                 pass
@@ -571,7 +571,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         if self.pdf_mode is False:
             with anvil.server.no_loading_indicator:
                 self.task_satisf = anvil.server.call(
-                    "run_bg_task_satisf", row["numero"], row["code_txt"], row
+                    "run_bg_task_suivi", row["numero"], row["code_txt"], row
                 )
                 self.timer_1.interval = 0.5
 
@@ -586,7 +586,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
     def button_downl_pdf1_click(self, **event_args):
         """This method is called when the button is clicked"""
         stage_row = app_tables.stages.get(numero=self.row["numero"])
-        pdf = stage_row["satis_pdf"]
+        pdf = stage_row["suivi_pdf"]
         if pdf:
             anvil.media.download(pdf)
             alert("Enquête téléchargée")

@@ -20,6 +20,7 @@ unique_ids:
     Pre_R_pour_stagiaire: '1699202225666940199047086.69'
     QCM_visu_modif_ST_Main: '1704213717676115424615741.90633'
     Pre_R_Moulinette: '1721475574028104475535451.521'
+    Stage_suivi_results.Stage_suivi_histograms: '1722766003516240955504350.9377'
     Stage_satisf_statistics.Stage_satisf_histograms: '1716312894185591012455048.2341'
     Stage_satisf_statistics.ItemTemplate14: '1717080249397548217642523.8767'
     Visu_stages: '1696617496144193209880821.08047'
@@ -61,6 +62,7 @@ unique_ids:
     Pre_R_pour_stagiaire.ItemTemplate3: '1699560833646565775883986.893'
     Pre_Visu_PDF_into_IMG.ImageItem: '1702310455837278396289922.7161'
     _q_fetch_exemple: '171190797453753533806385.82484'
+    Stage_suivi_results.Stage_suivi_rep_ouvertes: '1722766938379888985048511.016'
     Recherche_stagiaire: '169617204019653036080982.868935'
   modules:
     Pre_R_doc_name: '1702573243195439228782014.23444'

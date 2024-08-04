@@ -154,6 +154,9 @@ db_schema:
     - name: suivi_dico2_q_ouv
       admin_ui: {width: 200, order: 21}
       type: simpleObject
+    - name: suivi_pdf
+      admin_ui: {width: 200, order: 22}
+      type: media
   qcm:
     title: Qcm
     client: search
