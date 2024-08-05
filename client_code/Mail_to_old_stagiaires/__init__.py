@@ -62,4 +62,13 @@ class Mail_to_old_stagiaires(Mail_to_old_stagiairesTemplate):
                 #exist.delete()
         msg = f"Nb de doublons effacés: {nb}"
         alert(msg)
+
+    def button_tri_nom_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # lecture de toute la table old_stagiaires sur le mail
+        self.liste_old_stagiaires = app_tables.stagiaires_histo.search(
+                                                                    tables.order_by("mail", ascending=True),
+                                                                     )
+        self.label_nb_rows.text = str(len(self.liste_old_stagiaires))
+        self.repeating_panel_1.items = self.liste_old_stagiaires
         

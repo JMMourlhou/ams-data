@@ -31,6 +31,11 @@ components:
       properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Comparaison}
       type: Button
       event_bindings: {click: button_comp_stagiaires_click}
+    - name: button_tri_nom
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Tri/mails}
+      type: Button
+      event_bindings: {click: button_tri_nom_click}
+      layout_properties: {}
     - name: column_panel_2
       properties: {col_widths: '{"ANDAWQ":19,"NJMGAJ":17,"GKWLMH":24}', wrap_on: never}
       type: ColumnPanel
