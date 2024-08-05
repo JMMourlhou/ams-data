@@ -28,7 +28,7 @@ class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
                     align="left",
                     spacing_above="none",
                     background="",
-                    foreground="black",
+                    foreground="White",
                     # bold=False,
                     font_size=14,
                     # enabled = False
@@ -48,8 +48,8 @@ class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
                                         content=text,
                                         align=self.alignement(),
                                         spacing_above="none",
-                                        background=self.couleur(ligne),
-                                        foreground="black",
+                                        background=self.couleur_background(ligne),
+                                        foreground=self.couleur_foreground(ligne),
                                         #bold=True,
                                         font_size=14,
                                         # enabled = False
@@ -57,7 +57,7 @@ class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
                                      )
                     self.column_panel_reponses.add_component(self.tb)  # add 1 des réponses)
                     
-    def couleur(self, ligne, **event_args):  
+    def couleur_background(self, ligne, **event_args):  
         if self.type != "ouvertes":   # rep fermées, j'affiche les couleurs correspondant aux réponses
             bg_couleur = ""
             if ligne == 0:
@@ -75,7 +75,26 @@ class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
         else: # rep fermées
             bg_couleur = "theme:Gray 300"    # gris clair
         return bg_couleur
-
+        
+    def couleur_foreground(self, ligne, **event_args):  
+        if self.type != "ouvertes":   # rep fermées, j'affiche les couleurs correspondant aux réponses
+            fg_couleur = ""
+            if ligne == 0:
+                fg_couleur = "white"
+            if ligne == 1:
+                fg_couleur = "white"    
+            if ligne == 2:
+                fg_couleur = "black"
+            if ligne == 3:
+                fg_couleur = "black"
+            if ligne == 4:
+                fg_couleur = "white"    
+            if ligne == 5:
+                fg_couleur = "white"
+        else: # rep fermées
+            fg_couleur = "black"    # gris clair
+        return fg_couleur
+        
     def alignement(self, **event_args):  
         align = "center"
         if self.type == "ouvertes":   # rep ouvertes, j'affiche à gauche

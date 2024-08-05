@@ -16,7 +16,7 @@ class ItemTemplate17(ItemTemplate17Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.label_1.text = self.item['prenom'] +" "+ self.item['name']
+        self.label_1.text = self.item['prenom'] +" "+ self.item['name']+" "+ self.item['user_email']['tel']
         
         # recherche du row formulaire du stagiaire
         list = app_tables.stage_suivi.search(

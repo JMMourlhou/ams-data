@@ -5,11 +5,11 @@ toolbox_item: {title: JM_Plot}
 custom_component: false
 components:
 - name: label_question
-  properties: {bold: false, align: center, spacing_above: none, background: '', font: arial, foreground: 'theme:On Tertiary', spacing_below: small, visible: false, font_size: 16}
+  properties: {bold: false, align: center, spacing_above: none, background: '', font: arial, foreground: 'theme:On Primary', spacing_below: small, visible: false, font_size: 16}
   type: Label
   layout_properties: {grid_position: 'DXGHUF,JAANQH'}
 - name: column_panel_reponses
-  properties: {visible: true, background: 'theme:Gray 300', role: outlined-card, foreground: 'theme:Primary', col_spacing: none, spacing_above: none, spacing_below: none}
+  properties: {visible: true, background: 'theme:Gray 300', role: outlined-card, foreground: 'theme:On Primary', col_spacing: none, spacing_above: none, spacing_below: none}
   type: ColumnPanel
   layout_properties: {grid_position: 'HEEQXV,VRFIPW'}
   components: []
