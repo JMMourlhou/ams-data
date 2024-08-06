@@ -616,7 +616,7 @@ db_schema:
     server: full
     columns:
     - name: email
-      admin_ui: {width: 145}
+      admin_ui: {order: 0, width: 199}
       type: string
     - name: role
       admin_ui: {width: 96}
