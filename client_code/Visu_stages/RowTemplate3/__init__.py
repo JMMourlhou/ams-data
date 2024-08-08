@@ -21,6 +21,10 @@ class RowTemplate3(RowTemplate3Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        app_user = anvil.users.get_user()
+        if app_user['role'] == "J":
+            self.button_inscription.visible = False
+            self.button_del_stage.visible = False
         
         self.button_qcm.tag.stage = self.item['numero']  #numero de stage en tag du bouton self.button_qcm
         if screen_size < 800:
@@ -37,6 +41,8 @@ class RowTemplate3(RowTemplate3Template):
                 self.text_box_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
             self.button_qcm.text = "Résultats des QCM"
             
+        
+        
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']
         stage = stage.strip()

@@ -173,7 +173,7 @@ db_schema:
       type: link_single
       target: qcm_description
     - name: photo
-      admin_ui: {width: 200}
+      admin_ui: {order: 0, width: 95}
       type: media
     - name: num
       admin_ui: {width: 76}
@@ -225,6 +225,10 @@ db_schema:
     - name: taux_success
       admin_ui: {width: 138}
       type: number
+    - name: qcm_owner
+      admin_ui: {width: 200}
+      type: link_single
+      target: users
   codes_stages:
     title: Codes_stages
     client: search

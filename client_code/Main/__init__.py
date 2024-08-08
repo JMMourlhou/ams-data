@@ -7,7 +7,6 @@ import anvil.tables.query as q
 from .. import French_zone
 from ..Saisie_info_de_base import Saisie_info_de_base
 from ..Stage_creation import Stage_creation
-#from ..Visu_stages import Visu_stages
 from ..Visu_stages.RowTemplate3 import RowTemplate3
 from anvil import open_form
 import sign_in_for_AMS_Data
@@ -23,12 +22,7 @@ class Main(MainTemplate):
         self.bt_user_mail.text = "Connectez vous !"
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.enabled = False
-        self.bt_gestion_stages.visible = False
         self.column_panel_admin.visible = False
-        self.column_panel_others.visible = False
-        self.button_qcm.visible = False
-        self.button_pre_requis.visible = False
-        self.bt_gestion_stages.visible = False
 
         self.nb = nb
         """ Incrémentation de nb """
@@ -139,34 +133,11 @@ class Main(MainTemplate):
 
             self.bt_se_deconnecter.visible = False
             self.bt_user_mail.enabled = False
-            # self.bt_gestion_stages.visible =False
+
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
-            # self.button_qcm.visible = False
-            self.bt_gestion_stages.visible = False
-            self.button_pre_requis.visible = False
 
-    def display_admin_or_other_buttons(self, **event_args):
-        user = anvil.users.get_user(q.fetch_only("nom"))
-        if user:
-            self.bt_sign_in.visible = False
-            self.bt_user_mail.enabled = True
-            self.button_qcm.visible = True
-            self.button_pre_requis.visible = True
-            if user["role"] == "A" or user["role"] == "B":  # 'A'dministrator ou 'B'ureau
-                self.column_panel_admin.visible = True
-                self.column_panel_others.visible = True
-                self.bt_gestion_stages.visible = True
-                self.flow_panel_admin_only.visible = True
-            if user["role"] != "A":  # user connected,but not admin
-                self.column_panel_admin.visible = False
-                self.column_panel_others.visible = True
-            if user["role"] == "B":
-                self.flow_panel_admin_only.visible = True
-            if user["role"] == "T":
-                self.button_qcm.visible = False
-                self.button_form_satisf.visible = False
-                
+              
     def bt_gestion_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
         open_form("Visu_stages")
@@ -324,4 +295,40 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Stage_form_suivi import Stage_form_suivi
         open_form("Stage_form_suivi")
+
+    def display_admin_or_other_buttons(self, **event_args):
+        user = anvil.users.get_user(q.fetch_only("nom"))
+       
+        if user:
+            self.bt_sign_in.visible = False
+            self.bt_user_mail.enabled = True
+            self.button_qcm.visible = True
+            self.button_pre_requis.visible = True
+            self.label_role.text = user['role']   # affichage du role
             
+            if user["role"] == "A" :                              # 'A'dministrator  JM    TOUT
+                self.column_panel_admin.visible = True
+                self.column_panel_others.visible = True
+                #self.bt_gestion_stages.visible = True
+                self.flow_panel_admin_only.visible = True
+                
+                
+            if user["role"] == "B":                               # Bureaux    Visu stages, recherches et modif
+                self.flow_panel_admin_only.visible = False
+                self.column_panel_others.visible = False
+                self.column_panel_admin.visible = True
+
+            if user["role"] == "J":                               # Bureaux JC     TOUT sauf   Visu stages et recherches
+                self.flow_panel_admin_only.visible = False
+                self.column_panel_modif.visible = False
+                self.column_panel_admin.visible = True
+                self.column_panel_others.visible = False
+                
+            if user["role"] == "T":                               # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
+                self.button_qcm.visible = False
+                self.button_form_satisf.visible = False
+
+            if user["role"] == "F":                               # Formateurs: QCM, Pré requis, PREVOIR CREATION D'UN QCM 
+                self.button_qcm.visible = True
+                self.button_form_satisf.visible = False
+                self.button_form_suivi_stage.visible = False
