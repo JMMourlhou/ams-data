@@ -54,37 +54,37 @@ components:
         grid_position: LRXJXA,CUVIXY
       event_bindings: {click: bt_sign_in_click}
   - type: ColumnPanel
-    properties: {col_widths: '{}', background: 'theme:On Primary Container'}
+    properties: {col_widths: '{}', background: 'theme:On Primary Container', visible: false}
     name: column_panel_admin
     layout_properties: {grid_position: 'CWEFOY,ECORVD'}
     components:
-    - name: flow_panel_1
-      properties: {background: 'theme:On Primary Container', vertical_align: middle, align: center}
+    - name: flow_panel_admin_only
+      properties: {background: 'theme:On Primary Container', vertical_align: middle, align: center, visible: false}
       type: FlowPanel
       layout_properties: {grid_position: 'AOZXYS,RPVEJB'}
       components:
       - name: Close
-        properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary', visible: false}
+        properties: {text: Fermer, foreground: 'theme:On Primary', background: 'theme:Primary', visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: Close_click}
       - name: button_loop
-        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: false}
+        properties: {text: Loop s/table, background: 'theme:Primary', foreground: 'theme:On Primary', bold: true, visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_loop_click}
       - name: button_1
-        properties: {text: extraction TXT, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
+        properties: {text: extraction TXT, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
       - name: button_qr_code_generator
-        properties: {text: Qr Code Generator, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
+        properties: {text: Qr Code Generator, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_1_click}
       - name: button_sign
-        properties: {text: Sign, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
+        properties: {text: Sign, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         layout_properties: {}
         event_bindings: {click: button_sign_click}
@@ -104,12 +104,12 @@ components:
         event_bindings: {click: button_mail_histo_click}
         layout_properties: {}
       - name: button_rsz_img
-        properties: {text: Resize IMG, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
+        properties: {text: Resize IMG, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         event_bindings: {click: button_rsz_img_click}
         layout_properties: {}
       - name: button_size_pr
-        properties: {text: Size PR, background: 'theme:Primary', foreground: 'theme:On Primary', visible: false}
+        properties: {text: Size PR, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
         type: Button
         event_bindings: {click: button_size_pr_click}
         layout_properties: {}

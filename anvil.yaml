@@ -137,7 +137,7 @@ db_schema:
       admin_ui: {width: 200}
       type: simpleObject
     - name: satis_pdf
-      admin_ui: {width: 200}
+      admin_ui: {order: 17, width: 93}
       type: media
     - name: saisie_satisf_ok
       admin_ui: {width: 200}
@@ -157,6 +157,12 @@ db_schema:
     - name: suivi_pdf
       admin_ui: {width: 200, order: 22}
       type: media
+    - name: display_suivi
+      admin_ui: {width: 200, order: 23}
+      type: bool
+    - name: display_satisf
+      admin_ui: {order: 18.5, width: 200}
+      type: bool
   qcm:
     title: Qcm
     client: search

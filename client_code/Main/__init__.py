@@ -157,9 +157,12 @@ class Main(MainTemplate):
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
                 self.bt_gestion_stages.visible = True
-            else:  # user connected,but not admin
+                self.flow_panel_admin_only.visible = True
+            if user["role"] != "A":  # user connected,but not admin
                 self.column_panel_admin.visible = False
                 self.column_panel_others.visible = True
+            if user["role"] == "B":
+                self.flow_panel_admin_only.visible = True
             if user["role"] == "T":
                 self.button_qcm.visible = False
                 self.button_form_satisf.visible = False
@@ -196,7 +199,6 @@ class Main(MainTemplate):
         self.bt_sign_in.visible = False
         # import sign_in_for_AMS_Data
         from sign_in_for_AMS_Data.LoginDialog_V2 import LoginDialog_V2
-
         self.content_panel.clear()
         self.content_panel.add_component(LoginDialog_V2(), full_width_row=False)
 
@@ -240,7 +242,6 @@ class Main(MainTemplate):
 
     def button_loop_click(self, **event_args):
         """This method is called when the button is clicked"""
-        
         from .. import z_loop_on_tables
         result=z_loop_on_tables.loop_old_mails()
         alert(result)
