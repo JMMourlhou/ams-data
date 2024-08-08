@@ -1,0 +1,37 @@
+container: {type: ColumnPanel}
+components:
+- name: column_panel_header
+  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'MJAWTL,MRNJHC'}
+  components:
+  - name: label_3
+    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Paramètres}
+    type: Label
+    layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+- name: column_panel_1
+  properties: {background: 'theme:Primary', role: outlined-card}
+  type: ColumnPanel
+  layout_properties: {grid_position: 'KFOKKY,UXGOQU'}
+  components:
+  - name: button_annuler
+    properties: {role: outlined-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
+    type: Button
+    layout_properties: {grid_position: 'HZLHFQ,DWFNXH'}
+    event_bindings: {click: button_annuler_click}
+  - name: column_panel_2
+    properties: {spacing_below: large, role: elevated-card}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'GFLWHW,ITSWFL'}
+    components:
+    - name: button_maj_pr
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Primary', icon: 'fa:user', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Pré Requis Généraux}
+      type: Button
+      layout_properties: {grid_position: 'OJUXXB,PGZSMD'}
+      event_bindings: {click: button_maj_pr_click}
+    - name: button_gestion_pre_requis
+      properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '... par stage'}
+      type: Button
+      layout_properties: {grid_position: 'OJUXXB,TZTTPS'}
+      event_bindings: {click: button_gestion_pre_requis_click}
+is_package: true

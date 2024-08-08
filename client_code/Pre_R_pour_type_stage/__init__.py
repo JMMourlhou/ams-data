@@ -121,8 +121,8 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
                 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        open_form('Visu_stages')
+        from ..Parametres import Parametres
+        open_form("Parametres")
 
     def sov_dico_ds_temp(self, **event_args):
         table_temp = app_tables.temp.search()[0]   # sauvegarde du dico ds TABLE TEMP

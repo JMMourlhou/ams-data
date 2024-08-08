@@ -37,11 +37,6 @@ class Visu_stages(Visu_stagesTemplate):
         from ..Stage_creation import Stage_creation
         open_form('Stage_creation')
 
-    def button_gestion_pre_requis_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Pre_R_pour_type_stage import Pre_R_pour_type_stage
-        open_form('Pre_R_pour_type_stage')
-
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
         self.column_panel_header.scroll_into_view()

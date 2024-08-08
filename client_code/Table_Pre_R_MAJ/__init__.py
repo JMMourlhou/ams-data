@@ -28,5 +28,5 @@ class Table_Pre_R_MAJ(Table_Pre_R_MAJTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main',99)
+        from ..Parametres import Parametres
+        open_form("Parametres")

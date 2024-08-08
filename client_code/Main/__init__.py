@@ -237,11 +237,6 @@ class Main(MainTemplate):
         from ..QrCode_Generator import QrCode_Generator
         open_form("QrCode_Generator")
 
-    def button_maj_pr_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Table_Pre_R_MAJ import Table_Pre_R_MAJ
-        open_form("Table_Pre_R_MAJ")
-
     def button_form_satisf_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_form_satisfaction import Stage_form_satisfaction
@@ -332,3 +327,8 @@ class Main(MainTemplate):
                 self.button_qcm.visible = True
                 self.button_form_satisf.visible = False
                 self.button_form_suivi_stage.visible = False
+
+    def button_parametres_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Parametres import Parametres
+        open_form("Parametres")
