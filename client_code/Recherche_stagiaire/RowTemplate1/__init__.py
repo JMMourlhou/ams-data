@@ -222,7 +222,11 @@ class RowTemplate1(RowTemplate1Template):
             print(row_stage['numero'])
             # lecture des pré requis pour ce stage et pour ce stagiaire
             stagiaire_email = self.drop_down_code_stage.tag
-            stagiaire_row = app_tables.users.get(email=stagiaire_email)
+            try:
+                stagiaire_row = app_tables.users.get(email=stagiaire_email['email'])
+            except:
+                stagiaire_row = app_tables.users.get(email=stagiaire_email)
+                
             liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email=stagiaire_row,
                                                             stage_num=row_stage
                                                             )
