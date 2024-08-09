@@ -39,6 +39,7 @@ class Parametres(ParametresTemplate):
 
     def button_gestion_pre_requis_personnel_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.c
+        
+        self.column_panel_pr_par_personne.visible = True
 
  
