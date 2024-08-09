@@ -31,7 +31,7 @@ class Parametres(ParametresTemplate):
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         self.stage_row = self.drop_down_code_stage.selected_value
-        self.drop_down_code_personne.items = [(r["name"]+" "+r["prenom"], r) for r in app_tables.stagiaires_inscrits.search(
+        self.drop_down_personnes.items = [(r["name"]+" "+r["prenom"], r) for r in app_tables.stagiaires_inscrits.search(
                                                                                                                                 tables.order_by("name", ascending=True),
                                                                                                                                 stage_txt=self.stage_row["code"]
                                                                                                                                 )
@@ -39,7 +39,7 @@ class Parametres(ParametresTemplate):
 
     def button_gestion_pre_requis_personnel_click(self, **event_args):
         """This method is called when the button is clicked"""
-        
+        self.drop_down_code_stage.items = [(r["code"], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
         self.column_panel_pr_par_personne.visible = True
 
  
