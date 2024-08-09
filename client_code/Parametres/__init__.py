@@ -31,3 +31,20 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..Pre_R_pour_type_stage import Pre_R_pour_type_stage
         open_form('Pre_R_pour_type_stage')
+
+    def drop_down_code_stage_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.stage_row = self.drop_down_code_stage.selected_value
+        self.drop_down_code_personne.items = [(r["name"]+" "+r["prenom"], r) for r in app_tables.stagiaires_inscrits.search(
+                                                                                                                                tables.order_by("name", ascending=True),
+                                                                                                                                stage_txt=self.stage_row["code"]
+                                                                                                                                )
+                                            ]
+        
+
+
+    def button_gestion_pre_requis_personnel_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # INITIALISATION Drop down des types de stage
+        self.drop_down_code_stage.items = [(r["code"], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
+        self.column_panel_pr_par_personne.visible = True

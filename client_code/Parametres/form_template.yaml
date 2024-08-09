@@ -20,18 +20,78 @@ components:
     layout_properties: {grid_position: 'HZLHFQ,DWFNXH'}
     event_bindings: {click: button_annuler_click}
   - name: column_panel_2
-    properties: {spacing_below: large, role: elevated-card}
+    properties: {spacing_below: large, role: elevated-card, col_widths: '{"JPHUDS":40}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'GFLWHW,ITSWFL'}
     components:
     - name: button_maj_pr
-      properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Primary', icon: 'fa:user', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Pré Requis Généraux}
+      properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Primary', icon: 'fa:user', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Intitulé des Pré Requis}
       type: Button
       layout_properties: {grid_position: 'OJUXXB,PGZSMD'}
       event_bindings: {click: button_maj_pr_click}
     - name: button_gestion_pre_requis
-      properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '... par stage'}
+      properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '... par type de stage'}
       type: Button
       layout_properties: {grid_position: 'OJUXXB,TZTTPS'}
       event_bindings: {click: button_gestion_pre_requis_click}
+    - name: button_gestion_pre_requis_personnel
+      properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '... par personne'}
+      type: Button
+      layout_properties: {grid_position: 'OJUXXB,IYYXHR'}
+      event_bindings: {click: button_gestion_pre_requis_personnel_click}
+    - name: column_panel_pr_par_personne
+      properties: {col_widths: '{"VBUMSX":40,"MHEOBZ":40}', visible: false}
+      type: ColumnPanel
+      layout_properties: {grid_position: 'WCKZOS,JPHUDS'}
+      components:
+      - name: drop_down_code_stage
+        properties:
+          role: null
+          include_placeholder: true
+          bold: false
+          align: full
+          placeholder: Stage
+          spacing_above: small
+          background: theme:Tertiary
+          underline: false
+          font: ''
+          foreground: theme:On Primary Container
+          items: []
+          spacing_below: none
+          visible: true
+          border: ''
+          italic: false
+          enabled: true
+          font_size: 16
+          tooltip: ''
+        type: DropDown
+        layout_properties: {grid_position: 'PRMQIX,VBUMSX'}
+        event_bindings: {change: drop_down_code_stage_change}
+        data_bindings:
+        - {property: border, code: '', writeback: false}
+      - name: drop_down_code_personne
+        properties:
+          role: null
+          include_placeholder: true
+          bold: false
+          align: full
+          placeholder: Personnes
+          spacing_above: small
+          background: theme:Tertiary
+          underline: false
+          font: ''
+          foreground: theme:On Primary Container
+          items: []
+          spacing_below: none
+          visible: true
+          border: ''
+          italic: false
+          enabled: true
+          font_size: 16
+          tooltip: ''
+        type: DropDown
+        layout_properties: {grid_position: 'PRMQIX,MHEOBZ'}
+        event_bindings: {change: drop_down_code_stage_change}
+        data_bindings:
+        - {property: border, code: '', writeback: false}
 is_package: true
