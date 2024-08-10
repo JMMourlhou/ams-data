@@ -27,19 +27,31 @@ class Parametres(ParametresTemplate):
         from ..Pre_R_pour_type_stage import Pre_R_pour_type_stage
         open_form('Pre_R_pour_type_stage')
 
+    # PRE REQUIS PERSONNALISé SELECTIONNé, INITIALISATION de DROP DOWN DE TOUS LES STAGES EXISTANTS
+    def button_gestion_pre_requis_personnel_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.drop_down_code_stage.items = [(r['code']['code']+' du '+str(r['date_debut']), r) for r in app_tables.stages.search(q.fetch_only("code"),
+                                                                                                                                tables.order_by("code_txt", ascending=True),
+                                                                                                                                tables.order_by("date_debut", ascending=True)
+                                                                                                                               )]
+        self.column_panel_pr_par_personne.visible = True  
 
+    # STAGE SELECTIONNE, INITIALISATION DU DROP DOWN DES PERSONNES DS CE STAGE (stagiaires inscrits)
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         self.stage_row = self.drop_down_code_stage.selected_value
-        self.drop_down_personnes.items = [(r["name"]+" "+r["prenom"], r) for r in app_tables.stagiaires_inscrits.search(
-                                                                                                                                tables.order_by("name", ascending=True),
-                                                                                                                                stage_txt=self.stage_row["code"]
-                                                                                                                                )
-                                            ]
+        self.drop_down_personnes.items = [
+                                           (r["name"]+" "+r["prenom"], r) for r in app_tables.stagiaires_inscrits.search(q.fetch_only("stage","user_email"),
+                                                                                                                        tables.order_by("name", ascending=True),
+                                                                                                                        stage_txt=self.stage_row["code"]['code']
+                                                                                                                         )
+                                         ]
+        
+        
 
-    def button_gestion_pre_requis_personnel_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        self.drop_down_code_stage.items = [(r["code"], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
-        self.column_panel_pr_par_personne.visible = True
-
+    def drop_down_personnes_change(self, **event_args):
+        """This method is called when an item is selected"""
+        stagiaire_inscrit_row = self.drop_down_personnes.selected_value
+        from ..Pre_R_pour_1_stagiaire import Pre_R_pour_1_stagiaire
+        open_form('Pre_R_pour_1_stagiaire',stagiaire_inscrit_row)
  

@@ -83,5 +83,7 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    
         path = os.path.join(target_folder_path, im_name)     
         im_paths.append(path)
         images[i].save(path, 'JPEG')
+        if i > 1:
+            break
     return im_paths
   

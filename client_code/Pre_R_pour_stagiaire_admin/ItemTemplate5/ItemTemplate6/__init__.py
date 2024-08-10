@@ -51,6 +51,7 @@ class ItemTemplate6(ItemTemplate6Template):
             if file_extension == ".pdf":      
                 # génération du JPG à partir du pdf
                 liste_images = anvil.server.call('pdf_into_jpg', file, new_file_name)
+                self.timer_1.interval=0.5
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
                 #print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
                 file = liste_images[0]
@@ -94,7 +95,6 @@ class ItemTemplate6(ItemTemplate6Template):
 
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-
         if self.task_img.is_completed(): # lecture de l'image sauvée en BG task
             print("fin")
             row = app_tables.pre_requis_stagiaire.get(
