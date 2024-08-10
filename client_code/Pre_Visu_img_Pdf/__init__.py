@@ -9,6 +9,8 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()
+        
         self.image_1.source = file          
         self.new_file_name = new_file_name
         self.stage_num = stage_num          # stage row
@@ -20,6 +22,8 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
 
     def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
+        open_form(self.f)
+        """
         stage = self.stage_num['numero']
         
         if self.origine == "admin":
@@ -32,7 +36,7 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
             else:
                 from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
                 open_form("Pre_R_pour_stagiaire")
-            
+        """   
 
     def download_click(self, **event_args):
         """This method is called when the button is clicked"""
