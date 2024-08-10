@@ -201,8 +201,6 @@ class Main(MainTemplate):
 
     def button_create_recherche_click(self, **event_args):
         """This method is called when the button is clicked"""
-        table_temp = app_tables.temp.search()[0]
-        table_temp.update(text="recherche")
         from ..Recherche_stagiaire import Recherche_stagiaire
         open_form("Recherche_stagiaire")
 

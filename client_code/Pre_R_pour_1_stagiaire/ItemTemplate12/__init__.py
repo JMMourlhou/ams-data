@@ -11,13 +11,15 @@ class ItemTemplate12(ItemTemplate12Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        
 
         # Any code you write here will run before the form opens.
         self.text_box_1.text = "  " + self.item['requis_txt']
+        self.image_1.source = self.item['thumb']
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.item['doc1'] is not None or self.item['pdf_doc1'] is not None:
+        if self.item['doc1'] is not None:
             r=alert("Ce pré-requis n'est pas vide, Voulez-vous vraiment le détruire ?",buttons=[("oui",True),("non",False)])
         else:
             r=alert("Voulez-vous détruire ce pré-requis ?",buttons=[("oui",True),("non",False)])
@@ -29,5 +31,10 @@ class ItemTemplate12(ItemTemplate12Template):
             row = app_tables.stagiaires_inscrits.get(   numero =     self.item['numero'],
                                                         user_email = self.item['stagiaire_email']
                                                         )
-            open_form("Pre_R_pour_1_stagiaire",row)
+            # get_open_form() permet de ne prendre que la forme mère de la forme Pre_R_pour_1_stgiaire
+            # et donc de ne pas avoir à réinitialiser la fome mère, ce qui fausserait sa self.f 
+            self.maman = get_open_form()   # récupération de la forme appelante immédiate
+            self.maman.display()
+
+ 
             

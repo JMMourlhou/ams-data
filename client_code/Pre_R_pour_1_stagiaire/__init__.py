@@ -14,10 +14,12 @@ global dico_pre_requis_stg  # dico des pr pour ce stgiaire
 dico_pre_requis_stg = {}
 
 class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
-    def __init__(self,stagiaire_inscrit_row, **properties):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
+    def __init__(self,stagiaire_inscrit_row, re_display=False, **properties):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
         # Set Form properties and Data Bindings.
+       
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()   # récupération de la forme mère pour revenir ds la forme appelante
         
         #import anvil.js    # pour screen size
         from anvil.js import window # to gain access to the window object
@@ -34,42 +36,13 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
         else:
             pr = stagiaire_inscrit_row['prenom'].capitalize()
             self.label_3.text = "Pré-Requis personnalisés pour "+nom+" "+pr+"  / "+stagiaire_inscrit_row['stage_txt']
-            
-        # liste des pré-requis existants du stagiaire
-        liste_pr_stagiaire = app_tables.pre_requis_stagiaire.search( q.fetch_only("requis_txt",
-                                                                       stagiaire_email=q.fetch_only("email"),
-                                                                       ),
-                                                            numero=int(stagiaire_inscrit_row['numero']),
-                                                            stagiaire_email=stagiaire_inscrit_row["user_email"]
-                                                         )
-        # Création du dict des pr du stagiaire
-        global dico_pre_requis_stg  # dico des pr pour ce stgiaire
-        dico_pre_requis_stg = {}
-        for pr_st in liste_pr_stagiaire:
-            clef = pr_st['requis_txt']
-            valeur = ""
-            dico_pre_requis_stg[clef] = valeur
-            print(dico_pre_requis_stg.keys())
-        
-        # INITIALISATION Drop down pré-requis possible du stagiaire, je ne prends pas un pré requis déjà sélectionné pour ce stagiaire
-        liste_drop_d = []
-        global dico_pre_requis
-        dico_pre_requis = {}
-        
+
         # search de tous les pré-requis existants
-        liste_tous_pr = app_tables.pre_requis.search(tables.order_by("requis", ascending=True),
+        self.liste_tous_pr = app_tables.pre_requis.search(tables.order_by("requis", ascending=True),
                                                     q.fetch_only("requis","code_pre_requis")
                                                     )
-        for pr in liste_tous_pr:
-            clef_search = dico_pre_requis_stg.get(pr['requis'])
-            if clef_search is None:
-                liste_drop_d.append((pr['requis'], pr))
-                dico_pre_requis[pr['code_pre_requis']] = pr['requis']
-               
-        self.drop_down_pre_requis.items = liste_drop_d
-        # affichage des pré-requis du stagiaire
-        self.repeating_panel_1.items = liste_pr_stagiaire
 
+        self.display()
 
     def drop_down_pre_requis_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -86,13 +59,55 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
                             row,
                         )
         print("ajout: ", result)
-
-        # réaffichage des pré requis
-        open_form("Pre_R_pour_1_stagiaire",self.stagiaire_inscrit_row)
+       
+        # réaffichage des pré requis par reinitimisation 
+        self.display()
                         
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        open_form("Visu_stages")
+        # Je connais la forme appelante: en init : self.f = get_open_form()
+        try:
+            self.f.button_maj_pr.visible = True
+            self.f.button_gestion_pre_requis.visible = True
+            self.f.column_panel_pr_par_personne.visible = False
+            self.f.drop_down_code_stage.selected_value = None
+            self.f.drop_down_personnes.selected_value = None
+        except:
+            pass
+        open_form(self.f)
 
+    # Affichage qui permet de ne pas réinitialiser la forme et donc de garder self.f = get_open_form() 
+    def display(self):
+        liste_drop_d = []
+        global dico_pre_requis
+        dico_pre_requis = {}
+
+        # liste des pré-requis existants du stagiaire
+        self.liste_pr_stagiaire = app_tables.pre_requis_stagiaire.search( q.fetch_only("requis_txt",
+                                                                       stagiaire_email=q.fetch_only("email"),
+                                                                       ),
+                                                            numero=int(self.stagiaire_inscrit_row['numero']),
+                                                            stagiaire_email=self.stagiaire_inscrit_row["user_email"]
+                                                         )
+        # Création du dict des pr du stagiaire
+        global dico_pre_requis_stg  # dico des pr pour ce stgiaire
+        dico_pre_requis_stg = {}
+        for pr_st in self.liste_pr_stagiaire:
+            clef = pr_st['requis_txt']
+            valeur = ""
+            dico_pre_requis_stg[clef] = valeur
+            print(dico_pre_requis_stg.keys())
+
+        
+        for pr in self.liste_tous_pr:
+            clef_search = dico_pre_requis_stg.get(pr['requis'])
+            if clef_search is None:
+                liste_drop_d.append((pr['requis'], pr))
+                dico_pre_requis[pr['code_pre_requis']] = pr['requis']
+                
+        # Re_initialisation drop D Pré-requis à ajouter
+        self.drop_down_pre_requis.items = liste_drop_d
+        # affichage des pré-requis du stagiaire
+        self.repeating_panel_1.items = self.liste_pr_stagiaire
+        

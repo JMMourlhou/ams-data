@@ -13,13 +13,15 @@ global intitul
 intitul=""
 
 class Stage_visu_modif(Stage_visu_modifTemplate):
-    def __init__(self, provenance="", num_stage=0, bg_task=False, **properties):     # bg_task True: je crée les bg task en entrée de stage visu modif
+    def __init__(self, num_stage=0, bg_task=False, **properties):     # bg_task True: je crée les bg task en entrée de stage visu modif
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        self.provenance = provenance
         self.num_stage=num_stage
         self.bg_task = bg_task
         
+        self.f = get_open_form()   # récupération de la forme mère pour revenir ds la forme appelante
+        print("form mère atteingnable (en modif): ", self.f)
+      
         # Any code you write here will run before the form opens.
         if num_stage == 0:
             alert("Numéro de stage non trouvé")
@@ -117,13 +119,17 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
     
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
+        # Je connais la forme appelante: en init : self.f = get_open_form()
+        open_form(self.f)
+        """
         if self.provenance == "recherche":
             from ..Recherche_stagiaire import Recherche_stagiaire
             open_form('Recherche_stagiaire')
         if self.provenance == "visu_stages":
             from ..Visu_stages import Visu_stages
             open_form('Visu_stages')
-
+        """
+        
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
         """ Tests avant validation """

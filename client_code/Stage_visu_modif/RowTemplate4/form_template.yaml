@@ -1,27 +1,27 @@
 container: {type: DataRowPanel}
 components:
 - type: FlowPanel
-  properties: {role: null, vertical_align: middle, spacing: small, align: center, tooltip: '', border: '', foreground: '', visible: true, spacing_above: none, spacing_below: small, background: 'theme:Primary'}
+  properties: {role: null, vertical_align: middle, align: center, spacing_above: none, background: 'theme:Primary', foreground: '', spacing_below: small, visible: true, border: '', tooltip: '', spacing: small}
   name: flow_panel_1
   layout_properties: {column: null}
   components:
   - type: TextBox
-    properties: {role: null, align: center, hide_text: false, tooltip: '', placeholder: '', border: '', enabled: true, foreground: 'theme:Tertiary', visible: true, text: '', font_size: null, font: '', spacing_above: small, type: text, spacing_below: none, italic: false, background: 'theme:Primary', bold: true, underline: false}
+    properties: {role: null, bold: true, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
     name: text_box_3
     layout_properties: {width: 205.588560546875, expand: false}
     event_bindings: {focus: text_box_3_focus}
   - type: TextBox
-    properties: {role: null, align: center, hide_text: false, tooltip: '', placeholder: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '', font_size: 12, font: '', spacing_above: small, type: text, spacing_below: none, italic: false, background: 'theme:Primary', bold: false, underline: false}
+    properties: {role: null, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 12, tooltip: '', text: ''}
     name: text_box_1
     layout_properties: {width: 240.1821396484375}
     event_bindings: {focus: text_box_1_focus}
   - type: TextBox
-    properties: {role: null, align: center, hide_text: false, tooltip: '', placeholder: '', border: '', enabled: true, foreground: 'theme:On Primary', visible: true, text: '', font_size: null, font: '', spacing_above: small, type: text, spacing_below: none, italic: false, background: 'theme:Primary', bold: false, underline: false}
+    properties: {role: null, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
     name: text_box_2
     layout_properties: {width: 125.679583984375}
     event_bindings: {focus: text_box_2_focus}
   - type: Button
-    properties: {role: elevated-button, align: center, tooltip: '', border: '', enabled: true, foreground: 'theme:Primary', visible: true, text: '', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: 'theme:Tertiary', bold: false, underline: false, icon: 'fa:minus-circle'}
+    properties: {role: elevated-button, bold: false, align: center, spacing_above: small, background: 'theme:Tertiary', icon: 'fa:minus-circle', underline: false, font: '', icon_align: left, foreground: 'theme:Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
     name: button_delete
     layout_properties: {}
     event_bindings: {click: bt_delete}

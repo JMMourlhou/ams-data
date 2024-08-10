@@ -49,9 +49,8 @@ class ItemTemplate6(ItemTemplate6Template):
                 self.save_file(file, new_file_name, file_extension)
                     
             if file_extension == ".pdf":      
-                # génération du JPG à partir du pdf
+                # génération du JPG à partir du pdf, METTRE EN BG TASK
                 liste_images = anvil.server.call('pdf_into_jpg', file, new_file_name)
-                self.timer_1.interval=0.5
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
                 #print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
                 file = liste_images[0]

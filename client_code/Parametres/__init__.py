@@ -27,15 +27,25 @@ class Parametres(ParametresTemplate):
         from ..Pre_R_pour_type_stage import Pre_R_pour_type_stage
         open_form('Pre_R_pour_type_stage')
 
+    
     # PRE REQUIS PERSONNALISé SELECTIONNé, INITIALISATION de DROP DOWN DE TOUS LES STAGES EXISTANTS
     def button_gestion_pre_requis_personnel_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.drop_down_code_stage.items = [(r['code']['code']+' du '+str(r['date_debut']), r) for r in app_tables.stages.search(q.fetch_only("code"),
-                                                                                                                                tables.order_by("code_txt", ascending=True),
-                                                                                                                                tables.order_by("date_debut", ascending=True)
-                                                                                                                               )]
-        self.column_panel_pr_par_personne.visible = True  
-
+        self.button_maj_pr.visible = False
+        self.button_gestion_pre_requis.visible = False
+        liste = app_tables.stages.search(q.fetch_only("code"),
+                                                     tables.order_by("code_txt", ascending=True),
+                                                     tables.order_by("date_debut", ascending=True)
+                                        )
+        liste_dp=[]
+        for stage in liste:
+            if stage['numero']<1000:  # si stage type stagiaire, je rajoute la date
+                liste_dp.append((stage['code']['code']+" du "+str(stage['date_debut']),stage))
+            else:                     # si stage type formateur, je ne rajoute pas la date
+                liste_dp.append((stage['code']['code'],stage))  
+        self.drop_down_code_stage.items = liste_dp 
+        self.column_panel_pr_par_personne.visible = True 
+        
     # STAGE SELECTIONNE, INITIALISATION DU DROP DOWN DES PERSONNES DS CE STAGE (stagiaires inscrits)
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -46,6 +56,7 @@ class Parametres(ParametresTemplate):
                                                                                                                         stage_txt=self.stage_row["code"]['code']
                                                                                                                          )
                                          ]
+        self.drop_down_personnes.visible = True
         
         
 

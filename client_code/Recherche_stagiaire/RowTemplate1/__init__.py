@@ -94,7 +94,7 @@ class RowTemplate1(RowTemplate1Template):
                 mel = self.item['user_email']['email']
 
             from ...Saisie_info_apres_visu import Saisie_info_apres_visu
-            open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="", provenance="recherche")
+            open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="")
             
         if contenu[0:1] == "i":  # inscription du stagiaire au stage
             #alert(contenu)

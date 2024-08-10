@@ -12,6 +12,7 @@ class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
     def __init__(self, num_stage, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        self.f = get_open_form()
         self.num_stage = num_stage
         # Any code you write here will run before the form opens.
         #lecture du stage  
@@ -25,5 +26,4 @@ class Pre_R_pour_stagiaire_admin(Pre_R_pour_stagiaire_adminTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Visu_stages import Visu_stages
-        open_form('Visu_stages')
+        open_form(self.f)

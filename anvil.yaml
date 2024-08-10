@@ -54,12 +54,6 @@ db_schema:
     client: full
     server: full
     columns:
-    - name: text
-      admin_ui: {width: 200}
-      type: string
-    - name: code_stage
-      admin_ui: {width: 200}
-      type: string
     - name: pre_r_pour_stage
       admin_ui: {width: 537}
       type: simpleObject
@@ -72,6 +66,9 @@ db_schema:
     - name: nb_mails_sent
       admin_ui: {width: 200, order: 4.5}
       type: number
+    - name: text
+      admin_ui: {order: -0.5, width: 200}
+      type: string
   stages:
     title: Stages
     client: search

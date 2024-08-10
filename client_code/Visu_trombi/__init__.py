@@ -119,7 +119,7 @@ class Visu_trombi(Visu_trombiTemplate):
         #print(event_args) # c'est un dictionnaire contenant les infos de lévenement
         mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
         from ..Saisie_info_apres_visu import Saisie_info_apres_visu
-        open_form('Saisie_info_apres_visu', mel, self.num_stage, self.intitule, provenance="trombi")
+        open_form('Saisie_info_apres_visu', mel, self.num_stage, self.intitule)
   
     def im_mouse_down(self, x, y, **event_args):
         """This method is called when the mouse cursor enters this component"""
@@ -129,7 +129,7 @@ class Visu_trombi(Visu_trombiTemplate):
         mel = event_args["sender"].tag   # j'extrai le tag du sender (l'image)
         #print("mail",mel)
         from ..Saisie_info_apres_trombi import Saisie_info_apres_trombi
-        open_form('Saisie_info_apres_trombi', self.num_stage, self.intitule, mel, provenance="trombi")
+        open_form('Saisie_info_apres_trombi', self.num_stage, self.intitule, mel)
     
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""

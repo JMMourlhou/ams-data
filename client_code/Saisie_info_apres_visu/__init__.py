@@ -13,15 +13,17 @@ global user
 user = anvil.users.get_user()  # Acquisition de l'utilisateur (pour le role)
 
 class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
-    def __init__(self, mel, num_stage=0, intitule="", provenance="", **properties):
+    def __init__(self, mel, num_stage=0, intitule="", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.num_stage = num_stage
         self.intitule = intitule
         self.mel = mel
-        self.provenance=provenance
+        
         # Any code you write here will run before the form opens.
-       
+        self.f = get_open_form()   # récupération de la forme mère pour revenir ds la forme appelante
+        print("form mère atteingnable (en modif): ", self.f) 
+        
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
 
@@ -223,19 +225,10 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.provenance == "":   # vient de main, click sur le bt user
-            from ..Main import Main
-            open_form('Main',99)
-        if self.provenance == "trombi":
-            from ..Visu_trombi import Visu_trombi
-            open_form('Visu_trombi',self.num_stage, self.intitule, False)
-        if self.provenance == "recherche":
-            from ..Recherche_stagiaire import Recherche_stagiaire
-            open_form('Recherche_stagiaire')
-        if self.provenance == "visu_stage":
-            from ..Stage_visu_modif import Stage_visu_modif
-            open_form('Stage_visu_modif',"recherche",self.num_stage)
-
+        # Je connais la forme appelante: en init : self.f = get_open_form()
+        open_form(self.f)
+        
+        
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
         self.column_panel_1.scroll_into_view()

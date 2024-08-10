@@ -40,8 +40,6 @@ class RowTemplate3(RowTemplate3Template):
             if self.item['date_debut'] is not None:
                 self.text_box_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
             self.button_qcm.text = "Résultats des QCM"
-            
-        
         
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']
@@ -67,7 +65,7 @@ class RowTemplate3(RowTemplate3Template):
     def text_box_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = int(self.text_box_1.text)
-        open_form('Stage_visu_modif',"visu_stages", num_stage)   
+        open_form('Stage_visu_modif', num_stage)   
         
     def text_box_2_click(self, **event_args):
         """This method is called when the button is clicked"""

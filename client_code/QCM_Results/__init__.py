@@ -14,8 +14,8 @@ class QCM_Results(QCM_ResultsTemplate):
     def __init__(self, stage_row, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
         # Any code you write here will run before the form opens.         # RECHERCHE des stagiaires du stage sélectionné en Visu_stages 
+        self.f = get_open_form()
         if stage_row:
             liste_stagiaires = app_tables.stagiaires_inscrits.search(
                                                                     tables.order_by("name", ascending=True),
@@ -27,5 +27,4 @@ class QCM_Results(QCM_ResultsTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""       
-        from ..Visu_stages import Visu_stages
-        open_form('Visu_stages')
+        open_form(self.f)
