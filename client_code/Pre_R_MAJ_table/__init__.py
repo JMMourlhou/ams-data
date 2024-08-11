@@ -1,4 +1,4 @@
-from ._anvil_designer import Table_Pre_R_MAJTemplate
+from ._anvil_designer import Pre_R_MAJ_tableTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Table_Pre_R_MAJ(Table_Pre_R_MAJTemplate):
+class Pre_R_MAJ_table(Pre_R_MAJ_tableTemplate):
     def __init__(self, **properties):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
         # Set Form properties and Data Bindings.
         self.init_components(**properties)

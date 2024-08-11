@@ -14,8 +14,8 @@ class Parametres(ParametresTemplate):
 
     def button_maj_pr_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Table_Pre_R_MAJ import Table_Pre_R_MAJ
-        open_form("Table_Pre_R_MAJ")
+        from ..Pre_R_MAJ_table import Pre_R_MAJ_table
+        open_form("Pre_R_MAJ_table")
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
