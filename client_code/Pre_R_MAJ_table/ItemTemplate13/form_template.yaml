@@ -14,6 +14,12 @@ components:
     properties: {role: outlined, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
     type: TextBox
     layout_properties: {width: null, expand: true}
+    event_bindings: {change: text_box_1_change}
+  - name: button_modif
+    properties: {text: Modif, background: 'theme:Error', foreground: 'theme:Tertiary', enabled: true, visible: false}
+    type: Button
+    layout_properties: {}
+    event_bindings: {click: button_modif_click}
   - name: button_annuler
     properties: {role: null, bold: false, align: center, spacing_above: none, background: 'theme:Primary', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: ''}
     type: Button
