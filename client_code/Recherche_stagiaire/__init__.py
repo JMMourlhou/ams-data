@@ -11,10 +11,9 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
          
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        # Any code you write here will run before the form opens.
-        self.f = get_open_form()
-        print("form mère : ", self.f) 
-        self.label_origine.text = str(self.f)
+        # Any code you write here will run before the form opens. 
+        
+        self.label_origine.text = get_open_form()
         
         self.inscription = inscript
         if self.inscription != "recherche":   # inscription/num_stage

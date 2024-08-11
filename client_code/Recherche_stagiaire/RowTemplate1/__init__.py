@@ -86,8 +86,8 @@ class RowTemplate1(RowTemplate1Template):
             à partir de la forme Visu_stages
         Donc j'utilise la table Temp qui contient la raison d'entrée en recherche : recherche ou inscription
         """
-        temp_row1 = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
-        contenu = str(temp_row1['text'])
+        #temp_row1 = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
+        #contenu = str(temp_row1['text'])
         print("test: ",self.c.label_origine.text)
         if self.c.label_origine.text == "<AMS_Data.Main.Main object>":    # vient du menu / recherche
         #if contenu[0:1] == "r":  # recherche
