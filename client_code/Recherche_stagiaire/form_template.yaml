@@ -39,6 +39,10 @@ components:
           name: button_retour
           layout_properties: {grid_position: 'TVFLYD,TSDRJZ', row_background: '', full_width_row: false}
           event_bindings: {click: button_retour_click}
+        - name: label_origine
+          properties: {align: center, visible: true}
+          type: Label
+          layout_properties: {grid_position: 'HRNIDI,CZOWDC'}
       - name: column_panel_users
         properties: {wrap_on: mobile, col_widths: '{"ETASBM":35,"ZUHOMU":25}', col_spacing: small}
         type: ColumnPanel

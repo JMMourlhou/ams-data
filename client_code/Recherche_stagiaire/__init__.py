@@ -12,6 +12,9 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()
+        print("form mère : ", self.f) 
+        self.label_origine.text = str(self.f)
         
         self.inscription = inscript
         if self.inscription != "recherche":   # inscription/num_stage
@@ -170,8 +173,6 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def text_box_email_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_recherche_click()
-
-
 
     def text_box_role_change(self, **event_args):
         """This method is called when the text in this text box is edited"""

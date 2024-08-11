@@ -11,6 +11,8 @@ from ... import French_zone # calcul tps traitement
 
 class RowTemplate1(RowTemplate1Template):
     def __init__(self, **properties):
+        self.c = get_open_form()
+        print("form mère en col panel : ", self.c) 
         
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
@@ -86,8 +88,9 @@ class RowTemplate1(RowTemplate1Template):
         """
         temp_row1 = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
         contenu = str(temp_row1['text'])
-
-        if contenu[0:1] == "r":  # recherche
+        print("test: ",self.c.label_origine.text)
+        if self.c.label_origine.text == "<AMS_Data.Main.Main object>":    # vient du menu / recherche
+        #if contenu[0:1] == "r":  # recherche
             try:
                 mel = self.item['email']   
             except:
@@ -95,8 +98,8 @@ class RowTemplate1(RowTemplate1Template):
 
             from ...Saisie_info_apres_visu import Saisie_info_apres_visu
             open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="")
-            
-        if contenu[0:1] == "i":  # inscription du stagiaire au stage
+        else:   
+        #if contenu[0:1] == "i":  # inscription du stagiaire au stage
             #alert(contenu)
             mel = self.item['email']
             stagiaire_row = app_tables.users.get(email=mel)
