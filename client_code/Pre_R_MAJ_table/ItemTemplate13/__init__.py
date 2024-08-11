@@ -26,12 +26,16 @@ class ItemTemplate13(ItemTemplate13Template):
         """This method is called when the text in this text box is edited"""
         self.button_modif.visible = True
 
+    def text_box_2_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_modif.visible = True
+
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment modifier l'intitulé ?",buttons=[("oui",True),("non",False)])
         sov_old_pr = self.item['requis']
         if r :   # oui
-            result, nb = anvil.server.call("modif_pr", self.item, self.text_box_1.text)
+            result, nb = anvil.server.call("modif_pr", self.item, self.text_box_1.text, self.text_box_2.text)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
                 return
@@ -40,4 +44,6 @@ class ItemTemplate13(ItemTemplate13Template):
         else:   # non
             self.text_box_1.text = sov_old_pr
         self.button_modif.visible = False
+
+    
             

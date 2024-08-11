@@ -30,9 +30,10 @@ components:
       layout_properties: {grid_position: 'SJRQZU,ZZSMEM'}
       components:
       - name: button_maj_pr
-        properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Primary', icon: 'fa:user', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Intitulé des Pré Requis}
+        properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Primary', icon: 'fa:user', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Codes / Intitulé des Pré-R}
         type: Button
         event_bindings: {click: button_maj_pr_click}
+        layout_properties: {}
       - name: button_gestion_pre_requis
         properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '... par type de stage'}
         type: Button

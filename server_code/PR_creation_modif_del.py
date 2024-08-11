@@ -9,17 +9,18 @@ from anvil import *  #pour les alertes
 
 #Création d'un nouveau Pré-Requis
 @anvil.server.callable 
-def add_pr(code_stage,     # row codes_pr concernée
-              
-             ):
+def add_pr(code, intitule, commentaires):
     
-    new_row=app_tables.stages.add_row(
-                              
+    new_row=app_tables.pre_requis.add_row(
+                              code_pre_requis=code,
+                              requis=intitule,
+                              commentaires=commentaires,
+                              doc=False
                              )
         
                  
-    stage = app_tables.stages.search(numero=new_row['numero'])
-    if len(stage)>0:
+    pr = app_tables.pre_requis.search(code_pre_requis=new_row['code_pre_requis'])
+    if len(pr)>0:
         valid=True
     else:
         valid=False
@@ -28,12 +29,13 @@ def add_pr(code_stage,     # row codes_pr concernée
 
 # ==========================================================================================
 @anvil.server.callable           #modif d'un intitulé pr et répercution ds la table pr_stgiaires 
-def modif_pr(pr_row, intitule):
-    pr_row.update(requis = intitule)
+def modif_pr(pr_row, intitule, code):
+    pr_row.update(requis = intitule,
+                 code_pre_requis=code)
     # modif des PR existants
     liste = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
     if len(liste)>0:
         for pr_r in liste:
-            pr_r.update(requis_txt = intitule )
+            pr_r.update(requis_txt = intitule)
     valid=True
     return valid, len(liste)
