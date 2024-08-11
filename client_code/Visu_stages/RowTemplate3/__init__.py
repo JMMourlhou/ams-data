@@ -87,14 +87,8 @@ class RowTemplate3(RowTemplate3Template):
                 )
         if r== "Oui" :   
             from ...Recherche_stagiaire import Recherche_stagiaire
-            num_stage = self.text_box_1.text
-            #print("test inscription;",num_stage)
-            inscription = "inscription/"+str(num_stage)
-            
-            table_temp = app_tables.temp.search()[0]
-            table_temp.update(text=inscription)
-        
-            open_form('Recherche_stagiaire',inscription)
+            num_stage = self.text_box_1.text        
+            open_form('Recherche_stagiaire',num_stage)
 
     def button_pr_requis_click(self, **event_args):
         """This method is called when the button is clicked"""

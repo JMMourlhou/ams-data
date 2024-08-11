@@ -7,16 +7,17 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 class Recherche_stagiaire(Recherche_stagiaireTemplate):
-    def __init__(self, inscript="recherche", **properties):       # inscript="inscription" si vient de visu_stages pour inscription d'1 stagiare
+    def __init__(self, num_stage="", **properties):       # inscript="inscription" si vient de visu_stages pour inscription d'1 stagiare
          
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens. 
-        
-        self.label_origine.text = get_open_form()
-        
-        self.inscription = inscript
-        if self.inscription != "recherche":   # inscription/num_stage
+       
+        # Pour une inscription:
+        self.label_origine.text = str(get_open_form())
+        self.num_stage = num_stage
+        self.label_num_stage.text = num_stage
+        if self.num_stage != "":  
             self.drop_down_code_stage.visible = False
             self.drop_down_num_stages.visible = False
         

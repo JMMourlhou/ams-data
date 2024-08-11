@@ -81,16 +81,11 @@ class RowTemplate1(RowTemplate1Template):
             
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        """
-        Je ne peux pas remonter ds mes components pour savoir si je suis en mode "inscription",
-            à partir de la forme Visu_stages
-        Donc j'utilise la table Temp qui contient la raison d'entrée en recherche : recherche ou inscription
-        """
+       
         #temp_row1 = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
         #contenu = str(temp_row1['text'])
         print("test: ",self.c.label_origine.text)
-        if self.c.label_origine.text == "<AMS_Data.Main.Main object>":    # vient du menu / recherche
-        #if contenu[0:1] == "r":  # recherche
+        if self.c.label_origine.text == "<AMS_Data.Main.Main object>":    # vient du menu / recherche, pas d'inscription
             try:
                 mel = self.item['email']   
             except:
@@ -98,13 +93,11 @@ class RowTemplate1(RowTemplate1Template):
 
             from ...Saisie_info_apres_visu import Saisie_info_apres_visu
             open_form('Saisie_info_apres_visu', mel, num_stage=0, intitule="")
-        else:   
-        #if contenu[0:1] == "i":  # inscription du stagiaire au stage
-            #alert(contenu)
+        else:   # inscription
             mel = self.item['email']
             stagiaire_row = app_tables.users.get(email=mel)
             #alert(stagiaire_row['email'])
-            stage = contenu[12:16]
+            stage = self.c.label_num_stage.text
             print("stage en inscription", stage)
             # Choix du mode de financement / Création d'une box incluant le drop down mode de fi
             def show_results(self, result):
@@ -140,7 +133,7 @@ class RowTemplate1(RowTemplate1Template):
                     return
                 txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
                 alert(txt_msg)
-                open_form('Recherche_stagiaire', contenu)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo
+                open_form('Recherche_stagiaire', stage)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo
     
     def button_role_click(self, **event_args):
         """This method is called when the button is clicked"""

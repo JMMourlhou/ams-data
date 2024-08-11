@@ -43,6 +43,10 @@ components:
           properties: {align: center, visible: true}
           type: Label
           layout_properties: {grid_position: 'HRNIDI,CZOWDC'}
+        - name: label_num_stage
+          properties: {align: center}
+          type: Label
+          layout_properties: {grid_position: 'DFVUJU,IDGFFB'}
       - name: column_panel_users
         properties: {wrap_on: mobile, col_widths: '{"ETASBM":35,"ZUHOMU":25}', col_spacing: small}
         type: ColumnPanel

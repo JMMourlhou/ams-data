@@ -32,12 +32,13 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
+        
         #lecture du stage
-        stage_row=app_tables.stages.get(numero=num_stage)
+        stage_row=app_tables.stages.get(numero=int(num_stage))
 
         #lecture des stagiaires inscrits
         liste_stagiaires = app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", 
-                                                                                 user_email=q.fetch_only("email", "tel")),
+                                                                    user_email=q.fetch_only("email", "tel")),
                                                                     tables.order_by("name", ascending=True),
                                                                     stage=stage_row
                                                                            )
