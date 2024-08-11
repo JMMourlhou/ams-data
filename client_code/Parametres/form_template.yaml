@@ -38,6 +38,7 @@ components:
         properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '... par type de stage'}
         type: Button
         event_bindings: {click: button_gestion_pre_requis_click}
+        layout_properties: {width: 163.18952978515625}
       - name: button_gestion_pre_requis_personnel
         properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '... par personne'}
         type: Button
