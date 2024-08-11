@@ -10,6 +10,10 @@ components:
     properties: {height: 32}
     type: Spacer
     layout_properties: {}
+  - name: text_box_2
+    properties: {background: 'theme:Primary', foreground: 'theme:On Tertiary', role: outlined}
+    type: TextBox
+    layout_properties: {width: 126.38997387695312}
   - name: text_box_1
     properties: {role: outlined, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
     type: TextBox

@@ -27,8 +27,13 @@ def add_pr(code_stage,     # row codes_pr concernée
 
 
 # ==========================================================================================
-@anvil.server.callable           #modif d'un pr
+@anvil.server.callable           #modif d'un intitulé pr et répercution ds la table pr_stgiaires 
 def modif_pr(pr_row, intitule):
     pr_row.update(requis = intitule)
+    # modif des PR existants
+    liste = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
+    if len(liste)>0:
+        for pr_r in liste:
+            pr_r.update(requis_txt = intitule )
     valid=True
-    return valid
+    return valid, len(liste)
