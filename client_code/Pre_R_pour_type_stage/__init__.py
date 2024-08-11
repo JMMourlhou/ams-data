@@ -52,7 +52,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         #print(type(row['pre_requis']))
         if isinstance(row['pre_requis'], dict):       # LE DICT EXISTE DS TABLE CODES STAGE, row du stage
             # INITIALISATION Drop down pré-requis en fonction des pré requis déjà sélectionnés ds dico
-            self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("requis", ascending=True)) if not dico_pre_requis.get(r["code_pre_requis"])]
+            self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("code_pre_requis", ascending=True)) if not dico_pre_requis.get(r["code_pre_requis"])]
             self.drop_down_pre_requis.visible = True
             
             dico_pre_requis = row['pre_requis']
