@@ -69,6 +69,9 @@ db_schema:
     - name: text
       admin_ui: {order: -0.5, width: 200}
       type: string
+    - name: code_stage
+      admin_ui: {width: 200, order: 5.5}
+      type: string
   stages:
     title: Stages
     client: search
@@ -274,7 +277,7 @@ db_schema:
       admin_ui: {width: 68}
       type: number
     - name: stagiaire_email
-      admin_ui: {width: 126}
+      admin_ui: {order: 1, width: 179}
       type: link_single
       target: users
     - name: nom

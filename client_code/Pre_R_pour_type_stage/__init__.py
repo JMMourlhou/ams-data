@@ -124,6 +124,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         from ..Parametres import Parametres
         open_form("Parametres")
 
+    
     def sov_dico_ds_temp(self, **event_args):
         table_temp = app_tables.temp.search()[0]   # sauvegarde du dico ds TABLE TEMP
         global code_stage
