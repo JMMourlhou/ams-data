@@ -58,7 +58,7 @@ def add_stage(code_stage,     # row codes_stage concernée
 # ==========================================================================================
 @anvil.server.callable           #modif d'un stage
 @anvil.tables.in_transaction
-def modif_stage(code,
+def modif_stage(code,    # row stage
               numero,   # attention numero est txt
               lieu,
               date_debut,
@@ -74,7 +74,7 @@ def modif_stage(code,
     numero=int(numero)
 
     # lecture fichier père code stages
-    code_stage = app_tables.codes_stages.get(code=code)
+    code_stage = app_tables.codes_stages.get(code=code['code'])
     if not code_stage:   
         alert("Code stage non trouvé ds fichier param Code_stages")
         valid=False
@@ -92,7 +92,8 @@ def modif_stage(code,
         alert("Lieu stage non trouvé ds fichier param lieux")
         valid=False
     else:   
-        stage.update(lieu = lieu_stage,
+        stage.update(code = code,                      # Code stage modifiable pour faciliter les chgt eventuels de type de stage
+                    lieu = lieu_stage,
                     date_debut = date_debut,
                     nb_stagiaires_deb = nb_stagiaires_deb,
                     date_fin = date_fin,

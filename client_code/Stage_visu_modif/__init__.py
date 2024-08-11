@@ -156,8 +156,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         if len(stage) == 0:
             alert("Le numéro de stage n'existe pas !")
             self.button_annuler_click()
-        #pas de modif du type et num de stage
-        result = anvil.server.call("modif_stage", row['code'],
+        #pas de modif du  num de stage
+        result = anvil.server.call("modif_stage", row,
                                                 self.text_box_num_stage.text,  # num du stage  de la ligne  
                                                 row2['lieu'],                                              
                                                 self.date_picker_from.date,
@@ -262,6 +262,16 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.button_trombi_pdf.visible = True
             self.timer_2.interval=0
             anvil.server.call('task_killer',self.task_trombi)
+
+    def drop_down_code_stage_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.button_validation.visible = True   
+        row = self.drop_down_code_stage.selected_value
+        if row is None :
+            alert("Vous devez sélectionner un stage !")
+            self.drop_down_code_stage.focus()
+            return
+        self.text_box_intitule.text=row['intitulé']
 
 
 

@@ -32,7 +32,7 @@ class Stage_creation(Stage_creationTemplate):
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         row = self.drop_down_code_stage.selected_value
-        if row == None :
+        if row is None :
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
