@@ -182,8 +182,7 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
     if len(liste_pr) > 0:
         for pr in liste_pr:
             pr.delete()
-            
-    
+
     # Lecture table stagiaires inscrits à ce stage pour effacement du stagiaire
     row = app_tables.stagiaires_inscrits.get(user_email=stagiaire_row,       # ce user
                                                  stage=stage_row)            # ET pour ce stage
