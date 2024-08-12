@@ -51,7 +51,7 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_visu_modif import Stage_visu_modif
-        open_form('Stage_visu_modif', "visu_stages", int(self.num_stage), False)  # False: ne pas effectuer les BG tasks
+        open_form('Stage_visu_modif', int(self.num_stage), False)  # False: ne pas effectuer les BG tasks
 
 
     def button_trombi_click(self, **event_args):
