@@ -20,7 +20,14 @@ class ItemTemplate13(ItemTemplate13Template):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment effacer ce pré-requis ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
-            alert("oui")
+            result,nb = anvil.server.call("del_pr", self.item)
+            if result is not True:
+                alert("ERREUR, Effacement non effectué !")
+                return
+            alert(f"Effacement effectué pour {nb} pré-requis Stagiaires!")
+        open_form("Pre_R_MAJ_table")
+
+        
 
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""

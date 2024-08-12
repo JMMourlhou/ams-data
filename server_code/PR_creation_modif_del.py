@@ -39,3 +39,22 @@ def modif_pr(pr_row, intitule, code):
             pr_r.update(requis_txt = intitule)
     valid=True
     return valid, len(liste)
+
+# ==========================================================================================
+@anvil.server.callable           #Del d'un pr et répercution ds la table pr_stgiaires 
+def del_pr(pr_row):
+    valid = False
+    pr_row.delete()
+    valid = True
+    
+    # del des PR stagiaires existants
+    liste = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
+    if len(liste)>0:
+        valid = False
+        for pr_r in liste:
+            pr_r.delete()
+        # Vérification
+        liste = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
+        if len(liste)==0:
+            valid = True
+    return valid, len(liste)

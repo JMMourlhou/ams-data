@@ -66,7 +66,8 @@ class Pre_R_MAJ_table(Pre_R_MAJ_tableTemplate):
                 alert("ERREUR, Ajout non effectué !")
                 return
             alert("Création effectuée !")
-        self
+        self.column_panel_add.visible = False
+        open_form("Pre_R_MAJ_table")
         
     
     def text_box_1_change(self, **event_args):
