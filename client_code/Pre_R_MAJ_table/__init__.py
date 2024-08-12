@@ -17,9 +17,8 @@ class Pre_R_MAJ_table(Pre_R_MAJ_tableTemplate):
         self.text_box_3.placeholder = "Commentaires"
         
         # search de tous les pré-requis existants et affichage
-        liste_tous_pr = app_tables.pre_requis.search(
-                                                        tables.order_by("requis", ascending=True),
-                                                        q.fetch_only("requis", "code_pre_requis"),
+        liste_tous_pr = app_tables.pre_requis.search(q.fetch_only("requis", "code_pre_requis"),
+                                                        tables.order_by("requis", ascending=True)
                                                     )
         self.repeating_panel_1.items = liste_tous_pr
 
@@ -67,11 +66,8 @@ class Pre_R_MAJ_table(Pre_R_MAJ_tableTemplate):
                 alert("ERREUR, Ajout non effectué !")
                 return
             alert("Création effectuée !")
+        self
         
-
-
-
-
     
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""

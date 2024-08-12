@@ -48,6 +48,6 @@ class RowTemplate4(RowTemplate4Template):
             txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_row)   # module serveur "add_stagiaire"
             alert(txt_msg)
             # réaffichage par initialisation de la forme mère 
-            open_form('Stage_visu_modif',"visu_stages", stage_row['numero']) # réinitialisation de la fenêtre
+            open_form('Stage_visu_modif', stage_row['numero']) # réinitialisation de la fenêtre
         
      
