@@ -46,18 +46,19 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         
         if row['pre_requis'] is None:  # si le dictionaire n'existe pas encore (pas de pré requis encore introduit pour ce type de stage)
             dico_pre_requis = {}
-            self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("requis", ascending=True))]
-            self.drop_down_pre_requis.visible = True
+            #self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("requis", ascending=True))]
+
             
+        
         #print(type(row['pre_requis']))
-        if isinstance(row['pre_requis'], dict):       # LE DICT EXISTE DS TABLE CODES STAGE, row du stage
+        if isinstance(row['pre_requis'], dict):       # LE DICT EXISTE DS TABLE CODES STAGE, row du stage (pré requis introduits pour ce type de stage))
             # INITIALISATION Drop down pré-requis en fonction des pré requis déjà sélectionnés ds dico
-            self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("code_pre_requis", ascending=True)) if not dico_pre_requis.get(r["code_pre_requis"])]
-            self.drop_down_pre_requis.visible = True
-            
             dico_pre_requis = row['pre_requis']
             
-            # affichage des prérequis à partir du dico que je transforme  en liste
+        self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("requis", ascending=True)) if not dico_pre_requis.get(r["code_pre_requis"])]
+        self.drop_down_pre_requis.visible = True
+            
+        # affichage du repeating panel des prérequis à partir du dico que je transforme  en liste
         list_keys = dico_pre_requis.keys()
         list_keys = sorted(list_keys)  # création de la liste triée des clefs du dictionaires prérequis
         # j'affiche tous les pré requis 

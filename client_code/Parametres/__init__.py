@@ -53,7 +53,7 @@ class Parametres(ParametresTemplate):
         self.drop_down_personnes.items = [
                                            (r["name"]+" "+r["prenom"], r) for r in app_tables.stagiaires_inscrits.search(q.fetch_only("stage","user_email"),
                                                                                                                         tables.order_by("name", ascending=True),
-                                                                                                                        stage_txt=self.stage_row["code"]['code']
+                                                                                                                        numero=self.stage_row['numero']
                                                                                                                          )
                                          ]
         self.drop_down_personnes.visible = True
