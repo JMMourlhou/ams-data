@@ -54,7 +54,7 @@ def del_pr(pr_row):
         for pr_r in liste:
             pr_r.delete()
         # Vérification
-        liste = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
-        if len(liste)==0:
+        liste1 = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
+        if len(liste1)==0:
             valid = True
     return valid, len(liste)
