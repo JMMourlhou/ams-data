@@ -41,9 +41,10 @@ class ItemTemplate13(ItemTemplate13Template):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment modifier ce Pré-requis ?",buttons=[("oui",True),("non",False)])
         sov_old_pr = self.item['requis']
+        sov_old_code = self.item['code_pre_requis']
         if r :   # oui
             # 1 modif ds les pre-requis stagiaires 
-            result, nb = anvil.server.call("modif_pr", self.item, self.text_box_1.text, self.text_box_2.text, sov_old_pr)
+            result, nb = anvil.server.call("modif_pr", self.item, self.text_box_1.text, self.text_box_2.text, sov_old_code)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
                 return
@@ -51,6 +52,7 @@ class ItemTemplate13(ItemTemplate13Template):
             
         else:   # non
             self.text_box_1.text = sov_old_pr
+            self.text_box_2.text = sov_old_code
         self.button_modif.visible = False
 
     

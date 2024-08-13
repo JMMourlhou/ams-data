@@ -46,10 +46,13 @@ def modif_pr(pr_row, intitule, code, old_code):
         dico = {}
         dico = stage['pre_requis']
         # recherche si clef (old_code) existante, si oui effact ancienne clef puis recréation avec la nouvelle
+        print("old code: ", old_code)
         test = dico.get(old_code)
         print("test: ", test)
         if test is not None: # Clé existante 1 on l'efface, 2 on recrée 
-            del dico[old_code]
+            #del dico[old_code]
+            v = dico.pop(old_code, "Pas effacée")
+            print(v)
             # création du nx pr ds dico pr pour ce stage
             clef = code
             print("new key: ", clef)
