@@ -43,7 +43,7 @@ class ItemTemplate13(ItemTemplate13Template):
         sov_old_pr = self.item['requis']
         if r :   # oui
             # 1 modif ds les pre-requis stagiaires 
-            result, nb = anvil.server.call("modif_pr", self.item, self.text_box_1.text, self.text_box_2.text)
+            result, nb = anvil.server.call("modif_pr", self.item, self.text_box_1.text, self.text_box_2.text, sov_old_pr)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
                 return
