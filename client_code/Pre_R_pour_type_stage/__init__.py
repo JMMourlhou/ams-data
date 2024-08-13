@@ -80,7 +80,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
                                 "Validé": False,
                                 "Commentaires": "",
                                 "Nom_document": ""
-                               }
+                                }
 
         #réaffichage des pré requis
         list_keys = dico_pre_requis.keys()

@@ -30,6 +30,7 @@ def add_pr(code, intitule, commentaires):
 # ==========================================================================================
 @anvil.server.callable           #modif d'un intitulé pr et répercution ds la table pr_stgiaires ET Table Codes_stages, si le dictionnaire des pr pour un stage contient ce code
 def modif_pr(pr_row, intitule, code, old_code):
+    valid = False
     pr_row.update(requis = intitule,
                  code_pre_requis=code)
     
@@ -46,28 +47,26 @@ def modif_pr(pr_row, intitule, code, old_code):
         dico = {}
         dico = stage['pre_requis']
         # recherche si clef (old_code) existante, si oui effact ancienne clef puis recréation avec la nouvelle
-        print("old code: ", old_code)
         test = dico.get(old_code)
-        print("test: ", test)
         if test is not None: # Clé existante 1 on l'efface, 2 on recrée 
-            #del dico[old_code]
-            v = dico.pop(old_code, "Pas effacée")
-            print(v)
+            del dico[old_code]
             # création du nx pr ds dico pr pour ce stage
             clef = code
-            print("new key: ", clef)
-            dico[clef]= {                        # AJOUT DE LA nouvelle CLEF DS LE DICO PR table codes stages
-                            "Doc": intitule,
+            valeur = {                                 # AJOUT DE LA nouvelle CLEF DS LE DICO PR table codes stages
+                            "Doc": "",
                             "Validé": False,
-                            "Commentaires": "",
+                            "Commentaires": "new",
                             "Nom_document": ""
-                        }
-    valid=True
+            }
+            dico[clef]= valeur
+            # réécriture du row stage
+            stage.update(pre_requis=dico)
+            valid=True
     return valid, len(liste)
 
 # ==========================================================================================
 @anvil.server.callable           #Del d'un pr et répercution ds la table pr_stgiaires ET table code_stages
-def del_pr(pr_row):
+def del_pr(pr_row, code):
     valid = False
     pr_row.delete()
     valid = True
@@ -81,5 +80,21 @@ def del_pr(pr_row):
         # Vérification
         liste1 = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
         if len(liste1)==0:
-            valid = True
+            valid1 = True
+
+    # del des PR existants en table Codes_stages
+    liste = app_tables.codes_stages.search()   # lecture de chaque stage
+    for stage in liste:
+        # lecture du dico
+        dico = {}
+        dico = stage['pre_requis']
+        # recherche si clef (old_code) existante, si oui effact ancienne clef puis recréation avec la nouvelle
+        test = dico.get(code)
+        if test is not None: # Clé existante 1 on l'efface
+            del dico[code]
+            # réécriture du row stage sans la clef
+            stage.update(pre_requis=dico)
+            valid2 = True
+    if valid1 is True and valid2 is True:
+        valid=True
     return valid, len(liste)

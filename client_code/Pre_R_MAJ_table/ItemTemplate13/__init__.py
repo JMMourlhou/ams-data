@@ -18,9 +18,9 @@ class ItemTemplate13(ItemTemplate13Template):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous vraiment effacer ce pré-requis ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous vraiment effacer ce pré-requis pour tous les stages et stagiaires ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
-            result,nb = anvil.server.call("del_pr", self.item)
+            result,nb = anvil.server.call("del_pr", self.item, self.item['code_pre_requis'])
             if result is not True:
                 alert("ERREUR, Effacement non effectué !")
                 return
