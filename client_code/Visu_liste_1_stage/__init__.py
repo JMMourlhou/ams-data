@@ -16,6 +16,8 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()
+        
         self.num_stage = num_stage
         self.intitule = intitule
         self.pdf_mode = pdf_mode
@@ -50,9 +52,11 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
+        """
         from ..Stage_visu_modif import Stage_visu_modif
         open_form('Stage_visu_modif', int(self.num_stage), False)  # False: ne pas effectuer les BG tasks
-
+        """
+        open_form()
 
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""
