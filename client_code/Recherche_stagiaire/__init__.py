@@ -12,7 +12,15 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens. 
-       
+        
+        #import anvil.js    # pour screen size
+        from anvil.js import window # to gain access to the window object
+        global screen_size
+        screen_size = window.innerWidth
+        if screen_size < 800:   # Tel, je n'affiche que l'icone des boutons suivants
+            self.button_mail_to_all.text = ""
+            self.button_trombi.text = ""
+            
         # Pour une inscription:
         self.label_origine.text = str(get_open_form())
         self.num_stage = num_stage
