@@ -11,15 +11,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
          
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        # Any code you write here will run before the form opens. 
-        
-        #import anvil.js    # pour screen size
-        from anvil.js import window # to gain access to the window object
-        global screen_size
-        screen_size = window.innerWidth
-        if screen_size < 800:   # Tel, je n'affiche que l'icone des boutons suivants
-            self.button_mail_to_all.text = ""
-            self.button_trombi.text = ""
+        # Any code you write here will run before the form opens.
             
         # Pour une inscription:
         self.label_origine.text = str(get_open_form())
@@ -38,6 +30,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         print("screen: ", screen_size)
         if screen_size > 800:
             self.data_grid_1.rows_per_page = 6
+        else: # Phone
+            self.button_mail_to_all.text = ""  # Affiche les icones uniqt
+            self.button_trombi.text = ""
+            self.button_pre_requis = ""
         if screen_size > 1800:
             self.data_grid_1.rows_per_page = 11
     # Focus on nom en ouverture de form
@@ -146,6 +142,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.label_titre.text = str(len(self.liste_date))+" résultats"
         self.button_mail_to_all.visible = True
         self.button_trombi.visible = True
+        self.button_pre_requis.visible = True
         self.repeating_panel_1.items = self.liste_date
 
     def button_retour_click(self, **event_args):
@@ -209,6 +206,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         from ..Visu_trombi import Visu_trombi
         #open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text, False)
         open_form('Visu_trombi',str(self.selection['numero']), self.selection['code']['intitulé'], False)
+
+    def button_pre_requis_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        open_form('Pre_R_pour_stagiaire_admin',self.selection['numero'])
 
                 
        

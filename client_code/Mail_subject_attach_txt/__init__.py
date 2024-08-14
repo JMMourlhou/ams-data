@@ -15,6 +15,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()
         self.old_stagiaires = old_stagiaires
         
          # Récupération des icones ds files pour afficher les icones en template 16
@@ -80,8 +81,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main',99) 
+        open_form(self.f) 
 
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
