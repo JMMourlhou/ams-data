@@ -151,6 +151,8 @@ class Main(MainTemplate):
         self.column_panel_admin.visible = False
         self.button_qcm.visible = False
         self.button_pre_requis.visible = False
+        self.button_form_suivi_stage.visible = False
+        self.button_form_satisf.visible = False
         self.content_panel.clear()
         self.content_panel.add_component(
             SignupDialog_V2(h, num_stage), full_width_row=True
