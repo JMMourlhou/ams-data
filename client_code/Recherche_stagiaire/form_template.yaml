@@ -21,7 +21,7 @@ components:
       layout_properties: {grid_position: 'VFRGMW,CGVGSJ'}
       components:
       - name: column_panel_6
-        properties: {col_widths: '{"SKICUP":30,"TSDRJZ":25,"JMXDJI":25}', wrap_on: never, spacing_above: none, spacing_below: small, background: 'theme:Tertiary'}
+        properties: {col_widths: '{"SKICUP":30,"TSDRJZ":25,"JMXDJI":20,"QJDWXV":20}', wrap_on: never, spacing_above: none, spacing_below: small, background: 'theme:Tertiary'}
         type: ColumnPanel
         layout_properties: {grid_position: 'QFBRWM,GTQDWQ'}
         components:
@@ -30,6 +30,11 @@ components:
           type: Button
           layout_properties: {grid_position: 'TVFLYD,JMXDJI'}
           event_bindings: {click: button_mail_to_all_click}
+        - name: button_trombi
+          properties: {text: Trombi, visible: false, icon: 'fa:users', foreground: 'theme:On Primary Container'}
+          type: Button
+          layout_properties: {grid_position: 'TVFLYD,QJDWXV'}
+          event_bindings: {click: button_trombi_click}
         - type: Label
           properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Recherche}
           name: label_titre

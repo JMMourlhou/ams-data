@@ -113,6 +113,8 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                 self.liste_type_stage.append(row)
         self.label_titre.text = str(len(self.liste_type_stage))+" résultats"
         self.button_mail_to_all.visible = True
+
+        
         self.repeating_panel_1.items = self.liste_type_stage
         
     def drop_down_code_stage_change(self, **event_args):
@@ -127,14 +129,15 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
-        selection=self.drop_down_num_stages.selected_value
+        self.selection=self.drop_down_num_stages.selected_value
         #extraction du num stage
         self.liste_date = app_tables.stagiaires_inscrits.search(
                                         tables.order_by("name", ascending=True),
-                                        stage=selection
+                                        stage=self.selection
                                       )
         self.label_titre.text = str(len(self.liste_date))+" résultats"
         self.button_mail_to_all.visible = True
+        self.button_trombi.visible = True
         self.repeating_panel_1.items = self.liste_date
 
     def button_retour_click(self, **event_args):
@@ -192,6 +195,13 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         
         # 'formul' indique l'origine, ici 'formulaire de satisfaction'
         open_form("Mail_subject_attach_txt",  liste_email, 'stagiaire_tous') 
+
+    def button_trombi_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_trombi import Visu_trombi
+        #open_form('Visu_trombi',self.text_box_num_stage.text, self.text_box_intitule.text, False)
+        open_form('Visu_trombi',str(self.selection['numero']), self.selection['code']['intitulé'], False)
+
                 
        
 
