@@ -5,9 +5,7 @@ components:
 - type: ColumnPanel
   properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: none, visible: true, border: '', tooltip: ''}
   name: column_panel_header
-  layout_properties:
-    col_widths: {}
-    grid_position: OFJBPV,VKAECL
+  layout_properties: {grid_position: 'AQQDKN,WVGJPN'}
   components:
   - type: Image
     properties: {role: null, vertical_align: center, spacing_above: none, background: 'theme:On Primary Container', horizontal_align: center, source: _/theme/en_tete_small.png, foreground: '', display_mode: shrink_to_fit, spacing_below: small, visible: true, border: solid white 1px, tooltip: '', height: 202.75433349609375}
@@ -195,6 +193,6 @@ components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: content_panel
-  layout_properties: {grid_position: 'RSACLT,PYHLGG'}
+  layout_properties: {grid_position: 'AQQDKN,IZRYGB'}
   components: []
 is_package: true
