@@ -24,7 +24,7 @@ services:
   server_config: {enc_delegation_refresh_token: hpOFXpFvivlCtjXrhtAWx4r0B41C+gLgl7cGOjQhndVAlL+qXXey8uW2EQLRIunkYvBVpT4JxxeYiLwgUMPL9toRFzWNJBJQA0+J60ztN8XdPYr8qTHm8MxzjTwyJhA+V0e1CNA5Yy4BI0t+5mWzhbF/jJFrSPAAe59p1yZD9R1Vn4GYV3iXmsdxrO+MRZ+Oi0ePYr/0IGihj+F4UbaVwJTcg3d8+4YthD43Ycju27LD2b6hSrjb3OVRkt7o4FWbEiHR+m0tlKWriCGeUVnqPjyBl76NCtKqSGQnbE8nm88UjFBMDV/B8T3sjl//MA==}
 - source: /runtime/services/anvil/email.yml
   client_config: {}
-  server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com, smtp_encryption: starttls, test_mode: false, smtp_password: uHoy2y3KDFLqEsYi3S1aJKEhWfDPfe2QIaCBxD7tYzEJkvEnpvkFT1UqtUNEYvbCrVM1qNxdyJ1C39bPsygt4F/9Cra/zuYoMaitwdlb+KfD7HLG3Ae38E+uCFAlo8Cn1G5zlrXDBkrpDLASqrg209Vms5iBrt9ZybPMZGW54Fa7TUpKVR+8icUG/ZE=}
+  server_config: {custom_smtp: true, smtp_host: smtp.gmail.com, smtp_port: 587, smtp_user: jmmourlhou@gmail.com, smtp_encryption: starttls, test_mode: false, smtp_password: CufxMG78l7gv0aODjv+dSL8n+Xn+iK3M09Xt4S8GCkSH7tnzVjVBaVFk3glUwD+6Rk0200Y0R4B0VSmTNRm7nrinI9xJ3qD02WbyxFsBrTWnsmHRdG49ytNetJRw9VPG+Y6QcrNxojtrpfzTTJyDgTae98A9hBf00MawFJ/HHwK57cDAzz+0q4xwgVY=}
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
