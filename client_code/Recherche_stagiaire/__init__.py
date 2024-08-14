@@ -140,6 +140,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                                         stage=self.selection
                                       )
         self.label_titre.text = str(len(self.liste_date))+" résultats"
+        self.button_insc_par_qr.visible = True
         self.button_mail_to_all.visible = True
         self.button_trombi.visible = True
         self.button_pre_requis.visible = True
@@ -210,6 +211,10 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def button_pre_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
         open_form('Pre_R_pour_stagiaire_admin',self.selection['numero'])
+
+    def button_insc_par_qr_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        open_form('QrCode_display', False, str(self.selection['numero'])
 
                 
        
