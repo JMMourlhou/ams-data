@@ -10,7 +10,7 @@ components:
     grid_position: DGXGMW,VQVVNA
   components:
   - type: Label
-    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Envoi de mail}
+    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Paramétrage des Modèles de Mails}
     name: label_3
     layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
 - type: ColumnPanel

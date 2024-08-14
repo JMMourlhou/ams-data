@@ -105,7 +105,7 @@ components:
     layout_properties: {grid_position: 'KYGVGK,OGDLZS'}
     components:
     - name: button_mails
-      properties: {text: Param Mails, background: 'theme:Primary', foreground: 'theme:On Primary', visible: true}
+      properties: {text: Modèles de Mails, background: 'theme:Primary', foreground: 'theme:On Primary Container', visible: true}
       type: Button
       layout_properties: {grid_position: 'TJWBZJ,QQRCNT'}
       event_bindings: {click: button_mails_click}

@@ -65,4 +65,9 @@ class Parametres(ParametresTemplate):
         stagiaire_inscrit_row = self.drop_down_personnes.selected_value
         from ..Pre_R_pour_1_stagiaire import Pre_R_pour_1_stagiaire
         open_form('Pre_R_pour_1_stagiaire',stagiaire_inscrit_row)
+
+    def button_mails_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Mail_subject_attach_txt import Mail_subject_attach_txt
+        open_form("Mail_subject_attach_txt",[],"")
  
