@@ -323,6 +323,11 @@ class Main(MainTemplate):
                 self.button_qcm.visible = True
                 self.button_form_satisf.visible = False
                 self.button_form_suivi_stage.visible = False
+        else: #pas de user
+            self.column_panel_modif.visible = False
+            self.column_panel_admin.visible = False
+            self.column_panel_others.visible = False
+            
 
     def button_parametres_click(self, **event_args):
         """This method is called when the button is clicked"""
