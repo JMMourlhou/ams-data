@@ -151,3 +151,8 @@ class Visu_trombi(Visu_trombiTemplate):
         if cpt == 25:   
            print("Page Break", cpt)
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!
+
+    def button_trombi_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Visu_liste_1_stage import Visu_liste_1_stage
+        open_form('Visu_liste_1_stage',self.num_stage, self.intitule)

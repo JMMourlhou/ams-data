@@ -21,39 +21,44 @@ components:
       layout_properties: {grid_position: 'VFRGMW,CGVGSJ'}
       components:
       - name: column_panel_6
-        properties: {col_widths: '{"SKICUP":24,"TSDRJZ":15,"JMXDJI":20,"QJDWXV":20,"KWXRYX":18,"ZJKDRS":14}', wrap_on: never, spacing_above: none, spacing_below: small, background: 'theme:Tertiary'}
+        properties: {col_widths: '{}', wrap_on: never, spacing_above: none, spacing_below: small, background: 'theme:Tertiary'}
         type: ColumnPanel
         layout_properties: {grid_position: 'QFBRWM,GTQDWQ'}
         components:
-        - name: button_mail_to_all
-          properties: {text: à la sélection, visible: false, icon: 'fa:send', foreground: 'theme:On Primary Container'}
-          type: Button
-          layout_properties: {grid_position: 'TVFLYD,JMXDJI'}
-          event_bindings: {click: button_mail_to_all_click}
-        - name: button_trombi
-          properties: {text: Trombi, visible: false, icon: 'fa:users', foreground: 'theme:On Primary Container'}
-          type: Button
-          layout_properties: {grid_position: 'TVFLYD,QJDWXV'}
-          event_bindings: {click: button_trombi_click}
-        - name: button_pre_requis
-          properties: {text: Pré-requis, visible: false, icon: 'fa:paperclip', foreground: 'theme:On Primary Container'}
-          type: Button
-          layout_properties: {grid_position: 'TVFLYD,KWXRYX'}
-          event_bindings: {click: button_pre_requis_click}
-        - name: button_insc_par_qr
-          properties: {text: + QR, visible: false, icon: 'fa:qrcode', foreground: 'theme:On Primary Container'}
-          type: Button
-          layout_properties: {grid_position: 'TVFLYD,ZJKDRS'}
-          event_bindings: {click: button_insc_par_qr_click}
-        - type: Label
-          properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Recherche}
-          name: label_titre
-          layout_properties: {grid_position: 'TVFLYD,SKICUP'}
-        - type: Button
-          properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
-          name: button_retour
-          layout_properties: {grid_position: 'TVFLYD,TSDRJZ', row_background: '', full_width_row: false}
-          event_bindings: {click: button_retour_click}
+        - name: column_panel_8
+          properties: {col_widths: '{"EDSRGW":45,"IVZAZR":6}', wrap_on: never}
+          type: ColumnPanel
+          layout_properties: {grid_position: 'ZDIHWY,CRZXDI'}
+          components:
+          - name: flow_panel_1
+            properties: {align: center}
+            type: FlowPanel
+            layout_properties: {grid_position: 'ZLZXLE,EDSRGW'}
+            components:
+            - name: button_mail_to_all
+              properties: {text: à la sélection, visible: false, icon: 'fa:send', foreground: 'theme:On Primary Container'}
+              type: Button
+              event_bindings: {click: button_mail_to_all_click}
+            - name: button_trombi
+              properties: {text: Trombi, visible: false, icon: 'fa:users', foreground: 'theme:On Primary Container'}
+              type: Button
+              event_bindings: {click: button_trombi_click}
+            - name: button_pre_requis
+              properties: {text: Pré-requis, visible: false, icon: 'fa:paperclip', foreground: 'theme:On Primary Container'}
+              type: Button
+              event_bindings: {click: button_pre_requis_click}
+            - name: button_insc_par_qr
+              properties: {text: + QR, visible: false, icon: 'fa:qrcode', foreground: 'theme:On Primary Container'}
+              type: Button
+              event_bindings: {click: button_insc_par_qr_click}
+            - type: Label
+              properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Recherche}
+              name: label_titre
+          - type: Button
+            properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
+            name: button_retour
+            layout_properties: {grid_position: 'ZLZXLE,IVZAZR'}
+            event_bindings: {click: button_retour_click}
         - name: label_origine
           properties: {align: center, visible: false}
           type: Label

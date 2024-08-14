@@ -116,11 +116,11 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             for row in l:                      # pour chaque stagiaire du stage
                 self.liste_type_stage.append(row)
         self.label_titre.text = str(len(self.liste_type_stage))+" résultats"
-        self.button_mail_to_all.visible = True
-
-        
+       
         self.repeating_panel_1.items = self.liste_type_stage
-        
+        if len(self.liste_type_stage)>0:
+             self.button_mail_to_all.visible = True
+    
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         self.text_box_nom.text=""       # critere nom
@@ -140,11 +140,17 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
                                         stage=self.selection
                                       )
         self.label_titre.text = str(len(self.liste_date))+" résultats"
-        self.button_insc_par_qr.visible = True
-        self.button_mail_to_all.visible = True
-        self.button_trombi.visible = True
-        self.button_pre_requis.visible = True
+        self.button_insc_par_qr.visible = True    # Affiche BT inscription par QR
         self.repeating_panel_1.items = self.liste_date
+        if len(self.liste_date)>0:
+            self.button_mail_to_all.visible = True
+            self.button_trombi.visible = True
+            self.button_pre_requis.visible = True
+        else:
+            self.button_mail_to_all.visible = False
+            self.button_mail_to_all.visible = False
+            self.button_trombi.visible = False
+            self.button_pre_requis.visible = False
 
     def button_retour_click(self, **event_args):
         """This method is called when the button is clicked"""

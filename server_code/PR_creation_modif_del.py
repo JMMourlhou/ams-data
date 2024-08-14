@@ -68,21 +68,23 @@ def modif_pr(pr_row, intitule, code, old_code):
 @anvil.server.callable           #Del d'un pr et répercution ds la table pr_stgiaires ET table code_stages
 def del_pr(pr_row, code):
     valid = False
+    valid1 = False
+    valid2 = False
     pr_row.delete()
-    valid = True
+
     
     # del des PR stagiaires existants
     liste = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
     if len(liste)>0:
-        valid = False
         for pr_r in liste:
             pr_r.delete()
+            valid1 = True
         # Vérification
         liste1 = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)
         if len(liste1)==0:
-            valid1 = True
+            valid2 = True
 
-    # del des PR existants en table Codes_stages
+    # del des PR existants en table Codes_stages (s'il y en a ! )
     liste = app_tables.codes_stages.search()   # lecture de chaque stage
     for stage in liste:
         # lecture du dico
@@ -94,7 +96,7 @@ def del_pr(pr_row, code):
             del dico[code]
             # réécriture du row stage sans la clef
             stage.update(pre_requis=dico)
-            valid2 = True
+            
     if valid1 is True and valid2 is True:
         valid=True
     return valid, len(liste)
