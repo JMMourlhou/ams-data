@@ -13,25 +13,25 @@ components:
     type: FlowPanel
     layout_properties: {grid_position: 'MIMVUY,FHKVHU'}
     components:
-    - name: column_panel_1
+    - name: flow_panel_3
       properties: {}
-      type: ColumnPanel
+      type: FlowPanel
       components:
       - name: button_nom
-        properties: {role: outlined-button, bold: false, align: left, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary Container', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: button_nom}
+        properties: {role: null, bold: false, align: left, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary Container', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: button_nom}
         type: Button
-        layout_properties: {grid_position: 'HLZJDG,FQOFQY'}
         event_bindings: {click: button_nom_click}
-      layout_properties: {width: 247.3403701171875}
+      layout_properties: {width: 212.4145246582031}
     - name: flow_panel_2
-      properties: {align: center}
+      properties: {align: right}
       type: FlowPanel
-      layout_properties: {width: 54.99140595703125}
+      layout_properties: {width: 192.4210302734375}
       components:
       - name: button_2
-        properties: {text: ' + PR', background: 'theme:On Primary Container', foreground: 'theme:Tertiary', icon: '', bold: true}
+        properties: {text: + Personnaliser, background: 'theme:On Primary Container', foreground: 'theme:Tertiary', icon: '', bold: true, align: left}
         type: Button
         event_bindings: {click: button_2_click}
+        layout_properties: {}
 - name: repeating_panel_1
   properties: {item_template: Pre_R_pour_stagiaire_admin.ItemTemplate5.ItemTemplate6, visible: false, role: null, spacing_below: none}
   type: RepeatingPanel
