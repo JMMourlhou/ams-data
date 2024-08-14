@@ -21,11 +21,11 @@ components:
         properties: {role: null, bold: false, align: left, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary Container', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: button_nom}
         type: Button
         event_bindings: {click: button_nom_click}
-      layout_properties: {width: 212.4145246582031}
+      layout_properties: {width: 146.4873642578125}
     - name: flow_panel_2
       properties: {align: right}
       type: FlowPanel
-      layout_properties: {width: 192.4210302734375}
+      layout_properties: {width: 121.42621630859375}
       components:
       - name: button_2
         properties: {text: + Personnaliser, background: 'theme:On Primary Container', foreground: 'theme:Tertiary', icon: '', bold: true, align: left}
