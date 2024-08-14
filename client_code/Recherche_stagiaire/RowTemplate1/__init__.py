@@ -256,7 +256,7 @@ class RowTemplate1(RowTemplate1Template):
                 alert(f"Effacement impossible:\nCette personne est inscrite dans {nb_stages} {txt}\n\n Détail:\n{txt} N°{detail}")
                 return
             # Effact de la personne si confirmation
-            r=alert("Voulez-vous vraiment enlever définitivement cette personne ? ",buttons=[("oui",True),("non",False)])
+            r=alert("Voulez-vous vraiment enlever définitivement cette personne ? ",dismissible=False ,buttons=[("oui",True),("non",False)])
             if r :   # oui
                 # lecture row users
                 row = app_tables.users.get(email=self.email_pour_del['email'])

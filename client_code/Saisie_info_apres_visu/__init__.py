@@ -102,7 +102,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             return
 
         if self.check_box_accept_data_use.checked is not True:
-            r=alert("Voulez-vous valider l'utilisation de vos données par AMsport ?",buttons=[("oui",True),("non",False)])
+            r=alert("Voulez-vous valider l'utilisation de vos données par AMsport ?",dismissible=False,buttons=[("oui",True),("non",False)])
             if r :   #Non, nom pas correct
                 self.check_box_accept_data_use.checked = True
                 return

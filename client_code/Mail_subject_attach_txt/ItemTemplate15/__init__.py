@@ -18,7 +18,7 @@ class ItemTemplate15(ItemTemplate15Template):
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous enlever ce modèle de mail ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous enlever ce modèle de mail ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # Oui               
             anvil.server.call('del_mails', self.text_area_subject.tag.id) 
         self.f = get_open_form()   # récupération de la forme mère pour accéder aux fonctions et composents

@@ -115,7 +115,7 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
 
     def button_sending_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Confirmez-vous l'envoi ?",buttons=[("oui",True),("non",False)])
+        r=alert("Confirmez-vous l'envoi ?",dismissible=False, buttons=[("oui",True),("non",False)])
         if r :   # Oui    
             liste_des_attachements = list(self.dico_attachements.keys()) # extraction des clefs du dico des attachements
             """

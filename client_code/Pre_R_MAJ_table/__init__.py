@@ -59,7 +59,7 @@ class Pre_R_MAJ_table(Pre_R_MAJ_tableTemplate):
             alert("Ce code de Pré-Requis existe déjà !")
             self.text_box_1.focus()
             return
-        r=alert("Voulez-vous vraiment ajouter ce Pré-Requis ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous vraiment ajouter ce Pré-Requis ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
             result = anvil.server.call("add_pr", self.text_box_1.text, self.text_box_2.text, self.text_box_3.text )
             if result is not True:

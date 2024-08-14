@@ -43,7 +43,7 @@ class ItemTemplate1(ItemTemplate1Template):
             
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
         if result:
-            r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
+            r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
             if r :   # Oui
                 anvil.server.call("del_1pr",clef_a_annuler,code_stage)
         # =======================================================       

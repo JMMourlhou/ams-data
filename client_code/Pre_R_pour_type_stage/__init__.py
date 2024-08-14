@@ -96,7 +96,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
 
         self.sov_dico_ds_temp()   # sauvegarde du dico ds TABLE TEMP   
         # =================================================================================================
-        r=alert("Voulez-vous ajouter ce pré-requis pour tous les stagiaires de ce type de stage ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous ajouter ce pré-requis pour tous les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # Oui
             liste_stages = app_tables.stages.search(code_txt = code_stage)  
             print("nb de stages: ",len(liste_stages))

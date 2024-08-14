@@ -41,7 +41,7 @@ class RowTemplate4(RowTemplate4Template):
 
     def bt_delete(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Enlever ce stagiaire ?",buttons=[("Non",False),("Oui",True)])
+        r=alert("Enlever ce stagiaire ?",dismissible=False,buttons=[("Non",False),("Oui",True)])
         if r :   #oui   
             stage_row = self.button_delete.tag.stage_row
             stagiaire_row = self.button_delete.tag.stagiaire_row

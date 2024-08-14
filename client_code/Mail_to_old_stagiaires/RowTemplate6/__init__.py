@@ -57,7 +57,7 @@ class RowTemplate6(RowTemplate6Template):
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous enlever cet historique ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous enlever cet historique ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :     
             result = anvil.server.call("del_histo",self.item)
             if result is not True:

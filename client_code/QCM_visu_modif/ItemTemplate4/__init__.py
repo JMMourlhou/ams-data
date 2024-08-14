@@ -714,7 +714,7 @@ class ItemTemplate4(ItemTemplate4Template):
         qcm_descro_row = self.qcm_nb
         num_question = self.button_delete.tag.numero
         #question de confirmation
-        r=alert("Enlever cette question ?",buttons=[("Non",False),("Oui",True)])
+        r=alert("Enlever cette question ?",dismissible=False,buttons=[("Non",False),("Oui",True)])
         if r :   #oui     
             if self.mode == "creation":  # ===================================================  MODE CREATION QCM
                 result = anvil.server.call('delete_qcm', qcm_descro_row, num_question)
