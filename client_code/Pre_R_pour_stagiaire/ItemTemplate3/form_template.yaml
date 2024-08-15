@@ -70,7 +70,7 @@ components:
       layout_properties: {}
       event_bindings: {change: file_loader_1_change}
     - name: button_del
-      properties: {role: outlined-button, bold: false, align: left, spacing_above: small, background: '', icon: 'fa:remove', underline: false, font: '', icon_align: left_edge, foreground: 'theme:Error', spacing_below: small, visible: false, border: '', italic: false, enabled: true, font_size: 27, tooltip: '', text: ' '}
+      properties: {role: outlined-button, bold: false, align: left, spacing_above: small, background: '', icon: 'fa:remove', underline: false, font: '', icon_align: right, foreground: 'theme:Error', spacing_below: small, visible: false, border: '', italic: false, enabled: true, font_size: 27, tooltip: '', text: ''}
       type: Button
       layout_properties: {}
       event_bindings: {click: button_del_click}

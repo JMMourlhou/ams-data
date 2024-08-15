@@ -59,6 +59,7 @@ class ItemTemplate3(ItemTemplate3Template):
 
                 # module de sauvegarde du 'file'  jpg
                 self.save_file(file, new_file_name, ".jpg")
+        self.file_loader_1.visible = False
 
     def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""
