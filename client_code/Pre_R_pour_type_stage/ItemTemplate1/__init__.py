@@ -28,25 +28,21 @@ class ItemTemplate1(ItemTemplate1Template):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
 
-        # lecture du dico des pré requis ds table temp
-        """
-        temp_row = app_tables.temp.search()[0]    # A MODIFIER PAS BESOIN DE TEMP ! get_open_form
-        code_stage = temp_row['code_stage']
-        """
         code_stage = self.f.drop_down_code_stage.selected_value['code']
-        dico = self.f.drop_down_code_stage.selected_value['pre_requis']
+        dico = self.f.drop_down_code_stage.selected_value['pre_requis']   # lecture ds form mere
         clef_a_annuler = self.button_annuler.tag
         try:
             del dico[clef_a_annuler]
+            # Ré écriture du dictionnaire des pr pour ce stage ds table 'codes stages'    
+            result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
+            if result:
+                r=alert("Voulez-vous enlever les pré-requis pour les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
+                if r :   # Oui
+                    r=alert("Si un document existe pour ce pré-requis, l'effacer quand même ?",dismissible=False,buttons=[("oui",True),("non",False)])
+                    anvil.server.call("del_1pr",clef_a_annuler,code_stage,r)
         except:
-            alert(f"{clef_a_annuler} n'existe plus")
-        # Ré écriture du dictionnaire des pr pour ce stage ds table 'codes stages'    
-        result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
-        if result:
-            r=alert("Voulez-vous enlever les pré-requis pour les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
-            if r :   # Oui
-                r=alert("Si un document existe pour ce pré-requis, l'effacer quand même ?",dismissible=False,buttons=[("oui",True),("non",False)])
-                anvil.server.call("del_1pr",clef_a_annuler,code_stage,r)
+            #alert(f"{clef_a_annuler} n'existe plus")
+            pass
         # =======================================================       
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)
