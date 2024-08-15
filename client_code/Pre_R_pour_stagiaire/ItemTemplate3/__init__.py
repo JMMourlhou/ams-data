@@ -21,6 +21,7 @@ class ItemTemplate3(ItemTemplate3Template):
             self.image_1.source = self.item['thumb']              # DIPLAY L'image thumb
             self.button_del.visible = True
             self.button_visu.visible = True
+            self.file_loader_1.visible = False
         else:                                 # si doc none
             self.button_del.visible = False 
             self.button_visu.visible = False
