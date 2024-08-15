@@ -33,6 +33,7 @@ class Main(MainTemplate):
         """ cas 2: soit ouverture de l'app """
         """        ou retour par URL suite à PW reset ou confirm mail"""
         if self.nb == 2:
+            self.column_panel_others.visible = False
             """ get_url_hash() gets the decoded hash (the part after the ‘#’ character) of the URL used to open this app.
 
                 If the first character of the hash is a question mark (e.g., https://myapp.anvil.app/#?a=foo&b=bar),
