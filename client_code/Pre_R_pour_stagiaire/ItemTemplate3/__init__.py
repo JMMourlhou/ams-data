@@ -21,14 +21,15 @@ class ItemTemplate3(ItemTemplate3Template):
             self.image_1.source = self.item['thumb']              # DIPLAY L'image thumb
             self.button_del.visible = True
             self.button_visu.visible = True
-        else:
-            self.button_del.visible = False            
+        else:                                 # si doc none
+            self.button_del.visible = False 
+            self.button_visu.visible = False
+            """
             try:     # si pas de doc en table, erreur
-                #media = self.item['doc1'].name
                 self.button_visu.visible = False
             except:
                 pass
-        
+            """
         self.stage_num =   self.item['stage_num']        # Row stage
         self.item_requis = self.item['item_requis']      # Row Item requis
         self.email =       self.item['stagiaire_email']  # Row user
