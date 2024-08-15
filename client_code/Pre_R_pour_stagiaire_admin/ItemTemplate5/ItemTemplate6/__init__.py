@@ -35,7 +35,9 @@ class ItemTemplate6(ItemTemplate6Template):
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-   
+            n = Notification("Attendre la fin du traitement pour prendre une autre photo !",
+                 timeout=3)   # par défaut 2 secondes
+            n.show()
             # nouveau nom doc SANS extension
             new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
             print("new file name: ",new_file_name)
