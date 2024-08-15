@@ -22,7 +22,7 @@ class ItemTemplate6(ItemTemplate6Template):
         self.label_en_tete_pr.text = txt0 +txt1 + txt2
         
         if self.item['doc1'] is not None:
-            self.image_1.source = self.item['thumb']              # DISPLAY L'image haute qualité 
+            self.image_1.source = self.item['thumb']              # DISPLAY L'image basse qualité
             self.button_visu.visible = True
             self.button_del.visible = True
         else:
