@@ -45,7 +45,8 @@ class ItemTemplate1(ItemTemplate1Template):
         if result:
             r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
             if r :   # Oui
-                anvil.server.call("del_1pr",clef_a_annuler,code_stage)
+                r=alert("Si un document existe pour ce pré-requis, l'effacer quand même ?",dismissible=False,buttons=[("oui",True),("non",False)])
+                    anvil.server.call("del_1pr",clef_a_annuler,code_stage,r)
         # =======================================================       
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)

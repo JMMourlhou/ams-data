@@ -21,7 +21,7 @@ def modif_pre_requis_codes_stages(code_stage, pr_requis_dico):
 
 # =========================================================================
 @anvil.server.callable           #del du pré_requis (pour un type de stage) ds tous les stages impliqués
-def del_1pr(clef_a_annuler,code_stage):
+def del_1pr(clef_a_annuler,code_stage,efface=False):  # efface est TRUE si on efface quand même un doc existant pour le PR à effacer 
     result = False
     # lecture row du item_requis à annuler
     row = app_tables.pre_requis.get(q.fetch_only(),
@@ -38,7 +38,7 @@ def del_1pr(clef_a_annuler,code_stage):
                                                                 )
         for stagiaire in liste_stagiaires:
             # Pour chq stagiaire, effact du pré_requis SI VIDE                    
-            if stagiaire['doc1'] is None:
+            if stagiaire['doc1'] is None or efface is True:
                 stagiaire.delete()
             result = True
     return result

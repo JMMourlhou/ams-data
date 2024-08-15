@@ -20,7 +20,7 @@ class ItemTemplate12(ItemTemplate12Template):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         if self.item['doc1'] is not None:
-            r=alert("Ce pré-requis n'est pas vide, Voulez-vous vraiment le détruire ?",buttons=[("oui",True),("non",False)])
+            r=alert("Ce pré-requis n'est pas vide, Voulez-vous vraiment le détruire ?",dismissible=False,buttons=[("oui",True),("non",False)])
         else:
             r=alert("Voulez-vous détruire ce pré-requis ?", dismissible=False ,buttons=[("oui",True),("non",False)])
         if r :   # Oui               
