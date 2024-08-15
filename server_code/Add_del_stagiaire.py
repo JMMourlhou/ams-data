@@ -141,9 +141,11 @@ def add_1_pre_requis(stage_row, user, pr_row):
     try:  # user est le row_user (qd je modifie les pr par type de stage)
         user_row = app_tables.users.get(q.fetch_only("nom","prenom"),
                                     email=user)
+        valid=True
     except: # user est le mail du stgiaire (qd je modifie 1 pr d'1 stgiaire, provenance Pre_R_pour_1_stagiaire )
-         user_row = app_tables.users.get(q.fetch_only("nom","prenom"),
+        user_row = app_tables.users.get(q.fetch_only("nom","prenom"),
                                     email=user["email"])
+        valid=True
     
     app_tables.pre_requis_stagiaire.add_row(
                                             stage_num = stage_row,  
@@ -156,7 +158,6 @@ def add_1_pre_requis(stage_row, user, pr_row):
                                             nom = user_row['nom'],
                                             prenom = user_row['prenom']
                                              )    
-    valid = True
     return valid
 
 # =========================================================================================================================================

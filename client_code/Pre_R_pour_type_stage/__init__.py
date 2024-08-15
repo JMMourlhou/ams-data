@@ -32,6 +32,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         #lecture du dictionaire ds table codes_stages pour le stage sélectionné
         
         row = self.drop_down_code_stage.selected_value
+        self.row = row
         if row is None :
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
@@ -67,7 +68,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
     def drop_down_pre_requis_change(self, **event_args):
         """This method is called when an item is selected"""
         row = self.drop_down_pre_requis.selected_value       # row du pre_requis 
-        if row == None:
+        if row is None:
             alert("Vous devez sélectionner un pré-requis !")
             self.drop_down_code_stage.focus()
             return
@@ -88,7 +89,7 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         print(list_keys)
         self.repeating_panel_1.items = list(list_keys)   # liste des clefs (pré requis)
         
-        #réinitialisation dropdown pré requis
+        #réinitialisation dropdown pré requis sans le pré requis sélectionné
         self.drop_down_pre_requis.items = [(r["requis"], r) for r in app_tables.pre_requis.search(tables.order_by("requis", ascending=True)) if not dico_pre_requis.get(r["code_pre_requis"])]
         
         global code_stage
@@ -98,7 +99,9 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
         # =================================================================================================
         r=alert("Voulez-vous ajouter ce pré-requis pour tous les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # Oui
-            liste_stages = app_tables.stages.search(code_txt = code_stage)  
+            #liste_stages = app_tables.stages.search(code_txt = code_stage)  # PAS FIABLE CAR BASE SUR UNE DONNEE TEXTE !
+            
+            liste_stages = app_tables.stages.search(code = self.row)  # row stage
             print("nb de stages: ",len(liste_stages))
             # acquisition des stagiaires inscrits à ces stages
             for stage in liste_stages:
@@ -106,16 +109,20 @@ class Pre_R_pour_type_stage(Pre_R_pour_type_stageTemplate):
                 liste_stagiaires = app_tables.stagiaires_inscrits.search(numero=stage['numero'])
                 # Pour chq stagiaire, ajout du pré_requis
                 for stagiaire in liste_stagiaires:
-                    print(stagiaire["name"])
+                    #print(stagiaire["name"])
                     # ajout du pré_requis si pas existant
                     test = app_tables.pre_requis_stagiaire.search(stage_num = stage,
                                                                 item_requis = row,
                                                                 stagiaire_email = stagiaire['user_email'])
-                    print("lg: ", len(test))
+                    #print("lg: ", len(test))
                     if len(test) == 0:
-                        print("non existant")
+                        #print("non existant")
                         result = anvil.server.call("add_1_pre_requis", stage, stagiaire['user_email']['email'], row)
-                        print("ajout: ",result)
+            print("TEST !  : ", result)
+            if result:
+                alert("Ajout effectué !")
+            else:
+                alert("Erreur en ajout !")
                     
                 
     def button_annuler_click(self, **event_args):

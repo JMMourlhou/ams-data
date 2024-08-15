@@ -40,13 +40,13 @@ class ItemTemplate1(ItemTemplate1Template):
             del dico[clef_a_annuler]
         except:
             alert(f"{clef_a_annuler} n'existe plus")
-            
+        # Ré écriture du dictionnaire des pr pour ce stage ds table 'codes stages'    
         result = anvil.server.call("modif_pre_requis_codes_stages", code_stage, dico)
         if result:
-            r=alert("Voulez-vous enlever les pré-requis déjà affectés pour les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
+            r=alert("Voulez-vous enlever les pré-requis pour les stagiaires de ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
             if r :   # Oui
                 r=alert("Si un document existe pour ce pré-requis, l'effacer quand même ?",dismissible=False,buttons=[("oui",True),("non",False)])
-                    anvil.server.call("del_1pr",clef_a_annuler,code_stage,r)
+                anvil.server.call("del_1pr",clef_a_annuler,code_stage,r)
         # =======================================================       
         # réaffichage complet 
         open_form('Pre_R_pour_type_stage',code_stage)
