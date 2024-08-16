@@ -413,7 +413,7 @@ db_schema:
       admin_ui: {order: 4, width: 120}
       type: string
     - name: nom
-      admin_ui: {order: 1.8125, width: 107}
+      admin_ui: {order: 1.8125, width: 72.38}
       type: string
     - name: prenom
       admin_ui: {order: 1.84375, width: 99}
@@ -443,7 +443,7 @@ db_schema:
       admin_ui: {order: 1.75, width: 200}
       type: datetime
     - name: erreur_mail
-      admin_ui: {order: 1.875, width: 125}
+      admin_ui: {order: 1.875, width: 111}
       type: bool
     - name: select
       admin_ui: {width: 127}
