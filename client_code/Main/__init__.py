@@ -55,7 +55,7 @@ class Main(MainTemplate):
             # alert(f"h ds init d'AMS_Data: {h}")
 
             if len(h) != 0:  # a URL has openned this app
-                # lien actif < à 10 min ?
+                # lien actif < à 3 mois ?
                 # url_time_str=""
                 url_time = h["t"]
                 url_time_over = French_zone.time_over(url_time)
@@ -147,6 +147,8 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
         self.bt_se_connecter.visible = False
+        self.column_panel_bt_mail.visible = False
+        """
         self.bt_sign_in.visible = False
         self.bt_gestion_stages.visible = False
         self.column_panel_admin.visible = False
@@ -154,6 +156,7 @@ class Main(MainTemplate):
         self.button_pre_requis.visible = False
         self.button_form_suivi_stage.visible = False
         self.button_form_satisf.visible = False
+        """
         self.content_panel.clear()
         self.content_panel.add_component(
             SignupDialog_V2(h, num_stage), full_width_row=True

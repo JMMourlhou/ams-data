@@ -142,11 +142,11 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.label_titre.text = str(len(self.liste_date))+" résultats"
         self.button_insc_par_qr.visible = True    # Affiche BT inscription par QR
         self.repeating_panel_1.items = self.liste_date
-        if len(self.liste_date)>0:
+        if len(self.liste_date)>0:                     # Stagiaires inscrits
             self.button_mail_to_all.visible = True
             self.button_trombi.visible = True
             self.button_pre_requis.visible = True
-        else:
+        else:                                           # Pas de stagiaires inscrits
             self.button_mail_to_all.visible = False
             self.button_mail_to_all.visible = False
             self.button_trombi.visible = False
