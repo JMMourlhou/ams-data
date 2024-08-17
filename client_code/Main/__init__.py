@@ -54,6 +54,10 @@ class Main(MainTemplate):
             # alert(f"h ds init d'AMS_Data: {h}")
 
             if len(h) != 0:  # a URL has openned this app
+                # handling buttons display before going to module externe 'sign_in_for_AMS_Data'
+                self.display_bt_mail()
+                self.display_admin_or_other_buttons()
+                
                 # lien actif < à 3 mois ?
                 # url_time_str=""
                 url_time = h["t"]
@@ -127,12 +131,13 @@ class Main(MainTemplate):
             self.bt_se_connecter.visible = False
             self.bt_se_deconnecter.visible = True
         else:
-            self.bt_user_mail.text = "Connectez vous !"
+            # Pas de USER
+            self.bt_user_mail.text = "Non connecté"
+            self.bt_user_mail.enabled = False
             self.bt_se_connecter.visible = True
             self.bt_sign_in.visible = True
 
             self.bt_se_deconnecter.visible = False
-            self.bt_user_mail.enabled = False
 
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
