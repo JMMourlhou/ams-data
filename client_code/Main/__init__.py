@@ -18,11 +18,11 @@ class Main(MainTemplate):
         
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        """
         self.bt_se_deconnecter.visible = False
-        #self.bt_user_mail.text = "Connectez vous !"
         self.bt_user_mail.enabled = False
         self.column_panel_admin.visible = False
-
+        """
         self.nb = nb
         """ Incrémentation de nb """
         self.nb = self.nb + 1
