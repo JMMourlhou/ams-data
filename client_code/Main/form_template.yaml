@@ -38,7 +38,7 @@ components:
           grid_position: GXBZDW,UYTBFE
         event_bindings: {click: bt_se_deconnecter_click}
       - type: Button
-        properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ' Se connecter '}
+        properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '"Connectez vous !"'}
         name: bt_se_connecter
         layout_properties:
           col_widths: {}
