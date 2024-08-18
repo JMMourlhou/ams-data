@@ -130,7 +130,7 @@ components:
             border: ''
             italic: false
             enabled: true
-            font_size: 14
+            font_size: 12
             tooltip: ''
           name: drop_down_code_stage
           event_bindings: {change: drop_down_code_stage_change}
@@ -163,7 +163,7 @@ components:
             border: ''
             italic: false
             enabled: true
-            font_size: 14
+            font_size: 12
             tooltip: ''
           name: drop_down_num_stages
           event_bindings: {change: drop_down_num_stages_change}
