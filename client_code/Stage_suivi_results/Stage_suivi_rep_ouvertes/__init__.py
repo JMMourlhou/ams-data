@@ -41,7 +41,7 @@ class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
             cpt = 0
             for ligne in list_rep:
                 cpt += 1
-                text = text + str(ligne) 
+                text = text +"  "+ str(ligne) 
                 if cpt == 2:            # après avoir lu la rep je peux afficher
                     
                     self.tb = RichText(

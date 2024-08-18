@@ -481,7 +481,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         print()
         print()
         """
-
+        # Initialisation 
         if type_de_suivi == "S":
             # Préparation du column panel des noms des stagiaires
             self.liste_response = app_tables.stagiaires_inscrits.search(
@@ -526,7 +526,9 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                 self.column_panel_q_ouv.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep))
             except:
                 pass
-
+        self.button_downl_pdf0.visible = True
+        self.button_downl_pdf1.visible = True
+        
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT GLOBAL des Q Fermées"""
         
 

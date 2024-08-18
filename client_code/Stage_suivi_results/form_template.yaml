@@ -130,7 +130,7 @@ components:
       type: RepeatingPanel
       layout_properties: {grid_position: 'ZHDLPE,AYATBI'}
   - name: button_downl_pdf0
-    properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Télécharger en Pdf}
+    properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Télécharger en Pdf}
     type: Button
     layout_properties: {grid_position: 'SYJRUO,YKHFIF'}
     event_bindings: {click: button_downl_pdf1_click}
