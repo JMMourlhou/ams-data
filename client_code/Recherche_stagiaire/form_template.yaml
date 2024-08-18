@@ -108,7 +108,7 @@ components:
             layout_properties: {grid_position: 'OPUFKC,RBHOTT'}
             event_bindings: {pressed_enter: text_box_email_pressed_enter, change: text_box_role_change}
       - name: column_panel_7
-        properties: {col_widths: '{"GDMMNK":28,"JKUPIX":35,"OZDORT":11,"SNGQDN":16}', spacing_below: none, spacing_above: none, wrap_on: never, col_spacing: tiny}
+        properties: {col_widths: '{"GDMMNK":26,"JKUPIX":35,"OZDORT":13,"SNGQDN":16}', spacing_below: none, spacing_above: none, wrap_on: never, col_spacing: tiny}
         type: ColumnPanel
         layout_properties: {grid_position: 'GAHVSD,CXBXCA'}
         components:
@@ -136,7 +136,7 @@ components:
           event_bindings: {change: drop_down_code_stage_change}
           layout_properties: {grid_position: 'SGQLAI,GDMMNK'}
         - name: button_recherche
-          properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:Error', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ' go !'}
+          properties: {role: elevated-button, bold: true, align: left, spacing_above: none, background: 'theme:Error', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ' go !'}
           type: Button
           event_bindings: {click: button_recherche_click}
           layout_properties: {grid_position: 'SGQLAI,OZDORT'}
