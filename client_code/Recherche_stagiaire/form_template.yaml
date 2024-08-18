@@ -108,7 +108,7 @@ components:
             layout_properties: {grid_position: 'OPUFKC,RBHOTT'}
             event_bindings: {pressed_enter: text_box_email_pressed_enter, change: text_box_role_change}
       - name: column_panel_7
-        properties: {col_widths: '{"GDMMNK":20,"JKUPIX":27,"OZDORT":16,"SNGQDN":27}', spacing_below: none, spacing_above: none, wrap_on: never, col_spacing: tiny}
+        properties: {col_widths: '{"GDMMNK":20,"JKUPIX":32,"OZDORT":13,"SNGQDN":25}', spacing_below: none, spacing_above: none, wrap_on: never, col_spacing: tiny}
         type: ColumnPanel
         layout_properties: {grid_position: 'GAHVSD,CXBXCA'}
         components:
