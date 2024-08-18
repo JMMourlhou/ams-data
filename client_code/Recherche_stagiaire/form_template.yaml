@@ -117,7 +117,7 @@ components:
             role: null
             include_placeholder: true
             bold: false
-            align: left
+            align: full
             placeholder: Stage
             spacing_above: small
             background: theme:Tertiary
