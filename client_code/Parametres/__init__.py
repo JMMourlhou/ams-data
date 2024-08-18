@@ -70,4 +70,9 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..Mail_subject_attach_txt import Mail_subject_attach_txt
         open_form("Mail_subject_attach_txt",[],"")
+
+    def button_create_qcm_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..QCM_visu_modif import QCM_visu_modif
+        open_form("QCM_visu_modif_Main")
  

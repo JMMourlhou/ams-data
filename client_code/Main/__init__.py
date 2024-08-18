@@ -199,10 +199,6 @@ class Main(MainTemplate):
         else:
             open_form("Saisie_info_apres_visu", user["email"])
 
-    def button_create_qcm_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..QCM_visu_modif import QCM_visu_modif
-        open_form("QCM_visu_modif_Main")
 
     def button_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -313,9 +309,9 @@ class Main(MainTemplate):
                 
                 
             if user["role"] == "B":                               # Bureaux    Visu stages, recherches et modif
-                self.flow_panel_admin_only.visible = False
-                self.column_panel_others.visible = False
-                self.column_panel_admin.visible = True
+                self.flow_panel_admin_only.visible = False   # Tools stages de JM
+                self.column_panel_others.visible = False     # BT des stagiaires
+                self.column_panel_admin.visible = True       
 
             if user["role"] == "J":                               # Bureaux JC     TOUT sauf   Visu stages et recherches
                 self.flow_panel_admin_only.visible = False
@@ -332,7 +328,7 @@ class Main(MainTemplate):
                 self.button_form_satisf.visible = False
                 self.button_form_suivi_stage.visible = False
         else: #pas de user
-            self.column_panel_modif.visible = False
+            self.column_panel_bureaux.visible = False
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
             
