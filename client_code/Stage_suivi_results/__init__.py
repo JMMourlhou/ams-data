@@ -17,9 +17,6 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         self.init_components(**properties)
         self.column_panel_mailing.visible = False
         # Any code you write here will run before the form opens.
-        self.pdf_mode = pdf_mode  # appel du pdf renderer ?
-        self.timer_1.interval = 0  # neutralise le timer
-        self.test_existence_pdf = False
         
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
@@ -28,56 +25,69 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
 
         global cpt
         cpt = 0
-        if self.pdf_mode is True:
-            self.column_panel_a.visible = False
-            self.button_annuler2.visible = False
-            self.button_downl_pdf1.visible = False
-            self.drop_down_code_stages_change(row)
 
         # sélection des stages si la saisie du formulaire a été validée (saisie_suivi_ok=True)
         liste_stage_drop_down = []
         liste_stages = app_tables.stages.search(
             tables.order_by("numero", ascending=False), saisie_suivi_ok=True
         )
-        # création de la drop down codes stages
+        # initialistaion de la drop down codes stagiaires
         for stage in liste_stages:
             row_stage = app_tables.stages.get(numero=int(stage["numero"]))
-            if row_stage:
-                if row_stage["code_txt"]=="T_BASE_N":   # demande suivi de Tuteurs, Faut connaitre pour quel stage
-                    liste_stage_drop_down.append(
-                        (
-                            "Tuteurs",
-                            row_stage  # tuteur
-                        )
-                    )
-                else:  #Stage normal de stagiaires
+            if row_stage and row_stage["type_stage"] != 'T':   # ne pas inclure ds drop down stgiaires le 'stage' tuteur
                     liste_stage_drop_down.append(
                         (
                             row_stage["code_txt"] + " du " + str(row_stage["date_debut"]),
                             row_stage   # stage normal
                         )
                     )
-        self.drop_down_code_stages.items = liste_stage_drop_down
-
-
+        self.drop_down_code_stagiaires.items = liste_stage_drop_down
+        
+        # initialistaion de la drop down codes suivi des tuteurs
+        self.drop_down_code_tuteurs.items = liste_stage_drop_down
     
     # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
-    def drop_down_code_stages_change(self, row=None, **event_args):
+    def drop_down_code_stagiaires_change(self, **event_args):
         """This method is called when an item is selected"""
-        if row is None:  # Pas de mode pdf
-            row = (self.drop_down_code_stages.selected_value)  # row du stage sélectionné ds le drop down, 
-        else:
+        type_de_suivi = "S"
+        row = self.drop_down_code_stagiaires.selected_value
+        if row is None: 
             alert("Vous devez sélectionner un stage !")
-            self.drop_down_code_stage.focus()
+            self.drop_down_code_stagiaires.focus()
             return
-        self.row = row
+        self.traitement(type_de_suivi,row)
 
+    def drop_down_code_tuteurs_change(self, **event_args):
+        """This method is called when an item is selected"""
+        type_de_suivi = "T"   
+        row = self.drop_down_code_tuteurs.selected_value
+        if row is None: 
+            alert("Vous devez sélectionner un stage !")
+            self.drop_down_code_tuteurs.focus()
+            return
+        self.traitement(type_de_suivi,row)
+
+        
+    def traitement(self, type_de_suivi, row):
+        self.row = row
+        self.type_de_suivi = type_de_suivi
         """ ------------------------------------------------------------------------
                     INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
         """
-        self.liste_no_response = app_tables.stagiaires_inscrits.search(
-            numero=row["numero"], enquete_suivi=False                    # Enquete_suivi ds  table stagiaires_inscrits
-        )
+        if type_de_suivi == "S":   # Stagiaires du stage sélectionné 
+            self.label_titre_no_response.text = "Stagiaires n'ayant pas encore répondu"
+            self.liste_no_response = app_tables.stagiaires_inscrits.search(
+                                                                            numero=self.row["numero"],
+                                                                            enquete_suivi=False                   
+                                                                        )
+        if type_de_suivi == "T":   # stage 'Tuteurs'                           !!!!  ATTENTION QD IL Y AURA PLUSIEURS FORMUL 
+            self.label_titre_no_response.text = "Tuteurs n'ayant pas encore répondu"
+            # liste des tuteurs n'ayant pas remplis leurs Formulaires
+            self.liste_no_response = app_tables.stagiaires_inscrits.search(
+                                                                            pour_stage_num=self.row,   # colonne spéciale ds table stagiaires inscrits, tuteur ou formateur pour stage ...
+                                                                            enquete_suivi=False                   
+                                                                        )
+            
         if self.liste_no_response:  # retardataires
             self.repeating_panel_no_response.items = self.liste_no_response
             self.column_panel_mailing.visible = True
@@ -87,17 +97,13 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             self.label_titre_no_response.visible = False
             self.repeating_panel_no_response.visible = False
         # ------------------------------------------------------------------------
-
-        # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
-        stage_row = app_tables.stages.get(numero=self.row["numero"])
-        pdf = stage_row["suivi_pdf"]
-        if pdf and self.pdf_mode is not True:
-            self.button_downl_pdf0.visible = True
-            self.button_downl_pdf1.visible = True
-            self.test_existence_pdf = True
-
+        if type_de_suivi == "T":
+            text1 = "Tuteurs du "
+        else:
+            text1 = "Stagiaires du "
         self.label_titre.text = (
-            "Stage n°"
+            text1
+            + "Stage n°"
             + str(row["numero"])
             + " "
             + row["code_txt"]
@@ -105,7 +111,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             + str(row["date_debut"])
         )
         self.column_panel_titres.visible = True
-        self.drop_down_code_stages.visible = False
+        self.drop_down_code_stagiaires.visible = False
         self.column_panel_header.visible = False
         dico_rep_ferm = {}
         dico_rep_ouv = {}
@@ -256,10 +262,16 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         rep10_cumul["10"] = 0  # Cumul des réponses 0, question 10
 
         # lecture des formulaires du stage choisi
-        liste_formulaires = app_tables.stage_suivi.search(
-                                                            stage_num_txt="112",   # -------------------------------------   A MODIFIER
-                                                            user_role = 'T'        # "T" si sélection Tuteurs ds drop down sinon "S"
-                                                        )
+        if type_de_suivi == "S":
+            liste_formulaires = app_tables.stage_suivi.search(
+                                                                stage_num_txt= str(self.row['numero']),   # -------------------------------------   A MODIFIER
+                                                                user_role = 'S'        # "T" si sélection Tuteurs ds drop down sinon "S"
+                                                            )
+        if type_de_suivi == "T":
+            liste_formulaires = app_tables.stage_suivi.search(
+                                                                stage_num_txt= str(self.row['numero']),   # -------------------------------------   A MODIFIER
+                                                                user_role = 'T'        # "T" si sélection Tuteurs ds drop down sinon "S"
+                                                            )
         print(len(liste_formulaires), "formulaires de suivi à traiter en 'Stage suivi result, ligne 253'")
         
         cpt_formulaire = 0
@@ -269,18 +281,12 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             print("==========================FORMULAIRE", cpt_formulaire)
 
             # dico questions fermées
-            dico_rep_ferm = formulaire[
-                "rep_dico_rep_ferm"
-            ]  # dico questions fermées du formulaire
-            nb_questions_ferm = len(
-                dico_rep_ferm
-            )  # nb questions ds formulaire questions fermées
+            dico_rep_ferm = formulaire["rep_dico_rep_ferm"]  # dico questions fermées du formulaire
+            nb_questions_ferm = len(dico_rep_ferm)  # nb questions ds formulaire questions fermées
             print("nb_q_fermées: ", nb_questions_ferm)
 
             # dico questions ouvertes
-            dico_rep_ouv = formulaire[
-                "rep_dico_rep_ouv"
-            ]  # dico questions ouvertes du formulaire
+            dico_rep_ouv = formulaire["rep_dico_rep_ouv"]  # dico questions ouvertes du formulaire
             nb_questions_ouv = len(dico_rep_ouv)
             print("nb_q_ouvertes: ", nb_questions_ouv)
 
@@ -473,15 +479,25 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         print()
         print()
         """
-        
-        # Préparation du column panel des noms des stagiaires
-        self.liste_response = app_tables.stagiaires_inscrits.search(
-                                                    tables.order_by("name", ascending=True),
-                                                    numero=row["numero"], enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
-                                                     )
+
+        if type_de_suivi == "S":
+            # Préparation du column panel des noms des stagiaires
+            self.liste_response = app_tables.stagiaires_inscrits.search(
+                                                        tables.order_by("name", ascending=True),
+                                                        numero=self.row["numero"],
+                                                        enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
+                                                        )
+        if type_de_suivi == "T":
+            # Préparation du column panel des noms des Tuteurs
+            self.liste_response = app_tables.stagiaires_inscrits.search(
+                                                        tables.order_by("name", ascending=True),
+                                                        pour_stage_num=self.row,
+                                                        enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
+                                                        )
         print("stage suivi result ligne 471, nb de réponses: ", len(self.liste_response))
         self.repeating_panel_noms.items = self.liste_response
-   
+
+        
          # Initialisation des clefs: valeur du dictionnaire des réponses
         q_rep = {
             "1": [],
@@ -511,33 +527,6 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
 
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT GLOBAL des Q Fermées"""
         
-
-
-
-
-
-
-
-
-        
-        """ ============================================================================================== Fin de l'affichage des résultats par stagiare """
-        # Génération du pdf si non existant A CHANGER QD L'ENQUETE EST COMPLETE
-        print("génération du pdf")
-        # if self.test_existence_pdf is not True or self.test_existence_pdf is True:
-        if self.pdf_mode is False:
-            with anvil.server.no_loading_indicator:
-                self.task_satisf = anvil.server.call(
-                    "run_bg_task_suivi", row["numero"], row["code_txt"], row
-                )
-                self.timer_1.interval = 0.5
-
-    def timer_1_tick(self, **event_args):
-        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-        if self.task_satisf.is_completed():
-            self.button_downl_pdf0.visible = True
-            self.button_downl_pdf1.visible = True
-            self.timer_1.interval = 0
-            anvil.server.call("task_killer", self.task_satisf)
 
     def button_downl_pdf1_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -571,3 +560,6 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
 
         # 'formul' indique l'origine, ici 'formulaire de satisfaction'
         open_form("Mail_subject_attach_txt", liste_email, "formul")
+
+
+       

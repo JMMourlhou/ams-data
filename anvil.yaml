@@ -85,7 +85,7 @@ db_schema:
       admin_ui: {width: 82}
       type: string
     - name: numero
-      admin_ui: {width: 119.17}
+      admin_ui: {order: -1, width: 119.17}
       type: number
     - name: lieu
       admin_ui: {width: 144}
@@ -143,7 +143,7 @@ db_schema:
       admin_ui: {width: 200}
       type: bool
     - name: type_stage
-      admin_ui: {order: 1.25, width: 106}
+      admin_ui: {order: -0.5, width: 106}
       type: string
     - name: saisie_suivi_ok
       admin_ui: {width: 200, order: 19}
@@ -375,6 +375,10 @@ db_schema:
     - name: enquete_suivi
       admin_ui: {order: 5.5, width: 200}
       type: bool
+    - name: pour_stage_num
+      admin_ui: {order: 0.875, width: 200}
+      type: link_single
+      target: stages
   mails_histo:
     client: search
     server: full
