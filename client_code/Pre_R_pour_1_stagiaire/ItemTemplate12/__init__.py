@@ -14,7 +14,10 @@ class ItemTemplate12(ItemTemplate12Template):
 
         # Any code you write here will run before the form opens.
         self.text_box_1.text = "  " + self.item['requis_txt']
-        self.image_1.source = self.item['thumb']
+        if self.item['thumb'] != None:
+            self.image_1.source = self.item['thumb']
+        else:
+            self.image_1.visible = False
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
