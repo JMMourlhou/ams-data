@@ -102,6 +102,14 @@ components:
       type: DropDown
       layout_properties: {}
       event_bindings: {change: drop_down_code_tuteurs_change}
+    - name: label_type_suivi
+      properties: {visible: false, text: Type suivi}
+      type: Label
+      layout_properties: {}
+    - name: label_pour_stage
+      properties: {text: pour_stage, visible: false}
+      type: Label
+      layout_properties: {}
   - name: column_panel_mailing
     properties: {role: outlined-card, background: 'theme:Primary'}
     type: ColumnPanel

@@ -50,6 +50,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
     def drop_down_code_stagiaires_change(self, **event_args):
         """This method is called when an item is selected"""
         type_de_suivi = "S"
+        self.label_type_suivi.text = type_de_suivi  # pour get_open_form en ItemTemplate17
         row = self.drop_down_code_stagiaires.selected_value
         if row is None: 
             alert("Vous devez sélectionner un stage !")
@@ -60,6 +61,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
     def drop_down_code_tuteurs_change(self, **event_args):
         """This method is called when an item is selected"""
         type_de_suivi = "T"   
+        self.label_type_suivi.text = type_de_suivi     # pour get_open_form en ItemTemplate17
         row = self.drop_down_code_tuteurs.selected_value
         if row is None: 
             alert("Vous devez sélectionner un stage !")
@@ -489,6 +491,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                                                         )
         if type_de_suivi == "T":
             # Préparation du column panel des noms des Tuteurs
+            self.label_pour_stage.text = self.row['']
             self.liste_response = app_tables.stagiaires_inscrits.search(
                                                         tables.order_by("name", ascending=True),
                                                         pour_stage_num=self.row,

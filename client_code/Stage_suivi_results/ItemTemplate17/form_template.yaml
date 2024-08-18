@@ -2,7 +2,7 @@ is_package: true
 container:
   type: ColumnPanel
   event_bindings: {show: form_show}
-  properties: {spacing_above: large}
+  properties: {spacing_above: large, visible: true}
 components:
 - name: label_1
   properties: {background: 'theme:Primary', foreground: 'theme:On Primary', text: Prénom Nom, align: center}
