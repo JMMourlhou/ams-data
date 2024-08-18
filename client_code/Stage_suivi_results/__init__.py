@@ -34,7 +34,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             self.button_downl_pdf1.visible = False
             self.drop_down_code_stages_change(row)
 
-        # sélection des stages si la saisie du formulaire a été validée (saisie_satisf_ok=True)
+        # sélection des stages si la saisie du formulaire a été validée (saisie_suivi_ok=True)
         liste_stage_drop_down = []
         liste_stages = app_tables.stages.search(
             tables.order_by("numero", ascending=False), saisie_suivi_ok=True
@@ -43,22 +43,30 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         for stage in liste_stages:
             row_stage = app_tables.stages.get(numero=int(stage["numero"]))
             if row_stage:
-                liste_stage_drop_down.append(
-                    (
-                        row_stage["code_txt"] + " du " + str(row_stage["date_debut"]),
-                        row_stage,
+                if row_stage["code_txt"]=="T_BASE_N":   # demande suivi de Tuteurs, Faut connaitre pour quel stage
+                    liste_stage_drop_down.append(
+                        (
+                            "Tuteurs",
+                            row_stage  # tuteur
+                        )
                     )
-                )
+                else:  #Stage normal de stagiaires
+                    liste_stage_drop_down.append(
+                        (
+                            row_stage["code_txt"] + " du " + str(row_stage["date_debut"]),
+                            row_stage   # stage normal
+                        )
+                    )
         self.drop_down_code_stages.items = liste_stage_drop_down
 
+
+    
     # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
     def drop_down_code_stages_change(self, row=None, **event_args):
         """This method is called when an item is selected"""
-        if row is None:  # *********************************************** A TESTER
-            row = (
-                self.drop_down_code_stages.selected_value
-            )  # row du stage sélectionné ds le drop down
-        if row is None:
+        if row is None:  # Pas de mode pdf
+            row = (self.drop_down_code_stages.selected_value)  # row du stage sélectionné ds le drop down, 
+        else:
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
@@ -248,10 +256,13 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         rep10_cumul["10"] = 0  # Cumul des réponses 0, question 10
 
         # lecture des formulaires du stage choisi
+        liste_formulaires = app_tables.stage_suivi.search(
+                                                            stage_num_txt="112",   # -------------------------------------   A MODIFIER
+                                                            user_role = 'T'        # "T" si sélection Tuteurs ds drop down sinon "S"
+                                                        )
+        print(len(liste_formulaires), "formulaires de suivi à traiter en 'Stage suivi result, ligne 253'")
+        
         cpt_formulaire = 0
-        liste_formulaires = app_tables.stage_suivi.search(stage_row=row)
-        print(len(liste_formulaires), "formulaires à traiter")
-
         for formulaire in liste_formulaires:
             date = formulaire["date_heure"]
             cpt_formulaire += 1
@@ -327,7 +338,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                             print("cumul5 ", rep5_cumul[str(question)])
        
 
-        # à partir du dico  j'extrai les questions pour les afficher
+        # à partir du dico  j'extrais les questions pour les afficher
         cpt_questions = 0
         for cle, val in dico_rep_ferm.items():
             cpt_questions += 1
@@ -408,19 +419,11 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             self.column_panel_content.add_component(
                 Stage_suivi_histograms(qt, r0, r1, r2, r3, r4, r5)
             )
-
-
-
-
-        
-
-        # =================================================================================================
-        # affichage des réponses OUVERTES pour chaque Stagiaire
-        # =================================================================================================
        
 
-
-
+        # =================================================================================================
+        # affichage des réponses OUVERTES pour chaque Tuteur
+        # =================================================================================================
         
         """
         # Boucle sur tous les formulaires du stage
@@ -471,15 +474,14 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         print()
         """
         
-        # Préparation du colun panel des noms de stagaires
+        # Préparation du column panel des noms des stagiaires
         self.liste_response = app_tables.stagiaires_inscrits.search(
                                                     tables.order_by("name", ascending=True),
                                                     numero=row["numero"], enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
                                                      )
+        print("stage suivi result ligne 471, nb de réponses: ", len(self.liste_response))
         self.repeating_panel_noms.items = self.liste_response
-
-
-        
+   
          # Initialisation des clefs: valeur du dictionnaire des réponses
         q_rep = {
             "1": [],

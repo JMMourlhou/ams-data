@@ -18,12 +18,12 @@ class ItemTemplate17(ItemTemplate17Template):
         # Any code you write here will run before the form opens.
         self.label_1.text = self.item['prenom'] +" "+ self.item['name']+" "+ self.item['user_email']['tel']
         
-        # recherche du row formulaire du stagiaire
+        # recherche du row formulaire du tuteur
         list = app_tables.stage_suivi.search(
                                             user_email=self.item['user_email']['email'],
                                             stage_num_txt=str(self.item['numero'])
                                             )
-        print("nb de formulaires: ",len(list))
+        print("Template 17, nb de formulaires: ",len(list))
         
         #Boucle sur les formulaires
         rep_ouv = {}
