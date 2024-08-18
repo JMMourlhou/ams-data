@@ -11,7 +11,7 @@ components:
     type: Spacer
     layout_properties: {}
   - name: text_box_1
-    properties: {role: outlined, bold: false, align: left, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: false, font_size: null, tooltip: '', text: ''}
+    properties: {role: outlined, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: false, font_size: null, tooltip: '', text: ''}
     type: TextBox
     layout_properties: {width: null, expand: true}
     event_bindings: {}
