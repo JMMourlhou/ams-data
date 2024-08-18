@@ -32,7 +32,7 @@ class ItemTemplate17(ItemTemplate17Template):
             
             list = app_tables.stage_suivi.search(
                                                 user_email=self.item['user_email']['email'],
-                                                stage_num_txt=str(self.item['pour_stage_num'])    # 1003
+                                                stage_num_txt=str(self.item['pour_stage_num']['numero'])    # 1003
                                                 )
             print("Template 17, nb de formulaires du Tuteur: ",len(list))
         

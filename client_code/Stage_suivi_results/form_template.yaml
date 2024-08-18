@@ -106,10 +106,6 @@ components:
       properties: {visible: false, text: Type suivi}
       type: Label
       layout_properties: {}
-    - name: label_pour_stage
-      properties: {text: pour_stage, visible: false}
-      type: Label
-      layout_properties: {}
   - name: column_panel_mailing
     properties: {role: outlined-card, background: 'theme:Primary'}
     type: ColumnPanel
