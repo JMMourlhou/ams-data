@@ -20,7 +20,7 @@ components:
     layout_properties: {grid_position: 'HZLHFQ,DWFNXH'}
     event_bindings: {click: button_annuler_click}
   - name: column_panel_2
-    properties: {spacing_below: large, role: elevated-card, col_widths: '{}'}
+    properties: {spacing_below: small, role: elevated-card, col_widths: '{}', spacing_above: medium}
     type: ColumnPanel
     layout_properties: {grid_position: 'SWCEAA,WDPHMZ', full_width_row: true}
     components:
