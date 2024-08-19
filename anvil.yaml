@@ -72,6 +72,9 @@ db_schema:
     - name: code_stage
       admin_ui: {width: 200, order: 5.5}
       type: string
+    - name: liste_imgpdf_bg_task
+      admin_ui: {width: 200, order: 6.5}
+      type: simpleObject
   stages:
     title: Stages
     client: search
