@@ -1,4 +1,4 @@
-# Display a pdf file loaded into 1 or several pictures (appelé par mailing Mail_suject_attach_txt, bouton attachements, qd user choisit d'envoyer un pdf)
+# Transform a pdf file loaded into 1 or several pictures
 import anvil.files
 from anvil.files import data_files
 import anvil.tables as tables
@@ -13,18 +13,24 @@ import requests
 from typing import List
 from io import BytesIO
 from shutil import copyfile
+
 global filename 
-filename="temp"
+filename=""
 
-# Ce module n'est pas utilisé
-@anvil.server.callable
-def display_pdf(file) -> List:   # file est un pdf qui vient d'être choisi par le user
+@anvil.server.background_task
+#@anvil.server.callable
+def pdf_into_jpg_bg(pdf_file, new_file_name) -> List:   # file est un pdf qui vient d'être choisi par le user
     global filename
-    filename = "temp"     # ce fichier pdf sera affiché (son nom n'a pas d'importance)
+    filename = new_file_name                                   
+    return get_pdf_file_images(media=pdf_file)
+  
 
-    media = file                      # Lecture du doc pdf ds table
-    print(media.name)
-    return get_pdf_file_images(media=media)  
+@anvil.server.callable
+def get_pdf_file_images_from_url(pdf_file_url: str) -> List:
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        pdf_file_path = os.path.join(tmpdirname, 'tmp.pdf')
+        _download_file(pdf_file_url, pdf_file_path)
+        return get_images_from_pdf_file(pdf_file_path, tmpdirname)             
 
 
 def get_pdf_file_images(media: anvil.media) -> List:
@@ -71,11 +77,19 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    
     for i in range(len(images)):
         # Save pages as images in the pdf
         #im_name = 'page' + str(i) + '.jpg'
-        im_name = filename + str(i) + '.jpg'                  # <--  Ici
-        print("pdfinto img:",im_name)                         # ok
+        #im_name = filename + str(i) + '.jpg'                
+        im_name = filename + str(i)                            # <--  Ici
+        #print("pdfinto img:",im_name)                         # ok
         
         path = os.path.join(target_folder_path, im_name)     
         im_paths.append(path)
         images[i].save(path, 'JPEG')
-    return im_paths
-  
+        if i > 1:
+            break
+
+# -----------------------------------------------------------------------------------------
+# A FAIRE APPELER from client side
+@anvil.server.callable
+def pdf_into_jpg_bgtasked(pdf_file, new_file_name):
+    task = anvil.server.launch_background_task("pdf_into_jpg_bg",pdf_file, new_file_name)
+    return task

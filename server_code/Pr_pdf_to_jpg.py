@@ -76,8 +76,8 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    
     for i in range(len(images)):
         # Save pages as images in the pdf
         #im_name = 'page' + str(i) + '.jpg'
-        #im_name = filename + str(i) + '.jpg'                  # <--  Ici
-        im_name = filename + str(i)                  # <--  Ici
+        #im_name = filename + str(i) + '.jpg'                
+        im_name = filename + str(i)                            # <--  Ici
         #print("pdfinto img:",im_name)                         # ok
         
         path = os.path.join(target_folder_path, im_name)     

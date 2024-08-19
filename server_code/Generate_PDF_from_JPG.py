@@ -13,7 +13,7 @@ from anvil.pdf import PDFRenderer
     "prepress": Output similar to Acrobat Distiller “Prepress Optimized” setting.
  ** "default": Output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file.
     """
-# Calculer la taille du file et ajuster la qualité (screen : pas assez bon)
+# Ce module n'est pas utilisé
 @anvil.server.callable
 def generate_pdf_from_jpg(file, file_name, stage_num, email, item_requis, pr_requis_row):
     pdf_object = PDFRenderer(page_size ='A4',
