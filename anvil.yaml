@@ -72,9 +72,6 @@ db_schema:
     - name: code_stage
       admin_ui: {width: 200, order: 5.5}
       type: string
-    - name: liste_imgpdf_bg_task
-      admin_ui: {width: 200, order: 6.5}
-      type: simpleObject
   stages:
     title: Stages
     client: search
@@ -382,6 +379,9 @@ db_schema:
       admin_ui: {order: 0.875, width: 200}
       type: link_single
       target: stages
+    - name: temp_pr_pdf_img_liste
+      admin_ui: {order: 7, width: 200}
+      type: simpleObject
   mails_histo:
     client: search
     server: full

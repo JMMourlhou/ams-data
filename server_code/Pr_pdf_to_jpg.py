@@ -24,7 +24,7 @@ def pdf_into_jpg(pdf_file, new_file_name) -> List:   # file est un pdf qui vient
     return get_pdf_file_images(media=pdf_file)
   
 
-@anvil.server.callable
+#@anvil.server.callable
 def get_pdf_file_images_from_url(pdf_file_url: str) -> List:
     with tempfile.TemporaryDirectory() as tmpdirname:
         pdf_file_path = os.path.join(tmpdirname, 'tmp.pdf')

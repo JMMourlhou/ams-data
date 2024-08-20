@@ -51,14 +51,12 @@ class ItemTemplate3(ItemTemplate3Template):
                 self.save_file(file, new_file_name, file_extension)
                     
             if file_extension == ".pdf":      
-                # génération du JPG à partir du pdf bg task
-                liste_images = anvil.server.call('pdf_into_jpg', file, new_file_name)
-                #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
-                #print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
-                file = liste_images[0]
-
-                # module de sauvegarde du 'file'  jpg
-                self.save_file(file, new_file_name, ".jpg")
+                # génération du JPG à partir du pdf bg task en bg task
+                #liste_images = anvil.server.call('pdf_into_jpg', file, new_file_name)
+                self.new_file_name = new_file_name   # pour timer2
+                self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
+                self.timer_2.interval=0.5
+                
         self.file_loader_1.visible = False
 
     def button_visu_click(self, **event_args):
@@ -101,7 +99,7 @@ class ItemTemplate3(ItemTemplate3Template):
 
         if self.task_img.is_completed(): # lecture de l'image sauvée en BG task
             print("fin")
-            row = app_tables.pre_requis_stagiaire.get(
+            row = app_tables.pre_requis_stagiaire.get(q.fetch_only('thumb'),
                                                         stage_num=self.stage_num,
                                                         item_requis=self.item_requis,
                                                         stagiaire_email=self.email
@@ -112,9 +110,35 @@ class ItemTemplate3(ItemTemplate3Template):
                 self.button_visu.visible = True  
                 self.button_del.visible = True
             else:
-                alert("Row stagiaire non trouvé")
+                alert("timer_1_tick: Row stagiaire non trouvé")
                 self.button_visu.visible = False  
                 self.button_del.visible = False
             self.timer_1.interval=0
             anvil.server.call('task_killer',self.task_img)
 
+    def timer_2_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        if self.task_pdf.is_completed(): # lecture de l'image sauvée en BG task
+            # lecture de la liste sauvée par bg task ds row du stagiaire_inscrit
+            row = app_tables.stagiaires_inscrits.get(q.fetch_only("temp_pr_pdf_img_liste"),
+                                                      stage=self.item['stage_num'],
+                                                      user_email=self.item['stagiaire_email']
+                                                      )
+            liste_images=[]
+            if row:
+                liste_images=row['temp_pr_pdf_img_liste']
+                #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
+                #print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
+                file = liste_images[0]
+    
+                # module de sauvegarde du 'file'  jpg
+                self.save_file(file, self.new_file_name, ".jpg")
+            else:
+                alert('timer_2_tick: row stagiaire inscrit non trouvée')
+            
+            self.timer_2.interval=0
+            anvil.server.call('task_killer',self.task_img)
+
+            
+
+            
