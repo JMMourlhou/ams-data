@@ -21,16 +21,19 @@ filename=""
 #@anvil.server.callable
 def pdf_into_jpg_bg(pdf_file, new_file_name,stage_row, email_row) -> List:   # file est un pdf qui vient d'être choisi par le user
     global filename
-    filename = new_file_name                                   
+    filename = new_file_name       
+    media = pdf_file
     #return get_pdf_file_images(media=pdf_file)             # à sauver
     # sauvegarde de la liste ds le row temp du stgiaire inscrit
-    liste = get_pdf_file_images(media=pdf_file)
-    row_stagiaire_inscrit = app_tables.stagiaires_inscrits.get(q.fetch_only("temp_pr_pdf_img_liste"),
+    #liste = str(list(get_pdf_file_images(media))[0])   # 1ere image
+    liste = get_pdf_file_images(media)[0]  # 1ere image
+    print("type", type(liste))
+    row_stagiaire_inscrit = app_tables.stagiaires_inscrits.get(q.fetch_only("temp_pr_pdf_img"),
                                                                     stage= stage_row,
                                                                     user_email=email_row
                                                                 )
     if row_stagiaire_inscrit:
-        row_stagiaire_inscrit.update(temp_pr_pdf_img_liste = get_pdf_file_images(liste))
+        row_stagiaire_inscrit.update(temp_pr_pdf_img = liste)
 
 def get_pdf_file_images_from_url(pdf_file_url: str) -> List:
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -73,9 +76,8 @@ def _download_file(url, destination):
 def get_images_from_pdf_file(pdf_file_path: str, target_folder: str) -> List:
     images = pdf_to_jpg(source_file_path=pdf_file_path, target_folder_path=target_folder) 
     print("nb img ;",len(images))
-    # return [anvil.media.from_file(fpath) for fpath in images]          # modif jm
-    liste= [anvil.media.from_file(fpath) for fpath in images]
-    return liste[0]                                                      # Je ne retourne que la 1ere image                     
+    return [anvil.media.from_file(fpath) for fpath in images]          
+             
 
 def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    # new file name rentré à la place de page 
     global filename                                          # global file name
@@ -85,8 +87,9 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    
         # Save pages as images in the pdf
         #im_name = 'page' + str(i) + '.jpg'
         #im_name = filename + str(i) + '.jpg'                
-        im_name = filename + str(i)                            # <--  Ici
-        #print("pdfinto img:",im_name)                         # ok
+        #im_name = filename + str(i)                            # 
+        im_name = filename                     # <--  Ici
+        print("pdf into img:",im_name)                         # ok
         
         path = os.path.join(target_folder_path, im_name)     
         im_paths.append(path)

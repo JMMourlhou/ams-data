@@ -379,9 +379,9 @@ db_schema:
       admin_ui: {order: 0.875, width: 200}
       type: link_single
       target: stages
-    - name: temp_pr_pdf_img_liste
-      admin_ui: {order: 7, width: 200}
-      type: simpleObject
+    - name: temp_pr_pdf_img
+      admin_ui: {width: 200, order: 13}
+      type: media
   mails_histo:
     client: search
     server: full

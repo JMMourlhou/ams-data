@@ -53,6 +53,7 @@ class ItemTemplate3(ItemTemplate3Template):
             if file_extension == ".pdf":      
                 # génération du JPG à partir du pdf bg task en bg task
                 #liste_images = anvil.server.call('pdf_into_jpg', file, new_file_name)
+                new_file_name = new_file_name + ".jpg"
                 self.new_file_name = new_file_name   # pour timer2
                 self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
                 self.timer_2.interval=0.5
@@ -120,17 +121,16 @@ class ItemTemplate3(ItemTemplate3Template):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         if self.task_pdf.is_completed(): # lecture de l'image sauvée en BG task
             # lecture de la liste sauvée par bg task ds row du stagiaire_inscrit
-            row = app_tables.stagiaires_inscrits.get(q.fetch_only("temp_pr_pdf_img_liste"),
+            row = app_tables.stagiaires_inscrits.get(q.fetch_only("temp_pr_pdf_img"),
                                                       stage=self.item['stage_num'],
                                                       user_email=self.item['stagiaire_email']
                                                       )
-            liste_images=[]
             if row:
-                liste_images=row['temp_pr_pdf_img_liste']
+                file=row['temp_pr_pdf_img']
+                
                 #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
                 #print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
-                file = liste_images[0]
-    
+                
                 # module de sauvegarde du 'file'  jpg
                 self.save_file(file, self.new_file_name, ".jpg")
             else:
