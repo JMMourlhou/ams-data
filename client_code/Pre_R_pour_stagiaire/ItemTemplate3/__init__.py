@@ -37,27 +37,22 @@ class ItemTemplate3(ItemTemplate3Template):
 
     def file_loader_1_change(self, file, **event_args):
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-   
+            print("type fichier chargé par file loader: ", type(file))
             # nouveau nom doc SANS extension
             self.new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
             
-            print("file loadednew file name: ",self.new_file_name)
+            print("file just loaded, new file name: ",self.new_file_name)
             
-            # Type de fichier ?
+            # Type du fichier loaded ?
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
 
-            
             # sauvegarde du 'file' image en jpg, resized 1000 x 800   ou   800x1000  plus thumnail 150 x 100   ou  100 x 150
-            if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":
-                self.save_file(file, new_file_name, file_extension)
+            if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp" or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":
+                self.save_file(file, self.new_file_name, file_extension)
                     
             if file_extension == ".pdf":      
                 # génération du JPG à partir du pdf bg task en bg task
-                #liste_images = anvil.server.call('pdf_into_jpg', file, new_file_name)
-                
-                new_file_name = new_file_name + ".jpg"
-                self.new_file_name = new_file_name   # pour timer2
-                self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
+                self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, self.new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
                 self.timer_2.interval=0.5
                 
         self.file_loader_1.visible = False
@@ -119,6 +114,7 @@ class ItemTemplate3(ItemTemplate3Template):
             self.timer_1.interval=0
             anvil.server.call('task_killer',self.task_img)
 
+    # Un fichier pdf a été chargé
     def timer_2_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         if self.task_pdf.is_completed(): # lecture de l'image sauvée en BG task
@@ -129,12 +125,10 @@ class ItemTemplate3(ItemTemplate3Template):
                                                       )
             if row:
                 file=row['temp_pr_pdf_img']
-                
-                #extraction 1ere image de la liste (il peut y avoir plusieurs pages)
-                #print("nb d'images jpg crées par pdf_into_jpg:", len(liste_images))
-                
+                print("type fichier chargé de la table : ", type(file))
+                self.image_1.source = file        # affichage de l'image anciennement pdf transformée en jpg 
                 # module de sauvegarde du 'file'  jpg
-                self.save_file(file, self.new_file_name, ".jpg")
+                self.save_file(self.image_1.source, self.new_file_name, ".jpg")
             else:
                 alert('timer_2_tick: row stagiaire inscrit non trouvée')
             

@@ -19,7 +19,10 @@ filename=""
 
 @anvil.server.background_task
 #@anvil.server.callable
-def pdf_into_jpg_bg(pdf_file, new_file_name,stage_row, email_row) -> List:   # file est un pdf qui vient d'être choisi par le user
+def pdf_into_jpg_bg(pdf_file, new_file_name, stage_row, email_row) -> List:  
+    # file est un pdf qui vient d'être choisi par le user
+    # new_file_name est sans extension
+    # stage_row et email row: pour sauver l'image jpg générée en table du stagiaire inscrit, col  "temp_pr_pdf_img"
     global filename
     filename = new_file_name       
     media = pdf_file
@@ -86,15 +89,14 @@ def pdf_to_jpg(source_file_path: str, target_folder_path: str) -> List[str]:    
     for i in range(len(images)):
         # Save pages as images in the pdf
         #im_name = 'page' + str(i) + '.jpg'
-        #im_name = filename + str(i) + '.jpg'                
-        #im_name = filename + str(i)                            # 
-        im_name = filename                     # <--  Ici
-        print("pdf into img:",im_name)                         # ok
+                                      
+        im_name = filename + '.jpg'                                    # <--  ajout extension
+        print("pr_pdf_to_jpg_BgTasked, img full name; ",im_name)                         
         
         path = os.path.join(target_folder_path, im_name)     
         im_paths.append(path)
         images[i].save(path, 'JPEG')
-        if i == 0:
+        if i == 0:                                                     # 1ere image traitée, je sors 
             break
     return im_paths
     
