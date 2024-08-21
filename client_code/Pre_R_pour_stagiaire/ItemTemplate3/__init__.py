@@ -89,7 +89,7 @@ class ItemTemplate3(ItemTemplate3Template):
         else:
             alert("Pré Requis non enlevé")
 
-    # EN
+    # EN 
     def save_file(self, file, new_file_name, file_extension):
         # Sauvegarde du 'file' jpg
         # Avec loading_indicator, appel BG TASK
