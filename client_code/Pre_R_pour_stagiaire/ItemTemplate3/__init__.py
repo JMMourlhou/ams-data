@@ -41,7 +41,6 @@ class ItemTemplate3(ItemTemplate3Template):
             print("type fichier chargé par file loader: ", type(file))
             # nouveau nom doc SANS extension
             self.new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
-            
             print("file just loaded, new file name: ",self.new_file_name)
             
             # Type du fichier loaded ?
@@ -50,15 +49,10 @@ class ItemTemplate3(ItemTemplate3Template):
             # sauvegarde du 'file' image en jpg, resized 1000 x 800   ou   800x1000  plus thumnail 150 x 100   ou  100 x 150
             if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp" or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":   
                 self.save_file(file, self.new_file_name, file_extension, False, "")
-                
             if file_extension == ".pdf":      
                 # génération du JPG à partir du pdf bg task en bg task
                 self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, self.new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
-                self.timer_2.interval=0.5
-                
-                
-            
-                
+                self.timer_2.interval=0.5   
         self.file_loader_1.visible = False
 
     def button_visu_click(self, **event_args):
@@ -89,7 +83,7 @@ class ItemTemplate3(ItemTemplate3Template):
         else:
             alert("Pré Requis non enlevé")
 
-    # EN 
+    # Sauvegarde du file JPG et resize
     def save_file(self, file, new_file_name, file_extension):
         # Sauvegarde du 'file' jpg
         # Avec loading_indicator, appel BG TASK

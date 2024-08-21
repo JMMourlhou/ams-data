@@ -61,10 +61,7 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
 
             #-------------------------------------------------------------------------------- à Remplacer par 1 B.G. task / loop traitmt images
             # Img file, Convert the 'file' Media object into a Pillow Image
-            if from_table is False:
-                img = Image.open(io.BytesIO(file.get_bytes()))
-            else:
-                img = Image.open(io.BytesIO(lazy_media.get_bytes()))   # from_table = True,  lazy_media vient d'une table (ancien pdf)
+            img = Image.open(io.BytesIO(file.get_bytes()))
             width, height = img.size
             print('run_bg_task_save_jpg, size img', width, height)
             taille = width * height
