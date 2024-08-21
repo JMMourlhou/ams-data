@@ -85,11 +85,11 @@ class ItemTemplate3(ItemTemplate3Template):
         else:
             alert("Pré Requis non enlevé")
             
-    def save_file(self, file, new_file_name, file_extension):
+    def save_file(self, file, new_file_name, file_extension, from_table=False, lazy_media=""):
         # Sauvegarde du 'file' jpg
         # Avec loading_indicator, appel BG TASK
         self.test_img_just_loaded = True  # indique que l'image, donc self.item['doc1'], a changé
-        self.task_img = anvil.server.call('run_bg_task_save_jpg', self.item, file, new_file_name, file_extension)    
+        self.task_img = anvil.server.call('run_bg_task_save_jpg', self.item, file, new_file_name, file_extension, from_table, lazy_media)    
         self.timer_1.interval=0.5
 
     def timer_1_tick(self, **event_args):
@@ -127,8 +127,17 @@ class ItemTemplate3(ItemTemplate3Template):
                 file=row['temp_pr_pdf_img']
                 print("type fichier chargé de la table : ", type(file))
                 self.image_1.source = file        # affichage de l'image anciennement pdf transformée en jpg 
+
+                print(f'url: {file.url}')
+                print(f'content_type: {file.content_type}')
+                print(f'length: {file.length} bytes')
+                # This will be `None` since this is a website, not a file
+                print(f'name: {file.name}')
+                # Only print the first 15 bytes
+                print(f'raw bytes: {file.get_bytes()[:15]} ...')
+                #raw_bytes = file.get_bytes()
                 # module de sauvegarde du 'file'  jpg
-                self.save_file(self.image_1.source, self.new_file_name, ".jpg")
+                self.save_file(self.image_1.source, self.new_file_name, ".jpg", True, file)
             else:
                 alert('timer_2_tick: row stagiaire inscrit non trouvée')
             
