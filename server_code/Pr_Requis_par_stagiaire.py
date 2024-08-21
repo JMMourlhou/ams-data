@@ -49,11 +49,11 @@ def preparation_liste_pour_panels_pr(user_email, stage):
 
 """
 **************************************************** ECRITURE DE L'IMAGE JPG ou autre format img EN BGT 
+Appelé par Pre_R_pour_stagiaire/
+*************************************************************************************************
 """
 @anvil.server.background_task
-def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extension, from_table=False, lazy_media=None):
-    
-    
+def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extension):
     if pr_requis_row:
         if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp"or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":
             print("serveur Preq: Ce fichier est une image de type ",file_extension)        
@@ -115,8 +115,8 @@ def modify_pre_r_par_stagiaire(pr_requis_row, file, new_file_name, file_extensio
             print("serveur Preq: Ce fichier est un pdf")
 
 @anvil.server.callable
-def run_bg_task_save_jpg(pr_requis_row, file, new_file_name, file_extension, from_table=False, lazy_media = None):
-    task = anvil.server.launch_background_task('modify_pre_r_par_stagiaire',pr_requis_row, file, new_file_name, file_extension, from_table, lazy_media)
+def run_bg_task_save_jpg(pr_requis_row, file, new_file_name, file_extension):
+    task = anvil.server.launch_background_task('modify_pre_r_par_stagiaire',pr_requis_row, file, new_file_name, file_extension)
     return task
 
 """
