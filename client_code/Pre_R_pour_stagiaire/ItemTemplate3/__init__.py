@@ -8,6 +8,7 @@ from anvil.tables import app_tables
 import anvil.media
 from ...import Pre_R_doc_name        # Pour générer un nouveau nom au document chargé
 
+
 class ItemTemplate3(ItemTemplate3Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -47,13 +48,16 @@ class ItemTemplate3(ItemTemplate3Template):
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
 
             # sauvegarde du 'file' image en jpg, resized 1000 x 800   ou   800x1000  plus thumnail 150 x 100   ou  100 x 150
-            if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp" or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":
-                self.save_file(file, self.new_file_name, file_extension)
-                    
+            if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp" or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":   
+                self.save_file(file, self.new_file_name, file_extension, False, "")
+                
             if file_extension == ".pdf":      
                 # génération du JPG à partir du pdf bg task en bg task
                 self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, self.new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
                 self.timer_2.interval=0.5
+                
+                
+            
                 
         self.file_loader_1.visible = False
 
@@ -84,12 +88,13 @@ class ItemTemplate3(ItemTemplate3Template):
             self.file_loader_1.visible = True
         else:
             alert("Pré Requis non enlevé")
-            
-    def save_file(self, file, new_file_name, file_extension, from_table=False, lazy_media=""):
+
+    # EN
+    def save_file(self, file, new_file_name, file_extension):
         # Sauvegarde du 'file' jpg
         # Avec loading_indicator, appel BG TASK
         self.test_img_just_loaded = True  # indique que l'image, donc self.item['doc1'], a changé
-        self.task_img = anvil.server.call('run_bg_task_save_jpg', self.item, file, new_file_name, file_extension, from_table, lazy_media)    
+        self.task_img = anvil.server.call('run_bg_task_save_jpg', self.item, file, new_file_name, file_extension)    
         self.timer_1.interval=0.5
 
     def timer_1_tick(self, **event_args):
@@ -119,15 +124,20 @@ class ItemTemplate3(ItemTemplate3Template):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         if self.task_pdf.is_completed(): # lecture de l'image sauvée en BG task
             # lecture de la liste sauvée par bg task ds row du stagiaire_inscrit
+            self.timer_2.interval=0
+            anvil.server.call('task_killer',self.task_pdf)
+            
             row = app_tables.stagiaires_inscrits.get(q.fetch_only("temp_pr_pdf_img"),
                                                       stage=self.item['stage_num'],
                                                       user_email=self.item['stagiaire_email']
                                                       )
             if row:
+                
+                # Venant d'une table et non d'un file loader, file est un lazy BlobMedia
                 file=row['temp_pr_pdf_img']
                 print("type fichier chargé de la table : ", type(file))
                 self.image_1.source = file        # affichage de l'image anciennement pdf transformée en jpg 
-
+                
                 print(f'url: {file.url}')
                 print(f'content_type: {file.content_type}')
                 print(f'length: {file.length} bytes')
@@ -135,14 +145,19 @@ class ItemTemplate3(ItemTemplate3Template):
                 print(f'name: {file.name}')
                 # Only print the first 15 bytes
                 print(f'raw bytes: {file.get_bytes()[:15]} ...')
-                #raw_bytes = file.get_bytes()
-                # module de sauvegarde du 'file'  jpg
-                self.save_file(self.image_1.source, self.new_file_name, ".jpg", True, file)
+
+                """  ---------------------------------------------------------------------------------------------------------------------------------------------
+                TRANSFORMATION D'UN LAZY MEDIA (img qui vient d'une table) EN BLOB MEDIA (En sortie du file loader et transformable en SERVER side pour resize...)
+                """
+                media_object = anvil.URLMedia(file.url)
+                # -----------------------------------------------------------------------------------------------------------------------------------------------
+                self.save_file(media_object, self.new_file_name, ".jpg")
+                #self.save_file(self.image_1.source, self.new_file_name, ".jpg", True, media_object)
+                
             else:
                 alert('timer_2_tick: row stagiaire inscrit non trouvée')
             
-            self.timer_2.interval=0
-            anvil.server.call('task_killer',self.task_img)
+            
 
             
 
