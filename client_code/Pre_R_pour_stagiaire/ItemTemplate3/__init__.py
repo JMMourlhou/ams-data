@@ -39,8 +39,9 @@ class ItemTemplate3(ItemTemplate3Template):
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
    
             # nouveau nom doc SANS extension
-            new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
-            print("new file name: ",new_file_name)
+            self.new_file_name = Pre_R_doc_name.doc_name_creation(self.stage_num, self.item_requis, self.email)   # extension non incluse 
+            
+            print("file loadednew file name: ",self.new_file_name)
             
             # Type de fichier ?
             path_parent, file_name, file_extension = anvil.server.call('path_info', str(file.name))
@@ -53,6 +54,7 @@ class ItemTemplate3(ItemTemplate3Template):
             if file_extension == ".pdf":      
                 # génération du JPG à partir du pdf bg task en bg task
                 #liste_images = anvil.server.call('pdf_into_jpg', file, new_file_name)
+                
                 new_file_name = new_file_name + ".jpg"
                 self.new_file_name = new_file_name   # pour timer2
                 self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
