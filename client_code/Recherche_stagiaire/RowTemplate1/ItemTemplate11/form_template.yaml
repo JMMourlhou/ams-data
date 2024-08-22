@@ -6,6 +6,11 @@ components:
   type: Timer
   layout_properties: {grid_position: 'GBROCR,FBJYWA'}
   event_bindings: {tick: timer_1_tick}
+- name: timer_2
+  properties: {interval: 0}
+  type: Timer
+  layout_properties: {grid_position: 'RSUDLK,ORWBEV'}
+  event_bindings: {tick: timer_2_tick}
 - name: label_1
   properties: {font_size: 13, align: center, spacing_above: none, spacing_below: none, icon: '', background: 'theme:Primary', foreground: 'theme:Tertiary', bold: true}
   type: Label

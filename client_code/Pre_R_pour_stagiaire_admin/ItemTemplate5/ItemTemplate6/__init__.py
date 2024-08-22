@@ -129,7 +129,7 @@ class ItemTemplate6(ItemTemplate6Template):
                 # Venant d'une table et non d'un file loader, file est un lazy BlobMedia
                 file=row['temp_pr_pdf_img']
                 #print("type fichier chargé de la table : ", type(file))
-                self.image_1.source = file        # affichage de l'image anciennement pdf transformée en jpg 
+                #self.image_1.source = file        # affichage de l'image anciennement pdf transformée en jpg 
                 """
                 print(f'url: {file.url}')
                 print(f'content_type: {file.content_type}')
