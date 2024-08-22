@@ -59,7 +59,7 @@ components:
         border: ''
         italic: false
         enabled: true
-        font_size: null
+        font_size: 14
         tooltip: ''
         text: Choisir
       type: FileLoader

@@ -18,7 +18,6 @@ global filename
 filename=""
 
 @anvil.server.background_task
-#@anvil.server.callable
 def pdf_into_jpg_bg(pdf_file, new_file_name, stage_row, email_row) -> List:  
     # file est un pdf qui vient d'être choisi par le user
     # new_file_name est sans extension

@@ -35,8 +35,8 @@ class ItemTemplate6(ItemTemplate6Template):
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            n = Notification("Attendre la fin du traitement pour prendre une autre photo !",
-                 timeout=3)   # par défaut 2 secondes
+            n = Notification("Traitement en cours...\n\nAttendre la fin du traitement pour prendre une autre photo !",
+                 timeout=4)   # par défaut 2 secondes
             n.show()
             print("type fichier chargé par file loader: ", type(file))
             # nouveau nom doc SANS extension
@@ -48,7 +48,7 @@ class ItemTemplate6(ItemTemplate6Template):
 
             # sauvegarde du 'file' image en jpg, resized 1000 x 800   ou   800x1000  plus thumnail 150 x 100   ou  100 x 150
             if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".bmp" or file_extension == ".gif" or file_extension == ".jif" or file_extension == ".png":   
-                self.save_file(file, self.new_file_name, file_extension, False, "")
+                self.save_file(file, self.new_file_name, file_extension)
             if file_extension == ".pdf":      
                 # génération du JPG à partir du pdf bg task en bg task
                 self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, self.new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
@@ -79,6 +79,9 @@ class ItemTemplate6(ItemTemplate6Template):
             self.image_1.source = None
             self.button_visu.visible = False
             self.button_del.visible = False
+            self.file_loader_1.text = "Choisir"
+            self.file_loader_1.font_size = 14
+            self.file_loader_1.visible = True
         else:
             alert("Pré Requis non enlevé")
 
@@ -125,9 +128,9 @@ class ItemTemplate6(ItemTemplate6Template):
                 
                 # Venant d'une table et non d'un file loader, file est un lazy BlobMedia
                 file=row['temp_pr_pdf_img']
-                print("type fichier chargé de la table : ", type(file))
+                #print("type fichier chargé de la table : ", type(file))
                 self.image_1.source = file        # affichage de l'image anciennement pdf transformée en jpg 
-                
+                """
                 print(f'url: {file.url}')
                 print(f'content_type: {file.content_type}')
                 print(f'length: {file.length} bytes')
@@ -135,15 +138,14 @@ class ItemTemplate6(ItemTemplate6Template):
                 print(f'name: {file.name}')
                 # Only print the first 15 bytes
                 print(f'raw bytes: {file.get_bytes()[:15]} ...')
-
+                """
+                
                 """  ---------------------------------------------------------------------------------------------------------------------------------------------
                 TRANSFORMATION D'UN LAZY MEDIA (img qui vient d'une table) EN BLOB MEDIA (En sortie du file loader et transformable en SERVER side pour resize...)
                 """
                 media_object = anvil.URLMedia(file.url)
                 # -----------------------------------------------------------------------------------------------------------------------------------------------
                 self.save_file(media_object, self.new_file_name, ".jpg")
-                #self.save_file(self.image_1.source, self.new_file_name, ".jpg", True, media_object)
-                
             else:
                 alert('timer_2_tick: row stagiaire inscrit non trouvée')
             
