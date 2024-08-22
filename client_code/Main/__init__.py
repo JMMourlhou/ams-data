@@ -316,11 +316,10 @@ class Main(MainTemplate):
                 self.column_panel_others.visible = False     # BT des stagiaires
                 self.column_panel_admin.visible = True       
 
-            if user["role"] == "J":                               # Bureaux JC     TOUT sauf   Visu stages et recherches
-                self.flow_panel_admin_only.visible = False
-                self.column_panel_modif.visible = False
-                self.column_panel_admin.visible = True
+            if user["role"] == "J":                               # Bureaux JC     TOUT sauf recherches
+                self.flow_panel_admin_only.visible = True
                 self.column_panel_others.visible = False
+                self.flow_panel_visu.visible = True
                 
             if user["role"] == "T":                               # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
                 self.column_panel_others.visible = True
