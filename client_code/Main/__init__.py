@@ -300,7 +300,10 @@ class Main(MainTemplate):
             self.button_qcm.visible = True
             self.button_pre_requis.visible = True
             self.label_role.text = user['role']   # affichage du role
-            
+
+            if user["role"] == "S":
+                self.column_panel_others.visible = True
+                
             if user["role"] == "A" :                              # 'A'dministrator  JM    TOUT
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
@@ -320,13 +323,17 @@ class Main(MainTemplate):
                 self.column_panel_others.visible = False
                 
             if user["role"] == "T":                               # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
+                self.column_panel_others.visible = True
                 self.button_qcm.visible = False
                 self.button_form_satisf.visible = False
+                
 
             if user["role"] == "F":                               # Formateurs: QCM, Pré requis, PREVOIR CREATION D'UN QCM 
                 self.button_qcm.visible = True
                 self.button_form_satisf.visible = False
                 self.button_form_suivi_stage.visible = False
+
+            
         else: #pas de user
             self.column_panel_bureaux.visible = False
             self.column_panel_admin.visible = False
