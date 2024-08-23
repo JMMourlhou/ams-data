@@ -111,6 +111,11 @@ components:
         name: bt_gestion_stages
         event_bindings: {click: bt_gestion_stages_click}
         layout_properties: {}
+      - name: bt_gestion_qcm
+        properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: 'fa:question-circle-o', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary Container', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: '  MAJ QCM'}
+        type: Button
+        event_bindings: {click: bt_gestion_qcm_click}
+        layout_properties: {}
     - name: column_panel_bureaux
       properties: {wrap_on: never, col_spacing: none}
       type: ColumnPanel
