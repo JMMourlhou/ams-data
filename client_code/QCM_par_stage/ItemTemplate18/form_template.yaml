@@ -1,0 +1,21 @@
+is_package: true
+container: {type: ColumnPanel}
+components:
+- name: flow_panel_1
+  properties: {align: right, foreground: 'theme:On Primary'}
+  type: FlowPanel
+  layout_properties: {grid_position: 'BVKSYB,KOXPHW'}
+  components:
+  - name: flow_panel_2
+    properties: {}
+    type: FlowPanel
+    layout_properties: {width: 192.06894775390623}
+    components:
+    - name: button_descro
+      properties: {text: button_descro, foreground: 'theme:On Primary Container', align: full}
+      type: Button
+      layout_properties: {width: 149.77536865234373, expand: true}
+  - name: button_send
+    properties: {text: '', icon_align: right, icon: 'fa:arrow-right', foreground: 'theme:On Primary Container'}
+    type: Button
+    layout_properties: {}

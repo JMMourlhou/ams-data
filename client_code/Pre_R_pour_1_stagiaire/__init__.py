@@ -60,7 +60,7 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
                         )
         print("ajout: ", result)
        
-        # réaffichage des pré requis par reinitimisation 
+        # réaffichage des pré requis par reinitialisation 
         self.display()
                         
 
@@ -87,9 +87,9 @@ class Pre_R_pour_1_stagiaire(Pre_R_pour_1_stagiaireTemplate):
         self.liste_pr_stagiaire = app_tables.pre_requis_stagiaire.search( q.fetch_only("requis_txt",
                                                                        stagiaire_email=q.fetch_only("email"),
                                                                        ),
-                                                            numero=int(self.stagiaire_inscrit_row['numero']),
-                                                            stagiaire_email=self.stagiaire_inscrit_row["user_email"]
-                                                         )
+                                                                        numero=int(self.stagiaire_inscrit_row['numero']),
+                                                                        stagiaire_email=self.stagiaire_inscrit_row["user_email"]
+                                                                         )
         # Création du dict des pr du stagiaire
         global dico_pre_requis_stg  # dico des pr pour ce stgiaire
         dico_pre_requis_stg = {}
