@@ -15,7 +15,9 @@ components:
       properties: {text: button_descro, foreground: 'theme:On Primary Container', align: full}
       type: Button
       layout_properties: {width: 149.77536865234373, expand: true}
+      event_bindings: {click: button_descro_click}
   - name: button_send
-    properties: {text: '', icon_align: right, icon: 'fa:arrow-right', foreground: 'theme:On Primary Container'}
+    properties: {text: '', icon_align: right, icon: 'fa:arrow-right', foreground: 'theme:On Primary Container', visible: false}
     type: Button
     layout_properties: {}
+    event_bindings: {click: button_send_click}

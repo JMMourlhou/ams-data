@@ -224,5 +224,23 @@ def create_qcm_plot_pdf(user, nb, visu_next_qcm = False, visu_legend=False):    
     
     return media_object
 
- 
+# ajout d'un droit au qcm pour un stage, table codes_stages, appelé en paramètres par QCM_par_stage / template 18
+@anvil.server.callable
+def modif_qcm_stage(nb, stage, visible=True): # nb: int, num du stage     stage: stage row ds table  codes_stages    visible: Qcm visible ? True / False
+   
+    # création de la clé / valeur
+    cle = nb
+    valeur = [stage["intitule"], visible]
+
+    # lecture dictionnaire des qcm dsla table 
+    if stage['droit_qcm'] is not None or dict != {}:
+         dict = stage["droit_qcm"]
+    else:
+        dict={}    
+        
+     # ajout du qcm ds le dictionaire
+    dict[cle]=valeur
+    
+    # sauvegarde du dict
+    stage.update(droit_qcm=dict)
 
