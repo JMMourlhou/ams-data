@@ -205,10 +205,6 @@ class Main(MainTemplate):
         from ..QCM_visu_modif_ST_Main import QCM_visu_modif_ST_Main
         open_form("QCM_visu_modif_ST_Main")
 
-    def bt_gestion_qcm_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..QCM_visu_modif_Main import QCM_visu_modif_Main
-        open_form("QCM_visu_modif_Main")
 
     def button_create_recherche_click(self, **event_args):
         """This method is called when the button is clicked"""
