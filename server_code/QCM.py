@@ -226,7 +226,7 @@ def create_qcm_plot_pdf(user, nb, visu_next_qcm = False, visu_legend=False):    
 # ------------------------------------------------------------------------------------------------------------------
 # ajout d'un droit au qcm pour un stage, table codes_stages, appelé en paramètres par QCM_par_stage / template 18
 @anvil.server.callable
-def modif_qcm_stage(nb, stage, visible): # nb: int, num du qcm    stage: stage row ds table  codes_stages    visible: Qcm visible ? True / False
+def modif_qcm_stage(nb, qcm_descro, stage, visible): # nb: int, num du qcm    stage: stage row ds table  codes_stages    visible: Qcm visible ? True / False
     # préparation de l'option visible ou pas ds la valeur de la clé
     if visible is True:  # la valeur est "True", le qcm est visible dès l'accès du stgiaire au menu QCM
         visu = "True"
@@ -235,14 +235,14 @@ def modif_qcm_stage(nb, stage, visible): # nb: int, num du qcm    stage: stage r
         
     # création de la clé / valeur
     cle = str(nb) # clé du QCM doit être str
-    valeur = [stage["intitulé"], visu]   
+    valeur = [qcm_descro, visu]   # intiltulé du QCM
 
-    # lecture dictionnaire des qcm dsla table 
-    if stage['droit_qcm'] is not None or dict != {}:
-         dict = stage["droit_qcm"]
-    else:
+    # lecture dictionnaire des qcm ds la table 
+    dict={}  
+    dict = stage["droit_qcm"]
+    if dict is None or dict == {}:
         dict={}    
-        
+    print(f"dico: {str(dict)}")
      # ajout du qcm ds le dictionaire
     dict[cle]=valeur
     

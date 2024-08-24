@@ -34,7 +34,7 @@ class QCM_par_stage(QCM_par_stageTemplate):
         # lecture du dictionaire du stage
         self.dict = self.stage_row["droit_qcm"] 
         # panel des qcms (MOINS LES QCM DEJA SELECTIONNE POUR CE STAGE)
-        if self.dict is not None or self.dict != {}:     
+        if self.dict is not None and self.dict != {}:     # ni None, ni {}
             # Enlever les qcm déjà sélectionnés
             liste = []
             for qcm in self.liste_qcm_descro:

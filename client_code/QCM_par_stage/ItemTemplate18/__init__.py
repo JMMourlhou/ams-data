@@ -15,10 +15,10 @@ class ItemTemplate18(ItemTemplate18Template):
         # Any code you write here will run before the form opens.
         try:
             self.button_descro.text = self.item[1]   # si la liste a été construite car qcm existant
-            self.visible = self.item[2]                   # 3eme info  self.item["visu_qcm_par_stage"]
+            self.visu = self.item[2]             # 3eme info  self.item["visu_qcm_par_stage"]
         except:
             self.button_descro.text = self.item["destination"]   # si la liste a été directement copiée de la table
-            self.visible = self.item["visu_qcm_par_stage"]
+            self.visu = self.item["visu_qcm_par_stage"]
 
     
     def button_descro_click(self, **event_args):
@@ -42,4 +42,4 @@ class ItemTemplate18(ItemTemplate18Template):
         # self.visible contient la col "visu_qcm_par_stage" de table qcm descro ...
         #   ... pour la création de la clé des qcm pour un stage et s'il faut le visualiser ou pas 
         #   ... le qcm est visibleou pas dès l'accès du stgiaire au menu QCM
-        anvil.server.call("modif_qcm_stage", qcm_num, stage, self.visible) 
+        anvil.server.call("modif_qcm_stage", qcm_num, self.button_descro.text ,stage, self.visu) 
