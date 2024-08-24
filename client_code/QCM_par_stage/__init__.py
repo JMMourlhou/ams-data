@@ -33,22 +33,20 @@ class QCM_par_stage(QCM_par_stageTemplate):
               
         # lecture du dictionaire du stage
         self.dict = self.stage_row["droit_qcm"] 
-        
-        # panel panel des qcms (MOINS LES QCM DEJA SELECTIONNE POUR CE STAGE)
+        # panel des qcms (MOINS LES QCM DEJA SELECTIONNE POUR CE STAGE)
         if self.dict is not None or self.dict != {}:     
             # Enlever les qcm déjà sélectionnés
             liste = []
             for qcm in self.liste_qcm_descro:
-
                 clef_search = self.dict.get(str(qcm['qcm_nb']))   # recherche sur le num du qcm (doit être str)
                 if clef_search is None:  
                     # si ce qcm n'est pas ds le dict du stage, je l'affiche
                     print(qcm['destination'])
-                    liste.append((qcm['qcm_nb'],qcm['destination']))                    
+                    liste.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))                    
         else: # si pas de dict, j'affiche ts les qcm
             liste = self.liste_qcm_descro
         
-        print(len(liste))     
+        print(f"Nb de qcm à visualiser: {len(liste)}")     
         self.repeating_panel_1.items = liste
                                                                 
         

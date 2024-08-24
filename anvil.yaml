@@ -202,7 +202,7 @@ db_schema:
     server: full
     columns:
     - name: qcm_nb
-      admin_ui: {width: 116}
+      admin_ui: {order: 0, width: 120}
       type: number
     - name: destination
       admin_ui: {width: 288}
@@ -229,6 +229,9 @@ db_schema:
       admin_ui: {width: 200}
       type: link_single
       target: users
+    - name: visu_qcm_par_stage
+      admin_ui: {order: 1.5, width: 200}
+      type: bool
   codes_stages:
     title: Codes_stages
     client: search
