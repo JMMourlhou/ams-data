@@ -174,9 +174,7 @@ class RowTemplate1(RowTemplate1Template):
                     self.repeating_panel_1.items = qcm_results
         else:
             self.repeating_panel_1.visible = False
-            #self.button_1.foreground = "theme:Tertiary"               #yellow
-            #self.button_1.background = "theme:On Primary Container"
-            
+            self.user_initial_color()        
 
     def button_histo_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -201,8 +199,7 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_2.items = app_tables.stagiaires_inscrits.search(user_email = stagiaire)
         else:
             self.repeating_panel_2.visible = False
-            self.button_1.foreground = "theme:Tertiary"               #yellow
-            #self.button_1.background = "theme:On Primary Container"
+            self.user_initial_color()
             
 
     def drop_down_code_stage_change(self, **event_args):
@@ -227,6 +224,7 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_3.items = liste_pr
         else:
             self.repeating_panel_3.visible = False
+            self.user_initial_color()
 
     def button_mail_click(self, **event_args):
         """This method is called when the button is clicked"""
