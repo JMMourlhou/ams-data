@@ -248,4 +248,22 @@ def modif_qcm_stage(nb, qcm_descro, stage, visible): # nb: int, num du qcm    st
     
     # sauvegarde du dict
     stage.update(droit_qcm=dict)
+    
 
+# ------------------------------------------------------------------------------------------------------------------
+# effact d'un droit au qcm pour un stage, table codes_stages, appelé en paramètres par QCM_par_stage / template 19
+@anvil.server.callable
+def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table  codes_stages   
+    
+    # création de la clé 
+    cle = str(nb) # clé du QCM doit être str
+
+    # lecture dictionnaire des qcm ds la table 
+    dict={}  
+    dict = stage["droit_qcm"]
+    
+     # del du qcm ds le dictionaire
+    del dict[cle]
+    
+    # sauvegarde du dict
+    stage.update(droit_qcm=dict)
