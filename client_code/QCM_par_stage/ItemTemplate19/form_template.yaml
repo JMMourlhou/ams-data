@@ -2,20 +2,17 @@ is_package: true
 container: {type: ColumnPanel}
 components:
 - name: flow_panel_1
-  properties: {align: left}
+  properties: {align: right, foreground: 'theme:On Primary'}
   type: FlowPanel
-  layout_properties: {grid_position: 'OKRDFF,XJRVLY'}
+  layout_properties: {grid_position: 'BQROYE,FHMSIV'}
   components:
   - name: button_send
-    properties: {text: '', icon_align: left, icon: 'fa:arrow-left', foreground: 'theme:On Primary Container'}
+    properties: {text: '', icon_align: right, icon: 'fa:arrow-left', foreground: 'theme:Error', visible: false}
     type: Button
     layout_properties: {}
-  - name: flow_panel_2
-    properties: {align: left}
-    type: FlowPanel
-    layout_properties: {width: 159.75897387695312}
-    components:
-    - name: button_descro
-      properties: {text: button_descro, foreground: 'theme:On Primary Container', align: left}
-      type: Button
-      layout_properties: {width: 177.61336572265623, expand: true}
+    event_bindings: {click: button_send_click}
+  - name: button_descro
+    properties: {text: button_descro, foreground: 'theme:On Primary', align: left}
+    type: Button
+    layout_properties: {width: 107.5643701171875, expand: true}
+    event_bindings: {click: button_descro_click}

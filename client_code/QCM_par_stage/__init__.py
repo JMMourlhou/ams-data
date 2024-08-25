@@ -25,29 +25,38 @@ class QCM_par_stage(QCM_par_stageTemplate):
     def drop_down_types_stages_change(self, **event_args):
         """This method is called when an item is selected"""
         self.stage_row = self.drop_down_types_stages.selected_value
-       
-        self.column_panel_1.visible = True
+        
         # Tous les qcm
         self.liste_qcm_descro = app_tables.qcm_description.search(tables.order_by("destination", ascending=True))  
-        print(f"nb de qcm: {len(self.liste_qcm_descro)}")
-              
+        print(f"nb de qcm: {len(self.liste_qcm_descro)}")  
+        
         # lecture du dictionaire du stage
         self.dict = self.stage_row["droit_qcm"] 
+        
         # panel des qcms (MOINS LES QCM DEJA SELECTIONNE POUR CE STAGE)
         if self.dict is not None and self.dict != {}:     # ni None, ni {}
             # Enlever les qcm déjà sélectionnés
-            liste = []
+            liste_qcm_dispos = []
+            liste_qcm_selectionnes = []
             for qcm in self.liste_qcm_descro:
                 clef_search = self.dict.get(str(qcm['qcm_nb']))   # recherche sur le num du qcm (doit être str)
                 if clef_search is None:  
-                    # si ce qcm n'est pas ds le dict du stage, je l'affiche
+                    # ce qcm n'est pas ds le dict du stage, je l'affiche ds panel 1, qcm dispos
                     print(qcm['destination'])
-                    liste.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))                    
+                    liste_qcm_dispos.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
+                else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
+                    liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
+                    
         else: # si pas de dict, j'affiche ts les qcm
-            liste = self.liste_qcm_descro
-        
-        print(f"Nb de qcm à visualiser: {len(liste)}")     
-        self.repeating_panel_1.items = liste
-                                                                
+            liste_qcm_dispos = self.liste_qcm_descro
+            liste_qcm_selectionnes = []
+            
+        print(f"Nb de qcm dipos: {len(liste_qcm_dispos)}")
+        self.repeating_panel_1.visible = True
+        self.repeating_panel_1.items = liste_qcm_dispos
+
+        print(f"Nb de qcm sélectionnés: {len(liste_qcm_selectionnes)}") 
+        self.repeating_panel_2.visible = True
+        self.repeating_panel_2.items = liste_qcm_selectionnes
         
         
