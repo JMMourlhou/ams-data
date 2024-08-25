@@ -18,16 +18,11 @@ class RowTemplate1(RowTemplate1Template):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.repeating_panel_1.visible = False  #qcm non visibles tant que pas de click sur bt Qcm
+        self.user_initial_color()
         try: # *********************************          Liste à partir table users
             if self.item['prenom'] is not None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
-                if self.item['role'] == "A":          # Admin en rouge
-                    self.button_1.foreground = "white"
-                    self.button_1.background = "red"
-                if self.item['role'] == "F":
-                    self.button_1.foreground = "blue"  # Formateur en bleu
-                if self.item['role'] == "T":
-                    self.button_1.foreground = "green"  # Formateur en bleu
+         
                 self.button_role.text = self.item['role']
                 self.email_pour_del = self.item   
             else:
@@ -67,7 +62,7 @@ class RowTemplate1(RowTemplate1Template):
             self.button_del.visible = True
             
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
-        start = French_zone.french_zone_time()  # pour calcul du tpsde traitement
+        start = French_zone.french_zone_time()  # pour calcul du tps de traitement
         
         liste0 = app_tables.stagiaires_inscrits.search( q.fetch_only("stage_txt"),
                                                            user_email=user_row)
@@ -159,10 +154,12 @@ class RowTemplate1(RowTemplate1Template):
                                                             tables.order_by("time", ascending=False),
                                                             user_qcm = stagiaire
                                                             )
-                if self.item['role'] == "A":          # Admin en rouge
+                if self.item['role'] == "A" or self.item['role'] == "B" or self.item['role'] == "J":          # Admin en rouge
                     self.button_1.foreground = "red"
                 if self.item['role'] == "F":
                     self.button_1.foreground = "blue"  # Formateur en bleu
+                if self.item['role'] == "T":
+                    self.button_1.foreground = "green"  # Formateur en bleu    
             except: # si recherche sur la table stagiaire_inscrit
                 stagiaire = app_tables.users.get(email=self.item['user_email']['email'])
                 qcm_results = app_tables.qcm_result.search(
@@ -204,7 +201,7 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_2.items = app_tables.stagiaires_inscrits.search(user_email = stagiaire)
         else:
             self.repeating_panel_2.visible = False
-            #self.button_1.foreground = "theme:Tertiary"               #yellow
+            self.button_1.foreground = "theme:Tertiary"               #yellow
             #self.button_1.background = "theme:On Primary Container"
             
 
@@ -254,6 +251,7 @@ class RowTemplate1(RowTemplate1Template):
                 if nb_stages > 1:
                     txt = "stages"
                 alert(f"Effacement impossible:\nCette personne est inscrite dans {nb_stages} {txt}\n\n Détail:\n{txt} N°{detail}")
+                self.button_histo_click()   # visu de l'histo du stagiaire
                 return
             # Effact de la personne si confirmation
             r=alert("Voulez-vous vraiment enlever définitivement cette personne ? ",dismissible=False ,buttons=[("oui",True),("non",False)])
@@ -264,6 +262,15 @@ class RowTemplate1(RowTemplate1Template):
                     txt_msg = anvil.server.call("del_personne",row)
                 alert(txt_msg)
             open_form("Recherche_stagiaire")
+
+    def user_initial_color(self):
+        if self.item['role'] == "A" or self.item['role'] == "B" or self.item['role'] == "J":          # Admin en rouge
+            self.button_1.foreground = "red"   # Bureaux en rouge
+        if self.item['role'] == "F":
+            self.button_1.foreground = "blue"  # Formateur en bleu
+        if self.item['role'] == "T":
+            self.button_1.foreground = "green"  # Tuteur en vert
+         
 
 
 
