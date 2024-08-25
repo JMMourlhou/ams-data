@@ -17,12 +17,12 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.column_panel_1.visible = False
         #initialisation des drop down des qcm créés et barêmes
         self.image_1.source = None
-        self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search()]
+        self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search(tables.order_by("destination", ascending=True))]
         self.drop_down_bareme.items=["1","2","3","4","5","10"]
         self.drop_down_bareme.selected_value = "1"
         self.drop_down_nb_options.items=([("Vrai/Faux", 1), ("2 options", 2), ("3 options", 3), ("4 options", 4), ("5 options", 5)])
         # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Ré-affichage ?   +++++++++++++++++++++++++++++
-        if qcm_descro_nb != None:      #réinitialisation de la forme après une création ou modif
+        if qcm_descro_nb is not None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
             # j'affiche le drop down du qcm
             self.drop_down_qcm_row.selected_value = qcm_descro_nb

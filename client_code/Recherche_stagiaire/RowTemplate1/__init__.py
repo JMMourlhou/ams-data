@@ -174,6 +174,7 @@ class RowTemplate1(RowTemplate1Template):
                     self.repeating_panel_1.items = qcm_results
         else:
             self.repeating_panel_1.visible = False
+            self.button_qcm.foreground = "yellow"
             self.user_initial_color()        
 
     def button_histo_click(self, **event_args):
@@ -182,7 +183,6 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_2.visible = True
             self.button_histo.foreground = "red"
             self.button_1.foreground = "red"
-            #self.button_1.background = "theme:On Primary Container"
             
             try:  # si recherche sur la table users
                 stagiaire = app_tables.users.get(email=self.item['email'])
@@ -199,12 +199,16 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_2.items = app_tables.stagiaires_inscrits.search(user_email = stagiaire)
         else:
             self.repeating_panel_2.visible = False
+            self.button_histo.foreground = "yellow"
             self.user_initial_color()
             
 
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         self.repeating_panel_3.visible = True
+        self.drop_down_code_stage.foreground = "red"
+        self.button_1.foreground = "red"
+        
         row_stagiaire_inscrit = self.drop_down_code_stage.selected_value   # Stage sélectionné du user ds drop_down (row table stagiaire inscrit)
         if row_stagiaire_inscrit is not None:
             # lecture fichier père stages
@@ -224,6 +228,7 @@ class RowTemplate1(RowTemplate1Template):
             self.repeating_panel_3.items = liste_pr
         else:
             self.repeating_panel_3.visible = False
+            self.drop_down_code_stage.foreground = "yellow"
             self.user_initial_color()
 
     def button_mail_click(self, **event_args):
