@@ -59,23 +59,53 @@ class ItemTemplate19(ItemTemplate19Template):
 
     def check_box_visu_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text)
+        if self.check_box_visu.checked is False:
+            r=alert("Ce QCM ne sera pas visible, est-ce OK ?",dismissible=False, buttons=[("oui",True),("non",False)])
+            if not r :   #Non
+                return
+        self.save_qcm()
 
     def text_box_p_pass_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
+        self.text_box_p_pass_lost_focus()
+        
+    def text_box_p_pass_lost_focus(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
         # Taux de succès
-        try: 
-            taux = int(self.text_box_p_pass.text)
-            if taux > 49 and taux < 100:
-                anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, taux, self.text_box_next.text)
+        try:
+            test = int(self.text_box_p_pass.text)   # simple test 
         except:
-            alert("Le taux de succès doit être compris entre 50 et 100 !")
+            alert("Le taux de succès doit être un chiffre !")
             return
+            
+        self.taux = int(self.text_box_p_pass.text)   
+        if self.taux <50 or self.taux >100:
+            alert("Le taux de succès doit être un entier compris entre 50 et 100 !")
+            return
+        self.save_qcm()   
             
     def text_box_next_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
-        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text)
+        self.text_box_next_lost_focus()
+        
+    def text_box_next_lost_focus(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        # next qcm
+        self.f = get_open_form()
+        try:
+            test = int(self.text_box_next.text)
+        except:
+            alert("Le numéro du prochain QCM doit être un chiffre !")
+            return
+            
+        self.next_qcm = int(self.text_box_next.text)
+        if self.next_qcm <1 or self.next_qcm > nb_qcm:
+            alert(f"Le numéro du prochain QCM doit être un entier compris entre 1 et {nb_qcm} !") 
+            return
+        self.save_qcm()
 
-       
+    def save_qcm(self): 
+        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text)
+ 
   
  

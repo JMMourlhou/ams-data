@@ -28,6 +28,7 @@ class QCM_par_stage(QCM_par_stageTemplate):
         
         # Tous les qcm
         self.liste_qcm_descro = app_tables.qcm_description.search(tables.order_by("destination", ascending=True))  
+        self.label_nb_qcm.text = len(self.liste_qcm_descro)
         print(f"nb de qcm: {len(self.liste_qcm_descro)}")  
         
         # lecture du dictionaire du stage

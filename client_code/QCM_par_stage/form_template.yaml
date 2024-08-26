@@ -42,6 +42,10 @@ components:
       type: DropDown
       layout_properties: {width: 251.74731640624998}
       event_bindings: {change: drop_down_types_stages_change}
+- name: label_nb_qcm
+  properties: {align: center, visible: false}
+  type: Label
+  layout_properties: {grid_position: 'AOEBBO,VUZHQX'}
 - name: column_panel_2
   properties: {background: 'theme:On Primary Container', spacing_below: none, col_widths: '{"KQSOJL":19,"QEUNAM":41}'}
   type: ColumnPanel
