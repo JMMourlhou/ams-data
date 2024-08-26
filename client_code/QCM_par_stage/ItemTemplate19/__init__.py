@@ -66,10 +66,10 @@ class ItemTemplate19(ItemTemplate19Template):
         # Taux de succès
         try: 
             taux = int(self.text_box_p_pass.text)
-            if taux > 0 and taux < 100:
+            if taux > 49 and taux < 100:
                 anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, taux, self.text_box_next.text)
         except:
-            alert("Le taux de succès doit être compris ")
+            alert("Le taux de succès doit être compris entre 50 et 100 !")
             return
             
     def text_box_next_pressed_enter(self, **event_args):
