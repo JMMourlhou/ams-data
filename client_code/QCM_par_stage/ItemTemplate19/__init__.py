@@ -29,6 +29,7 @@ class ItemTemplate19(ItemTemplate19Template):
         self.check_box_visu.checked = self.item[3]
         self.text_box_p_pass.text = self.item[4]
         self.text_box_next.text = self.item[5]
+        self.check_box_start_visu.checked = self.item[2]
         
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -92,6 +93,7 @@ class ItemTemplate19(ItemTemplate19Template):
         """This method is called when the user presses Enter in this text box"""
         # next qcm
         self.f = get_open_form()
+        nb_qcm = self.f.label_nb_qcm.text
         try:
             test = int(self.text_box_next.text)
         except:
@@ -99,13 +101,22 @@ class ItemTemplate19(ItemTemplate19Template):
             return
             
         self.next_qcm = int(self.text_box_next.text)
-        if self.next_qcm <1 or self.next_qcm > nb_qcm:
-            alert(f"Le numéro du prochain QCM doit être un entier compris entre 1 et {nb_qcm} !") 
+        if self.next_qcm <0 or self.next_qcm > nb_qcm:
+            alert(f"Le numéro du prochain QCM doit être un entier compris entre 0 (pas de prochain) et {nb_qcm} !") 
             return
         self.save_qcm()
-
+        
+    def check_box_start_visu_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_start_visu.checked is False:
+            r=alert("Ce QCM sera visible quand le stagiare aura validé les qcm précédants, est-ce OK ?",dismissible=False, buttons=[("oui",True),("non",False)])
+            if not r :   #Non
+                return
+        self.save_qcm()
+    
     def save_qcm(self): 
-        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text)
- 
-  
+        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text, self.check_box_start_visu.checked)
+
+
+
  

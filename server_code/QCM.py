@@ -271,7 +271,7 @@ def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table
 # ------------------------------------------------------------------------------------------------------------------
 # modif table qcm descro, qcm d'un stage sélectionné
 @anvil.server.callable
-def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm): # nb: int, num du qcm    stage: stage row ds table  codes_stages   
+def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_start): # nb: int, num du qcm    stage: stage row ds table  codes_stages   
     
     # lecture du qcm row, table qcm descro
     qcm_row = app_tables.qcm_description.get(qcm_nb=nb)
@@ -293,5 +293,6 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm): # nb: i
         qcm_row.update(
                         visible=visible,
                         taux_success = taux_success,
-                        next_qcm=next_qcm
+                        next_qcm = next_qcm,
+                        visu_qcm_par_stage = visu_start
                         )
