@@ -1,9 +1,6 @@
 from ._anvil_designer import ItemTemplate19Template
 from anvil import *
 import anvil.server
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -62,16 +59,23 @@ class ItemTemplate19(ItemTemplate19Template):
 
     def check_box_visu_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        pass
+        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text)
 
     def text_box_p_pass_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
-        pass
-
+        # Taux de succès
+        try: 
+            taux = int(self.text_box_p_pass.text)
+            if taux > 0 and taux < 100:
+                anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, taux, self.text_box_next.text)
+        except:
+            alert("Le taux de succès doit être compris ")
+            return
+            
     def text_box_next_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
-        pass
+        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text)
 
-   # def sov_qcm(self, )
+       
   
  

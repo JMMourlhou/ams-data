@@ -276,8 +276,20 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm): # nb: i
     # lecture du qcm row, table qcm descro
     qcm_row = app_tables.qcm_description.get(qcm_nb=nb)
     
-    # sauvegarde du dict
-    if len(qcm_row)>0:
+    if len(str(qcm_row))>0:
+        # test si next_qcm est vide
+        if next_qcm == "":
+            next_qcm = None
+        else:
+            next_qcm = int(next_qcm)
+        
+        # test si taux succès est vide  
+        if  len(str(taux_success))==0:
+            taux_success = None
+        else:
+            taux_success = int(taux_success)
+            
+        # sauvegarde du qcm
         qcm_row.update(
                         visible=visible,
                         taux_success = taux_success,

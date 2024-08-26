@@ -30,9 +30,9 @@ components:
       properties: {placeholder: '% ', background: 'theme:Primary', foreground: 'theme:On Primary'}
       type: TextBox
       layout_properties: {width: 58.56368798828125}
-      event_bindings: {pressed_enter: text_box_p_pass_pressed_enter}
+      event_bindings: {pressed_enter: text_box_p_pass_pressed_enter, lost_focus: text_box_p_pass_pressed_enter}
     - name: text_box_next
       properties: {placeholder: '', background: 'theme:Primary', foreground: 'theme:On Primary'}
       type: TextBox
       layout_properties: {width: 95.235091015625}
-      event_bindings: {pressed_enter: text_box_next_pressed_enter}
+      event_bindings: {pressed_enter: text_box_next_pressed_enter, lost_focus: text_box_next_pressed_enter}
