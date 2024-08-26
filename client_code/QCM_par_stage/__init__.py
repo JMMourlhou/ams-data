@@ -45,7 +45,7 @@ class QCM_par_stage(QCM_par_stageTemplate):
                     print(qcm['destination'])
                     liste_qcm_dispos.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
                 else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
-                    liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
+                    liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage'],qcm['visible'], qcm['taux_success'], qcm['next_qcm']))
                     
         else: # si pas de dict, j'affiche ts les qcm
             liste_qcm_dispos = self.liste_qcm_descro

@@ -12,7 +12,27 @@ components:
     layout_properties: {}
     event_bindings: {click: button_del_click}
   - name: button_descro
-    properties: {text: button_descro, foreground: 'theme:On Primary', align: left}
+    properties: {text: button_descro, foreground: 'theme:On Primary', align: full}
     type: Button
     layout_properties: {width: 107.5643701171875, expand: true}
     event_bindings: {click: button_descro_click}
+  - name: flow_panel_2
+    properties: {align: right}
+    type: FlowPanel
+    layout_properties: {width: 256.5963134765625}
+    components:
+    - name: check_box_visu
+      properties: {text: ''}
+      type: CheckBox
+      layout_properties: {}
+      event_bindings: {change: check_box_visu_change}
+    - name: text_box_p_pass
+      properties: {placeholder: '% ', background: 'theme:Primary', foreground: 'theme:On Primary'}
+      type: TextBox
+      layout_properties: {width: 58.56368798828125}
+      event_bindings: {pressed_enter: text_box_p_pass_pressed_enter}
+    - name: text_box_next
+      properties: {placeholder: '', background: 'theme:Primary', foreground: 'theme:On Primary'}
+      type: TextBox
+      layout_properties: {width: 95.235091015625}
+      event_bindings: {pressed_enter: text_box_next_pressed_enter}

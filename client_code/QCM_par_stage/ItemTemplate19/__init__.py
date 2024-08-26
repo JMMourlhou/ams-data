@@ -16,14 +16,23 @@ class ItemTemplate19(ItemTemplate19Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-         # Any code you write here will run before the form opens.
+        """
         try:
-            self.button_descro.text = self.item[1]   # si la liste a été construite car qcm existant
-
+            self.button_descro.text = str(self.item[0]) + " - " + self.item[1]   # si la liste a été construite car qcm existant
+            self.check_box_visu.checked = self.item[3]
+            self.text_box_p_pass.text = self.item[4]
+            self.text_box_next.text = self.item[5]
         except:
             self.button_descro.text = self.item["destination"]   # si la liste a été directement copiée de la table
-
-
+            self.check_box_visu.checked = self.item["visible"]
+            self.text_box_p_pass.text = self.item["taux_success"]
+            self.text_box_next.text = self.item["next_qcm"]
+        """
+        self.button_descro.text = str(self.item[0]) + " - " + self.item[1]   # la liste a été construite car qcm existant
+        self.check_box_visu.checked = self.item[3]
+        self.text_box_p_pass.text = self.item[4]
+        self.text_box_next.text = self.item[5]
+        
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.f = get_open_form()
@@ -50,6 +59,18 @@ class ItemTemplate19(ItemTemplate19Template):
             self.button_del.visible = True
         else:
             self.button_del.visible = False
+
+    def check_box_visu_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        pass
+
+    def text_box_p_pass_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        pass
+
+    def text_box_next_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        pass
 
   
  
