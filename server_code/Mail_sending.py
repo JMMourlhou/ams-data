@@ -40,7 +40,7 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
         time=French_zone_server_side.time_french_zone() # time is a datetime format 
         print(time)
         try:
-            anvil.mail.send(
+            anvil.email.send(
                 to=email,
                 subject=subject_txt,
                 attachments=attachments,
