@@ -8,9 +8,6 @@ import anvil.users
 import anvil.server
 from anvil.http import url_encode
 
-#import anvil.google.auth
-#import anvil.google.mail
-
 from . import French_zone_server_side
 from . import Variables_globales # importation du module de lecture des variables globales (sauf mon logo)
 from . import _Constant_parameters_public_ok
