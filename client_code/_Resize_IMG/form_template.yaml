@@ -1,37 +1,37 @@
-container: {type: ColumnPanel}
 components:
-- name: column_panel_header
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  type: ColumnPanel
-  layout_properties: {grid_position: 'ZSXKFY,CTREUN'}
-  components:
-  - name: label_3
-    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: 'Moulinette, taille img doc requis'}
+- components:
+  - layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+    name: label_3
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: 'Moulinette, taille img doc requis', tooltip: '', underline: false, visible: true}
     type: Label
-    layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
-- name: label_1
+  layout_properties: {grid_position: 'ZSXKFY,CTREUN'}
+  name: column_panel_header
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- layout_properties: {grid_position: 'RZCFSN,WLNFVC'}
+  name: label_1
   properties: {}
   type: Label
-  layout_properties: {grid_position: 'RZCFSN,WLNFVC'}
-- name: label_1_nom
+- layout_properties: {grid_position: 'WBAKHE,OIDBHI'}
+  name: label_1_nom
   properties: {}
   type: Label
-  layout_properties: {grid_position: 'WBAKHE,OIDBHI'}
-- name: file_loader_1
+- event_bindings: {change: file_loader_1_change}
+  layout_properties: {grid_position: 'PVNOQJ,LUSYGR'}
+  name: file_loader_1
   properties: {}
   type: FileLoader
-  layout_properties: {grid_position: 'PVNOQJ,LUSYGR'}
-  event_bindings: {change: file_loader_1_change}
-- name: image_1
+- layout_properties: {grid_position: 'JIRSKD,ABDXJO'}
+  name: image_1
   properties: {height: 372.76556396484375}
   type: Image
-  layout_properties: {grid_position: 'JIRSKD,ABDXJO'}
-- name: label_2
+- layout_properties: {grid_position: 'QASFTU,GOEZUS'}
+  name: label_2
   properties: {}
   type: Label
-  layout_properties: {grid_position: 'QASFTU,GOEZUS'}
-- name: label_2_nom
+- layout_properties: {grid_position: 'QHKNTA,OFYGLN'}
+  name: label_2_nom
   properties: {}
   type: Label
-  layout_properties: {grid_position: 'QHKNTA,OFYGLN'}
+container: {type: ColumnPanel}
 is_package: true

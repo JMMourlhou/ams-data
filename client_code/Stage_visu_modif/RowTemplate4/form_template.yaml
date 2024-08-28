@@ -1,28 +1,28 @@
-container: {type: DataRowPanel}
 components:
-- type: FlowPanel
-  properties: {role: null, vertical_align: middle, align: center, spacing_above: none, background: 'theme:Primary', foreground: '', spacing_below: small, visible: true, border: '', tooltip: '', spacing: small}
-  name: flow_panel_1
-  layout_properties: {column: null}
-  components:
-  - type: TextBox
-    properties: {role: null, bold: true, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
+- components:
+  - event_bindings: {focus: text_box_3_focus}
+    layout_properties: {expand: false, width: 205.588560546875}
     name: text_box_3
-    layout_properties: {width: 205.588560546875, expand: false}
-    event_bindings: {focus: text_box_3_focus}
-  - type: TextBox
-    properties: {role: null, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 12, tooltip: '', text: ''}
-    name: text_box_1
+    properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', hide_text: false, italic: false, placeholder: '', role: null, spacing_above: small, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {focus: text_box_1_focus}
     layout_properties: {width: 240.1821396484375}
-    event_bindings: {focus: text_box_1_focus}
-  - type: TextBox
-    properties: {role: null, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
-    name: text_box_2
+    name: text_box_1
+    properties: {align: center, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 12, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: null, spacing_above: small, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {focus: text_box_2_focus}
     layout_properties: {width: 125.679583984375}
-    event_bindings: {focus: text_box_2_focus}
-  - type: Button
-    properties: {role: elevated-button, bold: false, align: center, spacing_above: small, background: 'theme:Tertiary', icon: 'fa:minus-circle', underline: false, font: '', icon_align: left, foreground: 'theme:Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
-    name: button_delete
+    name: text_box_2
+    properties: {align: center, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: null, spacing_above: small, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {click: bt_delete}
     layout_properties: {}
-    event_bindings: {click: bt_delete}
+    name: button_delete
+    properties: {align: center, background: 'theme:Tertiary', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Primary', icon: 'fa:minus-circle', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
+    type: Button
+  layout_properties: {column: null}
+  name: flow_panel_1
+  properties: {align: center, background: 'theme:Primary', border: '', foreground: '', role: null, spacing: small, spacing_above: none, spacing_below: small, tooltip: '', vertical_align: middle, visible: true}
+  type: FlowPanel
+container: {type: DataRowPanel}
 is_package: true

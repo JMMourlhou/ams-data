@@ -1,14 +1,14 @@
-is_package: true
-container:
-  type: ColumnPanel
-  properties: {col_widths: '{}'}
 components:
-- name: button_nom_prenom
-  properties: {text: nom_p, align: center, background: 'theme:Tertiary', foreground: 'theme:On Primary Container'}
-  type: Button
+- event_bindings: {click: button_nom_prenom_click}
   layout_properties: {grid_position: 'PPSTST,ZFDVZT'}
-  event_bindings: {click: button_nom_prenom_click}
-- name: repeating_panel_qcm_results
+  name: button_nom_prenom
+  properties: {align: center, background: 'theme:Tertiary', foreground: 'theme:On Primary Container', text: nom_p}
+  type: Button
+- layout_properties: {grid_position: 'BBZOXE,HADKAT'}
+  name: repeating_panel_qcm_results
   properties: {item_template: QCM_Results.ItemTemplate7.ItemTemplate8, visible: true}
   type: RepeatingPanel
-  layout_properties: {grid_position: 'BBZOXE,HADKAT'}
+container:
+  properties: {col_widths: '{}'}
+  type: ColumnPanel
+is_package: true

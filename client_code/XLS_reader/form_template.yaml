@@ -1,43 +1,43 @@
-container:
-  type: ColumnPanel
-  properties: {role: outlined-card}
 components:
-- name: column_panel_header
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  type: ColumnPanel
-  layout_properties: {grid_position: 'JXHURK,KBKZBH'}
-  event_bindings: {}
-  components:
-  - name: spacer_1
+- components:
+  - layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
+    name: spacer_1
     properties: {height: -3.9891357421875, visible: false}
     type: Spacer
-    layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
-  - name: label_titre
-    properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Insertion d'anciens stagiaires par lecture fichier CSV}
+  - layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+    name: label_titre
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: Insertion d'anciens stagiaires par lecture fichier CSV, tooltip: '', underline: false, visible: true}
     type: Label
-    layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
-  - name: label_nb_rows
+  - layout_properties: {grid_position: 'JHZLGZ,GATSDH'}
+    name: label_nb_rows
     properties: {}
     type: Label
-    layout_properties: {grid_position: 'JHZLGZ,GATSDH'}
-  - name: file_loader_1
-    properties: {text: Choisir le fichier csv, role: outlined-button, file_types: .csv}
-    type: FileLoader
+  - event_bindings: {change: file_loader_1_change}
     layout_properties: {grid_position: 'IQRXPT,ZKHKII'}
-    event_bindings: {change: file_loader_1_change}
-  - name: column_panel_1
-    properties: {wrap_on: never, col_spacing: large}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'FDLYLV,AWJPVU'}
-    components:
-    - name: button_annuler
-      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
-      type: Button
+    name: file_loader_1
+    properties: {file_types: .csv, role: outlined-button, text: Choisir le fichier csv}
+    type: FileLoader
+  - components:
+    - event_bindings: {click: button_annuler_click}
       layout_properties: {grid_position: 'SIHWFU,NFPFQW'}
-      event_bindings: {click: button_annuler_click}
-- name: timer_1
+      name: button_annuler
+      properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
+      type: Button
+    layout_properties: {grid_position: 'FDLYLV,AWJPVU'}
+    name: column_panel_1
+    properties: {col_spacing: large, wrap_on: never}
+    type: ColumnPanel
+  event_bindings: {}
+  layout_properties: {grid_position: 'JXHURK,KBKZBH'}
+  name: column_panel_header
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- event_bindings: {tick: timer_1_tick}
+  layout_properties: {grid_position: 'UYOLGT,PVTBJO'}
+  name: timer_1
   properties: {interval: 0}
   type: Timer
-  layout_properties: {grid_position: 'UYOLGT,PVTBJO'}
-  event_bindings: {tick: timer_1_tick}
+container:
+  properties: {role: outlined-card}
+  type: ColumnPanel
 is_package: true

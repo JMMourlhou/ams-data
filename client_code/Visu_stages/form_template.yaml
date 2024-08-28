@@ -1,66 +1,66 @@
-container:
-  type: ColumnPanel
-  properties: {col_widths: '{"CGPGQU":42}'}
-  event_bindings: {show: form_show}
 components:
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  name: column_panel_header
+- components:
+  - layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
+    name: spacer_1
+    properties: {height: -3.9891357421875, visible: false}
+    type: Spacer
+  - layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+    name: label_3
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: Liste des stages, tooltip: '', underline: false, visible: true}
+    type: Label
+  event_bindings: {}
   layout_properties:
     col_widths: {}
     grid_position: OFVPWK,OAIUIT
-  components:
-  - name: spacer_1
-    properties: {height: -3.9891357421875, visible: false}
-    type: Spacer
-    layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
-  - type: Label
-    properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Liste des stages}
-    name: label_3
-    layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
-  event_bindings: {}
-- type: ColumnPanel
-  properties: {col_widths: '{"MYQPJL":35}', role: elevated-card}
-  name: column_panel_2
-  layout_properties: {grid_position: 'HIAFAM,CGPGQU'}
-  components:
-  - type: Button
-    properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
-    name: button_annuler
+  name: column_panel_header
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- components:
+  - event_bindings: {click: button_annuler_click}
     layout_properties:
       col_widths: {}
       grid_position: SVCHXN,MYQPJL
-    event_bindings: {click: button_annuler_click}
-  - type: FlowPanel
-    properties: {role: null, vertical_align: full, align: left, spacing_above: none, background: '', foreground: '', spacing_below: none, visible: true, border: '', tooltip: '', spacing: medium}
-    name: flow_panel_2
-    layout_properties: {grid_position: 'CZIKBP,MPYWTC'}
-    components:
-    - type: Button
-      properties: {role: elevated-button, bold: true, align: full, spacing_above: small, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Création d'1 stage}
+    name: button_annuler
+    properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
+    type: Button
+  - components:
+    - event_bindings: {click: creation_stage_click}
+      layout_properties: {expand: true, grid_position: 'SVCHXN,ROGZCQ', width: null}
       name: creation_stage
-      layout_properties: {grid_position: 'SVCHXN,ROGZCQ', expand: true, width: null}
-      event_bindings: {click: creation_stage_click}
-- type: DataGrid
-  properties:
-    role: null
-    spacing_above: small
-    columns: []
-    background: ''
-    rows_per_page: 7
-    wrap_on: mobile
-    foreground: ''
-    show_page_controls: true
-    auto_header: false
-    spacing_below: small
-    visible: true
-    border: ''
-    tooltip: ''
-  name: data_grid_1
-  layout_properties: {grid_position: 'DDRVAU,RHIHMA'}
-  components:
-  - type: RepeatingPanel
-    properties: {role: outlined-card, spacing_above: none, background: '', item_template: Visu_stages.RowTemplate3, foreground: '', items: null, spacing_below: none, visible: true, border: '', tooltip: ''}
+      properties: {align: full, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Création d'1 stage, tooltip: '', underline: false, visible: true}
+      type: Button
+    layout_properties: {grid_position: 'CZIKBP,MPYWTC'}
+    name: flow_panel_2
+    properties: {align: left, background: '', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: full, visible: true}
+    type: FlowPanel
+  layout_properties: {grid_position: 'HIAFAM,CGPGQU'}
+  name: column_panel_2
+  properties: {col_widths: '{"MYQPJL":35}', role: elevated-card}
+  type: ColumnPanel
+- components:
+  - layout_properties: {}
     name: repeating_panel_1
-    layout_properties: {}
+    properties: {background: '', border: '', foreground: '', item_template: Visu_stages.RowTemplate3, items: null, role: outlined-card, spacing_above: none, spacing_below: none, tooltip: '', visible: true}
+    type: RepeatingPanel
+  layout_properties: {grid_position: 'DDRVAU,RHIHMA'}
+  name: data_grid_1
+  properties:
+    auto_header: false
+    background: ''
+    border: ''
+    columns: []
+    foreground: ''
+    role: null
+    rows_per_page: 7
+    show_page_controls: true
+    spacing_above: small
+    spacing_below: small
+    tooltip: ''
+    visible: true
+    wrap_on: mobile
+  type: DataGrid
+container:
+  event_bindings: {show: form_show}
+  properties: {col_widths: '{"CGPGQU":42}'}
+  type: ColumnPanel
 is_package: true

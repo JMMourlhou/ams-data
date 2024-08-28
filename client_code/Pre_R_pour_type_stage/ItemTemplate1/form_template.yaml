@@ -1,27 +1,27 @@
-container:
-  type: ColumnPanel
-  properties: {col_widths: '{"MPSSKP":83}'}
 components:
-- type: FlowPanel
-  properties: {role: null, vertical_align: middle, align: center, spacing_above: none, background: 'theme:Primary', foreground: '', spacing_below: none, visible: true, border: '', tooltip: '', spacing: medium}
-  name: flow_panel_1
-  layout_properties: {grid_position: 'ZTYXXQ,MPSSKP'}
-  components:
-  - type: Spacer
-    properties: {height: 32}
+- components:
+  - layout_properties: {}
     name: spacer_1
-    layout_properties: {}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: center, placeholder: '', spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', italic: false, enabled: false, font_size: null, tooltip: '', text: ''}
-    name: text_box_1
-    layout_properties: {width: null, expand: true}
-  - type: Button
-    properties: {role: null, bold: false, align: center, spacing_above: none, background: 'theme:Primary', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 21, tooltip: '', text: ''}
-    name: button_annuler
-    layout_properties: {grid_position: 'PJIZXA,HIXLGT'}
-    event_bindings: {click: button_annuler_click}
-  - type: Spacer
     properties: {height: 32}
+    type: Spacer
+  - layout_properties: {expand: true, width: null}
+    name: text_box_1
+    properties: {align: center, background: 'theme:Primary', bold: false, border: '', enabled: false, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: outlined, spacing_above: small, spacing_below: small, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {click: button_annuler_click}
+    layout_properties: {grid_position: 'PJIZXA,HIXLGT'}
+    name: button_annuler
+    properties: {align: center, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 21, foreground: 'theme:Tertiary', icon: 'fa:minus-square', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: '', tooltip: '', underline: false, visible: true}
+    type: Button
+  - layout_properties: {grid_position: 'ZTYXXQ,WCMWOO'}
     name: spacer_4
-    layout_properties: {grid_position: 'ZTYXXQ,WCMWOO'}
+    properties: {height: 32}
+    type: Spacer
+  layout_properties: {grid_position: 'ZTYXXQ,MPSSKP'}
+  name: flow_panel_1
+  properties: {align: center, background: 'theme:Primary', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: middle, visible: true}
+  type: FlowPanel
+container:
+  properties: {col_widths: '{"MPSSKP":83}'}
+  type: ColumnPanel
 is_package: true

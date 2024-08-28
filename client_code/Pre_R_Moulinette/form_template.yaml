@@ -1,41 +1,41 @@
-container: {type: ColumnPanel}
 components:
-- name: column_panel_header
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  type: ColumnPanel
-  layout_properties: {grid_position: 'LDZBMA,OJCLHH'}
-  event_bindings: {}
-  components:
-  - name: spacer_1
+- components:
+  - layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
+    name: spacer_1
     properties: {height: -3.9891357421875, visible: false}
     type: Spacer
-    layout_properties: {grid_position: 'WJPNVT,VNSUXA'}
-  - name: timer_1
+  - event_bindings: {tick: timer_1_tick}
+    layout_properties: {grid_position: 'QHPQQI,QOOUEV'}
+    name: timer_1
     properties: {interval: 0}
     type: Timer
-    layout_properties: {grid_position: 'QHPQQI,QOOUEV'}
-    event_bindings: {tick: timer_1_tick}
-  - name: label_3
-    properties: {role: null, bold: true, align: center, spacing_above: small, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: small, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: 'Resizing les Pré-Requis '}
+  - layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
+    name: label_3
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: 'Resizing les Pré-Requis ', tooltip: '', underline: false, visible: true}
     type: Label
-    layout_properties: {grid_position: 'EFRCWD,VSKSUF'}
-  - name: label_nb_rows
+  - layout_properties: {grid_position: 'JHZLGZ,GATSDH'}
+    name: label_nb_rows
     properties: {align: center}
     type: Label
-    layout_properties: {grid_position: 'JHZLGZ,GATSDH'}
-  - name: column_panel_1
-    properties: {wrap_on: never, col_spacing: large}
-    type: ColumnPanel
-    layout_properties: {grid_position: 'FDLYLV,AWJPVU'}
-    components:
-    - name: button_annuler
-      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
-      type: Button
+  - components:
+    - event_bindings: {click: button_annuler_click}
       layout_properties: {grid_position: 'SIHWFU,NFPFQW'}
-      event_bindings: {click: button_annuler_click}
-    - name: button_go
-      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Go !}
+      name: button_annuler
+      properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
       type: Button
+    - event_bindings: {click: button_go_click}
       layout_properties: {grid_position: 'SIHWFU,EJSHDV'}
-      event_bindings: {click: button_go_click}
+      name: button_go
+      properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Go !, tooltip: '', underline: false, visible: true}
+      type: Button
+    layout_properties: {grid_position: 'FDLYLV,AWJPVU'}
+    name: column_panel_1
+    properties: {col_spacing: large, wrap_on: never}
+    type: ColumnPanel
+  event_bindings: {}
+  layout_properties: {grid_position: 'LDZBMA,OJCLHH'}
+  name: column_panel_header
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+container: {type: ColumnPanel}
 is_package: true

@@ -1,90 +1,90 @@
-container:
-  type: ColumnPanel
-  properties: {col_widths: '{}'}
 components:
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  name: column_panel_header
+- components:
+  - layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+    name: label_3
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: Pré-requis par type de stage, tooltip: '', underline: false, visible: true}
+    type: Label
   layout_properties:
     col_widths: {}
     grid_position: DGXGMW,VQVVNA
-  components:
-  - type: Label
-    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Pré-requis par type de stage}
-    name: label_3
-    layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  name: column_panel_1
-  layout_properties:
-    col_widths: {}
-    grid_position: HVXSKI,IUEAZJ
-  components:
-  - type: ColumnPanel
-    properties: {col_widths: '{}'}
-    name: column_panel_6
-    layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
-    components:
-    - type: Button
-      properties: {role: elevated-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
-      name: button_annuler
+  name: column_panel_header
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- components:
+  - components:
+    - event_bindings: {click: button_annuler_click}
       layout_properties:
         col_widths: {}
         grid_position: COGJPP,SACJUA
-      event_bindings: {click: button_annuler_click}
-  - type: FlowPanel
-    properties: {role: null, vertical_align: full, align: center, spacing_above: none, background: '', foreground: '', spacing_below: none, visible: true, border: '', tooltip: '', spacing: medium}
-    name: flow_panel_1
-    layout_properties: {grid_position: 'BWKGSA,VNTBFV'}
-    components:
-    - type: DropDown
-      properties:
-        role: outlined
-        include_placeholder: true
-        bold: false
-        align: full
-        placeholder: Stage
-        spacing_above: small
-        background: theme:Tertiary
-        underline: false
-        font: ''
-        foreground: theme:On Primary Container
-        items: []
-        spacing_below: small
-        visible: true
-        border: ''
-        italic: false
-        enabled: true
-        font_size: 16
-        tooltip: ''
-      name: drop_down_code_stage
+      name: button_annuler
+      properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
+      type: Button
+    layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
+    name: column_panel_6
+    properties: {col_widths: '{}'}
+    type: ColumnPanel
+  - components:
+    - event_bindings: {change: drop_down_code_stage_change}
       layout_properties: {grid_position: 'GYKKPW,SDVOPJ', row_background: '', width: 146.80734252929688}
-      event_bindings: {change: drop_down_code_stage_change}
-    - type: DropDown
+      name: drop_down_code_stage
       properties:
-        role: null
-        include_placeholder: true
-        bold: false
         align: full
-        placeholder: Pré-requis à ajouter
-        spacing_above: small
         background: theme:Tertiary
-        underline: false
-        font: ''
-        foreground: theme:On Primary Container
-        items: []
-        spacing_below: small
-        visible: false
+        bold: false
         border: ''
-        italic: false
         enabled: true
+        font: ''
         font_size: 16
+        foreground: theme:On Primary Container
+        include_placeholder: true
+        italic: false
+        items: []
+        placeholder: Stage
+        role: outlined
+        spacing_above: small
+        spacing_below: small
         tooltip: ''
-      name: drop_down_pre_requis
+        underline: false
+        visible: true
+      type: DropDown
+    - event_bindings: {change: drop_down_pre_requis_change}
       layout_properties: {grid_position: 'GYKKPW,LJENHL', row_background: '', width: 208.208}
-      event_bindings: {change: drop_down_pre_requis_change}
-- type: RepeatingPanel
-  properties: {item_template: Pre_R_pour_type_stage.ItemTemplate1}
+      name: drop_down_pre_requis
+      properties:
+        align: full
+        background: theme:Tertiary
+        bold: false
+        border: ''
+        enabled: true
+        font: ''
+        font_size: 16
+        foreground: theme:On Primary Container
+        include_placeholder: true
+        italic: false
+        items: []
+        placeholder: Pré-requis à ajouter
+        role: null
+        spacing_above: small
+        spacing_below: small
+        tooltip: ''
+        underline: false
+        visible: false
+      type: DropDown
+    layout_properties: {grid_position: 'BWKGSA,VNTBFV'}
+    name: flow_panel_1
+    properties: {align: center, background: '', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: full, visible: true}
+    type: FlowPanel
+  layout_properties:
+    col_widths: {}
+    grid_position: HVXSKI,IUEAZJ
+  name: column_panel_1
+  properties: {background: 'theme:Primary', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- layout_properties: {grid_position: 'LDYBVZ,WMUOAU'}
   name: repeating_panel_1
-  layout_properties: {grid_position: 'LDYBVZ,WMUOAU'}
+  properties: {item_template: Pre_R_pour_type_stage.ItemTemplate1}
+  type: RepeatingPanel
+container:
+  properties: {col_widths: '{}'}
+  type: ColumnPanel
 is_package: true

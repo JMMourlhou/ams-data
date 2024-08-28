@@ -1,119 +1,119 @@
-container:
-  type: DataRowPanel
-  properties: {role: null, bold: false, align: center, spacing_above: none, background: '', underline: false, font: '', auto_display_data: false, foreground: '', spacing_below: none, visible: true, border: '', italic: false, font_size: null, tooltip: ''}
 components:
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: 'theme:Primary', wrap_on: mobile, col_spacing: medium, foreground: 'theme:On Primary', spacing_below: small, visible: true, border: '', tooltip: ''}
-  name: column_panel_1
-  layout_properties: {column: 'null'}
-  components:
-  - name: flow_panel_3
-    properties: {spacing_above: none, spacing_below: none, align: center}
-    type: FlowPanel
-    layout_properties: {grid_position: 'ZSHOKH,PZAFRH'}
-    components:
-    - name: column_panel_2
-      properties: {wrap_on: never, col_widths: '{}', spacing_above: none}
-      type: ColumnPanel
-      layout_properties: {width: 345.78584765625}
-      components:
-      - name: flow_panel_2
-        properties: {vertical_align: middle, spacing: small, spacing_above: none, spacing_below: none, align: left}
-        type: FlowPanel
-        layout_properties: {grid_position: 'KJLNPO,GIRVHA'}
-        components:
-        - name: button_role
-          properties: {role: null, bold: true, align: left, spacing_above: none, background: 'theme:Primary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: Role}
-          type: Button
-          event_bindings: {click: button_role_click}
+- components:
+  - components:
+    - components:
+      - components:
+        - event_bindings: {click: button_role_click}
           layout_properties: {}
-        - type: Button
-          properties: {role: null, bold: true, align: left, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: nom p}
-          name: button_1
-          event_bindings: {click: button_1_click}
+          name: button_role
+          properties: {align: left, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: Role, tooltip: '', underline: false, visible: true}
+          type: Button
+        - event_bindings: {click: button_1_click}
           layout_properties: {expand: true, width: 15}
-        - type: Button
-          properties: {role: null, bold: true, align: left, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: mail}
+          name: button_1
+          properties: {align: left, background: '', bold: true, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: nom p, tooltip: '', underline: false, visible: true}
+          type: Button
+        - event_bindings: {click: button_3_click}
           name: button_3
-          event_bindings: {click: button_3_click}
-    - name: column_panel_4
-      properties: {spacing_above: none, spacing_below: none, col_spacing: small}
-      type: ColumnPanel
-      layout_properties: {width: 203.40852685546875}
-      components:
-      - name: flow_panel_4
-        properties: {align: center, spacing_above: none, spacing_below: none, spacing: none, vertical_align: middle}
+          properties: {align: left, background: '', bold: true, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: mail, tooltip: '', underline: false, visible: true}
+          type: Button
+        layout_properties: {grid_position: 'KJLNPO,GIRVHA'}
+        name: flow_panel_2
+        properties: {align: left, spacing: small, spacing_above: none, spacing_below: none, vertical_align: middle}
         type: FlowPanel
-        components:
-        - type: Button
-          properties: {role: null, bold: true, align: right, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: tel}
+      layout_properties: {width: 345.78584765625}
+      name: column_panel_2
+      properties: {col_widths: '{}', spacing_above: none, wrap_on: never}
+      type: ColumnPanel
+    - components:
+      - components:
+        - event_bindings: {click: button_4_click}
           name: button_4
-          event_bindings: {click: button_4_click}
-        layout_properties: {grid_position: 'RVRIDE,TWPWFR', full_width_row: false}
-    - name: column_panel_5
+          properties: {align: right, background: '', bold: true, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: tel, tooltip: '', underline: false, visible: true}
+          type: Button
+        layout_properties: {full_width_row: false, grid_position: 'RVRIDE,TWPWFR'}
+        name: flow_panel_4
+        properties: {align: center, spacing: none, spacing_above: none, spacing_below: none, vertical_align: middle}
+        type: FlowPanel
+      layout_properties: {width: 203.40852685546875}
+      name: column_panel_4
+      properties: {col_spacing: small, spacing_above: none, spacing_below: none}
+      type: ColumnPanel
+    - components:
+      - components:
+        - event_bindings: {click: button_qcm_click}
+          name: button_qcm
+          properties: {align: center, background: 'theme:On Primary Container', font_size: 10, foreground: 'theme:Tertiary', spacing_above: none, spacing_below: none, text: Qcm}
+          type: Button
+        - event_bindings: {click: button_histo_click}
+          layout_properties: {}
+          name: button_histo
+          properties: {align: center, background: 'theme:On Primary Container', font_size: 10, foreground: 'theme:Tertiary', spacing_above: none, spacing_below: none, text: Hist}
+          type: Button
+        - data_bindings:
+          - {code: '', property: border, writeback: false}
+          event_bindings: {change: drop_down_code_stage_change}
+          layout_properties: {expand: false}
+          name: drop_down_code_stage
+          properties:
+            align: center
+            background: theme:On Primary Container
+            bold: false
+            border: ''
+            enabled: true
+            font: ''
+            font_size: 12
+            foreground: theme:Tertiary
+            include_placeholder: true
+            italic: false
+            items: []
+            placeholder: PR
+            role: null
+            spacing_above: small
+            spacing_below: none
+            tooltip: ''
+            underline: false
+            visible: true
+          type: DropDown
+        - event_bindings: {click: button_mail_click}
+          layout_properties: {}
+          name: button_mail
+          properties: {align: center, background: 'theme:On Primary Container', font_size: 12, foreground: 'theme:Tertiary', icon: 'fa:send', spacing_above: none, spacing_below: none, text: ''}
+          type: Button
+        - event_bindings: {click: button_del_click}
+          layout_properties: {}
+          name: button_del
+          properties: {align: center, background: 'theme:On Primary Container', font_size: 12, foreground: 'theme:Tertiary', icon: 'fa:minus', spacing_above: none, spacing_below: none, text: '', visible: false}
+          type: Button
+        layout_properties: {grid_position: 'OXRXAN,JTQYYA'}
+        name: flow_panel_1
+        properties: {align: justify, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
+        type: FlowPanel
+      name: column_panel_5
       properties: {}
       type: ColumnPanel
-      components:
-      - name: flow_panel_1
-        properties: {spacing_above: none, spacing_below: none, vertical_align: middle, spacing: medium, align: justify}
-        type: FlowPanel
-        layout_properties: {grid_position: 'OXRXAN,JTQYYA'}
-        components:
-        - name: button_qcm
-          properties: {text: Qcm, foreground: 'theme:Tertiary', align: center, background: 'theme:On Primary Container', spacing_above: none, spacing_below: none, font_size: 10}
-          type: Button
-          event_bindings: {click: button_qcm_click}
-        - name: button_histo
-          properties: {text: Hist, foreground: 'theme:Tertiary', align: center, background: 'theme:On Primary Container', spacing_above: none, spacing_below: none, font_size: 10}
-          type: Button
-          layout_properties: {}
-          event_bindings: {click: button_histo_click}
-        - name: drop_down_code_stage
-          properties:
-            role: null
-            include_placeholder: true
-            bold: false
-            align: center
-            placeholder: PR
-            spacing_above: small
-            background: theme:On Primary Container
-            underline: false
-            font: ''
-            foreground: theme:Tertiary
-            items: []
-            spacing_below: none
-            visible: true
-            border: ''
-            italic: false
-            enabled: true
-            font_size: 12
-            tooltip: ''
-          type: DropDown
-          layout_properties: {expand: false}
-          event_bindings: {change: drop_down_code_stage_change}
-          data_bindings:
-          - {property: border, code: '', writeback: false}
-        - name: button_mail
-          properties: {text: '', foreground: 'theme:Tertiary', align: center, background: 'theme:On Primary Container', spacing_above: none, spacing_below: none, font_size: 12, icon: 'fa:send'}
-          type: Button
-          layout_properties: {}
-          event_bindings: {click: button_mail_click}
-        - name: button_del
-          properties: {align: center, spacing_above: none, background: 'theme:On Primary Container', icon: 'fa:minus', foreground: 'theme:Tertiary', spacing_below: none, visible: false, font_size: 12, text: ''}
-          type: Button
-          layout_properties: {}
-          event_bindings: {click: button_del_click}
+    layout_properties: {grid_position: 'ZSHOKH,PZAFRH'}
+    name: flow_panel_3
+    properties: {align: center, spacing_above: none, spacing_below: none}
+    type: FlowPanel
   event_bindings: {}
-- name: repeating_panel_1
-  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card, spacing_below: small, background: 'theme:Primary', spacing_above: small}
-  type: RepeatingPanel
   layout_properties: {column: 'null'}
-- name: repeating_panel_2
-  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate9, role: outlined-card, visible: false, foreground: '', background: 'theme:Primary'}
+  name: column_panel_1
+  properties: {background: 'theme:Primary', border: '', col_spacing: medium, col_widths: '{}', foreground: 'theme:On Primary', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- layout_properties: {column: 'null'}
+  name: repeating_panel_1
+  properties: {background: 'theme:Primary', item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate10, role: outlined-card, spacing_above: small, spacing_below: small}
   type: RepeatingPanel
-  layout_properties: {column: 'null'}
-- name: repeating_panel_3
-  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate11, visible: false, spacing_below: large}
+- layout_properties: {column: 'null'}
+  name: repeating_panel_2
+  properties: {background: 'theme:Primary', foreground: '', item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate9, role: outlined-card, visible: false}
   type: RepeatingPanel
-  layout_properties: {column: 'null'}
+- layout_properties: {column: 'null'}
+  name: repeating_panel_3
+  properties: {item_template: Recherche_stagiaire.RowTemplate1.ItemTemplate11, spacing_below: large, visible: false}
+  type: RepeatingPanel
+container:
+  properties: {align: center, auto_display_data: false, background: '', bold: false, border: '', font: '', font_size: null, foreground: '', italic: false, role: null, spacing_above: none, spacing_below: none, tooltip: '', underline: false, visible: true}
+  type: DataRowPanel
 is_package: true

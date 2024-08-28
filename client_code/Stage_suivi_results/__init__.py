@@ -486,17 +486,17 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             # Préparation du column panel des noms des stagiaires
             self.liste_response = app_tables.stagiaires_inscrits.search(
                                                         tables.order_by("name", ascending=True),
-                                                        numero=self.row["numero"],
+                                                        numero=self.row["numero"],                   # CRITERE DIFFERENT, COLONE DIFFERENTE QUE POUR TUTEURS
                                                         enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
                                                         )
         if type_de_suivi == "T":
             # Préparation du column panel des noms des Tuteurs
             self.liste_response = app_tables.stagiaires_inscrits.search(
-                                                        tables.order_by("name", ascending=True),
-                                                        pour_stage_num=self.row,
-                                                        enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
+                                                            tables.order_by("name", ascending=True),
+                                                            pour_stage_num=self.row,                     # CRITERE DIFFERENT, COLONE DIFFERENTE QUE POUR STAGIAIRE
+                                                            enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
                                                         )
-        print("stage suivi result ligne 471, nb de réponses: ", len(self.liste_response))
+        print("stage suivi result ligne 499, nb de réponses: ", len(self.liste_response))              # TROUVER ERREUR: self.row ?
         self.repeating_panel_noms.items = self.liste_response
 
         

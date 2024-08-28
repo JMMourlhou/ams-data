@@ -1,221 +1,221 @@
-container:
-  type: ColumnPanel
-  properties: {col_widths: '{"QVMEKS":55,"RMIUTP":5}'}
-  event_bindings: {show: form_show}
 components:
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{"MCGGHR":25,"ZXRYFM":19,"YHGKZL":16}', spacing_above: small, background: 'theme:Tertiary', wrap_on: never, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  name: column_panel_1
-  layout_properties: {grid_position: 'ZQOYHT,YPPRLR'}
-  components:
-  - type: Label
-    properties: {role: null, bold: true, align: center, spacing_above: none, background: 'theme:Tertiary', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:On Tertiary', spacing_below: none, visible: true, border: '', italic: false, font_size: 16, tooltip: '', text: Renseignements}
+- components:
+  - layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
     name: label_3
-    layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
-  - type: Button
-    properties: {role: outlined-button, bold: true, align: center, spacing_above: none, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
-    name: button_annuler_copy
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: Renseignements, tooltip: '', underline: false, visible: true}
+    type: Label
+  - event_bindings: {click: button_annuler_copy_click}
     layout_properties: {grid_position: 'VXFMPQ,ZXRYFM'}
-    event_bindings: {click: button_annuler_copy_click}
-  - type: Button
-    properties: {role: outlined-button, bold: true, align: center, spacing_above: small, background: 'theme:Error', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: medium, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Valider}
-    name: button_validation_copy
+    name: button_annuler_copy
+    properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: outlined-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
+    type: Button
+  - event_bindings: {click: button_validation_click}
     layout_properties: {grid_position: 'VXFMPQ,YHGKZL'}
-    event_bindings: {click: button_validation_click}
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: small, visible: true, border: '', tooltip: ''}
-  name: column_panel_5
-  layout_properties: {grid_position: 'TKIFKH,GVUNIK'}
-  components:
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Nom, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_nom
+    name: button_validation_copy
+    properties: {align: center, background: 'theme:Error', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: medium, text: Valider, tooltip: '', underline: false, visible: false}
+    type: Button
+  layout_properties: {grid_position: 'ZQOYHT,YPPRLR'}
+  name: column_panel_1
+  properties: {background: 'theme:Tertiary', border: '', col_spacing: medium, col_widths: '{"MCGGHR":25,"ZXRYFM":19,"YHGKZL":16}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: never}
+  type: ColumnPanel
+- components:
+  - event_bindings: {change: text_box_nom_change}
     layout_properties: {grid_position: 'FDMGZB,AFDUFM EVHQUU,VNKBCQ'}
-    event_bindings: {change: text_box_nom_change}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Prénom(s), spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_prenom
+    name: text_box_nom
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:Tertiary', hide_text: false, italic: false, placeholder: Nom, role: outlined, spacing_above: none, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {change: text_box_prenom_change}
     layout_properties: {grid_position: 'FDMGZB,AFDUFM OXNGFR,LQFYRC'}
-    event_bindings: {change: text_box_prenom_change}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Tel, spacing_above: none, background: 'theme:Primary', type: tel, underline: false, font: '', hide_text: false, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_tel
+    name: text_box_prenom
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:Tertiary', hide_text: false, italic: false, placeholder: Prénom(s), role: outlined, spacing_above: none, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {change: text_box_tel_change}
     layout_properties: {grid_position: 'FDMGZB,AFDUFM YTNQUA,AJMRXT'}
-    event_bindings: {change: text_box_tel_change}
-  - type: TextBox
-    properties: {role: null, bold: false, align: left, placeholder: Mail, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:Tertiary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_mail
+    name: text_box_tel
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:Tertiary', hide_text: false, italic: false, placeholder: Tel, role: outlined, spacing_above: none, spacing_below: none, text: '', tooltip: '', type: tel, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {change: text_box_mail_change}
     layout_properties: {grid_position: 'FDMGZB,AFDUFM POUMKS,VLAEPT'}
-    event_bindings: {change: text_box_mail_change}
-  - name: column_panel_7
+    name: text_box_mail
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:Tertiary', hide_text: false, italic: false, placeholder: Mail, role: null, spacing_above: none, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - components:
+    - event_bindings: {click: button_download_photo_click}
+      layout_properties: {grid_position: 'ZDRBPR,MXCGXQ'}
+      name: button_download_photo
+      properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: '', icon: 'fa:download', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Télécharger, tooltip: '', underline: false, visible: true}
+      type: Button
+    - event_bindings: {change: file_loader_photo_change}
+      layout_properties: {grid_position: 'ZDRBPR,IXTBRF'}
+      name: file_loader_photo
+      properties:
+        align: center
+        background: theme:Primary
+        bold: false
+        border: ''
+        enabled: true
+        file: null
+        file_types: ''
+        files: []
+        font: ''
+        font_size: 14
+        foreground: theme:On Primary
+        icon: fa:upload
+        icon_align: left
+        italic: false
+        multiple: false
+        role: elevated-button
+        show_state: true
+        spacing_above: none
+        spacing_below: none
+        text: ' photo '
+        tooltip: ''
+        underline: false
+        visible: true
+      type: FileLoader
+    layout_properties: {grid_position: 'FDMGZB,AFDUFM GJMJQJ,ECEKIH'}
+    name: column_panel_7
     properties: {wrap_on: never}
     type: ColumnPanel
-    layout_properties: {grid_position: 'FDMGZB,AFDUFM GJMJQJ,ECEKIH'}
-    components:
-    - type: Button
-      properties: {role: elevated-button, bold: false, align: center, spacing_above: small, background: '', icon: 'fa:download', underline: false, font: '', icon_align: left, foreground: '', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: Télécharger}
-      name: button_download_photo
-      layout_properties: {grid_position: 'ZDRBPR,MXCGXQ'}
-      event_bindings: {click: button_download_photo_click}
-    - type: FileLoader
-      properties:
-        role: elevated-button
-        bold: false
-        file_types: ''
-        align: center
-        spacing_above: none
-        file: null
-        background: theme:Primary
-        icon: fa:upload
-        multiple: false
-        underline: false
-        font: ''
-        icon_align: left
-        foreground: theme:On Primary
-        show_state: true
-        files: []
-        spacing_below: none
-        visible: true
-        border: ''
-        italic: false
-        enabled: true
-        font_size: 14
-        tooltip: ''
-        text: ' photo '
-      name: file_loader_photo
-      layout_properties: {grid_position: 'ZDRBPR,IXTBRF'}
-      event_bindings: {change: file_loader_photo_change}
-  - type: Image
-    properties: {role: null, vertical_align: top, spacing_above: small, background: 'theme:Primary', horizontal_align: center, source: '', foreground: '', display_mode: shrink_to_fit, spacing_below: small, visible: true, border: '', tooltip: '', height: 221.761474609375}
+  - layout_properties: {grid_position: 'FDMGZB,AWFKMB'}
     name: image_photo
-    layout_properties: {grid_position: 'FDMGZB,AWFKMB'}
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{"MLNYOW":45,"XVURWU":20,"FOAKZS":28,"RUJLLM":12}', spacing_above: none, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: none, visible: true, border: '', tooltip: ''}
-  name: column_panel_naissance
-  layout_properties: {grid_position: 'ZCFAPB,YBQJSZ'}
-  components:
-  - type: Spacer
-    properties: {height: 0}
+    properties: {background: 'theme:Primary', border: '', display_mode: shrink_to_fit, foreground: '', height: 221.761474609375, horizontal_align: center, role: null, source: '', spacing_above: small, spacing_below: small, tooltip: '', vertical_align: top, visible: true}
+    type: Image
+  layout_properties: {grid_position: 'TKIFKH,GVUNIK'}
+  name: column_panel_5
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'KUPOYQ,MRDKZD'}
     name: spacer_3
-    layout_properties: {grid_position: 'KUPOYQ,MRDKZD'}
-  - type: Label
-    properties: {role: null, bold: true, align: left, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Error', spacing_below: none, visible: true, border: '', italic: false, font_size: null, tooltip: '', text: 'Naissance:'}
+    properties: {height: 0}
+    type: Spacer
+  - layout_properties: {grid_position: 'CPIMBI,LOWZYX'}
     name: label_1
-    layout_properties: {grid_position: 'CPIMBI,LOWZYX'}
-  - type: DatePicker
-    properties: {role: outlined, bold: false, format: '%d %m %Y', align: left, date: '', placeholder: Né le, pick_time: false, spacing_above: none, background: 'theme:Primary', underline: false, font: '', max_date: 01 01 2010, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', min_date: 01 01 1950}
-    name: date_naissance
+    properties: {align: left, background: '', bold: true, border: '', font: '', font_size: null, foreground: 'theme:Error', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: 'Naissance:', tooltip: '', underline: false, visible: true}
+    type: Label
+  - event_bindings: {change: date_naissance_change}
     layout_properties: {grid_position: 'RMUWJH,XVURWU'}
-    event_bindings: {change: date_naissance_change}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: à     (ville de Naissance), spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_ville_naissance
+    name: date_naissance
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', date: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', format: '%d %m %Y', italic: false, max_date: 01 01 2010, min_date: 01 01 1950, pick_time: false, placeholder: Né le, role: outlined, spacing_above: none, spacing_below: none, tooltip: '', underline: false, visible: true}
+    type: DatePicker
+  - event_bindings: {change: text_box_ville_naissance_change}
     layout_properties: {grid_position: 'RMUWJH,FOAKZS'}
-    event_bindings: {change: text_box_ville_naissance_change}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Code Postal, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_cp_naissance
+    name: text_box_ville_naissance
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: à     (ville de Naissance), role: outlined, spacing_above: none, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {change: text_box_cp_naissance_change}
     layout_properties: {grid_position: 'RMUWJH,RUJLLM'}
-    event_bindings: {change: text_box_cp_naissance_change}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Pays naissance, spacing_above: none, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_pays_naissance
+    name: text_box_cp_naissance
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: Code Postal, role: outlined, spacing_above: none, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {change: text_box_pays_naissance_change}
     layout_properties: {grid_position: 'RMUWJH,OCWNMD'}
-    event_bindings: {change: text_box_pays_naissance_change}
-- type: ColumnPanel
-  properties: {role: outlined-card, col_widths: '{"LMPSKT":39,"CVKDVN":21}', spacing_above: small, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: medium, visible: true, border: '', tooltip: ''}
-  name: column_panel_4
-  layout_properties: {grid_position: 'FIDNSX,TEDELA'}
-  components:
-  - type: Label
-    properties: {role: null, bold: true, align: left, spacing_above: none, background: '', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Error', spacing_below: none, visible: true, border: '', italic: false, font_size: null, tooltip: '', text: 'Adresse postale : '}
+    name: text_box_pays_naissance
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: Pays naissance, role: outlined, spacing_above: none, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  layout_properties: {grid_position: 'ZCFAPB,YBQJSZ'}
+  name: column_panel_naissance
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{"MLNYOW":45,"XVURWU":20,"FOAKZS":28,"RUJLLM":12}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: none, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'FAPMEU,SRTVDN'}
     name: label_2
-    layout_properties: {grid_position: 'FAPMEU,SRTVDN'}
-  - type: TextArea
-    properties: {role: outlined, bold: false, align: left, placeholder: Rue, spacing_above: small, background: 'theme:Primary', underline: false, font: '', foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, auto_expand: true, font_size: 14, tooltip: '', height: 61.79815673828125, text: ''}
-    name: text_area_rue
+    properties: {align: left, background: '', bold: true, border: '', font: '', font_size: null, foreground: 'theme:Error', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: 'Adresse postale : ', tooltip: '', underline: false, visible: true}
+    type: Label
+  - event_bindings: {change: text_area_rue_change}
     layout_properties: {grid_position: 'WEHTEV,LKQLFM'}
-    event_bindings: {change: text_area_rue_change}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Ville, spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_ville
+    name: text_area_rue
+    properties: {align: left, auto_expand: true, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', height: 61.79815673828125, italic: false, placeholder: Rue, role: outlined, spacing_above: small, spacing_below: none, text: '', tooltip: '', underline: false, visible: true}
+    type: TextArea
+  - event_bindings: {change: text_box_ville_change}
     layout_properties: {grid_position: 'WRYNRD,LMPSKT'}
-    event_bindings: {change: text_box_ville_change}
-  - type: TextBox
-    properties: {role: outlined, bold: false, align: left, placeholder: Code Postal, spacing_above: small, background: 'theme:Primary', type: text, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 14, tooltip: '', text: ''}
-    name: text_box_code_postal
+    name: text_box_ville
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: Ville, role: outlined, spacing_above: small, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {change: text_box_code_postal_change}
     layout_properties: {grid_position: 'WRYNRD,CVKDVN'}
-    event_bindings: {change: text_box_code_postal_change}
-- type: ColumnPanel
-  properties: {role: null, col_widths: '{"NLJVZN":56}', spacing_above: none, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: none, visible: true, border: '', tooltip: ''}
-  name: column_panel_mail2_comments
-  layout_properties: {grid_position: 'AQGHOT,ACFXDI'}
-  components:
-  - type: ColumnPanel
-    properties: {role: outlined-card, col_widths: '{}', spacing_above: none, background: '', wrap_on: mobile, col_spacing: medium, foreground: '', spacing_below: none, visible: true, border: '', tooltip: ''}
-    name: column_panel_3
-    layout_properties: {grid_position: 'TFUPZM,BTRCYP'}
-    components:
-    - type: CheckBox
-      properties: {role: null, bold: false, align: center, spacing_above: small, background: 'theme:Primary', allow_indeterminate: false, underline: false, font: '', foreground: 'theme:On Primary', checked: false, spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: J'accepte que AMSport conserve mes données pour son administration}
-      name: check_box_accept_data_use
+    name: text_box_code_postal
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: 14, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: Code Postal, role: outlined, spacing_above: small, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
+    type: TextBox
+  layout_properties: {grid_position: 'FIDNSX,TEDELA'}
+  name: column_panel_4
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{"LMPSKT":39,"CVKDVN":21}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: medium, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- components:
+  - components:
+    - event_bindings: {change: check_box_accept_data_use_change}
       layout_properties: {grid_position: 'KQUMRS,RDVFMD'}
-      event_bindings: {change: check_box_accept_data_use_change}
-    - type: DropDown
-      properties:
-        role: null
-        include_placeholder: true
-        bold: false
-        align: full
-        placeholder: Mode de Financement
-        spacing_above: small
-        background: theme:Primary
-        underline: false
-        font: ''
-        foreground: theme:On Primary
-        items: []
-        spacing_below: small
-        visible: false
-        border: ''
-        italic: false
-        enabled: true
-        font_size: null
-        tooltip: ''
-      name: drop_down_fi
+      name: check_box_accept_data_use
+      properties: {align: center, allow_indeterminate: false, background: 'theme:Primary', bold: false, border: '', checked: false, enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', italic: false, role: null, spacing_above: small, spacing_below: small, text: J'accepte que AMSport conserve mes données pour son administration, tooltip: '', underline: false, visible: true}
+      type: CheckBox
+    - event_bindings: {change: drop_down_fi_change}
       layout_properties: {grid_position: 'HJTZMH,IGZZGK'}
-      event_bindings: {change: drop_down_fi_change}
-  - type: TextBox
-    properties: {role: null, bold: false, align: left, placeholder: 2eme mail, spacing_above: small, background: 'theme:Primary', type: email, underline: false, font: '', hide_text: false, foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: ''}
-    name: text_box_email2
+      name: drop_down_fi
+      properties:
+        align: full
+        background: theme:Primary
+        bold: false
+        border: ''
+        enabled: true
+        font: ''
+        font_size: null
+        foreground: theme:On Primary
+        include_placeholder: true
+        italic: false
+        items: []
+        placeholder: Mode de Financement
+        role: null
+        spacing_above: small
+        spacing_below: small
+        tooltip: ''
+        underline: false
+        visible: false
+      type: DropDown
+    layout_properties: {grid_position: 'TFUPZM,BTRCYP'}
+    name: column_panel_3
+    properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: none, tooltip: '', visible: true, wrap_on: mobile}
+    type: ColumnPanel
+  - event_bindings: {change: text_box_email2_change}
     layout_properties: {grid_position: 'HMNWUV,TIORTM'}
-    event_bindings: {change: text_box_email2_change}
-  - type: TextArea
-    properties: {role: null, bold: false, align: left, placeholder: Commentaires, spacing_above: none, background: 'theme:Primary', underline: false, font: '', foreground: 'theme:On Primary', spacing_below: none, visible: true, border: '', italic: false, enabled: true, auto_expand: false, font_size: null, tooltip: '', height: 85.9083, text: ''}
-    name: text_area_commentaires
+    name: text_box_email2
+    properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: 2eme mail, role: null, spacing_above: small, spacing_below: none, text: '', tooltip: '', type: email, underline: false, visible: true}
+    type: TextBox
+  - event_bindings: {change: text_area_commentaires_change}
     layout_properties: {grid_position: 'DJXAYC,NLJVZN'}
-    event_bindings: {change: text_area_commentaires_change}
-- name: text_box_id
-  properties: {background: 'theme:On Primary', foreground: 'theme:Gray 600', align: center}
+    name: text_area_commentaires
+    properties: {align: left, auto_expand: false, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', height: 85.9083, italic: false, placeholder: Commentaires, role: null, spacing_above: none, spacing_below: none, text: '', tooltip: '', underline: false, visible: true}
+    type: TextArea
+  layout_properties: {grid_position: 'AQGHOT,ACFXDI'}
+  name: column_panel_mail2_comments
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{"NLJVZN":56}', foreground: '', role: null, spacing_above: none, spacing_below: none, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- layout_properties: {grid_position: 'CQFMME,QVMEKS'}
+  name: text_box_id
+  properties: {align: center, background: 'theme:On Primary', foreground: 'theme:Gray 600'}
   type: TextBox
-  layout_properties: {grid_position: 'CQFMME,QVMEKS'}
-- name: text_box_role
-  properties: {visible: false, placeholder: '', background: 'theme:On Primary Container', foreground: 'theme:Tertiary', align: center}
-  type: TextBox
+- event_bindings: {change: text_box_role_change}
   layout_properties: {grid_position: 'CQFMME,RMIUTP'}
-  event_bindings: {change: text_box_role_change}
-- type: ColumnPanel
-  properties: {col_widths: '{}'}
-  name: column_panel_2
-  layout_properties: {grid_position: 'RLRBJD,FHRZOY'}
-  components:
-  - type: Button
-    properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:Error', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: false, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Valider}
-    name: button_validation
+  name: text_box_role
+  properties: {align: center, background: 'theme:On Primary Container', foreground: 'theme:Tertiary', placeholder: '', visible: false}
+  type: TextBox
+- components:
+  - event_bindings: {click: button_validation_click}
     layout_properties: {grid_position: 'CIPHTH,CFVXHS'}
-    event_bindings: {click: button_validation_click}
-  - type: Button
-    properties: {role: elevated-button, bold: true, align: center, spacing_above: small, background: 'theme:On Primary Container', icon: '', underline: false, font: '', icon_align: left, foreground: 'theme:Tertiary', spacing_below: small, visible: true, border: '', italic: false, enabled: true, font_size: null, tooltip: '', text: Retour}
-    name: button_annuler
+    name: button_validation
+    properties: {align: center, background: 'theme:Error', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Valider, tooltip: '', underline: false, visible: false}
+    type: Button
+  - event_bindings: {click: button_annuler_click}
     layout_properties: {grid_position: 'PYZSYJ,NZHZBB'}
-    event_bindings: {click: button_annuler_click}
+    name: button_annuler
+    properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Retour, tooltip: '', underline: false, visible: true}
+    type: Button
+  layout_properties: {grid_position: 'RLRBJD,FHRZOY'}
+  name: column_panel_2
+  properties: {col_widths: '{}'}
+  type: ColumnPanel
+container:
+  event_bindings: {show: form_show}
+  properties: {col_widths: '{"QVMEKS":55,"RMIUTP":5}'}
+  type: ColumnPanel
 is_package: true

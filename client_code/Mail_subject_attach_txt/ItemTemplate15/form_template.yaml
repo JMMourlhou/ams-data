@@ -1,28 +1,28 @@
-is_package: true
-container: {type: ColumnPanel}
 components:
-- name: column_panel_1
-  properties: {col_widths: '{"WVKNHQ":22,"NGDSUX":48}', col_spacing: tiny, role: null, background: 'theme:Primary'}
-  type: ColumnPanel
-  layout_properties: {grid_position: 'MIPLMV,IDRFAS'}
-  components:
-  - name: text_area_subject
-    properties: {height: 42.20086669921875, auto_expand: true, background: '', foreground: 'theme:On Primary', role: outlined, enabled: false}
-    type: TextArea
+- components:
+  - data_bindings: []
     layout_properties: {grid_position: 'ZVISZF,WVKNHQ CCCYYW,CEZMFK'}
-    data_bindings: []
-  - name: text_area_text
-    properties: {height: 43.73089599609375, auto_expand: true, enabled: false, role: outlined, foreground: 'theme:On Primary'}
+    name: text_area_subject
+    properties: {auto_expand: true, background: '', enabled: false, foreground: 'theme:On Primary', height: 42.20086669921875, role: outlined}
     type: TextArea
+  - event_bindings: {}
     layout_properties: {grid_position: 'ZVISZF,NGDSUX'}
-    event_bindings: {}
-  - name: button_selection
-    properties: {text: Sélection, foreground: 'theme:On Primary Container', icon: 'fa:arrow-left', background: 'theme:Green'}
-    type: Button
+    name: text_area_text
+    properties: {auto_expand: true, enabled: false, foreground: 'theme:On Primary', height: 43.73089599609375, role: outlined}
+    type: TextArea
+  - event_bindings: {click: button_selection_click}
     layout_properties: {grid_position: 'ZVISZF,BVFGCJ GNDHQY,JUTTSO'}
-    event_bindings: {click: button_selection_click}
-  - name: button_del
-    properties: {role: null, bold: false, align: center, spacing_above: small, background: '', icon: 'fa:minus-square', underline: false, font: '', icon_align: left, foreground: 'theme:Error', spacing_below: none, visible: true, border: '', italic: false, enabled: true, font_size: 15, tooltip: '', text: Enlever}
+    name: button_selection
+    properties: {background: 'theme:Green', foreground: 'theme:On Primary Container', icon: 'fa:arrow-left', text: Sélection}
     type: Button
+  - event_bindings: {click: button_del_click}
     layout_properties: {grid_position: 'ZVISZF,BVFGCJ KPVAWC,CUPHCM'}
-    event_bindings: {click: button_del_click}
+    name: button_del
+    properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 15, foreground: 'theme:Error', icon: 'fa:minus-square', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: none, text: Enlever, tooltip: '', underline: false, visible: true}
+    type: Button
+  layout_properties: {grid_position: 'MIPLMV,IDRFAS'}
+  name: column_panel_1
+  properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"WVKNHQ":22,"NGDSUX":48}', role: null}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true

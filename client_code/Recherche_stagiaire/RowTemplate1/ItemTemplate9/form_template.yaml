@@ -1,8 +1,8 @@
-is_package: true
-container: {type: ColumnPanel}
 components:
-- name: button_detail_histo
-  properties: {text: button_detail_histo, foreground: 'theme:On Primary', background: 'theme:On Primary Container'}
-  type: Button
+- event_bindings: {click: button_detail_histo_click}
   layout_properties: {grid_position: 'ZIIYXX,YYJFCH'}
-  event_bindings: {click: button_detail_histo_click}
+  name: button_detail_histo
+  properties: {background: 'theme:On Primary Container', foreground: 'theme:On Primary', text: button_detail_histo}
+  type: Button
+container: {type: ColumnPanel}
+is_package: true
