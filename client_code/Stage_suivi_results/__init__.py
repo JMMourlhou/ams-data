@@ -493,6 +493,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                                                         )
         if type_de_suivi == "T":
             # Préparation du column panel des noms des Tuteurs
+            print("tuteur : ", self.row['numero'])
             self.liste_response = app_tables.stagiaires_inscrits.search(
                                                             tables.order_by("name", ascending=True),
                                                             pour_stage_num=self.row,                     # CRITERE DIFFERENT, COLONE DIFFERENTE QUE POUR STAGIAIRE

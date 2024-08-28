@@ -267,14 +267,20 @@ class RowTemplate1(RowTemplate1Template):
             open_form("Recherche_stagiaire")
 
     def user_initial_color(self):
-        if self.item['role'] == "A" or self.item['role'] == "B" or self.item['role'] == "J":          # Admin en rouge
+        try:
+            role = self.item['role']
+        except:   
+            role = self.item['user_email']['role']
+            
+        if role == "A" or role == "B" or role == "J":          # Admin en rouge
             self.button_1.foreground = "red"   # Bureaux en rouge
-        if self.item['role'] == "F":
+        if role == "F":
             self.button_1.foreground = "blue"  # Formateur en bleu
-        if self.item['role'] == "T":
+        if role == "T":
             self.button_1.foreground = "green"  # Tuteur en vert
-         
-
+        if role == "S":
+            self.button_1.foreground = "yellow"  # Stagiaire en jaune
+        
 
 
 
