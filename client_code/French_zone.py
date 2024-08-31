@@ -46,3 +46,11 @@ def time_over(t):
     if diff_in_minutes < timedelay_url_in_min: # J
         bool = False # time not over
     return bool
+
+
+# Returns the difference beetween now  and  a past date 
+def time_diff(past_date):
+    #time now
+    time_now=french_zone_time()
+    diff = time_now - past_date
+    return diff

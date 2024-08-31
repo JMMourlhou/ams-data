@@ -94,6 +94,16 @@ components:
         name: bt_gestion_stages
         properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary Container', icon: 'fa:users', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: '  Stages  ', tooltip: '', underline: false, visible: true}
         type: Button
+      - event_bindings: {click: bt_del_qcm_essai_click}
+        layout_properties: {}
+        name: bt_del_qcm_essai
+        properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary Container', icon: 'fa:users', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: '  del QCM Essais', tooltip: '', underline: false, visible: true}
+        type: Button
+      - event_bindings: {click: bt_del_qcm_2_mois_click}
+        layout_properties: {}
+        name: bt_del_qcm_2_mois
+        properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary Container', icon: 'fa:users', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: '  Del QCM échoués > 2 mois ', tooltip: '', underline: false, visible: true}
+        type: Button
       layout_properties: {grid_position: 'AOZXYS,RPVEJB'}
       name: flow_panel_admin_only
       properties: {align: center, background: 'theme:On Primary Container', vertical_align: middle, visible: true}

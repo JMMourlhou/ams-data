@@ -257,7 +257,7 @@ def maj_pr_stagiaires_txt():
 
 #boucle sur la table QCM results pour nom/prenom en clair txt 
 def maj_qcm_results_txt():
-    # liste des résulltats
+    # liste des résultats
     liste_results = app_tables.qcm_result.search()
     for row in liste_results:
         #lecture fichier père 'users'
@@ -271,6 +271,47 @@ def maj_qcm_results_txt():
                    intitule= qcm['destination']
                   )
 
+#boucle sur la table QCM results pour effact qcm essai
+def del_qcm_results_essai():
+    nb_del = 0
+    # liste des résulltats
+    #lecture table qcm mère QCM _desro sur qcm 3
+    row_essai = app_tables.qcm_description.get(qcm_nb=3)  # qcm-nb int
+    # liste des qcm d'essai
+    liste_results = app_tables.qcm_result.search(
+                                                    qcm_number=row_essai
+                                                )
+    for row in liste_results:
+        nb_del += 1
+        row.delete()
+    result = (f"{nb_del} qcm effacés")
+    return result
+
+
+#boucle sur la table QCM results pour effact qcm de plus de 2 mois, échoués
+def del_qcm_results_unsuccessed_old():
+    from . import French_zone
+    from datetime import datetime, timedelta
+
+    nb_del = 0
+    # liste des qcm results
+    liste_results = app_tables.qcm_result.search()
+    for row in liste_results:
+        diff = French_zone.time_diff(row['time'])
+        print(f"diff: {timedelta.total_seconds(diff)} seconds")
         
+        diff_in_seconds = int(timedelta.total_seconds(diff))
+        one_day_in_seconds = 60 * 60  * 24  # 86400 sec / day
+        two_months_in_seconds = one_day_in_seconds * 60
+        
+        days = int(timedelta.total_seconds(diff)) / one_day_in_seconds
+        print(f"diff: {days} days")          
+        if row['success'] is False and diff_in_seconds > two_months_in_seconds:     # plus de 2 mois, échoués
+            nb_del += 1
+            print(f"diff: {days} days, {row['success']}, effact")
+            #row.delete()
+    
+    result = (f"{nb_del} qcm effacés")
+    return result
         
         

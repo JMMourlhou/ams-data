@@ -348,4 +348,16 @@ class Main(MainTemplate):
         from ..Parametres import Parametres
         open_form("Parametres")
 
+    def bt_del_qcm_essai_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from .. import z_loop_on_tables
+        result=z_loop_on_tables.del_qcm_results_essai()
+        alert(result)
+
+    def bt_del_qcm_2_mois_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from .. import z_loop_on_tables
+        result=z_loop_on_tables.del_qcm_results_unsuccessed_old()
+        alert(result)
+
 
