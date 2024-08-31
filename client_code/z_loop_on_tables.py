@@ -309,7 +309,7 @@ def del_qcm_results_unsuccessed_old():
         if row['success'] is False and diff_in_seconds > two_months_in_seconds:     # plus de 2 mois, échoués
             nb_del += 1
             print(f"diff: {days} days, {row['success']}, effact")
-            #row.delete()
+            row.delete()
     
     result = (f"{nb_del} qcm effacés")
     return result
