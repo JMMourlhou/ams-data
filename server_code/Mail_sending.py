@@ -50,8 +50,7 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
                     <b>{prenom},</b><br>
                     <br>
                     {rich_text} <br>
-                    <br>
-                    {client_mail} <br>
+                    <span>Contacter AMSport: {client_mail}</span> 
                     <p><img src = {fin_mail_carte} width="370" height="236"> </p>
                     <br>
                     <p><img src = {fin_mail_qualiopi} width="150" height="100"> 
