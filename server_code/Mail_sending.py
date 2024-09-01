@@ -42,6 +42,7 @@ def send_mail(emails_list, subject_txt, rich_text, old_stagiaires=False, attachm
         try:
             anvil.email.send(
                 to=email,
+                from_name = "AMSport",
                 subject=subject_txt,
                 attachments=attachments,
                 html=f"""
