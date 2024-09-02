@@ -34,6 +34,13 @@ class Visu_trombi(Visu_trombiTemplate):
         if self.pdf_mode is True:
             self.button_annuler.visible = False
             self.button_annuler2.visible = False
+            self.button_trombi.visible = False
+            self.button_trombi_pdf.visible = False
+        else:
+            self.button_annuler.visible = True
+            self.button_annuler2.visible = True
+            self.button_trombi.visible = True
+            self.button_trombi_pdf.visible = True
             
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(numero=int(num_stage))    
@@ -43,9 +50,9 @@ class Visu_trombi(Visu_trombiTemplate):
         
         # extraction de la liste (fonction list())
         rows = list(app_tables.stagiaires_inscrits.search(
-            artables.order_by("name", ascending=True),
+            tables.order_by("name", ascending=True),
             stage=stage_row
-        ))     
+        ))      
         nb_stagiaires = len(rows)                      # nb de stagiaires
         print("nb-stagiaires", nb_stagiaires)
 

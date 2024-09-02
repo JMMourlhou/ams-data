@@ -91,7 +91,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             
         # Initialisation du Drop down num_stages et dates
         self.drop_down_num_stages.items = [(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list1]
-        self.drop_down_num_stages.visible = True
+        
         """
         for r in self.drop_down_num_stages.items:           # Je peux boucler ds ma dropdown
             print(r, r[0], r[1])                            # je peux extraire 0 ce qui est affiché, 1 row stage
@@ -119,7 +119,8 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
        
         self.repeating_panel_1.items = self.liste_type_stage
         if len(self.liste_type_stage)>0:
-             self.button_mail_to_all.visible = True
+            self.button_mail_to_all.visible = True
+            self.drop_down_num_stages.visible = True
     
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -127,6 +128,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.text_box_prenom.text=""  # critere prenom
         self.text_box_email.text=""  # critere email
         self.text_box_tel.text=""  # critere tel
+        self.drop_down_num_stages.visible = False
         self.button_recherche.visible = False
         self.button_efface.visible = True
         self.filtre_type_stage()  
