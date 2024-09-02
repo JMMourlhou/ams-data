@@ -43,7 +43,7 @@ class Visu_trombi(Visu_trombiTemplate):
         
         # extraction de la liste (fonction list())
         rows = list(app_tables.stagiaires_inscrits.search(
-            tables.order_by("name", ascending=True),
+            artables.order_by("name", ascending=True),
             stage=stage_row
         ))     
         nb_stagiaires = len(rows)                      # nb de stagiaires
@@ -156,3 +156,13 @@ class Visu_trombi(Visu_trombiTemplate):
         """This method is called when the button is clicked"""
         from ..Visu_liste_1_stage import Visu_liste_1_stage
         open_form('Visu_liste_1_stage',self.num_stage, self.intitule)
+
+    def button_trombi_pdf_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        stage_row = app_tables.stages.get(numero=int(self.num_stage))
+        pdf = stage_row["trombi_media"]
+        if pdf:
+            anvil.media.download(pdf)
+            alert("Trombinoscope téléchargé")
+        else:
+            alert("Pdf du trombi non trouvé")
