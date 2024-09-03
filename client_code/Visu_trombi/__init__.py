@@ -69,6 +69,7 @@ class Visu_trombi(Visu_trombiTemplate):
             mel=row["user_email"]['email']
             stagiaire = app_tables.users.get(email=mel)    
             if stagiaire :
+                
                 #Photo
                 table_pic = stagiaire['photo']
                 
@@ -84,16 +85,35 @@ class Visu_trombi(Visu_trombiTemplate):
                                     )
                 #self.im.set_event_handler('mouse_down',self.im_mouse_down)            #POUR RENDRE L'IMAGE CLICKABLE, REVALIDER CETTE LIGNE
                 self.im.set_event_handler('show',self.im_show)
+                
+                # Nom prénom
                 try:  #au cas où prenom vide 
                     txt = stagiaire['nom'] + " " + stagiaire['prenom']
                 except:
                     txt = stagiaire['nom']
-                
                 self.bt = Button(text=txt, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 14, enabled = True)
                 self.bt.set_event_handler('click',self.bt_click)
+
+                # Tel
+                tel=row["user_email"]['tel']
+                a = tel[0:2]   # mise en forme du tel
+                b = tel[2:4]
+                c = tel[4:6]
+                d = tel[6:8]
+                e = tel[8:10]
+                tel = a+"-"+b+"-"+c+"-"+d+"-"+e    
+                self.bt2 = Button(text=tel, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 14, enabled = True)
+                self.bt2.set_event_handler('click',self.bt_click)
+
+                # mail
+                self.bt3 = Button(text=mel, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 12, enabled = True)
+                self.bt3.set_event_handler('click',self.bt_click)
                 
                 self.xy_panel.add_component(self.im, x=xx, y=yy, width = larg)
                 self.xy_panel.add_component(self.bt, x=xx, y=yy+larg, width = larg)  #nom,prénom
+                self.xy_panel.add_component(self.bt2, x=xx, y=yy+larg+20, width = larg)  #tel
+                self.xy_panel.add_component(self.bt3, x=xx, y=yy+larg+40, width = larg)  #tel
+                
 
                 if screen_size < 800:
                     nb_img_par_ligne = 4
@@ -106,12 +126,10 @@ class Visu_trombi(Visu_trombiTemplate):
                         cpt_ligne == 0
                        
                     xx = 1
-                    yy += 239
+                    yy += 280   # Je descend de 260 pixels pour afficher la prochaine ligne
                     cpt_ligne += 1
                 else :                      # pas 4eme image, je décalle à la prochaine image
                     xx = xx + larg + inter
-                    
-                
             else:
                 """ si pas de stagiaire """
                 print("stagiaire non trouvé par son mail")
