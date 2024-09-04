@@ -159,11 +159,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                                                     self.text_area_commentaires.text
                                                     )
             if result is True :
-                alert("Renseignements enregistés !")    # *************************************
+                #alert("Renseignements enregistés !")    # *************************************
                 # insertion du stagiaire automatiqt si num_stage != 0
                 if user and self.first_entry:          # 1ERE ENTREE 
                     if  user['temp']==0:
-                        alert("Votre compte est à jour,\n Vous n'êtes pas insrit à un stage.")
+                        alert("Renseignements enregistés !,\n Vous n'êtes pas insrit à un stage.")
                         self.button_retour_click()
                     else:
                         #row = self.drop_down_fi.selected_value
