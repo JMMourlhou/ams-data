@@ -143,11 +143,30 @@ class ItemTemplate6(ItemTemplate6Template):
                 """  ---------------------------------------------------------------------------------------------------------------------------------------------
                 TRANSFORMATION D'UN LAZY MEDIA (img qui vient d'une table) EN BLOB MEDIA (En sortie du file loader et transformable en SERVER side pour resize...)
                 """
-                media_object = anvil.URLMedia(file.url)
+                self.media_object = anvil.URLMedia(file.url)
                 # -----------------------------------------------------------------------------------------------------------------------------------------------
-                self.save_file(media_object, self.new_file_name, ".jpg")
+                self.save_file(self.media_object, self.new_file_name, ".jpg")
             else:
                 alert('timer_2_tick: row stagiaire inscrit non trouvée')
+
+    def button_rotation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        row = app_tables.pre_requis_stagiaire.get(
+                                                        stage_num=self.stage_num,
+                                                        item_requis=self.item_requis,
+                                                        stagiaire_email=self.email
+                                                    )
+        file=row["doc1"]
+        self.media_object1 = anvil.URLMedia(file.url)
+        self.media_object2 = anvil.image.rotate(self.media_object1,90)
+        # Sauvegarde
+        self.save_file(self.media_object2, file.name, ".jpg")
+        row = app_tables.pre_requis_stagiaire.get(
+                                                        stage_num=self.stage_num,
+                                                        item_requis=self.item_requis,
+                                                        stagiaire_email=self.email
+                                                    )
+        self.image_1.source = row['thumb']
             
         
 
