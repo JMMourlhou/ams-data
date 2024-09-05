@@ -29,6 +29,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             self.column_panel_naissance.visible = False
             self.column_panel_adresse.visible = False
             self.drop_down_fi.visible = False
+            self.column_panel_mail2_commentaires.visible = False
             
         # Drop down mode de financemnt
         self.drop_down_fi.items = [(r['intitule_fi'], r) for r in app_tables.mode_financement.search()]
