@@ -127,13 +127,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if self.text_box_code_postal.text == "":
                 alert("Entrez votre adresse (Code Postal) !")
                 return
-            
-        """    
-        # Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
-        if self.drop_down_fi.selected_value is None and self.first_entry is True: 
-            alert("Vous devez sélectionner un mode de financement !")
-            return
-        """    
+            # Stage non type formateur: Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
+            if self.drop_down_fi.selected_value is None and self.first_entry is True: 
+                alert("Vous devez sélectionner un mode de financement !")
+                return
+
         
         if self.check_box_accept_data_use.checked is not True:
             r=alert("Voulez-vous valider l'utilisation de vos données par AMsport ?",dismissible=False, buttons=[("oui",True),("non",False)])
@@ -166,9 +164,11 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                         alert("Renseignements enregistés !,\n Vous n'êtes pas insrit à un stage.")
                         self.button_retour_click()
                     else:
-                        #row = self.drop_down_fi.selected_value
-                        #code_fi=row['code_fi']
-                        txt_msg = anvil.server.call("add_stagiaire", user, self.stage, "???", type_add="")
+                        code_fi = "???"
+                        if user['temp'] < 998:
+                            row = self.drop_down_fi.selected_value
+                            code_fi=row['code_fi']
+                        txt_msg = anvil.server.call("add_stagiaire", user, self.stage, code_fi, type_add="")
                         alert(txt_msg)
                         anvil.users.logout()
                         alert("Si ce n'est pas fait, créez un raccourci de cette appli sur votre tel maintenant... \n\n ... puis ouvrez la de nouveau pour commencer à l'utiliser.")
