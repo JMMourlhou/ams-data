@@ -83,7 +83,7 @@ components:
     type: Label
   - layout_properties: {grid_position: 'RMUWJH,YKPWPM'}
     name: date_naissance
-    properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: JJMMAAAA}
+    properties: {background: 'theme:Primary', foreground: 'theme:On Primary', pick_time: true, placeholder: JJMMAAAA}
     type: DatePicker
   - event_bindings: {change: text_box_ville_naissance_change}
     layout_properties: {grid_position: 'RMUWJH,FOAKZS'}
