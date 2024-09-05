@@ -157,10 +157,11 @@ class ItemTemplate6(ItemTemplate6Template):
                                                         stagiaire_email=self.email
                                                     )
         file=row["doc1"]
-        self.media_object1 = anvil.URLMedia(file.url)
-        self.media_object2 = anvil.image.rotate(self.media_object1,90)
+        media_object1 = anvil.URLMedia(file.url)
+        media_object2 = anvil.image.rotate(media_object1,90)
         # Sauvegarde
-        self.save_file(self.media_object2, file.name, ".jpg")
+        self.save_file(media_object2, file.name, ".jpg")
+        #relecture pour affichage du thumb rotated
         row = app_tables.pre_requis_stagiaire.get(
                                                         stage_num=self.stage_num,
                                                         item_requis=self.item_requis,
