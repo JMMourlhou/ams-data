@@ -14,7 +14,11 @@ import sign_in_for_AMS_Data
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):  # msg pour afficher une alerte si mail erroné en pwreset par ex
         # Set Form properties and Data Bindings.
-        
+        from anvil.js.window import moment
+        moment.updateLocale('fr', {'weekdaysMin': ['Di','Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']})
+        moment.updateLocale("fr", { "week": {
+                            "dow": 1, # First day of week is Monday
+                            }})
         
         self.init_components(**properties)
         # Any code you write here will run before the form opens.

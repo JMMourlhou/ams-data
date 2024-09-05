@@ -94,7 +94,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         if len(self.text_box_tel.text) < 10:    # tel inf à 10 caract ?
             alert("Le numéro de teléphone n'est pas valide")
             return
-        if self.date_naissance.date == None :           # dateN vide ?
+        if self.date_naissance.date is None :           # dateN vide ?
             alert("Entrez la date de naissance")
             return
         if self.text_box_ville_naissance.text == "" :    # ville N vide ?
