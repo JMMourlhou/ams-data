@@ -18,7 +18,7 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         self.item_requis = item_requis      # item requis row
         self.label_1.text = self.new_file_name
         self.origine = origine
-        self.download.scroll_into_view()
+
 
     def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -43,6 +43,10 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         n = Notification("Téléchargement effectué !",
                  timeout=1)   # par défaut 2 secondes
         n.show()
+
+    def form_show(self, **event_args):
+        """This method is called when the form is shown on the page"""
+        self.download.scroll_into_view()
 
             
 

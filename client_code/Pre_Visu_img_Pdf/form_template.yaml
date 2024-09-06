@@ -27,5 +27,7 @@ components:
   name: column_panel_2
   properties: {role: elevated-card}
   type: ColumnPanel
-container: {type: ColumnPanel}
+container:
+  event_bindings: {show: form_show}
+  type: ColumnPanel
 is_package: true
