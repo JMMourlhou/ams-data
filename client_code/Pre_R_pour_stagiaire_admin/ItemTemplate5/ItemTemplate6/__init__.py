@@ -168,6 +168,10 @@ class ItemTemplate6(ItemTemplate6Template):
                                                         stagiaire_email=self.email
                                                     )
         self.image_1.source = row['thumb']
+
+    def form_show(self, **event_args):
+        """This method is called when the form is shown on the page"""
+        self.label_en_tete_pr.scroll_into_view()
             
         
 
