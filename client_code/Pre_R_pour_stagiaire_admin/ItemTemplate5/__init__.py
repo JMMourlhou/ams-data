@@ -45,5 +45,5 @@ class ItemTemplate5(ItemTemplate5Template):
         """This method is called when the button is clicked"""
         from ...Pre_R_pour_1_stagiaire import Pre_R_pour_1_stagiaire
         open_form('Pre_R_pour_1_stagiaire',self.item)   # j'envoie le row 'stagiaire inscrit' en entier
-        
+
             

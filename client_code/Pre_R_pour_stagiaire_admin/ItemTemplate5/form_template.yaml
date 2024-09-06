@@ -33,6 +33,7 @@ components:
   properties: {item_template: Pre_R_pour_stagiaire_admin.ItemTemplate5.ItemTemplate6, role: null, spacing_below: none, visible: false}
   type: RepeatingPanel
 container:
+  event_bindings: {show: form_show}
   properties: {spacing_above: none, spacing_below: none}
   type: ColumnPanel
 is_package: true
