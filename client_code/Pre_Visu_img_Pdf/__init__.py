@@ -10,7 +10,7 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.f = get_open_form()
-        self.image_1.scroll_into_view()
+        self.column_panel_1.scroll_into_view()
         self.image_1.source = file          
         self.new_file_name = new_file_name
         self.stage_num = stage_num          # stage row
