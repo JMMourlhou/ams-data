@@ -10,7 +10,7 @@ class ItemTemplate5(ItemTemplate5Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        self.f = get_open_form()
         # Any code you write here will run before the form opens.
         self.button_nom.text=self.item['name'].capitalize()+" "+self.item['prenom']
         
@@ -23,6 +23,8 @@ class ItemTemplate5(ItemTemplate5Template):
 
     def button_nom_click(self, **event_args):          # Click sur le BT nom/prénom pour voir ses pré requis
         """This method is called when the button is clicked"""
+        
+        
         if self.button_nom.background == "theme:Tertiary":
             self.button_nom.background = "red"
             #self.button_nom.foreground = "black"
@@ -46,9 +48,10 @@ class ItemTemplate5(ItemTemplate5Template):
         from ...Pre_R_pour_1_stagiaire import Pre_R_pour_1_stagiaire
         open_form('Pre_R_pour_1_stagiaire',self.item)   # j'envoie le row 'stagiaire inscrit' en entier
 
-    def repeating_panel_1_show(self, **event_args):
-        """This method is called when the repeating panel is shown on the screen"""
-        # To scroll the whole page to the top; smooth scrolling not supported this way
-        anvil.js.window.scrollTo(0, 0)
+
+        
+
+ 
+        
 
             

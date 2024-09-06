@@ -17,7 +17,7 @@ components:
   - components:
     - data_bindings:
       - {code: '', property: border, writeback: false}
-      event_bindings: {show: image_1_show}
+      event_bindings: {}
       layout_properties: {grid_position: 'VTTKFP,ZCKDCL'}
       name: image_1
       properties: {background: '', display_mode: shrink_to_fit, height: 120.238525390625, role: null, spacing_above: small, spacing_below: none}

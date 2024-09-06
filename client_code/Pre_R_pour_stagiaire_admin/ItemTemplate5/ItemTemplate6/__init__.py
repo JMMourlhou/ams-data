@@ -158,6 +158,8 @@ class ItemTemplate6(ItemTemplate6Template):
                                                     )
         self.image_1.source = row['thumb']
 
+    
+
             
         
 
