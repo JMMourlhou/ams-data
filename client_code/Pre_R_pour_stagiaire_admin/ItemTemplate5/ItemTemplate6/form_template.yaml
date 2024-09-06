@@ -23,7 +23,7 @@ components:
       event_bindings: {}
       layout_properties: {grid_position: 'VTTKFP,ZCKDCL'}
       name: image_1
-      properties: {background: '', display_mode: fill_width, height: 47.82568359375, role: null, spacing_above: small, spacing_below: none}
+      properties: {background: '', display_mode: fill_width, height: 77.07342529296875, role: null, spacing_above: small, spacing_below: none}
       type: Image
     - event_bindings: {click: button_rotation_click}
       layout_properties: {grid_position: 'MIQDYO,JLEOBX'}

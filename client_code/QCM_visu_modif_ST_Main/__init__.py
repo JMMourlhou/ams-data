@@ -63,6 +63,10 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         qcm_row = self.drop_down_qcm_row.selected_value          #qcm description row
+        if qcm_row == None:
+            alert("Choisissez un QCM !")
+            return
+        
         self.qcm_row = qcm_row
         print("dropD change :",qcm_row["qcm_nb"],qcm_row["qcm_source"])
         # Pour les lignes QCM déjà crée du qcm choisi
