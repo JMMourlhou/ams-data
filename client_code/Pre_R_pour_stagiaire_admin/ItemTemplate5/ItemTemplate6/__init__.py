@@ -158,14 +158,6 @@ class ItemTemplate6(ItemTemplate6Template):
                                                     )
         self.image_1.source = row['thumb']
 
-    def form_show(self, **event_args):
-        """This method is called when the form is shown on the page"""
-        self.f.button_nom.scroll_into_view()
-
-    def image_1_show(self, **event_args):
-        """This method is called when the Image is shown on the screen"""
-        self.f = get_open_form()
-        print(self.f)
             
         
 

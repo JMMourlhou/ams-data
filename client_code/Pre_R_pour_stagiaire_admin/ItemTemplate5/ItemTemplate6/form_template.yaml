@@ -80,6 +80,6 @@ components:
   properties: {align: center, background: 'theme:Primary', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: middle, visible: true}
   type: FlowPanel
 container:
-  event_bindings: {show: form_show}
+  event_bindings: {}
   type: ColumnPanel
 is_package: true

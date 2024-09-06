@@ -46,4 +46,9 @@ class ItemTemplate5(ItemTemplate5Template):
         from ...Pre_R_pour_1_stagiaire import Pre_R_pour_1_stagiaire
         open_form('Pre_R_pour_1_stagiaire',self.item)   # j'envoie le row 'stagiaire inscrit' en entier
 
+    def repeating_panel_1_show(self, **event_args):
+        """This method is called when the repeating panel is shown on the screen"""
+        # To scroll the whole page to the top; smooth scrolling not supported this way
+        anvil.js.window.scrollTo(0, 0)
+
             
