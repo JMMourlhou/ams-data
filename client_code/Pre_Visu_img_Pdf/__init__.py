@@ -10,7 +10,7 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.f = get_open_form()
-        self.column_panel_1.scroll_into_view()
+
         self.image_1.source = file          
         self.new_file_name = new_file_name
         self.stage_num = stage_num          # stage row
@@ -18,7 +18,7 @@ class Pre_Visu_img_Pdf(Pre_Visu_img_PdfTemplate):
         self.item_requis = item_requis      # item requis row
         self.label_1.text = self.new_file_name
         self.origine = origine
-       
+        self.download.scroll_into_view()
 
     def retour_click(self, **event_args):
         """This method is called when the button is clicked"""
