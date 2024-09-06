@@ -160,8 +160,12 @@ class ItemTemplate6(ItemTemplate6Template):
 
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
+        self.f.button_nom.scroll_into_view()
+
+    def image_1_show(self, **event_args):
+        """This method is called when the Image is shown on the screen"""
         self.f = get_open_form()
-        self.f.ItemTemplate5.button_nom.scroll_into_view()
+        print(self.f)
             
         
 
