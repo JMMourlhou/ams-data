@@ -15,6 +15,8 @@ class ItemTemplate6(ItemTemplate6Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()
+        
         self.test_img_just_loaded = False  # pour savoir si l'image vient d'être chargée (voir visu image)
         txt0 = "Pour le " + self.item['code_txt']+" de "  # le stage
         txt1 = self.item['nom']+"."+self.item['prenom'][0]+" : "
@@ -128,17 +130,6 @@ class ItemTemplate6(ItemTemplate6Template):
                 
                 # Venant d'une table et non d'un file loader, file est un lazy BlobMedia
                 file=row['temp_pr_pdf_img']
-                #print("type fichier chargé de la table : ", type(file))
-                #self.image_1.source = file        # affichage de l'image anciennement pdf transformée en jpg 
-                """
-                print(f'url: {file.url}')
-                print(f'content_type: {file.content_type}')
-                print(f'length: {file.length} bytes')
-                # This will be `None` since this is a website, not a file
-                print(f'name: {file.name}')
-                # Only print the first 15 bytes
-                print(f'raw bytes: {file.get_bytes()[:15]} ...')
-                """
                 
                 """  ---------------------------------------------------------------------------------------------------------------------------------------------
                 TRANSFORMATION D'UN LAZY MEDIA (img qui vient d'une table) EN BLOB MEDIA (En sortie du file loader et transformable en SERVER side pour resize...)
@@ -171,7 +162,7 @@ class ItemTemplate6(ItemTemplate6Template):
 
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""
-        self.label_en_tete_pr.scroll_into_view()
+        self.f.button_nom.scroll_into_view()
             
         
 
