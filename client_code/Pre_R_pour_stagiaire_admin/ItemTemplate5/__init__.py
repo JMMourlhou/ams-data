@@ -14,12 +14,6 @@ class ItemTemplate5(ItemTemplate5Template):
         # Any code you write here will run before the form opens.
         self.button_nom.text=self.item['name'].capitalize()+" "+self.item['prenom']
         
-        # search des pré-requis de chaque stagiaire de ce stage en SERVEUR
-        #     Pour lecture fichier père users: user row
-        #     Pour lecture fichier père stages: stage row
-        #liste_pr = anvil.server.call('preparation_liste_pour_panels_pr', self.item['user_email'], self.item['stage'])
-        #list(liste_pr).sort(key=lambda x: x["item_requis"]["code_pre_requis"])      # TRI par code pré requis 
-        
 
     def button_nom_click(self, **event_args):          # Click sur le BT nom/prénom pour voir ses pré requis
         """This method is called when the button is clicked"""
