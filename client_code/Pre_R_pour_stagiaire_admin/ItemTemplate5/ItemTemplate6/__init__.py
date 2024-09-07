@@ -27,6 +27,7 @@ class ItemTemplate6(ItemTemplate6Template):
             self.button_del.visible = True
         else:
             self.button_del.visible = False
+            self.button_rotation.visible = False
         
         self.stage_num =   self.item['stage_num'] 
         self.item_requis = self.item['item_requis']
