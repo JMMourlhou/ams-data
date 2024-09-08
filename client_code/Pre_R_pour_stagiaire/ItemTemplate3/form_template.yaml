@@ -21,10 +21,15 @@ components:
 - components:
   - components:
     - data_bindings: []
-      layout_properties: {full_width_row: true, grid_position: 'LSIOOU,UOWYNL'}
+      layout_properties: {full_width_row: true, grid_position: 'UFTPVX,RFKQMS'}
       name: image_1
       properties: {display_mode: original_size, height: '50', role: null, spacing_above: small, spacing_below: medium}
       type: Image
+    - event_bindings: {click: button_rotation_click}
+      layout_properties: {grid_position: 'TBQEOC,CTISSM'}
+      name: button_rotation
+      properties: {font_size: 20, icon: 'fa:rotate-right', text: ''}
+      type: Button
     layout_properties: {expand: false, width: 210.978}
     name: column_panel_2
     properties: {background: 'theme:On Primary Container', role: tonal-card}

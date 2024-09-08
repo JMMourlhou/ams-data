@@ -155,6 +155,26 @@ class ItemTemplate3(ItemTemplate3Template):
                 self.save_file(media_object, self.new_file_name, ".jpg") 
             else:
                 alert('timer_2_tick: row stagiaire inscrit non trouvée')
+
+    def button_rotation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        row = app_tables.pre_requis_stagiaire.get(
+                                                        stage_num=self.stage_num,
+                                                        item_requis=self.item_requis,
+                                                        stagiaire_email=self.email
+                                                    )
+        file=row["doc1"]
+        media_object1 = anvil.URLMedia(file.url)
+        media_object2 = anvil.image.rotate(media_object1,90)
+        # Sauvegarde
+        self.save_file(media_object2, file.name, ".jpg")
+        #relecture pour affichage du thumb rotated
+        row = app_tables.pre_requis_stagiaire.get(
+                                                        stage_num=self.stage_num,
+                                                        item_requis=self.item_requis,
+                                                        stagiaire_email=self.email
+                                                    )
+        self.image_1.source = row['thumb']
             
             
 
