@@ -28,7 +28,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         from anvil.js import window # to gain access to the window objec
         screen_size = window.innerWidth
         print("screen: ", screen_size)
-        if screen_size > 800:
+        if screen_size > 700:
             self.data_grid_1.rows_per_page = 6
         else: # Phone
             self.button_mail_to_all.text = ""  # Affiche les icones uniqt
