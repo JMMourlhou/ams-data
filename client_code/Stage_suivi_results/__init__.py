@@ -305,9 +305,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             for cle, val in dico_rep_ferm.items():
                 reponse = val[1]  # indice 1: donc reponse (int)
 
-                for q in range(
-                    1, nb_questions_ferm + 1
-                ):  # boucle sur nb questionsfermées de 1 à nb_questions_fermées (exclusif)
+                for q in range(1, nb_questions_ferm + 1):  # boucle sur nb questionsfermées de 1 à nb_questions_fermées (exclusif)
                     question = str(q)  # transorme q (int) en question str
                     # print("======= QUESTION N° ", question)
                     if cle == question:  # ex si question 1
@@ -551,7 +549,6 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-
         open_form("Main", 99)
 
     def button_mailing_to_all_click(self, **event_args):
