@@ -75,6 +75,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         """This method is called when an item is selected"""
         self.type_de_suivi = "T"   
         self.label_type_suivi.text = "T"     # pour get_open_form en ItemTemplate17
+        
         if row is None:
             row = self.drop_down_code_tuteurs.selected_value
             self.row = self.drop_down_code_tuteurs.selected_value

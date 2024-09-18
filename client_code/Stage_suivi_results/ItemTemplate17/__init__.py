@@ -16,23 +16,29 @@ class ItemTemplate17(ItemTemplate17Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.f = get_open_form() # pour récupérer label_type_suivi en form mère
+        
+        # self.f = get_open_form() # pour récupérer label_type_suivi en form mère    
         self.label_1.text = self.item['prenom'] +" "+ self.item['name']+" "+ self.item['user_email']['tel']
         
         # recherche du ou des formulaires du stagiaire ou Tuteur 
-        if self.f.label_type_suivi.text == "S":
+        #if self.f.label_type_suivi.text == "S":
+        try:
             list = app_tables.stage_suivi.search(
                                                 user_email=self.item['user_email']['email'],
-                                                stage_num_txt=str(self.item['numero'])
+                                                stage_num_txt=str(self.item['numero']),
+                                                user_role = "S"
                                                 )
             print("Template 17, nb de formulaires du stagiaire: ",len(list))
-        if self.f.label_type_suivi.text == "T":
+        except:
+        #if self.f.label_type_suivi.text == "T":
             print("Template 17, email: ",self.item['user_email']['email'])
             print("Template 17, num: ",self.item['numero'])
             
             list = app_tables.stage_suivi.search(
                                                 user_email=self.item['user_email']['email'],
-                                                stage_num_txt=str(self.item['pour_stage_num']['numero'])    # 1003
+                                                #stage_num_txt=str(self.item['pour_stage_num']['numero'])    # 
+                                                stage_num_txt=str(self.item['numero']),
+                                                user_role = "T"
                                                 )
             print("Template 17, nb de formulaires du Tuteur: ",len(list))
         
