@@ -16,46 +16,48 @@ class ItemTemplate17(ItemTemplate17Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
-        # self.f = get_open_form() # pour récupérer label_type_suivi en form mère    
+
+        # lecture fichier temp (get_open_form ne fonctionne pas si je suis en BGT, génération du pdf de suivi)
+        temp_row = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
+        type_suivi = temp_row['type_suivi']
+           
         self.label_1.text = self.item['prenom'] +" "+ self.item['name']+" "+ self.item['user_email']['tel']
         
         # recherche du ou des formulaires du stagiaire ou Tuteur 
-        #if self.f.label_type_suivi.text == "S":
-        try:
+        if type_suivi == "S":
             list = app_tables.stage_suivi.search(
                                                 user_email=self.item['user_email']['email'],
                                                 stage_num_txt=str(self.item['numero']),
                                                 user_role = "S"
                                                 )
             print("Template 17, nb de formulaires du stagiaire: ",len(list))
-        except:
-        #if self.f.label_type_suivi.text == "T":
+            
+        if type_suivi == "T":
             print("Template 17, email: ",self.item['user_email']['email'])
             print("Template 17, num: ",self.item['numero'])
             
             list = app_tables.stage_suivi.search(
                                                 user_email=self.item['user_email']['email'],
-                                                #stage_num_txt=str(self.item['pour_stage_num']['numero'])    # 
-                                                stage_num_txt=str(self.item['numero']),
+                                                stage_num_txt=str(self.item['pour_stage_num']['numero']),    # 
                                                 user_role = "T"
                                                 )
             print("Template 17, nb de formulaires du Tuteur: ",len(list))
+            nb_formulaires = len(list)
         
         #Boucle sur les formulaires
         rep_ouv = {}
         qt=0
+        cpt = 0
         val = []
         for formulaire in list:
             #Boucle sur 1 formulaire 
-
+            cpt += 1
             # Affichage des réponses ouvertes
             rep_ouv = formulaire['rep_dico_rep_ouv']
             print(rep_ouv)
             for cle_num_question, val in rep_ouv.items():
                 #Boucle sur chaque rep ouverte
                 qt = cle_num_question
-                print("qt ", qt)
                 liste_rep = val
                 self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True, "ouvertes"))   # True; je mets q° et rep sur 2 lignes
 
@@ -65,9 +67,11 @@ class ItemTemplate17(ItemTemplate17Template):
             for cle_num_question, val in rep_ferm.items():
                 #Boucle sur chaque rep ouverte
                 qt = cle_num_question
-                print("qt ", qt)
                 liste_rep = val
                 self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True, "fermées"))   # True; je mets q° et rep sur 1 ligne
+
+            if cpt < nb_formulaires:
+                self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, )
 
     def form_show(self, **event_args):
         self.add_component(PageBreak()) 

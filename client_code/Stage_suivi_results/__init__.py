@@ -53,6 +53,8 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             self.column_panel_a.visible = False
             self.button_annuler2.visible = False
             self.button_downl_pdf1.visible = False
+            self.button_downl_pdf0.visible = False
+            
             if self.type_suivi == "S":
                 self.drop_down_code_stagiaires_change(row)   # row envoyé par la bg task 
             else:
@@ -449,11 +451,13 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         # =================================================================================================
         # affichage des réponses OUVERTES pour chaque Tuteur
         # =================================================================================================
-
+        # ECRITURE DS FICHIER TEMP DU TYPE DE SUIVI (en bg task, je ne pourrai pas utiliser get_open_formen template17)
+        anvil.server.call('temp_type_suivi', type_de_suivi)   # pour récupérer le type de suivi en template 17
+        
         # Initialisation 
         if type_de_suivi == "S":
             # Préparation du column panel des noms des stagiaires
-            self.liste_response = app_tables.stagiaires_inscrits.search(
+            self.liste_noms = app_tables.stagiaires_inscrits.search(
                                                         tables.order_by("name", ascending=True),
                                                         numero=self.row["numero"],                   # CRITERE DIFFERENT, COLONE DIFFERENTE QUE POUR TUTEURS
                                                         enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
@@ -461,14 +465,13 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         if type_de_suivi == "T":
             # Préparation du column panel des noms des Tuteurs
             print("tuteur : ", self.row['numero'])
-            self.liste_response = app_tables.stagiaires_inscrits.search(
+            self.liste_noms = app_tables.stagiaires_inscrits.search(
                                                             tables.order_by("name", ascending=True),
                                                             pour_stage_num=self.row,                     # CRITERE DIFFERENT, COLONE DIFFERENTE QUE POUR STAGIAIRE
                                                             enquete_suivi=True   # Enquete_suivi ds  table stagiaires_inscrits
                                                         )
-        print("stage suivi result ligne 499, nb de réponses: ", len(self.liste_response))              # TROUVER ERREUR: self.row ?
-        self.repeating_panel_noms.items = self.liste_response
-
+        print("stage suivi result ligne 499, nb de noms: ", len(self.liste_noms))              # TROUVER ERREUR: self.row ?
+        self.repeating_panel_noms.items = self.liste_noms
         
          # Initialisation des clefs: valeur du dictionnaire des réponses
         q_rep = {
@@ -496,19 +499,20 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                 self.column_panel_q_ouv.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep))
             except:
                 pass
-        self.button_downl_pdf0.visible = True
-        self.button_downl_pdf1.visible = True
+        
         
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT GLOBAL des Q Fermées"""
-        # Génération du pdf si non existant A CHANGER QD L'ENQUETE EST COMPLETE
+        # Génération du pdf A CHANGER QD L'ENQUETE EST COMPLETE
         print("génération du pdf")
         if self.pdf_mode is False:
+            self.button_downl_pdf0.visible = True
+            self.button_downl_pdf1.visible = True
             with anvil.server.no_loading_indicator:
                 self.task_suivi = anvil.server.call('run_bg_task_suivi', type_de_suivi, row["numero"],row["code_txt"], row)
                 self.timer_1.interval=0.5
 
     def timer_1_tick(self, **event_args):
-        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        """This method is called Every 0.5 seconds. Does not trigger if [interval] is 0."""
         if self.task_suivi.is_completed():
             self.button_downl_pdf0.visible = True
             self.button_downl_pdf1.visible = True
