@@ -12,8 +12,10 @@ import fast_pdf
 
 
 class Stage_suivi_results(Stage_suivi_resultsTemplate):
-    def __init__(self, pdf_mode=False, row=None, **properties):  # si pdf=True, cette forme  appellée par pdf renderer
+    def __init__(self, type_suivi="", pdf_mode=False, row=None, **properties):  # si pdf=True, cette forme  appellée par pdf renderer
         # Set Form properties and Data Bindings.
+        self.pdf_mode = pdf_mode     # si on vient du BG task pour génération du pdf, pdf_mode = True
+        self.type_suivi = type_suivi # si on vient du BG task pour génération du pdf, rappel quel suivi est demandé, Stagiaire ou Tuteur
         self.init_components(**properties)
         self.column_panel_mailing.visible = False
         # Any code you write here will run before the form opens.
@@ -45,30 +47,41 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         
         # initialistaion de la drop down codes suivi des tuteurs
         self.drop_down_code_tuteurs.items = liste_stage_drop_down
+
+        # si génération du pdf, on cache des boutons et on envoi directement en traitement en fonction du type de suivi demandé
+        if self.pdf_mode is True:
+            self.column_panel_a.visible = False
+            self.button_annuler2.visible = False
+            self.button_downl_pdf1.visible = False
+            if self.type_suivi == "S":
+                self.drop_down_code_stagiaires_change(row)   # row envoyé par la bg task 
+            else:
+                self.drop_down_code_tuteurs_change(row)
     
     # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
-    def drop_down_code_stagiaires_change(self, **event_args):
+    def drop_down_code_stagiaires_change(self, row=None ,**event_args):
         """This method is called when an item is selected"""
         self.type_de_suivi = "S"
-        self.label_type_suivi.text = self.type_de_suivi  # pour get_open_form en ItemTemplate17
-        row = self.drop_down_code_stagiaires.selected_value
-        if row is None: 
-            alert("Vous devez sélectionner un stage !")
-            self.drop_down_code_stagiaires.focus()
-            return
+        self.label_type_suivi.text = "S"  # pour get_open_form en ItemTemplate17
+        if row is None:
+            row = self.drop_down_code_stagiaires.selected_value
+            if row is None: 
+                alert("Vous devez sélectionner un stage !")
+                self.drop_down_code_stagiaires.focus()
+                return
         self.traitement(self.type_de_suivi,row)
 
-    def drop_down_code_tuteurs_change(self, **event_args):
+    def drop_down_code_tuteurs_change(self, row=None, **event_args):  # row vient du bg task
         """This method is called when an item is selected"""
         self.type_de_suivi = "T"   
-        self.label_type_suivi.text = self.type_de_suivi     # pour get_open_form en ItemTemplate17
-        row = self.drop_down_code_tuteurs.selected_value
-        self.row = self.drop_down_code_tuteurs.selected_value
-        
-        if row is None: 
-            alert("Vous devez sélectionner un stage !")
-            self.drop_down_code_tuteurs.focus()
-            return
+        self.label_type_suivi.text = "T"     # pour get_open_form en ItemTemplate17
+        if row is None:
+            row = self.drop_down_code_tuteurs.selected_value
+            self.row = self.drop_down_code_tuteurs.selected_value
+            if row is None: 
+                alert("Vous devez sélectionner un stage !")
+                self.drop_down_code_tuteurs.focus()
+                return
         self.traitement(self.type_de_suivi,row)
 
         
@@ -435,55 +448,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         # =================================================================================================
         # affichage des réponses OUVERTES pour chaque Tuteur
         # =================================================================================================
-        
-        """
-        # Boucle sur tous les formulaires du stage
-        cpt_formulaire = 0
-        for formulaire in liste_formulaires:
-            cpt_formulaire += 1
-            print("==========================FORMULAIRE", cpt_formulaire)
 
-            # lecture dico questions ouvertes du formulaire
-            dico_rep_ouv = formulaire[
-                "rep_dico_rep_ouv"
-            ]  # dico questions ouvertes du formulaire
-            nb_questions_ouv = len(
-                dico_rep_ouv
-            )  # nb questions ds formulaire questions fermées
-            print("nb_q_ouvertes: ", nb_questions_ouv)
-
-            # lecture des 10 réponses de ce formulaire
-            for cle_num_question, val in dico_rep_ouv.items():
-                quest = val[0]
-                rep = val[1]
-                liste_rep = []  # liste cumul des réponses d'1 question
-                print("===========================  question n° ", cle_num_question)
-                print("===========================  question ", quest)
-                print(" ========================== rep ", rep)
-                print()
-
-                # recherche de la clef q_rep déjà constituée
-                liste_rep = q_rep[cle_num_question]
-
-                # si 1er formulaire, je met les questions ds le dict des reponses q_rep
-                if cpt_formulaire == 1:
-                    print(
-                        "-------------------------------------------------------------------------- Ajout de q°",
-                        quest,
-                    )
-                    # ajout de la question ds la valeur
-                    liste_rep.append(quest)
-
-                # rajout de la réponse de ce formulaire à la liste de réponses
-                liste_rep.append(rep)
-
-                # réecriture de la question et de ses réponses ds le dictionaires des réponses
-                q_rep[cle_num_question] = liste_rep
-
-        print(q_rep)
-        print()
-        print()
-        """
         # Initialisation 
         if type_de_suivi == "S":
             # Préparation du column panel des noms des stagiaires
@@ -534,6 +499,20 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         self.button_downl_pdf1.visible = True
         
         """ ============================================================================================= FIN DE L'AFFICHAGE DU RESULTAT GLOBAL des Q Fermées"""
+        # Génération du pdf si non existant A CHANGER QD L'ENQUETE EST COMPLETE
+        print("génération du pdf")
+        if self.pdf_mode is False:
+            with anvil.server.no_loading_indicator:
+                self.task_suivi = anvil.server.call('run_bg_task_suivi', type_de_suivi, row["numero"],row["code_txt"], row)
+                self.timer_1.interval=0.5
+
+    def timer_1_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        if self.task_suivi.is_completed():
+            self.button_downl_pdf0.visible = True
+            self.button_downl_pdf1.visible = True
+            self.timer_1.interval=0
+            anvil.server.call('task_killer',self.task_suivi)
         
 
     def button_downl_pdf1_click(self, **event_args):

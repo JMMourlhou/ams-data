@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 from ..Stage_suivi_rep_ouvertes import (Stage_suivi_rep_ouvertes)   #  Forme ajoutée pour questions ouvertes
 from anvil_extras.PageBreak import PageBreak
 
-# AFFICHAGE DES PRENOM / NOM des stgiaires
+# AFFICHAGE DES PRENOM / NOM des stagiaires
 class ItemTemplate17(ItemTemplate17Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.

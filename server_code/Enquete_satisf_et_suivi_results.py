@@ -17,7 +17,7 @@ from pytz import timezone      #
 # Calculer la taille du file et ajuster la qualité (screen : pas assez bon)
 
 """----------------------------------------------------------------------------------------------------------
-                   BG task    Formulaire de SATISFACTION
+                   BG task    Formulaire de SATISFACTION  Génération du PDF et sauvegarde en table stage
    ---------------------------------------------------------------------------------------------------------
 """
 @anvil.server.background_task
@@ -46,3 +46,33 @@ def run_bg_task_satisf(stage_num, type, row):
     task = anvil.server.launch_background_task('generate_satisf_results',stage_num, type, row)
     return task
 
+
+"""----------------------------------------------------------------------------------------------------------
+                   BG task    Formulaire de SUIVI Génération du PDF et sauvegarde en table stage
+    ---------------------------------------------------------------------------------------------------------
+"""
+@anvil.server.background_task
+def generate_suivi_results(type_suivi, stage_num, type, row):
+    start = time.time()   # pour calcul du tpsde traitement (environ 25 se)
+    now_utc = datetime.now(timezone('UTC'))
+    date_time = now_utc.astimezone(timezone('Europe/Paris')) # initialisation of the date & time of writing
+
+    pdf_object = PDFRenderer(page_size ='A4',
+                            filename = f"Enquete_satisf_{type}_{stage_num}_{date_time}.pdf",
+                            #filename = f"Enquete_satisf_{type}_{stage_num}.pdf",
+                            landscape = False,
+                            margins = {'top': 0.3, 'bottom': 0.1, 'left': 0.2, 'right': 0.2},  #  cm
+                            scale = 1.0,                                                       
+                            quality = "screen"      
+                            ).render_form('Stage_suivi_results',type_suivi, True,row)    # True: pdf mode, j'efface le bt return et passe le row du stage qui avait été sélectionné
+   
+    # sauvegarde du résultat de l'enquete media
+    row.update(suivi_pdf = pdf_object) 
+    end = time.time()
+    print("Temps de traitement: ", end-start)
+    
+# A FAIRE APPELER from client side
+@anvil.server.callable
+def run_bg_task_suivi(type_suivi, stage_num, type, row):
+    task = anvil.server.launch_background_task('generate_suivi_results', type_suivi, stage_num, type, row)
+    return task

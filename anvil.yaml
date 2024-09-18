@@ -579,6 +579,9 @@ db_schema:
     - admin_ui: {order: 5.5, width: 200}
       name: code_stage
       type: string
+    - admin_ui: {order: 6.5, width: 200}
+      name: type_suivi
+      type: string
     server: full
     title: Temp
   users:
