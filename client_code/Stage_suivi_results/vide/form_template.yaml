@@ -1,8 +1,21 @@
 components:
-- layout_properties: {grid_position: 'ZWXJGE,ZWVVEN'}
-  name: text_area_1
-  properties: {align: center, background: 'theme:On Primary', height: 121.33027648925781, text: Autre stagiare}
-  type: TextArea
+- components:
+  - layout_properties: {grid_position: 'RUUDLN,GUGNCI'}
+    name: button_1
+    properties: {align: right, icon: 'fa:arrow-circle-down', text: ''}
+    type: Button
+  - layout_properties: {grid_position: 'RUUDLN,YWZYVF'}
+    name: label_1
+    properties: {align: center, background: 'theme:Primary', foreground: 'theme:On Primary', text: 'Autre stagiaire de '}
+    type: Label
+  - layout_properties: {grid_position: 'RUUDLN,EJBVEN'}
+    name: button_1_copy
+    properties: {align: left, icon: 'fa:arrow-circle-down', text: ''}
+    type: Button
+  layout_properties: {grid_position: 'TLXSJO,VGYZJD'}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
 container:
   event_bindings: {show: form_show}
   properties: {spacing_above: none, spacing_below: none}

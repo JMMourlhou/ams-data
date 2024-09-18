@@ -43,7 +43,7 @@ class ItemTemplate17(ItemTemplate17Template):
                                                 user_role = "T"
                                                 )
             print("Template 17, nb de formulaires du Tuteur: ",len(list))
-            nb_formulaires = len(list)
+        nb_formulaires = len(list)
         
         #Boucle sur les formulaires
         rep_ouv = {}
@@ -72,7 +72,8 @@ class ItemTemplate17(ItemTemplate17Template):
                 self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True, "fermées"))   # True; je mets q° et rep sur 1 ligne
 
             if cpt < nb_formulaires:
-                self.column_panel_content.add_component(Vide())
+                titre = self.item['user_email']['nom'] +  self.item['user_email']['prenom'] 
+                self.column_panel_content.add_component(vide(titre))
                                                         
     def form_show(self, **event_args):
         self.add_component(PageBreak()) 
