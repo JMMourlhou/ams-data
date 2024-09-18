@@ -49,19 +49,19 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
     # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
     def drop_down_code_stagiaires_change(self, **event_args):
         """This method is called when an item is selected"""
-        type_de_suivi = "S"
-        self.label_type_suivi.text = type_de_suivi  # pour get_open_form en ItemTemplate17
+        self.type_de_suivi = "S"
+        self.label_type_suivi.text = self.type_de_suivi  # pour get_open_form en ItemTemplate17
         row = self.drop_down_code_stagiaires.selected_value
         if row is None: 
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stagiaires.focus()
             return
-        self.traitement(type_de_suivi,row)
+        self.traitement(self.type_de_suivi,row)
 
     def drop_down_code_tuteurs_change(self, **event_args):
         """This method is called when an item is selected"""
-        type_de_suivi = "T"   
-        self.label_type_suivi.text = type_de_suivi     # pour get_open_form en ItemTemplate17
+        self.type_de_suivi = "T"   
+        self.label_type_suivi.text = self.type_de_suivi     # pour get_open_form en ItemTemplate17
         row = self.drop_down_code_tuteurs.selected_value
         self.row = self.drop_down_code_tuteurs.selected_value
         
@@ -69,7 +69,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_tuteurs.focus()
             return
-        self.traitement(type_de_suivi,row)
+        self.traitement(self.type_de_suivi,row)
 
         
     def traitement(self, type_de_suivi, row):
@@ -102,9 +102,12 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             self.repeating_panel_no_response.visible = False
         # ------------------------------------------------------------------------
         if type_de_suivi == "T":
+            self.drop_down_code_stagiaires.visible = False
             text1 = "Tuteurs du "
         else:
             text1 = "Stagiaires du "
+            self.drop_down_code_tuteurs.visible = False
+            
         self.label_titre.text = (
             text1
             + "Stage n°"
