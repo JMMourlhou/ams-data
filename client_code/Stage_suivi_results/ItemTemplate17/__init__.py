@@ -72,7 +72,7 @@ class ItemTemplate17(ItemTemplate17Template):
                 self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True, "fermées"))   # True; je mets q° et rep sur 1 ligne
 
             if cpt < nb_formulaires:
-                titre = self.item['user_email']['nom'] +  self.item['user_email']['prenom'] 
+                titre = self.item['user_email']['nom'] + " " + self.item['user_email']['prenom'] 
                 self.column_panel_content.add_component(vide(titre))
                                                         
     def form_show(self, **event_args):
