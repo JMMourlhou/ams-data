@@ -7,6 +7,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Stage_suivi_rep_ouvertes import (Stage_suivi_rep_ouvertes)   #  Forme ajoutée pour questions ouvertes
+from ..vide import vide
 from anvil_extras.PageBreak import PageBreak
 
 # AFFICHAGE DES PRENOM / NOM des stagiaires
@@ -71,7 +72,7 @@ class ItemTemplate17(ItemTemplate17Template):
                 self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, liste_rep, True, "fermées"))   # True; je mets q° et rep sur 1 ligne
 
             if cpt < nb_formulaires:
-                self.column_panel_content.add_component(Stage_suivi_rep_ouvertes(qt, )
-
+                self.column_panel_content.add_component(Vide())
+                                                        
     def form_show(self, **event_args):
         self.add_component(PageBreak()) 

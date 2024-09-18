@@ -14,7 +14,7 @@ import anvil.server
 
 
 class Stage_suivi_rep_ouvertes(Stage_suivi_rep_ouvertesTemplate):
-    def __init__(self, qt, list_rep, concatenate = False, type="ouvertes", **properties):
+    def __init__(self, qt, list_rep="", concatenate = False, type="ouvertes", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.

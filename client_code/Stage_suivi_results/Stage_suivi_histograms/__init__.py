@@ -1,8 +1,6 @@
 from ._anvil_designer import Stage_suivi_histogramsTemplate
 from anvil import *
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
