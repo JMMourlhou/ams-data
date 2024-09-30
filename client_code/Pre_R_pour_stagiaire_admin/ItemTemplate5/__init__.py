@@ -17,8 +17,7 @@ class ItemTemplate5(ItemTemplate5Template):
 
     def button_nom_click(self, **event_args):          # Click sur le BT nom/prénom pour voir ses pré requis
         """This method is called when the button is clicked"""
-        
-        
+
         if self.button_nom.background == "theme:Tertiary":
             self.button_nom.background = "red"
             #self.button_nom.foreground = "black"

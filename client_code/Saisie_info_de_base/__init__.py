@@ -128,32 +128,65 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             date_n=self.date_naissance.date      # extraction de la date de naissance saisie format yyyy-mm-dd
             #alert(f"date_N: {date_n}")
             span = now - date_n                  # calcul diff des dates en jours
-            alert(f"écart: {span}")
+            #alert(f"écart: {span}")
             #alert(f"écart: {type(span)}")
-            days = span.years
+            span_years = span.days/365
+            #alert(f"écart: {span_years}")
+            if span_years < 15:
+                alert("Erreur sur votre date de naissance !")
+                return   
+
+            if self.text_box_v_naissance.text == "" :    # ville N vide ?
+                alert("Entrez la ville de naissance !")
+                return   
+            if len(self.text_box_v_naissance.text)<3:
+                alert("La ville de naissance est incomplète !")
+                return 
+                
+            # Test sur Code postal NAISSANCE, non vide, 5 caractères numériques.
+            if self.text_box_c_naissance.text == "":
+                alert("Entrez votre Code Postal de naissance !\n\n Si vous êtes né à l'étranger, entrez 99999")
+                return
+            if len(self.text_box_c_naissance.text) != 5:
+                alert("Le Code Postal de naissance doit être de 5 chiffres,\n\nPas de lettres !\n\n Si vous êtes né à l'étranger, entrez 99999")
+                return
+            try:
+                cp_test = int(self.text_box_c_naissance.text)
+            except:
+                alert("Le Code Postal de naissance ne doit contenir que des chiffres\n\n Si vous êtes né à l'étranger, entrez 99999")
+                return
+                
             
-            
-            # Test sur Code postal, non vide, 5 caractères numériques.
+            if self.text_area_rue.text == "":
+                alert("Entrez votre Rue !")
+                return  
+            if len(self.text_area_rue.text)<10:
+                alert("La Rue est incomplète !")
+                return 
+                
+            if self.text_box_ville.text == "":
+                alert("Entrez votre Ville (adresse postale) !")
+                return
+            if len(self.text_box_ville.text)<3:
+                alert("La Ville (adresse postale) est incomplète !")
+                return 
+                
+            # Test sur Code postal adresse, non vide, 5 caractères numériques.
+            if self.text_box_code_postal.text == "":
+                alert("Entrez votre Code Postal (adresse postale) !")
+                return
+             # Test sur Code postal adresse, non vide, 5 caractères numériques.
             if self.text_box_code_postal.text == "":
                 alert("Entrez votre adresse (Code Postal) !")
                 return
             if len(self.text_box_code_postal.text) != 5:
                 alert("Le Code Postal doit être de 5 chiffres")
+                return
             try:
                 cp_test = int(self.text_box_code_postal.text)
             except:
                 alert("Le Code Postal ne doit contenir que des chiffres")
-            
-            if self.text_box_v_naissance.text == "" :    # ville N vide ?
-                alert("Entrez la ville de naissance !")
-                return   
-            if self.text_area_rue.text == "":
-                alert("Entrez votre adresse (Rue) !")
                 return  
-            if self.text_box_ville.text == "":
-                alert("Entrez votre adresse (Ville) !")
-                return
-            
                 
             # Stage non type formateur: Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
             if self.drop_down_fi.selected_value is None and self.first_entry is True: 
@@ -189,7 +222,7 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 # insertion du stagiaire automatiqt si num_stage != 0
                 if user and self.first_entry:          # 1ERE ENTREE 
                     if  user['temp']==0:
-                        alert("Renseignements enregistés !,\n Vous n'êtes pas insrit à un stage.")
+                        alert("Renseignements enregistés !,\n Vous n'êtes pas inscrit à un stage.")
                         self.button_retour_click()
                     else:
                         code_fi = "???"
