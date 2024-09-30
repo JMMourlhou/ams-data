@@ -120,15 +120,15 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if self.date_naissance.date is None :           # dateN vide ?
                 alert("Entrez la date de naissance !")
                 return   
-            now=French_zone.french_zone_time
+            now=French_zone.french_zone_time()   # now est datetime obj
             alert(f"type de var: {type(now)}")
             alert(f"now brute: {now}")
-            now=str(now.date())
-            now=datetime.strptime(now, "%d-%m-%Y")
+            now=now.date()
+            #now=datetime.strptime(now, "%d-%m-%Y")
             alert(f"now: {now}")
-            date_n=str(self.date_naissance.date)
+            date_n=self.date_naissance.date
             # Convertir la chaîne de caractères en objet datetime
-            date_n = datetime.strptime(date_n, "%d-%m-%Y")
+            #date_n = datetime.strptime(date_n, "%d-%m-%Y")
             alert(f"date_N: {date_n}")
             time = now - date_n
             alert(f"écart: {time}")
