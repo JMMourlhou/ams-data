@@ -10,6 +10,8 @@ from anvil.tables import app_tables
 
 from .. import French_zone   #pour tester la date de naissance
 from datetime import datetime
+from datetime import timedelta
+
 
 global user
 user=anvil.users.get_user()
@@ -120,27 +122,17 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if self.date_naissance.date is None :           # dateN vide ?
                 alert("Entrez la date de naissance !")
                 return   
-            now=French_zone.french_zone_time()   # now est datetime obj
-            alert(f"type de var: {type(now)}")
-            alert(f"now brute: {now}")
-            now=now.date()
-            #now=datetime.strptime(now, "%d-%m-%Y")
-            alert(f"now: {now}")
-            date_n=self.date_naissance.date
-            # Convertir la chaîne de caractères en objet datetime
-            #date_n = datetime.strptime(date_n, "%d-%m-%Y")
-            alert(f"date_N: {date_n}")
-            time = now - date_n
-            alert(f"écart: {time}")
-            if self.text_box_v_naissance.text == "" :    # ville N vide ?
-                alert("Entrez la ville de naissance !")
-                return   
-            if self.text_area_rue.text == "":
-                alert("Entrez votre adresse (Rue) !")
-                return  
-            if self.text_box_ville.text == "":
-                alert("Entrez votre adresse (Ville) !")
-                return
+            now=French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
+            now=now.date()                       # extraction de la date, format yyyy-mm-dd
+            #alert(f"now: {now}")
+            date_n=self.date_naissance.date      # extraction de la date de naissance saisie format yyyy-mm-dd
+            #alert(f"date_N: {date_n}")
+            span = now - date_n                  # calcul diff des dates en jours
+            alert(f"écart: {span}")
+            #alert(f"écart: {type(span)}")
+            days = span.years
+            
+            
             # Test sur Code postal, non vide, 5 caractères numériques.
             if self.text_box_code_postal.text == "":
                 alert("Entrez votre adresse (Code Postal) !")
@@ -151,6 +143,17 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 cp_test = int(self.text_box_code_postal.text)
             except:
                 alert("Le Code Postal ne doit contenir que des chiffres")
+            
+            if self.text_box_v_naissance.text == "" :    # ville N vide ?
+                alert("Entrez la ville de naissance !")
+                return   
+            if self.text_area_rue.text == "":
+                alert("Entrez votre adresse (Rue) !")
+                return  
+            if self.text_box_ville.text == "":
+                alert("Entrez votre adresse (Ville) !")
+                return
+            
                 
             # Stage non type formateur: Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
             if self.drop_down_fi.selected_value is None and self.first_entry is True: 
