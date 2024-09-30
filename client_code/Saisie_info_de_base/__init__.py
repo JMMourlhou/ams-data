@@ -8,6 +8,9 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from .. import French_zone   #pour tester la date de naissance
+from datetime import datetime
+
 global user
 user=anvil.users.get_user()
 
@@ -113,9 +116,22 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             
         # Si Inscription ds un stage numéro > 998 : F ou T ou QCM pas de test sur Naissance et adresse     
         if int(self.stage) < 998:
+            # naissance non vide, supérieure à 15 ans
             if self.date_naissance.date is None :           # dateN vide ?
                 alert("Entrez la date de naissance !")
                 return   
+            now=French_zone.french_zone_time
+            alert(f"type de var: {type(now)}")
+            alert(f"now brute: {now}")
+            now=str(now.date())
+            now=datetime.strptime(now, "%d-%m-%Y")
+            alert(f"now: {now}")
+            date_n=str(self.date_naissance.date)
+            # Convertir la chaîne de caractères en objet datetime
+            date_n = datetime.strptime(date_n, "%d-%m-%Y")
+            alert(f"date_N: {date_n}")
+            time = now - date_n
+            alert(f"écart: {time}")
             if self.text_box_v_naissance.text == "" :    # ville N vide ?
                 alert("Entrez la ville de naissance !")
                 return   
@@ -125,9 +141,17 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
             if self.text_box_ville.text == "":
                 alert("Entrez votre adresse (Ville) !")
                 return
+            # Test sur Code postal, non vide, 5 caractères numériques.
             if self.text_box_code_postal.text == "":
                 alert("Entrez votre adresse (Code Postal) !")
                 return
+            if len(self.text_box_code_postal.text) != 5:
+                alert("Le Code Postal doit être de 5 chiffres")
+            try:
+                cp_test = int(self.text_box_code_postal.text)
+            except:
+                alert("Le Code Postal ne doit contenir que des chiffres")
+                
             # Stage non type formateur: Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
             if self.drop_down_fi.selected_value is None and self.first_entry is True: 
                 alert("Vous devez sélectionner un mode de financement !")
