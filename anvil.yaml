@@ -198,7 +198,7 @@ db_schema:
     server: full
     title: Pre_Requis_stagiaire
   qcm:
-    client: search
+    client: full
     columns:
     - admin_ui: {width: 171}
       name: qcm_nb

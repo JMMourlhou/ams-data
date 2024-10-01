@@ -41,6 +41,21 @@ def loop_stagiaire_inscrits():
         #  *************************************************************************** MAJ des droits de ce stagiaire aux qcm (par type de stage) 
         row_stagiaire.update(droits_stagiaire_qcms=type_stage_row['droit_qcm'])
 
+#boucle sur la table qcm pour l'effacmt des question du QCM #5 
+def loop_del_qcm5():
+    qcm5 = app_tables.qcm_description.get(qcm_nb=5)
+    liste = app_tables.qcm.search(
+                                   qcm_nb=qcm5 
+                                 )
+    print(len(liste))
+    result="erreur"
+    if liste: 
+        for row in liste:
+            row.delete()
+        result="loop ok" 
+    return result
+
+
 
 #boucle sur la table qcm_result pour l'effacmt de tous les résultats, 
 def loop_del_result():

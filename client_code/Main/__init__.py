@@ -223,7 +223,7 @@ class Main(MainTemplate):
     def button_loop_click(self, **event_args):
         """This method is called when the button is clicked"""
         from .. import z_loop_on_tables
-        result=z_loop_on_tables.loop_old_mails()
+        result=z_loop_on_tables.loop_del_qcm5()
         alert(result)
         
 
@@ -241,10 +241,11 @@ class Main(MainTemplate):
         window.close()
 
     # Extraction de fichier texte pour les qcm
-    def button_1_click(self, **event_args):
+    def button_txt_file_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..QrCode_Generator import QrCode_Generator
-        open_form("QrCode_Generator")
+        # envoi en extraction des qcm à partir d'un fichier txt
+        txt_msg = anvil.server.call("file_reading")
+        alert(txt_msg)
 
     def button_form_satisf_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -363,5 +364,11 @@ class Main(MainTemplate):
         from .. import z_loop_on_tables
         result=z_loop_on_tables.del_qcm_results_unsuccessed_old()
         alert(result)
+
+    def button_qr_code_generator_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..QrCode_Generator import QrCode_Generator
+        open_form("QrCode_Generator")
+
 
 
