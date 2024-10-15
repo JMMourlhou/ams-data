@@ -15,7 +15,7 @@ ADD & EFFACEMENT d'1 stagiaire du stage
 
 @anvil.server.callable           # ADD d'un nouveau stagiaire ds le stage
 @anvil.tables.in_transaction
-def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add=""):   # Stage num pas row
+def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add="", pour_stage=None):   # Stage num pas row
     valid=""
     # lecture fichier père stages
     code_stage = app_tables.stages.get(numero=int(stage))
@@ -62,6 +62,15 @@ def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add=""):   # Stage n
                 dico_droits_qcm = type_stage_row['droit_qcm']
             else:
                 dico_droits_qcm = {}
+
+    # Si stage 1003, tuteur, je renseigne la colonne 'pour_stage_num'
+    if int(stage) == 1003:
+        suivi = True
+        # pour_stage_n = XXXX
+    else:
+        suivi = False
+        pour_stage_n = None
+        
     
     new_row=app_tables.stagiaires_inscrits.add_row(
                               stage = code_stage,  
@@ -73,7 +82,8 @@ def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add=""):   # Stage n
                               stage_txt = code_stage['code_txt'],
                               numero = code_stage['numero'],
                               enquete_satisf=False,
-                              enquete_suivi=False
+                              enquete_suivi=suivi,
+                              pour_stage_num=pour_stage_n
                               )
              
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])
