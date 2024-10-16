@@ -665,6 +665,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: temp3
       type: string
+    - admin_ui: {order: 23.25, width: 200}
+      name: temp_for_stage
+      type: number
     server: full
     title: Users
 dependencies:
