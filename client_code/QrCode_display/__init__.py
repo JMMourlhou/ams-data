@@ -12,44 +12,59 @@ from anvil import open_form
 
 class QrCode_display(QrCode_displayTemplate):
     def __init__(self, log_in=False, num_stage=0, **properties):
+        # log_in True qd on veut log in sur l'app sans rien d'autre 
+        
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        
-        # si num_stage="1003", stage tuteur, il faut savoir pour quel stage lestuteurs seront inscrits
-        # l'info sera contenue ds temp_pour_stage ds la table user puis ds table stagiaire inscrit)
-        if int(num_stage) == 1003:
-            # Initialisation du Drop down num_stages et dates
-            list = app_tables.stages.search(
-                                            tables.order_by("code_txt", ascending=True),
-                                            numero = q.less_than(900)
-                                            )
-            self.drop_down_num_stages.items = [r['code_txt']+" / "+(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list]
-            self.column_panel_choix_stage.visible = True
-            
         # Any code you write here will run before the form opens
-        # si log_in = False, appel du qr_code pour que les stagiaires s'inscrivent au stage
-        if log_in is False:
-            # lecture du stage par son numéro si pas de log_in normal
-            stage = app_tables.stages.get(numero=int(num_stage)) 
-            if not stage:
-                alert("Code du stage non trouvé")
-                return
-            txt_stage=stage['code']['code']
-            txt_stage=txt_stage.replace("_","")
-            self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
-            if num_stage==0 :
-                alert("Numéro de stage non valide")
-                return
-            else:
-                time = self.recup_time()
-                param="/#?a=qrcode" + "&stage=" + str(num_stage) + "&t=" + time
-        else:
+        
+        if log_in is True:
             # si log_in =True, appel du qr_code pour que les stagiaires log in ds l'appli, donc pas de num stage
             param = ""
             self.label_titre.text = "Flachez pour vous connecter à l'appli AMSdata "
 
+        # si log_in = False, appel du qr_code pour que les stagiaires s'inscrivent au stage
+        if log_in is False:
+            if num_stage==0 :
+                alert("Numéro de stage non valide")
+                return
+            
+            # lecture du stage par son numéro 
+            stage = app_tables.stages.get(numero=int(num_stage)) 
+            if not stage:
+                alert("Code du stage non trouvé")
+                return
+
+            # si num_stage="1003", stage tuteur, il faut savoir pour quel stage lestuteurs seront inscrits
+            # l'info sera contenue ds temp_pour_stage ds la table user puis ds table stagiaire inscrit)
+            if int(num_stage) == 1003:
+                # Initialisation du Drop down num_stages et dates
+                list = app_tables.stages.search(
+                                                tables.order_by("code_txt", ascending=True),
+                                                numero = q.less_than(900)
+                                                )
+                self.drop_down_num_stages.items = [(r['code_txt']+" / "+str(r['date_debut'])+" / "+str(r['numero']), r) for r in list]
+                self.column_panel_choix_stage.visible = True
+                self.text_area_lien.visible = False
+            
+            
+            txt_stage=stage['code']['code']
+            txt_stage=txt_stage.replace("_","")
+            self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
+           
+            
+            time = self.recup_time()
+            param="/#?a=qrcode" + "&stage=" + str(num_stage) + "&t=" + time
+        
+        
+
+
+
+        # CREER UNE FONCTION pour tous stages 1003 et tous les autres
+        
         # Lecture de la variable globale "code_app1" ds table variables_globales
         app = anvil.server.call('get_variable_value', "code_app1")
+        
         stage_link = app + param  # App "AMS Data"  + code stage
         self.text_area_lien.text = stage_link
         print(stage_link)
@@ -71,7 +86,10 @@ class QrCode_display(QrCode_displayTemplate):
 
     def drop_down_num_stages_change(self, **event_args):
         """This method is called when an item is selected"""
-        pass
+        pour_stage_row = self.drop_down_num_stages.selected_value
+        self.pour_stage = pour_stage_row['numero']
+        self.text_area_lien.visible = False
+        
 
         
 
