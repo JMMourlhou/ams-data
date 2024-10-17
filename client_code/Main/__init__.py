@@ -70,7 +70,7 @@ class Main(MainTemplate):
                     alert("Ce lien n'est plus actif !")
                 else:
                     # stage number in URL's Hash ? (le user vient-il de flacher le Qr code?)
-                    # si oui je suis en sign in après flash du qr code par le stagiaire
+                    # si oui je suis en sign in après flash du qr code par le stagiaire ou click du lien ds un mail
                     if "stage" in h:
                         self.qr_code()
                         return
