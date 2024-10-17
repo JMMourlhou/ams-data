@@ -223,9 +223,6 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def button_insc_par_qr_click(self, **event_args):
         """This method is called when the button is clicked"""
         # si True, appel du qr_code pour que les stagiaires log in ds l'appli
-        if self.selection['numero'] != 1003:
-            open_form('QrCode_display',False, str(self.selection['numero']))
-        else:
-            pass
+        open_form('QrCode_display',False, str(self.selection['numero']))
 
 

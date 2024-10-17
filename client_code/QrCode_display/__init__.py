@@ -14,6 +14,18 @@ class QrCode_display(QrCode_displayTemplate):
     def __init__(self, log_in=False, num_stage=0, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        
+        # si num_stage="1003", stage tuteur, il faut savoir pour quel stage lestuteurs seront inscrits
+        # l'info sera contenue ds temp_pour_stage ds la table user puis ds table stagiaire inscrit)
+        if int(num_stage) == 1003:
+            # Initialisation du Drop down num_stages et dates
+            list = app_tables.stages.search(
+                                            tables.order_by("code_txt", ascending=True),
+                                            numero = q.less_than(900)
+                                            )
+            self.drop_down_num_stages.items = [r['code_txt']+" / "+(str(r['date_debut'])+" / "+str(r['numero']), r) for r in list]
+            self.column_panel_choix_stage.visible = True
+            
         # Any code you write here will run before the form opens
         # si log_in = False, appel du qr_code pour que les stagiaires s'inscrivent au stage
         if log_in is False:
@@ -56,6 +68,10 @@ class QrCode_display(QrCode_displayTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99)
+
+    def drop_down_num_stages_change(self, **event_args):
+        """This method is called when an item is selected"""
+        pass
 
         
 
