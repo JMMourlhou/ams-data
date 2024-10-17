@@ -45,7 +45,7 @@ components:
     type: Image
   - layout_properties: {grid_position: 'MUJMMY,EIJWRE'}
     name: text_area_lien
-    properties: {align: center, auto_expand: true, background: 'theme:Primary', foreground: 'theme:On Primary', height: 46.89910888671875, text: Lien, visible: true}
+    properties: {align: center, auto_expand: true, background: 'theme:Primary', foreground: 'theme:On Primary', height: 46.89910888671875, text: Lien, visible: false}
     type: TextArea
   layout_properties: {grid_position: 'EVIREU,BQKXSN'}
   name: column_panel_2
