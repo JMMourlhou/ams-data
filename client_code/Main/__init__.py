@@ -163,8 +163,14 @@ class Main(MainTemplate):
         
         self.content_panel.clear()
         alert("envoi en SignupDialog_V2")
-        self.content_panel.add_component(SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True)
+        #self.content_panel.add_component(SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True)
 
+        self.content_panel.add_component(
+            SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True
+        )
+
+
+    
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
