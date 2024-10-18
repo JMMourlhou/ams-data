@@ -229,7 +229,13 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                         if user['temp'] < 998:
                             row = self.drop_down_fi.selected_value
                             code_fi=row['code_fi']
-                        txt_msg = anvil.server.call("add_stagiaire", user, self.stage, code_fi, type_add="")
+                        if user['temp'] == 1003:       # si tuteur, chercher ds user['temp_for_stage'] pour quel stage travaille le tuteur
+                            pour_stage = user['temp_for_stage']
+                            print(f"++++++++++++++++++++++++++ 1003 pour stage: {pour_stage}")
+                        else:
+                            pour_stage = 0
+                        
+                        txt_msg = anvil.server.call("add_stagiaire", user, self.stage, code_fi, "", pour_stage)
                         alert(txt_msg)
                         anvil.users.logout()
                         alert("Si ce n'est pas fait, créez un raccourci de cette appli sur votre tel maintenant... \n\n ... puis ouvrez la de nouveau pour commencer à l'utiliser.")

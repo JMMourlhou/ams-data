@@ -68,7 +68,7 @@ def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add="", pour_stage=N
         suivi = True            # le tuteur pourra remplir le suivi
         # pour_stage_n = XXXX
     else:
-        suivi = False           # A MODIFIER, METTRE TOUJOURS TRUE puis test en entrée de module si la date de fin de stage correspond a la date du jour  
+        suivi = False           # A MODIFIER, METTRE TOUJOURS TRUE puis test en entrée de module de saisi de suivi si la date de fin de stage et date today <= 1 mois  
         pour_stage_n = None
         
     
