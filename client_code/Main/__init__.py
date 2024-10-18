@@ -118,16 +118,18 @@ class Main(MainTemplate):
         return
 
     def qr_code(self, **event_args):
-        num_stage = self.h["stage"]            
+        num_stage = self.h["stage"]   
+        if "pour" in h:
+            pour_stage = self.h["pour"]
         # alert(f"num stage test {num_stage}")
         if len(num_stage) != 0:
-            self.bt_sign_in_click(self.h, num_stage)
+            self.bt_sign_in_click(self.h, num_stage, pour_stage)
             return
 
+    
     """ ***********************************************************************************************"""
     """ ****************************** Gestions  BOUTONS et leurs clicks ******************************"""
     """ ***********************************************************************************************"""
-
     def display_bt_mail(self, **event_args):
         user = anvil.users.get_user(q.fetch_only("nom"))
         if user:
