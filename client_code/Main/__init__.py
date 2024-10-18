@@ -119,7 +119,7 @@ class Main(MainTemplate):
 
     def qr_code(self, **event_args):
         num_stage = self.h["stage"]   
-        if "pour" in h:
+        if "pour" in self.h:
             pour_stage = self.h["pour"]
         # alert(f"num stage test {num_stage}")
         if len(num_stage) != 0:
