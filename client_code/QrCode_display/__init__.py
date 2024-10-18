@@ -20,7 +20,6 @@ class QrCode_display(QrCode_displayTemplate):
         
         if log_in is True:
             # si log_in =True, appel du qr_code pour que les stagiaires log in ds l'appli, donc pas de num stage
-            param = ""
             self.label_titre.text = "Flachez pour vous connecter à l'appli AMSdata "
 
         # si log_in = False, appel du qr_code pour que les stagiaires s'inscrivent au stage
@@ -51,7 +50,7 @@ class QrCode_display(QrCode_displayTemplate):
                 self.label_titre.text = "Choisir quel stage encadre le tuteur"
             else:
                 self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
-                self.link_creation(1003, 0)        
+                self.link_creation(num_stage, 0)        
 
     def recup_time(self, **event_args): 
         time=French_zone.french_zone_time()
