@@ -168,9 +168,7 @@ class Main(MainTemplate):
         self.button_form_satisf.visible = False
         """
         self.content_panel.clear()
-        self.content_panel.add_component(
-            SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True
-        )
+        self.content_panel.add_component(SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True)
 
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
