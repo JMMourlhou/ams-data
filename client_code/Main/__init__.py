@@ -121,7 +121,10 @@ class Main(MainTemplate):
         num_stage = self.h["stage"]   
         if "pour" in self.h:
             pour_stage = self.h["pour"]
-        # alert(f"num stage test {num_stage}")
+        else:
+            pour_stage = 0
+            
+        alert(f"pou stage test {pour_stage}")
         if len(num_stage) != 0:
             self.bt_sign_in_click(self.h, num_stage, pour_stage)
             return
@@ -168,6 +171,7 @@ class Main(MainTemplate):
         self.button_form_satisf.visible = False
         """
         self.content_panel.clear()
+        alert("envoi en SignupDialog_V2")
         self.content_panel.add_component(SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True)
 
     def bt_se_deconnecter_click(self, **event_args):
