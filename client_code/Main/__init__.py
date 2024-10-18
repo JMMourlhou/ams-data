@@ -164,7 +164,7 @@ class Main(MainTemplate):
         self.content_panel.add_component(
             SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True
         )
-        #open_form('sign_in_for_AMS_Data.SignupDialog_V2',h, num_stage, pour_stage)
+
     
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
