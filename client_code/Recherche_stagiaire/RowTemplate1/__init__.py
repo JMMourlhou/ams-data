@@ -239,9 +239,9 @@ class RowTemplate1(RowTemplate1Template):
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
-        # Effacement du stgiaire/formateur si pas ds un stage et si administrateur
+        # Effacement du stgiaire/formateur si pas ds un stage et si je suis l'administrateur
         user = anvil.users.get_user()
-        if user["role"] == "A":
+        if user["role"] == "A":   # seul,l'administrateur peut effacer definitivement un stagiaire ou formateur ou tuteur
             # Cette personne est-elle inscrite ds un ou plusieurs stages ?
             list = app_tables.stagiaires_inscrits.search(user_email=self.email_pour_del)
             detail =""
