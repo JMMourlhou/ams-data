@@ -65,11 +65,9 @@ def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add="", pour_stage=N
 
     # Si stage 1003, tuteur, je renseigne la colonne 'pour_stage_num'
     if int(stage) == 1003:
-        suivi = True            # le tuteur pourra remplir le suivi
         #lecture du stage pour enregistrement de son row
         pour_stage_n = app_tables.stages.get(numero=pour_stage)
-    else:
-        suivi = False           # A MODIFIER, METTRE TOUJOURS TRUE puis test en entrée de module de saisi de suivi si la date de fin de stage et date today <= 1 mois  
+    else:  # ce n'est pas un stage tuteur
         pour_stage_n = None
         
     
@@ -82,9 +80,9 @@ def add_stagiaire(stagiaire_row, stage, mode_fi="???", type_add="", pour_stage=N
                               droits_stagiaire_qcms = dico_droits_qcm,
                               stage_txt = code_stage['code_txt'],
                               numero = code_stage['numero'],
-                              enquete_satisf=False,
-                              enquete_suivi=suivi,
-                              pour_stage_num=pour_stage_n
+                              enquete_satisf=False,         # le stagiaire ou tuteur n'a pas encore rempli le formulaire de satisfaction
+                              enquete_suivi=False,          # le stagiaire ou tuteur n'a pas encore rempli le formulaire de suivi
+                              pour_stage_num=pour_stage_n   # voir traitement juste au dessus
                               )
              
     stagiaire_row = app_tables.stagiaires_inscrits.search(stage=new_row['stage'])

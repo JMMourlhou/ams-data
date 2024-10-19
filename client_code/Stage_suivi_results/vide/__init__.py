@@ -3,7 +3,7 @@ from anvil import *
 from anvil_extras.PageBreak import PageBreak
 
 
-# AFFICHAGE vide qd le tuteur a plusieurs stgiaires pour le formulaire de suivi
+# AFFICHAGE vide qd le tuteur a plusieurs stagiaires pour le formulaire de suivi
 # APPELE PAR LA FORM 'S.ItemTemplate17' par add component:
 
 
@@ -16,4 +16,4 @@ class vide(videTemplate):
     
 
     def form_show(self, **event_args):
-        self.add_component(PageBreak())  # si en création de pdf, je saute une page ts les 25 images, NE FONCTIONNE PAS !!!
+        self.add_component(PageBreak())  

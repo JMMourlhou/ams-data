@@ -14,11 +14,11 @@ import fast_pdf
 class Stage_suivi_results(Stage_suivi_resultsTemplate):
     def __init__(self, type_suivi="", pdf_mode=False, row=None, **properties):  # si pdf=True, cette forme  appellée par pdf renderer
         # Set Form properties and Data Bindings.
+        self.init_components(**properties)
+        # Any code you write here will run before the form opens.
         self.pdf_mode = pdf_mode     # si on vient du BG task pour génération du pdf, pdf_mode = True
         self.type_suivi = type_suivi # si on vient du BG task pour génération du pdf, rappel quel suivi est demandé, Stagiaire ou Tuteur
-        self.init_components(**properties)
         self.column_panel_mailing.visible = False
-        # Any code you write here will run before the form opens.
         
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object
@@ -28,11 +28,12 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         global cpt
         cpt = 0
 
-        # sélection des stages si la saisie du formulaire a été validée (saisie_suivi_ok=True)
+        # sélection des stages visualisés ds dropdown (si la saisie du formulaire a été authorisée (table 'stages': saisie_suivi_ok=True))
         liste_stage_drop_down = []
         liste_stages = app_tables.stages.search(
             tables.order_by("numero", ascending=False), saisie_suivi_ok=True
         )
+        
         # initialistaion de la drop down codes stagiaires
         for stage in liste_stages:
             row_stage = app_tables.stages.get(numero=int(stage["numero"]))
@@ -54,11 +55,12 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
             self.button_annuler2.visible = False
             self.button_downl_pdf1.visible = False
             self.button_downl_pdf0.visible = False
-            
+
+            # exécution automatique, simulation de la sélection du stage en drop down 
             if self.type_suivi == "S":
                 self.drop_down_code_stagiaires_change(row)   # row envoyé par la bg task 
-            else:
-                self.drop_down_code_tuteurs_change(row)
+            else:  # Tuteurs
+                self.drop_down_code_tuteurs_change(row)      # row envoyé par la bg task 
     
     # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
     def drop_down_code_stagiaires_change(self, row=None ,**event_args):
@@ -72,7 +74,8 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
                 self.drop_down_code_stagiaires.focus()
                 return
         self.traitement(self.type_de_suivi,row)
-
+        
+    # si row not None, Cette forme est ouverte en appel du pdf renderer, j'ai déjà le row du stage
     def drop_down_code_tuteurs_change(self, row=None, **event_args):  # row vient du bg task
         """This method is called when an item is selected"""
         self.type_de_suivi = "T"   
@@ -92,7 +95,7 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         self.row = row
         self.type_de_suivi = type_de_suivi
         """ ------------------------------------------------------------------------
-                    INITIALISATION DE LA LISTE DES NON REPONSES (column panel)
+                    INITIALISATION DE LA LISTE DES NON REPONSES (pour 'repeating_panel_no_response')
         """
         if type_de_suivi == "S":   # Stagiaires du stage sélectionné 
             self.label_titre_no_response.text = "Stagiaires n'ayant pas encore répondu"

@@ -13,8 +13,13 @@ class ItemTemplate14(ItemTemplate14Template):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.button_mail.tag = self.item['user_email']
-        self.text_box_1.text = self.item['name']+" "+self.item['prenom']+" "+self.item['user_email']['tel']
-
+        #erreur si tel vide
+        try:
+            self.text_box_1.text = self.item['name']+" "+self.item['prenom']+" "+self.item['user_email']['tel']
+        except:
+            self.text_box_1.text = self.item['name']+" "+self.item['prenom']
+            
+            
     def button_mail_click(self, **event_args):
         """This method is called when the button is clicked"""
         liste_email = []

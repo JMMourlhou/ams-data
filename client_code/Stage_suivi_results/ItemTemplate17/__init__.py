@@ -10,20 +10,25 @@ from ..Stage_suivi_rep_ouvertes import (Stage_suivi_rep_ouvertes)   #  Forme ajo
 from ..vide import vide
 from anvil_extras.PageBreak import PageBreak
 
-# AFFICHAGE DES PRENOM / NOM des stagiaires
+# AFFICHAGE DU PRENOM / NOM du stagiaire ou Tuteur
+# Recherche et affichage de ses Q/Rep ouvertes et fermées
+
 class ItemTemplate17(ItemTemplate17Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
         # Any code you write here will run before the form opens.
 
         # lecture fichier temp (get_open_form ne fonctionne pas si je suis en BGT, génération du pdf de suivi)
         temp_row = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
         type_suivi = temp_row['type_suivi']
-           
-        self.label_1.text = self.item['prenom'] +" "+ self.item['name']+" "+ self.item['user_email']['tel']
-        
+
+        # erreur si tel pas rentré
+        try:
+            self.label_1.text = self.item['prenom'] +" "+ self.item['name']+" "+ self.item['user_email']['tel']
+        except:
+            self.label_1.text = self.item['prenom'] +" "+ self.item['name']
+            
         # recherche du ou des formulaires du stagiaire ou Tuteur 
         if type_suivi == "S":
             list = app_tables.stage_suivi.search(

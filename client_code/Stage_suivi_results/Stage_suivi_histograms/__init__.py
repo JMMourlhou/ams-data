@@ -12,7 +12,7 @@ from plotly import graph_objects as go
 from anvil_extras.PageBreak import PageBreak
 
 
-# AFFICHAGE DES RESULTATS d pour 1 question fermée du formulaire de suivi
+# AFFICHAGE D'un plot histogramme // RESULTATS pour 1 question fermée du formulaire de suivi
 # APPELE PAR LA FORM 'STAGE_SATISF_Statistics' par add component:
 #   (  self.column_panel_content.add_component(Stage_suivi_histograms(qt,r0,r1,r2,r3,r4,r5)) )
 
