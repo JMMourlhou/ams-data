@@ -128,7 +128,9 @@ class RowTemplate1(RowTemplate1Template):
                     if code_fi == "??":
                         alert("Sélectionner un mode de financement")
                         return
-                    txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
+                        
+                    #                                            row satgiaire  numero  code_fi  origine         stage pour lequel travaille le tuteur           
+                    txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage,  code_fi, "bt_recherche", 0)
                     alert(txt_msg)
                     open_form('Recherche_stagiaire', stage)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo
             
@@ -149,8 +151,8 @@ class RowTemplate1(RowTemplate1Template):
                 nom_dropdown = 'choix_stage'  # sera également la clef du dictionnaire de sortie/résultat ib.results
                 ib = InputBox('Choix du stage du tuteur', ['OK', 'Cancel'], default_button='OK',large=True)  # si touche return = OK
                 
-                row = app_tables.mode_financement.get(code_fi="??")   #Pour sélectionner la row selected value de dropdown
-                ib.add_dropdown(name=nom_dropdown, prompt="",items=[(r['intitule_fi'], r) for r in app_tables.mode_financement.search(tables.order_by("intitule_fi", ascending=True))], selected_value=row,events=[('change', dropdown_change)])
+                row = app_tables.stages.get(code_txt="BPMOTO")   #Pour sélectionner la row selected value de dropdown
+                ib.add_dropdown(name=nom_dropdown, prompt="",items=[(r['code_txt']+" / "+str(r['date_debut'])+" / "+str(r['numero']), r) for r in app_tables.stages.search(tables.order_by("code_txt", ascending=True),numero = q.less_than(900))], selected_value=row,events=[('change', dropdown_change)])
                 # Je peux rajouter ds ma input box d'autres components:
                 #ib.add_textbox(text=30, prompt='Width:', visible=True)  # visible True par défaut
                 #ib.add_textbox(text=20, prompt='Height:', visible=True)
@@ -158,15 +160,16 @@ class RowTemplate1(RowTemplate1Template):
                 ib.show()
                 #alert(ib.results)
                 result=ib.results   #dictionaire  clef 'choix_stage' valeur=row table stage sélectionné
-                # ex de result:     {'choix_stage': <anvil.tables.Row: num_stage='120', ='Association finance'>, 'clicked_button': 'OK'}
-                valid = result.get('clicked_button')   # extraction de la valeur de la clef 'num_stage' ds dropdown 'choix_stage'
+                # ex de result:     {'choix_stage': <anvil.tables.Row: numero='120', type_stage='S', .... >, 'clicked_button': 'OK'}
+                valid = result.get('clicked_button')   # extraction de la valeur de la clef 'numero' ds dropdown 'choix_stage'
                 if valid == 'OK':
-                    code_fi = result.get('mode_fi')['code_fi']   # ds dict 'result', extraction de la valeur de la clef 'mode_fi' (row, col 'code_fi')
+                    pour_stage = result.get('choix_stage')['numero']   # ds dict 'result', extraction de la valeur de la clef 'mode_fi' (row, col 'code_fi')
                     #alert(code_fi)
-                    if code_fi == "??":
-                        alert("Sélectionner un mode de financement")
+                    if pour_stage is None:
+                        alert("Sélectionner un stage")
                         return
-                    txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage, code_fi, type_add="bt_recherche")
+                    #                                            row satgiaire  numero  code_fi  origine         stage pour lequel travaille le tuteur       
+                    txt_msg = anvil.server.call("add_stagiaire", stagiaire_row, stage,  'NUL',   "bt_recherche", pour_stage)
                     alert(txt_msg)
                     open_form('Recherche_stagiaire', stage)  # réouvre la forme mère pour mettre à jour l'affichage de l'histo
 
