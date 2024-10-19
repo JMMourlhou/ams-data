@@ -96,12 +96,15 @@ class Visu_trombi(Visu_trombiTemplate):
 
                 # Tel
                 tel=row["user_email"]['tel']
-                a = tel[0:2]   # mise en forme du tel
-                b = tel[2:4]
-                c = tel[4:6]
-                d = tel[6:8]
-                e = tel[8:10]
-                tel = a+"-"+b+"-"+c+"-"+d+"-"+e    
+                try:
+                    a = tel[0:2]   # mise en forme du tel
+                    b = tel[2:4]
+                    c = tel[4:6]
+                    d = tel[6:8]
+                    e = tel[8:10]
+                    tel = a+"-"+b+"-"+c+"-"+d+"-"+e    
+                except:
+                    tel="Tel ?"
                 self.bt2 = Button(text=tel, tag = mel, spacing_above = None, background="", foreground="blue", bold=True, font_size = 14, enabled = True)
                 self.bt2.set_event_handler('click',self.bt_click)
 
