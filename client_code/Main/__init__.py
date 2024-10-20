@@ -157,13 +157,12 @@ class Main(MainTemplate):
 
     def bt_sign_in_click(self, h={}, num_stage=0, pour_stage=0, **event_args):  # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""
-        alert(h)
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
         self.bt_user_mail.visible = False
         self.column_panel_2.visible = False
         self.content_panel.clear()        
         self.content_panel.add_component(
-            SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True
+            SignupDialog_V2(h, num_stage, pour_stage, full_width_row=True
         )
 
     
