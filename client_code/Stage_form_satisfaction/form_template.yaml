@@ -89,12 +89,12 @@ components:
     - event_bindings: {change: check_box_1_3_change}
       layout_properties: {}
       name: check_box_1_3
-      properties: {background: 'theme:Jaune Orangé', text: '2'}
+      properties: {background: 'theme:Jaune Orange', text: '2'}
       type: CheckBox
     - event_bindings: {change: check_box_1_4_change}
       layout_properties: {}
       name: check_box_1_4
-      properties: {background: 'theme:Vers Très Clair', text: '3'}
+      properties: {background: 'theme:Vert Tres Clair', text: '3'}
       type: CheckBox
     - event_bindings: {change: check_box_1_5_change}
       layout_properties: {}
