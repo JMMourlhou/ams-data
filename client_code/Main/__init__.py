@@ -161,9 +161,7 @@ class Main(MainTemplate):
         self.bt_user_mail.visible = False
         self.column_panel_2.visible = False
         self.content_panel.clear()        
-        self.content_panel.add_component(
-            SignupDialog_V2(h, num_stage, pour_stage, full_width_row=True
-        )
+        self.content_panel.add_component(SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True)
 
     
     def bt_se_deconnecter_click(self, **event_args):
