@@ -25,6 +25,7 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         self.intitule = intitule
         self.pdf_mode = pdf_mode
         if self.pdf_mode is True:                 # mode pdf renderer
+            self.column_panel_boutons.visible = False
             self.button_annuler.visible = False
             self.button_trombi.visible = False
         

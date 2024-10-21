@@ -37,7 +37,7 @@ class ItemTemplate2(ItemTemplate2Template):
             #self.text_box_5.text = finance['intitule_fi']
 
             self.rich_text_1.border="0px solid blue"
-            self.rich_text_1.font_size=12
+            self.rich_text_1.font_size=14
             self.rich_text_1.bold=False
             self.rich_text_1.italic=False
             self.rich_text_1.align="center"
