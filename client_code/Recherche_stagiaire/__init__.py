@@ -13,13 +13,14 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
             
-        # Pour une inscription:
+        # Pour une inscription (self.num_stage != "")
         self.label_origine.text = str(get_open_form())
         self.num_stage = num_stage
         self.label_num_stage.text = num_stage
         if self.num_stage != "":  
             self.drop_down_code_stage.visible = False
             self.drop_down_num_stages.visible = False
+
         
         # Drop down codes stages
         self.drop_down_code_stage.items = [(r['code'], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
