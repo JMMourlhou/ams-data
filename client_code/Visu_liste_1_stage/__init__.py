@@ -10,6 +10,8 @@ import anvil.media                               # pour le pdf standard
 global pdf_mode
 pdf_mode=False
 
+# Affichage et génération du pdf des fiches stagiaires du stage
+
 class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
         print("pdf_mode ", pdf_mode)

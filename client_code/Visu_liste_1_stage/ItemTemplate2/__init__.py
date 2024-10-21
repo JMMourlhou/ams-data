@@ -8,12 +8,12 @@ from anvil.tables import app_tables
 
 from ... import French_zone # calcul tps traitement
 
-
 from ..._Constant_parameters_public_ok import nb_fiche_stagiaire_pdf   # pour param nb de fiches à imprimer 
 from anvil_extras.PageBreak import PageBreak
 global cpt  # Cpt le nb de form imprimée
 cpt = 0
 
+# Repeating panel appelée par Visu_liste_1_stage
 class ItemTemplate2(ItemTemplate2Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.

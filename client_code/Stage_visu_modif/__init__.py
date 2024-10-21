@@ -51,12 +51,14 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.button_fiches_stagiaires.visible = False
             self.button_visu_fiches_stagiaires.visible = False
 
+        # si option stable cochée, true, on lancera les bgt du trombi et fiches
         if stage_row['allow_bgt_generation'] is False:
             self.button_fiches_stagiaires.visible = False
             self.button_trombi_pdf.visible = False
         else:
             self.button_fiches_stagiaires.visible = True
             self.button_trombi_pdf.visible = True
+            
         #lecture intitulé stage
         global intitul
         intitul = stage_row['code']['code']
