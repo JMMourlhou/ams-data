@@ -13,7 +13,7 @@ from anvil_extras.PageBreak import PageBreak
 global cpt  # Cpt le nb de form imprimée
 cpt = 0
 
-# Repeating panel appelée par Visu_liste_1_stage
+# Repeating panel appelée par Visu_liste_1_stage, affichage des fiches stagiaires
 class ItemTemplate2(ItemTemplate2Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -25,15 +25,8 @@ class ItemTemplate2(ItemTemplate2Template):
         stagiaire = app_tables.users.get(   q.fetch_only("photo", 'date_naissance', 'nom', 'prenom', 'email', 'tel', 'ville_naissance','code_postal_naissance','pays_naissance','adresse_rue','adresse_code_postal','adresse_ville'),
                                             email=mel)    
         if stagiaire :
-            start = French_zone.french_zone_time()  # pour calcul du tpsde traitement (environ 25 se)
+            start = French_zone.french_zone_time()  # pour calcul du tps de traitement (environ 25 se)
             #Photo
-            """
-            orig_pic = stagiaire['photo']
-            if orig_pic != None:
-                thumb_pic = anvil.image.generate_thumbnail(orig_pic, 320)
-                self.image_1.source = thumb_pic
-            """
-            
             self.image_1.source = stagiaire['photo']
             end = French_zone.french_zone_time()
             print("Temps de traitement image: ", end-start)
@@ -44,7 +37,7 @@ class ItemTemplate2(ItemTemplate2Template):
             #self.text_box_5.text = finance['intitule_fi']
 
             self.rich_text_1.border="0px solid blue"
-            self.rich_text_1.font_size=17
+            self.rich_text_1.font_size=16
             self.rich_text_1.bold=False
             self.rich_text_1.italic=False
             self.rich_text_1.align="center"
@@ -62,8 +55,11 @@ class ItemTemplate2(ItemTemplate2Template):
     def image_1_show(self, **event_args):
         #This method is called when the Image is shown on the screen
     
-        global cpt  # Cpt le nb de form imprimée
+        global cpt  # Cpt le nb d'images imprimées
         cpt += 1
+        mail = self.item["user_email"]['email']
+        test = cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf
+        print(f"{cpt}: {mail} / {test}")
         # variable globale "nb_fiche_stagiaire_pdf" (module public variables_globales)   VOIR IMPORT EN HAUT
 
         #nb_fiche_stagiaire_pdf = anvil.server.call('get_variable_value', "nb_fiche_stagiaire_pdf")

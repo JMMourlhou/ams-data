@@ -11,6 +11,7 @@ global pdf_mode
 pdf_mode=False
 
 # Affichage et génération du pdf des fiches stagiaires du stage
+# appelera V.ItemTemplate2
 
 class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
     def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
@@ -30,8 +31,9 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         #lecture du fichier père stages
         stage_row = app_tables.stages.get(  q.fetch_only("code_txt"),
                                             numero=int(num_stage))    
+
         stagiaires_liste =  app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", 
-                                                                                  user_email=q.fetch_only()),
+                                                                                user_email=q.fetch_only()),
                                                                     tables.order_by("name", ascending=True),
                                                                     stage=stage_row
                                                                 )
