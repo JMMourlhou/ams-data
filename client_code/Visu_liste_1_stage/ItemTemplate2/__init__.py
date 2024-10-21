@@ -11,7 +11,7 @@ from ... import French_zone # calcul tps traitement
 from ..._Constant_parameters_public_ok import nb_fiche_stagiaire_pdf   # pour param nb de fiches à imprimer 
 from anvil_extras.PageBreak import PageBreak
 global cpt  # Cpt le nb de form imprimée
-cpt = 0
+cpt = -1
 
 # Repeating panel appelée par Visu_liste_1_stage, affichage des fiches stagiaires
 class ItemTemplate2(ItemTemplate2Template):
@@ -37,7 +37,7 @@ class ItemTemplate2(ItemTemplate2Template):
             #self.text_box_5.text = finance['intitule_fi']
 
             self.rich_text_1.border="0px solid blue"
-            self.rich_text_1.font_size=16
+            self.rich_text_1.font_size=12
             self.rich_text_1.bold=False
             self.rich_text_1.italic=False
             self.rich_text_1.align="center"
@@ -58,10 +58,10 @@ class ItemTemplate2(ItemTemplate2Template):
         global cpt  # Cpt le nb d'images imprimées
         cpt += 1
         mail = self.item["user_email"]['email']
-        test = cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf
+        test = (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf
         print(f"{cpt}: {mail} / {test}")
         # variable globale "nb_fiche_stagiaire_pdf" (module public variables_globales)   VOIR IMPORT EN HAUT
 
         #nb_fiche_stagiaire_pdf = anvil.server.call('get_variable_value', "nb_fiche_stagiaire_pdf")
-        if (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf == cpt:          # ts les 1 ou 5 stagiaires, selon param global
+        if (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf == cpt and cpt != 0:          # ts les 1 ou 5 stagiaires, selon param global
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les n stagiares 

@@ -7,12 +7,12 @@ components:
   - event_bindings: {click: button_annuler_click}
     layout_properties: {grid_position: 'VXFMPQ,YOTCJN'}
     name: button_annuler
-    properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Retour, tooltip: '', underline: false, visible: true}
+    properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
     type: Button
   - event_bindings: {click: button_trombi_click}
     layout_properties: {grid_position: 'VXFMPQ,ESVUGG'}
     name: button_trombi
-    properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: Trombi, tooltip: '', underline: false, visible: true}
+    properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: Trombi, tooltip: '', underline: false, visible: true}
     type: Button
   layout_properties: {grid_position: 'GUJKVN,OHOFYT'}
   name: column_panel_header
