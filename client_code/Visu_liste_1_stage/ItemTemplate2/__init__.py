@@ -10,7 +10,7 @@ from ... import French_zone # calcul tps traitement
 
 from ..._Constant_parameters_public_ok import nb_fiche_stagiaire_pdf   # pour param nb de fiches à imprimer 
 from anvil_extras.PageBreak import PageBreak
-global cpt  # Cpt le nb de form imprimée
+global cpt  # Cpt le nb d'images imprimées
 cpt = -1
 
 # Repeating panel appelée par Visu_liste_1_stage, affichage des fiches stagiaires
