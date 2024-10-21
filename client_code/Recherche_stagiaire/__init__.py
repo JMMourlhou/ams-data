@@ -170,7 +170,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
 
     def button_efface_click(self, **event_args):    # # j'efface les critères
         """This method is called when the button is clicked"""
-        open_form('Recherche_stagiaire')
+        open_form('Recherche_stagiaire', self.num_stage)
 
     def text_box_nom_pressed_enter(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
