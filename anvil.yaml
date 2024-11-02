@@ -464,6 +464,9 @@ db_schema:
     - admin_ui: {order: 25, width: 200}
       name: com_ferm
       type: simpleObject
+    - admin_ui: {order: 26, width: 200}
+      name: display_com
+      type: bool
     server: full
     title: Stages
   stagiaires_histo:
