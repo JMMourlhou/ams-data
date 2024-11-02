@@ -50,8 +50,9 @@ components:
     properties: {align: center, background: '', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: full, visible: true}
     type: FlowPanel
   - components:
-    - layout_properties: {}
-      name: drop_down_stagiaire
+    - event_bindings: {change: drop_down_stagiaires_change}
+      layout_properties: {}
+      name: drop_down_stagiaires
       properties:
         align: full
         background: theme:Tertiary

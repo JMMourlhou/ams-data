@@ -13,7 +13,7 @@ from anvil.tables import app_tables
 global user_stagiaire
 user_stagiaire = anvil.users.get_user()
 global stage_row
-stage_row = ()
+stage_row = None
 global nb_questions_ferm  # nb questions fermées (check 0 à 5)
 nb_questions_ferm = 0
 global nb_questions_ouvertes  # nb questions ouvertes
@@ -77,7 +77,8 @@ class Stage_form_com(Stage_form_comTemplate):
 
         global user_stagiaire
         if user_stagiaire:
-            # Drop down stages inscrits du user
+            
+            # Initilistaion de la drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(
                 q.fetch_only(
                     "user_email", "stage"
@@ -86,6 +87,7 @@ class Stage_form_com(Stage_form_comTemplate):
     
             )
             print("nb de stages où le stagiaire est inscrit; ", len(liste0))
+            
             liste_drop_d = []
             for row in liste0:
                 # lecture fichier père stage
@@ -122,13 +124,34 @@ class Stage_form_com(Stage_form_comTemplate):
             self.drop_down_code_stage.focus()
             return
         self.text_area_a1.text = None
+        self.drop_down_stagiaires.visible = True
+        # sélection des stagiaires du stage sélectionné
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(tables.order_by("prenom", ascending=True),
+                                                                    stage = stage_row
+                                                                )
+        print(len(liste_stagiaires))
+        # création de la drop down stgaiaires du stage
+        liste_drop_d_stagiaires = []
+        for stagiaire in liste_stagiaires:
+            ligne_drop_d_visible = stagiaire["prenom"]+" "+stagiaire["name"]
+            liste_drop_d_stagiaires.append((ligne_drop_d_visible, stagiaire['user_email']))
+        self.drop_down_stagiaires.items = liste_drop_d_stagiaires
+        
+        
+
+
+    def drop_down_stagiaires_change(self, **event_args):
+        self.stagiaire_choisi = self.drop_down_stagiaires.selected_value # user row from stagiaire inscrit
+        
+        global stage_row
         # extraction des 2 dictionnaires du stage
         dico_q_ferm = {}
         dico_q_ouv = {}
         dico_q_ferm = stage_row["com_ferm"]
         global nb_questions_ferm  # nb questions fermées (testé en validation)
         nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
-
+        
+        #affichage des formes fermées  en fonction de leur nb 
         if nb_questions_ferm > 0:  # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
             self.label_1.text = dico_q_ferm["1"][0]  # Je prend le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
@@ -159,7 +182,8 @@ class Stage_form_com(Stage_form_comTemplate):
         if nb_questions_ferm > 9:
             self.column_panel_10.visible = True
             self.label_10.text = dico_q_ferm["10"][0]
-
+            
+        #affichage des formes ouvertes en fonction de leur nb 
         dico_q_ouv = stage_row["com_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
         global nb_questions_ouvertes  # nb questions ouvertes
         nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
@@ -970,37 +994,40 @@ class Stage_form_com(Stage_form_comTemplate):
         dico_rep_q_ouv = {}  #     clé:num question   valeur: = question txt,reponse (txt)
 
         for cp in self.get_components():  # column panels in form self
-            if (cp.tag != 0 and cp.tag != "header"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
-                num_question = cp.tag
-                print("test erreur: tag : ",cp.text)
-                if num_question <= nb_questions_ferm:
-                    try:
-                        for objet in cp.get_components():  # objets ds column panel
-                            try:
-                                if objet.tag == "label":
-                                    question = objet.text
-                                if objet.tag == "fp":
-                                    cpt = 0
-                                    rep = ""
-                                    for box in objet.get_components():
-                                        if box.checked is True:
-                                            rep = cpt  # si rep1 est 2, indique 1
-                                            clef = str(
-                                                num_question
-                                            )  # la clé doit être str qd j'envoie le dico en server-side
-                                            valeur = (question, rep)
-                                            dico_rep_q_ferm[clef] = valeur
-                                            break
-                                        else:
-                                            cpt += 1
-                                    print("question : ", num_question, "rep :", rep)
-                            except:
-                                pass
-                    except:
-                        pass
-                else:  # nb de questions atteint, on sort
-                    break
+            if cp.tag != 0 and cp.tag != "header":  # si pas les col panel du haut de la forme, ce sont des cp des questions
 
+                num_question = cp.tag
+                try:
+                    
+                    if num_question <= nb_questions_ferm:
+                        try:
+                            for objet in cp.get_components():  # objets ds column panel
+                                try:
+                                    if objet.tag == "label":
+                                        question = objet.text
+                                    if objet.tag == "fp":
+                                        cpt = 0
+                                        rep = ""
+                                        for box in objet.get_components():
+                                            if box.checked is True:
+                                                rep = cpt  # si rep1 est 2, indique 1
+                                                clef = str(
+                                                    num_question
+                                                )  # la clé doit être str qd j'envoie le dico en server-side
+                                                valeur = (question, rep)
+                                                dico_rep_q_ferm[clef] = valeur
+                                                break
+                                            else:
+                                                cpt += 1
+                                        print("question : ", num_question, "rep :", rep)
+                                except:
+                                    pass
+                        except:
+                            pass
+                    else:  # nb de questions atteint, on sort
+                        break
+                except:
+                    pass
         # Création du dict réponses ouvertes
         clef = "1"  # num question ,  la clé doit être str qd j'envoie le dico en server-side
         if int(clef) <= nb_questions_ouvertes:
@@ -1055,7 +1082,7 @@ class Stage_form_com(Stage_form_comTemplate):
         # Print pour vérif des 2 dicos
         print()
         print("============== Dict reponses fermées: ")
-        print(dico_rep_q_ferm)
+        print("dico fermé",dico_rep_q_ferm)
         print()
         print("============== Dict reponses ouvertes: ")
         print(dico_rep_q_ouv)
@@ -1063,18 +1090,19 @@ class Stage_form_com(Stage_form_comTemplate):
         date_time = ""
         date_time = French_zone.french_zone_time()  # importé en ht de ce script,
         print()
-        date = str(date_time)[0:10]  # je prends les 19 1ers caract
+        date = str(date_time)[0:10]  # je prends les 10 1ers caract (date uniqt)
         print(date)
+        
 
         global user_stagiaire
-        result = anvil.server.call(
-            "add_1_formulaire_satisfaction",
-            user_stagiaire,
-            stage_row,
-            dico_rep_q_ferm,
-            dico_rep_q_ouv,
-            date,
-        )
+        result = anvil.server.call("add_1_formulaire_com",
+                                    stage_row,
+                                    stage_row["numero"],
+                                    self.stagiaire_choisi,   # user_row from table stagiaires inscrits
+                                    dico_rep_q_ferm,
+                                    dico_rep_q_ouv,
+                                    date,
+                                )
         if result is True:
             alert(
                 "Merci pour vos réponses ! \n \n Ce formulaire est sauvé, \n (ANONYMEMENT)"
@@ -1082,3 +1110,5 @@ class Stage_form_com(Stage_form_comTemplate):
             self.button_annuler_click()
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")
+
+

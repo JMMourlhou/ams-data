@@ -107,12 +107,14 @@ def add_1_formulaire_suivi( user_stagiaire,              # users row (celui qui 
 # =======================================================================================================
 @anvil.server.callable           #AJOUT d'un formulaire commmunication ds table com, appelé par Stage_form_com
 @anvil.tables.in_transaction
-def add_1_formulaire_com(  user_stagiaire,              # users row
-                                    stage_row,                   # stages row
-                                    dico_rep_q_ferm,
-                                    dico_rep_q_ouv,
-                                    date
-                                ):
+def add_1_formulaire_com(  
+                            stage_row, # row table stage 
+                            stage_numero_txt, # num du stage en txt
+                            user_row,              # user row du stagiare choisi en communication
+                            dico_rep_q_ferm,
+                            dico_rep_q_ouv,
+                            date
+                        ):
     # Print pour vérif des 2 dicos    
     print("=============== serveur side:")
     print("============== Dict reponses fermées: ")
@@ -124,15 +126,15 @@ def add_1_formulaire_com(  user_stagiaire,              # users row
     print(date)
     
     new_row=app_tables.com.add_row(stage_row=stage_row,
-                                            stage_type_txt=stage_row["code_txt"],
-                                            stage_num_txt=str(stage_row["numero"]),
-                                            date=date,
-                                            rep_dico_rep_ferm=dico_rep_q_ferm,
-                                            rep_dico_rep_ouv=dico_rep_q_ouv
+                                            stage_num_txt = str(stage_numero_txt),
+                                            user          = user_row,
+                                            date          = date,              # date txt
+                                            com_ferm      = dico_rep_q_ferm,
+                                            com_ouv       = dico_rep_q_ouv
                                          )
     id=new_row.get_id()
     #relecture du row:
-    re_read_row= app_tables.stage_satisf.get_by_id(id)
+    re_read_row= app_tables.com.get_by_id(id)
     
     if re_read_row:  
         return(True)
