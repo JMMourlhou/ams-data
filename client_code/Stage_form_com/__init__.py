@@ -27,6 +27,7 @@ class Stage_form_com(Stage_form_comTemplate):
 
         # Any code you write here will run before the form opens.
         self.column_panel_header.tag = "header"
+        
         self.column_panel_0.tag = 0
         self.column_panel_1.tag = 1
         self.column_panel_2.tag = 2
@@ -38,6 +39,21 @@ class Stage_form_com(Stage_form_comTemplate):
         self.column_panel_8.tag = 8
         self.column_panel_9.tag = 9
         self.column_panel_10.tag = 10
+
+        self.column_panel_a1.tag = 0
+        self.column_panel_a2.tag = 0
+        self.column_panel_a3.tag = 0
+        self.column_panel_a4.tag = 0
+        self.column_panel_a5.tag = 0
+        self.column_panel_a6.tag = 0
+        self.column_panel_a7.tag = 0
+        self.column_panel_a8.tag = 0
+        self.column_panel_a9.tag = 0
+        self.column_panel_a10.tag = 0
+        
+        #self.flow_panel_0.tag = "header"
+        #self.flow_panel_11.tag = "header"
+        
         self.flow_panel_1.tag = "fp"
         self.flow_panel_2.tag = "fp"
         self.flow_panel_3.tag = "fp"
@@ -75,7 +91,7 @@ class Stage_form_com(Stage_form_comTemplate):
                 # lecture fichier père stage
                 stage = app_tables.stages.get(numero=row["stage"]["numero"])
                 if (
-                    stage["saisie_satisf_ok"] is True
+                    stage["display_com"] is True
                 ):  # si autorisé à saisir le formulaire, je l'affiche
                     # lecture fichier père type de stage
                     type = app_tables.codes_stages.get(
@@ -109,21 +125,13 @@ class Stage_form_com(Stage_form_comTemplate):
         # extraction des 2 dictionnaires du stage
         dico_q_ferm = {}
         dico_q_ouv = {}
-        dico_q_ferm = stage_row["satis_dico1_q_ferm"]
+        dico_q_ferm = stage_row["com_ferm"]
         global nb_questions_ferm  # nb questions fermées (testé en validation)
-        nb_questions_ferm = int(
-            dico_q_ferm["NBQ"]
-        )  # nb de questions fermées ds le dico
+        nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
 
-        if (
-            nb_questions_ferm > 0
-        ):  # Check du nb de questions fermées à afficher et affectation des questions
+        if nb_questions_ferm > 0:  # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
-            self.label_1.text = dico_q_ferm[
-                "1"
-            ][
-                0
-            ]  # Je prend le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
+            self.label_1.text = dico_q_ferm["1"][0]  # Je prend le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
         if nb_questions_ferm > 1:
             self.column_panel_2.visible = True
             self.label_2.text = dico_q_ferm["2"][0]
@@ -152,9 +160,7 @@ class Stage_form_com(Stage_form_comTemplate):
             self.column_panel_10.visible = True
             self.label_10.text = dico_q_ferm["10"][0]
 
-        dico_q_ouv = stage_row[
-            "satis_dico2_q_ouv"
-        ]  # check du nb de questions ouvertes à afficher et affectation des questions
+        dico_q_ouv = stage_row["com_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
         global nb_questions_ouvertes  # nb questions ouvertes
         nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
         if nb_questions_ouvertes > 0:
@@ -884,7 +890,7 @@ class Stage_form_com(Stage_form_comTemplate):
 
         # tests si questions ouvertes obligatoires sont répondues
         global stage_row
-        dico_ouv = stage_row["satis_dico2_q_ouv"]
+        dico_ouv = stage_row["com_ouv"]
 
         if (
             self.column_panel_a1.visible is True and dico_ouv["1"][1] == "obligatoire"
@@ -964,10 +970,9 @@ class Stage_form_com(Stage_form_comTemplate):
         dico_rep_q_ouv = {}  #     clé:num question   valeur: = question txt,reponse (txt)
 
         for cp in self.get_components():  # column panels in form self
-            if (
-                cp.tag != 0 and cp.tag != "header"
-            ):  # si pas les col panel du haut de la forme, ce sont des cp des questions
+            if (cp.tag != 0 and cp.tag != "header"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
                 num_question = cp.tag
+                print("test erreur: tag : ",cp.text)
                 if num_question <= nb_questions_ferm:
                     try:
                         for objet in cp.get_components():  # objets ds column panel
@@ -1058,8 +1063,8 @@ class Stage_form_com(Stage_form_comTemplate):
         date_time = ""
         date_time = French_zone.french_zone_time()  # importé en ht de ce script,
         print()
-        date_time = str(date_time)[0:19]  # je prends les 19 1ers caract
-        print(date_time)
+        date = str(date_time)[0:10]  # je prends les 19 1ers caract
+        print(date)
 
         global user_stagiaire
         result = anvil.server.call(
@@ -1068,7 +1073,7 @@ class Stage_form_com(Stage_form_comTemplate):
             stage_row,
             dico_rep_q_ferm,
             dico_rep_q_ouv,
-            date_time,
+            date,
         )
         if result is True:
             alert(

@@ -51,7 +51,7 @@ components:
     type: FlowPanel
   - components:
     - layout_properties: {}
-      name: drop_down_stagiairee
+      name: drop_down_stagiaire
       properties:
         align: full
         background: theme:Tertiary
