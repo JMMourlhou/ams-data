@@ -364,5 +364,10 @@ class Main(MainTemplate):
         from ..QrCode_Generator import QrCode_Generator
         open_form("QrCode_Generator")
 
+    def button_form_com_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Stage_form_com import Stage_form_com
+        open_form('Stage_form_com')
+
 
 

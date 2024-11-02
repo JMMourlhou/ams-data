@@ -38,6 +38,30 @@ db_schema:
       type: simpleObject
     server: full
     title: Codes_stages
+  com:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: stage_row
+      target: stages
+      type: link_single
+    - admin_ui: {order: 1, width: 125}
+      name: stage_num_txt
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: user_email
+      type: string
+    - admin_ui: {order: 3, width: 126}
+      name: date
+      type: date
+    - admin_ui: {order: 4, width: 357}
+      name: com_ouv
+      type: simpleObject
+    - admin_ui: {order: 5, width: 369}
+      name: com_ferm
+      type: simpleObject
+    server: full
+    title: Com
   cpt_stages:
     client: search
     columns:
