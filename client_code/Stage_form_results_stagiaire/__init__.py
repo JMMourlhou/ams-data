@@ -82,7 +82,7 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
             if len(liste0) > 0: 
                 liste_drop_d = []
                 for row in liste0:
-                                          liste_drop_d.append((type["intitulé"], stage))
+                    liste_drop_d.append((row["date"],row ))
     
                 # print(liste_drop_d)
                 self.drop_down_code_stage.items = liste_drop_d
