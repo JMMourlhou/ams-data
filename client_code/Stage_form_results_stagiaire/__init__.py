@@ -8,10 +8,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-global user_stagiaire
-user_stagiaire = anvil.users.get_user()
-global stage_row
-stage_row = None
 global nb_questions_ferm  # nb questions fermées (check 0 à 5)
 nb_questions_ferm = 0
 global nb_questions_ouvertes  # nb questions ouvertes
@@ -73,75 +69,47 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
         self.label_9.tag = "label"
         self.label_10.tag = "label"
 
-        global user_stagiaire
-        if user_stagiaire:
+        user = anvil.users.get_user()
+        if user:
             # Initilistaion de la drop down dates 
-            liste0 = app_tables.com.search(user_email=user_stagiaire)
-            
-            print("nb de dates où le stagiaire est intervenu ; ", len(liste0))
-            if len(liste0) > 0: 
+            self.liste0 = app_tables.com.search(user=user)
+            print("nb de dates où le stagiaire est intervenu ; ", len(self.liste0))
+            if len(self.liste0) > 0: 
                 liste_drop_d = []
-                for row in liste0:
+                for row in self.liste0:
                     liste_drop_d.append((row["date"],row ))
-    
                 # print(liste_drop_d)
-                self.drop_down_code_stage.items = liste_drop_d
+                self.drop_down_date.items = liste_drop_d
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-
         open_form("Main", 99)
 
-    def drop_down_code_stage_change(self, **event_args):
+    def drop_down_date_change(self, **event_args):
         """This method is called when an item is selected"""
-        global stage_row
-        stage_row = self.drop_down_code_stage.selected_value
-        if stage_row is None:
-            alert("Vous devez sélectionner un pré-requis !")
-            self.drop_down_code_stage.focus()
+        self.date = self.drop_down_date.selected_value
+        if self.date is None:
+            alert("Vous devez sélectionner une date !")
+            self.drop_down_date.focus()
             return
-        self.text_area_a1.text = None
-        self.drop_down_stagiaires.visible = True
-        # sélection des stagiaires du stage sélectionné
-        liste_stagiaires = app_tables.stagiaires_inscrits.search(
-            tables.order_by("prenom", ascending=True), stage=stage_row
-        )
-        print(len(liste_stagiaires))
-        # création de la drop down stgaiaires du stage
-        liste_drop_d_stagiaires = []
-        for stagiaire in liste_stagiaires:
-            ligne_drop_d_visible = stagiaire["prenom"] + " " + stagiaire["name"]
-            liste_drop_d_stagiaires.append(
-                (ligne_drop_d_visible, stagiaire["user_email"])
-            )
-        self.drop_down_stagiaires.items = liste_drop_d_stagiaires
+        # sélection des formulaires saisis à la date sélectionnée
+        liste_formulaires = app_tables.com.search(date=self.date["date"])
 
-    def drop_down_stagiaires_change(self, **event_args):
-        self.stagiaire_choisi = (
-            self.drop_down_stagiaires.selected_value
-        )  # user row from stagiaire inscrit
+        #  ============================================  Affichage résultats
 
-        global stage_row
+        # extraction du stage par lecture du premier formulaire de la liste
+        first_row = liste_formulaires[0]
+        stage_row = first_row["stage_row"]
         # extraction des 2 dictionnaires du stage
-        dico_q_ferm = {}
-        dico_q_ouv = {}
         dico_q_ferm = stage_row["com_ferm"]
-        global nb_questions_ferm  # nb questions fermées (testé en validation)
-        nb_questions_ferm = int(
-            dico_q_ferm["NBQ"]
-        )  # nb de questions fermées ds le dico
-
+        # nb_questions_ferm  
+        nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
+        
         # affichage des formes fermées  en fonction de leur nb
-        if (
-            nb_questions_ferm > 0
-        ):  # Check du nb de questions fermées à afficher et affectation des questions
+        if (nb_questions_ferm > 0):  # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
-            self.label_1.text = dico_q_ferm[
-                "1"
-            ][
-                0
-            ]  # Je prend le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
+            self.label_1.text = dico_q_ferm["1"][0]  # Je prends le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
         if nb_questions_ferm > 1:
             self.column_panel_2.visible = True
             self.label_2.text = dico_q_ferm["2"][0]
@@ -171,9 +139,7 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
             self.label_10.text = dico_q_ferm["10"][0]
 
         # affichage des formes ouvertes en fonction de leur nb
-        dico_q_ouv = stage_row[
-            "com_ouv"
-        ]  # check du nb de questions ouvertes à afficher et affectation des questions
+        dico_q_ouv = stage_row["com_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
         global nb_questions_ouvertes  # nb questions ouvertes
         nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
         if nb_questions_ouvertes > 0:

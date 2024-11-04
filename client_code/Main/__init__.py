@@ -369,5 +369,10 @@ class Main(MainTemplate):
         from ..Stage_form_com import Stage_form_com
         open_form('Stage_form_com')
 
+    def button_form_com_resultats_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Stage_form_results_stagiaire import Stage_form_results_stagiaire
+        open_form('Stage_form_results_stagiaire')
+
 
 
