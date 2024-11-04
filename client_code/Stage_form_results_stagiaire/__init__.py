@@ -1,9 +1,7 @@
 from ._anvil_designer import Stage_form_results_stagiaireTemplate
 from .. import French_zone  # POur acquisition de date et heure Francaise (Browser time)
 from anvil import *
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
 import anvil.server
 import anvil.users
 import anvil.tables as tables
@@ -77,35 +75,17 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
 
         global user_stagiaire
         if user_stagiaire:
-            # Initilistaion de la drop down stages inscrits du user
-            liste0 = app_tables.stagiaires_inscrits.search(
-                q.fetch_only(
-                    "user_email", "stage"
-                ),  # <----------------------  A Modifier?
-                user_email=user_stagiaire,
-            )
-            print("nb de stages où le stagiaire est inscrit; ", len(liste0))
-
-            liste_drop_d = []
-            for row in liste0:
-                # lecture fichier père stage
-                stage = app_tables.stages.get(numero=row["stage"]["numero"])
-                if (
-                    stage["display_com"] is True
-                ):  # si autorisé à saisir le formulaire, je l'affiche
-                    # lecture fichier père type de stage
-                    type = app_tables.codes_stages.get(
-                        q.fetch_only("code"), code=stage["code"]["code"]
-                    )
-                    if type["type_stage"] == "S":  # Si stagiaire, j'affiche la date
-                        liste_drop_d.append(
-                            (type["code"] + "  du " + str(stage["date_debut"]), stage)
-                        )
-                    else:
-                        liste_drop_d.append((type["intitulé"], stage))
-
-            # print(liste_drop_d)
-            self.drop_down_code_stage.items = liste_drop_d
+            # Initilistaion de la drop down dates 
+            liste0 = app_tables.com.search(user_email=user_stagiaire)
+            
+            print("nb de dates où le stagiaire est intervenu ; ", len(liste0))
+            if len(liste0) > 0: 
+                liste_drop_d = []
+                for row in liste0:
+                                          liste_drop_d.append((type["intitulé"], stage))
+    
+                # print(liste_drop_d)
+                self.drop_down_code_stage.items = liste_drop_d
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
