@@ -17,7 +17,6 @@ unique_ids:
     theme.css: SCDE4L3ZF6DMB4NGZQGILXYF753WOOFF
   forms:
     Alert: '1698080420847437755022731.54675'
-    Form1: '172917852147191169068019.08731'
     Mail_subject_attach_txt: '1718380599798219847202618.32935'
     Mail_subject_attach_txt.ItemTemplate15: '1718887468288494998764751.1149'
     Mail_subject_attach_txt.ItemTemplate16: '1719077732896813355487767.9452'
@@ -65,6 +64,7 @@ unique_ids:
     Signature: '1717864769771530618885862.57666'
     Stage_creation: '1692038175242270722241195.8854'
     Stage_form_com: '1730567816773183930869042.51343'
+    Stage_form_results_stagiaire: '1730720756100878763721185.7145'
     Stage_form_satisfaction: '1715687708085269221711040.39606'
     Stage_form_suivi: '1721813843532988132783811.056'
     Stage_satisf_statistics: '1716044574949435523020889.3661'
