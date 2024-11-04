@@ -44,20 +44,7 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
         self.column_panel_a8.tag = 0
         self.column_panel_a9.tag = 0
         self.column_panel_a10.tag = 0
-
-        # self.flow_panel_0.tag = "header"
-        # self.flow_panel_11.tag = "header"
-
-        self.flow_panel_1.tag = "fp"
-        self.flow_panel_2.tag = "fp"
-        self.flow_panel_3.tag = "fp"
-        self.flow_panel_4.tag = "fp"
-        self.flow_panel_5.tag = "fp"
-        self.flow_panel_6.tag = "fp"
-        self.flow_panel_7.tag = "fp"
-        self.flow_panel_8.tag = "fp"
-        self.flow_panel_9.tag = "fp"
-        self.flow_panel_10.tag = "fp"
+       
         self.label_1.tag = "label"
         self.label_2.tag = "label"
         self.label_3.tag = "label"
@@ -95,21 +82,80 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
             return
         # sélection des formulaires saisis à la date sélectionnée
         liste_formulaires = app_tables.com.search(date=self.date["date"])
-
-        #  ============================================  Affichage résultats
-
+        nb_formulaires = len(liste_formulaires)
+        max_points_ferm = nb_formulaires * 6      # max de points possibles pour une question
+        alert(f"max points fermés: {max_points_ferm}")
+        #  ================================================================  Affichage résultats
         # extraction du stage par lecture du premier formulaire de la liste
         first_row = liste_formulaires[0]
         stage_row = first_row["stage_row"]
         # extraction des 2 dictionnaires du stage
         dico_q_ferm = stage_row["com_ferm"]
+        dico_q_ouv = stage_row["com_ouv"]
         # nb_questions_ferm  
         nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
+        alert(f"nb de questions ferm : {nb_questions_ferm}")
+        # nb_questions_ouv
+        nb_questions_ouv = int(dico_q_ouv["NBQ"])  # nb de questions fermées ds le dico
+        alert(f"nb de question ouv: {nb_questions_ouv}")
+
+        
+        # =========================== Boucle sur tous les formulaires pour les questions fermées
+        # initialisation des compteurs
+        points_q1 = 0
+        points_q2 = 0
+        points_q3 = 0
+        points_q4 = 0
+        points_q5 = 0
+        points_q6 = 0
+        points_q7 = 0
+        points_q8 = 0
+        points_q9 = 0
+        points_q10 = 0
+        
+        # boucle
+        for formulaire in liste_formulaires:
+            dico_ferm = formulaire["com_ferm"]   # dico fermé du formulaire
+            
+            points_q1 = points_q1 + dico_ferm["1"][1] + 1 # cumul 1ere question  + 1 car mini = 0, max = 5
+            alert(f"cumul q1: {points_q1}")
+            points_q2 = points_q2 + dico_ferm["2"][1] + 1  # cumul 2eme question
+            #alert(f"cumul q2: {points_q2}")
+            points_q3 = points_q3 + dico_ferm["3"][1] + 1 # cumul 3eme question
+            #alert(f"cumul q3: {points_q3}")
+            points_q4 = points_q4 + dico_ferm["4"][1] + 1 # cumul 4eme question
+            #alert(f"cumul q4: {points_q4}")
+            points_q5 = points_q5 + dico_ferm["5"][1] + 1 # cumul 5eme question
+            #alert(f"cumul q5: {points_q5}")
+            points_q6 = points_q6 + dico_ferm["6"][1] + 1 # cumul 6eme question
+            #alert(f"cumul q6: {points_q6}")
+            points_q7 = points_q7 + dico_ferm["7"][1] + 1 # cumul 7eme question
+            #alert(f"cumul q7: {points_q7}")
+            points_q8 = points_q8 + dico_ferm["8"][1] + 1 # cumul 8eme question
+            #alert(f"cumul q8: {points_q8}")
+            points_q9 = points_q9 + dico_ferm["9"][1] + 1 # cumul 9eme question
+            #alert(f"cumul q9: {points_q9}")
+            points_q10 = points_q10 + dico_ferm["10"][1] + 1 # cumul 10eme question
+            #alert(f"cumul q10: {points_q10}")
+            
+        # fin de boucle questions fermées, calcul des pourcentages
+        pourcent_q1 = (points_q1 // max_points_ferm) * 100  # partie entiere 
+
+        pourcent_q2 = points_q2 // max_points_ferm
+        pourcent_q3 = points_q3 // max_points_ferm
+        pourcent_q4 = points_q4 // max_points_ferm
+        pourcent_q5 = points_q5 // max_points_ferm
+        pourcent_q6 = points_q6 // max_points_ferm
+        pourcent_q7 = points_q7 // max_points_ferm
+        pourcent_q8 = points_q8 // max_points_ferm
+        pourcent_q9 = points_q9 // max_points_ferm
+        pourcent_q10 = points_q10 // max_points_ferm
         
         # affichage des formes fermées  en fonction de leur nb
-        if (nb_questions_ferm > 0):  # Check du nb de questions fermées à afficher et affectation des questions
+        if nb_questions_ferm > 0:  # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
-            self.label_1.text = dico_q_ferm["1"][0]  # Je prends le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
+            self.label_1.text = dico_q_ferm["1"][0] + ": " + str(pourcent_q1) + " %"  # Je prends le 1er elmt de la liste (la question), le 2eme: si question 'obligatoire / facultative'
+            
         if nb_questions_ferm > 1:
             self.column_panel_2.visible = True
             self.label_2.text = dico_q_ferm["2"][0]

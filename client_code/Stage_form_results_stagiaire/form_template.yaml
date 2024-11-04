@@ -59,23 +59,6 @@ components:
     properties: {align: center, bold: true, font_size: null, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   - components:
-    - layout_properties: {grid_position: 'HRJSWS,AEXQWF'}
-      name: button_bad
-      properties: {align: center, background: 'theme:Surface', bold: false, enabled: false, font_size: 30, foreground: 'theme:Error', icon: 'fa:thumbs-down', role: null, text: ' '}
-      type: Button
-    - layout_properties: {grid_position: 'HRJSWS,FYTCZV'}
-      name: label_11
-      properties: {align: center, bold: true, font_size: 40, foreground: 'theme:On Primary', text: '----- >'}
-      type: Label
-    - layout_properties: {grid_position: 'HRJSWS,GSRIRY'}
-      name: button_bad_copy
-      properties: {align: center, background: 'theme:Surface', bold: false, enabled: false, font_size: 30, foreground: 'theme:Vert Foncé', icon: 'fa:thumbs-up', role: null, text: ' '}
-      type: Button
-    layout_properties: {full_width_row: false, grid_position: 'LIPPSJ,JPIDBL'}
-    name: column_panel_11
-    properties: {col_spacing: tiny, col_widths: '{"AEXQWF":9,"FYTCZV":42,"GSRIRY":9}', spacing_above: none, spacing_below: none, wrap_on: never}
-    type: ColumnPanel
-  - components:
     - event_bindings: {change: check_box_1_1_change}
       layout_properties: {}
       name: check_box_1_1
@@ -119,41 +102,6 @@ components:
     name: label_2
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_2_1_change}
-      layout_properties: {}
-      name: check_box_2_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_2_2_change}
-      layout_properties: {}
-      name: check_box_2_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_2_3_change}
-      layout_properties: {}
-      name: check_box_2_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_2_4_change}
-      layout_properties: {}
-      name: check_box_2_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_2_5_change}
-      layout_properties: {}
-      name: check_box_2_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_2_6_change}
-      layout_properties: {}
-      name: check_box_2_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_2
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'NPMHOX,PPTCJY'}
   name: column_panel_2
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -163,41 +111,6 @@ components:
     name: label_3
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_3_1_change}
-      layout_properties: {}
-      name: check_box_3_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_3_2_change}
-      layout_properties: {}
-      name: check_box_3_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_3_3_change}
-      layout_properties: {}
-      name: check_box_3_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_3_4_change}
-      layout_properties: {}
-      name: check_box_3_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_3_5_change}
-      layout_properties: {}
-      name: check_box_3_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_3_6_change}
-      layout_properties: {}
-      name: check_box_3_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_3
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'DEOTOO,OWXFUJ'}
   name: column_panel_3
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -207,41 +120,6 @@ components:
     name: label_4
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_4_1_change}
-      layout_properties: {}
-      name: check_box_4_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_4_2_change}
-      layout_properties: {}
-      name: check_box_4_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_4_3_change}
-      layout_properties: {}
-      name: check_box_4_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_4_4_change}
-      layout_properties: {}
-      name: check_box_4_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_4_5_change}
-      layout_properties: {}
-      name: check_box_4_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_4_6_change}
-      layout_properties: {}
-      name: check_box_4_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_4
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'YFRVFH,JMZIUZ'}
   name: column_panel_4
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -251,41 +129,6 @@ components:
     name: label_5
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_5_1_change}
-      layout_properties: {}
-      name: check_box_5_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_5_2_change}
-      layout_properties: {}
-      name: check_box_5_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_5_3_change}
-      layout_properties: {}
-      name: check_box_5_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_5_4_change}
-      layout_properties: {}
-      name: check_box_5_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_5_5_change}
-      layout_properties: {}
-      name: check_box_5_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_5_6_change}
-      layout_properties: {}
-      name: check_box_5_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_5
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'ERRPTP,HRVRRA'}
   name: column_panel_5
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -295,41 +138,6 @@ components:
     name: label_6
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_6_1_change}
-      layout_properties: {}
-      name: check_box_6_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_6_2_change}
-      layout_properties: {}
-      name: check_box_6_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_6_3_change}
-      layout_properties: {}
-      name: check_box_6_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_6_4_change}
-      layout_properties: {}
-      name: check_box_6_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_6_5_change}
-      layout_properties: {}
-      name: check_box_6_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_6_6_change}
-      layout_properties: {}
-      name: check_box_6_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_6
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'WMUYSU,SHQXOW'}
   name: column_panel_6
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -339,41 +147,6 @@ components:
     name: label_7
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_7_1_change}
-      layout_properties: {}
-      name: check_box_7_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_7_2_change}
-      layout_properties: {}
-      name: check_box_7_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_7_3_change}
-      layout_properties: {}
-      name: check_box_7_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_7_4_change}
-      layout_properties: {}
-      name: check_box_7_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_7_5_change}
-      layout_properties: {}
-      name: check_box_7_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_7_6_change}
-      layout_properties: {}
-      name: check_box_7_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_7
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'HTYFTP,TCJGGX'}
   name: column_panel_7
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -383,41 +156,6 @@ components:
     name: label_8
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_8_1_change}
-      layout_properties: {}
-      name: check_box_8_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_8_2_change}
-      layout_properties: {}
-      name: check_box_8_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_8_3_change}
-      layout_properties: {}
-      name: check_box_8_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_8_4_change}
-      layout_properties: {}
-      name: check_box_8_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_8_5_change}
-      layout_properties: {}
-      name: check_box_8_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_8_6_change}
-      layout_properties: {}
-      name: check_box_8_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_8
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'UHNJSC,PIJVXA'}
   name: column_panel_8
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -427,41 +165,6 @@ components:
     name: label_9
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_9_1_change}
-      layout_properties: {}
-      name: check_box_9_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_9_2_change}
-      layout_properties: {}
-      name: check_box_9_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_9_3_change}
-      layout_properties: {}
-      name: check_box_9_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_9_4_change}
-      layout_properties: {}
-      name: check_box_9_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_9_5_change}
-      layout_properties: {}
-      name: check_box_9_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_9_6_change}
-      layout_properties: {}
-      name: check_box_9_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_9
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'UAIJIN,AJVQRD'}
   name: column_panel_9
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
@@ -471,41 +174,6 @@ components:
     name: label_10
     properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
-  - components:
-    - event_bindings: {change: check_box_10_1_change}
-      layout_properties: {}
-      name: check_box_10_1
-      properties: {foreground: '', text: '0'}
-      type: CheckBox
-    - event_bindings: {change: check_box_10_2_change}
-      layout_properties: {}
-      name: check_box_10_2
-      properties: {text: '1'}
-      type: CheckBox
-    - event_bindings: {change: check_box_10_3_change}
-      layout_properties: {}
-      name: check_box_10_3
-      properties: {text: '2'}
-      type: CheckBox
-    - event_bindings: {change: check_box_10_4_change}
-      layout_properties: {}
-      name: check_box_10_4
-      properties: {text: '3'}
-      type: CheckBox
-    - event_bindings: {change: check_box_10_5_change}
-      layout_properties: {}
-      name: check_box_10_5
-      properties: {text: '4'}
-      type: CheckBox
-    - event_bindings: {change: check_box_10_6_change}
-      layout_properties: {}
-      name: check_box_10_6
-      properties: {text: '5'}
-      type: CheckBox
-    layout_properties: {grid_position: 'JRVRQF,OFJMGN'}
-    name: flow_panel_10
-    properties: {align: center, spacing: medium, spacing_above: none, spacing_below: none, vertical_align: middle}
-    type: FlowPanel
   layout_properties: {grid_position: 'SUBTIB,WDYVCD'}
   name: column_panel_10
   properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"YMLJWU":5}', role: elevated-card, visible: false}
