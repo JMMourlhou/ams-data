@@ -56,7 +56,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_1
-    properties: {align: center, bold: true, font_size: null, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, font_size: null, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'VIKPIZ,GJEHEN'}
   name: column_panel_1
@@ -65,7 +65,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_2
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'NPMHOX,PPTCJY'}
   name: column_panel_2
@@ -74,7 +74,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_3
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'DEOTOO,OWXFUJ'}
   name: column_panel_3
@@ -83,7 +83,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_4
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'YFRVFH,JMZIUZ'}
   name: column_panel_4
@@ -92,7 +92,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_5
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'ERRPTP,HRVRRA'}
   name: column_panel_5
@@ -101,7 +101,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_6
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'WMUYSU,SHQXOW'}
   name: column_panel_6
@@ -110,7 +110,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_7
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'HTYFTP,TCJGGX'}
   name: column_panel_7
@@ -119,7 +119,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_8
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'UHNJSC,PIJVXA'}
   name: column_panel_8
@@ -128,7 +128,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_9
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'UAIJIN,AJVQRD'}
   name: column_panel_9
@@ -137,7 +137,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'KWCYPI,YMLJWU'}
     name: label_10
-    properties: {align: center, bold: true, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: ESSAI}
+    properties: {align: center, bold: true, foreground: '', spacing_above: none, spacing_below: none, text: ESSAI}
     type: Label
   layout_properties: {grid_position: 'SUBTIB,WDYVCD'}
   name: column_panel_10
