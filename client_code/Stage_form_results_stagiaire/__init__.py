@@ -301,6 +301,6 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
         if pourcent<=80 and pourcent > 64: 
             nom_couleur = "theme:Vert Clair"
         if pourcent > 80: 
-            nom_couleur = "theme:Vert Clair"
+            nom_couleur = "theme:Vert Foncé"
         return nom_couleur
         

@@ -1111,4 +1111,17 @@ class Stage_form_com(Stage_form_comTemplate):
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")
 
+    def drop_down_cadre_change(self, **event_args):
+        """This method is called when an item is selected"""
+        if self.drop_down_cadre.selected_value == "Cours communication":
+            self.text_box_cadre.visible = False
+        else:
+            self.text_box_cadre.visible = True
+            
+        self.drop_down_code_stage.visible = True
+
+    def text_box_cadre_show(self, **event_args):
+        """This method is called when the TextBox is shown on the screen"""
+        self.text_box_cadre.focus()
+
 
