@@ -133,12 +133,13 @@ def add_1_formulaire_com(
         return(False)
 
 # =======================================================================================================
-@anvil.server.callable     # Sauvegarde des résultats commmunication d'un stagiaire, pour une intervention
+@anvil.server.callable     # Sauvegarde des résultats globaux, commmunication d'un stagiaire, pour une intervention, cumul de tous les stagiaires audience, 
 def add_com_results(
-                         stage_row,            # numero de stage 
+                         stage_row,            # stage row
+                         numero,               # numero stage txt
                          user,                 # user_row
                          date,                 # date txt 
-                         pourcent_q1,
+                         pourcent_q1,          # numérique
                          pourcent_q2,
                          pourcent_q3,
                          pourcent_q4,
@@ -147,15 +148,26 @@ def add_com_results(
                          pourcent_q7,
                          pourcent_q8,
                          pourcent_q9,
-                         pourcent_q10,                         
+                         pourcent_q10,
+                         cadre                  # cadre de l'intervention communication
                          ):
     
-    new_row=app_tables.com.add_row(stage_row=stage_row,
-                                            stage_num_txt = str(stage_numero_txt),
-                                            user          = user_row,
-                                            date          = date,              # date txt
-                                            com_ferm      = dico_rep_q_ferm,
-                                            com_ouv       = dico_rep_q_ouv
+    new_row=app_tables.com.add_row(
+                                        stage_row,            # stage row
+                                        numero,               # numero stage txt
+                                        user,                 # user_row
+                                        date,                 # date txt 
+                                        pourcent_q1,          # numérique
+                                        pourcent_q2,
+                                        pourcent_q3,
+                                        pourcent_q4,
+                                        pourcent_q5,
+                                        pourcent_q6,
+                                        pourcent_q7,
+                                        pourcent_q8,
+                                        pourcent_q9,
+                                        pourcent_q10,
+                                        cadre                  # cadre de l'intervention communication
                                          )
     id=new_row.get_id()
     #relecture du row:

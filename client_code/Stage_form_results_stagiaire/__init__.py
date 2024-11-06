@@ -253,20 +253,21 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
 
         # sauvegarde ds table com
         anvil.server.call("add_com_results",
-                         stage_row,
-                         stage_row["numero"],
-                         self.user,               #user_row
-                         self.com_row["date"],
-                         str(pourcent_q1),
-                         str(pourcent_q2),
-                         str(pourcent_q3),
-                         str(pourcent_q4),
-                         str(pourcent_q5),
-                         str(pourcent_q6),
-                         str(pourcent_q7),
-                         str(pourcent_q8),
-                         str(pourcent_q9),
-                         str(pourcent_q10)
+                            stage_row,               # row
+                            stage_row["numero"],     # num txt
+                            self.user,               #user_row
+                            self.com_row["date"],    # text
+                            pourcent_q1,           # numérique
+                            pourcent_q2,           # numérique
+                            pourcent_q3,           # numérique
+                            pourcent_q4,           # numérique
+                            pourcent_q5,           # numérique
+                            pourcent_q6,           # numérique
+                            pourcent_q7,           # numérique
+                            pourcent_q8,           # numérique
+                            pourcent_q9,           # numérique
+                            pourcent_q10,          # numérique
+                            cadre                  # text
                          )
     
     def couleurs(self, pourcent,  **event_args):    
