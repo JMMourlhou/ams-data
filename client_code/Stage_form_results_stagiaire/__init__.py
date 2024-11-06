@@ -34,16 +34,16 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
 
     def drop_down_date_change(self, **event_args):
         """This method is called when an item is selected"""
-        self.date = self.drop_down_date.selected_value
-        if self.date is None:
+        self.com_row = self.drop_down_date.selected_value
+        if self.com_row is None:
             alert("Vous devez sélectionner une date !")
             self.drop_down_date.focus()
             return
         self.label_cadre.visible = True
-        cadre = self.date["cadre"]
+        cadre = self.com_row["cadre"]
         self.label_cadre.text = f"({cadre})"
         # sélection des formulaires saisis à la date sélectionnée
-        liste_formulaires = app_tables.com.search(date=self.date["date"])
+        liste_formulaires = app_tables.com.search(date=self.com_row["date"])
         nb_formulaires = len(liste_formulaires)
         max_points_ferm = nb_formulaires * 6      # max de points possibles pour une question
         #  ================================================================  Affichage résultats
@@ -255,8 +255,18 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
         anvil.server.call("add_com_results",
                          stage_row,
                          stage_row["numero"],
-                         self.user,   # user_row from table stagiaires inscrits
-                         self.date["date"] 
+                         self.user,               #user_row
+                         self.com_row["date"],
+                         str(pourcent_q1),
+                         str(pourcent_q2),
+                         str(pourcent_q3),
+                         str(pourcent_q4),
+                         str(pourcent_q5),
+                         str(pourcent_q6),
+                         str(pourcent_q7),
+                         str(pourcent_q8),
+                         str(pourcent_q9),
+                         str(pourcent_q10)
                          )
     
     def couleurs(self, pourcent,  **event_args):    

@@ -115,15 +115,6 @@ def add_1_formulaire_com(
                             dico_rep_q_ouv,
                             date
                         ):
-    # Print pour vérif des 2 dicos    
-    print("=============== serveur side:")
-    print("============== Dict reponses fermées: ")
-    print(dico_rep_q_ferm)   
-    print()
-    print("============== Dict reponses ouvertes: ")
-    print(dico_rep_q_ouv)
-    print()
-    print(date)
     
     new_row=app_tables.com.add_row(stage_row=stage_row,
                                             stage_num_txt = str(stage_numero_txt),
@@ -141,9 +132,36 @@ def add_1_formulaire_com(
     else:
         return(False)
 
-@anvil.server.callable
-def add_com_results():
+# =======================================================================================================
+@anvil.server.callable     # Sauvegarde des résultats commmunication d'un stagiaire, pour une intervention
+def add_com_results(
+                         stage_row,            # numero de stage 
+                         user,                 # user_row
+                         date,                 # date txt 
+                         pourcent_q1,
+                         pourcent_q2,
+                         pourcent_q3,
+                         pourcent_q4,
+                         pourcent_q5,
+                         pourcent_q6,
+                         pourcent_q7,
+                         pourcent_q8,
+                         pourcent_q9,
+                         pourcent_q10,                         
+                         ):
+    
     new_row=app_tables.com.add_row(stage_row=stage_row,
                                             stage_num_txt = str(stage_numero_txt),
                                             user          = user_row,
                                             date          = date,              # date txt
+                                            com_ferm      = dico_rep_q_ferm,
+                                            com_ouv       = dico_rep_q_ouv
+                                         )
+    id=new_row.get_id()
+    #relecture du row:
+    re_read_row= app_tables.com.get_by_id(id)
+    
+    if re_read_row:  
+        return(True)
+    else:
+        return(False)

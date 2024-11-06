@@ -66,6 +66,40 @@ db_schema:
       type: string
     server: full
     title: Com
+  com_sum:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 119}
+      name: stage
+      target: stages
+      type: link_single
+    - admin_ui: {order: 1, width: 105}
+      name: user
+      target: users
+      type: link_single
+    - admin_ui: {order: 2, width: 200}
+      name: date
+      type: string
+    - admin_ui: {order: 3, width: 122}
+      name: pourcent_1
+      type: number
+    - admin_ui: {order: 4, width: 118}
+      name: pourcent_2
+      type: number
+    - admin_ui: {order: 5, width: 119}
+      name: pourcent_3
+      type: number
+    - admin_ui: {order: 6, width: 200}
+      name: poucent_4
+      type: number
+    - admin_ui: {order: 7, width: 122}
+      name: pourcent_5
+      type: number
+    - admin_ui: {order: 8, width: 200}
+      name: pourcent_6
+      type: number
+    server: full
+    title: Com_sum
   cpt_stages:
     client: search
     columns:
