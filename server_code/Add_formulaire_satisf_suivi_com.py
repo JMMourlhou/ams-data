@@ -149,29 +149,49 @@ def add_com_results(
                          pourcent_q8,
                          pourcent_q9,
                          pourcent_q10,
-                         cadre                  # cadre de l'intervention communication
+                         cadre,                  # cadre de l'intervention communication
+                         q1,                     # question 1, txt
+                         q2,
+                         q3,
+                         q4,
+                         q5,
+                         q6,
+                         q7,
+                         q8,
+                         q9,
+                         q10,
                          ):
     
-    new_row=app_tables.com.add_row(
-                                        stage_row,            # stage row
-                                        numero,               # numero stage txt
-                                        user,                 # user_row
-                                        date,                 # date txt 
-                                        pourcent_q1,          # numérique
-                                        pourcent_q2,
-                                        pourcent_q3,
-                                        pourcent_q4,
-                                        pourcent_q5,
-                                        pourcent_q6,
-                                        pourcent_q7,
-                                        pourcent_q8,
-                                        pourcent_q9,
-                                        pourcent_q10,
-                                        cadre                  # cadre de l'intervention communication
+    new_row=app_tables.com_sum.add_row(
+                                        stage        = stage_row,            # stage row
+                                        numero       = str(numero),               # numero stage txt
+                                        user         = user,                 # user_row
+                                        date         = date,                 # date txt 
+                                        pourcent_1  = pourcent_q1,          # numérique
+                                        pourcent_2  = pourcent_q2,
+                                        pourcent_3  = pourcent_q3,
+                                        pourcent_4  = pourcent_q4,
+                                        pourcent_5  = pourcent_q5,
+                                        pourcent_6  = pourcent_q6,
+                                        pourcent_7  = pourcent_q7, 
+                                        pourcent_8  = pourcent_q8,
+                                        pourcent_9  = pourcent_q9,
+                                        pourcent_10  = pourcent_q10,
+                                        cadre = cadre,                  # cadre de l'intervention communication
+                                        q1 = q1,                        # question1 txt
+                                        q2 = q2,                        # question1 txt
+                                        q3 = q3,                        # question1 txt
+                                        q4 = q4,                        # question1 txt
+                                        q5 = q5,                        # question1 txt
+                                        q6 = q6,                        # question1 txt
+                                        q7 = q7,                        # question1 txt
+                                        q8 = q8,                        # question1 txt
+                                        q9 = q9,                        # question1 txt
+                                        q10 = q10,                        # question1 txt
                                          )
     id=new_row.get_id()
     #relecture du row:
-    re_read_row= app_tables.com.get_by_id(id)
+    re_read_row= app_tables.com_sum.get_by_id(id)
     
     if re_read_row:  
         return(True)

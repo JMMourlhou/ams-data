@@ -101,7 +101,7 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
             points_q9 = points_q9 + dico_ferm["9"][1] + 1 # cumul 9eme question
             points_q10 = points_q10 + dico_ferm["10"][1] + 1 # cumul 10eme question
             
-        # cumul des réponses pour questions ouvertes
+            # cumul des réponses pour questions ouvertes
             dico_ouv = formulaire["com_ouv"]   # dico fermé du formulaire
             if nb_questions_ouvertes > 0:
                 question_ouv1 = dico_ouv["1"][0]
@@ -251,24 +251,45 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
             self.label_a10.text = question_ouv10
             self.text_area_a10.text = rep_ouv10
 
-        # sauvegarde ds table com
-        anvil.server.call("add_com_results",
-                            stage_row,               # row
-                            stage_row["numero"],     # num txt
-                            self.user,               #user_row
-                            self.com_row["date"],    # text
-                            pourcent_q1,           # numérique
-                            pourcent_q2,           # numérique
-                            pourcent_q3,           # numérique
-                            pourcent_q4,           # numérique
-                            pourcent_q5,           # numérique
-                            pourcent_q6,           # numérique
-                            pourcent_q7,           # numérique
-                            pourcent_q8,           # numérique
-                            pourcent_q9,           # numérique
-                            pourcent_q10,          # numérique
-                            cadre                  # text
-                         )
+        
+        # sauvegarde ds table com si pas déjà sauvegardée. (date et user existant ds table 'com_sum')
+        # lecture de table 'com_sum'
+        row = app_tables.com_sum.search(stage = stage_row,
+                                        user = self.user)
+        if len(row) == 0:                                               # Si pas de résultat: pas encore sauvée
+            result = anvil.server.call("add_com_results",
+                                stage_row,               # row
+                                stage_row["numero"],     # num txt
+                                self.user,               #user_row
+                                self.com_row["date"],    # text
+                                pourcent_q1,           # numérique
+                                pourcent_q2,           # numérique
+                                pourcent_q3,           # numérique
+                                pourcent_q4,           # numérique
+                                pourcent_q5,           # numérique
+                                pourcent_q6,           # numérique
+                                pourcent_q7,           # numérique
+                                pourcent_q8,           # numérique
+                                pourcent_q9,           # numérique
+                                pourcent_q10,          # numérique
+                                cadre,                 # text
+                                dico_q_ferm["1"][0],     # question 1 txt        
+                                dico_q_ferm["2"][0],     # question 1 txt        
+                                dico_q_ferm["3"][0],     # question 1 txt        
+                                dico_q_ferm["4"][0],     # question 1 txt        
+                                dico_q_ferm["5"][0],     # question 1 txt        
+                                dico_q_ferm["6"][0],     # question 1 txt        
+                                dico_q_ferm["7"][0],     # question 1 txt        
+                                dico_q_ferm["8"][0],     # question 1 txt        
+                                dico_q_ferm["9"][0],     # question 1 txt        
+                                dico_q_ferm["10"][0]     # question 1 txt         
+                            )
+            if result is False:
+                alert("Erreur en sauvegarde du récap en table 'com_sum' ")
+            else:
+                alert("Sauvegarde effectuée")
+        else:
+            alert("Déjà sauvegardée !")
     
     def couleurs(self, pourcent,  **event_args):    
         if pourcent<=16: 
