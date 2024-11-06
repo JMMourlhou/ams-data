@@ -8,11 +8,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-global nb_questions_ferm  # nb questions fermées (check 0 à 5)
-nb_questions_ferm = 0
-global nb_questions_ouvertes  # nb questions ouvertes
-nb_questions_ouvertes = 0
-
 
 class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
     def __init__(self, **properties):
@@ -20,46 +15,10 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.column_panel_header.tag = "header"
-        """
-        self.column_panel_0.tag = 0
-        self.column_panel_1.tag = 1
-        self.column_panel_2.tag = 2
-        self.column_panel_3.tag = 3
-        self.column_panel_4.tag = 4
-        self.column_panel_5.tag = 5
-        self.column_panel_6.tag = 6
-        self.column_panel_7.tag = 7
-        self.column_panel_8.tag = 8
-        self.column_panel_9.tag = 9
-        self.column_panel_10.tag = 10
-
-        self.column_panel_a1.tag = 0
-        self.column_panel_a2.tag = 0
-        self.column_panel_a3.tag = 0
-        self.column_panel_a4.tag = 0
-        self.column_panel_a5.tag = 0
-        self.column_panel_a6.tag = 0
-        self.column_panel_a7.tag = 0
-        self.column_panel_a8.tag = 0
-        self.column_panel_a9.tag = 0
-        self.column_panel_a10.tag = 0
-       
-        self.label_1.tag = "label"
-        self.label_2.tag = "label"
-        self.label_3.tag = "label"
-        self.label_4.tag = "label"
-        self.label_5.tag = "label"
-        self.label_6.tag = "label"
-        self.label_7.tag = "label"
-        self.label_8.tag = "label"
-        self.label_9.tag = "label"
-        self.label_10.tag = "label"
-        """
-        user = anvil.users.get_user()
-        if user:
+        self.user = anvil.users.get_user()
+        if self.user:
             # Initilistaion de la drop down dates 
-            self.liste0 = app_tables.com.search(user=user)
+            self.liste0 = app_tables.com.search(user=self.user)
             print("nb de dates où le stagiaire est intervenu ; ", len(self.liste0))
             if len(self.liste0) > 0: 
                 liste_drop_d = []
@@ -80,6 +39,9 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
             alert("Vous devez sélectionner une date !")
             self.drop_down_date.focus()
             return
+        self.label_cadre.visible = True
+        cadre = self.date["cadre"]
+        self.label_cadre.text = f"({cadre})"
         # sélection des formulaires saisis à la date sélectionnée
         liste_formulaires = app_tables.com.search(date=self.date["date"])
         nb_formulaires = len(liste_formulaires)
@@ -154,7 +116,7 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
                 question_ouv4 = dico_ouv["4"][0]
                 rep_ouv4 = rep_ouv4 + "\n" + dico_ouv["4"][1]   
             if nb_questions_ouvertes > 4:
-                question_ouv4 = dico_ouv["5"][0]
+                question_ouv5 = dico_ouv["5"][0]
                 rep_ouv5 = rep_ouv5 + "\n" + dico_ouv["5"][1]
             if nb_questions_ouvertes > 5:
                 question_ouv6 = dico_ouv["6"][0]
@@ -261,33 +223,41 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
         
         if nb_questions_ouvertes > 4:
             self.column_panel_a5.visible = True
-            self.label_a5.text = rep_ouv5
+            self.label_a5.text = question_ouv5
             self.text_area_a5.text = rep_ouv5
             
         if nb_questions_ouvertes > 5:
             self.column_panel_a6.visible = True
-            self.label_a6.text = rep_ouv6
+            self.label_a6.text = question_ouv6
             self.text_area_a6.text = rep_ouv6
             
         if nb_questions_ouvertes > 6:
             self.column_panel_a7.visible = True
-            self.label_a7.text = rep_ouv7
+            self.label_a7.text = question_ouv7
             self.text_area_a7.text = rep_ouv7
         
         if nb_questions_ouvertes > 7:
             self.column_panel_a8.visible = True
-            self.label_a8.text = rep_ouv8
+            self.label_a8.text = question_ouv8
             self.text_area_a8.text = rep_ouv8
         
         if nb_questions_ouvertes > 8:
             self.column_panel_a9.visible = True
-            self.label_a9.text = rep_ouv9
+            self.label_a9.text = question_ouv9
             self.text_area_a9.text = rep_ouv9
         
         if nb_questions_ouvertes > 9:
             self.column_panel_a10.visible = True
-            self.label_a10.text = rep_ouv10
+            self.label_a10.text = question_ouv10
             self.text_area_a10.text = rep_ouv10
+
+        # sauvegarde ds table com
+        anvil.server.call("add_com_results",
+                         stage_row,
+                         stage_row["numero"],
+                         self.user,   # user_row from table stagiaires inscrits
+                         self.date["date"] 
+                         )
     
     def couleurs(self, pourcent,  **event_args):    
         if pourcent<=16: 

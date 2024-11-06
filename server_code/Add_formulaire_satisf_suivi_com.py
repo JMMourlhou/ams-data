@@ -140,3 +140,10 @@ def add_1_formulaire_com(
         return(True)
     else:
         return(False)
+
+@anvil.server.callable
+def add_com_results():
+    new_row=app_tables.com.add_row(stage_row=stage_row,
+                                            stage_num_txt = str(stage_numero_txt),
+                                            user          = user_row,
+                                            date          = date,              # date txt

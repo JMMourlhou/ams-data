@@ -37,6 +37,7 @@ components:
         include_placeholder: true
         italic: false
         items: []
+        margin: ['4', null, null, null]
         placeholder: Intervention du  ....
         role: null
         spacing_above: small
@@ -49,6 +50,16 @@ components:
     name: flow_panel_0
     properties: {align: center, background: '', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: full, visible: true}
     type: FlowPanel
+  - layout_properties: {grid_position: 'MEOXQV,TBAGMA'}
+    name: label_cadre
+    properties:
+      align: center
+      foreground: theme:On Primary
+      spacing:
+        margin: ['0', null, null, null]
+        padding: ['4', null, null, null]
+      visible: false
+    type: Label
   layout_properties: {grid_position: 'PCAMBQ,EBKMZZ'}
   name: column_panel_0
   properties: {background: 'theme:Primary', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
