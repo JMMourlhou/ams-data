@@ -27,15 +27,15 @@ components:
           underline: false
           visible: true
         type: Button
-      layout_properties: {width: 146.4873642578125}
+      layout_properties: {width: 179.5994130859375}
       name: flow_panel_3
-      properties: {}
+      properties: {align: left}
       type: FlowPanel
     - components:
       - event_bindings: {click: button_2_click}
         layout_properties: {}
         name: button_2
-        properties: {align: left, background: 'theme:On Primary Container', bold: true, foreground: 'theme:Tertiary', icon: '', text: + Personnaliser}
+        properties: {align: left, background: 'theme:On Primary Container', bold: true, foreground: 'theme:Tertiary', icon: '', text: + Perso}
         type: Button
       layout_properties: {width: 121.42621630859375}
       name: flow_panel_2
