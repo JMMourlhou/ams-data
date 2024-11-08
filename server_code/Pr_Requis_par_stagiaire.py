@@ -14,19 +14,6 @@ def path_info(file):
     path = pathlib.Path(file)
     return str(path.parent), str(path.name), str(path.suffix).lower()  # path, file name, extension
 
-# ===============================================================================================================
-# liste des STAGIAIRES (ADMIN  pour afficher ts les stagiaires d'1 stage et ensuite voir leurs docs prérequis 
-#     Pour lecture fichier père users: self.item['user_email']
-#     Pour lecture fichier père stages: self.item['stage']
-@anvil.server.callable
-def preparation_liste_pour_panels_stagiaires(row_stage):
-    # lecture des stagiaires de ce stage
-    liste_stagiaires = app_tables.stagiaires_inscrits.search(q.fetch_only("user_email", "name"),
-                                                            stage=row_stage
-                                                            )
-    return liste_stagiaires
-
-
 
 
 # ===============================================================================================================
