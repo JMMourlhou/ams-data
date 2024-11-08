@@ -216,10 +216,11 @@ class Main(MainTemplate):
 
     def button_loop_click(self, **event_args):
         """This method is called when the button is clicked"""
+        """
         from .. import z_loop_on_tables
         result=z_loop_on_tables.loop_del_qcm5()
         alert(result)
-        
+        """
 
     def Close_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -347,17 +348,9 @@ class Main(MainTemplate):
         from ..Parametres import Parametres
         open_form("Parametres")
 
-    def bt_del_qcm_essai_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from .. import z_loop_on_tables
-        result=z_loop_on_tables.del_qcm_results_essai()
-        alert(result)
+    
 
-    def bt_del_qcm_2_mois_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from .. import z_loop_on_tables
-        result=z_loop_on_tables.del_qcm_results_unsuccessed_old()
-        alert(result)
+    
 
     def button_qr_code_generator_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -374,5 +367,16 @@ class Main(MainTemplate):
         from ..Stage_form_results_stagiaire import Stage_form_results_stagiaire
         open_form('Stage_form_results_stagiaire')
 
+    def bt_maj_txt_stagiaires_inscrits_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..z_Utilitaires_JM import z_Utilitaires_JM
+        open_form('z_Utilitaires_JM')
 
+    
+
+    
+
+
+
+    
 
