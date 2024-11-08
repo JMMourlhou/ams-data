@@ -7,6 +7,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from .. import French_zone # calcul tps traitement
+
 
 class z_Utilitaires_JM(z_Utilitaires_JMTemplate):
     def __init__(self, **properties):
@@ -49,6 +51,7 @@ class z_Utilitaires_JM(z_Utilitaires_JMTemplate):
     def bt_maj_txt_pre_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
         with anvil.server.no_loading_indicator:
+            self.start = French_zone.french_zone_time()  # pour calcul du tps de traitement
             alert("Début du traitement")
             self.task_maj_pr = anvil.server.call('run_bg_task_maj_pr_stagiaires_txt')
             self.timer_1.interval=0.5
@@ -56,6 +59,7 @@ class z_Utilitaires_JM(z_Utilitaires_JMTemplate):
     def timer_1_tick(self, **event_args):
         """This method is called Every 0.5 seconds. Does not trigger if [interval] is 0."""
         if self.task_maj_pr.is_completed():
-            alert("Maj des colonnes txt, Table PR, achevée")
+            self.end = French_zone.french_zone_time()  # pour calcul du tps de traitement
+            alert(f"Maj des colonnes txt en {self.end-self.start}")
             self.timer_1.interval=0
             anvil.server.call('task_killer',self.task_maj_pr)

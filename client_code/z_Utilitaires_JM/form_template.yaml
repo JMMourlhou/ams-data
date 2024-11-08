@@ -1,5 +1,6 @@
 components:
-- layout_properties: {grid_position: 'GRLOAM,TVIFTF'}
+- event_bindings: {tick: timer_1_tick}
+  layout_properties: {grid_position: 'GRLOAM,TVIFTF'}
   name: timer_1
   properties: {interval: 0}
   type: Timer
