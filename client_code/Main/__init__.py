@@ -311,7 +311,6 @@ class Main(MainTemplate):
                 #self.bt_gestion_stages.visible = True
                 self.flow_panel_admin_only.visible = True
                 
-                
             if user["role"] == "B":                               # Bureaux    Visu stages, recherches et modif
                 self.flow_panel_admin_only.visible = False   # Tools stages de JM
                 self.column_panel_others.visible = False     # BT des stagiaires
@@ -346,11 +345,7 @@ class Main(MainTemplate):
     def button_parametres_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Parametres import Parametres
-        open_form("Parametres")
-
-    
-
-    
+        open_form("Parametres")  
 
     def button_qr_code_generator_click(self, **event_args):
         """This method is called when the button is clicked"""

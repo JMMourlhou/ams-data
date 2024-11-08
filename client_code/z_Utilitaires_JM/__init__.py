@@ -49,6 +49,7 @@ class z_Utilitaires_JM(z_Utilitaires_JMTemplate):
     def bt_maj_txt_pre_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
         with anvil.server.no_loading_indicator:
+            alert("Début du traitement")
             self.task_maj_pr = anvil.server.call('run_bg_task_maj_pr_stagiaires_txt')
             self.timer_1.interval=0.5
             
@@ -57,4 +58,4 @@ class z_Utilitaires_JM(z_Utilitaires_JMTemplate):
         if self.task_maj_pr.is_completed():
             alert("Maj des colonnes txt, Table PR, achevée")
             self.timer_1.interval=0
-            anvil.server.call('task_killer',self.task_suivi)
+            anvil.server.call('task_killer',self.task_maj_pr)
