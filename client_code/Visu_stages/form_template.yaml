@@ -50,7 +50,7 @@ components:
   name: column_panel_2
   properties:
     col_widths: '{"MYQPJL":35}'
-    role: elevated-card
+    role: outlined-card
     spacing:
       padding: ['5', null, '5', null]
   type: ColumnPanel
