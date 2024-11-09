@@ -28,7 +28,7 @@ components:
       type: Button
     layout_properties: {full_width_row: false, grid_position: 'EMGUXL,LEJSQR'}
     name: flow_panel_type
-    properties: {align: center, gap: none}
+    properties: {align: right, gap: none}
     type: FlowPanel
   - components:
     - event_bindings: {click: text_box_3_click}
@@ -106,7 +106,7 @@ components:
     type: FlowPanel
   layout_properties: {}
   name: column_panel_1
-  properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"LEJSQR":7,"CUWCHL":53}', spacing_above: none, wrap_on: never}
+  properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"LEJSQR":8,"CUWCHL":52}', spacing_above: none, wrap_on: never}
   type: ColumnPanel
 container:
   properties: {align: center, auto_display_data: false, background: 'theme:On Primary', bold: false, border: '', font: '', font_size: null, foreground: '', italic: false, role: null, spacing_above: none, spacing_below: none, tooltip: '', underline: false, visible: true}
