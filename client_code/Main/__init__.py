@@ -221,8 +221,10 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
         anvil.users.logout()  # logging out the user
+        self.user = None
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
+        
         
     # ===================================================================================================================
     #                                                                                                   BT 'SE CONNECTER'         
