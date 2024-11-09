@@ -5,7 +5,7 @@ components:
       layout_properties: {expand: false, width: null}
       name: text_box_2
       properties:
-        align: right
+        align: center
         background: ''
         bold: true
         border: ''
@@ -28,7 +28,7 @@ components:
       type: Button
     layout_properties: {full_width_row: false, grid_position: 'EMGUXL,LEJSQR'}
     name: flow_panel_type
-    properties: {align: right, gap: none}
+    properties: {align: center, gap: none}
     type: FlowPanel
   - components:
     - event_bindings: {click: text_box_3_click}
