@@ -30,7 +30,7 @@ class RowTemplate3(RowTemplate3Template):
         if screen_size < 800:
             self.text_box_1.visible = False
             self.button_del_stage.visible = False
-            
+            self.button_sending.text = ""
             if self.item['date_debut'] is not None:
                 self.text_box_3.text = self.item['date_debut'].strftime("%m/%Y")   # format date française avec fonction Python strftime
         else:
