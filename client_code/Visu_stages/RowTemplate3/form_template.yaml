@@ -1,35 +1,29 @@
 components:
 - components:
-  - components:
-    - event_bindings: {click: text_box_2_click}
-      layout_properties: {expand: false, width: 100.76645610351562}
-      name: text_box_2
-      properties:
-        align: full
-        background: ''
-        bold: true
-        border: ''
-        enabled: true
-        font: ''
-        font_size: null
-        foreground: theme:Tertiary
-        icon: ''
-        icon_align: left
-        italic: false
-        role: null
-        spacing:
-          padding: [null, '5', null, '5']
-        spacing_above: small
-        spacing_below: small
-        text: type
-        tooltip: ''
-        underline: false
-        visible: true
-      type: Button
-    layout_properties: {width: 87.27141650390625}
-    name: flow_panel_2
-    properties: {spacing: none, vertical_align: middle}
-    type: FlowPanel
+  - event_bindings: {click: text_box_2_click}
+    name: text_box_2
+    properties:
+      align: left
+      background: ''
+      bold: true
+      border: ''
+      enabled: true
+      font: ''
+      font_size: null
+      foreground: theme:Tertiary
+      icon: ''
+      icon_align: left
+      italic: false
+      role: null
+      spacing:
+        padding: [null, '5', null, '5']
+      spacing_above: small
+      spacing_below: small
+      text: type
+      tooltip: ''
+      underline: false
+      visible: true
+    type: Button
   - event_bindings: {click: text_box_3_click}
     layout_properties: {}
     name: text_box_3
