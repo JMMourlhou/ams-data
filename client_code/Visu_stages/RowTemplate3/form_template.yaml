@@ -5,7 +5,7 @@ components:
       layout_properties: {expand: true, width: null}
       name: text_box_2
       properties:
-        align: center
+        align: full
         background: ''
         bold: true
         border: ''
