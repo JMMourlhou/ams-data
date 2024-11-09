@@ -30,8 +30,8 @@ class RowTemplate3(RowTemplate3Template):
         # Affichage en fonction largeur écran
         if screen_size < 800:
             self.flow_panel_type.width = 110
-            self.text_box_1.visible = False
-            self.button_del_stage.visible = False
+            self.text_box_1.visible = False   # numéro du stage non visible
+            self.button_del_stage.visible = False  # BT annulation du stage non visible
             self.button_sending.text = ""
             if self.item['date_debut'] is not None:
                 self.text_box_3.text = self.item['date_debut'].strftime("%m/%Y")   # format date française avec fonction Python strftime

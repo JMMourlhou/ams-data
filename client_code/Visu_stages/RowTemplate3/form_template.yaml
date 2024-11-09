@@ -28,7 +28,7 @@ components:
       type: Button
     layout_properties: {full_width_row: false, grid_position: 'EMGUXL,LEJSQR'}
     name: flow_panel_type
-    properties: {gap: none}
+    properties: {align: center, gap: none}
     type: FlowPanel
   - components:
     - components:
@@ -108,7 +108,7 @@ components:
     layout_properties: {grid_position: 'EMGUXL,CUWCHL'}
     name: flow_panel_1
     properties:
-      align: left
+      align: center
       background: ''
       border: ''
       foreground: ''
