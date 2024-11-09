@@ -29,7 +29,7 @@ class RowTemplate3(RowTemplate3Template):
         
         # Affichage en fonction largeur écran
         if screen_size < 800:
-            self.flow_panel_type.width = 67
+            self.flow_panel_type.width = 80
             self.text_box_1.visible = False
             self.button_del_stage.visible = False
             self.button_sending.text = ""
