@@ -19,8 +19,6 @@ import math
 @anvil.server.background_task
 def resize_jpg(row, file_name):
     
-    
-    
     if row:
         print(row['stagiaire_email']['email'])
         
@@ -88,7 +86,9 @@ def run_bg_task_resize_jpg(row, file_name):
 **************************************************************** FIN DU PRECESSUS BGT
 """
 
-# test taille des img des pr-requis
+
+
+# (table PR stagiaire): calcul taille de l'img du pré-requis et écriture de cette taille ds le même row 
 @anvil.server.callable
 def size_jpg():
     result=False

@@ -14,14 +14,20 @@ import sign_in_for_AMS_Data
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):  # msg pour afficher une alerte si mail erroné en pwreset par ex
         # Set Form properties and Data Bindings.
+        self.init_components(**properties)
+        # Any code you write here will run before the form opens.
+        
+        # renseignements user 
+        self.user = anvil.users.get_user(q.fetch_only("nom","prenom","role","email"))
+
+        # Initilisation du calendrier avec les jours en Francais
         from anvil.js.window import moment
         moment.updateLocale('fr', {'weekdaysMin': ['Di','Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']})
         moment.updateLocale("fr", { "week": {
                             "dow": 1, # First day of week is Monday
                             }})
         
-        self.init_components(**properties)
-        # Any code you write here will run before the form opens.
+        
         """
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.enabled = False
@@ -59,8 +65,8 @@ class Main(MainTemplate):
 
             if len(h) != 0:  # a URL has openned this app
                 # handling buttons display before going to module externe 'sign_in_for_AMS_Data'
-                self.display_bt_mail()
-                self.display_admin_or_other_buttons()
+                self.display_bt_mail()                 # Bt de connection
+                self.display_admin_or_other_buttons()  # Autres BT
                 
                 # lien actif < à 3 mois ?
                 # url_time_str=""
@@ -84,13 +90,10 @@ class Main(MainTemplate):
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
         
-        # renseignements du user 
-        user = anvil.users.get_user(q.fetch_only("prenom"))
-        #self.user = anvil.users.get_user(q.fetch_only("prenom"))
-        if not user:
+        if not self.user:
             self.content_panel.clear()
         else:
-            if user["prenom"] is None or user["prenom"] == "":
+            if self.user["prenom"] is None or self.user["prenom"] == "":
                 self.column_panel_header.visible = False
                 self.content_panel.add_component(Saisie_info_de_base(True), full_width_row=True)
 
@@ -117,6 +120,8 @@ class Main(MainTemplate):
         )
         return
 
+    # stage number in URL's Hash (le user vient de flacher le Qr code)
+    # je suis en sign in après flash du qr code par le stagiaire ou click du lien ds un mail 
     def qr_code(self, **event_args):
         num_stage = self.h["stage"]   
         if "pour" in self.h:
@@ -130,12 +135,11 @@ class Main(MainTemplate):
 
     
     """ ***********************************************************************************************"""
-    """ ****************************** Gestions  BOUTONS et leurs clicks ******************************"""
+    """ ****************************** Gestions  BOUTONS CONNECTION et leurs clicks ******************************"""
     """ ***********************************************************************************************"""
     def display_bt_mail(self, **event_args):
-        user = anvil.users.get_user(q.fetch_only("nom"))
-        if user:
-            self.bt_user_mail.text = user["email"]
+        if self.user:
+            self.bt_user_mail.text = self.user["email"]
             self.bt_se_connecter.visible = False
             self.bt_se_deconnecter.visible = True
         else:
@@ -150,11 +154,57 @@ class Main(MainTemplate):
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
 
-              
-    def bt_gestion_stages_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        open_form("Visu_stages")
+    """ ***********************************************************************************************"""
+    """ ****************************** Gestions  AUTRES BOUTONS et leurs clicks ******************************"""
+    """ ***********************************************************************************************"""
+    def display_admin_or_other_buttons(self, **event_args):
+        if self.user:
+            self.bt_sign_in.visible = False
+            self.bt_user_mail.enabled = True
+            self.button_qcm.visible = True
+            self.button_pre_requis.visible = True
+            self.label_role.text = self.user['role']   # affichage du role
 
+            if self.user["role"] == "S":
+                self.column_panel_others.visible = True
+                
+            if self.user["role"] == "A" :                              # 'A'dministrator  JM    TOUT
+                self.column_panel_admin.visible = True
+                self.column_panel_others.visible = True
+                #self.bt_gestion_stages.visible = True
+                self.flow_panel_admin_only.visible = True
+                
+            if self.user["role"] == "B":                               # Bureaux    Visu stages, recherches et modif
+                self.flow_panel_admin_only.visible = False   # Tools stages de JM
+                self.column_panel_others.visible = False     # BT des stagiaires
+                self.column_panel_admin.visible = True       
+
+            if self.user["role"] == "J":                               # Bureaux JC     TOUT sauf recherches
+                self.column_panel_admin.visible = True
+                self.flow_panel_admin_only.visible = False
+                self.flow_panel_bureaux.visible = False
+                self.flow_panel_visu.visible = True
+                self.column_panel_others.visible = False          # pas BT des stagiaires
+                self.flow_panel_visu.visible = True
+                
+            if self.user["role"] == "T":                               # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
+                self.column_panel_others.visible = True
+                self.button_qcm.visible = False
+                self.button_form_satisf.visible = False
+
+            if self.user["role"] == "F":                               # Formateurs: QCM, Pré requis, PREVOIR CREATION D'UN QCM 
+                self.button_qcm.visible = True
+                self.button_form_satisf.visible = False
+                self.button_form_suivi_stage.visible = False
+            
+        else: #pas de user
+            self.column_panel_bureaux.visible = False
+            self.column_panel_admin.visible = False
+            self.column_panel_others.visible = False
+            
+    # ===================================================================================================================
+    #                                                                                                         BT 'SIGN IN'          
+    # ===================================================================================================================
     def bt_sign_in_click(self, h={}, num_stage=0, pour_stage=0, **event_args):  # h qd vient de sign in par qr code
         """This method is called when the button is clicked"""
         from sign_in_for_AMS_Data.SignupDialog_V2 import SignupDialog_V2
@@ -164,13 +214,19 @@ class Main(MainTemplate):
         self.content_panel.add_component(SignupDialog_V2(h, num_stage, pour_stage), full_width_row=True)
         #open_form('sign_in_for_AMS_Data.SignupDialog_V2',h, num_stage, pour_stage)
     
+    # ===================================================================================================================
+    #                                                                                                 BT 'SE DECONNECTER'         
+    # ===================================================================================================================
     def bt_se_deconnecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.content_panel.clear()
         anvil.users.logout()  # logging out the user
         self.display_bt_mail()
         self.display_admin_or_other_buttons()
-
+        
+    # ===================================================================================================================
+    #                                                                                                   BT 'SE CONNECTER'         
+    # ===================================================================================================================
     def button_se_connecter_click(self, **event_args):
         """This method is called when the button is clicked"""
         """Will call the EXTERNAL MODULE DEPENDACY when the link is clicked"""
@@ -181,192 +237,157 @@ class Main(MainTemplate):
         self.content_panel.clear()
         self.content_panel.add_component(LoginDialog_V2(), full_width_row=False)
 
-    def button_qr_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        open_form("QrCode_display", True)
-
+    # click sur le mail du user (l'icone du petit bonhomme), envoi en "Saisie_info_apres_visu"
     def bt_user_mail_click(self, prem_util=False, **event_args):  # True=1ere utilisation
-        """This method is called when the button is clicked"""
         self.content_panel.clear()
         self.bt_se_deconnecter.visible = False
         self.bt_sign_in.visible = False
         # Saisie_info_de_base(False) car pas la 1ere saisie de la fiche de renseignements
-        user = anvil.users.get_user(q.fetch_only("email"))
-        if not user:
+        if not self.user:
             self.content_panel.clear()
         else:
-            open_form("Saisie_info_apres_visu", user["email"])
+            open_form("Saisie_info_apres_visu", self.user["email"])
 
-
-    def button_qcm_click(self, **event_args):
+    # BT admin 'Stages' cliqué, envoi en "Visu_stages"         
+    def bt_gestion_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
+        open_form("Visu_stages")
+
+    # BT stagiaire QCM
+    def button_qcm_click(self, **event_args):
         from ..QCM_visu_modif_ST_Main import QCM_visu_modif_ST_Main
         open_form("QCM_visu_modif_ST_Main")
 
-
+    # BT bureaux Recherches
     def button_create_recherche_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Recherche_stagiaire import Recherche_stagiaire
         open_form("Recherche_stagiaire")
 
+    # BT stagiaire Doc requis à rentrer 
     def button_pre_requis_click(self, **event_args):
-        """This method is called when the button is clicked"""
         from ..Pre_R_pour_stagiaire import Pre_R_pour_stagiaire
         open_form("Pre_R_pour_stagiaire")
 
-    def button_loop_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        """
-        from .. import z_loop_on_tables
-        result=z_loop_on_tables.loop_del_qcm5()
-        alert(result)
-        """
 
-    def Close_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        import anvil.js
-        from anvil.js.window import localStorage
-        from anvil.js import window
-        import anvil.users
-
-        # Déconnecter l'utilisateur
-        anvil.users.logout()
-        # Afficher un message
-        # alert("Vous êtes déconnecté.")
-        window.close()
-
-    # Extraction de fichier texte pour les qcm
-    def button_txt_file_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        # envoi en extraction des qcm à partir d'un fichier txt
-        txt_msg = anvil.server.call("file_reading")
-        alert(txt_msg)
-
-    def button_form_satisf_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Stage_form_satisfaction import Stage_form_satisfaction
-        open_form("Stage_form_satisfaction")
-
-    def button_satisf_result_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Stage_satisf_statistics import Stage_satisf_statistics
-        open_form("Stage_satisf_statistics")
-
-    def button_sign_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Signature import Signature
-        open_form("Signature")
-
-
-    def button_xls_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..XLS_reader import XLS_reader
-        open_form("XLS_reader")
-
-    def button_mail_histo_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Mail_to_old_stagiaires import Mail_to_old_stagiaires
-        open_form("Mail_to_old_stagiaires")
-
-    def button_rsz_img_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Pre_R_Moulinette import Pre_R_Moulinette
-        open_form("Pre_R_Moulinette")
-
-    def button_size_pr_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        result = anvil.server.call('size_jpg')
-        if result:
-            alert("fin")
-        else:
-            alert("pas de fin normale")
-
-
+    # BT Résultats des formulaires de suivi de stages
     def button_suivi_result_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_suivi_results import Stage_suivi_results
         open_form("Stage_suivi_results")
 
+    # BT stagiaire pour son suivi de stage 
     def button_form_suivi_stage_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_form_suivi import Stage_form_suivi
         open_form("Stage_form_suivi")
-
-    def display_admin_or_other_buttons(self, **event_args):
-        user = anvil.users.get_user(q.fetch_only("nom"))
-       
-        if user:
-            self.bt_sign_in.visible = False
-            self.bt_user_mail.enabled = True
-            self.button_qcm.visible = True
-            self.button_pre_requis.visible = True
-            self.label_role.text = user['role']   # affichage du role
-
-            if user["role"] == "S":
-                self.column_panel_others.visible = True
-                
-            if user["role"] == "A" :                              # 'A'dministrator  JM    TOUT
-                self.column_panel_admin.visible = True
-                self.column_panel_others.visible = True
-                #self.bt_gestion_stages.visible = True
-                self.flow_panel_admin_only.visible = True
-                
-            if user["role"] == "B":                               # Bureaux    Visu stages, recherches et modif
-                self.flow_panel_admin_only.visible = False   # Tools stages de JM
-                self.column_panel_others.visible = False     # BT des stagiaires
-                self.column_panel_admin.visible = True       
-
-            if user["role"] == "J":                               # Bureaux JC     TOUT sauf recherches
-                self.column_panel_admin.visible = True
-                self.flow_panel_admin_only.visible = False
-                self.flow_panel_bureaux.visible = False
-                self.flow_panel_visu.visible = True
-                self.column_panel_others.visible = False          # pas BT des stagiaires
-                self.flow_panel_visu.visible = True
-                
-            if user["role"] == "T":                               # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
-                self.column_panel_others.visible = True
-                self.button_qcm.visible = False
-                self.button_form_satisf.visible = False
-                
-
-            if user["role"] == "F":                               # Formateurs: QCM, Pré requis, PREVOIR CREATION D'UN QCM 
-                self.button_qcm.visible = True
-                self.button_form_satisf.visible = False
-                self.button_form_suivi_stage.visible = False
-
-            
-        else: #pas de user
-            self.column_panel_bureaux.visible = False
-            self.column_panel_admin.visible = False
-            self.column_panel_others.visible = False
-            
 
     def button_parametres_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Parametres import Parametres
         open_form("Parametres")  
 
-    def button_qr_code_generator_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..QrCode_Generator import QrCode_Generator
-        open_form("QrCode_Generator")
+    
+    
 
+    # BT Stagiaire, communication (avis du groupe sur une intervention)    
     def button_form_com_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_form_com import Stage_form_com
         open_form('Stage_form_com')
 
+    # BT Stagiaire, communication (le stagiaire voit ses résultats (avis du groupe sur son intervention))
     def button_form_com_resultats_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Stage_form_results_stagiaire import Stage_form_results_stagiaire
         open_form('Stage_form_results_stagiaire')
+        
+    # BT résultats des formulaires de satisfaction en fin de stage
+    def button_form_satisf_click(self, **event_args):
+        from ..Stage_form_satisfaction import Stage_form_satisfaction
+        open_form("Stage_form_satisfaction")
 
+    # BT résultats des formulaires de satisfaction en fin de stage
+    def button_satisf_result_click(self, **event_args):
+        from ..Stage_satisf_statistics import Stage_satisf_statistics
+        open_form("Stage_satisf_statistics")
+
+    # BT Publipostage aux anciens stagiaires
+    def button_mail_histo_click(self, **event_args):
+        from ..Mail_to_old_stagiaires import Mail_to_old_stagiaires
+        open_form("Mail_to_old_stagiaires")
+
+    # BT UTILITAIRES 
     def bt_maj_txt_stagiaires_inscrits_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..z_Utilitaires_JM import z_Utilitaires_JM
         open_form('z_Utilitaires_JM')
+    
 
+    
+    """
+    ==============================================================
+    # Les UTILITAIRES suivants sont à TRANSFERER DS UTILITAIRES POUR alléger module MAIN
+    ==============================================================
+
+    # ENVOI EN MODULE z_loop_on_tables pour plusieurs utilitaires
+    def button_loop_click(self, **event_args):
+        from .. import z_loop_on_tables
+        result=z_loop_on_tables.loop_del_qcm5()
+        alert(result)
+    
+    # Test pour fermer la fenêtre
+    def Close_click(self, **event_args):
+        import anvil.js
+        from anvil.js.window import localStorage
+        from anvil.js import window
+        import anvil.users
+        # Déconnecter l'utilisateur
+        anvil.users.logout()
+        # Afficher un message
+        # alert("Vous êtes déconnecté.")
+        window.close()
+
+    # Génération d'un Qr code à partir d'une phrase, un lien, ...
+    def button_qr_code_generator_click(self, **event_args):
+        from ..QrCode_Generator import QrCode_Generator
+        open_form("QrCode_Generator")
+
+    
+    # Extraction de fichier texte pour les qcm
+    def button_txt_file_click(self, **event_args):
+        # envoi en extraction des qcm à partir d'un fichier txt
+        txt_msg = anvil.server.call("file_reading")
+        alert(txt_msg)
+
+    
+    # Essai de signature électronique
+    def button_sign_click(self, **event_args):
+        from ..Signature import Signature
+        open_form("Signature")
+
+    # lecture d'un fichier csv (excel)
+    def button_xls_click(self, **event_args):
+        from ..XLS_reader import XLS_reader
+        open_form("XLS_reader")
+
+    
+    # boucle sur les images dela table pré-requis pour resize jpg en 1000 x 800   ou 800 x 1000
+    def button_rsz_img_click(self, **event_args):
+        from ..Pre_R_Moulinette import Pre_R_Moulinette
+        open_form("Pre_R_Moulinette")
+
+    
+    # (table PR stagiaire): calcul taille de l'img du pré-requis et écriture de cette taille ds le même row 
+    def button_size_pr_click(self, **event_args):
+        result = anvil.server.call('size_jpg')
+        if result:
+            alert("fin")
+        else:
+            alert("pas de fin normale")
+            
+    """
+    
     
 
     
