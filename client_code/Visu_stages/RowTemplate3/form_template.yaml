@@ -1,6 +1,7 @@
 components:
 - components:
   - event_bindings: {click: text_box_2_click}
+    layout_properties: {width: 20}
     name: text_box_2
     properties:
       align: left
