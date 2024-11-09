@@ -124,7 +124,7 @@ components:
     type: FlowPanel
   layout_properties: {}
   name: column_panel_1
-  properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"LEJSQR":9,"CUWCHL":51}', wrap_on: never}
+  properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"LEJSQR":9,"CUWCHL":51}', spacing_above: none, wrap_on: never}
   type: ColumnPanel
 container:
   properties: {align: center, auto_display_data: false, background: 'theme:On Primary', bold: false, border: '', font: '', font_size: null, foreground: '', italic: false, role: null, spacing_above: none, spacing_below: none, tooltip: '', underline: false, visible: true}
