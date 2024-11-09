@@ -2,10 +2,10 @@ components:
 - components:
   - components:
     - event_bindings: {click: text_box_2_click}
-      layout_properties: {expand: false, width: 53.28114538574219}
+      layout_properties: {expand: true, width: 79.04172744140625}
       name: text_box_2
       properties:
-        align: full
+        align: left
         background: ''
         bold: true
         border: ''
