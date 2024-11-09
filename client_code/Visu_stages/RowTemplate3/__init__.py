@@ -25,8 +25,9 @@ class RowTemplate3(RowTemplate3Template):
         if app_user['role'] == "J":
             self.button_inscription.visible = False
             self.button_del_stage.visible = False
-        
         self.button_qcm.tag.stage = self.item['numero']  #numero de stage en tag du bouton self.button_qcm
+        
+        # Affichage en fonction largeur écran
         if screen_size < 800:
             self.text_box_1.visible = False
             self.button_del_stage.visible = False
