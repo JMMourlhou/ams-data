@@ -1,6 +1,10 @@
 components:
 - components:
   - components:
+    - layout_properties: {width: 9.017501831054688}
+      name: spacer_1
+      properties: {height: 32}
+      type: Spacer
     - event_bindings: {click: text_box_2_click}
       layout_properties: {expand: true, width: 79.04172744140625}
       name: text_box_2
