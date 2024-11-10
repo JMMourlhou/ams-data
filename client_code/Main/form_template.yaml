@@ -25,7 +25,7 @@ components:
           col_widths: {}
           grid_position: OPHTMO,HRACXZ
         name: bt_se_connecter
-        properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '"Connectez vous !"', tooltip: '', underline: false, visible: true}
+        properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Connectez vous !, tooltip: '', underline: false, visible: true}
         type: Button
       layout_properties: {grid_position: 'YOXQOW,UEQISO'}
       name: column_panel_bt_mail
@@ -36,7 +36,7 @@ components:
         col_widths: {}
         grid_position: LRXJXA,CUVIXY
       name: bt_sign_in
-      properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: ' Créer son compte ', tooltip: '', underline: false, visible: true}
+      properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: ' Créez votre compte ', tooltip: '', underline: false, visible: true}
       type: Button
     layout_properties: {grid_position: 'EOVRLY,HGJCCZ'}
     name: column_panel_2
