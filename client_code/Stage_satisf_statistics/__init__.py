@@ -70,6 +70,11 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
             self.label_titre_no_response.visible = False
             self.repeating_panel_no_response.visible = False
         # ------------------------------------------------------------------------
+        # test si un stagiaire au moins a rempli le formulaire de satisfaction
+        liste_test = app_tables.stage_satisf.search(stage_row=row)
+        if len(liste_test) == 0:
+            return
+            
         
         # Si pdf déjà sauvé en table stage, j'affiche les boutons téléchargement et renseigne ma variable de test
         stage_row = app_tables.stages.get(numero=self.row["numero"])

@@ -22,7 +22,7 @@ from pytz import timezone      #
 """
 @anvil.server.background_task
 def generate_satisf_results(stage_num, type, row):
-    start = time.time()   # pour calcul du tpsde traitement (environ 25 se)
+    start = time.time()   # pour calcul du tpsde traitement (environ 25 sec)
     now_utc = datetime.now(timezone('UTC'))
     date_time = now_utc.astimezone(timezone('Europe/Paris')) # initialisation of the date & time of writing
 
