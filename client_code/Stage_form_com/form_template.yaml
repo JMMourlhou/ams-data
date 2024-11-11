@@ -36,7 +36,7 @@ components:
         foreground: theme:On Primary
         include_placeholder: true
         italic: false
-        items: [Cours communication, Autres cours (à préciser), '']
+        items: [Cours communication, Anatomie, Bio-mécanique, Autres cours (à préciser), '']
         margin: [null, '0', null, null]
         placeholder: Choisir le cadre ...
         role: null

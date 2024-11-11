@@ -180,7 +180,7 @@ def loop_qcm4():
             result="loop ok"
         print(f"loop sur qcm9: {result}")
 
-#boucle sur la table pré-requis par stagiaire pour ajouter un pré-requiq à tous les stgiaires d'un stage
+#boucle sur la table pré-requis par stagiaire pour ajouter un pré-requiq à tous les stagiaires d'un stage
 def ajout_pre_requis():
     # lecture stage 
     stage_row=app_tables.stages.get(numero=116)
@@ -221,8 +221,6 @@ def maj_stages_txt():
         row_stage = app_tables.codes_stages.get(code=stage['code']['code'])
         stage.update(code_txt=row_stage['code'])
         print(stage['numero'], stage['code_txt'])
-
-
 
 
 #boucle sur la table QCM results pour nom/prenom en clair txt 

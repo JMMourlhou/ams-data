@@ -8,7 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
+# Le stagiaire affiche ses propres résultats en communication
 class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.

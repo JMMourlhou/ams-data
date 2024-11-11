@@ -1,9 +1,7 @@
 from ._anvil_designer import Stage_form_comTemplate
 from .. import French_zone  # POur acquisition de date et heure Francaise (Browser time)
 from anvil import *
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+
 import anvil.server
 import anvil.users
 import anvil.tables as tables
@@ -19,7 +17,7 @@ nb_questions_ferm = 0
 global nb_questions_ouvertes  # nb questions ouvertes
 nb_questions_ouvertes = 0
 
-
+# Le stagiaire note un de ses co-stgiaire du même stage en communication ou autre présentation
 class Stage_form_com(Stage_form_comTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
