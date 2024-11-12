@@ -896,7 +896,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         dico_rep_q_ouv = {}   #     clé:num question   valeur: = question txt,reponse (txt)
         
         for cp in self.get_components(): # column panels in form self
-            if cp.tag != 0 and cp.tag != "header" and type(cp.tag)=="int": # si pas les col panel du haut de la forme, ce sont des cp des questions
+            if cp.tag != 0 and cp.tag != "header": # si pas les col panel du haut de la forme, ce sont des cp des questions
                 num_question = cp.tag
                 if num_question <= nb_questions_ferm:
                     try:
