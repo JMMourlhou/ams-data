@@ -32,7 +32,13 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         qcm_row = self.drop_down_qcm_row.selected_value
+        user=anvil.users.get_user()
 
+        # test si il est le propriétaire
+        if qcm_row["qcm_owner"]["email"] != user["email"]:
+            alert("Vous n'êtes pas le propriétaire de ce QCM, \nVous ne pouvez pas le modifier !")
+            return
+        
         # Pour les lignes QCM déjà crée du qcm choisi
         global liste
         liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
@@ -41,8 +47,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         #num_question = str(nb_questions + 1)
         self.label_2.text = nb_questions + 1  # Num ligne à partir du nb lignes déjà créées
 
-        # acquisition du user et modif de son temp (nb de questions de son qcm)
-        user=anvil.users.get_user()
+        # modif du user's temp (nb de questions de son qcm)
+        
         r = anvil.server.call("temp_user_qcm", user, nb_questions,qcm_row["qcm_nb"])
         if r is False:
             alert("user non MAJ")

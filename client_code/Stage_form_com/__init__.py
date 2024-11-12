@@ -1111,10 +1111,10 @@ class Stage_form_com(Stage_form_comTemplate):
 
     def drop_down_cadre_change(self, **event_args):
         """This method is called when an item is selected"""
-        if self.drop_down_cadre.selected_value == "Cours communication":
-            self.text_box_cadre.visible = False
-        else:
+        if self.drop_down_cadre.selected_value == "Autres... (à préciser)":
             self.text_box_cadre.visible = True
+        else:
+            self.text_box_cadre.visible = False
             
         self.drop_down_code_stage.visible = True
 

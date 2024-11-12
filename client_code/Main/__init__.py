@@ -150,7 +150,7 @@ class Main(MainTemplate):
             self.bt_sign_in.visible = True
 
             self.bt_se_deconnecter.visible = False
-
+            self.outlined_card_niv1.visible = False
             self.column_panel_admin.visible = False
             self.column_panel_others.visible = False
 
@@ -171,31 +171,56 @@ class Main(MainTemplate):
             if self.user["role"] == "A" :                              # 'A'dministrator  JM    TOUT
                 self.column_panel_admin.visible = True
                 self.column_panel_others.visible = True
-                #self.bt_gestion_stages.visible = True
                 self.flow_panel_admin_only.visible = True
+                self.outlined_card_niv1.visible = True
                 
-            if self.user["role"] == "B":                               # Bureaux    Visu stages, recherches et modif
-                self.flow_panel_admin_only.visible = False   # Tools stages de JM
-                self.column_panel_others.visible = False     # BT des stagiaires
-                self.column_panel_admin.visible = True       
+            if self.user["role"] == "B":                    # Bureaux:   
+                self.outlined_card_pr_qcm.visible = True        # faire 1 qcm et voir ses résultats 
+                self.outlined_card_formulaires.visible = False  
+                self.outlined_card_com.visible = False           
 
-            if self.user["role"] == "J":                               # Bureaux JC     TOUT sauf recherches
-                self.column_panel_admin.visible = True
-                self.flow_panel_admin_only.visible = False
-                self.flow_panel_bureaux.visible = False
-                self.flow_panel_visu.visible = True
-                self.column_panel_others.visible = False          # pas BT des stagiaires
-                self.flow_panel_visu.visible = True
+                self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
+                self.flow_panel_visu_formulaires.visible = True    # Voir les résultats des formulaires de suivi et de stisfaction         
+                self.button_create_qcm.visible = False
+                self.button_create_recherche.visible = True        # faire une recherche     
+
+            if self.user["role"] == "J":                    #  JC:    
+                self.outlined_card_pr_qcm.visible = True        # faire 1 qcm et voir ses résultats 
+                self.button_pre_requis.visible = False
                 
-            if self.user["role"] == "T":                               # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
-                self.column_panel_others.visible = True
+                self.outlined_card_formulaires.visible = False  
+                self.outlined_card_com.visible = False           
+
+                self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
+                self.flow_panel_visu_formulaires.visible = False             
+                self.button_create_qcm.visible = False
+                self.button_create_recherche.visible = True     # faire une recherche
+                
+            if self.user["role"] == "T":                    # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
+                self.outlined_card_pr_qcm.visible = True 
+                self.button_pre_requis.visible = True           # Rentrer ses pré requis
                 self.button_qcm.visible = False
+                
+                self.outlined_card_formulaires.visible = True   
+                self.button_form_suivi_stage.visible = True     # Rentrer le formulaire de suivi de stage du stgiaire BPMotoN
                 self.button_form_satisf.visible = False
+                
+                self.outlined_card_com.visible = False           
 
-            if self.user["role"] == "F":                               # Formateurs: QCM, Pré requis, PREVOIR CREATION D'UN QCM 
-                self.button_qcm.visible = True
-                self.button_form_satisf.visible = False
-                self.button_form_suivi_stage.visible = False
+                self.outlined_card_niv1.visible = False         
+                self.flow_panel_visu_formulaires.visible = False             
+                self.button_create_qcm.visible = False
+                self.button_create_recherche.visible = False
+
+            if self.user["role"] == "F":                 # 1 Formateur peut .... 
+                self.outlined_card_pr_qcm.visible = True        # faire 1 qcm et voir ses résultats 
+                self.outlined_card_formulaires.visible = False  
+                self.outlined_card_com.visible = True           # évaluer avec sa classe une intervention, voir ses propres résultats
+
+                self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
+                self.flow_panel_visu_formulaires.visible = False             
+                self.button_create_qcm.visible = True
+                self.button_create_recherche.visible = True
             
         else: #pas de user
             self.column_panel_bureaux.visible = False
@@ -289,9 +314,6 @@ class Main(MainTemplate):
         from ..Parametres import Parametres
         open_form("Parametres")  
 
-    
-    
-
     # BT Stagiaire, communication (avis du groupe sur une intervention)    
     def button_form_com_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -314,6 +336,8 @@ class Main(MainTemplate):
         from ..Stage_satisf_statistics import Stage_satisf_statistics
         open_form("Stage_satisf_statistics")
 
+    
+
     # BT Publipostage aux anciens stagiaires
     def button_mail_histo_click(self, **event_args):
         from ..Mail_to_old_stagiaires import Mail_to_old_stagiaires
@@ -324,7 +348,12 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..z_Utilitaires_JM import z_Utilitaires_JM
         open_form('z_Utilitaires_JM')
-    
+        
+    # BT Création/modif d'un QCM    
+    def button_create_qcm_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..QCM_visu_modif import QCM_visu_modif
+        open_form("QCM_visu_modif_Main")
 
     
     """
@@ -389,6 +418,8 @@ class Main(MainTemplate):
             alert("pas de fin normale")
             
     """
+
+    
     
     
 
