@@ -175,7 +175,9 @@ class Main(MainTemplate):
                 self.outlined_card_niv1.visible = True
                 
             if self.user["role"] == "B":                    # Bureaux:   
-                self.outlined_card_pr_qcm.visible = True        # faire 1 qcm et voir ses résultats 
+                self.outlined_card_pr_qcm.visible = True        
+                self.button_qcm.visible = True                  # faire 1 qcm et voir ses résultats
+                self.button_pre_requis.visible = False
                 self.outlined_card_formulaires.visible = False  
                 self.outlined_card_com.visible = False           
 
@@ -216,12 +218,12 @@ class Main(MainTemplate):
                 self.outlined_card_pr_qcm.visible = True        # faire 1 qcm et voir ses résultats 
                 self.outlined_card_formulaires.visible = False  
                 self.outlined_card_com.visible = True           # évaluer avec sa classe une intervention, voir ses propres résultats
-
+                
                 self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
                 self.flow_panel_visu_formulaires.visible = False             
-                self.button_create_qcm.visible = True
-                self.button_create_recherche.visible = True
-            
+                self.button_create_qcm.visible = True           # créer un qcm
+                self.button_create_recherche.visible = True     # rechercher un stagiaire
+                
         else: #pas de user
             self.column_panel_bureaux.visible = False
             self.column_panel_admin.visible = False
