@@ -37,6 +37,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             self.button_pre_requis.text = ""
         if screen_size > 1800:
             self.data_grid_1.rows_per_page = 11
+            
     # Focus on nom en ouverture de form
     def form_show(self, **event_args):
         """This method is called when the form is shown on the page"""

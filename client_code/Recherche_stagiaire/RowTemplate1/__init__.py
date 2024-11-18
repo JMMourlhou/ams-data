@@ -93,9 +93,9 @@ class RowTemplate1(RowTemplate1Template):
             stagiaire_row = app_tables.users.get(email=mel)
             #alert(stagiaire_row['email'])
             stage = self.c.label_num_stage.text
-            print("stage en inscription", stage)
-
-            if int(stage)!=1003:
+            print(f"stage en inscription: <{stage}>")
+            
+            if int(stage) != 1003:
                 # Choix du mode de financement / Création d'une box incluant le drop down mode de fi
                 def show_results(self, result):
                     #alert(result)
