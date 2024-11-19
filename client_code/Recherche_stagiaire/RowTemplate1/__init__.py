@@ -73,14 +73,12 @@ class RowTemplate1(RowTemplate1Template):
         
         end = French_zone.french_zone_time()
         print("Temps de traitement init drop dwn: ", end-start)
-            
+
+    # button_1 : nom du stagiaire
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-       
-        #temp_row1 = app_tables.temp.search()[0]  # lecture de 1ere ligne fichier temp
-        #contenu = str(temp_row1['text'])
-        print("test: ",self.c.label_origine.text)
-        if self.c.label_origine.text == "<AMS_Data.Main.Main object>":    # vient du menu / recherche, pas d'inscription
+        print("Mode inscription si stage pas vide: ",self.c.label_origine.text)
+        if self.c.label_origine.text == "<AMS_Data.Main.Main object>" or self.c.label_num_stage.text == "":    # vient du menu / recherche, pas d'inscription
             try:
                 mel = self.item['email']   
             except:
