@@ -77,8 +77,10 @@ class RowTemplate1(RowTemplate1Template):
     # button_1 : nom du stagiaire
     def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
-        print("Mode inscription si stage pas vide: ",self.c.label_origine.text)
-        if self.c.label_origine.text == "<AMS_Data.Main.Main object>" or self.c.label_num_stage.text == "":    # vient du menu / recherche, pas d'inscription
+
+        # self.c.label_num_stage.text   est en forme mère recherche_stagiaire
+        print("Mode inscription si stage pas vide: ",self.c.label_origine.text, self.c.label_num_stage.text)
+        if self.c.label_origine.text == "<AMS_Data.Main.Main object>" or self.c.label_num_stage.text == "":    # vient du menu / recherche, pas d'inscription // 
             try:
                 mel = self.item['email']   
             except:
