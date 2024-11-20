@@ -63,7 +63,7 @@ components:
     - event_bindings: {click: button_visu_click}
       layout_properties: {grid_position: 'QJKZUK,XPKLKS'}
       name: button_visu
-      properties: {background: 'theme:Primary', foreground: 'theme:On Primary', icon: 'fa:window-restore', icon_align: left, role: filled-button, text: '   Voir / PDF', visible: false}
+      properties: {background: 'theme:Primary', foreground: 'theme:On Primary', icon: 'fa:binoculars', icon_align: left, role: filled-button, text: '   Voir / PDF', visible: false}
       type: Button
     - data_bindings: []
       event_bindings: {click: button_del_click}

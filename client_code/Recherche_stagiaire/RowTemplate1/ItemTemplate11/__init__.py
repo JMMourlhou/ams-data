@@ -24,15 +24,18 @@ class ItemTemplate11(ItemTemplate11Template):
         #txt1 = self.item['item_requis']['requis']
         txt1 = self.item['requis_txt']
         self.label_1.text = txt1 +" / "+ txt2
+        
         if self.item['doc1'] is not None:
-            self.image_1.source = self.item['thumb']              # DIPLAY L'image haute qualité 
+            self.image_1.source = self.item['thumb']              # DIPLAY L'image basse qualité 
             self.button_del.visible = True
             self.button_visu.visible = True
             self.file_loader_1.visible = False
+            self.button_rotation.visible = True
         else:
             self.button_del.visible = False
             self.button_visu.visible = False
             self.file_loader_1.visible = True
+            self.button_rotation.visible = False
 
     def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -73,6 +76,7 @@ class ItemTemplate11(ItemTemplate11Template):
                 self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, self.new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
                 self.timer_2.interval=0.5   
         self.file_loader_1.visible = False
+        self.button_rotation.visible = True
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -81,6 +85,7 @@ class ItemTemplate11(ItemTemplate11Template):
             self.image_1.source = None
             self.button_visu.visible = False
             self.button_del.visible = False
+            self.button_rotation.visible = False
             
             self.file_loader_1.text = ""
             self.file_loader_1.font_size = 18
@@ -152,5 +157,25 @@ class ItemTemplate11(ItemTemplate11Template):
                 self.save_file(media_object, self.new_file_name, ".jpg") 
             else:
                 alert('timer_2_tick: row stagiaire inscrit non trouvée')
+
+    def button_rotation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        row = app_tables.pre_requis_stagiaire.get(
+                                                        stage_num=self.stage_num,
+                                                        item_requis=self.item_requis,
+                                                        stagiaire_email=self.email
+                                                    )
+        file=row["doc1"]
+        media_object1 = anvil.URLMedia(file.url)
+        media_object2 = anvil.image.rotate(media_object1,90)
+        # Sauvegarde
+        self.save_file(media_object2, file.name, ".jpg")
+        #relecture pour affichage du thumb rotated
+        row = app_tables.pre_requis_stagiaire.get(
+                                                        stage_num=self.stage_num,
+                                                        item_requis=self.item_requis,
+                                                        stagiaire_email=self.email
+                                                    )
+        self.image_1.source = row['thumb']
 
                 
