@@ -12,7 +12,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-# Le stagiaire note un de ses co-stgiaire du même stage en communication ou autre présentation
+# Résultat des évaluation en comm pour une date précise 
 class Stage_com_results_stagiaires(Stage_com_results_stagiairesTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
