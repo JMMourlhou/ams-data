@@ -21,11 +21,13 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
             self.liste0 = app_tables.com.search(user=self.user)
             print("nb de dates où le stagiaire est intervenu ; ", len(self.liste0))
             if len(self.liste0) > 0: 
-                liste_drop_d = []
+                liste_test = []
+                liste1 = []
                 for row in self.liste0:
-                    liste_drop_d.append((row["date"],row ))   # date, row_intervention
-                # print(liste_drop_d)
-                self.drop_down_date.items = liste_drop_d
+                    if row["date"] not in liste_test:
+                        liste_test.append(row["date"])   # date, row_intervention
+                        liste1.append((row["date"],row ))   # date, row_intervention
+                self.drop_down_date.items = liste1
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -45,7 +47,7 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
         # sélection des formulaires saisis à la date sélectionnée
         liste_formulaires = app_tables.com.search(date=self.com_row["date"])
         nb_formulaires = len(liste_formulaires)
-        max_points_ferm = nb_formulaires * 6      # max de points possibles pour une question
+        max_points_ferm = nb_formulaires * 5      # max de points possibles pour une question
         #  ================================================================  Affichage résultats
         # extraction du stage par lecture du premier formulaire de la liste
         first_row = liste_formulaires[0]
@@ -90,16 +92,16 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
             
             dico_ferm = formulaire["com_ferm"]   # dico fermé du formulaire
             # cumul des scores pour questions fermées
-            points_q1 = points_q1 + dico_ferm["1"][1] + 1 # cumul 1ere question  + 1 car mini = 0, max = 5
-            points_q2 = points_q2 + dico_ferm["2"][1] + 1  # cumul 2eme question
-            points_q3 = points_q3 + dico_ferm["3"][1] + 1 # cumul 3eme question
-            points_q4 = points_q4 + dico_ferm["4"][1] + 1 # cumul 4eme question
-            points_q5 = points_q5 + dico_ferm["5"][1] + 1 # cumul 5eme question
-            points_q6 = points_q6 + dico_ferm["6"][1] + 1 # cumul 6eme question
-            points_q7 = points_q7 + dico_ferm["7"][1] + 1 # cumul 7eme question
-            points_q8 = points_q8 + dico_ferm["8"][1] + 1 # cumul 8eme question
-            points_q9 = points_q9 + dico_ferm["9"][1] + 1 # cumul 9eme question
-            points_q10 = points_q10 + dico_ferm["10"][1] + 1 # cumul 10eme question
+            points_q1 = points_q1 + dico_ferm["1"][1]  # cumul 1ere question    mini = 0, max = 5
+            points_q2 = points_q2 + dico_ferm["2"][1]  # cumul 2eme question
+            points_q3 = points_q3 + dico_ferm["3"][1]  # cumul 3eme question
+            points_q4 = points_q4 + dico_ferm["4"][1]  # cumul 4eme question
+            points_q5 = points_q5 + dico_ferm["5"][1]  # cumul 5eme question
+            points_q6 = points_q6 + dico_ferm["6"][1]  # cumul 6eme question
+            points_q7 = points_q7 + dico_ferm["7"][1]  # cumul 7eme question
+            points_q8 = points_q8 + dico_ferm["8"][1]  # cumul 8eme question
+            points_q9 = points_q9 + dico_ferm["9"][1]  # cumul 9eme question
+            points_q10 = points_q10 + dico_ferm["10"][1]  # cumul 10eme question
             
             # cumul des réponses pour questions ouvertes
             dico_ouv = formulaire["com_ouv"]   # dico fermé du formulaire
