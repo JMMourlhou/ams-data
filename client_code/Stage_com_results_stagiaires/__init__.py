@@ -19,7 +19,13 @@ class Stage_com_results_stagiaires(Stage_com_results_stagiairesTemplate):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        
+        # Initialisation dropdown date
+        liste_dates = []
+        liste_initiale = app_tables.com_sum.search()
+        for date_row in liste_initiale:
+            if date_row["date"] not in liste_dates:
+                liste_dates.append((date_row['date'], date_row))
+        self.drop_down_date.items = liste_dates
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
