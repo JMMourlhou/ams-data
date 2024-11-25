@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 
 
 # L'administration affiche les résultats en communication d'un stagiaire (et sauvegarde si non fait)
-class Stage_form_com_results_stagiaire_copy(Stage_form_com_results_stagiaire_adminTemplate):
+class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_adminTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
@@ -18,44 +18,60 @@ class Stage_form_com_results_stagiaire_copy(Stage_form_com_results_stagiaire_adm
         # Any code you write here will run before the form opens.
         self.user = anvil.users.get_user()
         if self.user:
-            # Initilistaion de la drop down dates
-            self.liste0 = app_tables.com.search(user=self.user)
-            print("nb de dates où le stagiaire est intervenu ; ", len(self.liste0))
-            if len(self.liste0) > 0:
-                liste_drop_d = []
-                for row in self.liste0:
-                    liste_drop_d.append((row["date"], row))
-                # print(liste_drop_d)
-                self.drop_down_date.items = liste_drop_d
+            # Initilistaion de la drop down stage
+            liste0 = app_tables.com.search(tables.order_by("date", ascending=True))   # tous stages ayant eu des inter en com
+            if liste0:
+                liste1 = []
+                for stage in liste0:
+                    if stage["stage_num_txt"] not in liste1:
+                        liste1.append(stage["stage_num_txt"], stage)
+                self.drop_down_stage.items = liste1
+
+    def drop_down_stage_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.stage = self.drop_down_stage.selected_value[1]   # sélection du row stage
+        # initialisation dropdown date
+        liste0 = app_tables.com.search(tables.order_by("date", ascending=True),
+                                      stage_row = self.stage
+                                      )   # toutes dates du stage où il a eu des inter en com
+        if liste0:
+            liste1 = []
+            for date in liste0:
+                if date["date"] not in liste1:
+                    liste1.append(stage["date"])
+            self.drop_down_date.items = liste1
+            self.drop_down_date.visible = True
+
+    def drop_down_date_change(self, **event_args):
+        """This method is called when an item is selected"""
+        date = self.drop_down_date.selected_value  # date sélectionnée
+        # initialisation drop down stagiaires
+        liste0 = app_tables.com.search(tables.order_by("nom", ascending=True),
+                                                date = date,
+                                                stage_row = self.stage
+                                                )
+        # nom, user row
+        liste1 = []
+        for stagiaire in liste0:
+            liste1.append(stagiaire["nom"], stagiaire["user"])
+        self.drop_down_stagiaires.items = liste1
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-
         open_form("Main", 99)
 
-    def drop_down_date_change(self, **event_args):
+    
+    def drop_down_stagiaires_change(self, **event_args):
         """This method is called when an item is selected"""
-        self.com_row = self.drop_down_date.selected_value 
-        if self.com_row is None:
-            alert("Vous devez sélectionner une date !")
-            self.drop_down_date.focus()
-            return 
-        self.label_cadre.visible = True
+        user = self.drop_down_stagiaires.selected_value[1]  # user row sélectionnée
+        
+        # continuer ici
+        
+        
+        
         cadre = self.com_row["cadre"]
         self.label_cadre.text = f"({cadre})"
-
-        # initialisation drop down stagiaires
-        liste_stagiaires = app_tables.com.search(   tables.order_by("name", ascending=True),
-                                                    date = self.com_row["date"]
-                                                    )
-        """
-        for date_row in liste_initiale:
-            if date_row["date"] not in liste_dates:
-                liste_dates.append(date_row['date'])
-        self.drop_down_date.items = liste_dates
-        """
-
         
         # sélection des formulaires saisis à la date sélectionnée
         liste_formulaires = app_tables.com.search(date=self.com_row["date"])
@@ -348,3 +364,7 @@ class Stage_form_com_results_stagiaire_copy(Stage_form_com_results_stagiaire_adm
         if pourcent > 80:
             nom_couleur = "theme:Vert Foncé"
         return nom_couleur
+
+    
+
+
