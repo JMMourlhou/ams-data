@@ -70,6 +70,9 @@ db_schema:
     - admin_ui: {order: 6, width: 200}
       name: date_time
       type: datetime
+    - admin_ui: {order: 0.75, width: 200}
+      name: nom_prenom
+      type: string
     server: full
     title: Com
   com_sum:

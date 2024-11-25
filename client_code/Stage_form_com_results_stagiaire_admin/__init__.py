@@ -24,12 +24,13 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
                 liste1 = []
                 for stage in liste0:
                     if stage["stage_num_txt"] not in liste1:
-                        liste1.append(stage["stage_num_txt"], stage)
+                        liste1.append(stage["stage_num_txt"])
                 self.drop_down_stage.items = liste1
 
     def drop_down_stage_change(self, **event_args):
         """This method is called when an item is selected"""
-        self.stage = self.drop_down_stage.selected_value[1]   # sélection du row stage
+        stage = self.drop_down_stage.selected_value   # sélection du num stage
+        self.stage = app_tables.stages.get(numero=int(stage)) # lecture stage_row
         # initialisation dropdown date
         liste0 = app_tables.com.search(tables.order_by("date", ascending=True),
                                       stage_row = self.stage
@@ -38,43 +39,41 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
             liste1 = []
             for date in liste0:
                 if date["date"] not in liste1:
-                    liste1.append(stage["date"])
+                    liste1.append(date["date"])
             self.drop_down_date.items = liste1
-            self.drop_down_date.visible = True
+        self.drop_down_date.visible = True
 
     def drop_down_date_change(self, **event_args):
         """This method is called when an item is selected"""
-        date = self.drop_down_date.selected_value  # date sélectionnée
+        self.date = self.drop_down_date.selected_value  # date sélectionnée
         # initialisation drop down stagiaires
-        liste0 = app_tables.com.search(tables.order_by("nom", ascending=True),
-                                                date = date,
+        liste0 = app_tables.com.search(tables.order_by("nom_prenom", ascending=True),
+                                                date = self.date,
                                                 stage_row = self.stage
                                                 )
-        # nom, user row
+        
+        # pour pouvoir effectuer le test d'existence ds liste
+        #   je crée 1 liste test qui ne contient que la valeur nom_prenom
         liste1 = []
+        liste1_test = []
         for stagiaire in liste0:
-            liste1.append(stagiaire["nom"], stagiaire["user"])
+            if stagiaire['nom_prenom'] not in liste1_test:
+                liste1_test.append(stagiaire["nom_prenom"])                     
+                liste1.append((stagiaire["nom_prenom"], stagiaire["user"]))   # nom, user row
         self.drop_down_stagiaires.items = liste1
+        self.drop_down_stagiaires.visible = True
 
-    def button_annuler_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form("Main", 99)
-
-    
     def drop_down_stagiaires_change(self, **event_args):
         """This method is called when an item is selected"""
-        user = self.drop_down_stagiaires.selected_value[1]  # user row sélectionnée
+        self.user = self.drop_down_stagiaires.selected_value  # user row sélectionnée
         
-        # continuer ici
-        
-        
-        
-        cadre = self.com_row["cadre"]
-        self.label_cadre.text = f"({cadre})"
-        
-        # sélection des formulaires saisis à la date sélectionnée
-        liste_formulaires = app_tables.com.search(date=self.com_row["date"])
+        # sélection des formulaires saisis du stagiaire à la date sélectionnée
+        #liste_formulaires = app_tables.com.search(date=self.com_row["date"])
+        liste_formulaires = app_tables.com.search(tables.order_by("nom_prenom", ascending=True),
+                                                user = self.user,  
+                                                date = self.date,
+                                                stage_row = self.stage
+                                                )
         nb_formulaires = len(liste_formulaires)
         max_points_ferm = (
             nb_formulaires * 6
@@ -83,6 +82,11 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
         # extraction du stage par lecture du premier formulaire de la liste
         first_row = liste_formulaires[0]
         stage_row = first_row["stage_row"]
+        cadre = first_row["cadre"]
+        self.label_cadre.text = f"({cadre})"
+
+
+        
         # extraction des 2 dictionnaires du stage
         dico_q_ferm = stage_row["com_ferm"]
         dico_q_ouv = stage_row["com_ouv"]
@@ -312,37 +316,39 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
 
         # sauvegarde ds table com si pas déjà sauvegardée. (date et user existant ds table 'com_sum')
         # lecture de table 'com_sum'
-        row = app_tables.com_sum.search(stage=stage_row, user=self.user)
+        row = app_tables.com_sum.search(stage=stage_row,
+                                        user=self.user,
+                                        date = self.date
+                                       )
         if len(row) == 0:  # Si pas de résultat: pas encore sauvée
-            result = anvil.server.call(
-                "add_com_results",
-                stage_row,  # row
-                stage_row["numero"],  # num txt
-                self.user,  # user_row
-                self.user["nom"],  # nom (utile pour tri sur nom)
-                self.com_row["date"],  # text
-                pourcent_q1,  # numérique
-                pourcent_q2,  # numérique
-                pourcent_q3,  # numérique
-                pourcent_q4,  # numérique
-                pourcent_q5,  # numérique
-                pourcent_q6,  # numérique
-                pourcent_q7,  # numérique
-                pourcent_q8,  # numérique
-                pourcent_q9,  # numérique
-                pourcent_q10,  # numérique
-                cadre,  # text
-                dico_q_ferm["1"][0],  # question 1 txt
-                dico_q_ferm["2"][0],  # question 1 txt
-                dico_q_ferm["3"][0],  # question 1 txt
-                dico_q_ferm["4"][0],  # question 1 txt
-                dico_q_ferm["5"][0],  # question 1 txt
-                dico_q_ferm["6"][0],  # question 1 txt
-                dico_q_ferm["7"][0],  # question 1 txt
-                dico_q_ferm["8"][0],  # question 1 txt
-                dico_q_ferm["9"][0],  # question 1 txt
-                dico_q_ferm["10"][0],  # question 1 txt
-            )
+            result = anvil.server.call("add_com_results",
+                                        stage_row,  # row
+                                        stage_row["numero"],  # num txt
+                                        self.user,  # user_row
+                                        self.user["nom"],  # nom (utile pour tri sur nom)
+                                        self.date,    # text
+                                        pourcent_q1,  # numérique
+                                        pourcent_q2,  # numérique
+                                        pourcent_q3,  # numérique
+                                        pourcent_q4,  # numérique
+                                        pourcent_q5,  # numérique
+                                        pourcent_q6,  # numérique
+                                        pourcent_q7,  # numérique
+                                        pourcent_q8,  # numérique
+                                        pourcent_q9,  # numérique
+                                        pourcent_q10,  # numérique
+                                        cadre,  # text
+                                        dico_q_ferm["1"][0],  # question 1 txt
+                                        dico_q_ferm["2"][0],  # question 1 txt
+                                        dico_q_ferm["3"][0],  # question 1 txt
+                                        dico_q_ferm["4"][0],  # question 1 txt
+                                        dico_q_ferm["5"][0],  # question 1 txt
+                                        dico_q_ferm["6"][0],  # question 1 txt
+                                        dico_q_ferm["7"][0],  # question 1 txt
+                                        dico_q_ferm["8"][0],  # question 1 txt
+                                        dico_q_ferm["9"][0],  # question 1 txt
+                                        dico_q_ferm["10"][0],  # question 1 txt
+                                    )
             if result is False:
                 alert("Erreur en sauvegarde du récap en table 'com_sum' ")
             else:
@@ -364,6 +370,11 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
         if pourcent > 80:
             nom_couleur = "theme:Vert Foncé"
         return nom_couleur
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form("Main", 99)
 
     
 

@@ -82,7 +82,7 @@ components:
     layout_properties: {grid_position: 'VXXUHN,QRSTKY'}
     name: drop_down_stagiaires
     properties:
-      align: left
+      align: full
       background: theme:Tertiary
       font_size: 16
       foreground: theme:On Primary Container

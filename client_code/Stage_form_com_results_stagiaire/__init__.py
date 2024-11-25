@@ -17,13 +17,13 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
         # Any code you write here will run before the form opens.
         self.user = anvil.users.get_user()
         if self.user:
-            # Initilistaion de la drop down dates 
+            # Initialisation de la drop down dates 
             self.liste0 = app_tables.com.search(user=self.user)
             print("nb de dates où le stagiaire est intervenu ; ", len(self.liste0))
             if len(self.liste0) > 0: 
                 liste_drop_d = []
                 for row in self.liste0:
-                    liste_drop_d.append((row["date"],row ))
+                    liste_drop_d.append((row["date"],row ))   # date, row_intervention
                 # print(liste_drop_d)
                 self.drop_down_date.items = liste_drop_d
 
@@ -252,10 +252,11 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
             self.text_area_a10.text = rep_ouv10
 
         
-        # sauvegarde ds table com si pas déjà sauvegardée. (date et user existant ds table 'com_sum')
+        # sauvegarde ds table com si pas déjà sauvegardée. (stage, date et user existant ds table 'com_sum')
         # lecture de table 'com_sum'
         row = app_tables.com_sum.search(stage = stage_row,
-                                        user = self.user)
+                                        user = self.user,
+                                        date = self.com_row["date"])
         if len(row) == 0:                                               # Si pas de résultat: pas encore sauvée
             result = anvil.server.call("add_com_results",
                                 stage_row,               # row

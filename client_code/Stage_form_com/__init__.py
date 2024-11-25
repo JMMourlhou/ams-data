@@ -127,13 +127,12 @@ class Stage_form_com(Stage_form_comTemplate):
         # création de la drop down stgaiaires du stage
         liste_drop_d_stagiaires = []
         for stagiaire in liste_stagiaires:
+            
             ligne_drop_d_visible = stagiaire["prenom"]+" "+stagiaire["name"]
             liste_drop_d_stagiaires.append((ligne_drop_d_visible, stagiaire['user_email']))
         self.drop_down_stagiaires.items = liste_drop_d_stagiaires
         
         
-
-
     def drop_down_stagiaires_change(self, **event_args):
         self.stagiaire_choisi = self.drop_down_stagiaires.selected_value # user row from stagiaire inscrit
         
@@ -1087,15 +1086,19 @@ class Stage_form_com(Stage_form_comTemplate):
         date = str(date_time)[0:10]  # je prends les 10 1ers caract (date uniqt)
         print(date)
         
-
         global user_stagiaire
+        nom_prenom = self.stagiaire_choisi["nom"] + " " + self.stagiaire_choisi["prenom"]
+        cadre = self.text_box_cadre.text
         result = anvil.server.call("add_1_formulaire_com",
                                     stage_row,
-                                    stage_row["numero"],
+                                    stage_row["numero"],     # stage numero 
                                     self.stagiaire_choisi,   # user_row from table stagiaires inscrits
+                                    nom_prenom,              # nom prenom du user
                                     dico_rep_q_ferm,
                                     dico_rep_q_ouv,
                                     date,
+                                    cadre,
+                                    date_time
                                 )
         if result is True:
             alert(
@@ -1111,6 +1114,7 @@ class Stage_form_com(Stage_form_comTemplate):
             self.text_box_cadre.visible = True
         else:
             self.text_box_cadre.visible = False
+            self.text_box_cadre.text = self.drop_down_cadre.selected_value
             
         self.drop_down_code_stage.visible = True
 

@@ -18,7 +18,7 @@ components:
       properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
       type: Button
     - components:
-      - event_bindings: {change: drop_down_stagiaires_change}
+      - event_bindings: {change: drop_down_stage_change}
         layout_properties: {}
         name: drop_down_stage
         properties:

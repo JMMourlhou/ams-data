@@ -111,17 +111,23 @@ def add_1_formulaire_com(
                             stage_row, # row table stage 
                             stage_numero_txt, # num du stage en txt
                             user_row,              # user row du stagiare choisi en communication
+                            nom_prenom,            # nom prenom du user
                             dico_rep_q_ferm,
                             dico_rep_q_ouv,
-                            date
+                            date,
+                            cadre,                  # cadre de l'intervention en communication (Cours com, ...)
+                            date_time
                         ):
     
     new_row=app_tables.com.add_row(stage_row=stage_row,
                                             stage_num_txt = str(stage_numero_txt),
                                             user          = user_row,
+                                            nom_prenom    = nom_prenom,
                                             date          = date,              # date txt
                                             com_ferm      = dico_rep_q_ferm,
-                                            com_ouv       = dico_rep_q_ouv
+                                            com_ouv       = dico_rep_q_ouv,
+                                            cadre         = cadre,
+                                            date_time     = date_time
                                          )
     id=new_row.get_id()
     #relecture du row:

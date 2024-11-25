@@ -282,6 +282,12 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         open_form("Visu_stages")
 
+    # BT admin, Résultat des évaluations d'un stgiaire pour une date/intervention 
+    def bt_com_1result_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Stage_form_com_results_stagiaire_admin import Stage_form_com_results_stagiaire_admin
+        open_form("Stage_form_com_results_stagiaire_admin")
+    
     # BT admin, Résultat des évaluations d'une intervention 
     def bt_com_results_click(self, **event_args):
         """This method is called when the button is clicked"""
