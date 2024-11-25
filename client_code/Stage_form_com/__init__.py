@@ -73,17 +73,13 @@ class Stage_form_com(Stage_form_comTemplate):
         self.label_9.tag = "label"
         self.label_10.tag = "label"
 
-        global user_stagiaire
+        user_stagiaire = anvil.users.get_user()
         if user_stagiaire:
-            
             # Initilistaion de la drop down stages inscrits du user
             liste0 = app_tables.stagiaires_inscrits.search(
-                q.fetch_only(
-                    "user_email", "stage"
-                ),  # <----------------------  A Modifier?
-                user_email=user_stagiaire,
-    
-            )
+                                                            q.fetch_only("user_email", "stage"),  # <----------------------  A Modifier?
+                                                                user_email=user_stagiaire,
+                                                            )
             print("nb de stages où le stagiaire est inscrit; ", len(liste0))
             
             liste_drop_d = []

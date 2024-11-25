@@ -261,6 +261,7 @@ class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
                                 stage_row,               # row
                                 stage_row["numero"],     # num txt
                                 self.user,               #user_row
+                                self.user["nom"],        # nom (utile pour tri sur nom)
                                 self.com_row["date"],    # text
                                 pourcent_q1,           # numérique
                                 pourcent_q2,           # numérique

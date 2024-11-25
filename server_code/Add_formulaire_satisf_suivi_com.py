@@ -138,6 +138,7 @@ def add_com_results(
                          stage_row,            # stage row
                          numero,               # numero stage txt
                          user,                 # user_row
+                         nom,                  # nom du stgiaire (utile pour tri)
                          date,                 # date txt 
                          pourcent_q1,          # numérique
                          pourcent_q2,
@@ -166,8 +167,9 @@ def add_com_results(
                                         stage        = stage_row,            # stage row
                                         numero       = str(numero),               # numero stage txt
                                         user         = user,                 # user_row
+                                        nom          = nom,                  # nom du stgiaire (pour tri dessus)
                                         date         = date,                 # date txt 
-                                        pourcent_1  = pourcent_q1,          # numérique
+                                        pourcent_1  = pourcent_q1,           # numérique
                                         pourcent_2  = pourcent_q2,
                                         pourcent_3  = pourcent_q3,
                                         pourcent_4  = pourcent_q4,

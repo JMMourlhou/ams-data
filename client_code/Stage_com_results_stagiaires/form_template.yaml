@@ -54,6 +54,10 @@ components:
   name: column_panel_0
   properties: {background: 'theme:Primary', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
   type: ColumnPanel
+- layout_properties: {grid_position: 'LFRWXX,PYKNGV'}
+  name: repeating_panel_results
+  properties: {item_template: Stage_com_results_stagiaires.ItemTemplate20}
+  type: RepeatingPanel
 container:
   properties: {visible: true}
   type: ColumnPanel

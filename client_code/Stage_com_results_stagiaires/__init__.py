@@ -24,10 +24,19 @@ class Stage_com_results_stagiaires(Stage_com_results_stagiairesTemplate):
         liste_initiale = app_tables.com_sum.search()
         for date_row in liste_initiale:
             if date_row["date"] not in liste_dates:
-                liste_dates.append((date_row['date'], date_row))
+                liste_dates.append(date_row['date'])
         self.drop_down_date.items = liste_dates
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form("Main", 99)
+
+    def drop_down_date_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.date_intervention = self.drop_down_date.selected_value        
+        liste = app_tables.com_sum.search(tables.order_by("nom"),
+                                                            date=self.date_intervention
+                                                        )
+        self.repeating_panel_results.items = liste
+        
