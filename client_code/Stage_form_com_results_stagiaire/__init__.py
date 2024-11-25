@@ -1,4 +1,4 @@
-from ._anvil_designer import Stage_form_results_stagiaireTemplate
+from ._anvil_designer import Stage_form_com_results_stagiaireTemplate
 from .. import French_zone  # POur acquisition de date et heure Francaise (Browser time)
 from anvil import *
 
@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 # Le stagiaire affiche ses propres résultats en communication
-class Stage_form_results_stagiaire(Stage_form_results_stagiaireTemplate):
+class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)

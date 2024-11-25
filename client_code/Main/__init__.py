@@ -331,8 +331,8 @@ class Main(MainTemplate):
     # BT Stagiaire, communication (le stagiaire voit ses résultats (avis du groupe sur son intervention))
     def button_form_com_resultats_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Stage_form_results_stagiaire import Stage_form_results_stagiaire
-        open_form('Stage_form_results_stagiaire')
+        from ..Stage_form_com_results_stagiaire import Stage_form_com_results_stagiaire
+        open_form('Stage_form_com_results_stagiaire')
         
     # BT résultats des formulaires de satisfaction en fin de stage
     def button_form_satisf_click(self, **event_args):
