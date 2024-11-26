@@ -180,12 +180,12 @@ class Saisie_info_de_base(Saisie_info_de_baseTemplate):
                 alert("Entrez votre adresse (Code Postal) !")
                 return
             if len(self.text_box_code_postal.text) != 5:
-                alert("Le Code Postal doit être de 5 chiffres")
+                alert("Le Code Postal (adresse postale) doit être de 5 chiffres !")
                 return
             try:
                 cp_test = int(self.text_box_code_postal.text)
             except:
-                alert("Le Code Postal ne doit contenir que des chiffres")
+                alert("Le Code Postal (adresse postale) ne doit contenir que des chiffres !")
                 return  
                 
             # Stage non type formateur: Si mode de financemt non sélectionné alors que 1ere saisie de la fiche renseignemnt
