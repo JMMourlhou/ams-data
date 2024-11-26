@@ -16,6 +16,7 @@ class ItemTemplate20(ItemTemplate20Template):
         # Any code you write here will run before the form opens.
         self.label_nom.text = self.item['nom']
         self.label_1.text = self.display(self.item['pourcent_1'])
+        self.label_11.text = self.item['q1']
         self.label_2.text = self.display(self.item['pourcent_2'])
         self.label_3.text = self.display(self.item['pourcent_3'])
         self.label_4.text = self.display(self.item['pourcent_4'])
@@ -31,6 +32,6 @@ class ItemTemplate20(ItemTemplate20Template):
         lg = len(text)
         if lg == 3:   # 100 --> 100,0 
             text = text + ",0"
-        if lg == 2:   # 25 --> 25,00
+        if lg == 2 or lg ==1:   # 25 --> 25,00
             text = text + ",00"
         return text
