@@ -30,8 +30,11 @@ class ItemTemplate20(ItemTemplate20Template):
     def display(self, nb, **properties):
         text = str(nb)
         lg = len(text)
+        
         if lg == 3:   # 100 --> 100,0 
             text = text + ",0"
         if lg == 2 or lg ==1:   # 25 --> 25,00
             text = text + ",00"
+        if lg > 4 :
+            
         return text
