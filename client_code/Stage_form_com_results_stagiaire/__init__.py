@@ -202,7 +202,6 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
             self.label_10.text = dico_q_ferm["10"][0] + "        " + str(pourcent_q10) + " %" 
 
         # affichage des formes ouvertes en fonction de leur nb
-
         if nb_questions_ouvertes > 0:
             self.column_panel_a1.visible = True
             self.label_a1.text = question_ouv1
@@ -253,7 +252,6 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
             self.label_a10.text = question_ouv10
             self.text_area_a10.text = rep_ouv10
 
-        
         # sauvegarde ds table com si pas déjà sauvegardée. (stage, date et user existant ds table 'com_sum')
         # lecture de table 'com_sum'
         row = app_tables.com_sum.search(stage = stage_row,
