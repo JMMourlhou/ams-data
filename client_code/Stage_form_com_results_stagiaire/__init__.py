@@ -45,7 +45,9 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
         cadre = self.com_row["cadre"]
         self.label_cadre.text = f"({cadre})"
         # sélection des formulaires saisis à la date sélectionnée
-        liste_formulaires = app_tables.com.search(date=self.com_row["date"])
+        liste_formulaires = app_tables.com.search(date=self.com_row["date"],
+                                                  user=self.user
+                                                 )
         nb_formulaires = len(liste_formulaires)
         max_points_ferm = nb_formulaires * 5      # max de points possibles pour une question
         #  ================================================================  Affichage résultats
@@ -137,16 +139,16 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
                 rep_ouv10 = rep_ouv10 + "\n" + dico_ouv["10"][1]
                 
         # fin de boucle questions fermées, calcul des pourcentages
-        pourcent_q1 = round((points_q1 / max_points_ferm) * 100,2)
-        pourcent_q2 = round((points_q2 / max_points_ferm) * 100,2)
-        pourcent_q3 = round((points_q3 / max_points_ferm) * 100,2)
-        pourcent_q4 = round((points_q4 / max_points_ferm) * 100,2)
-        pourcent_q5 = round((points_q5 / max_points_ferm) * 100,2)
-        pourcent_q6 = round((points_q6 / max_points_ferm) * 100,2)
-        pourcent_q7 = round((points_q7 / max_points_ferm) * 100,2)
-        pourcent_q8 = round((points_q8 / max_points_ferm) * 100,2)
-        pourcent_q9 = round((points_q9 / max_points_ferm) * 100,2)
-        pourcent_q10 = round((points_q10 / max_points_ferm) * 100,2)
+        pourcent_q1 = round((points_q1 / max_points_ferm) * 100)
+        pourcent_q2 = round((points_q2 / max_points_ferm) * 100)
+        pourcent_q3 = round((points_q3 / max_points_ferm) * 100)
+        pourcent_q4 = round((points_q4 / max_points_ferm) * 100)
+        pourcent_q5 = round((points_q5 / max_points_ferm) * 100)
+        pourcent_q6 = round((points_q6 / max_points_ferm) * 100)
+        pourcent_q7 = round((points_q7 / max_points_ferm) * 100)
+        pourcent_q8 = round((points_q8 / max_points_ferm) * 100)
+        pourcent_q9 = round((points_q9 / max_points_ferm) * 100)
+        pourcent_q10 = round((points_q10 / max_points_ferm) * 100)
         # pour chq question, détermination des couleurs d'affichage en fonction du pourcent
         nom_couleur1 = self.couleurs(pourcent_q1)
         nom_couleur2 = self.couleurs(pourcent_q2)

@@ -22,15 +22,18 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
             liste0 = app_tables.com.search(tables.order_by("date", ascending=True))   # tous stages ayant eu des inter en com
             if liste0:
                 liste1 = []
+                liste_test = [] # pour test d'existence
                 for stage in liste0:
-                    if stage["stage_num_txt"] not in liste1:
-                        liste1.append(stage["stage_num_txt"])
+                    if stage["stage_num_txt"] not in liste_test:
+                        stage_pere = app_tables.stages.get(numero=int(stage["stage_num_txt"]))
+                        liste1.append((stage["stage_num_txt"]+" "+stage_pere['code_txt'],stage_pere))
+                        liste_test.append(stage["stage_num_txt"])
                 self.drop_down_stage.items = liste1
 
     def drop_down_stage_change(self, **event_args):
         """This method is called when an item is selected"""
-        stage = self.drop_down_stage.selected_value   # sélection du num stage
-        self.stage = app_tables.stages.get(numero=int(stage)) # lecture stage_row
+        self.stage = self.drop_down_stage.selected_value   # sélection du stage_row
+        #self.stage = app_tables.stages.get(numero=int(stage)) # lecture stage_row
         # initialisation dropdown date
         liste0 = app_tables.com.search(tables.order_by("date", ascending=True),
                                       stage_row = self.stage
@@ -174,16 +177,16 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
                 rep_ouv10 = rep_ouv10 + "\n" + dico_ouv["10"][1]
 
         # fin de boucle questions fermées, calcul des pourcentages
-        pourcent_q1 = round((points_q1 / max_points_ferm) * 100, 2)
-        pourcent_q2 = round((points_q2 / max_points_ferm) * 100, 2)
-        pourcent_q3 = round((points_q3 / max_points_ferm) * 100, 2)
-        pourcent_q4 = round((points_q4 / max_points_ferm) * 100, 2)
-        pourcent_q5 = round((points_q5 / max_points_ferm) * 100, 2)
-        pourcent_q6 = round((points_q6 / max_points_ferm) * 100, 2)
-        pourcent_q7 = round((points_q7 / max_points_ferm) * 100, 2)
-        pourcent_q8 = round((points_q8 / max_points_ferm) * 100, 2)
-        pourcent_q9 = round((points_q9 / max_points_ferm) * 100, 2)
-        pourcent_q10 = round((points_q10 / max_points_ferm) * 100, 2)
+        pourcent_q1 = round((points_q1 / max_points_ferm) * 100)
+        pourcent_q2 = round((points_q2 / max_points_ferm) * 100)
+        pourcent_q3 = round((points_q3 / max_points_ferm) * 100)
+        pourcent_q4 = round((points_q4 / max_points_ferm) * 100)
+        pourcent_q5 = round((points_q5 / max_points_ferm) * 100)
+        pourcent_q6 = round((points_q6 / max_points_ferm) * 100)
+        pourcent_q7 = round((points_q7 / max_points_ferm) * 100)
+        pourcent_q8 = round((points_q8 / max_points_ferm) * 100)
+        pourcent_q9 = round((points_q9 / max_points_ferm) * 100)
+        pourcent_q10 = round((points_q10 / max_points_ferm) * 100)
         # pour chq question, détermination des couleurs d'affichage en fonction du pourcent
         nom_couleur1 = self.couleurs(pourcent_q1)
         nom_couleur2 = self.couleurs(pourcent_q2)
