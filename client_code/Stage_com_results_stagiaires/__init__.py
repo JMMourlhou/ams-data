@@ -38,5 +38,19 @@ class Stage_com_results_stagiaires(Stage_com_results_stagiairesTemplate):
         liste = app_tables.com_sum.search(tables.order_by("nom"),
                                                             date=self.date_intervention
                                                         )
+
+
+        list1 = liste[0]   # extraction du premier item pour lire les questions
+        self.label_1.text = list1['q1']
+        self.label_2.text = list1['q2']
+        self.label_3.text = list1['q3']
+        self.label_4.text = list1['q4']
+        self.label_5.text = list1['q5']
+        self.label_6.text = list1['q6']
+        self.label_7.text = list1['q7']
+        self.label_8.text = list1['q8']
+        self.label_9.text = list1['q9']
+        self.label_10.text = list1['q10']
+        
         self.repeating_panel_results.items = liste
         
