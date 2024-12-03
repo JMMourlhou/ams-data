@@ -293,6 +293,12 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Stage_com_results_stagiaires import Stage_com_results_stagiaires
         open_form("Stage_com_results_stagiaires")
+        
+    # BT admin, Saisie évenement
+    def button_event_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Evenements import Evenements
+        open_form("Evenements")
 
     # BT stagiaire QCM
     def button_qcm_click(self, **event_args):
@@ -432,6 +438,8 @@ class Main(MainTemplate):
             alert("pas de fin normale")
             
     """
+
+    
 
    
 
