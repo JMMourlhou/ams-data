@@ -24,7 +24,8 @@ class Evenements(EvenementsTemplate):
         # Init drop down date avec Date du jour et acquisition de l'heure
         now=French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         #date_time = str(now)[0:19]   # je prends les 19 1ers caract
-        self.date_picker_1.date = datetime.date.today()now
+        self.date_picker_1.pick_time = True
+        self.date_picker_1.date = now
         #now=now.date()                       # extraction de la date, format yyyy-mm-dd
         
         # Drop down codes lieux
