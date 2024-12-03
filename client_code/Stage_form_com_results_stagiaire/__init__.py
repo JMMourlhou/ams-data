@@ -92,25 +92,25 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
         for formulaire in liste_formulaires:
             dico_ferm = formulaire["com_ferm"]   # dico fermé du formulaire
             # cumul des scores pour questions fermées
-            if nb_questions_ouvertes > 0:
+            if nb_questions_ferm > 0:
                 points_q1 = points_q1 + dico_ferm["1"][1]  # cumul 1ere question    mini = 0, max = 5
-            if nb_questions_ouvertes > 1:
+            if nb_questions_ferm > 1:
                 points_q2 = points_q2 + dico_ferm["2"][1]  # cumul 2eme question
-            if nb_questions_ouvertes > 2:
+            if nb_questions_ferm > 2:
                 points_q3 = points_q3 + dico_ferm["3"][1]  # cumul 3eme question
-            if nb_questions_ouvertes > 3:
+            if nb_questions_ferm > 3:
                 points_q4 = points_q4 + dico_ferm["4"][1]  # cumul 4eme question
-            if nb_questions_ouvertes > 4:
+            if nb_questions_ferm > 4:
                 points_q5 = points_q5 + dico_ferm["5"][1]  # cumul 5eme question
-            if nb_questions_ouvertes > 5:   
+            if nb_questions_ferm > 5:   
                 points_q6 = points_q6 + dico_ferm["6"][1]  # cumul 6eme question
-            if nb_questions_ouvertes > 6:
+            if nb_questions_ferm > 6:
                 points_q7 = points_q7 + dico_ferm["7"][1]  # cumul 7eme question
-            if nb_questions_ouvertes > 7:
+            if nb_questions_ferm > 7:
                 points_q8 = points_q8 + dico_ferm["8"][1]  # cumul 8eme question
-            if nb_questions_ouvertes > 8:
+            if nb_questions_ferm > 8:
                 points_q9 = points_q9 + dico_ferm["9"][1]  # cumul 9eme question
-            if nb_questions_ouvertes > 9:
+            if nb_questions_ferm > 9:
                 points_q10 = points_q10 + dico_ferm["10"][1]  # cumul 10eme question
             
             # cumul des réponses pour questions ouvertes
