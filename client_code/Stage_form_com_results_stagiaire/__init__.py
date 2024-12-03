@@ -19,7 +19,7 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
         if self.user:
             # Initialisation de la drop down dates 
             self.liste0 = app_tables.com.search(user=self.user)
-            print("nb de dates où le stagiaire est intervenu ; ", len(self.liste0))
+            print("nb d'évaluations pour ce stagiaire ; ", len(self.liste0))
             if len(self.liste0) > 0: 
                 liste_test = []
                 liste1 = []
@@ -87,11 +87,9 @@ class Stage_form_com_results_stagiaire(Stage_form_com_results_stagiaireTemplate)
         rep_ouv8 = ""
         rep_ouv9 = ""
         rep_ouv10 = ""
-
         
-        # boucle
+        # boucle sur toutes les évaluations de ce stagiaire, pour la date sélectionnée
         for formulaire in liste_formulaires:
-            
             dico_ferm = formulaire["com_ferm"]   # dico fermé du formulaire
             # cumul des scores pour questions fermées
             if nb_questions_ouvertes > 0:
