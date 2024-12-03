@@ -29,7 +29,10 @@ class Evenements(EvenementsTemplate):
         
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
-        self.drop_down_lieux.selected_value = self.drop_down_lieux.items[1]
+        for lieu in self.drop_down_lieux.items:
+            print(lieu, lieu[0], lieu[1])
+        liste=self.drop_down_lieux.items[0]
+        self.drop_down_lieux.selected_value = liste[1]
         
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -41,6 +44,10 @@ class Evenements(EvenementsTemplate):
         pass
 
     def drop_down_event_change(self, **event_args):
+        """This method is called when an item is selected"""
+        pass
+
+    def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
         pass
 
