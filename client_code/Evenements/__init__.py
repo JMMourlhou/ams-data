@@ -61,18 +61,9 @@ class Evenements(EvenementsTemplate):
 
     def note_for_meeting(self, type):
         if type == "meeting":
-            self.text_area_notes.text = " \
-            Participants: A.C / A.JC / G.J / M.JM / L.C \n \
-            Objet: Réunion d'équipe \n\n \
-            Notes:\n \
-            "
+            self.text_area_notes.text = "Participants: A.C / A.JC / G.J / M.JM / L.C \n Objet: Réunion d'équipe \n\n Notes:\n "
         if type == "incident":
-            self.text_area_notes.text = " \
-            Participants: A.C / A.JC / G.J / M.JM / L.C \n \
-            Objet: Incident \n \
-            Personnes impliquées : \n \
-            Notes:\n \
-            "
+            self.text_area_notes.text = "Participants: A.C / A.JC / G.J / M.JM / L.C \n Objet: Incident \n Personnes impliquées : \n Notes:\n "
 
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
