@@ -20,12 +20,15 @@ class Evenements(EvenementsTemplate):
 
         # Init drop down event
         self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
-        
+        self.note_for_meeting("meeting")
         # Init drop down date avec Date du jour et acquisition de l'heure
         now=French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
+        date_format_fr = now.date()
+        date_format_fr = date_format_fr.strftime("%d/%m/%Y")
         #date_time = str(now)[0:19]   # je prends les 19 1ers caract
         self.date_picker_1.pick_time = True
         self.date_picker_1.date = now
+        self.date_picker_1.placeholder = date_format_fr
         #now=now.date()                       # extraction de la date, format yyyy-mm-dd
         
         # Drop down codes lieux
@@ -46,10 +49,35 @@ class Evenements(EvenementsTemplate):
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
-        pass
+        self.type = self.drop_down_event.selected_value
+        if self.type == "Réunion":
+            self.note_for_meeting("meeting")
+        if self.type == "Incident":
+            self.note_for_meeting("incident")
 
     def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
         pass
+
+    def note_for_meeting(self, type):
+        if type == "meeting":
+            self.text_area_notes.text = " \
+            Participants: Azcona C / Azcona JC / Groué J / Mourlhou JM \n \
+            Objet: Réunion d'équipe \n\n \
+            Notes:\n \
+            "
+        if type == "incident":
+            self.text_area_notes.text = " \
+            Participants: Azcona C / Azcona JC / Groué J / Mourlhou JM \n \
+            Objet: Incident \n \
+            Personnes impliquées : \n \
+            Notes:\n \
+            "
+
+    def text_area_commentaires_change(self, **event_args):
+        """This method is called when the text in this text area is edited"""
+        self.button_validation.visible = True
+        
+        
 
         
