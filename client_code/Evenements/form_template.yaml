@@ -103,7 +103,8 @@ components:
         name: image_1
         properties: {height: 117.30355834960938}
         type: Image
-      - layout_properties: {grid_position: 'TRAHUX,QWMIUC'}
+      - event_bindings: {change: file_loader_1_change}
+        layout_properties: {grid_position: 'TRAHUX,QWMIUC'}
         name: file_loader_1
         properties: {text: Photo 1}
         type: FileLoader
@@ -116,7 +117,8 @@ components:
         name: image_2
         properties: {height: 121.34857177734375}
         type: Image
-      - layout_properties: {grid_position: 'PMTAID,RUFFNL'}
+      - event_bindings: {change: file_loader_2_change}
+        layout_properties: {grid_position: 'PMTAID,RUFFNL'}
         name: file_loader_2
         properties: {text: Photo 2}
         type: FileLoader
@@ -129,7 +131,8 @@ components:
         name: image_3
         properties: {height: 118.41119384765625}
         type: Image
-      - layout_properties: {grid_position: 'NSORFG,XJXSDJ'}
+      - event_bindings: {change: file_loader_3_change}
+        layout_properties: {grid_position: 'NSORFG,XJXSDJ'}
         name: file_loader_3
         properties: {text: Photo 3}
         type: FileLoader
