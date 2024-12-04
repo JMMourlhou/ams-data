@@ -77,6 +77,10 @@ class Evenements(EvenementsTemplate):
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
+
+    def button_validation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
         
         
 
