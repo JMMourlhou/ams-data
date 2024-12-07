@@ -62,13 +62,13 @@ components:
         name: drop_down_lieux
         properties:
           align: center
-          background: theme:Primary
+          background: theme:On Primary Container
           bold: false
           border: ''
           enabled: true
           font: ''
-          font_size: 16
-          foreground: theme:On Primary
+          font_size: 18
+          foreground: theme:Gray 300
           include_placeholder: true
           italic: false
           items: []
@@ -80,9 +80,10 @@ components:
           underline: false
           visible: true
         type: DropDown
-      - layout_properties: {}
+      - event_bindings: {change: date_picker_1_change}
+        layout_properties: {}
         name: date_picker_1
-        properties: {align: center, background: 'theme:Primary', foreground: 'theme:On Primary', pick_time: false, placeholder: Date, role: null}
+        properties: {align: center, background: 'theme:On Primary Container', foreground: 'theme:On Primary', pick_time: true, placeholder: Date, role: null}
         type: DatePicker
       layout_properties: {grid_position: 'TMEQHQ,JRAEEJ'}
       name: flow_panel_1
