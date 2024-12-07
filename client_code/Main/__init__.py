@@ -22,12 +22,12 @@ class Main(MainTemplate):
 
         # Initilisation du calendrier avec les jours en Francais
         from anvil.js.window import moment
-        moment.updateLocale('fr', {'weekdaysMin': ['Di','Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']})
-        moment.updateLocale("fr", { "week": {
-                            "dow": 1, # First day of week is Monday
-                            }})
-        
-        
+        # Inclure les paramètres de localisation pour moment.js en français
+        moment.updateLocale('fr', { 'weekdaysMin': ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                                    'months': ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+                                    'week': { 'dow': 1} # Lundi comme premier jour de la semaine
+                                   }
+                           )
         """
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.enabled = False

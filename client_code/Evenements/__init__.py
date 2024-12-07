@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 from .. import French_zone   #pour afficher la date du jour
 from datetime import datetime
 from datetime import timedelta
-
+from anvil.js.window import moment
 
 class Evenements(EvenementsTemplate):
     def __init__(self, **properties):
@@ -21,15 +21,13 @@ class Evenements(EvenementsTemplate):
         # Init drop down event
         self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
         self.note_for_meeting("meeting")
+        
         # Init drop down date avec Date du jour et acquisition de l'heure
         now=French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
-        date_format_fr = now.date()
-        date_format_fr = date_format_fr.strftime("%d/%m/%Y")
-        #date_time = str(now)[0:19]   # je prends les 19 1ers caract
         self.date_picker_1.pick_time = True
-        self.date_picker_1.date = now
+        date_format_fr = now.strftime("%d/%m/%Y, %H:%M")
         self.date_picker_1.placeholder = date_format_fr
-        #now=now.date()                       # extraction de la date, format yyyy-mm-dd
+        
         
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
@@ -45,7 +43,11 @@ class Evenements(EvenementsTemplate):
 
     def drop_down_date_change(self, **event_args):
         """This method is called when an item is selected"""
-        pass
+        
+        date = self.date_picker_1.date
+        #date_format_fr = moment(date).locale('fr').strftime("%d/%m/%Y, %H:%M")
+        #date_format_fr = moment(date).locale('fr').format('ddd, D MMM YYYY, HH:mm')
+        self.date_picker_1.placeholder = date.strftime("%d/%m/%Y, %H:%M")
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -61,9 +63,9 @@ class Evenements(EvenementsTemplate):
 
     def note_for_meeting(self, type):
         if type == "meeting":
-            self.text_area_notes.text = "Participants: A.C / A.JC / G.J / M.JM / L.C \n Objet: Réunion d'équipe \n\n Notes:\n "
+            self.text_area_notes.text = "Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Réunion d'équipe \n\nNotes:\n "
         if type == "incident":
-            self.text_area_notes.text = "Participants: A.C / A.JC / G.J / M.JM / L.C \n Objet: Incident \n Personnes impliquées : \n Notes:\n "
+            self.text_area_notes.text = "Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Incident \nPersonnes impliquées : \nNotes:\n "
 
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
