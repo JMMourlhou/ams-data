@@ -87,14 +87,14 @@ class Evenements(EvenementsTemplate):
         self.button_validation.visible = True
 
     def date_fr(self, date_en):
-        self.jours_semaine = { "Mon": "Lun", "Tue": "Mar", "Wed": "Mer", "Thu": "Jeu", "Fri": "Ven", "Sat": "Sam", "Sun": "Dim" }
+        jours_semaine = { "Mon": "Lun", "Tue": "Mar", "Wed": "Mer", "Thu": "Jeu", "Fri": "Ven", "Sat": "Sam", "Sun": "Dim" }
         date_format_en = date_en.strftime("%a, %d/%m/%Y, %H:%M")
 
         # Convertir les abréviations anglaises en françaises
         jour_en = date_en.strftime("%a")
-        jour_fr = self.jours_semaine[jour_en]
+        jour_fr = jours_semaine[jour_en]
         date_format_fr = date_format_en.replace(jour_en, jour_fr)
-        alert(date_format_fr)
+        #alert(date_format_fr)
         return date_format_fr
 
     
