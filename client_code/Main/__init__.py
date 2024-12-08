@@ -11,6 +11,22 @@ from ..Visu_stages.RowTemplate3 import RowTemplate3
 from anvil import open_form
 import sign_in_for_AMS_Data
 
+
+#-------------------------------------------------------------------
+# Pour mettre au format Francais les calendriers
+from anvil.js.window import moment, document
+script = document.createElement('script')
+script.src = "https://cdn.jsdelivr.net/npm/moment@2.29.1/locale/fr.js" 
+document.head.appendChild(script)
+locale = moment.locale('fr')
+# this doesn't happen instantly so set it and then wait
+while locale != 'fr':
+    from time import sleep
+    sleep(.01)
+    locale = moment.locale()
+#---------------------------------------------------------------------
+
+
 class Main(MainTemplate):
     def __init__(self, nb=1, stage_nb=0, **properties):  # msg pour afficher une alerte si mail erroné en pwreset par ex
         # Set Form properties and Data Bindings.
@@ -20,14 +36,6 @@ class Main(MainTemplate):
         # renseignements user 
         self.user = anvil.users.get_user(q.fetch_only("nom","prenom","role","email"))
 
-        # Initilisation du calendrier avec les jours en Francais
-        from anvil.js.window import moment
-        # Inclure les paramètres de localisation pour moment.js en français
-        moment.updateLocale('fr', { 'weekdaysMin': ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
-                                    'months': ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
-                                    'week': { 'dow': 1} # Lundi comme premier jour de la semaine
-                                   }
-                           )
         """
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.enabled = False

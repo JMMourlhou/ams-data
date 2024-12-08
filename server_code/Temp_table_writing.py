@@ -1,6 +1,5 @@
 import anvil.files
 from anvil.files import data_files
-from anvil.google.drive import app_files
 import anvil.tables as tables
 from anvil.tables import app_tables
 import anvil.server

@@ -169,7 +169,7 @@ db_schema:
     server: full
     title: Cpt_stages
   events:
-    client: none
+    client: search
     columns:
     - admin_ui: {order: 0, width: 200}
       name: date_time

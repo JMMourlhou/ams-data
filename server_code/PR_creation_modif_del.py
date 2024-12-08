@@ -17,7 +17,6 @@ def add_pr(code, intitule, commentaires):
                               commentaires=commentaires,
                               doc=False
                              )
-        
                  
     pr = app_tables.pre_requis.search(code_pre_requis=new_row['code_pre_requis'])
     if len(pr)>0:

@@ -14,7 +14,7 @@ class ItemTemplate12(ItemTemplate12Template):
 
         # Any code you write here will run before the form opens.
         self.text_box_1.text = "  " + self.item['requis_txt']
-        if self.item['thumb'] != None:
+        if self.item['thumb'] is not None:
             self.image_1.source = self.item['thumb']
         else:
             self.image_1.visible = False
