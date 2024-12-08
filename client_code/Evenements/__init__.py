@@ -2,14 +2,12 @@ from ._anvil_designer import EvenementsTemplate
 from anvil import *
 import anvil.server
 
-#import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
 from .. import French_zone   #pour afficher la date du jour
 from datetime import datetime
-#from datetime import timedelta
 
 
 class Evenements(EvenementsTemplate):
@@ -30,7 +28,6 @@ class Evenements(EvenementsTemplate):
         self.note_for_meeting("meeting")
         
         # Init drop down date avec Date du jour et acquisition de l'heure
-        
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         self.date_picker_1.placeholder = self.date_fr(self.now) # fonction date_fr change Sun en Dim ds le place holder
         
@@ -80,9 +77,9 @@ class Evenements(EvenementsTemplate):
         now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         heure = now.time()
         heure = heure.strftime("%H:%M")
-        date = now.date()
-        
-        date = date.strftime("%d/%m/%Y")
+        date0 = now.date()
+        date = date0.strftime("%d/%m/%Y")
+        self.date_sov = date0.strftime("%Y/%m/%d")
         if type == "meeting":
             self.text_area_notes.text = (f"Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Réunion d'équipe du {date} à {heure}\n\nNotes:\n ")
         if type == "incident":
@@ -96,18 +93,19 @@ class Evenements(EvenementsTemplate):
         """This method is called when the button is clicked"""
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu['lieu']
-        alert(lieu_txt)
         result = anvil.server.call("add_event",     self.drop_down_event.selected_value,      # Type event
-                                                    self.date_picker_1.date,                  # date time
+                                                    self.date_sov,                            # date
                                                     row_lieu,                                 # lieu row
                                                     lieu_txt,                                 # lieu en clair
                                                     self.text_area_notes.text,                # notes    
                                                     self.image_1.source,                      # image 1
-                                                    self.image_2,
-                                                    self.image_3
+                                                    self.image_2.source,
+                                                    self.image_3.source
                                   )       
         if not result:
-            alert("Evenement non suvegardé")
+            alert("Evenement non sauvegardé !")
+        else:
+            alert("Evenement sauvegardé !")
 
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""

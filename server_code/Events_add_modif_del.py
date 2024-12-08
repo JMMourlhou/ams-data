@@ -13,7 +13,7 @@ from anvil import *  #pour les alertes
 def add_event(type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img_3):
     
     new_row=app_tables.events.add_row(  type_event=type_event,
-                                        date_time=date_time,
+                                        date=date_time,
                                         lieu=lieu_row,
                                         lieu_text=lieu_txt,
                                         note=note,
