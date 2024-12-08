@@ -26,7 +26,7 @@ class Evenements(EvenementsTemplate):
         self.date_picker_1.placeholder = self.date_fr(now)
         
         # Drop down codes lieux
-        self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
+        self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search(tables.order_by("lieu", ascending=True))]
         for lieu in self.drop_down_lieux.items:
             print(lieu, lieu[0], lieu[1])
         liste=self.drop_down_lieux.items[0]
