@@ -31,16 +31,29 @@ class Evenements(EvenementsTemplate):
             print(lieu, lieu[0], lieu[1])
         liste=self.drop_down_lieux.items[0]
         self.drop_down_lieux.selected_value = liste[1]
+
+    def date_picker_1_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.date_picker_1.format
+        date = self.date_picker_1.date
+        alert(date)
+        self.date_picker_1.placeholder = self.date_fr(date)
+
+    def date_fr(self, date_en):
+        jours_semaine = { "Mon": "Lun", "Tue": "Mar", "Wed": "Mer", "Thu": "Jeu", "Fri": "Ven", "Sat": "Sam", "Sun": "Dim" }
+        date_format_en = date_en.strftime("%a, %d/%m/%Y, %H:%M")
+
+        # Convertir les abréviations du jour anglaises en françaises
+        jour_en = date_en.strftime("%a")
+        jour_fr = jours_semaine[jour_en]
+        date_format_fr = date_format_en.replace(jour_en, jour_fr)
+        alert(date_format_fr)
+        return date_format_fr    
         
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form("Main", 99)
-
-    def date_picker_1_change(self, **event_args):
-        """This method is called when an item is selected"""
-        date = self.date_picker_1.date
-        self.date_picker_1.placeholder = self.date_fr(date)
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -86,16 +99,7 @@ class Evenements(EvenementsTemplate):
         self.image_3.source = thumb_pic
         self.button_validation.visible = True
 
-    def date_fr(self, date_en):
-        jours_semaine = { "Mon": "Lun", "Tue": "Mar", "Wed": "Mer", "Thu": "Jeu", "Fri": "Ven", "Sat": "Sam", "Sun": "Dim" }
-        date_format_en = date_en.strftime("%a, %d/%m/%Y, %H:%M")
-
-        # Convertir les abréviations anglaises en françaises
-        jour_en = date_en.strftime("%a")
-        jour_fr = jours_semaine[jour_en]
-        date_format_fr = date_format_en.replace(jour_en, jour_fr)
-        #alert(date_format_fr)
-        return date_format_fr
+  
 
     
         
