@@ -133,6 +133,11 @@ class Evenements(EvenementsTemplate):
             btn.textContent = 'Ok'
         for btn in document.querySelectorAll('.daterangepicker .cancelBtn'):
             btn.textContent = 'Retour' 
+
+    def timer_1_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        result = anvil.server.call("ping")
+        print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
         
 
   
