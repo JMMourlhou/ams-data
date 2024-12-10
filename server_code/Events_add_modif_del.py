@@ -7,26 +7,51 @@ import anvil.server
 from anvil import *  #pour les alertes
 
 
-# =========================================================================
-#Création d'un nouveau Evenement (Réunion ou Incident)
+# =========================================================================================
+# Création d'un nouvel Evenement (Réunion ou Incident), sauvegarde auto tt les 30 secondes...
+#   ... pour éviter de perdre les données en cas de session expired (sur tel possible)
+
 @anvil.server.callable 
-def add_event(type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img_3, writing_date_time):
+# Auto_sov = True: sauvegarde auto, doit modifier le row, si un id existe déjà
+# id du row = not None si sauvegarde auto, contient le id_row à modifier (sauf si c'est la 1ere sauvegarde)
+def add_event(id, type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img_3, writing_date_time):
     
-    new_row=app_tables.events.add_row(  type_event=type_event,
-                                        date=date_time,
-                                        lieu=lieu_row,
-                                        lieu_text=lieu_txt,
-                                        note=note,
-                                        img1=img_1,
-                                        img2=img_2,
-                                        img3=img_3,
-                                        writing_date_time=writing_date_time
-                                    )
-                 
-    id = new_row.get_id()
-    re_read_row = app_tables.events.get_by_id(id)
-    if re_read_row:
-        valid=True
-    else:
-        valid=False
-    return valid
+    #    si id = None, indique que c'est une premiere sauvegarde, j'utilise .add_row
+    if id is None:
+        new_row=app_tables.events.add_row(  
+                                            type_event=type_event,
+                                            date=date_time,
+                                            lieu=lieu_row,
+                                            lieu_text=lieu_txt,
+                                            note=note,
+                                            img1=img_1,
+                                            img2=img_2,
+                                            img3=img_3,
+                                            writing_date_time=writing_date_time
+                                        )
+        id = new_row.get_id()  # en création de l'évènement, je sauve l'id pour pouvoir le modifier en sauvegrde auto ou sauvegarde finale (bt Validation)
+        re_read_row = app_tables.events.get_by_id(id)
+        if re_read_row:
+            valid=True
+        else:
+            valid=False
+        
+    # si id = not None, indique qu'il y a déjà eu une sauvegarde: j'utilise update
+    if id is not None:
+        re_read_row = app_tables.events.get_by_id(id)
+        if re_read_row:
+            valid=True
+            re_read_row.update(
+                                type_event=type_event,
+                                date=date_time,
+                                lieu=lieu_row,
+                                lieu_text=lieu_txt,
+                                note=note,
+                                img1=img_1,
+                                img2=img_2,
+                                img3=img_3,
+                                writing_date_time=writing_date_time
+                                )
+        else:
+            valid=False
+    return valid, id

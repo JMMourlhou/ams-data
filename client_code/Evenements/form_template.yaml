@@ -1,4 +1,9 @@
 components:
+- event_bindings: {tick: timer_2_tick}
+  layout_properties: {grid_position: 'QKMISN,LJORAF'}
+  name: timer_2
+  properties: {interval: 30}
+  type: Timer
 - components:
   - layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
     name: label_0

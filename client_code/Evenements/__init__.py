@@ -15,6 +15,7 @@ class Evenements(EvenementsTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.id = None
 
         # Change les bt 'apply' en 'Valider' si je veux saisir l'heure en même tps que la date (picktime set à True)
         from anvil.js.window import document
@@ -93,12 +94,15 @@ class Evenements(EvenementsTemplate):
         self.button_validation_1.visible = True
         self.button_validation_2.visible = True
 
-    def button_validation_click(self, auto_sov=False, **event_args):
+    # validation:   auto_sov True si sovegarde auto tte les 30"   id est l'id 
+    def button_validation_click(self, auto_sov=False, id=None, **event_args):
         """This method is called when the button is clicked"""
         writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu['lieu']
-        result = anvil.server.call("add_event",     self.drop_down_event.selected_value,      # Type event
+        result, self.id = anvil.server.call("add_event", 
+                                                    self.id,                                       # row id   pour réécrire le row en auto sov tt les 30"
+                                                    self.drop_down_event.selected_value,      # Type event
                                                     self.date_sov,                            # date
                                                     row_lieu,                                 # lieu row
                                                     lieu_txt,                                 # lieu en clair
@@ -106,11 +110,11 @@ class Evenements(EvenementsTemplate):
                                                     self.image_1.source,                      # image 1
                                                     self.image_2.source,
                                                     self.image_3.source,
-                                                    writing_date_time                          # Date et heure de l'enregistrement
-                                  )       
+                                                    writing_date_time,                        # Date et heure de l'enregistrement
+                                     )       
         if not result :
             alert("Evenement non sauvegardé !")
-        # si la sauvegarde a été effectué en
+        # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider')
         if auto_sov is False: 
             self.button_annuler_click()
 
@@ -146,6 +150,11 @@ class Evenements(EvenementsTemplate):
         with anvil.server.no_loading_indicator:
             result = anvil.server.call("ping")
         print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
+
+    def timer_2_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        # Toutes les 30 secondes, sauvegarde auto
+        self.button_validation_click(True)
         
 
   
