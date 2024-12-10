@@ -126,24 +126,22 @@ class Evenements(EvenementsTemplate):
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            file_rezized = anvil.server.call('resize_img', file, "img1")   # 800x600
+            file_rezized = anvil.server.call('resize_img', file, "img1")   # 800x600 ou 600x800
             self.image_1.source = file_rezized
-            
-            #self.image_1.source = file
             self.button_validation.visible = True
 
     def file_loader_2_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            
-            
-            self.image_2.source = file
+            file_rezized = anvil.server.call('resize_img', file, "img2")   # 800x600 ou 600x800
+            self.image_2.source = file_rezized
             self.button_validation.visible = True
 
     def file_loader_3_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            self.image_3.source = file
+            file_rezized = anvil.server.call('resize_img', file, "img3")   # 800x600 ou 600x800
+            self.image_3.source = file_rezized
             self.button_validation.visible = True
 
     def date_picker_1_hide(self, **event_args):
@@ -155,16 +153,19 @@ class Evenements(EvenementsTemplate):
         for btn in document.querySelectorAll('.daterangepicker .cancelBtn'):
             btn.textContent = 'Retour' 
 
+    # Pour empêcher le msg session expired (suffit pour ordinateur, pas pour tel) 
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         with anvil.server.no_loading_indicator:
             result = anvil.server.call("ping")
         print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
 
+    # Pour lancer une sauvegarde automatique toutes les 30 secondes
     def timer_2_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
         # Toutes les 30 secondes, sauvegarde auto
-        self.button_validation_click(True)
+        with anvil.server.no_loading_indicator:
+            self.button_validation_click("True",self.id)
         
 
   
