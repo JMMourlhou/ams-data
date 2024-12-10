@@ -30,6 +30,7 @@ class Evenements(EvenementsTemplate):
         # Init drop down date avec Date du jour et acquisition de l'heure
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         self.date_picker_1.placeholder = self.date_fr(self.now) # fonction date_fr change Sun en Dim ds le place holder
+     
         
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search(tables.order_by("lieu", ascending=True))]
@@ -136,7 +137,8 @@ class Evenements(EvenementsTemplate):
 
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-        result = anvil.server.call("ping")
+        with anvil.server.no_loading_indicator:
+            result = anvil.server.call("ping")
         print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
         
 
