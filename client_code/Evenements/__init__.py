@@ -46,6 +46,7 @@ class Evenements(EvenementsTemplate):
         #self.date_picker_1.visible=False  # Efface le component date pour pouvoir afficher le place holder
         self.date_picker_1.placeholder = self.date_fr(now)
         self.date_picker_1.visible=True
+        self.text_area_notes.scroll_into_view()
 
     def date_fr(self, date_en):
         jours_semaine = { "Mon": "Lun", "Tue": "Mar", "Wed": "Mer", "Thu": "Jeu", "Fri": "Ven", "Sat": "Sam", "Sun": "Dim" }
@@ -89,8 +90,10 @@ class Evenements(EvenementsTemplate):
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
+        self.button_validation_1.visible = True
+        self.button_validation_2.visible = True
 
-    def button_validation_click(self, **event_args):
+    def button_validation_click(self, auto_sov=False, **event_args):
         """This method is called when the button is clicked"""
         writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         row_lieu = self.drop_down_lieux.selected_value
@@ -105,11 +108,11 @@ class Evenements(EvenementsTemplate):
                                                     self.image_3.source,
                                                     writing_date_time                          # Date et heure de l'enregistrement
                                   )       
-        if not result:
+        if not result :
             alert("Evenement non sauvegardé !")
-        else:
-            alert("Evenement sauvegardé !")
-        self.button_annuler_click()
+        # si la sauvegarde a été effectué en
+        if auto_sov is False: 
+            self.button_annuler_click()
 
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
