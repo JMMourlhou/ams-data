@@ -92,6 +92,7 @@ class Evenements(EvenementsTemplate):
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
+        writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu['lieu']
         result = anvil.server.call("add_event",     self.drop_down_event.selected_value,      # Type event
@@ -101,7 +102,8 @@ class Evenements(EvenementsTemplate):
                                                     self.text_area_notes.text,                # notes    
                                                     self.image_1.source,                      # image 1
                                                     self.image_2.source,
-                                                    self.image_3.source
+                                                    self.image_3.source,
+                                                    writing_date_time                          # Date et heure de l'enregistrement
                                   )       
         if not result:
             alert("Evenement non sauvegardé !")

@@ -10,7 +10,7 @@ from anvil import *  #pour les alertes
 # =========================================================================
 #Création d'un nouveau Evenement (Réunion ou Incident)
 @anvil.server.callable 
-def add_event(type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img_3):
+def add_event(type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img_3, writing_date_time):
     
     new_row=app_tables.events.add_row(  type_event=type_event,
                                         date=date_time,
@@ -19,7 +19,8 @@ def add_event(type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img
                                         note=note,
                                         img1=img_1,
                                         img2=img_2,
-                                        img3=img_3
+                                        img3=img_3,
+                                        writing_date_time=writing_date_time
                                     )
                  
     id = new_row.get_id()

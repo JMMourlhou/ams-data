@@ -1,7 +1,6 @@
 from anvil import *
 import anvil.files
 from anvil.files import data_files
-import anvil.email
 import tables
 from tables import app_tables
 import anvil.users

@@ -196,6 +196,9 @@ db_schema:
     - admin_ui: {order: -1, width: 106}
       name: date
       type: string
+    - admin_ui: {order: -2, width: 200}
+      name: writing_date_time
+      type: datetime
     server: full
     title: Events
   files:
@@ -882,9 +885,6 @@ services:
 - client_config: {}
   server_config: {enc_delegation_refresh_token: 8+TaxIyUhdkELYALRbHMlfx2L8Wv5TxtgVxFR202/f31KQ7vY4xAZVH+45XZnmnEfaqJC43GFdGlPvkZlQgf75ImSygBg2cllHI8b08Xug6qjG2ZtPTZ6Ee7xGWJs6T4rsu/R9F6RYioUzjYsPpw+rHH0y1lt/xq60UNTT6L+bhFdiowhKmToz648QpunO1zct60uEL5m9/9e8avlPQ5QxeTaEr6ccr9eoyXRjcJlOE7uXrmFDG69CZfx/Lv2D3opm7cFYKPxhMpo4y/eEvG7VZ37W2/4JaDa77662kedKj4B1HUKZpYvtqfjLyr1g==}
   source: /runtime/services/google.yml
-- client_config: {}
-  server_config: {custom_smtp: false, smtp_encryption: '', smtp_host: smtp.gmail.com, smtp_password: g5ce6sYMnJO03p22AVUgSjUVaKMjZ/PSDBjEWURkYP4vUB8QuWr7YKGTlaL3Ra7CeobqugcMG/gEZ+3Lg65oRMKeWjJNPiAoy2MwgM5hdViFqKJugcKo48AoK8q/68S65v3ri7Ze1VkESTxV5xQ6mRSYAs14balPgDDkpbe0I6i1Eabx43o54FZdIm4=, smtp_port: 587, smtp_user: jmarc@jmm-formation-et-services.fr, test_mode: false}
-  source: /runtime/services/anvil/email.yml
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
