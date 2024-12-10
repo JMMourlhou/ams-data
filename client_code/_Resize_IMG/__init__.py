@@ -17,8 +17,6 @@ class _Resize_IMG(_Resize_IMGTemplate):
 
         # Any code you write here will run before the form opens.
 
-        
-
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         self.label_1.text = file.length

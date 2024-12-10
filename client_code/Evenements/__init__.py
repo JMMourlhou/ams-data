@@ -9,6 +9,11 @@ from anvil.tables import app_tables
 from .. import French_zone   #pour afficher la date du jour
 from datetime import datetime
 
+# Saisie d'un évenement ou d'un incident 
+#   Pb rencontré: session expired si la saisie est intérrompue 
+    # 2 Solutions implémentées:  - Un 'ping' sur le serveur toutes les 5 minutes (300" timer 1) empêche la session d'expirée (sur un ordinateur) 
+    #                                mais pas sur un tel qd l'écran s'étteint.  
+    #                            - Une sauvegarde auto toutes les 30 secondes (timer 2), ce qui permet de ne pas perdre bp de données si expired. 
 
 class Evenements(EvenementsTemplate):
     def __init__(self, **properties):
@@ -101,7 +106,7 @@ class Evenements(EvenementsTemplate):
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu['lieu']
         result, self.id = anvil.server.call("add_event", 
-                                                    self.id,                                       # row id   pour réécrire le row en auto sov tt les 30"
+                                                    self.id,                                  # row id   pour réécrire le row en auto sov tt les 30"
                                                     self.drop_down_event.selected_value,      # Type event
                                                     self.date_sov,                            # date
                                                     row_lieu,                                 # lieu row
@@ -120,21 +125,26 @@ class Evenements(EvenementsTemplate):
 
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
-        thumb_pic = anvil.image.generate_thumbnail(file, 640)
-        self.image_1.source = thumb_pic
-        self.button_validation.visible = True
+        if file is not None:  #pas d'annulation en ouvrant choix de fichier
+            file_rezized = anvil.server.call('resize_img', file, "img1")   # 800x600
+            self.image_1.source = file_rezized
+            
+            #self.image_1.source = file
+            self.button_validation.visible = True
 
     def file_loader_2_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
-        thumb_pic = anvil.image.generate_thumbnail(file, 640)
-        self.image_2.source = thumb_pic
-        self.button_validation.visible = True
+        if file is not None:  #pas d'annulation en ouvrant choix de fichier
+            
+            
+            self.image_2.source = file
+            self.button_validation.visible = True
 
     def file_loader_3_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
-        thumb_pic = anvil.image.generate_thumbnail(file, 640)
-        self.image_3.source = thumb_pic
-        self.button_validation.visible = True
+        if file is not None:  #pas d'annulation en ouvrant choix de fichier
+            self.image_3.source = file
+            self.button_validation.visible = True
 
     def date_picker_1_hide(self, **event_args):
         """This method is called when the DatePicker is removed from the screen"""
