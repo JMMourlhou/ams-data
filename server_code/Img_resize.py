@@ -1,3 +1,4 @@
+import anvil.email
 import anvil.tables as tables
 import anvil.server
 import pathlib

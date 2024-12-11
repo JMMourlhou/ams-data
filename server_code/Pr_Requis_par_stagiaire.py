@@ -1,3 +1,4 @@
+import anvil.email
 #from anvil import *
 import pathlib
 import anvil.files

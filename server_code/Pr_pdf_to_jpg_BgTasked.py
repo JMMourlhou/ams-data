@@ -1,3 +1,4 @@
+import anvil.email
 # Transform a pdf file loaded into 1 or several pictures
 import anvil.files
 from anvil.files import data_files

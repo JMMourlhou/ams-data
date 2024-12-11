@@ -1,3 +1,4 @@
+import anvil.email
 from anvil.tables import app_tables
 import anvil.server
 from anvil.pdf import PDFRenderer
