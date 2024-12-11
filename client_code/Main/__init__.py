@@ -364,8 +364,6 @@ class Main(MainTemplate):
         from ..Stage_satisf_statistics import Stage_satisf_statistics
         open_form("Stage_satisf_statistics")
 
-    
-
     # BT Publipostage aux anciens stagiaires
     def button_mail_histo_click(self, **event_args):
         from ..Mail_to_old_stagiaires import Mail_to_old_stagiaires
@@ -383,7 +381,13 @@ class Main(MainTemplate):
         from ..QCM_visu_modif import QCM_visu_modif
         open_form("QCM_visu_modif_Main")
 
-    
+    # Pour empêcher le msg session expired (suffit pour ordinateur, pas pour tel) 
+    def timer_1_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        with anvil.server.no_loading_indicator:
+            result = anvil.server.call("ping")
+        print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
+        
     """
     ==============================================================
     # Les UTILITAIRES suivants sont à TRANSFERER DS UTILITAIRES POUR alléger module MAIN
