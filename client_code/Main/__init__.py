@@ -451,6 +451,10 @@ class Main(MainTemplate):
             
     """
 
+    def button_event_visu_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
+
     
 
    

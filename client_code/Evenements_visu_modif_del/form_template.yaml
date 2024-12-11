@@ -1,0 +1,60 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
+    name: label_0
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: ' Visualisation et MAJ des évenements', tooltip: '', underline: false, visible: true}
+    type: Label
+  layout_properties: {grid_position: 'JRDEIG,NSLPKU'}
+  name: column_panel_header
+  properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+- components:
+  - components:
+    - event_bindings: {click: button_annuler_click}
+      layout_properties:
+        col_widths: {}
+        grid_position: COGJPP,SACJUA
+      name: button_annuler
+      properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
+      type: Button
+    layout_properties: {grid_position: 'MZAUBQ,LXEHRW'}
+    name: column_panel_0_1
+    properties: {col_widths: '{}'}
+    type: ColumnPanel
+  - components:
+    - event_bindings: {change: drop_down_event_change}
+      layout_properties: {expand: false}
+      name: drop_down_event
+      properties:
+        align: center
+        background: theme:On Primary Container
+        bold: false
+        border: ''
+        enabled: true
+        font: ''
+        font_size: 16
+        foreground: theme:On Primary
+        include_placeholder: true
+        italic: false
+        items: [Réunion, Incident]
+        margin: [null, '0', null, null]
+        placeholder: Type d'évenement
+        role: null
+        spacing_above: small
+        spacing_below: small
+        tooltip: ''
+        underline: false
+        visible: true
+      type: DropDown
+    layout_properties: {grid_position: 'BWKGSA,VNTBFV'}
+    name: flow_panel_0
+    properties: {align: center, background: '', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: full, visible: true}
+    type: FlowPanel
+  layout_properties: {grid_position: 'AGRPRA,SOATGO'}
+  name: column_panel_0
+  properties: {background: 'theme:Primary', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
+  type: ColumnPanel
+container:
+  properties: {visible: true}
+  type: ColumnPanel
+is_package: true
