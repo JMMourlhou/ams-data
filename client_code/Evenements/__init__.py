@@ -29,9 +29,11 @@ class Evenements(EvenementsTemplate):
         for btn in document.querySelectorAll('.daterangepicker .cancelBtn'):
             btn.textContent = 'Retour' 
         
-        # Init drop down event
+        # Init drop down event (Pour l'instant choix à rentrer pour ne pas perdre les notes si je change le type d'evenmt)
+        """
         self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
         self.note_for_meeting("meeting")
+        """
         
         # Init drop down date avec Date du jour et acquisition de l'heure
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
@@ -71,11 +73,14 @@ class Evenements(EvenementsTemplate):
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
+        #self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
         self.type = self.drop_down_event.selected_value
-        if self.type == "Réunion":
-            self.note_for_meeting("meeting")
-        if self.type == "Incident":
-            self.note_for_meeting("incident")
+        if self.type == "Réunion" or self.type == "Incident":
+            self.flow_panel_lieu_date.visible = True
+            if self.type == "Réunion":
+                self.note_for_meeting("meeting")
+            if self.type == "Incident":
+                self.note_for_meeting("incident")
 
     def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -96,7 +101,7 @@ class Evenements(EvenementsTemplate):
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
-        self.button_validation_1.visible = True
+        #self.button_validation_1.visible = True
         self.button_validation_2.visible = True
 
     # validation:   auto_sov True si sovegarde auto tte les 30"   id est l'id 
@@ -163,7 +168,7 @@ class Evenements(EvenementsTemplate):
     # Pour lancer une sauvegarde automatique toutes les 30 secondes
     def timer_2_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-        # Toutes les 30 secondes, sauvegarde auto
+        # Toutes les 30 secondes, sauvegarde auto, self.id contient l'id du row qui est en cours de saisie
         with anvil.server.no_loading_indicator:
             self.button_validation_click("True",self.id)
         
