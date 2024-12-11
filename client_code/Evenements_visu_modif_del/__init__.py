@@ -34,23 +34,11 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         self.note_for_meeting("meeting")
         """
 
-        # Init drop down date avec Date du jour et acquisition de l'heure
-        self.now = (
-            French_zone.french_zone_time()
-        )  # now est le jour/h actuelle (datetime object)
-        self.date_picker_1.placeholder = self.date_fr(
-            self.now
-        )  # fonction date_fr change Sun en Dim ds le place holder
+        # acquisition de l'heure
+        self.now = (French_zone.french_zone_time())  # now est le jour/h actuelle (datetime object)
+        
 
-        # Drop down codes lieux
-        self.drop_down_lieux.items = [
-            (r["lieu"], r)
-            for r in app_tables.lieux.search(tables.order_by("lieu", ascending=True))
-        ]
-        for lieu in self.drop_down_lieux.items:
-            print(lieu, lieu[0], lieu[1])
-        liste = self.drop_down_lieux.items[0]
-        self.drop_down_lieux.selected_value = liste[1]
+        
 
     def date_picker_1_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -90,8 +78,11 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         # self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
         self.type = self.drop_down_event.selected_value
         if self.type == "Réunion" or self.type == "Incident":
-            self.flow_panel_lieu_date.visible = True
-            liste = app_tables
+            #self.flow_panel_lieu_date.visible = True
+            liste = app_tables.events.search(tables.order_by("date", ascending=False),
+                                            type_event=self.type
+                                            )
+            self.repeating_panel_1.items=liste
 
     def drop_down_lieux_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -199,12 +190,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             f"ping on server to prevent 'session expired' every 5 min, server answer:{result}"
         )
 
-    # Pour lancer une sauvegarde automatique toutes les 30 secondes
-    def timer_2_tick(self, **event_args):
-        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-        # Toutes les 30 secondes, sauvegarde auto, self.id contient l'id du row qui est en cours de saisie
-        with anvil.server.no_loading_indicator:
-            self.button_validation_click("True", self.id)
 
     # Initialisation du préfixe du nom du fichier img
     def nom_img(self, num_img_txt):

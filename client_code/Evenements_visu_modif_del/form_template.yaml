@@ -4,6 +4,11 @@ components:
     name: label_0
     properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: ' Visualisation et MAJ des évenements', tooltip: '', underline: false, visible: true}
     type: Label
+  - event_bindings: {tick: timer_1_tick}
+    layout_properties: {grid_position: 'NJAMYS,SIXLPS'}
+    name: timer_1
+    properties: {interval: 300}
+    type: Timer
   layout_properties: {grid_position: 'JRDEIG,NSLPKU'}
   name: column_panel_header
   properties: {background: '', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
@@ -54,6 +59,10 @@ components:
   name: column_panel_0
   properties: {background: 'theme:Primary', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
   type: ColumnPanel
+- layout_properties: {grid_position: 'HIPMUW,SVZKNQ'}
+  name: repeating_panel_1
+  properties: {item_template: Evenements_visu_modif_del.ItemTemplate21, spacing_above: none, spacing_below: none}
+  type: RepeatingPanel
 container:
   properties: {visible: true}
   type: ColumnPanel

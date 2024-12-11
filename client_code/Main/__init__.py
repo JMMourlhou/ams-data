@@ -307,6 +307,12 @@ class Main(MainTemplate):
         """This method is called when the button is clicked"""
         from ..Evenements import Evenements
         open_form("Evenements")
+        
+    # BT admin, Visu, maj, modif, del Saisie évenements
+    def button_event_visu_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Evenements_visu_modif_del import Evenements_visu_modif_del
+        open_form('Evenements_visu_modif_del')
 
     # BT stagiaire QCM
     def button_qcm_click(self, **event_args):
@@ -451,9 +457,7 @@ class Main(MainTemplate):
             
     """
 
-    def button_event_visu_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
+
 
     
 

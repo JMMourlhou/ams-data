@@ -1,0 +1,37 @@
+components:
+- components:
+  - event_bindings: {click: button_date_click}
+    layout_properties: {grid_position: 'XBDNDJ,GWYFOG'}
+    name: button_date
+    properties:
+      foreground: theme:On Primary
+      spacing:
+        margin: ['0', null, '0', null]
+      spacing_above: none
+      spacing_below: none
+      text: date
+    type: Button
+  - event_bindings: {click: button_lieu_click}
+    layout_properties: {grid_position: 'XBDNDJ,GFWPIJ'}
+    name: button_lieu
+    properties:
+      foreground: theme:On Primary
+      spacing:
+        margin: ['0', null, '0', null]
+      spacing_above: none
+      spacing_below: none
+      text: lieu
+    type: Button
+  layout_properties: {grid_position: 'GZXEJA,JLEUJQ'}
+  name: column_panel_1
+  properties:
+    background: theme:On Primary Container
+    role: null
+    spacing:
+      margin: ['0', null, '0', null]
+    spacing_above: none
+    spacing_below: none
+    wrap_on: never
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true
