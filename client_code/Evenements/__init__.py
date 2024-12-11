@@ -19,6 +19,7 @@ class Evenements(EvenementsTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        alert("branch")
         # Any code you write here will run before the form opens.
         self.id = None
 
@@ -131,21 +132,24 @@ class Evenements(EvenementsTemplate):
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            file_rezized = anvil.server.call('resize_img', file, "img1")   # 800x600 ou 600x800
+            nom=self.nom_img("1")  # envoi en fonction d'initialisation du nom de l'image 1
+            file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
             self.image_1.source = file_rezized
             self.button_validation.visible = True
 
     def file_loader_2_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            file_rezized = anvil.server.call('resize_img', file, "img2")   # 800x600 ou 600x800
+            nom=self.nom_img("2")  # envoi en fonction d'initialisation du nom de l'image 2
+            file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
             self.image_2.source = file_rezized
             self.button_validation.visible = True
 
     def file_loader_3_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
-            file_rezized = anvil.server.call('resize_img', file, "img3")   # 800x600 ou 600x800
+            nom=self.nom_img("3")   # envoi en fonction d'initialisation du nom de l'image 3
+            file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
             self.image_3.source = file_rezized
             self.button_validation.visible = True
 
@@ -172,7 +176,10 @@ class Evenements(EvenementsTemplate):
         with anvil.server.no_loading_indicator:
             self.button_validation_click("True",self.id)
         
-
+    # Initialisation du préfixe du nom du fichier img 
+    def nom_img(self,num_img_txt):
+        nom_img = self.date_sov+"_"+self.drop_down_event.selected_value+"_"+num_img_txt
+        return nom_img
   
 
     
