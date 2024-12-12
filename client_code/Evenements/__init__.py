@@ -77,6 +77,7 @@ class Evenements(EvenementsTemplate):
         self.type = self.drop_down_event.selected_value
         if self.type == "Réunion" or self.type == "Incident":
             self.flow_panel_lieu_date.visible = True
+            self.outlined_card_main.visible = True
             if self.type == "Réunion":
                 self.note_for_meeting("meeting")
             if self.type == "Incident":
