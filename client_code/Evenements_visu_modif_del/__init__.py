@@ -12,14 +12,20 @@ from .. import French_zone  # pour afficher la date du jour
 from datetime import datetime
 
 # Visu, Modif, Del d'un évenement ou d'un incident
-
+# type_evnt permet de réafficher les évenemnts après un effact d'un evnt (type_evnt != None)
 class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
-    def __init__(self, **properties):
+    def __init__(self, type_evnt=None ,**properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.id = None
-
+        
+        # envoi direct en traitement du drop down evenement si vient d'un effacement d'évenement
+        self.type_event = type_evnt
+        if self.type_event is not None:
+            self.drop_down_event.selected_value = self.type_event
+            self.drop_down_event_change()
+            
         # Change les bt 'apply' en 'Valider' si je veux saisir l'heure en même tps que la date (picktime set à True)
         from anvil.js.window import document
 
@@ -36,9 +42,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
 
         # acquisition de l'heure
         self.now = (French_zone.french_zone_time())  # now est le jour/h actuelle (datetime object)
-        
-
-        
+    
 
     def date_picker_1_change(self, **event_args):
         """This method is called when an item is selected"""

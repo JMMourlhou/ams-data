@@ -16,12 +16,43 @@ from datetime import datetime
     #                            - Une sauvegarde auto toutes les 30 secondes (timer 2), ce qui permet de ne pas perdre bp de données si expired. 
 
 class Evenements(EvenementsTemplate):
-    def __init__(self, **properties):
+    def __init__(self, to_be_modified_row=None, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.id = None
 
+        # Drop down codes lieux
+        self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search(tables.order_by("lieu", ascending=True))]
+        for lieu in self.drop_down_lieux.items:
+            print(lieu, lieu[0], lieu[1])
+        liste=self.drop_down_lieux.items[0]
+        self.drop_down_lieux.selected_value = liste[1]
+
+        now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
+        date0 = now.date()
+        self.date_sov = date0.strftime("%Y/%m/%d")
+
+        # Test si ouverture en mode Création ou modif (self.to_be_modified_row = None si création)
+        self.to_be_modified_row = to_be_modified_row
+        if self.to_be_modified_row is None:
+            # Creation
+            self.id = None
+        else:
+            # Modif à partir du row passé en init par la form Evenements_visu_modif_del
+            self.id=self.to_be_modified_row.get_id()
+            # initilisation des composants de cette forme par le row passé en init par la form Evenements_visu_modif_del
+            self.drop_down_event.selected_value = self.to_be_modified_row["type_event"]
+            self.drop_down_lieux.selected_value = self.to_be_modified_row["lieu"]
+            self.date_picker_1.date = self.to_be_modified_row["date"]
+            self.text_area_mot_clef.text = self.to_be_modified_row["mot_clef"]
+            self.text_area_notes.text = self.to_be_modified_row["note"]
+            self.image_1.source = self.to_be_modified_row["img1"]
+            self.image_2.source = self.to_be_modified_row["img2"]
+            self.image_3.source = self.to_be_modified_row["img3"]
+            self.flow_panel_lieu_date.visible = True
+            self.outlined_card_main.visible = True
+            
+            
         # Change les bt 'apply' en 'Valider' si je veux saisir l'heure en même tps que la date (picktime set à True)
         from anvil.js.window import document
         for btn in document.querySelectorAll('.daterangepicker .applyBtn'):
@@ -38,14 +69,6 @@ class Evenements(EvenementsTemplate):
         # Init drop down date avec Date du jour et acquisition de l'heure
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         self.date_picker_1.placeholder = self.date_fr(self.now) # fonction date_fr change Sun en Dim ds le place holder
-     
-        
-        # Drop down codes lieux
-        self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search(tables.order_by("lieu", ascending=True))]
-        for lieu in self.drop_down_lieux.items:
-            print(lieu, lieu[0], lieu[1])
-        liste=self.drop_down_lieux.items[0]
-        self.drop_down_lieux.selected_value = liste[1]
 
     def date_picker_1_change(self, **event_args):
         """This method is called when an item is selected"""  
@@ -93,7 +116,6 @@ class Evenements(EvenementsTemplate):
         heure = heure.strftime("%H:%M")
         date0 = now.date()
         date = date0.strftime("%d/%m/%Y")
-        self.date_sov = date0.strftime("%Y/%m/%d")
         if type == "meeting":
             self.text_area_notes.text = (f"Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Réunion d'équipe du {date} à {heure}\n\nNotes:\n ")
         if type == "incident":
@@ -181,7 +203,8 @@ class Evenements(EvenementsTemplate):
     def nom_img(self,num_img_txt):
         nom_img = self.date_sov+"_"+self.drop_down_event.selected_value+"_"+num_img_txt
         return nom_img
-  
+
+
 
     
         

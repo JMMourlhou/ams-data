@@ -1,12 +1,8 @@
 from ._anvil_designer import ItemTemplate21Template
 from anvil import *
 import anvil.server
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.users
+
 import anvil.tables as tables
-import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
@@ -16,25 +12,16 @@ class ItemTemplate21(ItemTemplate21Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()   # Récup du nom de la forme mère
         self.button_date.text = self.item['date']
         self.button_mot_clef.text = self.item['mot_clef']
         self.button_lieu.text = self.item['lieu_text']
 
-    def button_date_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
-
-    def button_lieu_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
-
-    def button_mot_clef_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        pass
-
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        id = self.item.get_id()
+        row_to_be_modified = app_tables.events.get_by_id(id)
+        open_form("Evenements", row_to_be_modified)
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -45,4 +32,6 @@ class ItemTemplate21(ItemTemplate21Template):
                 alert("ERREUR, Effacement non effectué !")
                 return
             alert("Effacement effectué !")
-        open_form("Evenements_visu_modif_del")
+        # Récupération du contenu de la drop_down en form appelante
+        type_evnt = self.f.drop_down_event.selected_value
+        open_form("Evenements_visu_modif_del", type_evnt)

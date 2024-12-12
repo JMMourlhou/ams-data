@@ -52,7 +52,8 @@ def add_event(id, type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2,
                                 img1=img_1,
                                 img2=img_2,
                                 img3=img_3,
-                                writing_date_time=writing_date_time
+                                writing_date_time=writing_date_time,
+                                mot_clef=mot_clef
                                 )
         else:
             valid=False
