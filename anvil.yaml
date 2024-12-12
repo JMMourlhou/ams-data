@@ -199,6 +199,9 @@ db_schema:
     - admin_ui: {order: -2, width: 200}
       name: writing_date_time
       type: datetime
+    - admin_ui: {order: 1.5, width: 200}
+      name: mot_clef
+      type: string
     server: full
     title: Events
   files:

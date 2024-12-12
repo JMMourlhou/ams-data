@@ -15,7 +15,7 @@ from anvil import *  #pour les alertes
 @anvil.server.callable 
 # Auto_sov = True: sauvegarde auto, doit modifier le row, si un id existe déjà
 # id du row = not None si sauvegarde auto, contient le id_row à modifier (sauf si c'est la 1ere sauvegarde)
-def add_event(id, type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img_3, writing_date_time):
+def add_event(id, type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2, img_3, writing_date_time, mot_clef):
     
     #    si id = None, indique que c'est une premiere sauvegarde, j'utilise .add_row
     if id is None:
@@ -28,7 +28,8 @@ def add_event(id, type_event, date_time, lieu_row, lieu_txt, note, img_1, img_2,
                                             img1=img_1,
                                             img2=img_2,
                                             img3=img_3,
-                                            writing_date_time=writing_date_time
+                                            writing_date_time=writing_date_time,
+                                            mot_clef=mot_clef
                                         )
         id = new_row.get_id()  # en création de l'évènement, je sauve l'id pour pouvoir le modifier en sauvegrde auto ou sauvegarde finale (bt Validation)
         re_read_row = app_tables.events.get_by_id(id)
