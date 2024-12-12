@@ -4,6 +4,7 @@ components:
     layout_properties: {grid_position: 'XBDNDJ,GWYFOG'}
     name: button_date
     properties:
+      align: left
       foreground: theme:On Primary
       spacing:
         margin: ['0', null, '0', null]
@@ -30,7 +31,17 @@ components:
   - event_bindings: {click: button_modif_click}
     layout_properties: {grid_position: 'XBDNDJ,OEQTYG'}
     name: button_modif
-    properties: {background: 'theme:Tertiary', enabled: true, font_size: 12, foreground: 'theme:On Primary Container', spacing_above: none, spacing_below: none, text: Modif, visible: true}
+    properties:
+      background: theme:Tertiary
+      enabled: true
+      font_size: 12
+      foreground: theme:On Primary Container
+      spacing:
+        padding: [null, '2', null, '2']
+      spacing_above: none
+      spacing_below: none
+      text: Modif
+      visible: true
     type: Button
   - event_bindings: {click: button_del_click}
     layout_properties: {grid_position: 'XBDNDJ,RCCGCJ'}
@@ -41,7 +52,7 @@ components:
   name: column_panel_1
   properties:
     background: theme:On Primary Container
-    col_widths: '{"GWYFOG":12,"PXVEIA":21,"GFWPIJ":14,"OEQTYG":7,"RCCGCJ":6}'
+    col_widths: '{"GWYFOG":19,"PXVEIA":14,"GFWPIJ":13,"OEQTYG":9,"RCCGCJ":12}'
     role: null
     spacing:
       margin: ['0', null, '0', null]
