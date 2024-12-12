@@ -122,7 +122,7 @@ class Evenements(EvenementsTemplate):
                                                     self.image_2.source,
                                                     self.image_3.source,
                                                     writing_date_time,                        # Date et heure de l'enregistrement
-                                                    mot_clef                                  # Mot clef pour accès rapide en recherche
+                                                    self.text_area_mot_clef.text              # Mot clef pour accès rapide en recherche
                                      )       
         if not result :
             alert("Evenement non sauvegardé !")
