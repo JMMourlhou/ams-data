@@ -148,6 +148,7 @@ class Main(MainTemplate):
     def display_bt_mail(self, **event_args):
         if self.user:
             self.bt_user_mail.text = self.user["email"]
+            self.column_panel_bt_mail.visible = True
             self.bt_se_connecter.visible = False
             self.bt_se_deconnecter.visible = True
         else:
@@ -183,6 +184,7 @@ class Main(MainTemplate):
                 self.outlined_card_niv1.visible = True
                 
             if self.user["role"] == "B":                    # Bureaux:   
+                self.column_panel_bt_mail.visible = True        # se déconnecter
                 self.outlined_card_pr_qcm.visible = True        
                 self.button_qcm.visible = True                  # faire 1 qcm et voir ses résultats
                 self.button_pre_requis.visible = False
@@ -192,10 +194,12 @@ class Main(MainTemplate):
                 self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
                 self.column_panel_formulaires.visible = True     # Voir les résultats des formulaires de suivi et de stisfaction     
                 self.button_create_qcm.visible = False
-                self.button_create_recherche.visible = True        # faire une recherche     
+                self.button_create_recherche.visible = True        # faire une recherche
+                self.column_panel_events.visible = True            # Saisir et voir les évenemnts
 
-            if self.user["role"] == "J":                    #  JC:    
-                self.outlined_card_pr_qcm.visible = True        # faire 1 qcm et voir ses résultats 
+            if self.user["role"] == "J":                    #  JC:   
+                self.column_panel_bt_mail.visible = True        # se déconnecter
+                self.outlined_card_pr_qcm.visible = False        
                 self.button_pre_requis.visible = False
                 
                 self.outlined_card_formulaires.visible = False  
@@ -205,6 +209,8 @@ class Main(MainTemplate):
                 self.column_panel_formulaires.visible = False      
                 self.button_create_qcm.visible = False
                 self.button_create_recherche.visible = True     # faire une recherche
+                self.column_panel_events.visible = True         # Saisir et voir les évenemnts
+
                 
             if self.user["role"] == "T":                    # Tuteurs MotoN:   Juste Saisie Formulaire de suivi et pré requis
                 self.outlined_card_pr_qcm.visible = True 
@@ -212,8 +218,8 @@ class Main(MainTemplate):
                 self.button_qcm.visible = False
                 
                 self.outlined_card_formulaires.visible = True   
-                self.button_form_suivi_stage.visible = True     # Rentrer le formulaire de suivi de stage du stgiaire BPMotoN
-                self.button_form_satisf.visible = False
+                self.button_form_suivi_stage.visible = True     # Rentrer le formulaire de suivi de stage du stagiaire BPMotoN
+                self.button_form_satisf.visible = False       # Rentrer le formulaire de fin de stage du stagiaire BPMotoN   ?????
                 
                 self.outlined_card_com.visible = False           
 
