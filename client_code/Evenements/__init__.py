@@ -9,6 +9,9 @@ from anvil.tables import app_tables
 from .. import French_zone   #pour afficher la date du jour
 from datetime import datetime
 
+# Change les bt 'apply' en 'Valider' si je veux saisir l'heure en même tps que la date (picktime set à True)
+# VOIR DATE PICKER, SHOW EVENT
+
 # Saisie d'un évenement ou d'un incident 
 #   Pb rencontré: session expired si la saisie est intérrompue 
     # 2 Solutions implémentées:  - Un 'ping' sur le serveur toutes les 5 minutes (300" timer 1) empêche la session d'expirée (sur un ordinateur) 
@@ -28,8 +31,8 @@ class Evenements(EvenementsTemplate):
         liste=self.drop_down_lieux.items[0]
         self.drop_down_lieux.selected_value = liste[1]
 
-        now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
-        date0 = now.date()
+        self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
+        date0 = self.now.date()                     # exraction de la date uniqt 
         self.date_sov = date0.strftime("%Y/%m/%d")
 
         # Test si ouverture en mode Création ou modif (self.to_be_modified_row = None si création)
@@ -37,13 +40,26 @@ class Evenements(EvenementsTemplate):
         if self.to_be_modified_row is None:
             # Creation
             self.id = None
+            self.outlined_card_main.visible = False
         else:
             # Modif à partir du row passé en init par la form Evenements_visu_modif_del
             self.id=self.to_be_modified_row.get_id()
             # initilisation des composants de cette forme par le row passé en init par la form Evenements_visu_modif_del
+
+            #   0123456789
+            # t=2023/01/17
+            t = self.to_be_modified_row["date"]
+            # Extraire l'année, le mois et le jour à partir de la chaîne
+            yy=t[0:4]  # 0 à 4, 4 non inclus
+            mm=t[5:7]
+            dd=t[8:10]
+            # Création de la variable de type date 
+            date1 = datetime(int(yy), int(mm), int(dd))
+            self.date_picker_1.pick_time = True
+            self.date_picker_1.date = date1
+            
             self.drop_down_event.selected_value = self.to_be_modified_row["type_event"]
             self.drop_down_lieux.selected_value = self.to_be_modified_row["lieu"]
-            self.date_picker_1.date = self.to_be_modified_row["date"]
             self.text_area_mot_clef.text = self.to_be_modified_row["mot_clef"]
             self.text_area_notes.text = self.to_be_modified_row["note"]
             self.image_1.source = self.to_be_modified_row["img1"]
@@ -52,14 +68,6 @@ class Evenements(EvenementsTemplate):
             self.flow_panel_lieu_date.visible = True
             self.outlined_card_main.visible = True
             
-            
-        # Change les bt 'apply' en 'Valider' si je veux saisir l'heure en même tps que la date (picktime set à True)
-        from anvil.js.window import document
-        for btn in document.querySelectorAll('.daterangepicker .applyBtn'):
-            btn.textContent = 'Ok'
-        for btn in document.querySelectorAll('.daterangepicker .cancelBtn'):
-            btn.textContent = 'Retour' 
-        
         # Init drop down event (Pour l'instant choix à rentrer pour ne pas perdre les notes si je change le type d'evenmt)
         """
         self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
@@ -67,32 +75,18 @@ class Evenements(EvenementsTemplate):
         """
         
         # Init drop down date avec Date du jour et acquisition de l'heure
-        self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
-        self.date_picker_1.placeholder = self.date_fr(self.now) # fonction date_fr change Sun en Dim ds le place holder
+        t = str(self.now)
+        # Extraire l'année, le mois et le jour à partir de la chaîne
+        yy=t[0:4]  # 0 à 4, 4 non inclus
+        mm=t[5:7]
+        dd=t[8:10]
+        hh=t[11:13]
+        mi=t[14:16]
+        # Création de la variable de type date 
+        date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(mi))
+        self.date_picker_1.pick_time = True
+        self.date_picker_1.date = date1
 
-    def date_picker_1_change(self, **event_args):
-        """This method is called when an item is selected"""  
-        now = self.date_picker_1.date
-        self.date_picker_1.date = None
-        #self.date_picker_1.visible=False  # Efface le component date pour pouvoir afficher le place holder
-        self.date_picker_1.placeholder = self.date_fr(now)
-        self.date_picker_1.visible=True
-        self.text_area_notes.scroll_into_view()
-
-    def date_fr(self, date_en):
-        jours_semaine = { "Mon": "Lun", "Tue": "Mar", "Wed": "Mer", "Thu": "Jeu", "Fri": "Ven", "Sat": "Sam", "Sun": "Dim" }
-        date_format_en = date_en.strftime("%a, %d/%m/%Y")
-
-        # Convertir les abréviations du jour anglaises en françaises
-        jour_en = date_en.strftime("%a")
-        jour_fr = jours_semaine[jour_en]
-        date_format_fr = date_format_en.replace(jour_en, jour_fr)
-        return date_format_fr    
-        
-    def button_annuler_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form("Main", 99)
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -106,20 +100,17 @@ class Evenements(EvenementsTemplate):
             if self.type == "Incident":
                 self.note_for_meeting("incident")
 
-    def drop_down_lieux_change(self, **event_args):
-        """This method is called when an item is selected"""
-        pass
 
     def note_for_meeting(self, type):
-        now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
-        heure = now.time()
+        #now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
+        heure = self.now.time()
         heure = heure.strftime("%H:%M")
-        date0 = now.date()
+        date0 = self.now.date()
         date = date0.strftime("%d/%m/%Y")
         if type == "meeting":
-            self.text_area_notes.text = (f"Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Réunion d'équipe du {date} à {heure}\n\nNotes:\n ")
+            self.text_area_notes.text = (f"Participants : A.C / A.JC / G.J / M.JM / L.C \nObjet : Réunion d'équipe du {date} à {heure}\n\nNotes :\n ")
         if type == "incident":
-            self.text_area_notes.text = (f"Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Incident, date/heure: .........\nPersonnes impliquées : \nNotes:\n ")
+            self.text_area_notes.text = ("Incident,    notes prises par : \nDate de l'incident : \nHeure de l'incident : \nPersonne(s) impliquée(s) : \nTémoins : \nNotes : ")
 
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
@@ -148,9 +139,19 @@ class Evenements(EvenementsTemplate):
                                      )       
         if not result :
             alert("Evenement non sauvegardé !")
-        # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider')
+        # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort !
         if auto_sov is False: 
-            self.button_annuler_click()
+            from ..Main import Main
+            open_form("Main", 99)
+
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        if self.id is not None:   # Une sauvegarde a déjà été effectuée, j'efface cette sauvegarde temporaire
+            result = anvil.server.call("del_event_bt_retour", self.id)
+            if not result :
+                alert("Sauvegarde temporaire non effacée !")    
+        from ..Main import Main
+        open_form("Main", 99)
 
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
@@ -176,7 +177,8 @@ class Evenements(EvenementsTemplate):
             self.image_3.source = file_rezized
             self.button_validation.visible = True
 
-    def date_picker_1_hide(self, **event_args):
+    # POur afficher OK et Retour en FRancais (calendrier)
+    def date_picker_1_show(self, **event_args):
         """This method is called when the DatePicker is removed from the screen"""
         # Change les bt 'apply' en 'Valider'
         from anvil.js.window import document
@@ -194,7 +196,7 @@ class Evenements(EvenementsTemplate):
 
     # Pour lancer une sauvegarde automatique toutes les 30 secondes
     def timer_2_tick(self, **event_args):
-        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        """This method is called Every 30 seconds. Does not trigger if [interval] is 0."""
         # Toutes les 30 secondes, sauvegarde auto, self.id contient l'id du row qui est en cours de saisie
         with anvil.server.no_loading_indicator:
             self.button_validation_click("True",self.id)

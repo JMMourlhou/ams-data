@@ -75,4 +75,19 @@ def del_event(to_be_deleted_event_row):
     if not test:
         result=True
     return result
-    
+
+# =========================================================================================
+# appelé par form Evenements    BT Retour alorsqu'il ya eu sauvegarde
+# Effacement de l'Evenement (Réunion ou Incident)
+# id du row à effacer
+@anvil.server.callable 
+def del_event_bt_retour(id):
+    result=False
+    to_be_deleted_row = app_tables.events.get_by_id(id)
+    to_be_deleted_row.delete()
+
+    #relecture
+    test = app_tables.events.get_by_id(id)
+    if not test:
+        result=True
+    return result

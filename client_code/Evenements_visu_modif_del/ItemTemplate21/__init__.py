@@ -17,7 +17,7 @@ class ItemTemplate21(ItemTemplate21Template):
         self.button_mot_clef.text = self.item['mot_clef']
         self.button_lieu.text = self.item['lieu_text']
 
-    def button_modif_click(self, **event_args):
+    def modif(self, **event_args):
         """This method is called when the button is clicked"""
         id = self.item.get_id()
         row_to_be_modified = app_tables.events.get_by_id(id)
