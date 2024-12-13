@@ -133,6 +133,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.drop_down_num_stages.visible = False
         self.button_recherche.visible = False
         self.button_efface.visible = True
+        self.column_panel_users.visible = False
         self.filtre_type_stage()  
         
     def drop_down_num_stages_change(self, **event_args):
@@ -167,6 +168,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         self.drop_down_num_stages.visible = False
         self.button_recherche.visible = False
         self.button_efface.visible = True
+        self.column_panel_users.visible = False
         self.filtre()
 
     def button_efface_click(self, **event_args):    # # j'efface les critères

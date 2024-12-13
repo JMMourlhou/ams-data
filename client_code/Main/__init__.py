@@ -190,7 +190,7 @@ class Main(MainTemplate):
                 self.outlined_card_com.visible = False           
 
                 self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
-                self.flow_panel_visu_formulaires.visible = True    # Voir les résultats des formulaires de suivi et de stisfaction         
+                self.column_panel_formulaires.visible = True     # Voir les résultats des formulaires de suivi et de stisfaction     
                 self.button_create_qcm.visible = False
                 self.button_create_recherche.visible = True        # faire une recherche     
 
@@ -202,7 +202,7 @@ class Main(MainTemplate):
                 self.outlined_card_com.visible = False           
 
                 self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
-                self.flow_panel_visu_formulaires.visible = False             
+                self.column_panel_formulaires.visible = False      
                 self.button_create_qcm.visible = False
                 self.button_create_recherche.visible = True     # faire une recherche
                 
@@ -217,8 +217,8 @@ class Main(MainTemplate):
                 
                 self.outlined_card_com.visible = False           
 
-                self.outlined_card_niv1.visible = False         
-                self.flow_panel_visu_formulaires.visible = False             
+                self.outlined_card_niv1.visible = False   
+                self.column_panel_formulaires.visible = False          
                 self.button_create_qcm.visible = False
                 self.button_create_recherche.visible = False
 
@@ -228,7 +228,7 @@ class Main(MainTemplate):
                 self.outlined_card_com.visible = True           # évaluer avec sa classe une intervention, voir ses propres résultats
                 
                 self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
-                self.flow_panel_visu_formulaires.visible = False             
+                self.column_panel_formulaires.visible = False           
                 self.button_create_qcm.visible = True           # créer un qcm
                 self.button_create_recherche.visible = True     # rechercher un stagiaire
                 
