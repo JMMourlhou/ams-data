@@ -21,7 +21,7 @@ class ItemTemplate21(ItemTemplate21Template):
         """This method is called when the button is clicked"""
         id = self.item.get_id()
         row_to_be_modified = app_tables.events.get_by_id(id)
-        open_form("Evenements", row_to_be_modified)
+        open_form("Evenements", row_to_be_modified, "modif")  # Mode modif 
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""

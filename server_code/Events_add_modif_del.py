@@ -69,6 +69,7 @@ def del_event(to_be_deleted_event_row):
     result=False
     id=to_be_deleted_event_row.get_id()
     to_be_deleted_event_row.delete()
+    print("effacement du row effectué normalement")
 
     #relecture
     test = app_tables.events.get_by_id(id)
@@ -85,6 +86,7 @@ def del_event_bt_retour(id):
     result=False
     to_be_deleted_row = app_tables.events.get_by_id(id)
     to_be_deleted_row.delete()
+    print("effacement du row temporaire après Bt Retour")
 
     #relecture
     test = app_tables.events.get_by_id(id)

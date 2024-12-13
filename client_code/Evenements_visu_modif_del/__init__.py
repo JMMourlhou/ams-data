@@ -74,7 +74,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
-
         open_form("Main", 99)
 
     def drop_down_event_change(self, **event_args):
@@ -88,9 +87,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
                                             )
             self.repeating_panel_1.items=liste
 
-    def drop_down_lieux_change(self, **event_args):
-        """This method is called when an item is selected"""
-        pass
 
     def note_for_meeting(self, type):
         now = (

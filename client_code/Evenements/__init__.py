@@ -19,11 +19,15 @@ from datetime import datetime
     #                            - Une sauvegarde auto toutes les 30 secondes (timer 2), ce qui permet de ne pas perdre bp de données si expired. 
 
 class Evenements(EvenementsTemplate):
-    def __init__(self, to_be_modified_row=None, **properties):
+    def __init__(self, to_be_modified_row=None, origine="", **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
 
+        # origine n'est pas vide si cette forme a été appelée en modification (click sur une row en Evenements_visu_modif_del)
+        # permet de tester l'origine si BT annuler est cliqué
+        self.origine = origine  
+        
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search(tables.order_by("lieu", ascending=True))]
         for lieu in self.drop_down_lieux.items:
@@ -143,10 +147,11 @@ class Evenements(EvenementsTemplate):
         if auto_sov is False: 
             from ..Main import Main
             open_form("Main", 99)
-
+            
+    # Une sauvegarde a déjà été effectuée, j'efface cette sauvegarde temporaire SI JE VIENS DE CREER CET EVNT (origine="")
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        if self.id is not None:   # Une sauvegarde a déjà été effectuée, j'efface cette sauvegarde temporaire
+        if self.id is not None and self.origine=="":  
             result = anvil.server.call("del_event_bt_retour", self.id)
             if not result :
                 alert("Sauvegarde temporaire non effacée !")    
