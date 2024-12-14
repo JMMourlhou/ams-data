@@ -105,7 +105,7 @@ components:
   - event_bindings: {change: text_area_commentaires_change}
     layout_properties: {grid_position: 'ZSJQNI,GBJTFR'}
     name: text_area_mot_clef
-    properties: {background: 'theme:On Primary Container', font_size: 13, foreground: 'theme:On Primary', height: 40.5771484375, role: outlined, spacing_above: none, spacing_below: none, text: ' ', tooltip: Mot clef}
+    properties: {background: 'theme:Tertiary', font_size: 13, foreground: 'theme:On Primary Container', height: 40.5771484375, role: outlined, spacing_above: none, spacing_below: none, text: ' ', tooltip: Mot clef}
     type: TextArea
   - event_bindings: {change: text_area_commentaires_change}
     layout_properties: {grid_position: 'WDICAX,CCVFLY'}
@@ -139,15 +139,40 @@ components:
     type: Button
   - components:
     - components:
-      - layout_properties: {grid_position: 'NBNQOH,OXHZOE'}
-        name: image_1
-        properties: {background: 'theme:On Primary Container', border: '', border_radius: '', height: 119.23687744140625, role: null}
-        type: Image
-      - event_bindings: {change: file_loader_1_change}
-        layout_properties: {grid_position: 'TRAHUX,QWMIUC'}
-        name: file_loader_1
-        properties: {role: elevated-button, text: Charger 1ere Photo}
-        type: FileLoader
+      - components:
+        - layout_properties: {grid_position: 'DFBJRI,WZGWCZ'}
+          name: image_1
+          properties: {background: 'theme:On Primary Container', border: '', border_radius: '', display_mode: original_size, height: 33.71563720703125, role: null}
+          type: Image
+        - event_bindings: {click: button_rotation_click}
+          layout_properties: {grid_position: 'XREOAI,DQKCYZ'}
+          name: button_rotation_1
+          properties: {font_size: 20, icon: 'fa:rotate-right', text: '', visible: false}
+          type: Button
+        - data_bindings: []
+          event_bindings: {click: button_del_click}
+          layout_properties: {grid_position: 'XREOAI,QZOCWV'}
+          name: button_del_1
+          properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 27, foreground: 'theme:Error', icon: 'fa:remove', icon_align: right, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: false}
+          type: Button
+        - event_bindings: {click: button_visu_click}
+          layout_properties: {grid_position: 'XREOAI,SGIWHN'}
+          name: button_visu_1
+          properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 27, foreground: 'theme:On Primary Container', icon: 'fa:binoculars', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: false}
+          type: Button
+        layout_properties: {grid_position: 'MMIYBF,GRIPLQ'}
+        name: outlined_card_1
+        properties: {role: outlined-card}
+        type: ColumnPanel
+      - components:
+        - event_bindings: {change: file_loader_1_change}
+          name: file_loader_1
+          properties: {role: elevated-button, text: Photo1}
+          type: FileLoader
+        layout_properties: {grid_position: 'WEDDHL,JCTZQH'}
+        name: flow_panel_1
+        properties: {align: center}
+        type: FlowPanel
       layout_properties: {grid_position: 'TGUCUE,HXQZSI'}
       name: outlined_card_3
       properties: {col_spacing: medium, role: elevated-card, wrap_on: never}
@@ -155,12 +180,12 @@ components:
     - components:
       - layout_properties: {grid_position: 'OMOEVP,CKKSVJ'}
         name: image_2
-        properties: {background: 'theme:On Primary Container', height: 117.5604248046875}
+        properties: {background: 'theme:On Primary Container', height: 32.633056640625}
         type: Image
       - event_bindings: {change: file_loader_2_change}
         layout_properties: {grid_position: 'PMTAID,RUFFNL'}
         name: file_loader_2
-        properties: {role: elevated-button, text: Charger 2eme Photo}
+        properties: {role: elevated-button, text: Photo2}
         type: FileLoader
       layout_properties: {grid_position: 'TGUCUE,WGWREM'}
       name: outlined_card_4
@@ -169,12 +194,12 @@ components:
     - components:
       - layout_properties: {grid_position: 'VLHCKO,DANIXR'}
         name: image_3
-        properties: {background: 'theme:On Primary Container', height: 123.39862060546875}
+        properties: {background: 'theme:On Primary Container', height: 30.6422119140625}
         type: Image
       - event_bindings: {change: file_loader_3_change}
         layout_properties: {grid_position: 'NSORFG,XJXSDJ'}
         name: file_loader_3
-        properties: {role: elevated-button, text: Charger 3eme Photo}
+        properties: {role: elevated-button, text: photo3}
         type: FileLoader
       layout_properties: {grid_position: 'TGUCUE,DBSEHN'}
       name: outlined_card_5

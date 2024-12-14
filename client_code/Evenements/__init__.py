@@ -165,6 +165,11 @@ class Evenements(EvenementsTemplate):
             file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
             self.image_1.source = file_rezized
             self.button_validation.visible = True
+            self.file_loader_1.visible = False
+            self.button_rotation_1.visible = True
+            self.button_del_1.visible = True
+            self.button_visu_1.visible = True
+            
 
     def file_loader_2_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
@@ -210,6 +215,10 @@ class Evenements(EvenementsTemplate):
     def nom_img(self,num_img_txt):
         nom_img = self.date_sov+"_"+self.drop_down_event.selected_value+"_"+num_img_txt
         return nom_img
+
+    def button_del_click1(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
 
 
 
