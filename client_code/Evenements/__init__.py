@@ -172,8 +172,10 @@ class Evenements(EvenementsTemplate):
             self.image_1.source = file_rezized
             self.button_validation.visible = True
             self.flow_panel_loader_1.visible = False
-            self.column_panel_trav_sur_img_1.visible = True
-
+            self.button_rotation_1.visible = True
+            self.button_del_1.visible = True
+            self.button_visu_1.visible = True
+            
     def file_loader_2_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
