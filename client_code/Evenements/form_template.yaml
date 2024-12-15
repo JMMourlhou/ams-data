@@ -142,30 +142,30 @@ components:
       - components:
         - layout_properties: {grid_position: 'DFBJRI,WZGWCZ'}
           name: image_1
-          properties: {background: 'theme:On Primary Container', border: '', border_radius: '', display_mode: fill_width, height: 33.71563720703125, role: null}
+          properties: {background: 'theme:On Primary Container', border: 1px solid black, border_radius: '', display_mode: shrink_to_fit, height: 92.761474609375, role: null}
           type: Image
         - components:
-          - event_bindings: {click: button_rotation_click}
+          - event_bindings: {click: button_rotation_1_click}
             layout_properties: {grid_position: 'QTDLTP,STIYWH'}
             name: button_rotation_1
-            properties: {font_size: 20, icon: 'fa:rotate-right', text: '', visible: false}
+            properties: {align: center, font_size: 20, icon: 'fa:rotate-right', text: ' ', visible: true}
             type: Button
           - data_bindings: []
-            event_bindings: {click: button_del_click}
+            event_bindings: {click: button_del_1_click}
             layout_properties: {grid_position: 'QTDLTP,SXCEYY'}
             name: button_del_1
-            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 27, foreground: 'theme:Error', icon: 'fa:remove', icon_align: right, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: false}
+            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 20, foreground: 'theme:Error', icon: 'fa:remove', icon_align: top, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
             type: Button
-          - event_bindings: {click: button_visu_click}
+          - event_bindings: {click: button_visu_1_click}
             layout_properties: {grid_position: 'QTDLTP,NRKEKA'}
             name: button_visu_1
-            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 27, foreground: 'theme:On Primary Container', icon: 'fa:binoculars', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: false}
+            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:binoculars', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
             type: Button
-          layout_properties: {grid_position: 'QFUQBV,UXYLOA'}
+          layout_properties: {grid_position: 'LBHSZS,BTUETK'}
           name: column_panel_trav_sur_img_1
           properties: {wrap_on: never}
           type: ColumnPanel
-        layout_properties: {grid_position: 'MMIYBF,GRIPLQ'}
+        layout_properties: {grid_position: 'GOTYUI,EEUEAK'}
         name: outlined_card_1
         properties: {role: outlined-card}
         type: ColumnPanel
@@ -174,44 +174,106 @@ components:
           name: file_loader_1
           properties: {role: elevated-button, text: Photo1}
           type: FileLoader
-        layout_properties: {grid_position: 'WEDDHL,JCTZQH'}
+        layout_properties: {grid_position: 'UIKGZG,JNORLC'}
         name: flow_panel_loader_1
         properties: {align: center}
         type: FlowPanel
       layout_properties: {grid_position: 'TGUCUE,HXQZSI'}
-      name: outlined_card_3
+      name: outlined_card_img1
       properties: {col_spacing: medium, role: elevated-card, wrap_on: never}
       type: ColumnPanel
     - components:
-      - layout_properties: {grid_position: 'OMOEVP,CKKSVJ'}
-        name: image_2
-        properties: {background: 'theme:On Primary Container', height: -1.55047607421875}
-        type: Image
-      - event_bindings: {change: file_loader_2_change}
-        layout_properties: {grid_position: 'PMTAID,RUFFNL'}
-        name: file_loader_2
-        properties: {role: elevated-button, text: Photo2}
-        type: FileLoader
-      layout_properties: {grid_position: 'TGUCUE,WGWREM'}
-      name: outlined_card_4
-      properties: {role: elevated-card, wrap_on: never}
+      - components:
+        - layout_properties: {grid_position: 'DFBJRI,WZGWCZ'}
+          name: image_2
+          properties: {background: 'theme:On Primary Container', border: 1px solid black, border_radius: '', display_mode: shrink_to_fit, height: 89.60556030273438, role: null}
+          type: Image
+        - components:
+          - event_bindings: {click: button_rotation_2_click}
+            layout_properties: {grid_position: 'QTDLTP,STIYWH'}
+            name: button_rotation_2
+            properties: {font_size: 20, icon: 'fa:rotate-right', text: '', visible: true}
+            type: Button
+          - data_bindings: []
+            event_bindings: {click: button_del_2_click}
+            layout_properties: {grid_position: 'QTDLTP,SXCEYY'}
+            name: button_del_2
+            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 20, foreground: 'theme:Error', icon: 'fa:remove', icon_align: top, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
+            type: Button
+          - event_bindings: {click: button_visu_2_click}
+            layout_properties: {grid_position: 'QTDLTP,NRKEKA'}
+            name: button_visu_2
+            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:binoculars', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
+            type: Button
+          layout_properties: {grid_position: 'QFUQBV,UXYLOA'}
+          name: column_panel_trav_sur_img_2
+          properties: {wrap_on: never}
+          type: ColumnPanel
+        layout_properties: {grid_position: 'MMIYBF,GRIPLQ'}
+        name: outlined_card_2
+        properties: {role: outlined-card}
+        type: ColumnPanel
+      - components:
+        - event_bindings: {change: file_loader_2_change}
+          layout_properties: {}
+          name: file_loader_2
+          properties: {role: elevated-button, text: Photo2}
+          type: FileLoader
+        layout_properties: {grid_position: 'WEDDHL,JCTZQH'}
+        name: flow_panel_loader_2
+        properties: {align: center}
+        type: FlowPanel
+      layout_properties: {grid_position: 'TGUCUE,XFRUFO'}
+      name: outlined_card_img2
+      properties: {col_spacing: medium, role: elevated-card, wrap_on: never}
       type: ColumnPanel
     - components:
-      - layout_properties: {grid_position: 'VLHCKO,DANIXR'}
-        name: image_3
-        properties: {background: 'theme:On Primary Container', height: 3.44952392578125}
-        type: Image
-      - event_bindings: {change: file_loader_3_change}
-        layout_properties: {grid_position: 'NSORFG,XJXSDJ'}
-        name: file_loader_3
-        properties: {role: elevated-button, text: photo3}
-        type: FileLoader
-      layout_properties: {grid_position: 'TGUCUE,DBSEHN'}
-      name: outlined_card_5
-      properties: {role: elevated-card}
+      - components:
+        - layout_properties: {grid_position: 'DFBJRI,WZGWCZ'}
+          name: image_3
+          properties: {background: 'theme:On Primary Container', border: 1px solid black, border_radius: '', display_mode: shrink_to_fit, height: 89.19268798828125, role: null}
+          type: Image
+        - components:
+          - event_bindings: {click: button_rotation_3_click}
+            layout_properties: {grid_position: 'QTDLTP,STIYWH'}
+            name: button_rotation_3
+            properties: {font_size: 20, icon: 'fa:rotate-right', text: '', visible: true}
+            type: Button
+          - data_bindings: []
+            event_bindings: {click: button_del_3_click}
+            layout_properties: {grid_position: 'QTDLTP,SXCEYY'}
+            name: button_del_3
+            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 20, foreground: 'theme:Error', icon: 'fa:remove', icon_align: top, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
+            type: Button
+          - event_bindings: {click: button_visu_3_click}
+            layout_properties: {grid_position: 'QTDLTP,NRKEKA'}
+            name: button_visu_3
+            properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:binoculars', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
+            type: Button
+          layout_properties: {grid_position: 'QFUQBV,UXYLOA'}
+          name: column_panel_trav_sur_img_3
+          properties: {wrap_on: never}
+          type: ColumnPanel
+        layout_properties: {grid_position: 'MMIYBF,GRIPLQ'}
+        name: outlined_card_3
+        properties: {role: outlined-card}
+        type: ColumnPanel
+      - components:
+        - event_bindings: {change: file_loader_3_change}
+          layout_properties: {}
+          name: file_loader_3
+          properties: {role: elevated-button, text: Photo3}
+          type: FileLoader
+        layout_properties: {grid_position: 'WEDDHL,JCTZQH'}
+        name: flow_panel_loader_3
+        properties: {align: center}
+        type: FlowPanel
+      layout_properties: {grid_position: 'TGUCUE,ESJAXT'}
+      name: outlined_card_img3
+      properties: {col_spacing: medium, role: elevated-card, wrap_on: never}
       type: ColumnPanel
     layout_properties: {grid_position: 'YKPNKX,PKHTTG'}
-    name: outlined_card_2
+    name: outlined_card_images
     properties:
       role: elevated-card
       spacing:
