@@ -122,7 +122,7 @@ class Evenements(EvenementsTemplate):
         #self.button_validation_1.visible = True
         self.button_validation_2.visible = True
 
-    # validation:   auto_sov True si sovegarde auto tte les 30"   id est l'id 
+    # validation:   auto_sov True si sauvegarde auto tte les 30"   
     def button_validation_click(self, auto_sov=False, id=None, **event_args):
         """This method is called when the button is clicked"""
         writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
@@ -143,8 +143,14 @@ class Evenements(EvenementsTemplate):
                                      )       
         if not result :
             alert("Evenement non sauvegardé !")
-        # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort !
+        # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort en modifiant le tag sov_incorrecte False ds le row de l'event
         if auto_sov is False: 
+            # sortie normale
+            # modif du sov_incorrecte à False
+
+
+
+            
             from ..Main import Main
             open_form("Main", 99)
             
@@ -165,11 +171,8 @@ class Evenements(EvenementsTemplate):
             file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
             self.image_1.source = file_rezized
             self.button_validation.visible = True
-            self.file_loader_1.visible = False
-            self.button_rotation_1.visible = True
-            self.button_del_1.visible = True
-            self.button_visu_1.visible = True
-            
+            self.flow_panel_loader_1.visible = False
+            self.column_panel_trav_sur_img_1.visible = True
 
     def file_loader_2_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
@@ -216,10 +219,21 @@ class Evenements(EvenementsTemplate):
         nom_img = self.date_sov+"_"+self.drop_down_event.selected_value+"_"+num_img_txt
         return nom_img
 
-    def button_del_click1(self, **event_args):
+    def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        from ..Pre_Visu_img import Pre_Visu_img
+        open_form("Pre_Visu_img", self.image_1.source)
 
+    def button_rotation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        file=self.image_1.source
+        self.image_1.source = anvil.image.rotate(file,90)
+
+    def button_del_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.image_1.source = None
+        self.column_panel_trav_sur_img.visible = False
+        self.flow_panel_loader_1.visible = True
 
 
     
