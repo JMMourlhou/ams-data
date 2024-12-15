@@ -613,7 +613,7 @@ db_schema:
     - admin_ui: {order: 22, width: 200}
       name: suivi_pdf
       type: media
-    - admin_ui: {order: 23, width: 200}
+    - admin_ui: {order: 19.5, width: 200}
       name: display_suivi
       type: bool
     - admin_ui: {order: 18.5, width: 200}
