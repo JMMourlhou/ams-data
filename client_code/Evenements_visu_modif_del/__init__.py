@@ -26,13 +26,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             self.drop_down_event.selected_value = self.type_event
             self.drop_down_event_change()
             
-        # Change les bt 'apply' en 'Valider' si je veux saisir l'heure en même tps que la date (picktime set à True)
-        from anvil.js.window import document
-
-        for btn in document.querySelectorAll(".daterangepicker .applyBtn"):
-            btn.textContent = "Ok"
-        for btn in document.querySelectorAll(".daterangepicker .cancelBtn"):
-            btn.textContent = "Retour"
 
         # Init drop down event (Pour l'instant choix à rentrer pour ne pas perdre les notes si je change le type d'evenmt)
         """
@@ -78,11 +71,17 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
-        # self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
+        # Acquisition du choix d'évenements à afficher
         self.type = self.drop_down_event.selected_value
+        # Acquisition du check box: Affiche les erreurs de sauvegardes
+        visu_des_erreurs = self.check_box_visu_erreurs.checked
+        
+        # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION
+        #   certaines raws viennent de sauvegardes temporaires ttes les 30 sec par forme 'Evenements'
+        #      ( venant de sorties incontrolées par fermetures defen^tres ou appuis sur la touche gauche du tel)
         if self.type == "Réunion" or self.type == "Incident":
-            #self.flow_panel_lieu_date.visible = True
             liste = app_tables.events.search(tables.order_by("date", ascending=False),
+                                            auto_sov=visu_des_erreurs, 
                                             type_event=self.type
                                             )
             self.repeating_panel_1.items=liste
@@ -201,3 +200,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             + num_img_txt
         )
         return nom_img
+
+    def check_box_visu_erreurs_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.drop_down_event_change()

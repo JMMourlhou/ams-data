@@ -23,10 +23,9 @@ class Evenements(EvenementsTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-
+        self.f = get_open_form()
         # origine n'est pas vide si cette forme a été appelée en modification (click sur une row en Evenements_visu_modif_del)
-        
-        # permet de tester l'origine si BT annuler est cliqué
+        #    permet de tester l'origine si BT annuler est cliqué
         self.origine = origine  
         
         # Drop down codes lieux
@@ -181,8 +180,7 @@ class Evenements(EvenementsTemplate):
         # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort en modifiant le tag sov_incorrecte False ds le row de l'event
         if auto_sov is False: 
             # sortie normale
-            from ..Main import Main
-            open_form("Main", 99)
+            open_form(self.f)
             
     # Une sauvegarde a déjà été effectuée, j'efface cette sauvegarde temporaire SI JE VIENS DE CREER CET EVNT (origine="")
     def button_annuler_click(self, **event_args):
@@ -191,8 +189,7 @@ class Evenements(EvenementsTemplate):
             result = anvil.server.call("del_event_bt_retour", self.id)
             if not result :
                 alert("Sauvegarde temporaire non effacée !")    
-        from ..Main import Main
-        open_form("Main", 99)
+        open_form(self.f)
 
     # Image1 en chargement
     def file_loader_1_change(self, file, **event_args):
