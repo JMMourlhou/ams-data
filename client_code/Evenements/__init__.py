@@ -259,7 +259,10 @@ class Evenements(EvenementsTemplate):
         """This method is called Every 30 seconds. Does not trigger if [interval] is 0."""
         # Toutes les 30 secondes, sauvegarde auto, self.id contient l'id du row qui est en cours de saisie
         with anvil.server.no_loading_indicator:
-            if self.button_validation.visible == True:
+            # J'execute la sauvegarde temporaire s'il y a eu un changement
+            # si on visualise l'événement ss le modifier, on ne le sauve pas, ...
+            #    ... ce qui positionnerait son tag 'auto_sov' sur True, et ne serait plus visible 
+            if self.button_validation.visible is True:
                 self.button_validation_click(True,self.id)  # auto sov: TRUE
         
     # Initialisation du préfixe du nom du fichier img 
