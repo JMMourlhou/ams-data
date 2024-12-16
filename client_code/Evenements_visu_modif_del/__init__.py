@@ -218,4 +218,20 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         )
         return nom_img
 
+    def text_box_date_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        liste = app_tables.events.search(tables.order_by("writing_date_time", ascending=False),
+                                        auto_sov=visu_des_erreurs, 
+                                        type_event=type_evenement
+                                        )
+        self.repeating_panel_1.items=liste
+
+    def text_box_mot_clef_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        pass
+
+    def text_box_lieu_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        pass
+
 
