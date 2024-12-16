@@ -55,6 +55,7 @@ class ItemTemplate6(ItemTemplate6Template):
                 self.task_pdf = anvil.server.call('pdf_into_jpg_bgtasked', file, self.new_file_name, self.item['stage_num'], self.item['stagiaire_email'])    
                 self.timer_2.interval=0.5   
         self.file_loader_1.visible = False
+        self.button_rotation.visible = True
             
     def button_visu_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -83,6 +84,7 @@ class ItemTemplate6(ItemTemplate6Template):
             self.file_loader_1.text = "Choisir"
             self.file_loader_1.font_size = 14
             self.file_loader_1.visible = True
+            self.button_rotation.visible = False
         else:
             alert("Pré Requis non enlevé")
 
