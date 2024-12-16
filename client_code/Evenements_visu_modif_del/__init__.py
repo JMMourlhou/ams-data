@@ -220,9 +220,9 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
 
     def text_box_date_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
+        c_date = self.text_box_date.text + "%"            #         nom
         liste = app_tables.events.search(tables.order_by("writing_date_time", ascending=False),
-                                        auto_sov=visu_des_erreurs, 
-                                        type_event=type_evenement
+                                        date=q.ilike(c_date)
                                         )
         self.repeating_panel_1.items=liste
 
@@ -231,7 +231,11 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         pass
 
     def text_box_lieu_focus(self, **event_args):
-        """This method is called when the TextBox gets focus"""
+        """This method is ca c_nom = self.text_box_nom.text + "%"            #         nomlled when the TextBox gets focus"""
         pass
+
+    def text_box_date_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_date_focus()
 
 
