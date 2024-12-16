@@ -19,14 +19,14 @@ from datetime import datetime
     #                            - Une sauvegarde auto toutes les 30 secondes (timer 2), ce qui permet de ne pas perdre bp de données si expired. 
 
 class Evenements(EvenementsTemplate):
-    def __init__(self, to_be_modified_row=None, origine="", **properties):
+    def __init__(self, to_be_modified_row=None, origine="", **properties): 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.f = get_open_form()
         # origine n'est pas vide si cette forme a été appelée en modification (click sur une row en Evenements_visu_modif_del)
         #    permet de tester l'origine si BT annuler est cliqué
-        self.origine = origine  
+        self.origine = origine    # origine = "modif" si viens de Evenements_visu_modif_del
         
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search(tables.order_by("lieu", ascending=True))]
@@ -70,7 +70,16 @@ class Evenements(EvenementsTemplate):
             date1 = datetime(int(yy), int(mm), int(dd))
             self.date_picker_1.pick_time = True
             self.date_picker_1.date = date1
-            self.drop_down_event.selected_value = self.to_be_modified_row["type_event"]
+            
+            type_evnt = self.to_be_modified_row["type_event"]
+            if type_evnt == "réunion":
+                type_evenement = "Nouvelle réunion"
+            elif type_evnt == "incident":
+                type_evenement = "Nouvel incident"
+            else:
+                type_evenement = "Autre évenement"
+            self.drop_down_event.selected_value = type_evenement
+            
             self.drop_down_lieux.selected_value = self.to_be_modified_row["lieu"]
             self.text_area_mot_clef.text = self.to_be_modified_row["mot_clef"]
             self.text_area_notes.text = self.to_be_modified_row["note"]
@@ -129,13 +138,12 @@ class Evenements(EvenementsTemplate):
         """This method is called when an item is selected"""
         #self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
         self.type = self.drop_down_event.selected_value
-        if self.type == "Réunion" or self.type == "Incident":
-            self.flow_panel_lieu_date.visible = True
-            self.outlined_card_main.visible = True
-            if self.type == "Réunion":
-                self.note_for_meeting("meeting")
-            if self.type == "Incident":
-                self.note_for_meeting("incident")
+        self.flow_panel_lieu_date.visible = True
+        self.outlined_card_main.visible = True
+        if self.type == "Nouvelle réunion":
+            self.note_for_meeting("meeting")
+        if self.type == "Nouvel incident":
+            self.note_for_meeting("incident")
 
 
     def note_for_meeting(self, type):
@@ -161,10 +169,19 @@ class Evenements(EvenementsTemplate):
         writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu['lieu']
+        
+        type_evnt = self.drop_down_event.selected_value
+        if type_evnt == "Nouvelle réunion":
+            type_evenement = "réunion"
+        elif type_evnt == "Nouvel incident":
+            type_evenement = "incident"
+        else:
+            type_evenement = "autre"
+            
         result, self.id = anvil.server.call("add_event", 
                                                     self.id,                                  # row id   pour réécrire le row en auto sov tt les 30"
                                                     auto_sov,                                 # False si bt validation utilisé   /   True si sauvegarde auto lancée par timer2, ts les 30 secondes
-                                                    self.drop_down_event.selected_value,      # Type event
+                                                    type_evenement,                           # Type event: réunion, incident, autre
                                                     self.date_sov,                            # date
                                                     row_lieu,                                 # lieu row
                                                     lieu_txt,                                 # lieu en clair
@@ -180,7 +197,15 @@ class Evenements(EvenementsTemplate):
         # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort en modifiant le tag sov_incorrecte False ds le row de l'event
         if auto_sov is False: 
             # sortie normale
-            open_form(self.f)
+            if type_evnt == "Nouvelle réunion":
+                type_evenement = "Voir une réunion"
+            elif type_evnt == "Nouvel incident":
+                type_evenement = "Voir un incident"
+            else:
+                type_evenement = "Voir un autre évenement"
+                
+            from ..Evenements_visu_modif_del import Evenements_visu_modif_del
+            open_form("Evenements_visu_modif_del", type_evenement)
             
     # Une sauvegarde a déjà été effectuée, j'efface cette sauvegarde temporaire SI JE VIENS DE CREER CET EVNT (origine="")
     def button_annuler_click(self, **event_args):
@@ -326,6 +351,8 @@ class Evenements(EvenementsTemplate):
         self.outlined_card_3.visible = False
         self.flow_panel_loader_3.visible = True
         self.file_loader_3.text = "Photo3"
+
+ 
 
 
         

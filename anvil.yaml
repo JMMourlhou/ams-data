@@ -171,7 +171,7 @@ db_schema:
   events:
     client: search
     columns:
-    - admin_ui: {order: 1, width: 89}
+    - admin_ui: {order: 1, width: 131}
       name: type_event
       type: string
     - admin_ui: {order: 2, width: 200}

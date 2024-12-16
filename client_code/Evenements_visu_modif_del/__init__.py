@@ -19,7 +19,8 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.id = None
-        
+        self.data_grid_1.visible = False
+        self.check_box_visu_erreurs.visible = False
         # envoi direct en traitement du drop down evenement si vient d'un effacement d'évenement
         self.type_event = type_evnt
         if self.type_event is not None:
@@ -73,18 +74,34 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         """This method is called when an item is selected"""
         # Acquisition du choix d'évenements à afficher
         self.type = self.drop_down_event.selected_value
+        if self.type == "Nouvel évenement":
+            from ..Evenements import Evenements
+            open_form("Evenements")
         # Acquisition du check box: Affiche les erreurs de sauvegardes
         visu_des_erreurs = self.check_box_visu_erreurs.checked
         
-        # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION
+        # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION (sauf si chechk box visu erreurs Checked )
         #   certaines raws viennent de sauvegardes temporaires ttes les 30 sec par forme 'Evenements'
         #      ( venant de sorties incontrolées par fermetures defen^tres ou appuis sur la touche gauche du tel)
-        if self.type == "Réunion" or self.type == "Incident":
-            liste = app_tables.events.search(tables.order_by("date", ascending=False),
-                                            auto_sov=visu_des_erreurs, 
-                                            type_event=self.type
-                                            )
-            self.repeating_panel_1.items=liste
+            
+        if self.type == "Voir une réunion":
+            type_evenement = "réunion"
+        elif self.type == "Voir un incident":
+            type_evenement = "incident"
+        else:
+            type_evenement = "autre"
+            
+        liste = app_tables.events.search(tables.order_by("writing_date_time", ascending=False),
+                                        auto_sov=visu_des_erreurs, 
+                                        type_event=type_evenement
+                                        )
+        self.repeating_panel_1.items=liste
+        self.check_box_visu_erreurs.visible = True
+        self.data_grid_1.visible = True
+            
+    def check_box_visu_erreurs_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.drop_down_event_change()     
 
 
     def note_for_meeting(self, type):
@@ -201,6 +218,4 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         )
         return nom_img
 
-    def check_box_visu_erreurs_change(self, **event_args):
-        """This method is called when this checkbox is checked or unchecked"""
-        self.drop_down_event_change()
+

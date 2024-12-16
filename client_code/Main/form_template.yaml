@@ -162,21 +162,11 @@ components:
       name: column_panel_formulaires
       properties: {}
       type: ColumnPanel
-    - components: []
-      layout_properties: {grid_position: 'YNNUDJ,KBTTQK'}
-      name: flow_panel_visu_formulaires
-      properties: {align: center}
-      type: FlowPanel
     - components:
-      - event_bindings: {click: button_event_click}
-        layout_properties: {grid_position: 'NUSGHJ,EZZHHW'}
-        name: button_event
-        properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: 'Saisie 1 évenement   ', tooltip: '', underline: false, visible: true}
-        type: Button
       - event_bindings: {click: button_event_visu_click}
         layout_properties: {grid_position: 'NUSGHJ,SEPIDY'}
         name: button_event_visu
-        properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: Visu & Maj Evenements, tooltip: '', underline: false, visible: true}
+        properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: outlined-button, spacing_above: small, spacing_below: small, text: Evenements, tooltip: '', underline: false, visible: true}
         type: Button
       layout_properties: {grid_position: 'SSWAQW,IFZVNG'}
       name: column_panel_events

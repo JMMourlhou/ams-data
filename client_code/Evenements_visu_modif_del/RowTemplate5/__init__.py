@@ -1,4 +1,4 @@
-from ._anvil_designer import ItemTemplate21Template
+from ._anvil_designer import RowTemplate5Template
 from anvil import *
 import anvil.server
 
@@ -6,7 +6,7 @@ import anvil.tables as tables
 from anvil.tables import app_tables
 
 
-class ItemTemplate21(ItemTemplate21Template):
+class RowTemplate5(RowTemplate5Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
@@ -25,6 +25,7 @@ class ItemTemplate21(ItemTemplate21Template):
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
+        type_evnt = self.item["type_event"]
         r=alert("Voulez-vous vraiment effacer cet évenement ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
             result = anvil.server.call("del_event", self.item)
@@ -33,5 +34,12 @@ class ItemTemplate21(ItemTemplate21Template):
                 return
             alert("Effacement effectué !")
         # Récupération du contenu de la drop_down en form appelante
-        type_evnt = self.f.drop_down_event.selected_value
-        open_form("Evenements_visu_modif_del", type_evnt)
+        
+        if type_evnt == "réunion":
+            type_evenement = "Voir une réunion"
+        elif type_evnt == "incident":
+            type_evenement = "Voir un incident"
+        else:
+            type_evenement = "Voir un autre évenement"
+                
+        open_form("Evenements_visu_modif_del", type_evenement)
