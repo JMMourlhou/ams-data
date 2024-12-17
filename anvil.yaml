@@ -193,7 +193,7 @@ db_schema:
     - admin_ui: {order: 7, width: 157}
       name: img3
       type: media
-    - admin_ui: {order: -1, width: 80}
+    - admin_ui: {order: -1, width: 170}
       name: date
       type: string
     - admin_ui: {order: -2, width: 200}

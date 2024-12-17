@@ -37,7 +37,7 @@ class Evenements(EvenementsTemplate):
 
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         date0 = self.now.date()                     # exraction de la date uniqt 
-        self.date_sov = date0.strftime("%Y/%m/%d")
+        #self.date_sov = date0.strftime("%Y/%m/%d")
 
         # Test si ouverture en mode Création ou modif (self.to_be_modified_row = None si création)
         self.to_be_modified_row = to_be_modified_row
@@ -54,9 +54,24 @@ class Evenements(EvenementsTemplate):
             
             self.image_3.source = None
             self.outlined_card_3.visible = False
+
+            # Init drop down date avec Date du jour et acquisition de l'heure
+            t = str(self.now)
+            # Extraire l'année, le mois et le jour à partir de la chaîne
+            yy=t[0:4]  # 0 à 4, 4 non inclus
+            mm=t[5:7]
+            dd=t[8:10]
+            hh=t[11:13]
+            mi=t[14:16]
+            # Création de la variable de type date 
+            date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(mi))
+            self.date_picker_1.pick_time = True
+            self.date_picker_1.date = date1
+            
         else:
             # Modif à partir du row passé en init par la form Evenements_visu_modif_del
             self.id=self.to_be_modified_row.get_id()
+            self.drop_down_event.visible = False
             # initilisation des composants de cette forme par le row passé en init par la form Evenements_visu_modif_del
 
             #   0123456789
@@ -66,8 +81,10 @@ class Evenements(EvenementsTemplate):
             yy=t[0:4]  # 0 à 4, 4 non inclus
             mm=t[5:7]
             dd=t[8:10]
+            hh=t[11:13]
+            min=t[14:16]
             # Création de la variable de type date 
-            date1 = datetime(int(yy), int(mm), int(dd))
+            date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(min))
             self.date_picker_1.pick_time = True
             self.date_picker_1.date = date1
             
@@ -119,20 +136,6 @@ class Evenements(EvenementsTemplate):
         self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
         self.note_for_meeting("meeting")
         """
-        
-        # Init drop down date avec Date du jour et acquisition de l'heure
-        t = str(self.now)
-        # Extraire l'année, le mois et le jour à partir de la chaîne
-        yy=t[0:4]  # 0 à 4, 4 non inclus
-        mm=t[5:7]
-        dd=t[8:10]
-        hh=t[11:13]
-        mi=t[14:16]
-        # Création de la variable de type date 
-        date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(mi))
-        self.date_picker_1.pick_time = True
-        self.date_picker_1.date = date1
-
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -182,11 +185,14 @@ class Evenements(EvenementsTemplate):
         # enlève les espaces à gauche et droite, sinon, erreur en recherche
         mot_k = self.text_area_mot_clef.text
         mot_k =mot_k.strip()   
+        date_sov = str(self.date_picker_1.date)
+        date_sov = date_sov[0:16]
+        date_sov = date_sov.replace("-"," ")
         result, self.id = anvil.server.call("add_event", 
                                                     self.id,                                  # row id   pour réécrire le row en auto sov tt les 15"
                                                     auto_sov,                                 # False si bt validation utilisé   /   True si sauvegarde auto lancée par timer2, ts les 15 secondes
                                                     type_evenement,                           # Type event: réunion, incident, autre
-                                                    self.date_sov,                            # date
+                                                    date_sov,                                 # date
                                                     row_lieu,                                 # lieu row
                                                     lieu_txt,                                 # lieu en clair
                                                     self.text_area_notes.text,                # notes    
@@ -355,6 +361,14 @@ class Evenements(EvenementsTemplate):
         self.outlined_card_3.visible = False
         self.flow_panel_loader_3.visible = True
         self.file_loader_3.text = "Photo3"
+
+    def drop_down_lieux_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.button_validation.visible = True
+
+    def date_picker_1_change(self, **event_args):
+        """This method is called when the selected date changes"""
+        self.button_validation.visible = True
 
  
 
