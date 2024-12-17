@@ -57,7 +57,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         visu_des_erreurs = self.check_box_visu_erreurs.checked
         
         # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION (sauf si chechk box visu erreurs Checked )
-        #   certaines raws viennent de sauvegardes temporaires ttes les 30 sec par forme 'Evenements'
+        #   certaines raws viennent de sauvegardes temporaires ttes les 15 sec par forme 'Evenements'
         #      ( venant de sorties incontrolées par fermetures defen^tres ou appuis sur la touche gauche du tel)
             
         if self.type == "Voir une réunion":
@@ -104,7 +104,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         # self.button_validation_1.visible = True
         self.button_validation_2.visible = True
 
-    # validation:   auto_sov True si sovegarde auto tte les 30"   id est l'id
+    # validation:   auto_sov True si sovegarde auto tte les 15"   id est l'id
     def button_validation_click(self, auto_sov=False, id=None, **event_args):
         """This method is called when the button is clicked"""
         writing_date_time = (
@@ -114,7 +114,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         lieu_txt = row_lieu["lieu"]
         result, self.id = anvil.server.call(
             "add_event",
-            self.id,  # row id   pour réécrire le row en auto sov tt les 30"
+            self.id,  # row id   pour réécrire le row en auto sov tt les 15"
             self.drop_down_event.selected_value,  # Type event
             self.date_sov,  # date
             row_lieu,  # lieu row
@@ -222,7 +222,9 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         """This method is called when the text in this text box is edited"""
         self.text_box_date_focus()
         
-    # ------------------------------------------------------------------  recherche sur mot clef   ! ne fonctionne pas: qd change, aucune row affichée
+    # ------------------------------------------------------------------  recherche sur mot clef 
+    # ERREUR: n'a pas fonctionné car un espace était inséré au début du mot clé (en écriture)
+    # avnt l'écriture du row, Il a fallu faire un strip sur le mot clé pour enlever cet espace !!! 
     def text_box_mot_clef_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
         if self.type == "Voir une réunion":
@@ -231,10 +233,11 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             type_evenement = "incident"
         else:
             type_evenement = "autre"
-            
         self.text_box_date.text = ""
         self.text_box_lieu.text = ""
-        c_mot_clef = self.text_box_mot_clef.text + "%"            #  wildcard search on mot clef
+        
+        c_mot_clef = self.text_box_mot_clef.text
+        c_mot_clef = c_mot_clef + "%"            #  wildcard search on mot clef
         liste = app_tables.events.search(tables.order_by("mot_clef", ascending=True),
                                         mot_clef=q.ilike(c_mot_clef),
                                         type_event=type_evenement
@@ -257,6 +260,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             
         self.text_box_date.text = ""
         self.text_box_mot_clef.text = ""
+        
         c_lieu = self.text_box_lieu.text + "%"            #  wildcard search on date
         liste = app_tables.events.search(tables.order_by("lieu", ascending=True),
                                         lieu_text=q.ilike(c_lieu),
@@ -267,6 +271,8 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     def text_box_lieu_change(self, **event_args):
         """This method is ca c_nom = self.text_box_nom.text + "%"            #         nomlled when the TextBox gets focus"""
         self.text_box_lieu_focus()
+
+ 
 
 
 

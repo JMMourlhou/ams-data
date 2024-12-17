@@ -16,7 +16,7 @@ from datetime import datetime
 #   Pb rencontré: session expired si la saisie est intérrompue 
     # 2 Solutions implémentées:  - Un 'ping' sur le serveur toutes les 5 minutes (300" timer 1) empêche la session d'expirée (sur un ordinateur) 
     #                                mais pas sur un tel qd l'écran s'étteint.  
-    #                            - Une sauvegarde auto toutes les 30 secondes (timer 2), ce qui permet de ne pas perdre bp de données si expired. 
+    #                            - Une sauvegarde auto toutes les 15 secondes (timer 2), ce qui permet de ne pas perdre bp de données si expired. 
 
 class Evenements(EvenementsTemplate):
     def __init__(self, to_be_modified_row=None, origine="", **properties): 
@@ -163,7 +163,7 @@ class Evenements(EvenementsTemplate):
         #self.button_validation_1.visible = True
         self.button_validation_2.visible = True
 
-    # validation:   auto_sov True si sauvegarde auto tte les 30", appelé par timer_2_tick
+    # validation:   auto_sov True si sauvegarde auto tte les 15", appelé par timer_2_tick
     def button_validation_click(self, auto_sov=False, id=None, **event_args):
         """This method is called when the button is clicked"""
         writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
@@ -177,10 +177,14 @@ class Evenements(EvenementsTemplate):
             type_evenement = "incident"
         else:
             type_evenement = "autre"
-            
+        
+        # Il y aura une recherche spéciale (#  wildcard search) sur le 'mot_clef' en Evenements_visu_modif_del 
+        # enlève les espaces à gauche et droite, sinon, erreur en recherche
+        mot_k = self.text_area_mot_clef.text
+        mot_k =mot_k.strip()   
         result, self.id = anvil.server.call("add_event", 
-                                                    self.id,                                  # row id   pour réécrire le row en auto sov tt les 30"
-                                                    auto_sov,                                 # False si bt validation utilisé   /   True si sauvegarde auto lancée par timer2, ts les 30 secondes
+                                                    self.id,                                  # row id   pour réécrire le row en auto sov tt les 15"
+                                                    auto_sov,                                 # False si bt validation utilisé   /   True si sauvegarde auto lancée par timer2, ts les 15 secondes
                                                     type_evenement,                           # Type event: réunion, incident, autre
                                                     self.date_sov,                            # date
                                                     row_lieu,                                 # lieu row
@@ -190,7 +194,7 @@ class Evenements(EvenementsTemplate):
                                                     self.image_2.source,
                                                     self.image_3.source,
                                                     writing_date_time,                        # Date et heure de l'enregistrement
-                                                    self.text_area_mot_clef.text              # Mot clef pour accès rapide en recherche
+                                                    mot_k                                     # Mot clef pour accès rapide en recherche
                                      )       
         if not result :
             alert("Evenement non sauvegardé !")
@@ -279,10 +283,10 @@ class Evenements(EvenementsTemplate):
             result = anvil.server.call("ping")
         print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
 
-    # Pour lancer une sauvegarde automatique toutes les 30 secondes
+    # Pour lancer une sauvegarde automatique toutes les 15 secondes
     def timer_2_tick(self, **event_args):
-        """This method is called Every 30 seconds. Does not trigger if [interval] is 0."""
-        # Toutes les 30 secondes, sauvegarde auto, self.id contient l'id du row qui est en cours de saisie
+        """This method is called Every 15 seconds. Does not trigger if [interval] is 0."""
+        # Toutes les 15 secondes, sauvegarde auto, self.id contient l'id du row qui est en cours de saisie
         with anvil.server.no_loading_indicator:
             # J'execute la sauvegarde temporaire s'il y a eu un changement
             # si on visualise l'événement ss le modifier, on ne le sauve pas, ...
