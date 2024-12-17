@@ -98,6 +98,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         self.repeating_panel_1.items=liste
         self.check_box_visu_erreurs.visible = True
         self.data_grid_1.visible = True
+        self.column_panel_recherche.visible = True
             
     def check_box_visu_erreurs_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
@@ -218,24 +219,40 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         )
         return nom_img
 
+    # ----------------------------------------------------------------  Recherche sur date
     def text_box_date_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        c_date = self.text_box_date.text + "%"            #         nom
+        c_date = self.text_box_date.text + "%"            #  wildcard search on date
         liste = app_tables.events.search(tables.order_by("writing_date_time", ascending=False),
                                         date=q.ilike(c_date)
                                         )
         self.repeating_panel_1.items=liste
 
+    def text_box_date_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.text_box_date_focus()
+        
+    # ------------------------------------------------------------------  recherche sur mot clef
     def text_box_mot_clef_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        pass
+        
+        c_mot_clef = self.text_box_mot_clef.text + "%"            #         mot clef
+        liste = app_tables.events.search(tables.order_by("mot_clef", ascending=True),
+                                        mot_clef=q.ilike(c_mot_clef)
+                                        )
+        self.repeating_panel_1.items=liste
 
+    def text_box_mot_clef_pressed_enter(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.text_box_mot_clef_focus()
+        
+    # ------------------------------------------------------------------  recherche sur lieu
     def text_box_lieu_focus(self, **event_args):
         """This method is ca c_nom = self.text_box_nom.text + "%"            #         nomlled when the TextBox gets focus"""
         pass
 
-    def text_box_date_change(self, **event_args):
-        """This method is called when the text in this text box is edited"""
-        self.text_box_date_focus()
+
+
+ 
 
 
