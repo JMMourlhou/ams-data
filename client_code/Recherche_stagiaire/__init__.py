@@ -46,11 +46,11 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
     def filtre(self):
         liste = []
         # Récupération des critères
-        c_role = self.text_box_role.text + "%"          # critère role
-        c_nom = self.text_box_nom.text + "%"            #         nom
-        c_prenom = self.text_box_prenom.text + "%"      #         prenom
-        c_email = self.text_box_email.text + "%"        #         email
-        c_tel = self.text_box_tel.text + "%"            #         tel
+        c_role = self.text_box_role.text + "%"          #  wildcard, critère role
+        c_nom = self.text_box_nom.text + "%"            #            nom
+        c_prenom = self.text_box_prenom.text + "%"      #            prenom
+        c_email = self.text_box_email.text + "%"        #            email
+        c_tel = self.text_box_tel.text + "%"            #            tel
         
         # Nom    
         if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :

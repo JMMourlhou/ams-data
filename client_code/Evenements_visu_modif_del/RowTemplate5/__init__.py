@@ -12,7 +12,7 @@ class RowTemplate5(RowTemplate5Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.f = get_open_form()   # Récup du nom de la forme mère
+        #self.f = get_open_form()   # Récup du nom de la forme mère
         self.button_date.text = self.item['date']
         self.button_mot_clef.text = self.item['mot_clef']
         self.button_lieu.text = self.item['lieu_text']
@@ -33,8 +33,8 @@ class RowTemplate5(RowTemplate5Template):
                 alert("ERREUR, Effacement non effectué !")
                 return
             alert("Effacement effectué !")
+            
         # Récupération du contenu de la drop_down en form appelante
-        
         if type_evnt == "réunion":
             type_evenement = "Voir une réunion"
         elif type_evnt == "incident":

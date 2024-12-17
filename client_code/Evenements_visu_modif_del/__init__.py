@@ -36,34 +36,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
 
         # acquisition de l'heure
         self.now = (French_zone.french_zone_time())  # now est le jour/h actuelle (datetime object)
-    
 
-    def date_picker_1_change(self, **event_args):
-        """This method is called when an item is selected"""
-        now = self.date_picker_1.date
-        self.date_picker_1.date = None
-        # self.date_picker_1.visible=False  # Efface le component date pour pouvoir afficher le place holder
-        self.date_picker_1.placeholder = self.date_fr(now)
-        self.date_picker_1.visible = True
-        self.text_area_notes.scroll_into_view()
-
-    def date_fr(self, date_en):
-        jours_semaine = {
-            "Mon": "Lun",
-            "Tue": "Mar",
-            "Wed": "Mer",
-            "Thu": "Jeu",
-            "Fri": "Ven",
-            "Sat": "Sam",
-            "Sun": "Dim",
-        }
-        date_format_en = date_en.strftime("%a, %d/%m/%Y")
-
-        # Convertir les abréviations du jour anglaises en françaises
-        jour_en = date_en.strftime("%a")
-        jour_fr = jours_semaine[jour_en]
-        date_format_fr = date_format_en.replace(jour_en, jour_fr)
-        return date_format_fr
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -74,6 +47,9 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         """This method is called when an item is selected"""
         # Acquisition du choix d'évenements à afficher
         self.type = self.drop_down_event.selected_value
+        self.text_box_date.text = ""
+        self.text_box_lieu.text = ""
+        self.text_box_mot_clef.text = ""
         if self.type == "Nouvel évenement":
             from ..Evenements import Evenements
             open_form("Evenements")
@@ -102,6 +78,9 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             
     def check_box_visu_erreurs_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        self.text_box_date.text = ""
+        self.text_box_lieu.text = ""
+        self.text_box_mot_clef.text = ""
         self.drop_down_event_change()     
 
 
@@ -207,7 +186,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             f"ping on server to prevent 'session expired' every 5 min, server answer:{result}"
         )
 
-
+    """
     # Initialisation du préfixe du nom du fichier img
     def nom_img(self, num_img_txt):
         nom_img = (
@@ -218,13 +197,24 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             + num_img_txt
         )
         return nom_img
-
+    """
+    
     # ----------------------------------------------------------------  Recherche sur date
     def text_box_date_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
+        
+        if self.type == "Voir une réunion":
+            type_evenement = "réunion"
+        elif self.type == "Voir un incident":
+            type_evenement = "incident"
+        else:
+            type_evenement = "autre"
+        self.text_box_mot_clef.text = ""
+        self.text_box_lieu.text = ""
         c_date = self.text_box_date.text + "%"            #  wildcard search on date
         liste = app_tables.events.search(tables.order_by("writing_date_time", ascending=False),
-                                        date=q.ilike(c_date)
+                                        date=q.ilike(c_date),
+                                        type_event=type_evenement
                                         )
         self.repeating_panel_1.items=liste
 
@@ -232,24 +222,51 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         """This method is called when the text in this text box is edited"""
         self.text_box_date_focus()
         
-    # ------------------------------------------------------------------  recherche sur mot clef
+    # ------------------------------------------------------------------  recherche sur mot clef   ! ne fonctionne pas: qd change, aucune row affichée
     def text_box_mot_clef_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        
-        c_mot_clef = self.text_box_mot_clef.text + "%"            #         mot clef
+        if self.type == "Voir une réunion":
+            type_evenement = "réunion"
+        elif self.type == "Voir un incident":
+            type_evenement = "incident"
+        else:
+            type_evenement = "autre"
+            
+        self.text_box_date.text = ""
+        self.text_box_lieu.text = ""
+        c_mot_clef = self.text_box_mot_clef.text + "%"            #  wildcard search on mot clef
         liste = app_tables.events.search(tables.order_by("mot_clef", ascending=True),
-                                        mot_clef=q.ilike(c_mot_clef)
+                                        mot_clef=q.ilike(c_mot_clef),
+                                        type_event=type_evenement
                                         )
         self.repeating_panel_1.items=liste
+    
+    def text_box_mot_clef_change(self, **event_args):
+       self.text_box_mot_clef_focus()
 
-    def text_box_mot_clef_pressed_enter(self, **event_args):
-        """This method is called when the user presses Enter in this text box"""
-        self.text_box_mot_clef_focus()
-        
+    
     # ------------------------------------------------------------------  recherche sur lieu
     def text_box_lieu_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        if self.type == "Voir une réunion":
+            type_evenement = "réunion"
+        elif self.type == "Voir un incident":
+            type_evenement = "incident"
+        else:
+            type_evenement = "autre"
+            
+        self.text_box_date.text = ""
+        self.text_box_mot_clef.text = ""
+        c_lieu = self.text_box_lieu.text + "%"            #  wildcard search on date
+        liste = app_tables.events.search(tables.order_by("lieu", ascending=True),
+                                        lieu_text=q.ilike(c_lieu),
+                                        type_event=type_evenement
+                                        )
+        self.repeating_panel_1.items=liste
+    
+    def text_box_lieu_change(self, **event_args):
         """This method is ca c_nom = self.text_box_nom.text + "%"            #         nomlled when the TextBox gets focus"""
-        pass
+        self.text_box_lieu_focus()
 
 
 
