@@ -51,10 +51,21 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         c_prenom = self.text_box_prenom.text + "%"      #            prenom
         c_email = self.text_box_email.text + "%"        #            email
         c_tel = self.text_box_tel.text + "%"            #            tel
-        
+
+        from ..import French_zone
+        start = French_zone.french_zone_time()
         # Nom    
         if self.text_box_nom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :
-            liste = anvil.server.call("search_on_name_only", c_nom)
+            #liste = anvil.server.call("search_on_name_only", c_nom)
+            
+            liste = app_tables.users.search(
+                                        q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("nom", ascending=True),
+                                        nom    = q.ilike(c_nom),    # ET
+                                    )
+            
+            end = French_zone.french_zone_time()
+            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ tps écoulé", end-start)
         # Prénom
         if self.text_box_prenom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_role.text == "":   
             liste = anvil.server.call("search_on_prenom_only", c_prenom)
@@ -76,6 +87,7 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
         # Mail
         if self.text_box_email.text != "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
             liste = anvil.server.call("search_on_email_only", c_email)
+            
         self.label_titre.text = str(len(liste))+" résultats"
         self.repeating_panel_1.items = liste
 
