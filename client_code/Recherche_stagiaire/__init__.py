@@ -68,26 +68,70 @@ class Recherche_stagiaire(Recherche_stagiaireTemplate):
             print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ tps écoulé", end-start)
         # Prénom
         if self.text_box_prenom.text != "" and self.text_box_email.text == "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_role.text == "":   
-            liste = anvil.server.call("search_on_prenom_only", c_prenom)
+            liste = app_tables.users.search(
+                                        q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("nom", ascending=True),
+                                       
+                                        prenom    = q.ilike(c_prenom),    # ET
+                                    )
         # Role
         if self.text_box_role.text != "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" :   
-            liste = anvil.server.call("search_on_role_only", c_role)
+            liste = app_tables.users.search(
+                                        q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("nom", ascending=True),
+                                            role   = q.ilike(c_role)
+                                    )
         # Role & Nom
         if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text == "" :   
-            liste = anvil.server.call("search_on_role_nom", c_role, c_nom)
+            #liste = anvil.server.call("search_on_role_nom", c_role, c_nom)
+            liste = app_tables.users.search(    q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("nom", ascending=True),
+                                        q.all_of                  # all of queries must match
+                                        (
+                                            role   = q.ilike(c_role),   # ET
+                                            nom    = q.ilike(c_nom)   
+                                        )
+                                    )
         # Nom & Prénom
         if self.text_box_role.text == "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
-            liste = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)        
+            #liste = anvil.server.call("search_on_nom_prenom", c_nom, c_prenom)        
+            liste = app_tables.users.search(    q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("nom", ascending=True),
+                                        q.all_of                  # all of queries must match
+                                        (
+                                            prenom   = q.ilike(c_prenom),   # ET
+                                            nom    = q.ilike(c_nom)   
+                                        )
+                                    )
+            
         # Role & Nom & Prénom
         if self.text_box_role.text != "" and self.text_box_nom.text != "" and self.text_box_prenom.text != "" :   
-            liste = anvil.server.call("search_on_role_nom_prenom", c_role, c_nom, c_prenom)        
+            #liste = anvil.server.call("search_on_role_nom_prenom", c_role, c_nom, c_prenom)        
+            liste = app_tables.users.search(    q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("nom", ascending=True),
+                                        q.all_of                  # all of queries must match
+                                        (
+                                            role   = q.ilike(c_role),   # ET
+                                            prenom   = q.ilike(c_prenom),   # ET
+                                            nom    = q.ilike(c_nom)   
+                                        )
+                                    )
         # Tel
         if self.text_box_tel.text != "" and self.text_box_email.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
-            liste = anvil.server.call("search_on_tel_only", c_tel)
+            #liste = anvil.server.call("search_on_tel_only", c_tel)
+            liste = app_tables.users.search(
+                                        q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("tel", ascending=True),
+                                        tel   = q.ilike(c_tel)
+                                    )
         # Mail
         if self.text_box_email.text != "" and self.text_box_tel.text == "" and self.text_box_nom.text == "" and self.text_box_prenom.text == "" and self.text_box_role.text == "" :  
-            liste = anvil.server.call("search_on_email_only", c_email)
-            
+            #liste = anvil.server.call("search_on_email_only", c_email)
+            liste = app_tables.users.search(
+                                        q.fetch_only("nom","prenom","email","tel","role"),
+                                        tables.order_by("email", ascending=True),
+                                        email   = q.ilike(c_email)
+                                    )
         self.label_titre.text = str(len(liste))+" résultats"
         self.repeating_panel_1.items = liste
 
