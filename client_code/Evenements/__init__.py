@@ -36,9 +36,8 @@ class Evenements(EvenementsTemplate):
         self.drop_down_lieux.selected_value = liste[1]
 
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
-        date0 = self.now.date()                     # exraction de la date uniqt 
-        #self.date_sov = date0.strftime("%Y/%m/%d")
-
+        self.date_sov = self.now.strftime("%Y_%m_%d %H_%M")            # exraction de la AAAA_MM_JJ hh_mm pour nom fichier image
+        
         # Test si ouverture en mode Création ou modif (self.to_be_modified_row = None si création)
         self.to_be_modified_row = to_be_modified_row
         if self.to_be_modified_row is None:
