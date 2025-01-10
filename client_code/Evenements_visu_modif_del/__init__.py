@@ -47,11 +47,9 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             from ..Evenements import Evenements
             open_form("Evenements")
             
-        if self.type == "Voir une réunion":
-            type_evenement = self.choix_selon_type_event()  # appel fonction en bas du script
-            self.test_non_valid(type_evenement)
+        type_evenement = self.choix_selon_type_event()  # appel fonction en bas du script
+        self.test_non_valid(type_evenement)  # affiche en rouge le check box erreur de validation 
             
-                
         # Acquisition du check box: Affiche les erreurs de sauvegardes
         visu_des_erreurs = self.check_box_visu_erreurs.checked
         # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION (sauf si chechk box visu erreurs Checked )
@@ -231,9 +229,16 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             type_evenement = "incident"
         else:
             type_evenement = "entretien"
-        return type_evenementst_
+        return type_evenement
 
-    de
+    # Affiche en rouge self.check_box_visu_erreurs si un ou plusieurs rows sont non validées
+    def test_non_valid(self, type_evenement):
+        liste_rows_non_valide = app_tables.events.search(
+                                                        auto_sov=True, 
+                                                        type_event=type_evenement
+                                                        )
+        if len(liste_rows_non_valide)>0:
+            self.check_box_visu_erreurs.background = "theme:Error"
 
    
 

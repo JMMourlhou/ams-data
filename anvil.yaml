@@ -716,7 +716,7 @@ db_schema:
       name: financement
       target: mode_financement
       type: link_single
-    - admin_ui: {width: 704}
+    - admin_ui: {order: 5, width: 829}
       name: droits_stagiaire_qcms
       type: simpleObject
     - admin_ui: {width: 200}
@@ -734,6 +734,11 @@ db_schema:
       type: media
     server: full
     title: Stagiaires_inscrits
+  table_25:
+    client: none
+    columns: []
+    server: full
+    title: Table 25
   temp:
     client: full
     columns:
