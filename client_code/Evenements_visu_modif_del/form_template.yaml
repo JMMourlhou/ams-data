@@ -41,7 +41,7 @@ components:
         foreground: theme:On Primary
         include_placeholder: true
         italic: false
-        items: [Nouvel évenement, Voir une réunion, Voir un incident, Voir un entretien individuel]
+        items: []
         margin: [null, '0', null, null]
         placeholder: Que voulez vous faire ?
         role: null

@@ -28,7 +28,14 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             self.drop_down_event_change()
         # acquisition de l'heure
         self.now = (French_zone.french_zone_time())  # now est le jour/h actuelle (datetime object)
-
+        
+        # initilisation Drop down codes type évenements
+        liste_event = []
+        for r in app_tables.event_types.search(tables.order_by("code", ascending=True)):
+            liste_event.append((r['msg_1'],r))   # on prend tous les msg: nouvel evnt, voir ...
+        self.drop_down_event.items = liste_event
+        for type in self.drop_down_event.items:
+            print(type, type[0], type[1])
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -42,8 +49,8 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         self.text_box_lieu.text = ""
         self.text_box_mot_clef.text = ""
         
-        self.type = self.drop_down_event.selected_value
-        if self.type == "Nouvel évenement":
+        self.type = self.drop_down_event.selected_value   
+        if self.type['code'] == 0:                        # choix "Nouvel évenemnt"
             from ..Evenements import Evenements
             open_form("Evenements")
             

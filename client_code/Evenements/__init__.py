@@ -35,6 +35,16 @@ class Evenements(EvenementsTemplate):
         liste=self.drop_down_lieux.items[0]
         self.drop_down_lieux.selected_value = liste[1]
 
+        # Drop down codes type évenements
+        liste_event = []
+        for r in app_tables.event_types.search(tables.order_by("code", ascending=True)):
+            if r['code'] != 0:                          # on ne prend pas le code 0 qui est le row "nouvel évenement"
+                liste_event.append((r['msg_0'],r))      # on ajoute le msg "nouvel ..."
+        self.drop_down_event.items = liste_event
+        for type in self.drop_down_event.items:
+            print(type, type[0], type[1])
+       
+
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         self.date_sov = self.now.strftime("%Y_%m_%d %H_%M")            # exraction de la AAAA_MM_JJ hh_mm pour nom fichier image
         
