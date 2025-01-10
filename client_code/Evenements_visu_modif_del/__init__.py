@@ -12,19 +12,19 @@ from .. import French_zone  # pour afficher la date du jour
 from datetime import datetime
 
 # Visu, Modif, Del d'un évenement ou d'un incident
-# type_evnt permet de réafficher les évenemnts après un effact d'un evnt (type_evnt != None)
+# type_evnt = ROW de table Event_types permet de réafficher les évenemnts après un effact d'un evnt (type_evnt != None)
 class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
-    def __init__(self, type_evnt=None ,**properties):
+    def __init__(self, type_evnt_row=None ,**properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.id = None
         self.data_grid_1.visible = False
         self.check_box_visu_erreurs.visible = False
-        # envoi direct en traitement du drop down evenement si vient d'un effacement d'évenement
-        self.type_event = type_evnt
-        if self.type_event is not None:
-            self.drop_down_event.selected_value = self.type_event
+        
+        # envoi direct en traitement du drop down evenement si vient d'un effacement ou modif d'évenement
+        if type_evnt_row is not None:
+            self.drop_down_event.selected_value = type_evnt_row
             self.drop_down_event_change()
         # acquisition de l'heure
         self.now = (French_zone.french_zone_time())  # now est le jour/h actuelle (datetime object)
@@ -49,12 +49,14 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         self.text_box_lieu.text = ""
         self.text_box_mot_clef.text = ""
         
-        self.type = self.drop_down_event.selected_value   
-        if self.type['code'] == 0:                        # choix "Nouvel évenemnt"
+        self.type_row = self.drop_down_event.selected_value   
+        # CREATION D'UN NOUVEL EVENEMNT "Nouvel évenemnt"
+        if self.type_row['code'] == 0:                        
             from ..Evenements import Evenements
             open_form("Evenements")
             
-        type_evenement = self.choix_selon_type_event()  # appel fonction en bas du script
+        # VOIR UN EVENEMNT    
+        type_evenement = self.type_row['type']
         self.test_non_valid(type_evenement)  # affiche en rouge le check box erreur de validation 
             
         # Acquisition du check box: Affiche les erreurs de sauvegardes
@@ -62,7 +64,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION (sauf si chechk box visu erreurs Checked )
         #   certaines raws viennent de sauvegardes temporaires ttes les 15 sec par forme 'Evenements'
         #      ( venant de sorties incontrolées par fermetures defenêtres ou appuis sur la touche gauche du tel)
-        type_evenement = self.choix_selon_type_event()  # appel fonction en bas du script
         liste = app_tables.events.search(tables.order_by("date", ascending=False),
                                         auto_sov=visu_des_erreurs, 
                                         type_event=type_evenement
@@ -89,9 +90,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     # validation:   auto_sov True si sovegarde auto tte les 15"   id est l'id
     def button_validation_click(self, auto_sov=False, id=None, **event_args):
         """This method is called when the button is clicked"""
-        writing_date_time = (
-            French_zone.french_zone_time()
-        )  # now est le jour/h actuelle (datetime object)
+        writing_date_time = (French_zone.french_zone_time())  # now est le jour/h actuelle (datetime object)
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu["lieu"]
         result, self.id = anvil.server.call(
@@ -172,7 +171,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     # ----------------------------------------------------------------  Recherche sur date
     def text_box_date_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        type_evenement = self.choix_selon_type_event()    # appel fonction en bas du script
+        type_evenement = self.type_row['type']
         
         self.text_box_mot_clef.text = ""
         self.text_box_lieu.text = ""
@@ -192,7 +191,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     # avnt l'écriture du row, Il a fallu faire un strip sur le mot clé pour enlever cet espace !!! 
     def text_box_mot_clef_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        type_evenement = self.choix_selon_type_event()       # appel fonction en bas du script
+        type_evenement = self.type_row['type']
         
         self.text_box_date.text = ""
         self.text_box_lieu.text = ""
@@ -212,7 +211,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     # ------------------------------------------------------------------  recherche sur lieu
     def text_box_lieu_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        type_evenement = self.choix_selon_type_event()     # appel fonction en bas du script
+        type_evenement = self.type_row['type']
             
         self.text_box_date.text = ""
         self.text_box_mot_clef.text = ""
@@ -228,15 +227,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         """This method is ca c_nom = self.text_box_nom.text + "%"            #         nomlled when the TextBox gets focus"""
         self.text_box_lieu_focus()
 
-    # Foction appellée 4 fois: En fonction du choix d'évenemnt du drop down, j'initilise la variable type_evenemnt (recherches sur date, mot_clef, lieu)
-    def choix_selon_type_event(self):
-        if self.type == "Voir une réunion":
-            type_evenement = "réunion"
-        elif self.type == "Voir un incident":
-            type_evenement = "incident"
-        else:
-            type_evenement = "entretien"
-        return type_evenement
 
     # Affiche en rouge self.check_box_visu_erreurs si un ou plusieurs rows sont non validées
     def test_non_valid(self, type_evenement):

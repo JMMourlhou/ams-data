@@ -35,11 +35,7 @@ class RowTemplate5(RowTemplate5Template):
             alert("Effacement effectué !")
             
         # Récupération du contenu de la drop_down en form appelante
-        if type_evnt == "réunion":
-            type_evenement = "Voir une réunion"
-        elif type_evnt == "incident":
-            type_evenement = "Voir un incident"
-        else:
-            type_evenement = "Voir un entretien individuel"
-                
-        open_form("Evenements_visu_modif_del", type_evenement)
+        # renvoyer le type d'évenemnt actuel: creation 
+        row = app_tables.event_types.get(type=type_evnt)
+        from .. import Evenements_visu_modif_del
+        open_form("Evenements_visu_modif_del", row)

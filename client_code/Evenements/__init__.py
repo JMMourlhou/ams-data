@@ -48,10 +48,11 @@ class Evenements(EvenementsTemplate):
         self.now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         self.date_sov = self.now.strftime("%Y_%m_%d %H_%M")            # exraction de la AAAA_MM_JJ hh_mm pour nom fichier image
         
-        # Test si ouverture en mode Création ou modif (self.to_be_modified_row = None si création)
+        # Test si ouverture en mode Création ou modif (self.to_be_modified_row = None si création)  Initialisé en init
         self.to_be_modified_row = to_be_modified_row
         if self.to_be_modified_row is None:
             # Creation
+            self.mode = "creation"
             self.id = None
             self.text_area_mot_clef.text = ""
             self.outlined_card_main.visible = False
@@ -79,7 +80,7 @@ class Evenements(EvenementsTemplate):
             self.date_picker_1.date = date1
         else:
             # Modif à partir du row passé en init par la form Evenements_visu_modif_del
-
+            self.mode = "modif"
             # Test si ce row n'avait pas été validé
             if self.to_be_modified_row["auto_sov"] is True:
                 alert("Cet évenemnt n'avait pas été validé.\n Vous pouvez maintenant achever sa saisie ou le Valider directement.")
@@ -104,14 +105,7 @@ class Evenements(EvenementsTemplate):
             self.date_picker_1.pick_time = True
             self.date_picker_1.date = date1
             
-            type_evnt = self.to_be_modified_row["type_event"]
-            if type_evnt == "réunion":
-                type_evenement = "Nouvelle réunion"
-            elif type_evnt == "incident":
-                type_evenement = "Nouvel incident"
-            else:
-                type_evenement = "Nouvel entretien individuel"
-            
+            type_evenement = self.to_be_modified_row["type_event"]
             self.drop_down_event.selected_value = type_evenement
             
             self.drop_down_lieux.selected_value = self.to_be_modified_row["lieu"]
@@ -157,23 +151,20 @@ class Evenements(EvenementsTemplate):
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
         #self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
-        self.type = self.drop_down_event.selected_value
+        self.type_row = self.drop_down_event.selected_value   # row du type d'évenemnts
         self.flow_panel_lieu_date.visible = True
         self.outlined_card_main.visible = True
-        if self.type == "Nouvelle réunion":
-            self.note_for_meeting("meeting")
-        if self.type == "Nouvel incident":
-            self.note_for_meeting("incident")
-        if self.type == "Nouvel entretien individuel":
-            self.note_for_meeting("entretien")
-
-    def note_for_meeting(self, type):
-        #now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         heure = self.now.time()
         heure = heure.strftime("%H:%M")
         date0 = self.now.date()
         date = date0.strftime("%d/%m/%Y")
-        if type == "meeting":
+        self.text_area_notes.text = self.type_row['text_initial']  # col text_initial table Event_types
+        self.text_area_mot_clef.text = ""
+        if self.type_row['mot_clef_setup'] is True:
+            self.text_area_mot_clef.text = f"Réunion du {date}"
+        
+        """
+        if type == "reunion":
             self.text_area_mot_clef.text = f"Réunion du {date}"
             self.text_area_notes.text = (f"Participants : A.C / A.JC / G.J / M.JM / L.C \nObjet : Réunion d'équipe du {date} à {heure}\n\nNotes :\n ")
         if type == "incident":
@@ -182,7 +173,8 @@ class Evenements(EvenementsTemplate):
         if type == "entretien":
             self.text_area_mot_clef.text = ""
             self.text_area_notes.text = (f"Entretien individuel,    notes prises par : A.C / A.JC \nDate de l'entretien : {date} à {heure} \n\nPoints positifs du stagiaire : \n\nPoints à améliorer : \n\nPoint de vue du stagiaire sur le contenu de la formation : \n\nPoint de vue du stagiaire sur son stage en structure : \n\nParcours individuel proposé afin de l'amener vers la réussite : \n\nDivers :")
-            
+        """
+        
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
@@ -201,15 +193,15 @@ class Evenements(EvenementsTemplate):
         writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu['lieu']
+
+        if self.mode=="creation":
+            type_row = self.drop_down_event.selected_value
+            type_evenement = type_row["type"]   # reunion/entretien/incident ...
         
-        type_evnt = self.drop_down_event.selected_value
-        if type_evnt == "Nouvelle réunion":
-            type_evenement = "réunion"
-        elif type_evnt == "Nouvel incident":
-            type_evenement = "incident"
-        else:
-            type_evenement = "autre"
-        
+        if self.mode=="modif":
+            type_evenement = self.to_be_modified_row["type_event"]
+            
+        row = app_tables.event_types.get(type=type_evenement)
         # Il y aura une recherche spéciale (#  wildcard search) sur le 'mot_clef' en Evenements_visu_modif_del 
         # enlève les espaces à gauche et droite, sinon, erreur en recherche
         mot_k = self.text_area_mot_clef.text
@@ -221,6 +213,7 @@ class Evenements(EvenementsTemplate):
                                                     self.id,                                  # row id   pour réécrire le row en auto sov tt les 15"
                                                     auto_sov,                                 # False si bt validation utilisé   /   True si sauvegarde auto lancée par timer2, ts les 15 secondes
                                                     type_evenement,                           # Type event: réunion, incident, entretien
+                                                    row,                                      # link avec table event_types
                                                     date_sov,                                 # date
                                                     row_lieu,                                 # lieu row
                                                     lieu_txt,                                 # lieu en clair
@@ -236,16 +229,10 @@ class Evenements(EvenementsTemplate):
             
         # si la sauvegarde a été effectuée en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort en renvoyant le type d'évenemnt pour initiliser la drop down
         if auto_sov is False: 
-            # sortie normale
-            if type_evnt == "Nouvelle réunion":
-                type_evenement = "Voir une réunion"
-            elif type_evnt == "Nouvel incident":
-                type_evenement = "Voir un incident"
-            else:
-                type_evenement = "Voir un entretien individuel"
-                
+            # sortie normale 
+            # renvoyer le type d'évenemnt actuel: row event_types
             from ..Evenements_visu_modif_del import Evenements_visu_modif_del
-            open_form("Evenements_visu_modif_del", type_evenement)
+            open_form("Evenements_visu_modif_del", row)
             
     # Une sauvegarde a déjà été effectuée, j'efface cette sauvegarde temporaire SI JE VIENS DE CREER CET EVNT (origine="")
     def button_annuler_click(self, **event_args):

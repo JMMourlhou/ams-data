@@ -183,9 +183,12 @@ db_schema:
     - admin_ui: {order: 0.5, width: 200}
       name: msg_0
       type: string
-    - admin_ui: {order: -1, width: 120}
+    - admin_ui: {order: 0.25, width: 64}
       name: code
       type: number
+    - admin_ui: {order: 3, width: 200}
+      name: mot_clef_setup
+      type: bool
     server: full
     title: Event_types
   events:
@@ -225,6 +228,10 @@ db_schema:
     - admin_ui: {order: -3, width: 126}
       name: auto_sov
       type: bool
+    - admin_ui: {order: 1.25, width: 146}
+      name: event_typ
+      target: event_types
+      type: link_single
     server: full
     title: Events
   files:
