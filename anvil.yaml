@@ -168,6 +168,23 @@ db_schema:
       type: number
     server: full
     title: Cpt_stages
+  event_types:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: type
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: msg_1
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: text_initial
+      type: string
+    - admin_ui: {order: 0.5, width: 200}
+      name: msg_0
+      type: string
+    server: full
+    title: Event_types
   events:
     client: search
     columns:
@@ -734,11 +751,6 @@ db_schema:
       type: media
     server: full
     title: Stagiaires_inscrits
-  table_25:
-    client: none
-    columns: []
-    server: full
-    title: Table 25
   temp:
     client: full
     columns:
