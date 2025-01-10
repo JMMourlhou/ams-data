@@ -38,21 +38,26 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
         # Acquisition du choix d'évenements à afficher
-        self.type = self.drop_down_event.selected_value
         self.text_box_date.text = ""
         self.text_box_lieu.text = ""
         self.text_box_mot_clef.text = ""
+        
+        self.type = self.drop_down_event.selected_value
         if self.type == "Nouvel évenement":
             from ..Evenements import Evenements
             open_form("Evenements")
+            
+        if self.type == "Voir une réunion":
+            type_evenement = self.choix_selon_type_event()  # appel fonction en bas du script
+            self.test_non_valid(type_evenement)
+            
+                
         # Acquisition du check box: Affiche les erreurs de sauvegardes
         visu_des_erreurs = self.check_box_visu_erreurs.checked
-        
         # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION (sauf si chechk box visu erreurs Checked )
         #   certaines raws viennent de sauvegardes temporaires ttes les 15 sec par forme 'Evenements'
         #      ( venant de sorties incontrolées par fermetures defenêtres ou appuis sur la touche gauche du tel)
         type_evenement = self.choix_selon_type_event()  # appel fonction en bas du script
-            
         liste = app_tables.events.search(tables.order_by("date", ascending=False),
                                         auto_sov=visu_des_erreurs, 
                                         type_event=type_evenement
@@ -226,7 +231,9 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             type_evenement = "incident"
         else:
             type_evenement = "entretien"
-        return type_evenement
+        return type_evenementst_
+
+    de
 
    
 

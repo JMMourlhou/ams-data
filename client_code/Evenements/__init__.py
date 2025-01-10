@@ -95,7 +95,13 @@ class Evenements(EvenementsTemplate):
             self.date_picker_1.date = date1
             
             type_evnt = self.to_be_modified_row["type_event"]
-            type_evenement = self.choix_selon_type_event(type_evnt)
+            if type_evnt == "réunion":
+                type_evenement = "Nouvelle réunion"
+            elif type_evnt == "incident":
+                type_evenement = "Nouvel incident"
+            else:
+                type_evenement = "Nouvel entretien individuel"
+            
             self.drop_down_event.selected_value = type_evenement
             
             self.drop_down_lieux.selected_value = self.to_be_modified_row["lieu"]
@@ -187,7 +193,12 @@ class Evenements(EvenementsTemplate):
         lieu_txt = row_lieu['lieu']
         
         type_evnt = self.drop_down_event.selected_value
-        type_evenement = self.choix_selon_type_event(type_evnt)
+        if type_evnt == "Nouvelle réunion":
+            type_evenement = "réunion"
+        elif type_evnt == "Nouvel incident":
+            type_evenement = "incident"
+        else:
+            type_evenement = "autre"
         
         # Il y aura une recherche spéciale (#  wildcard search) sur le 'mot_clef' en Evenements_visu_modif_del 
         # enlève les espaces à gauche et droite, sinon, erreur en recherche
@@ -379,14 +390,6 @@ class Evenements(EvenementsTemplate):
         """This method is called when the selected date changes"""
         self.button_validation.visible = True
 
-    def choix_selon_type_event(self, type_evnt):
-        if type_evnt == "réunion":
-            type_evenement = "Nouvelle réunion"
-        elif type_evnt == "incident":
-            type_evenement = "Nouvel incident"
-        else:
-            type_evenement = "Nouvel entretien individuel"
-        return type_evenement
 
  
 
