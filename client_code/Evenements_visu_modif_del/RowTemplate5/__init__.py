@@ -40,6 +40,6 @@ class RowTemplate5(RowTemplate5Template):
         elif type_evnt == "incident":
             type_evenement = "Voir un incident"
         else:
-            type_evenement = "Voir un autre évenement"
+            type_evenement = "Voir un entretien individuel"
                 
         open_form("Evenements_visu_modif_del", type_evenement)

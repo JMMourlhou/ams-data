@@ -26,14 +26,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         if self.type_event is not None:
             self.drop_down_event.selected_value = self.type_event
             self.drop_down_event_change()
-            
-
-        # Init drop down event (Pour l'instant choix à rentrer pour ne pas perdre les notes si je change le type d'evenmt)
-        """
-        self.drop_down_event.selected_value = self.drop_down_event.items[0]  # "Réunion"
-        self.note_for_meeting("meeting")
-        """
-
         # acquisition de l'heure
         self.now = (French_zone.french_zone_time())  # now est le jour/h actuelle (datetime object)
 
@@ -58,16 +50,10 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         
         # Création de la liste des évenemnts: NE PRENDRE QUE LES EVENEMNTS SAUVES PAR VALIDATION (sauf si chechk box visu erreurs Checked )
         #   certaines raws viennent de sauvegardes temporaires ttes les 15 sec par forme 'Evenements'
-        #      ( venant de sorties incontrolées par fermetures defen^tres ou appuis sur la touche gauche du tel)
+        #      ( venant de sorties incontrolées par fermetures defenêtres ou appuis sur la touche gauche du tel)
+        type_evenement = self.choix_selon_type_event()  # appel fonction en bas du script
             
-        if self.type == "Voir une réunion":
-            type_evenement = "réunion"
-        elif self.type == "Voir un incident":
-            type_evenement = "incident"
-        else:
-            type_evenement = "autre"
-            
-        liste = app_tables.events.search(tables.order_by("writing_date_time", ascending=False),
+        liste = app_tables.events.search(tables.order_by("date", ascending=False),
                                         auto_sov=visu_des_erreurs, 
                                         type_event=type_evenement
                                         )
@@ -83,20 +69,6 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         self.text_box_mot_clef.text = ""
         self.drop_down_event_change()     
 
-
-    def note_for_meeting(self, type):
-        now = (
-            French_zone.french_zone_time()
-        )  # now est le jour/h actuelle (datetime object)
-        heure = now.time()
-        heure = heure.strftime("%H:%M")
-        date0 = now.date()
-        date = date0.strftime("%d/%m/%Y")
-        self.date_sov = date0.strftime("%Y/%m/%d")
-        if type == "meeting":
-            self.text_area_notes.text = f"Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Réunion d'équipe du {date} à {heure}\n\nNotes:\n "
-        if type == "incident":
-            self.text_area_notes.text = f"Participants: A.C / A.JC / G.J / M.JM / L.C \nObjet: Incident, date/heure: .........\nPersonnes impliquées : \nNotes:\n "
 
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
@@ -186,33 +158,16 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
             f"ping on server to prevent 'session expired' every 5 min, server answer:{result}"
         )
 
-    """
-    # Initialisation du préfixe du nom du fichier img
-    def nom_img(self, num_img_txt):
-        nom_img = (
-            self.date_sov
-            + "_"
-            + self.drop_down_event.selected_value
-            + "_"
-            + num_img_txt
-        )
-        return nom_img
-    """
     
     # ----------------------------------------------------------------  Recherche sur date
     def text_box_date_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
+        type_evenement = self.choix_selon_type_event()    # appel fonction en bas du script
         
-        if self.type == "Voir une réunion":
-            type_evenement = "réunion"
-        elif self.type == "Voir un incident":
-            type_evenement = "incident"
-        else:
-            type_evenement = "autre"
         self.text_box_mot_clef.text = ""
         self.text_box_lieu.text = ""
         c_date = self.text_box_date.text + "%"            #  wildcard search on date
-        liste = app_tables.events.search(tables.order_by("writing_date_time", ascending=False),
+        liste = app_tables.events.search(tables.order_by("date", ascending=False),
                                         date=q.ilike(c_date),
                                         type_event=type_evenement
                                         )
@@ -227,12 +182,8 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     # avnt l'écriture du row, Il a fallu faire un strip sur le mot clé pour enlever cet espace !!! 
     def text_box_mot_clef_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        if self.type == "Voir une réunion":
-            type_evenement = "réunion"
-        elif self.type == "Voir un incident":
-            type_evenement = "incident"
-        else:
-            type_evenement = "autre"
+        type_evenement = self.choix_selon_type_event()       # appel fonction en bas du script
+        
         self.text_box_date.text = ""
         self.text_box_lieu.text = ""
         
@@ -251,12 +202,7 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     # ------------------------------------------------------------------  recherche sur lieu
     def text_box_lieu_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
-        if self.type == "Voir une réunion":
-            type_evenement = "réunion"
-        elif self.type == "Voir un incident":
-            type_evenement = "incident"
-        else:
-            type_evenement = "autre"
+        type_evenement = self.choix_selon_type_event()     # appel fonction en bas du script
             
         self.text_box_date.text = ""
         self.text_box_mot_clef.text = ""
@@ -271,6 +217,18 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
     def text_box_lieu_change(self, **event_args):
         """This method is ca c_nom = self.text_box_nom.text + "%"            #         nomlled when the TextBox gets focus"""
         self.text_box_lieu_focus()
+
+    # Foction appellée 4 fois: En fonction du choix d'évenemnt du drop down, j'initilise la variable type_evenemnt (recherches sur date, mot_clef, lieu)
+    def choix_selon_type_event(self):
+        if self.type == "Voir une réunion":
+            type_evenement = "réunion"
+        elif self.type == "Voir un incident":
+            type_evenement = "incident"
+        else:
+            type_evenement = "entretien"
+        return type_evenement
+
+   
 
  
 

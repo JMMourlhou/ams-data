@@ -12,10 +12,10 @@ from datetime import datetime
 # Change les bt 'apply' en 'Valider' si je veux saisir l'heure en même tps que la date (picktime set à True)
 # VOIR DATE PICKER, SHOW EVENT
 
-# Saisie d'un évenement ou d'un incident 
+# Saisie d'un évenement ou d'un incident ou entretien ind.
 #   Pb rencontré: session expired si la saisie est intérrompue 
-    # 2 Solutions implémentées:  - Un 'ping' sur le serveur toutes les 5 minutes (300" timer 1) empêche la session d'expirée (sur un ordinateur) 
-    #                                mais pas sur un tel qd l'écran s'étteint.  
+    # 2 Solutions implémentées:  - Un 'ping' sur le serveur toutes les 5 minutes (300" timer 1) empêche la session d'expirer (sur un ordinateur) 
+    #                                mais pas sur un tel qd l'écran s'étteint....  
     #                            - Une sauvegarde auto toutes les 15 secondes (timer 2), ce qui permet de ne pas perdre bp de données si expired. 
 
 class Evenements(EvenementsTemplate):
@@ -43,6 +43,7 @@ class Evenements(EvenementsTemplate):
         if self.to_be_modified_row is None:
             # Creation
             self.id = None
+            self.text_area_mot_clef.text = ""
             self.outlined_card_main.visible = False
             
             self.image_1.source = None
@@ -66,9 +67,15 @@ class Evenements(EvenementsTemplate):
             date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(mi))
             self.date_picker_1.pick_time = True
             self.date_picker_1.date = date1
-            
         else:
             # Modif à partir du row passé en init par la form Evenements_visu_modif_del
+
+            # Test si ce row n'avait pas été validé
+            if self.to_be_modified_row["auto_sov"] is True:
+                alert("Cet évenemnt n'avait pas été validé.\n Vous pouvez maintenant achever sa saisie ou le Valider directement.")
+                self.button_validation.visible = True
+                self.button_validation_2.visible = True
+            
             self.id=self.to_be_modified_row.get_id()
             self.drop_down_event.visible = False
             # initilisation des composants de cette forme par le row passé en init par la form Evenements_visu_modif_del
@@ -88,12 +95,7 @@ class Evenements(EvenementsTemplate):
             self.date_picker_1.date = date1
             
             type_evnt = self.to_be_modified_row["type_event"]
-            if type_evnt == "réunion":
-                type_evenement = "Nouvelle réunion"
-            elif type_evnt == "incident":
-                type_evenement = "Nouvel incident"
-            else:
-                type_evenement = "Autre évenement"
+            type_evenement = self.choix_selon_type_event(type_evnt)
             self.drop_down_event.selected_value = type_evenement
             
             self.drop_down_lieux.selected_value = self.to_be_modified_row["lieu"]
@@ -156,12 +158,15 @@ class Evenements(EvenementsTemplate):
         date0 = self.now.date()
         date = date0.strftime("%d/%m/%Y")
         if type == "meeting":
+            self.text_area_mot_clef.text = f"Réunion du {date}"
             self.text_area_notes.text = (f"Participants : A.C / A.JC / G.J / M.JM / L.C \nObjet : Réunion d'équipe du {date} à {heure}\n\nNotes :\n ")
         if type == "incident":
+            self.text_area_mot_clef.text = ""
             self.text_area_notes.text = ("Incident,    notes prises par : \nDate de l'incident : \nHeure de l'incident : \nPersonne(s) impliquée(s) : \nTémoins : \nNotes : ")
         if type == "entretien":
-            self.text_area_notes.text = (f"Entretien individuel,    notes prises par : A.C / A.JC \nDate de l'entretien : {date} à {heure} \nPoints positifs du stagiaire : \nPoints à améliorer : \nPoint de vue du stagiaire sur le contenu de la formation : \nPoint de vue du stagiaire sur son stage en structure : \nParcours individuel proposé afin de l'amener vers la réussite : \nDivers")
-        
+            self.text_area_mot_clef.text = ""
+            self.text_area_notes.text = (f"Entretien individuel,    notes prises par : A.C / A.JC \nDate de l'entretien : {date} à {heure} \n\nPoints positifs du stagiaire : \n\nPoints à améliorer : \n\nPoint de vue du stagiaire sur le contenu de la formation : \n\nPoint de vue du stagiaire sur son stage en structure : \n\nParcours individuel proposé afin de l'amener vers la réussite : \n\nDivers :")
+            
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
@@ -172,9 +177,8 @@ class Evenements(EvenementsTemplate):
     def button_validation_click(self, auto_sov=False, id=None, **event_args):
         """This method is called when the button is clicked"""
         test_mk = self.text_area_mot_clef.text
-        alert(len(test_mk))
-        if len(test_mk) == 0:
-            msg = "Rentrez un mot clef qui vous permettra de retrouver faciement cet évenemnt !\n\nPar ex:\nNom de la personne"
+        if len(test_mk) == 0 and auto_sov is False:   # Vraie validation, test si mot clef vide
+            msg = "Rentrez un mot clef qui vous permettra de retrouver facilement cet évenemnt !\n\nPar ex:\nNom de la personne\nType particulier d'évenement"
             alert(msg)
             return
             
@@ -183,12 +187,7 @@ class Evenements(EvenementsTemplate):
         lieu_txt = row_lieu['lieu']
         
         type_evnt = self.drop_down_event.selected_value
-        if type_evnt == "Nouvelle réunion":
-            type_evenement = "réunion"
-        elif type_evnt == "Nouvel incident":
-            type_evenement = "incident"
-        else:
-            type_evenement = "autre"
+        type_evenement = self.choix_selon_type_event(type_evnt)
         
         # Il y aura une recherche spéciale (#  wildcard search) sur le 'mot_clef' en Evenements_visu_modif_del 
         # enlève les espaces à gauche et droite, sinon, erreur en recherche
@@ -200,7 +199,7 @@ class Evenements(EvenementsTemplate):
         result, self.id = anvil.server.call("add_event", 
                                                     self.id,                                  # row id   pour réécrire le row en auto sov tt les 15"
                                                     auto_sov,                                 # False si bt validation utilisé   /   True si sauvegarde auto lancée par timer2, ts les 15 secondes
-                                                    type_evenement,                           # Type event: réunion, incident, autre
+                                                    type_evenement,                           # Type event: réunion, incident, entretien
                                                     date_sov,                                 # date
                                                     row_lieu,                                 # lieu row
                                                     lieu_txt,                                 # lieu en clair
@@ -213,7 +212,8 @@ class Evenements(EvenementsTemplate):
                                      )       
         if not result :
             alert("Evenement non sauvegardé !")
-        # si la sauvegarde a été effectué en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort en modifiant le tag sov_incorrecte False ds le row de l'event
+            
+        # si la sauvegarde a été effectuée en fin de saisie de l'évenemnt (clique sur Bt 'Valider'), on sort en renvoyant le type d'évenemnt pour initiliser la drop down
         if auto_sov is False: 
             # sortie normale
             if type_evnt == "Nouvelle réunion":
@@ -221,7 +221,7 @@ class Evenements(EvenementsTemplate):
             elif type_evnt == "Nouvel incident":
                 type_evenement = "Voir un incident"
             else:
-                type_evenement = "Voir un autre évenement"
+                type_evenement = "Voir un entretien individuel"
                 
             from ..Evenements_visu_modif_del import Evenements_visu_modif_del
             open_form("Evenements_visu_modif_del", type_evenement)
@@ -233,15 +233,15 @@ class Evenements(EvenementsTemplate):
             result = anvil.server.call("del_event_bt_retour", self.id)
             if not result :
                 alert("Sauvegarde temporaire non effacée !")    
-        open_form(self.f)
+        open_form("Evenements_visu_modif_del")
 
     # Image1 en chargement
     def file_loader_1_change(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
             nom=self.nom_img("1")  # envoi en fonction d'initialisation du nom de l'image 1
-            file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
-            self.image_1.source = file_rezized
+            file_resized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
+            self.image_1.source = file_resized
             self.file_loader_1.text = "1 img chargée"
             self.button_validation.visible = True
             
@@ -255,8 +255,8 @@ class Evenements(EvenementsTemplate):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
             nom=self.nom_img("2")  # envoi en fonction d'initialisation du nom de l'image 2
-            file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
-            self.image_2.source = file_rezized
+            file_resized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
+            self.image_2.source = file_resized
             self.file_loader_2.text = "1 img chargée"
             self.button_validation.visible = True
 
@@ -270,8 +270,8 @@ class Evenements(EvenementsTemplate):
         """This method is called when a new file is loaded into this FileLoader"""
         if file is not None:  #pas d'annulation en ouvrant choix de fichier
             nom=self.nom_img("3")   # envoi en fonction d'initialisation du nom de l'image 3
-            file_rezized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
-            self.image_3.source = file_rezized
+            file_resized = anvil.server.call('resize_img', file, nom)   # 800x600 ou 600x800
+            self.image_3.source = file_resized
             self.file_loader_3.text = "1 img chargée"
             self.button_validation.visible = True
 
@@ -378,6 +378,15 @@ class Evenements(EvenementsTemplate):
     def date_picker_1_change(self, **event_args):
         """This method is called when the selected date changes"""
         self.button_validation.visible = True
+
+    def choix_selon_type_event(self, type_evnt):
+        if type_evnt == "réunion":
+            type_evenement = "Nouvelle réunion"
+        elif type_evnt == "incident":
+            type_evenement = "Nouvel incident"
+        else:
+            type_evenement = "Nouvel entretien individuel"
+        return type_evenement
 
  
 
