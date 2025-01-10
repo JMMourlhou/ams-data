@@ -146,7 +146,8 @@ class Evenements(EvenementsTemplate):
             self.note_for_meeting("meeting")
         if self.type == "Nouvel incident":
             self.note_for_meeting("incident")
-
+        if self.type == "Nouvel entretien individuel":
+            self.note_for_meeting("entretien")
 
     def note_for_meeting(self, type):
         #now = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
@@ -158,7 +159,9 @@ class Evenements(EvenementsTemplate):
             self.text_area_notes.text = (f"Participants : A.C / A.JC / G.J / M.JM / L.C \nObjet : Réunion d'équipe du {date} à {heure}\n\nNotes :\n ")
         if type == "incident":
             self.text_area_notes.text = ("Incident,    notes prises par : \nDate de l'incident : \nHeure de l'incident : \nPersonne(s) impliquée(s) : \nTémoins : \nNotes : ")
-
+        if type == "entretien":
+            self.text_area_notes.text = (f"Entretien individuel,    notes prises par : A.C / A.JC \nDate de l'entretien : {date} à {heure} \nPoints positifs du stagiaire : \nPoints à améliorer : \nPoint de vue du stagiaire sur le contenu de la formation : \nPoint de vue du stagiaire sur son stage en structure : \nParcours individuel proposé afin de l'amener vers la réussite : \nDivers")
+        
     def text_area_commentaires_change(self, **event_args):
         """This method is called when the text in this text area is edited"""
         self.button_validation.visible = True
@@ -168,6 +171,13 @@ class Evenements(EvenementsTemplate):
     # validation:   auto_sov True si sauvegarde auto tte les 15", appelé par timer_2_tick
     def button_validation_click(self, auto_sov=False, id=None, **event_args):
         """This method is called when the button is clicked"""
+        test_mk = self.text_area_mot_clef.text
+        alert(len(test_mk))
+        if len(test_mk) == 0:
+            msg = "Rentrez un mot clef qui vous permettra de retrouver faciement cet évenemnt !\n\nPar ex:\nNom de la personne"
+            alert(msg)
+            return
+            
         writing_date_time = French_zone.french_zone_time()   # now est le jour/h actuelle (datetime object)
         row_lieu = self.drop_down_lieux.selected_value
         lieu_txt = row_lieu['lieu']
