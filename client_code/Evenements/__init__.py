@@ -83,7 +83,7 @@ class Evenements(EvenementsTemplate):
             self.mode = "modif"
             # Test si ce row n'avait pas été validé
             if self.to_be_modified_row["auto_sov"] is True:
-                alert("Cet évenemnt n'avait pas été validé.\n Vous pouvez maintenant achever sa saisie ou le Valider directement.")
+                alert("Cet évenement n'avait pas été validé.\n Vous pouvez maintenant achever sa saisie ou le valider directement.")
                 self.button_validation.visible = True
                 self.button_validation_2.visible = True
             
@@ -319,7 +319,7 @@ class Evenements(EvenementsTemplate):
         
     # Initialisation du préfixe du nom du fichier img 
     def nom_img(self,num_img_txt):
-        nom_img = self.date_sov+"_"+self.drop_down_event.selected_value+"_"+num_img_txt
+        nom_img = self.date_sov+"_"+self.type_row["type"]+"_"+num_img_txt
         return nom_img
 
     def button_visu_1_click(self, **event_args):
