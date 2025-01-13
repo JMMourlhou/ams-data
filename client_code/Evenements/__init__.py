@@ -75,9 +75,9 @@ class Evenements(EvenementsTemplate):
             hh=t[11:13]
             mi=t[14:16]
             # Création de la variable de type date 
-            date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(mi))
+            self.date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(mi))    # réutilisée pour le nom des images
             self.date_picker_1.pick_time = True
-            self.date_picker_1.date = date1
+            self.date_picker_1.date = self.date1
         else:
             # Modif à partir du row passé en init par la form Evenements_visu_modif_del
             self.mode = "modif"
@@ -101,9 +101,9 @@ class Evenements(EvenementsTemplate):
             hh=t[11:13]
             min=t[14:16]
             # Création de la variable de type date 
-            date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(min))
+            self.date1 = datetime(int(yy), int(mm), int(dd), int(hh), int(min))
             self.date_picker_1.pick_time = True
-            self.date_picker_1.date = date1
+            self.date_picker_1.date = self.date1  
             
             type_evenement = self.to_be_modified_row["type_event"]
             self.drop_down_event.selected_value = type_evenement
@@ -319,8 +319,12 @@ class Evenements(EvenementsTemplate):
         
     # Initialisation du préfixe du nom du fichier img 
     def nom_img(self,num_img_txt):
-        #nom_img = self.date_sov+"_"+self.type_row["type"]+"_"+num_img_txt
-        nom_img = self.date_sov+"_"+num_img_txt
+        type_row = self.drop_down_event.selected_value   # row du type d'évenemnts
+        row = type_row[0]
+        date = self.date1
+        date=date.replace(" ", "-")
+        nom_img = date +"_" + row["type"] + "_" + num_img_txt
+        #nom_img = self.date_sov+"_"+num_img_txt
         
         return nom_img
 
