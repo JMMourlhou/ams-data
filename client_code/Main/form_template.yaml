@@ -102,7 +102,7 @@ components:
       - event_bindings: {click: bt_maj_txt_stagiaires_inscrits_click}
         layout_properties: {}
         name: bt_maj_txt_stagiaires_inscrits
-        properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary Container', icon: 'fa:anchor', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: Utilitaires, tooltip: '', underline: false, visible: true}
+        properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary Container', icon: 'fa:anchor', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: JM Tools, tooltip: '', underline: false, visible: true}
         type: Button
       - event_bindings: {click: bt_com_1result_click}
         name: bt_com_1result
