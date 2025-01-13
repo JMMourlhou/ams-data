@@ -28,9 +28,9 @@ def csv_file_reader(csv_file):
         
         #extraction d'1 fichier créé pour INFO COLL 
         type_mail=ligne[0]           # extraction du type de mail ex: 
-        nom=ligne[1]  # extraction date du diplome
-        prenom=ligne[2]           # extraction du nom
-        mail=ligne[3]        # extraction du prenom
+        nom=ligne[1]                 # extraction date du diplome
+        prenom=ligne[2]              # extraction du nom
+        mail=ligne[3]                # extraction du prenom
         
         
         """

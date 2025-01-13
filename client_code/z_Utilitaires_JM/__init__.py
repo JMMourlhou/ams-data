@@ -63,3 +63,7 @@ class z_Utilitaires_JM(z_Utilitaires_JMTemplate):
             alert(f"Maj des colonnes txt en {self.end-self.start}")
             self.timer_1.interval=0
             anvil.server.call('task_killer',self.task_maj_pr)
+
+    def bt_csv_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        open_form('XLS_reader')
