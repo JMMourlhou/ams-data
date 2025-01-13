@@ -319,7 +319,9 @@ class Evenements(EvenementsTemplate):
         
     # Initialisation du préfixe du nom du fichier img 
     def nom_img(self,num_img_txt):
-        nom_img = self.date_sov+"_"+self.type_row["type"]+"_"+num_img_txt
+        #nom_img = self.date_sov+"_"+self.type_row["type"]+"_"+num_img_txt
+        nom_img = self.date_sov+"_"+num_img_txt
+        
         return nom_img
 
     def button_visu_1_click(self, **event_args):
