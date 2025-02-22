@@ -787,6 +787,20 @@ db_schema:
       type: string
     server: full
     title: Temp
+  texte_formulaires:
+    client: search
+    columns:
+    - admin_ui: {order: 0, width: 111}
+      name: code
+      type: string
+    - admin_ui: {order: 1, width: 463}
+      name: text
+      type: string
+    - admin_ui: {order: 2, width: 135}
+      name: obligation
+      type: bool
+    server: full
+    title: Texte_formulaires
   users:
     client: search
     columns:

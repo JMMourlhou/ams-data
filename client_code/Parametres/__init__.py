@@ -68,8 +68,8 @@ class Parametres(ParametresTemplate):
 
     def button_mails_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Mail_subject_attach_txt import Mail_subject_attach_txt
-        open_form("Mail_subject_attach_txt",[],"")
+        from ..Lieux_MAJ_table import Lieux_MAJ_table
+        open_form("Lieux_MAJ_table")
 
     def button_create_qcm_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -80,4 +80,9 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..QCM_par_stage import QCM_par_stage
         open_form("QCM_par_stage")
+
+    def button_textes_formulaires_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Text_formulaires_MAJ_table import Text_formulaires_MAJ_table
+        open_form("Text_formulaires_MAJ_table")
  

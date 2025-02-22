@@ -27,8 +27,6 @@ class ItemTemplate13(ItemTemplate13Template):
             alert(f"Effacement effectué pour {nb} pré-requis Stagiaires!")
         open_form("Pre_R_MAJ_table")
 
-        
-
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
         self.button_modif.visible = True
