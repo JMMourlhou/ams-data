@@ -793,7 +793,7 @@ db_schema:
     - admin_ui: {order: 0, width: 111}
       name: code
       type: string
-    - admin_ui: {order: 1, width: 463}
+    - admin_ui: {order: 1, width: 618}
       name: text
       type: string
     - admin_ui: {order: 2, width: 135}
