@@ -790,7 +790,7 @@ db_schema:
   texte_formulaires:
     client: search
     columns:
-    - admin_ui: {order: 0, width: 86}
+    - admin_ui: {order: 0, width: 135}
       name: code
       type: string
     - admin_ui: {order: 1, width: 618}

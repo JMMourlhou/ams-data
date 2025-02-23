@@ -31,7 +31,7 @@ def search_on_role_only(critere):
     liste = app_tables.users.search(
                                         q.fetch_only("nom","prenom","email","tel","role"),
                                         tables.order_by("nom", ascending=True),
-                                            role   = q.ilike(critere)
+                                        role   = q.ilike(critere)
                                     )
     return liste
 

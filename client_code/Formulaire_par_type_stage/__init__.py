@@ -43,7 +43,7 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         """This method is called when an item is selected"""
         global type_formulaire
         type_formulaire = self.drop_down_type_formulaire.selected_value
-        type_formulaire = type_formulaire[0:5]
+        type_formulaire = str(type_formulaire[0:5])
 
         # lecture du dictionaire pour ce type de stage et type de formulaire
         global dico_formulaire
@@ -52,56 +52,52 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         if type_formulaire == "SAT_O":
             dico_formulaire = self.row["satisf_q_ouv_template"]
 
+        list = app_tables.texte_formulaires.search(tables.order_by("code", ascending=True))
+        list_drop_down = []
+        for row in list:
+            cod=row["code"][0:5]
+            if cod == type_formulaire:
+                list_drop_down.append((row["text"],row))
+        self.drop_down_textes_formulaire.items=list_drop_down       
+        self.drop_down_textes_formulaire.visible = True
         
-        self.drop_down_textes_formulaire.items = [
-            (r["code"], r)
-            for r in app_tables.texte_formulaires.search(
-                tables.order_by("code", ascending=True)
-            )
-            if not dico_formulaire.get(r["code"])
-        ]
-
-        # affichage du repeating panel des prérequis à partir du dico que je transforme  en liste
-        list_keys = dico_formulaire.keys()
-        list_keys = sorted(
-            list_keys
-        )  # création de la liste triée des clefs du dictionaires prérequis
-        # j'affiche tous les pré requis
-        print('nb de clés: ',len(list_keys))
-        print(list(list_keys))
-        self.repeating_panel_1.items = list(list_keys)  # liste des clefs (pré requis)
-        """
-        self.sov_dico_ds_temp()  # sauvegarde du dico ds TABLE TEMP
-        """
-
+        if dico_formulaire != {}:   
+            # affichage du repeating panel des textes à partir du dico que je transforme  en liste
+            list_keys = dico_formulaire.keys()
+            list_keys = sorted(list_keys)  # création de la liste triée des clefs du dictionaire formulaire
+            # j'affiche tous les pré requis
+            print('nb de clés: ',len(list_keys))
+            self.repeating_panel_2.items = list(list_keys)  # liste des clefs (pré requis)
+            """
+            self.sov_dico_ds_temp()  # sauvegarde du dico ds TABLE TEMP
+            """
+        
+        
     def drop_down_textes_formulaire_change(self, **event_args):
         """This method is called when an item is selected"""
-        row = self.drop_down_pre_requis.selected_value  # row du pre_requis
+        row = self.drop_down_textes_formulaire.selected_value  # row du texte
         if row is None:
             alert("Vous devez sélectionner un pré-requis !")
             self.drop_down_code_stage.focus()
             return
         else:
-            clef = row[
-                "code_pre_requis"
-            ]  # extraction de la clef à ajouter à partir de la row sélectionnée de la dropbox
+            clef = row["code"]  # extraction de la clef à ajouter à partir de la row sélectionnée de la dropbox
         # rajout clef/valeur ds dico
-        global dico_pre_requis
-        dico_pre_requis[clef] = {  # AJOUT DE LA CLEF DS LE DICO
-            "Doc": row["doc"],
-            "Validé": False,
-            "Commentaires": "",
-            "Nom_document": "",
-        }
+        global dico_formulaire
+        dico_formulaire[clef] = {                          # AJOUT DE LA CLEF DS LE DICO
+                                row["text"],
+                                row["obligation"]    
+                                }
 
         # réaffichage des pré requis
-        list_keys = dico_pre_requis.keys()
+        list_keys = dico_formulaire.keys()
         list_keys = sorted(
             list_keys
-        )  # création de la liste triée des clefs du dictionaires prérequis
+        )  # création de la liste triée des clefs du dictionaires formulaire
         print(list_keys)
-        self.repeating_panel_1.items = list(list_keys)  # liste des clefs (pré requis)
+        self.repeating_panel_2.items = list(list_keys)  # liste des clefs (pré requis)
 
+        """
         # réinitialisation dropdown pré requis sans le pré requis sélectionné
         self.drop_down_pre_requis.items = [
             (r["requis"], r)
@@ -157,11 +153,10 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
                 alert("Ajout effectué !")
             else:
                 alert("Erreur en ajout !")
-
+        """
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Parametres import Parametres
-
         open_form("Parametres")
 
     def sov_dico_ds_temp(self, **event_args):

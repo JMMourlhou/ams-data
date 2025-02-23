@@ -23,7 +23,9 @@ class ItemTemplate23(ItemTemplate23Template):
         # Any code you write here will run before the form opens.
         row=app_tables.texte_formulaires.get(code=self.item)
         try:
-            self.text_box_1.text = "  " + row['text']
+            self.text_box_1.text = "  " + row['code']
+            self.text_box_2.text = "  "  + row['text']
+            self.check_box_1.checked = row['obligation']
             self.button_annuler.tag = row['code']
         except:
             alert("Un code pré-requis n'existe plus en table pre_requis")
