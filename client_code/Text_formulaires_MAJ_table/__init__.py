@@ -17,16 +17,14 @@ class Text_formulaires_MAJ_table(Text_formulaires_MAJ_tableTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.text_box_1.placeholder = "Lieu"
-        self.text_box_2.placeholder = "Adresse"
-        self.text_box_3.placeholder = "Commentaires"
+        self.text_box_1.placeholder = "Code"
+        self.text_box_2.placeholder = "Texte"
 
-        # search de tous les pré-requis existants et affichage
-        liste_tous = app_tables.lieux.search(
-            q.fetch_only("lieu", "adresse"),
-            tables.order_by("lieu", ascending=True),
+        # search de tous les codes existants et affichage
+        liste_tous = app_tables.texte_formulaires.search(
+            tables.order_by("code", ascending=True),
         )
-        self.repeating_panel_2.items = liste_tous
+        self.repeating_panel_1.items = liste_tous
 
         # réaffichage des pré requis
         # open_form("Table_Pre_R_MAJ")
@@ -45,12 +43,12 @@ class Text_formulaires_MAJ_table(Text_formulaires_MAJ_tableTemplate):
         """This method is called when the button is clicked"""
         # Text_box_1 non vide
         if self.text_box_1.text == "" or len(self.text_box_1.text) < 3:
-            alert("Entrez un lieu valide!")
+            alert("Entrez un code valide!")
             self.text_box_1.focus()
             return
         # Text_box_2 non vide
         if self.text_box_2.text == "" or len(self.text_box_2.text) < 6:
-            alert("Entrez une adreese supérieure à 5 caractères !")
+            alert("Entrez un texte supérieur à 5 caractères !")
             self.text_box_2.focus()
             return
         # Text_box_3 non vide
@@ -61,29 +59,29 @@ class Text_formulaires_MAJ_table(Text_formulaires_MAJ_tableTemplate):
             return
         """
         # Code existant ?
-        row = app_tables.pre_requis.get(code_pre_requis=self.text_box_1.text)
+        row = app_tables.texte_formulaires.get(code=self.text_box_1.text)
         if row:
-            alert("Ce lieu existe déjà !")
+            alert("Ce code existe déjà !")
             self.text_box_1.focus()
             return
         r = alert(
-            "Voulez-vous vraiment ajouter ce Lieu ?",
+            "Voulez-vous vraiment ajouter ce code ?",
             dismissible=False,
             buttons=[("oui", True), ("non", False)],
         )
         if r:  # oui
             result = anvil.server.call(
-                "add_lieu",
+                "add_text_formulaire",
                 self.text_box_1.text,
                 self.text_box_2.text,
-                self.text_box_3.text,
+                self.radio_button_1.selected,
             )
             if result is not True:
                 alert("ERREUR, Ajout non effectué !")
                 return
             alert("Création effectuée !")
         self.column_panel_add.visible = False
-        open_form("Lieux_MAJ_table")
+        open_form("Text_formulaires_MAJ_table")
 
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
