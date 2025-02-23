@@ -14,10 +14,11 @@ components:
     name: text_box_2
     properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: outlined, spacing_above: small, spacing_below: small, text: '', tooltip: '', type: text, underline: false, visible: true}
     type: TextBox
-  - layout_properties: {}
-    name: radio_button_1
-    properties: {align: left, text: ''}
-    type: RadioButton
+  - event_bindings: {change: check_box_1_change}
+    layout_properties: {}
+    name: check_box_1
+    properties: {text: ''}
+    type: CheckBox
   - event_bindings: {click: button_modif_click}
     layout_properties: {}
     name: button_modif
