@@ -19,21 +19,21 @@ components:
       - event_bindings: {click: button_maj_pr_click}
         layout_properties: {}
         name: button_maj_pr
-        properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: 'fa:user', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Codes / Intitulé des Pré-R, tooltip: '', underline: false, visible: true}
+        properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: 'fa:user', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: MAJ Pré-Requis, tooltip: '', underline: false, visible: true}
         type: Button
       - event_bindings: {click: button_gestion_pre_requis_click}
         layout_properties: {width: 163.18952978515625}
         name: button_gestion_pre_requis
-        properties: {align: full, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '... par type de stage', tooltip: '', underline: false, visible: true}
+        properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '... par type de stage', tooltip: '', underline: false, visible: true}
         type: Button
       - event_bindings: {click: button_gestion_pre_requis_personnel_click}
         layout_properties: {width: 223.32063427734374}
         name: button_gestion_pre_requis_personnel
-        properties: {align: full, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '... par personne', tooltip: '', underline: false, visible: true}
+        properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '... par personne', tooltip: '', underline: false, visible: true}
         type: Button
       layout_properties: {grid_position: 'SJRQZU,ZZSMEM'}
       name: flow_panel_1
-      properties: {align: center, spacing: huge}
+      properties: {align: justify, spacing: huge}
       type: FlowPanel
     - components:
       - data_bindings:
@@ -100,9 +100,14 @@ components:
       name: button_textes_formulaires
       properties: {background: 'theme:Primary', foreground: 'theme:Tertiary', text: Textes Formulaires, visible: true}
       type: Button
+    - event_bindings: {click: button_gestion_pre_requis_click}
+      layout_properties: {grid_position: 'VVLSXD,HFQWDS'}
+      name: button_gestion_formulaires
+      properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '... par  stage', tooltip: '', underline: false, visible: true}
+      type: Button
     layout_properties: {grid_position: 'SGYOSF,GZNTEG'}
     name: column_panel_6
-    properties: {background: 'theme:On Primary', role: outlined-card}
+    properties: {background: 'theme:On Primary', col_widths: '{"XESZVO":32,"HFQWDS":28}', role: outlined-card}
     type: ColumnPanel
   - components:
     - event_bindings: {click: button_mails_click}
@@ -137,7 +142,7 @@ components:
       type: Button
     layout_properties: {grid_position: 'NRRSCW,JAGLYC'}
     name: column_panel_4
-    properties: {background: 'theme:On Primary', role: outlined-card}
+    properties: {background: 'theme:On Primary', col_widths: '{"ENGBUW":30,"MBWPCQ":30}', role: outlined-card}
     type: ColumnPanel
   layout_properties: {grid_position: 'KFOKKY,UXGOQU'}
   name: column_panel_1
