@@ -51,7 +51,14 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
             dico_formulaire = self.row["satisf_q_ferm_template"]
         if type_formulaire == "SAT_O":
             dico_formulaire = self.row["satisf_q_ouv_template"]
-
+        if type_formulaire == "SUI_F":
+            dico_formulaire = self.row["suivi_stage_q_ferm_template"]
+        if type_formulaire == "SUI_O":
+            dico_formulaire = self.row["suivi_stage_q_ouv_template"]
+        if type_formulaire == "com_F":
+            dico_formulaire = self.row["com_ferm"]
+        if type_formulaire == "com_O":
+            dico_formulaire = self.row["com_ouv"]
         list = app_tables.texte_formulaires.search(tables.order_by("code", ascending=True))
         list_drop_down = []
         for row in list:

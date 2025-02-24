@@ -38,7 +38,7 @@ class ItemTemplate22(ItemTemplate22Template):
         sov_old_code = self.item['code']
         sov_old_obligation = self.item['obligation']
         if r :   # oui
-            # 1 modif ds les lieux stages 
+            # 1 modif text_formulaire
             result = anvil.server.call("modif_text_formulaire", self.item, self.text_box_1.text, self.text_box_2.text, self.check_box_1.checked)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
@@ -57,10 +57,6 @@ class ItemTemplate22(ItemTemplate22Template):
 
     def text_box_2_change(self, **event_args): # Le code change
         """This method is called when the text in this text box is edited"""
-        self.button_modif.visible = True
-
-    def radio_button_1_change(self, **event_args):
-        """This method is called when this radio button is selected (but not deselected)"""
         self.button_modif.visible = True
 
     def check_box_1_change(self, **event_args):
