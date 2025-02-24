@@ -1,14 +1,11 @@
 from ._anvil_designer import ItemTemplate23Template
 from anvil import *
 import anvil.server
-import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
+import json
 
 class ItemTemplate23(ItemTemplate23Template):
     def __init__(self, **properties):
@@ -29,42 +26,48 @@ class ItemTemplate23(ItemTemplate23Template):
         else:
             self.check_box_1.checked = False
             
-        self.button_annuler.tag = self.item[3] #row['code']
-        
+        self.button_annuler.tag = self.item[0] # 1,2,3 ...
+        self.button_modif.tag = self.item[0] # 1,2,3 ...
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment enlever ce texte du formulaire ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
-            """
-            result = anvil.server.call("del_text_formulaire", self.item)
-            if result is not True:
-                alert("Erreur: Effacement non effectué !")
-                return
+            row_temp=app_tables.temp.search()[0]
+            dico_formulaire=row_temp['dico_formulaire']
+            key=self.button_annuler.tag
+            del dico_formulaire[key]
             alert("Effacement effectué !")
-            """
-        open_form("Formulaire_par_type_stage")
+            
+        self.f.sov_dico(dico_formulaire)   
+        code_stage_row = self.f.drop_down_code_stage.selected_value
+        type_formulaire = self.f.drop_down_type_formulaire.selected_value
+        open_form("Formulaire_par_type_stage", code_stage_row, type_formulaire)
         
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous vraiment modifier ce texte du formulaire ?",buttons=[("oui",True),("non",False)])
-        sov_old_text = self.item['text']
-        sov_old_code = self.item['code']
-        sov_old_obligation = self.item['obligation']
+        r=alert("Voulez-vous vraiment modifier cette question du formulaire ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
-            """
-            # 1 modif text_formulaire
-            result = anvil.server.call("modif_text_formulaire", self.item, self.text_box_1.text, self.text_box_2.text, self.check_box_1.checked)
-            if result is not True:
-                alert("ERREUR, Modification non effectuée !")
-                return
-            alert("Modification effectuée !")
-            """
-        else:   # non
-            self.text_box_1.text = sov_old_code
-            self.text_box_2.text = sov_old_text
-            self.radio_button_1 = sov_old_obligation
-        self.button_modif.visible = False
+            row_temp=app_tables.temp.search()[0]
+            dico_formulaire=row_temp['dico_formulaire']
+            key=self.button_modif.tag
+            dico_formulaire[key]
+            obl = ""
+            if self.check_box_1.checked is True:
+                obl = "obligatoire"
+            else:
+                obl = "facultative"
+            dico_formulaire[key] = [                          # AJOUT DE LA CLEF DS LE DICO
+                                self.text_box_2.text,
+                                obl,
+                                self.item[3]
+                                ]
+            alert("Modif effectuée !")
+            
+        self.f.sov_dico(dico_formulaire)   
+        code_stage_row = self.f.drop_down_code_stage.selected_value
+        type_formulaire = self.f.drop_down_type_formulaire.selected_value
+        open_form("Formulaire_par_type_stage", code_stage_row, type_formulaire)
         
     def text_box_2_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
