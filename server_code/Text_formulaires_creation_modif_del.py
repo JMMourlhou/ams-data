@@ -15,27 +15,27 @@ def modif_dico_formulaire_codes_stages(stage_row, formulaire_dico, type_formulai
     if not stage_row :
         valid=False
     else:
+        print("stage_row: ", stage_row['code'])
         print("type_formulaire: ", type_formulaire)
-        print(formulaire_dico)
+        print("dico: ", formulaire_dico)
         if type_formulaire == "SAT_F":
             stage_row.update(satisf_q_ferm_template=formulaire_dico)
-            #dico_formulaire = self.row["satisf_q_ferm_template"]
+            valid=True
         if type_formulaire == "SAT_O":
             stage_row.update(satisf_q_ouv_template=formulaire_dico)
-            #dico_formulaire = self.row["satisf_q_ouv_template"]
+            valid=True
         if type_formulaire == "SUI_F":
             stage_row.update(suivi_stage_q_ferm_template=formulaire_dico)
-            #dico_formulaire = self.row["suivi_stage_q_ferm_template"]
+            valid=True
         if type_formulaire == "SUI_O":
             stage_row.update(suivi_stage_q_ouv_template=formulaire_dico)
-            #dico_formulaire = self.row["suivi_stage_q_ouv_template"]
+            valid=True
         if type_formulaire == "com_F":
             stage_row.update(com_ferm=formulaire_dico)
-            #dico_formulaire = self.row["com_ferm"]
+            valid=True
         if type_formulaire == "com_O":
             stage_row.update(com_ouv=formulaire_dico)
-            #dico_formulaire = self.row["com_ouv"]
-        valid=True
+            valid=True
     return valid
 
 
