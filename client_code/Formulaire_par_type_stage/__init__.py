@@ -44,7 +44,8 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         global type_formulaire
         type_formulaire = self.drop_down_type_formulaire.selected_value
         type_formulaire = str(type_formulaire[0:5])
-
+        
+        # initialisation de la liste des textes formulaires de la table texte_formulaires
         # lecture du dictionaire pour ce type de stage et type de formulaire
         global dico_formulaire
         if type_formulaire == "SAT_F":
@@ -59,17 +60,10 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
             dico_formulaire = self.row["com_ferm"]
         if type_formulaire == "com_O":
             dico_formulaire = self.row["com_ouv"]
-        list = app_tables.texte_formulaires.search(tables.order_by("code", ascending=True))
-        list_drop_down = []
-        for row in list:
-            cod=row["code"][0:5]
-            if cod == type_formulaire:
-                list_drop_down.append((row["text"],row))
-        self.drop_down_textes_formulaire.items=list_drop_down       
-        self.drop_down_textes_formulaire.visible = True
-        
+        list_textes = app_tables.texte_formulaires.search(tables.order_by("code", ascending=True))
+        # affichage du repeating panel des textes dèjà dans le dictionaire lu 
         if dico_formulaire != {}:   
-            # affichage du repeating panel des textes à partir du dico que je transforme  en liste
+            # dico doit être transformé en liste
             list_keys = dico_formulaire.keys()
             list_keys = sorted(list_keys)  # création de la liste triée des clefs du dictionaire formulaire
             # j'affiche tous les pré requis
@@ -78,7 +72,16 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
             """
             self.sov_dico_ds_temp()  # sauvegarde du dico ds TABLE TEMP
             """
-        
+        # Initialisation drop down textes_formulaire 
+        list_drop_down = []
+        for row in list_textes:
+            cod=row["code"][0:5]
+            if cod == type_formulaire:
+                # si ce texte n'est pas déjà dans les clés du dico_formulaie,je l'affiche
+                if not dico_formulaire.get(row["code"]):
+                    list_drop_down.append((row["text"],row))
+        self.drop_down_textes_formulaire.items=list_drop_down       
+        self.drop_down_textes_formulaire.visible = True
         
     def drop_down_textes_formulaire_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -95,25 +98,32 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
                                 row["text"],
                                 row["obligation"]    
                                 }
+        
+        list_textes = app_tables.texte_formulaires.search(tables.order_by("code", ascending=True))
+        # affichage du repeating panel des textes dèjà dans le dictionaire lu 
+        if dico_formulaire != {}:   
+            # dico doit être transformé en liste
+            list_keys = dico_formulaire.keys()
+            list_keys = sorted(list_keys)  # création de la liste triée des clefs du dictionaire formulaire
+            # j'affiche tous les pré requis
+            print('nb de clés: ',len(list_keys))
+            self.repeating_panel_2.items = list(list_keys)  # liste des clefs (pré requis)
+            """
+            self.sov_dico_ds_temp()  # sauvegarde du dico ds TABLE TEMP
+            """
 
-        # réaffichage des pré requis
-        list_keys = dico_formulaire.keys()
-        list_keys = sorted(
-            list_keys
-        )  # création de la liste triée des clefs du dictionaires formulaire
-        print(list_keys)
-        self.repeating_panel_2.items = list(list_keys)  # liste des clefs (pré requis)
+       # Initialisation drop down textes_formulaire 
+        list_drop_down = []
+        for row in list_textes:
+            cod=row["code"][0:5]
+            if cod == type_formulaire:
+                # si ce texte n'est pas déjà dans les clés du dico_formulaie,je l'affiche
+                if not dico_formulaire.get(row["code"]):
+                    list_drop_down.append((row["text"],row))
+        self.drop_down_textes_formulaire.items=list_drop_down       
+        self.drop_down_textes_formulaire.visible = True
 
         """
-        # réinitialisation dropdown pré requis sans le pré requis sélectionné
-        self.drop_down_pre_requis.items = [
-            (r["requis"], r)
-            for r in app_tables.pre_requis.search(
-                tables.order_by("requis", ascending=True)
-            )
-            if not dico_pre_requis.get(r["code_pre_requis"])
-        ]
-
         global code_stage
         result = anvil.server.call(
             "modif_pre_requis_codes_stages", code_stage, dico_pre_requis
