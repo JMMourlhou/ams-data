@@ -7,6 +7,38 @@ import anvil.server
 from anvil import *  #pour les alertes
 
 
+# =========================================================================
+# appelé par form Formulaire_par_type_stage
+@anvil.server.callable           #modif du dico pré_requis pour un type de stage ds table 'codes stages'
+def modif_dico_formulaire_codes_stages(stage_row, formulaire_dico, type_formulaire):
+    valid=""
+    if not stage_row :
+        valid=False
+    else:
+        print("type_formulaire: ", type_formulaire)
+        print(formulaire_dico)
+        if type_formulaire == "SAT_F":
+            stage_row.update(satisf_q_ferm_template=formulaire_dico)
+            #dico_formulaire = self.row["satisf_q_ferm_template"]
+        if type_formulaire == "SAT_O":
+            stage_row.update(satisf_q_ouv_template=formulaire_dico)
+            #dico_formulaire = self.row["satisf_q_ouv_template"]
+        if type_formulaire == "SUI_F":
+            stage_row.update(suivi_stage_q_ferm_template=formulaire_dico)
+            #dico_formulaire = self.row["suivi_stage_q_ferm_template"]
+        if type_formulaire == "SUI_O":
+            stage_row.update(suivi_stage_q_ouv_template=formulaire_dico)
+            #dico_formulaire = self.row["suivi_stage_q_ouv_template"]
+        if type_formulaire == "com_F":
+            stage_row.update(com_ferm=formulaire_dico)
+            #dico_formulaire = self.row["com_ferm"]
+        if type_formulaire == "com_O":
+            stage_row.update(com_ouv=formulaire_dico)
+            #dico_formulaire = self.row["com_ouv"]
+        valid=True
+    return valid
+
+
 # ==========================================================================================
 #Création d'un nouveau code
 @anvil.server.callable 

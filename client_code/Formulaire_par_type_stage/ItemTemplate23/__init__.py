@@ -34,7 +34,7 @@ class ItemTemplate23(ItemTemplate23Template):
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous vraiment effacer ce code ?",dismissible=False,buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous vraiment enlever ce texte du formulaire ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
             """
             result = anvil.server.call("del_text_formulaire", self.item)
@@ -43,11 +43,11 @@ class ItemTemplate23(ItemTemplate23Template):
                 return
             alert("Effacement effectué !")
             """
-        open_form("Text_formulaires_MAJ_table")
+        open_form("Formulaire_par_type_stage")
         
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous vraiment modifier ce code ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous vraiment modifier ce texte du formulaire ?",buttons=[("oui",True),("non",False)])
         sov_old_text = self.item['text']
         sov_old_code = self.item['code']
         sov_old_obligation = self.item['obligation']
