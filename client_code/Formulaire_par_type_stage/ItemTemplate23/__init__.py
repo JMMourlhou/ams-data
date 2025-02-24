@@ -21,16 +21,16 @@ class ItemTemplate23(ItemTemplate23Template):
         print("form mère atteingnable (en modif): ", self.f) 
         
         # Any code you write here will run before the form opens.
-        row=app_tables.texte_formulaires.get(code=self.item)
-        try:
-            self.text_box_1.text = "  " + row['code']
-            self.text_box_2.text = "  "  + row['text']
-            self.check_box_1.checked = row['obligation']
-            self.button_annuler.tag = row['code']
-        except:
-            alert("Un code texte n'existe plus en table Texte_formulaire")
-            #msg = (f"Un code pré-requis n'existe plus pour:  {row['requis']}")
-            #print(msg)
+        self.text_box_1.text = "  " + self.item[0]
+        self.text_box_2.text = "  "  + self.item[1]
+        
+        if self.item[2] == "obligatoire":
+            self.check_box_1.checked = True
+        else:
+            self.check_box_1.checked = False
+            
+        self.button_annuler.tag = self.item[3] #row['code']
+        
             
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

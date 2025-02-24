@@ -30,10 +30,10 @@ def modif_dico_formulaire_codes_stages(stage_row, formulaire_dico, type_formulai
         if type_formulaire == "SUI_O":
             stage_row.update(suivi_stage_q_ouv_template=formulaire_dico)
             valid=True
-        if type_formulaire == "com_F":
+        if type_formulaire == "COM_F":
             stage_row.update(com_ferm=formulaire_dico)
             valid=True
-        if type_formulaire == "com_O":
+        if type_formulaire == "COM_O":
             stage_row.update(com_ouv=formulaire_dico)
             valid=True
     return valid
