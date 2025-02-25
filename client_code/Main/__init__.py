@@ -189,11 +189,13 @@ class Main(MainTemplate):
                 self.button_qcm.visible = True                  # faire 1 qcm et voir ses résultats
                 self.button_pre_requis.visible = False
                 self.outlined_card_formulaires.visible = False  
-                self.outlined_card_com.visible = False           
+                self.outlined_card_com.visible = False     
+
+                self.column_panel_others.visible = True
 
                 self.outlined_card_niv1.visible = True          # ds le panneau priv niveau 1 ...
-                self.column_panel_formulaires.visible = True     # Voir les résultats des formulaires de suivi et de stisfaction     
-                self.button_create_qcm.visible = False
+                self.column_panel_formulaires.visible = True       # Voir les résultats des formulaires de suivi et de stisfaction     
+                self.button_create_qcm.visible = True
                 self.button_create_recherche.visible = True        # faire une recherche
                 self.column_panel_events.visible = True            # Saisir et voir les évenemnts
 

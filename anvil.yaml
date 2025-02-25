@@ -739,7 +739,7 @@ db_schema:
     - admin_ui: {order: 1.75, width: 119}
       name: prenom
       type: string
-    - admin_ui: {width: 70}
+    - admin_ui: {order: 2, width: 94}
       name: financement
       target: mode_financement
       type: link_single
