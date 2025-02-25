@@ -24,8 +24,8 @@ class Parametres(ParametresTemplate):
 
     def button_gestion_pre_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Formulaire_par_type_stage import Formulaire_par_type_stage
-        open_form('Formulaire_par_type_stage')
+        from ..Pre_R_pour_type_stage import Pre_R_pour_type_stage
+        open_form('Pre_R_pour_type_stage')
 
     
     # PRE REQUIS PERSONNALISé SELECTIONNé, INITIALISATION de DROP DOWN DE TOUS LES STAGES EXISTANTS
@@ -89,4 +89,9 @@ class Parametres(ParametresTemplate):
     def button_create_qcm_copy_click(self, **event_args):
         """This method is called when the button is clicked"""
         alert("Cette fonction est en cours de construction")
+
+    def button_gestion_formulaires_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Formulaire_par_type_stage import Formulaire_par_type_stage
+        open_form("Formulaire_par_type_stage")
  

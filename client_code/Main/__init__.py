@@ -187,7 +187,7 @@ class Main(MainTemplate):
                 self.column_panel_bt_mail.visible = True        # se déconnecter
                 self.outlined_card_pr_qcm.visible = True        
                 self.button_qcm.visible = True                  # faire 1 qcm et voir ses résultats
-                self.button_pre_requis.visible = False
+                self.button_pre_requis.visible = True
                 self.outlined_card_formulaires.visible = False  
                 self.outlined_card_com.visible = False     
 

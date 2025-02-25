@@ -100,7 +100,7 @@ components:
       name: button_textes_formulaires
       properties: {background: 'theme:Primary', foreground: 'theme:Tertiary', text: Textes Formulaires, visible: true}
       type: Button
-    - event_bindings: {click: button_gestion_pre_requis_click}
+    - event_bindings: {click: button_gestion_formulaires_click}
       layout_properties: {grid_position: 'VVLSXD,HFQWDS'}
       name: button_gestion_formulaires
       properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: '... par  stage', tooltip: '', underline: false, visible: true}
