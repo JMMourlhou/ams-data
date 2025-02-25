@@ -163,15 +163,18 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         # boucle sur le dictionnaire dico_formulaire
         global dico_test
         dico_test = {}
-        for clef, valeur in dico_formulaire.items():
-                key=valeur[2]
-                #alert(f"valeur 0: {clef[0]}\n valeur 1: {clef[1]}")
-                key = valeur[2]          # le code du texte est en position 3 dans le dico enregistré ds la table
-                dico_test[key] = [
-                                valeur[0],
-                                valeur[1]    
-                                ]
-        
+        try:
+            for clef, valeur in dico_formulaire.items():
+                    key=valeur[2]
+                    #alert(f"valeur 0: {clef[0]}\n valeur 1: {clef[1]}")
+                    key = valeur[2]          # le code du texte est en position 3 dans le dico enregistré ds la table
+                    dico_test[key] = [
+                                    valeur[0],
+                                    valeur[1]    
+                                    ]
+        except:
+            alert("La colonne du dict est 'Null': Vérifier la !")
+            self.button_annuler_click()
 
     def sov_dico_ds_temp(self, **event_args):
         global dico_formulaire
