@@ -85,4 +85,8 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..Text_formulaires_MAJ_table import Text_formulaires_MAJ_table
         open_form("Text_formulaires_MAJ_table")
+
+    def button_create_qcm_copy_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        alert("Cette fonction est en cours de construction")
  

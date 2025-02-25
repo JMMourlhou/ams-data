@@ -17,10 +17,11 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
         # Any code you write here will run before the form opens.
         self.qcm_row = None
         # acquisition du user
-        user=anvil.users.get_user()        
+        user=anvil.users.get_user()
         if user:
             self.admin = user['role']
-            if self.admin[0:1]=="S":         # si stagiaire
+            rol = self.admin[0:1]
+            if rol=="S" or rol=="T" or rol=="J":         # si stagiaire
                self.label_3.text = "Q.C.M"
         
         #initialisation du drop down des qcm créés et barêmes, n'affiche que les qcm visibles ET ds dict d'autorisations du stqgiaire (stagiaires inscrits)
@@ -37,8 +38,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
                     for clef, valeur in droits_stagiaire.items():   #clef=numqcm   valeur=("intitulé", "TRUE/False")   True si on le montre
                         print(clef,valeur)
                         if valeur[1]=="True":
-                            dict[clef]= valeur  # num_qcm:intitulé
-            
+                            dict[clef]= valeur  # num_qcm:intitulé 
         # J'initialise la liste en transformant le "dict" des qcm authorisés en liste
         # boucle de "dict"
         liste_qcm_rows=[]   # liste des qcm lus
