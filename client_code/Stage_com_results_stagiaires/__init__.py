@@ -2,8 +2,6 @@ from ._anvil_designer import Stage_com_results_stagiairesTemplate
 from .. import French_zone  # POur acquisition de date et heure Francaise (Browser time)
 from anvil import *
 import stripe.checkout
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
 
 import anvil.server
 import anvil.users

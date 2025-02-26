@@ -933,9 +933,6 @@ services:
   server_config: {user_table: users}
   source: /runtime/services/anvil/users.yml
 - client_config: {}
-  server_config: {enc_delegation_refresh_token: 8+TaxIyUhdkELYALRbHMlfx2L8Wv5TxtgVxFR202/f31KQ7vY4xAZVH+45XZnmnEfaqJC43GFdGlPvkZlQgf75ImSygBg2cllHI8b08Xug6qjG2ZtPTZ6Ee7xGWJs6T4rsu/R9F6RYioUzjYsPpw+rHH0y1lt/xq60UNTT6L+bhFdiowhKmToz648QpunO1zct60uEL5m9/9e8avlPQ5QxeTaEr6ccr9eoyXRjcJlOE7uXrmFDG69CZfx/Lv2D3opm7cFYKPxhMpo4y/eEvG7VZ37W2/4JaDa77662kedKj4B1HUKZpYvtqfjLyr1g==}
-  source: /runtime/services/google.yml
-- client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
 - client_config: {}

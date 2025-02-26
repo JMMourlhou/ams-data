@@ -227,9 +227,7 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
         self.label_10.background = nom_couleur10
 
         # affichage des formes fermées  en fonction de leur nb
-        if (
-            nb_questions_ferm > 0
-        ):  # Check du nb de questions fermées à afficher et affectation des questions
+        if (nb_questions_ferm > 0):  # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
             self.label_1.text = (
                 dico_q_ferm["1"][0] + "        " + str(pourcent_q1) + " %"

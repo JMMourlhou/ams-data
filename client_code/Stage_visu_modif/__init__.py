@@ -7,7 +7,6 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from datetime import datetime
 from .. import French_zone
-#from anvil import open_form
 
 global intitul
 intitul=""
@@ -83,7 +82,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.check_box_allow_bg_task.checked = stage_row['allow_bgt_generation']
             self.check_box_allow_satisf.checked = stage_row['saisie_satisf_ok']
             self.check_box_allow_suivi.checked = stage_row['saisie_suivi_ok']
-            self.check_box_allow_com.ckecked = stage_row['display_com']
+            self.check_box_allow_com.checked = stage_row['display_com']
+            
             
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
@@ -173,6 +173,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 else:
                     alert("Attention, créez d'abord un formulaire de suivi pour ce type de stage !")
                     self.check_box_allow_suivi.checked = False
+        else:
+            # effacement du formulaire de com (permet la future mise à jour si nécessaire)
+            anvil.server.call("efface_suivi_pour_un_stage",self.stage_row)
+                    
         
         # si check box F_satisf validé: test si un dict de satisf existe pour ce stage 
         if self.check_box_allow_satisf.checked is True:
@@ -188,10 +192,13 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 else:
                     alert("Attention, créez d'abord un formulaire de satisfaction pour ce type de stage !")
                     self.check_box_allow_satisf.checked = False 
+        else:
+            # effacement du formulaire de satisf (permet la future mise à jour si nécessaire)
+            anvil.server.call("efface_satisf_pour_un_stage",self.stage_row)           
 
         # si check box F_com validé: test si un dict de com existe pour ce stage 
         if self.check_box_allow_com.checked is True:
-            if self.stage_row['com_ferm'] is None: # si pas de dict de form de satisf question ferm pour ce stage
+            if self.stage_row['com_ferm'] is None: # si pas de dict de form de com question ferm pour ce stage
                 # lecture de table mère 'code_stage' pour verif si un dict template existant
                 code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
                 if code_stage_row['com_ferm'] is not {}:
@@ -202,6 +209,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 else:
                     alert("Attention, créez d'abord un formulaire de communication pour ce type de stage !")
                     self.check_box_allow_com.checked = False 
+        else:
+            # effacement du formulaire de com (permet la future mise à jour si nécessaire)
+            anvil.server.call("efface_com_pour_un_stage",self.stage_row)
+            
         # ! modif du  num de stage possible !!!
         result = anvil.server.call("modif_stage", row,
                                                 self.text_box_num_stage.text,  # num du stage  de la ligne  
@@ -215,12 +226,12 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                                                 self.check_box_allow_bg_task.checked,
                                                 self.check_box_allow_satisf.checked,
                                                 self.check_box_allow_suivi.checked,
-                                                self.check_box_allow_com.checked,
+                                                self.check_box_allow_com.checked
                                                  )
         if result is True :
-            alert("Stage enregisté !")
+            alert("Stage mis à jour !")
         else :
-            alert("Stage non enregisté !")
+            alert("Stage non mofifié !")
         self.button_annuler_click()
 
    

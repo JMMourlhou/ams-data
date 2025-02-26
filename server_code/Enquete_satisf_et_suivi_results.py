@@ -78,30 +78,3 @@ def run_bg_task_suivi(type_suivi, stage_num, type, row):
     task = anvil.server.launch_background_task('generate_suivi_results', type_suivi, stage_num, type, row)
     return task
 
-# Appelé par Stage_visu_modif
-# Inclure pour tous les stagiaires du stage_num les formulaires de satisfaction quand on a créé ou maj ce formulaire 
-@anvil.server.callable
-def update_satisf_pour_un_stage(stage_row, satis_dico2_q_ouv, satis_dico1_q_ferm):   # stage_row : 1 row table 'stages' 
-    stage_row.update( satis_dico1_q_ferm = satis_dico1_q_ferm,
-                      satis_dico2_q_ouv = satis_dico2_q_ouv
-                        )
-    return
-
-
-# Appelé par Stage_visu_modif   
-# Inclure pour tous les stagiaires du stage_num les formulaires de suivi quand on a créé ou maj ce formulaire
-@anvil.server.callable
-def update_suivi_pour_un_stage(stage_row, suivi_dico1_q_ouv, suivi_dico1_q_ferm):   # stage_row : 1 row table 'stages' 
-    stage_row.update( suivi_dico1_q_ferm = suivi_dico1_q_ferm,
-                      suivi_dico1_q_ouv = suivi_dico1_q_ouv
-                        )
-    return
-
-# Appelé par Stage_visu_modif   
-# Inclure pour tous les stagiaires du stage_num les formulaires de com quand on a créé ou maj ce formulaire
-@anvil.server.callable
-def update_com_pour_un_stage(stage_row, com_ouv, com_ferm):   # stage_row : 1 row table 'stages' 
-    stage_row.update( com_ferm = com_ferm,
-                      com_ouv = com_ouv
-                        )
-    return

@@ -85,7 +85,6 @@ class Stage_form_com(Stage_form_comTemplate):
             for row in liste0:
                 # lecture fichier père stage
                 stage = app_tables.stages.get(numero=row["stage"]["numero"])
-                alert()
                 if (stage["display_com"] is True):  # si autorisé à saisir le formulaire, je l'affiche
                     # lecture fichier père type de stage
                     type = app_tables.codes_stages.get(

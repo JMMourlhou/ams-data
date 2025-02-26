@@ -99,7 +99,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
         dico_q_ouv = {}
         dico_q_ferm = stage_row['satis_dico1_q_ferm']
         global nb_questions_ferm                   # nb questions fermées (testé en validation)
-        nb_questions_ferm = int(dico_q_ferm['NBQ'])   # nb de questions fermées ds le dico
+        nb_questions_ferm = len(dico_q_ferm)   # nb de questions fermées ds le dico = nb de clés
 
         if nb_questions_ferm > 0:   # Check du nb de questions fermées à afficher et affectation des questions
             self.column_panel_1.visible = True
@@ -134,7 +134,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
 
         dico_q_ouv = stage_row['satis_dico2_q_ouv']  # check du nb de questions ouvertes à afficher et affectation des questions
         global nb_questions_ouvertes  # nb questions ouvertes
-        nb_questions_ouvertes = int(dico_q_ouv['NBQ'])
+        nb_questions_ouvertes = len(dico_q_ouv)
         if nb_questions_ouvertes > 0:
             self.column_panel_a1.visible = True
             self.label_a1.text = dico_q_ouv['1'][0]

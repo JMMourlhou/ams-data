@@ -158,12 +158,12 @@ components:
       - event_bindings: {change: check_box_allow_suivi_change}
         layout_properties: {grid_position: 'THRZKB,UMNNFI'}
         name: check_box_allow_suivi
-        properties: {align: left, background: '', font_size: 9, foreground: 'theme:On Primary', text: Form de suivi}
+        properties: {align: left, background: '', font_size: 9, foreground: 'theme:On Primary', text: Form. de suivi}
         type: CheckBox
       - event_bindings: {change: check_box_allow_com_change}
-        layout_properties: {grid_position: 'RNYVGK,OTNWMI'}
+        layout_properties: {grid_position: 'AMAMCS,UBBAZN'}
         name: check_box_allow_com
-        properties: {align: left, background: '', font_size: 9, foreground: 'theme:On Primary', text: Form.  communication}
+        properties: {font_size: 9, foreground: 'theme:On Primary', text: Form. communication}
         type: CheckBox
       layout_properties: {grid_position: 'WSXPGK,NNNVVG MHMDWW,SXBDKJ'}
       name: column_panel_4
