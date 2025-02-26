@@ -31,7 +31,8 @@ class Stage_suivi_results(Stage_suivi_resultsTemplate):
         # sélection des stages visualisés ds dropdown (si la saisie du formulaire a été authorisée (table 'stages': saisie_suivi_ok=True))
         liste_stage_drop_down = []
         liste_stages = app_tables.stages.search(
-            tables.order_by("numero", ascending=False), saisie_suivi_ok=True
+            tables.order_by("numero", ascending=False),
+            saisie_suivi_ok=True
         )
         
         # initialistaion de la drop down codes stagiaires
