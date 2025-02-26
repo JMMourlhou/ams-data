@@ -147,10 +147,10 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
 
         # AFFICHAGE EN FONCTION DU NB DE QUESTIONS
         global nb_questions_ferm  # nb questions fermées (testé en validation)
-        nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
+        nb_questions_ferm = len(dico_q_ferm)  # nb de questions fermées ds le dico
         
         global nb_questions_ouvertes  # nb questions ouvertes
-        nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
+        nb_questions_ouvertes = len(dico_q_ouv)
         
 
         if (nb_questions_ferm > 0):  # Check du nb de questions fermées à afficher et affectation des questions
