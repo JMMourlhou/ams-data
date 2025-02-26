@@ -142,7 +142,8 @@ class Stage_form_com(Stage_form_comTemplate):
         dico_q_ouv = {}
         dico_q_ferm = stage_row["com_ferm"]
         global nb_questions_ferm  # nb questions fermées (testé en validation)
-        nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
+        #nb_questions_ferm = int(dico_q_ferm["NBQ"])  # nb de questions fermées ds le dico
+        nb_questions_ferm = len(dico_q_ferm)  # nb de questions fermées ds le dico
         
         #affichage des formes fermées  en fonction de leur nb 
         if nb_questions_ferm > 0:  # Check du nb de questions fermées à afficher et affectation des questions
@@ -179,7 +180,8 @@ class Stage_form_com(Stage_form_comTemplate):
         #affichage des formes ouvertes en fonction de leur nb 
         dico_q_ouv = stage_row["com_ouv"]  # check du nb de questions ouvertes à afficher et affectation des questions
         global nb_questions_ouvertes  # nb questions ouvertes
-        nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
+        #nb_questions_ouvertes = int(dico_q_ouv["NBQ"])
+        nb_questions_ouvertes = len(dico_q_ouv)
         if nb_questions_ouvertes > 0:
             self.column_panel_a1.visible = True
             self.label_a1.text = dico_q_ouv["1"][0]
@@ -252,7 +254,7 @@ class Stage_form_com(Stage_form_comTemplate):
                 self.text_area_a10.placeholder = "Votre réponse ... (facultative)"
         self.button_valider.visible = True
 
-    def check_box_1_1_change(self, **event_args):  # 1 seule réponse doit être checker
+    def check_box_1_1_change(self, **event_args):  # 1 seule réponse doit être checké
         """This method is called when this checkbox is checked or unchecked"""
         if self.check_box_1_1.checked is True:
             self.check_box_1_2.checked = False
