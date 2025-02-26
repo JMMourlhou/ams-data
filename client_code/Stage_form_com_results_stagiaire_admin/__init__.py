@@ -94,14 +94,10 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
         dico_q_ferm = stage_row["com_ferm"]
         dico_q_ouv = stage_row["com_ouv"]
         # nb_questions_ferm
-        nb_questions_ferm = int(
-            dico_q_ferm["NBQ"]
-        )  # nb de questions fermées ds le dico
+        nb_questions_ferm = len(dico_q_ferm) # nb de questions fermées ds le dico
         # alert(f"nb de questions ferm : {nb_questions_ferm}")
         # nb_questions_ouv
-        nb_questions_ouvertes = int(
-            dico_q_ouv["NBQ"]
-        )  # nb de questions fermées ds le dico
+        nb_questions_ouvertes = len(dico_q_ouv)  # nb de questions fermées ds le dico
         # alert(f"nb de question ouv: {nb_questions_ouvertes}")
 
         # =========================== Boucle sur tous les formulaires pour les questions fermées
@@ -325,6 +321,12 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
             self.label_a10.text = question_ouv10
             self.text_area_a10.text = rep_ouv10
 
+        if nb_questions_ferm == 1:
+            dico_q_ferm["2"]={""} 
+            
+
+
+            
         # sauvegarde ds table com si pas déjà sauvegardée. (date et user existant ds table 'com_sum')
         # lecture de table 'com_sum'
         row = app_tables.com_sum.search(stage=stage_row,
