@@ -40,7 +40,9 @@ def add_stage(code_stage,     # row codes_stage concernée
                               satis_dico1_q_ferm=code_stage["satisf_q_ferm_template"],  # copie du template satisf de la table "code_stages", questions fermées
                               satis_dico2_q_ouv=code_stage["satisf_q_ouv_template"],     # copie du template satisf de la table "code_stages", questions ouvertes
                               suivi_dico1_q_ferm=code_stage["suivi_stage_q_ferm_template"],  # copie du template suivi de la table "code_stages", questions fermées
-                              suivi_dico2_q_ouv=code_stage["suivi_stage_q_ouv_template"]    # copie du template suivi de la table "code_stages", questions ouvertes
+                              suivi_dico2_q_ouv=code_stage["suivi_stage_q_ouv_template"],    # copie du template suivi de la table "code_stages", questions ouvertes
+                              com_ouv=code_stage["com_ouv"],                              # copie du template com de la table "code_stages", questions ouvertes
+                              com_ferm=code_stage["com_ferm"]                             # copie  du template com de la table "code_stages", questions fermées
                              )
         
                  
@@ -70,7 +72,8 @@ def modif_stage(code,    # row stage
               commentaires,
               allow_bgt_generation,  # True/False
               allow_form_satisf,     # True/False 
-              allow_form_suivi       # True/False 
+              allow_form_suivi,       # True/False 
+              allow_form_com  
              ):
     numero=int(numero)
 
@@ -103,7 +106,8 @@ def modif_stage(code,    # row stage
                     commentaires = commentaires,
                     allow_bgt_generation = allow_bgt_generation,
                     saisie_satisf_ok =allow_form_satisf,         # formulaire de satisf autorisé ? T/F
-                    saisie_suivi_ok = allow_form_suivi           # formulaire de suivi autorisé ? T/F
+                    saisie_suivi_ok = allow_form_suivi,           # formulaire de suivi autorisé ? T/F
+                    display_com = allow_form_com                    # formulaire de communication autorisé ? T/F
                     )
         valid=True
     return valid

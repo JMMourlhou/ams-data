@@ -83,6 +83,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.check_box_allow_bg_task.checked = stage_row['allow_bgt_generation']
             self.check_box_allow_satisf.checked = stage_row['saisie_satisf_ok']
             self.check_box_allow_suivi.checked = stage_row['saisie_suivi_ok']
+            self.check_box_allow_com.ckecked = stage_row['display_com']
             
             """ *************************************************************************"""
             """       Création de liste et trombi en back ground task si stagiaires ds stage     """
@@ -187,7 +188,20 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                 else:
                     alert("Attention, créez d'abord un formulaire de satisfaction pour ce type de stage !")
                     self.check_box_allow_satisf.checked = False 
-                    
+
+        # si check box F_com validé: test si un dict de com existe pour ce stage 
+        if self.check_box_allow_com.checked is True:
+            if self.stage_row['com_ferm'] is None: # si pas de dict de form de satisf question ferm pour ce stage
+                # lecture de table mère 'code_stage' pour verif si un dict template existant
+                code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
+                if code_stage_row['com_ferm'] is not {}:
+                    r=alert("voulez-vous copier le formulaire de communication existant pour ce type de stage pour les stagiaires de ce stage ?", dismissible=False ,buttons=[("oui",True),("non",False)])
+                    if r :   # Oui
+                        # copie dans table stage pour ce stage
+                        anvil.server.call("update_com_pour_un_stage",self.stage_row, code_stage_row['com_ouv'], code_stage_row['com_ferm'])
+                else:
+                    alert("Attention, créez d'abord un formulaire de communication pour ce type de stage !")
+                    self.check_box_allow_com.checked = False 
         # ! modif du  num de stage possible !!!
         result = anvil.server.call("modif_stage", row,
                                                 self.text_box_num_stage.text,  # num du stage  de la ligne  
@@ -200,7 +214,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
                                                 self.text_area_commentaires.text,
                                                 self.check_box_allow_bg_task.checked,
                                                 self.check_box_allow_satisf.checked,
-                                                self.check_box_allow_suivi.checked
+                                                self.check_box_allow_suivi.checked,
+                                                self.check_box_allow_com.checked,
                                                  )
         if result is True :
             alert("Stage enregisté !")
@@ -238,6 +253,10 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         self.button_validation.visible = True
 
     def check_box_allow_suivi_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_validation.visible = True
+
+    def check_box_allow_com_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         self.button_validation.visible = True
 
@@ -304,6 +323,8 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.drop_down_code_stage.focus()
             return
         self.text_box_intitule.text=row['intitulé']
+
+    
 
 
 

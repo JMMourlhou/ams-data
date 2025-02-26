@@ -88,19 +88,30 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
         cadre = first_row["cadre"]
         self.label_cadre.text = f"({cadre})"
 
-
-        
+   
         # extraction des 2 dictionnaires du stage
         dico_q_ferm = stage_row["com_ferm"]
         dico_q_ouv = stage_row["com_ouv"]
         # nb_questions_ferm
         nb_questions_ferm = len(dico_q_ferm) # nb de questions fermées ds le dico
-        # alert(f"nb de questions ferm : {nb_questions_ferm}")
+        #alert(f"nb de questions ferm : {nb_questions_ferm}")
+        # création des questions non existaantes ex: nb de questions:8, initialisation du dico pour questions 9, 10 à ""
+        x=10
+        while x > nb_questions_ferm:
+            dico_q_ferm[str(x)] = [                          # AJOUT DE LA CLEF DS LE DICO
+                                "",
+                                "",
+                                ""
+                                ]
+            #alert(f"Création à blanc pour x={x}: '{dico_q_ferm[str(x)]}'")
+            x = x-1
+            
         # nb_questions_ouv
         nb_questions_ouvertes = len(dico_q_ouv)  # nb de questions fermées ds le dico
         # alert(f"nb de question ouv: {nb_questions_ouvertes}")
 
         # =========================== Boucle sur tous les formulaires pour les questions fermées
+        
         # initialisation des compteurs
         points_q1 = 0
         points_q2 = 0
@@ -320,13 +331,8 @@ class Stage_form_com_results_stagiaire_admin(Stage_form_com_results_stagiaire_ad
             self.column_panel_a10.visible = True
             self.label_a10.text = question_ouv10
             self.text_area_a10.text = rep_ouv10
-
-        if nb_questions_ferm == 1:
-            dico_q_ferm["2"]={""} 
-            
-
-
-            
+ 
+                    
         # sauvegarde ds table com si pas déjà sauvegardée. (date et user existant ds table 'com_sum')
         # lecture de table 'com_sum'
         row = app_tables.com_sum.search(stage=stage_row,
