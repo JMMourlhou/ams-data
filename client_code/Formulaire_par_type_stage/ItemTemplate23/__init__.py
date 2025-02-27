@@ -33,13 +33,13 @@ class ItemTemplate23(ItemTemplate23Template):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment enlever ce texte du formulaire ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
-            row_temp=app_tables.temp.search()[0]
+            row_temp=app_tables.temp.search()[0]         # lecture fichier temp du dico utilisé
             dico_formulaire=row_temp['dico_formulaire']
             key=self.button_annuler.tag
             del dico_formulaire[key]
             alert("Effacement effectué !")
             
-        self.f.sov_dico(dico_formulaire)   
+            self.f.sov_dico(dico_formulaire)   
         code_stage_row = self.f.drop_down_code_stage.selected_value
         type_formulaire = self.f.drop_down_type_formulaire.selected_value
         open_form("Formulaire_par_type_stage", code_stage_row, type_formulaire)
