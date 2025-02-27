@@ -21,6 +21,23 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.drop_down_bareme.items=["1","2","3","4","5","10"]
         self.drop_down_bareme.selected_value = "1"
         self.drop_down_nb_options.items=([("Vrai/Faux", 1), ("2 options", 2), ("3 options", 3), ("4 options", 4), ("5 options", 5)])
+        # ______________________________________________________________________________________________________________
+        #initialisation drop down owner,  propriétaires potentiels, tous sauf "S",
+        liste = app_tables.users.search(
+                                            q.fetch_only("nom","prenom","email","role"),
+                                            tables.order_by("prenom", ascending=True),
+                                            q.not_ (role = "S")
+                                        )
+        liste2 = []
+        for qcm_owner in liste:
+            liste2.append((qcm_owner["prenom"]+" "+qcm_owner["nom"],qcm_owner))    # doit renvoyer user row pour la création du qcm
+        self.drop_down_owner.items=liste2
+        try:
+            user=anvil.users.get_user()
+            self.drop_down_owner.selected_value = user    # essai d'initialiser la drop down sur le user 
+        except:
+            pass
+        self.text_box_destination.focus()
         # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  Ré-affichage ?   +++++++++++++++++++++++++++++
         if qcm_descro_nb is not None:      #réinitialisation de la forme après une création ou modif
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
@@ -31,15 +48,22 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
+        
         qcm_row = self.drop_down_qcm_row.selected_value
         user=anvil.users.get_user()
 
-        # test si il est le propriétaire
-        if qcm_row["qcm_owner"]["email"] != user["email"]:
+        # test s'il est le propriétaire
+        if qcm_row["qcm_owner"] != user["email"] and user["role"] != "B" and user["role"] != "A":
             alert("Vous n'êtes pas le propriétaire de ce QCM, \nVous ne pouvez pas le modifier !")
             return
-        
-        # Pour les lignes QCM déjà crée du qcm choisi
+        # __________________________________________________________ CREATION QCM   /   MODIF INTITULE ou propriétaire
+        self.text_box_num_qcm.text = qcm_row["qcm_nb"]
+        self.text_box_destination.text = qcm_row["destination"]
+        self.drop_down_owner.selected_value = user["email"]
+        self.check_box_visible.checked = qcm_row["visible"]
+        self.column_panel_creation_qcm.visible = True
+        # _______________________________________________________________________________
+        # Pour les lignes QCM déjà crées du qcm choisi
         global liste
         liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
         nb_questions = len(liste)
@@ -60,7 +84,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             
          # affiches les lignes du qcm
         self.label_3.text = "Mise à jour du Q.C.M " + qcm_row["destination"]
-        self.column_panel_1.visible = True
+        self.column_panel_question.visible = True
         self.affiche_lignes_qcm(liste)
 
 
@@ -254,24 +278,52 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             result = anvil.server.call("modify_users_temp2", user, "test")
             self.affiche_lignes_qcm()
             result = anvil.server.call("modify_users_temp2", user, None)   # je remets temp2 à vide
-
+            
+    #   _________________________________________________________________________________________________________
+    #                             CREATION D'UN QCM
+    #   _________________________________________________________________________________________________________
     def button_creation_click(self, **event_args):
         """This method is called when the button is clicked"""
+        self.column_panel_creation_qcm.visible = True
         self.column_panel_question.visible = False
         self.column_panel_content.visible = False
-        # initialisation du num en lisant tous les QCM dispo et en ajoutant 1
+        self.button_del.visible = False
+        self.drop_down_qcm_row.visible = False
+        
+        # initialisation du nx num de QCM en lisant tous les QCM dispo et en ajoutant 1
         nb_qcm = app_tables.qcm_description.search()
         self.text_box_num_qcm.text=len(nb_qcm)+1
-        #initialisation des propriétaires potentiels, bureaux/formateurs
-        liste = app_tables.users.search(
-                                            q.fetch_only("nom","prenom","email","role"),
-                                            tables.order_by("prenom", ascending=True),
-                                            q.not_ (role = "S") or (role = "T")
-                                                     
-                                        )
-            
-        liste2 = []
-        for qcm_owner in liste:
-            liste2.append((qcm_owner["prenom"]+" "+qcm_owner["nom"],qcm_owner["email"]))
-        self.drop_down_owner.items=liste2
-    
+        
+    def text_box_destination_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_valid_creation.visible = True
+        
+    def button_valid_creation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # Description > 5 caractères ?
+        if len(self.text_box_destination.text) < 5:
+            alert("La description du QCM doit être supérieure à 5 caractères !")
+            self.text_box_destination.focus()
+
+        # Un propriétaire doit être choisi
+        if self.drop_down_owner.selected_value is None:
+            alert("Choisissez un propriétaire ! ")
+            self.text_box_destination.focus()
+
+        # envoi en écriture si validation
+        r=alert("Confirmez la création de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
+        if r :   # oui
+            result = anvil.server.call("qcm_création", self.text_box_num_qcm.text,
+                                                                self.text_box_destination.text,
+                                                                self.drop_down_owner.selected_value,   # user row
+                                                                self.check_box_visible.checked
+                                               )
+            if result is not True:
+                alert("Création du Qcm non effectué !")
+                return
+            else:          
+                self.column_panel_question.visible = True
+
+ 
+        
+        
