@@ -37,9 +37,24 @@ class ItemTemplate23(ItemTemplate23Template):
             dico_formulaire=row_temp['dico_formulaire']
             key=self.button_annuler.tag
             del dico_formulaire[key]
-            alert("Effacement effectué !")
-            
-            self.f.sov_dico(dico_formulaire)   
+
+            # renumériser les clés des questions car une question a pu être enlevée en template 23
+            # j'utilise un dictionaire temporaire dico_temp
+            dico_temp = {}
+            i=1
+            for key, valeur in dico_formulaire.items():  #lecture à partir de la liste des clés
+                key_temp = str(i)
+                dico_temp[key_temp] = [                          # AJOUT DE LA CLEF DS LE DICO
+                                    valeur[0],     # texte question 
+                                    valeur[1],     # oblig
+                                    valeur[2],     # code texte
+                                    ]
+                i += 1
+            dico_formulaire = dico_temp
+
+            # sauvegarde 
+            self.f.sov_dico(dico_formulaire)  
+        # réouverure de la forme mère pour actualisation de l'affichage    
         code_stage_row = self.f.drop_down_code_stage.selected_value
         type_formulaire = self.f.drop_down_type_formulaire.selected_value
         open_form("Formulaire_par_type_stage", code_stage_row, type_formulaire)
@@ -62,9 +77,10 @@ class ItemTemplate23(ItemTemplate23Template):
                                 obl,
                                 self.item[3]
                                 ]
-            alert("Modif effectuée !")
-            
-        self.f.sov_dico(dico_formulaire)   
+        
+            # sauvegarde
+            self.f.sov_dico(dico_formulaire)  
+        # réouverure de la forme mère pour actualisation de l'affichage     
         code_stage_row = self.f.drop_down_code_stage.selected_value
         type_formulaire = self.f.drop_down_type_formulaire.selected_value
         open_form("Formulaire_par_type_stage", code_stage_row, type_formulaire)

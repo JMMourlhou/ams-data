@@ -36,5 +36,7 @@ components:
   name: flow_panel_1
   properties: {align: center, background: 'theme:Primary', border: '', foreground: '', role: null, spacing: medium, spacing_above: none, spacing_below: none, tooltip: '', vertical_align: middle, visible: true}
   type: FlowPanel
-container: {type: ColumnPanel}
+container:
+  properties: {visible: true}
+  type: ColumnPanel
 is_package: true

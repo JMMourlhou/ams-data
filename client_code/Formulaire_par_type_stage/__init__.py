@@ -18,6 +18,12 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.label_sov_dico.text = {}
+        
+        # si code_stage="" = "", c'est une ouverture normale
+        # initilistaion du dico_formulaire ds TABLE TEMP    
+        table_temp = app_tables.temp.search()[0]  # sauvegarde du dico ds TABLE TEMP
+        table_temp.update(dico_formulaire={})
+        
         # Initialisation drop down codes stages
         liste = [(r["code"], r)for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]
         self.drop_down_code_stage.items = liste
@@ -32,15 +38,22 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
     def drop_down_code_stage_change(self, **event_args):
         """This method is called when an item is selected"""
         # lecture du dictionaire ds table codes_stages pour le stage sélectionné
+        self.drop_down_type_formulaire.selected_value = None
         self.row_stage = self.drop_down_code_stage.selected_value
         if self.row_stage is None:
             alert("Vous devez sélectionner un stage !")
             self.drop_down_code_stage.focus()
             return
         self.drop_down_type_formulaire.visible = True
+        
          
     def drop_down_type_formulaire_change(self, **event_args):
         """This method is called when an item is selected"""
+        # initilistaion du dico_formulaire ds TABLE TEMP    
+        table_temp = app_tables.temp.search()[0]  # sauvegarde du dico ds TABLE TEMP
+        table_temp.update(dico_formulaire={})
+        # initilisation du drop down formulaire
+        self.drop_down_textes_formulaire.selected_value = None
         global dico_formulaire
         self.repeating_panel_2.visible = False
         type_formulaire = self.drop_down_type_formulaire.selected_value
@@ -82,32 +95,12 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         else:
             clef = row["code"]  # extraction de la clef à ajouter à partir de la row sélectionnée de la dropbox
 
-        
-        
-
         # relecture du fichier formulaire en temp car une question peut avoir été détruite en template 23 
         row_temp=app_tables.temp.search()[0]
         dico_formulaire=row_temp['dico_formulaire']
-
-        # renumériser les clés des questions car une question a pu être enlevée en template 23
-        # j'utilise un dictionaire temporaire dico_temp
-        list_keys = []
-        dico_temp = dico_formulaire
-        cpt=1
-        list_keys = dico_formulai.keys()
-        for cle in list_keys:  #lecture à partir de la liste des clés
-            key_temp = str(cpt)
-            dico_test[key_temp] = [                          # AJOUT DE LA CLEF DS LE DICO
-                                dico_formulaire[key_temp][0],     # texte question 
-                                dico_formulaire[key_temp][1],     # oblig
-                                dico_formulaire[key_temp][2],     # code texte
-                                ]
-            cpt += 1
-        dico_formulaire = dico_temp
         
         # rajout clef/valeur ds dico dico_formulaire
         clef = str(len(dico_formulaire)+1)
-        alert(f"clef: {clef}")
         obl = ""
         if row["obligation"] is True:
             obl = "obligatoire"
@@ -133,7 +126,7 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
                 
         # affichage repeating panel et maj drop down des textes dispos    
         self.maj_display(dico_formulaire) 
-        self.sov_dico(dico_formulaire)
+        self.sov_dico(dico_formulaire) 
         
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -144,6 +137,10 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         
         # affichage du repeating panel des textes dèjà dans le dictionaire lu 
         if dico_formulaire != {}:
+            # initialisation sauvegarde du dico_formulaire ds TABLE TEMP au cas où on efface une question dès l'affichage    
+            table_temp = app_tables.temp.search()[0]  # sauvegarde du dico ds TABLE TEMP
+            table_temp.update(dico_formulaire=dico_formulaire)
+            
             # dico lu de la table codes_stages, col du formulaire choisi doit être transformé en liste pour affichage ds le repeat panel
             list_keys = dico_formulaire.keys()
             print('nb de clés: ',len(list_keys))
@@ -180,7 +177,7 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         type_formulaire = self.drop_down_type_formulaire.selected_value
         result = anvil.server.call("modif_dico_formulaire_codes_stages", code_stage_row, dico_formulaire, type_formulaire )
         if not result:
-            alert("Erreur: l'écriture du dictionnaire non effectuée !")
+            alert("Erreur: écriture du dictionnaire non effectuée !")
             return
             
         # sauvegarde du dico_formulaire ds TABLE TEMP    
@@ -203,6 +200,11 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
                                     ]
         except:
             alert("La colonne du dict est 'Null': on la modifie en {} !")
+            
+            # initilistaion du dico_formulaire ds TABLE TEMP    
+            table_temp = app_tables.temp.search()[0]  # sauvegarde du dico ds TABLE TEMP
+            table_temp.update(dico_formulaire={}) 
+            
             dico_formulaire={}
             self.sov_dico(dico_formulaire)
             self.drop_down_type_formulaire_change()
