@@ -522,6 +522,12 @@ db_schema:
     - admin_ui: {width: 538}
       name: rep_dico_rep_ouv
       type: simpleObject
+    - admin_ui: {order: 6, width: 200}
+      name: nom
+      type: string
+    - admin_ui: {order: 7, width: 200}
+      name: prenom
+      type: string
     server: full
     title: Stage_satisf
   stage_suivi:

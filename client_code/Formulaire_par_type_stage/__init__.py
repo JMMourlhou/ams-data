@@ -45,7 +45,8 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
             self.drop_down_code_stage.focus()
             return
         self.drop_down_type_formulaire.visible = True
-        
+        self.repeating_panel_2.visible = False
+        self.drop_down_textes_formulaire.visible = False
          
     def drop_down_type_formulaire_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -54,8 +55,8 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
         table_temp.update(dico_formulaire={})
         # initilisation du drop down formulaire
         self.drop_down_textes_formulaire.selected_value = None
-        global dico_formulaire
         self.repeating_panel_2.visible = False
+        global dico_formulaire
         type_formulaire = self.drop_down_type_formulaire.selected_value
         type_formulaire = type_formulaire[0:5]
         
