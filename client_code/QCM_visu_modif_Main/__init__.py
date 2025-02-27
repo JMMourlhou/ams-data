@@ -14,7 +14,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.column_panel_1.visible = False
+        self.column_panel_question.visible = False
         #initialisation des drop down des qcm créés et barêmes
         self.image_1.source = None
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search(tables.order_by("destination", ascending=True))]
@@ -254,3 +254,24 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             result = anvil.server.call("modify_users_temp2", user, "test")
             self.affiche_lignes_qcm()
             result = anvil.server.call("modify_users_temp2", user, None)   # je remets temp2 à vide
+
+    def button_creation_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.column_panel_question.visible = False
+        self.column_panel_content.visible = False
+        # initialisation du num en lisant tous les QCM dispo et en ajoutant 1
+        nb_qcm = app_tables.qcm_description.search()
+        self.text_box_num_qcm.text=len(nb_qcm)+1
+        #initialisation des propriétaires potentiels, bureaux/formateurs
+        liste = app_tables.users.search(
+                                            q.fetch_only("nom","prenom","email","role"),
+                                            tables.order_by("prenom", ascending=True),
+                                            q.not_ (role = "S") or (role = "T")
+                                                     
+                                        )
+            
+        liste2 = []
+        for qcm_owner in liste:
+            liste2.append((qcm_owner["prenom"]+" "+qcm_owner["nom"],qcm_owner["email"]))
+        self.drop_down_owner.items=liste2
+    
