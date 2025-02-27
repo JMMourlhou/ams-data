@@ -202,7 +202,7 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
     
     # Del of stagiaire in the stage
     row.delete()
-    valid="Formulaire de satisfaction modifié pour ce stagiaire !"
+    valid="Stagiaire retiré de ce stage !"
    
     return valid
 
@@ -218,9 +218,6 @@ def init_formulaire_satis_stagiaire(stagiaire_row, bool):
     valid="Formulaire de satisfaction modifié pour ce stagiaire !"
    
     return valid
-
-
-    
 
 # =========================================================================================================================================
 @anvil.server.callable           #Réinitilisation Saisie du formulaire de suivi d'1 stagiaire du stage
