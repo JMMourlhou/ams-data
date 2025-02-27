@@ -33,6 +33,7 @@ def add_1_formulaire_satisfaction(  user_stagiaire,              # users row
                                             rep_dico_rep_ouv=dico_rep_q_ouv,
                                             nom=user_stagiaire["nom"],
                                             prenom=user_stagiaire["prenom"],
+                                            user_email=user_stagiaire
                                          )
     id=new_row.get_id()
     #relecture du row:

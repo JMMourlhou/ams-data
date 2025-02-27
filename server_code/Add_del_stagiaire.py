@@ -202,6 +202,35 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
     
     # Del of stagiaire in the stage
     row.delete()
-    valid="Stagiaire effacé de ce stage !"
+    valid="Formulaire de satisfaction modifié pour ce stagiaire !"
+   
+    return valid
+
+# =========================================================================================================================================
+@anvil.server.callable           #Réinitilisation Saisie du formulaire de satisfaction d'1 stagiaire du stage
+def init_formulaire_satis_stagiaire(stagiaire_row, bool):
+    if not stagiaire_row :
+        valid="Le formulaire de satisfaction n'a pas pu être modifié !"
+        return valid
+    
+    # modif
+    stagiaire_row.update(enquete_satisf = bool)
+    valid="Formulaire de satisfaction modifié pour ce stagiaire !"
+   
+    return valid
+
+
+    
+
+# =========================================================================================================================================
+@anvil.server.callable           #Réinitilisation Saisie du formulaire de suivi d'1 stagiaire du stage
+def init_formulaire_suivi_stagiaire(stagiaire_row, bool):
+    if not stagiaire_row :
+        valid="Le formulaire de suivi n'a pas pu être modifié !"
+        return valid
+    
+    # modif
+    stagiaire_row.update(enquete_satisf = bool)
+    valid="Formulaire de suivi modifié pour ce stagiaire !"
    
     return valid
