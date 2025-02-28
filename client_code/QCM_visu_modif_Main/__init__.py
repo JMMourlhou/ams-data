@@ -60,7 +60,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # __________________________________________________________ CREATION QCM   /   MODIF INTITULE ou propriétaire
         self.text_box_num_qcm.text = qcm_row["qcm_nb"]
         self.text_box_destination.text = qcm_row["destination"]
-        self.drop_down_owner.selected_value = user
+        self.sov_destination = qcm_row["destination"]  # pour test si 2 destinations identiques en modif 
+        self.drop_down_owner.selected_value = qcm_row["qcm_owner"]
         self.check_box_visible.checked = qcm_row["visible"]
         self.column_panel_creation_qcm.visible = True
         # _______________________________________________________________________________
@@ -300,6 +301,13 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         
     def text_box_destination_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
+        # La destination de ce qcm existe-t-elle déjà ?
+        test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
+        if len(test)==1 and self.text_box_destination.text != self.sov_destination:
+            
+            alert("La description du QCM existe déjà, changez la !")
+            self.text_box_destination.focus()
+            return 
         self.button_valid.visible = True
             
     def drop_down_owner_change(self, **event_args):
@@ -324,13 +332,13 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             self.text_box_destination.focus()
             return
 
-        # ECRITURE DANS LA TABLE
+        # ECRITURE DANS LA TABLE   _________________________________CREATION
         choix = self.drop_down_menu.selected_value
         if choix=="Créer un nouveau QCM":
             # CREATION:  envoi en écriture si validation
             # La destination de ce nouveau qcm existe-t-elle déjà ?
             test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
-            if test:
+            if len(test) == 1:
                 alert("La description du QCM existe déjà, changez la !")
                 self.text_box_destination.focus()
                 return
@@ -344,17 +352,14 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                                                 )
                 if result is not True:
                     alert("Création du Qcm non effectué !")
+                    self.button_valid.visible = False
                     return
                 else:          
                     self.column_panel_question.visible = True
+        # ECRITURE DANS LA TABLE   _________________________________ Modification      
         if choix=="Editer un QCM existant":
             # Modification:  envoi en modif si validation   
-            # La destination de ce qcm existe-t-elle déjà ?
-            test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
-            if len(test)>1:
-                alert("La description du QCM existe déjà, changez la !")
-                self.text_box_destination.focus()
-                return 
+            
 
             qcm_row = self.drop_down_qcm_row.selected_value
             r=alert("Confirmez la modification de la description de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
@@ -369,7 +374,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                     alert("Modification du Qcm non effectuée !")
                     return
                 else:
-                    alert("Modification du Qcm effectuée !")         
+                    alert("Modification du Qcm effectuée !") 
+                    self.button_valid.visible = False
     # Effacement d'un qcm
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -402,6 +408,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def button_quitter_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.button_annuler_click()
+
+   
+    
 
     
 
