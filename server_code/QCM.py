@@ -14,7 +14,7 @@ def qcm_création(qcm_nb, destination, qcm_owner, visible):                # qcm
     new_row=app_tables.qcm_description.add_row(
                                                 qcm_nb=int(qcm_nb),
                                                 destination=destination,
-                                                qcm_owner=qcm_owner,   # mail
+                                                qcm_owner=qcm_owner,   # user row
                                                 visible=visible
                                                     )
     qcm_row = app_tables.qcm_description.search(qcm_nb = new_row["qcm_nb"])
@@ -24,9 +24,39 @@ def qcm_création(qcm_nb, destination, qcm_owner, visible):                # qcm
         valid=False
     return valid
 
+# modif description d'un QCM
+@anvil.server.callable
+def qcm_modif(qcm_row, qcm_nb, destination, qcm_owner, visible):                # qcm_owner: user row     qcm_nb text
+    qcm_row.update(
+                    qcm_nb=int(qcm_nb),
+                    destination=destination,
+                    qcm_owner=qcm_owner,   # user row
+                    visible=visible
+                        )
+    qcm_row = app_tables.qcm_description.search(qcm_nb = int(qcm_nb))
+    if qcm_row:
+        valid=True
+    else:
+        valid=False
+    return valid
+
+# del d'un QCM
+@anvil.server.callable
+def qcm_del(qcm_row):                # qcm_owner: user row     qcm_nb text
+    id = qcm_row.get_id()
+    qcm_row.delete()
+    
+    test=app_tables.qcm_description.get_by_id(id)
+    if not test:
+        valid=True
+    else:
+        valid=False
+    return valid
+
+
+
 @anvil.server.callable
 def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb, type, param):
-    
     # qcm_nb est la row venant du dropdown choix du qcm
     new_row=app_tables.qcm.add_row(num= int(num_question),
                                    question = question,

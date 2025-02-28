@@ -15,6 +15,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.column_panel_question.visible = False
+    
         #initialisation des drop down des qcm créés et barêmes
         self.image_1.source = None
         self.drop_down_qcm_row.items = [(r['destination'], r) for r in app_tables.qcm_description.search(tables.order_by("destination", ascending=True))]
@@ -59,7 +60,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # __________________________________________________________ CREATION QCM   /   MODIF INTITULE ou propriétaire
         self.text_box_num_qcm.text = qcm_row["qcm_nb"]
         self.text_box_destination.text = qcm_row["destination"]
-        self.drop_down_owner.selected_value = user["email"]
+        self.drop_down_owner.selected_value = user
         self.check_box_visible.checked = qcm_row["visible"]
         self.column_panel_creation_qcm.visible = True
         # _______________________________________________________________________________
@@ -278,7 +279,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             result = anvil.server.call("modify_users_temp2", user, "test")
             self.affiche_lignes_qcm()
             result = anvil.server.call("modify_users_temp2", user, None)   # je remets temp2 à vide
-            
+
+
+
+        
     #   _________________________________________________________________________________________________________
     #                             CREATION D'UN QCM
     #   _________________________________________________________________________________________________________
@@ -296,34 +300,114 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         
     def text_box_destination_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
-        self.button_valid_creation.visible = True
-        
-    def button_valid_creation_click(self, **event_args):
+        self.button_valid.visible = True
+            
+    def drop_down_owner_change(self, **event_args):
+        """This method is called when an item is selected"""
+        self.button_valid.visible = True
+
+    def check_box_visible_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_valid.visible = True
+    
+    def button_valid_click(self, **event_args):
         """This method is called when the button is clicked"""
         # Description > 5 caractères ?
         if len(self.text_box_destination.text) < 5:
             alert("La description du QCM doit être supérieure à 5 caractères !")
             self.text_box_destination.focus()
-
+            return
+            
         # Un propriétaire doit être choisi
         if self.drop_down_owner.selected_value is None:
             alert("Choisissez un propriétaire ! ")
             self.text_box_destination.focus()
+            return
 
-        # envoi en écriture si validation
-        r=alert("Confirmez la création de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
-        if r :   # oui
-            result = anvil.server.call("qcm_création", self.text_box_num_qcm.text,
-                                                                self.text_box_destination.text,
-                                                                self.drop_down_owner.selected_value,   # user row
-                                                                self.check_box_visible.checked
-                                               )
-            if result is not True:
-                alert("Création du Qcm non effectué !")
+        # ECRITURE DANS LA TABLE
+        choix = self.drop_down_menu.selected_value
+        if choix=="Créer un nouveau QCM":
+            # CREATION:  envoi en écriture si validation
+            # La destination de ce nouveau qcm existe-t-elle déjà ?
+            test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
+            if test:
+                alert("La description du QCM existe déjà, changez la !")
+                self.text_box_destination.focus()
                 return
-            else:          
-                self.column_panel_question.visible = True
+            
+            r=alert("Confirmez la création de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
+            if r :   # oui
+                result = anvil.server.call("qcm_création", self.text_box_num_qcm.text,
+                                                                    self.text_box_destination.text,
+                                                                    self.drop_down_owner.selected_value,   # user row
+                                                                    self.check_box_visible.checked
+                                                )
+                if result is not True:
+                    alert("Création du Qcm non effectué !")
+                    return
+                else:          
+                    self.column_panel_question.visible = True
+        if choix=="Editer un QCM existant":
+            # Modification:  envoi en modif si validation   
+            # La destination de ce qcm existe-t-elle déjà ?
+            test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
+            if len(test)>1:
+                alert("La description du QCM existe déjà, changez la !")
+                self.text_box_destination.focus()
+                return 
 
+            qcm_row = self.drop_down_qcm_row.selected_value
+            r=alert("Confirmez la modification de la description de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
+            if r :   # oui
+                result = anvil.server.call("qcm_modif", qcm_row,
+                                                        self.text_box_num_qcm.text,
+                                                        self.text_box_destination.text,
+                                                        self.drop_down_owner.selected_value,   # user row
+                                                        self.check_box_visible.checked
+                                                )
+                if result is not True:
+                    alert("Modification du Qcm non effectuée !")
+                    return
+                else:
+                    alert("Modification du Qcm effectuée !")         
+    # Effacement d'un qcm
+    def button_del_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        qcm_row = self.drop_down_qcm_row.selected_value
+        r=alert("Confirmez l'effacement complet de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
+        if r :   # oui
+            result = anvil.server.call("qcm_del", qcm_row)
+        if result is not True:
+            alert("Effacement du Qcm non effectué !")
+            return
+        else:
+            alert("Effacement du Qcm effectué !")         
+            
+    def drop_down_menu_change(self, **event_args):
+        """This method is called when an item is selected"""
+        choix = self.drop_down_menu.selected_value
+        if choix=="Créer un nouveau QCM":
+            self.button_creation_click()
+            self.drop_down_menu.visible = False
+        if choix=="Editer un QCM existant":
+            self.drop_down_qcm_row.visible = True
+            self.drop_down_menu.visible = False
+            self.button_del.visible = True
+        if choix=="Affecter un QCM à un stage":
+            from ..QCM_par_stage import QCM_par_stage
+            open_form("QCM_par_stage")
+        if choix=="Quitter":
+            self.button_annuler_click()
+
+    def button_quitter_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        self.button_annuler_click()
+
+    
+
+    
+
+ 
  
         
         

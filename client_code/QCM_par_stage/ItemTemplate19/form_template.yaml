@@ -29,7 +29,7 @@ components:
     - event_bindings: {change: check_box_start_visu_change}
       layout_properties: {}
       name: check_box_start_visu
-      properties: {background: 'theme:Tertiary', foreground: 'theme:On Primary Container', text: ''}
+      properties: {background: 'theme:On Primary Container', foreground: 'theme:On Primary Container', text: ''}
       type: CheckBox
     name: flow_panel_2
     properties: {align: right}
