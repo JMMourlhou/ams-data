@@ -161,7 +161,7 @@ db_schema:
     server: full
     title: Com_sum
   cpt_stages:
-    client: search
+    client: full
     columns:
     - admin_ui: {width: 120}
       name: compteur
@@ -841,7 +841,7 @@ db_schema:
     - admin_ui: {width: 200}
       name: n_password_failures
       type: number
-    - admin_ui: {width: 97}
+    - admin_ui: {order: 5, width: 139}
       name: confirmed_email
       type: bool
     - admin_ui: {order: 10.5, width: 232}

@@ -10,12 +10,12 @@ components:
         margin: ['0', null, '0', null]
       spacing_above: none
       spacing_below: none
-      text: date
+      text: Date
     type: Button
   - event_bindings: {click: modif}
     layout_properties: {grid_position: 'XBDNDJ,PXVEIA'}
     name: button_mot_clef
-    properties: {align: left, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: mot clef}
+    properties: {align: left, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: Mot_clef}
     type: Button
   - event_bindings: {click: modif}
     layout_properties: {grid_position: 'XBDNDJ,GFWPIJ'}
@@ -27,7 +27,7 @@ components:
         margin: ['0', null, '0', null]
       spacing_above: none
       spacing_below: none
-      text: lieu
+      text: Lieu
     type: Button
   - event_bindings: {click: button_del_click}
     layout_properties: {grid_position: 'XBDNDJ,RCCGCJ'}

@@ -11,7 +11,11 @@ class Parametres(ParametresTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-
+        # lecture dernier num de stage
+        self.row_dernier_num_stage = app_tables.cpt_stages.search()[0]
+        self.text_box_num_stages.text = self.row_dernier_num_stage['compteur']
+        self.sov_num_stages = self.text_box_num_stages.text
+        
     def button_maj_pr_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Pre_R_MAJ_table import Pre_R_MAJ_table
@@ -68,30 +72,35 @@ class Parametres(ParametresTemplate):
 
     def button_mails_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Lieux_MAJ_table import Lieux_MAJ_table
-        open_form("Lieux_MAJ_table")
+        from ..Users_search import Users_search
+        open_form("Users_search")
 
-    def button_create_qcm_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..QCM_visu_modif import QCM_visu_modif
-        open_form("QCM_visu_modif_Main")
-
-    def button_qcm_par_stage_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..QCM_par_stage import QCM_par_stage
-        open_form("QCM_par_stage")
 
     def button_textes_formulaires_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Text_formulaires_MAJ_table import Text_formulaires_MAJ_table
         open_form("Text_formulaires_MAJ_table")
-
-    def button_create_qcm_copy_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        alert("Cette fonction est en cours de construction")
+  
 
     def button_gestion_formulaires_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Formulaire_par_type_stage import Formulaire_par_type_stage
         open_form("Formulaire_par_type_stage")
- 
+
+    def text_box_num_stages_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_valid_num_stage.visible = True
+
+    def button_valid_num_stage_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        next_stage_nb = int(self.text_box_num_stages.text) + 1
+        r=alert(f"Confirmez le numéro du prochain stage:{next_stage_nb} ?",dismissible=False,buttons=[("oui",True),("non",False)])
+        if r :   # oui
+            nb = int(self.text_box_num_stages.text)
+            self.row_dernier_num_stage.update(
+                                                compteur=nb
+                                                )
+        else:
+            self.text_box_num_stages.text = self.sov_num_stages
+        self.button_valid_num_stage.visible = False   
+        

@@ -237,6 +237,9 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
         if len(liste_rows_non_valide)>0:
             self.check_box_visu_erreurs.background = "theme:Error"
 
+
+
+ 
    
 
  

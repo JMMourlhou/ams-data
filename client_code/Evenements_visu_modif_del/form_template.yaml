@@ -76,7 +76,7 @@ components:
       name: text_box_mot_clef
       properties: {background: 'theme:Olive', foreground: 'theme:On Primary', placeholder: Mot Clef, role: null}
       type: TextBox
-    - event_bindings: {change: text_box_lieu_change, focus: text_box_lieu_focus}
+    - event_bindings: {change: text_box_lieu_change, focus: text_box_lieu_focus, pressed_enter: text_box_lieu_pressed_enter}
       layout_properties: {grid_position: 'IEOFVE,IDAWHI'}
       name: text_box_lieu
       properties:
