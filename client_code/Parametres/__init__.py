@@ -21,10 +21,7 @@ class Parametres(ParametresTemplate):
         from ..Pre_R_MAJ_table import Pre_R_MAJ_table
         open_form("Pre_R_MAJ_table")
 
-    def button_annuler_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        from ..Main import Main
-        open_form('Main',99) 
+   
 
     def button_gestion_pre_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -72,8 +69,8 @@ class Parametres(ParametresTemplate):
 
     def button_mails_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Users_search import Users_search
-        open_form("Users_search")
+        from ..Mail_subject_attach_txt import Mail_subject_attach_txt
+        open_form("Mail_subject_attach_txt")
 
 
     def button_textes_formulaires_click(self, **event_args):
@@ -109,3 +106,12 @@ class Parametres(ParametresTemplate):
         from ..Lieux_MAJ_table import Lieux_MAJ_table
         open_form("Lieux_MAJ_table")
         
+    def button_annuler_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Main import Main
+        open_form('Main',99) 
+
+    def button_users_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Users_search import Users_search
+        open_form('Users_search')

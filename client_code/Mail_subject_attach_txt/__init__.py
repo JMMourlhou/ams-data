@@ -11,7 +11,7 @@ import anvil.media
 # emails_liste liste des mails
 # ref_model contient lea ref du modele de mail si vient de qcm ou formul satisf ou recherche etc...du permet de court circuiter la drop down du choix du modèle 
 class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
-    def __init__(self, emails_liste, ref_model = "", old_stagiaires = False, **properties): 
+    def __init__(self, emails_liste=[], ref_model = "", old_stagiaires = False, **properties): 
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
@@ -38,7 +38,6 @@ class Mail_subject_attach_txt(Mail_subject_attach_txtTemplate):
         print('emails liste: ', self.emails_liste)
         self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
 
-        self.label_emails_liste.text = emails_liste   # sauve la liste de mails à envoyer, (utilisé ds le item repeating panel, del)
         
         # import anvil.js    # pour screen size
         from anvil.js import window  # to gain access to the window object

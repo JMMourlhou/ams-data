@@ -59,7 +59,7 @@ components:
       spacing_below: none
       text: ''
     type: CheckBox
-  - event_bindings: {change: check_box_conf_mail_change}
+  - event_bindings: {change: check_box_cpt_enabled_change}
     layout_properties: {grid_position: 'XBDNDJ,JAFFGJ'}
     name: check_box_cpt_enabled
     properties:
@@ -72,6 +72,32 @@ components:
       spacing_below: none
       text: ''
     type: CheckBox
+  - event_bindings: {}
+    layout_properties: {grid_position: 'XBDNDJ,YZBYXZ'}
+    name: button_sign_up
+    properties:
+      align: left
+      font_size: 10
+      foreground: theme:On Primary
+      spacing:
+        margin: ['0', null, '0', null]
+      spacing_above: none
+      spacing_below: none
+      text: Sign_up
+    type: Button
+  - event_bindings: {}
+    layout_properties: {grid_position: 'XBDNDJ,PMLUCD'}
+    name: button_last_login
+    properties:
+      align: left
+      font_size: 10
+      foreground: theme:On Primary
+      spacing:
+        margin: ['0', null, '0', null]
+      spacing_above: none
+      spacing_below: none
+      text: Log_in
+    type: Button
   - event_bindings: {click: button_modif_click}
     layout_properties: {grid_position: 'XBDNDJ,KZZTQJ'}
     name: button_modif
@@ -82,7 +108,7 @@ components:
   properties:
     background: theme:On Primary Container
     col_spacing: tiny
-    col_widths: '{"GWYFOG":2,"PXVEIA":5,"GFWPIJ":5,"YMHEQP":5,"WZJNHG":5,"JAFFGJ":4,"KZZTQJ":34}'
+    col_widths: '{"GWYFOG":2,"PXVEIA":4,"GFWPIJ":4,"YMHEQP":4,"WZJNHG":4,"JAFFGJ":3,"KZZTQJ":25,"YZBYXZ":7,"PMLUCD":7}'
     role: elevated-card
     spacing:
       margin: ['0', null, '4', null]

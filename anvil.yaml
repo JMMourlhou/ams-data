@@ -817,7 +817,7 @@ db_schema:
     - admin_ui: {order: 0.5, width: 65}
       name: role
       type: string
-    - admin_ui: {order: 0.25, width: 99}
+    - admin_ui: {order: 0.25, width: 128}
       name: enabled
       type: bool
     - admin_ui: {order: 1.5, width: 207}

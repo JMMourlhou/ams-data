@@ -105,9 +105,33 @@ components:
         spacing_below: none
         text: Cpt non permis
       type: CheckBox
+    - event_bindings: {focus: text_box_sign_up_focus, pressed_enter: text_box_sign_up_focus}
+      layout_properties: {grid_position: 'IEOFVE,KFLHLU'}
+      name: text_box_sign_up
+      properties:
+        background: theme:Olive
+        font_size: 12
+        foreground: theme:On Primary
+        margin: [null, null, '0', null]
+        placeholder: 'Créé AAAA '
+        role: null
+        text: Cpt créé le
+      type: TextBox
+    - event_bindings: {change: text_box_connexion_focus, focus: text_box_connexion_focus}
+      layout_properties: {grid_position: 'IEOFVE,RLLRUJ'}
+      name: text_box_connexion
+      properties:
+        background: theme:Olive
+        font_size: 12
+        foreground: theme:On Primary
+        margin: [null, null, '0', null]
+        placeholder: Dern.conn. le
+        role: null
+        text: Dern.conn. le
+      type: TextBox
     layout_properties: {grid_position: 'HYNVZO,MASFBI'}
     name: column_panel_recherche
-    properties: {col_spacing: tiny, col_widths: '{"AASIVP":4,"JOXHON":7,"IDAWHI":7,"QLSWSS":15,"TXCMYJ":11,"UFXMMK":53}', visible: true}
+    properties: {col_spacing: tiny, col_widths: '{"AASIVP":4,"JOXHON":7,"IDAWHI":7,"QLSWSS":15,"TXCMYJ":11,"UFXMMK":18,"KFLHLU":20,"RLLRUJ":30}', visible: true}
     type: ColumnPanel
   layout_properties: {grid_position: 'IXQCMR,DJOSII'}
   name: column_panel_0
@@ -136,7 +160,7 @@ components:
     columns:
     - {data_key: column_1, expand: false, id: JKSDUP, title: Role, width: 50.794097900390625}
     - {data_key: column_2, expand: false, id: VJQQOR, title: ' Nom', width: 74.06015014648438}
-    - {data_key: column_3, expand: false, id: OJLQEN, title: Prénom, width: 72.70437622070312}
+    - {data_key: column_3, expand: false, id: OJLQEN, title: Prénom, width: 86.0723876953125}
     - {data_key: column_1, expand: false, id: HRXFLR, title: Mail, width: 82.58108520507812}
     - {data_key: column_1, expand: false, id: RBIJJA, title: Mail_conf, width: 72.5484619140625}
     - {data_key: column_1, id: JYSMPI, title: Cpt enabled}

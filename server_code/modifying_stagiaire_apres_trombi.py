@@ -54,7 +54,10 @@ def modify_users_after_trombi(mel,
 
 # Appelé des paramètres, modif table users, colonnes mail confirmé   et     compte enabled
 @anvil.server.callable
-def modify_users_from_parameters(user_row,confirmed, enabled):  
+def modify_users_from_parameters(user_row, confirmed, enabled):  
+    print(f"confirmed: {confirmed}")
+    print(f"enabled: {enabled}")
+    
     result = False
     user_row.update(confirmed_email=confirmed,
                     enabled=enabled)

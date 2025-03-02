@@ -12,40 +12,50 @@ class RowTemplate7(RowTemplate7Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
+        self.sov_raison_modif = ""
+        
         # Any code you write here will run before the form opens.
         self.button_role.text = self.item['role']
         self.button_nom.text = self.item['nom']
         self.button_prenom.text = self.item['prenom']
         self.button_email.text = self.item['email']
+        
         self.check_box_conf_mail.checked = self.item['confirmed_email']
         self.check_box_cpt_enabled.checked = self.item['enabled']
         self.sov_old_conf_mail = self.item['confirmed_email']
         self.sov_old_enabled = self.item['enabled']
+        
+        self.button_sign_up.text = self.item['signed_up']
+        self.button_last_login.text = self.item['last_login']
 
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
-       
         r=alert("Voulez-vous vraiment modifier cette ligne ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
-            # 1 modif ds les lieux stages 
-            alert(self.check_box_conf_mail.ckecked)
-            bool2 = self.check_box_cpt_enabled.checked
-            result=anvil.server.call('modify_users_from_parameters', self.item, bool1, bool2)
+            result=anvil.server.call('modify_users_from_parameters',
+                                     self.item,
+                                     self.check_box_conf_mail.checked,
+                                     self.check_box_cpt_enabled.checked
+                                    )
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
                 return
-            alert("Modification effectuée !")
+            open_form('Users_search', self.sov_raison_modif)
         else:   # non
-            self.check_box_conf_mail.checked = sov_old_conf_mail
-            self.check_box_cpt_enabled.checked = sov_old_enabled
+            self.check_box_conf_mail.checked = self.sov_old_conf_mail
+            self.check_box_cpt_enabled.checked = self.sov_old_enabled
             self.button_modif.visible = False
         self.button_modif.visible = False
 
     def check_box_conf_mail_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        self.sov_raison_modif = "confirmation"
         self.button_modif.visible = True
 
+    def check_box_cpt_enabled_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.sov_raison_modif = "enabled"
+        self.button_modif.visible = True
 
 
   
