@@ -103,4 +103,9 @@ class Parametres(ParametresTemplate):
         else:
             self.text_box_num_stages.text = self.sov_num_stages
         self.button_valid_num_stage.visible = False   
+
+    def button_lieux_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Lieux_MAJ_table import Lieux_MAJ_table
+        open_form("Lieux_MAJ_table")
         

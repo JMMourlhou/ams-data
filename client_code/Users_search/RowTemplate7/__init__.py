@@ -20,24 +20,37 @@ class RowTemplate7(RowTemplate7Template):
         self.button_email.text = self.item['email']
         self.check_box_conf_mail.checked = self.item['confirmed_email']
         self.check_box_cpt_enabled.checked = self.item['enabled']
+        self.sov_old_conf_mail = self.item['confirmed_email']
+        self.sov_old_enabled = self.item['enabled']
 
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
+       
         r=alert("Voulez-vous vraiment modifier cette ligne ?",buttons=[("oui",True),("non",False)])
-        sov_old_conf_mail = self.check_box_conf_mail.checked
-        sov_old_enabled = self.check_box_cpt_enabled.checked
         if r :   # oui
             # 1 modif ds les lieux stages 
-            anvil.server.call('modify_users_from_parameters',self.item(),self.check_box_conf_mail.ckecked,self.check_box_cpt_enabled.checked)
+            alert(self.check_box_conf_mail.ckecked)
+            bool2 = self.check_box_cpt_enabled.checked
+            result=anvil.server.call('modify_users_from_parameters', self.item, bool1, bool2)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
                 return
             alert("Modification effectuée !")
-            
         else:   # non
-            self.text_box_1.text = sov_old_adresse
-            self.text_box_2.text = sov_old_lieu
+            self.check_box_conf_mail.checked = sov_old_conf_mail
+            self.check_box_cpt_enabled.checked = sov_old_enabled
+            self.button_modif.visible = False
         self.button_modif.visible = False
+
+    def check_box_conf_mail_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        self.button_modif.visible = True
+
+
+
+  
+
+    
         
         
         

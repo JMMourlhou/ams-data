@@ -16,6 +16,8 @@ class ItemTemplate21(ItemTemplate21Template):
         # Any code you write here will run before the form opens.
         self.text_box_2.text = self.item['lieu']
         self.text_box_1.text = self.item['adresse']
+        self.sov_old_adresse = self.item['adresse']
+        self.sov_old_lieu = self.item['lieu']
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -42,8 +44,6 @@ class ItemTemplate21(ItemTemplate21Template):
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment modifier ce Lieu ?",buttons=[("oui",True),("non",False)])
-        sov_old_adresse = self.item['adresse']
-        sov_old_lieu = self.item['lieu']
         if r :   # oui
             # 1 modif ds les lieux stages 
             result = anvil.server.call("modif_lieu", self.item, self.text_box_1.text, self.text_box_2.text, sov_old_lieu)
@@ -53,6 +53,6 @@ class ItemTemplate21(ItemTemplate21Template):
             alert("Modification effectuée !")
             
         else:   # non
-            self.text_box_1.text = sov_old_adresse
-            self.text_box_2.text = sov_old_lieu
+            self.text_box_1.text = self.sov_old_adresse
+            self.text_box_2.text = self.sov_old_lieu
         self.button_modif.visible = False

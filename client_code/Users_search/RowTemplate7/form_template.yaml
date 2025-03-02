@@ -1,6 +1,6 @@
 components:
 - components:
-  - event_bindings: {click: modif}
+  - event_bindings: {}
     layout_properties: {full_width_row: false, grid_position: 'XBDNDJ,GWYFOG'}
     name: button_role
     properties:
@@ -14,12 +14,12 @@ components:
       spacing_below: none
       text: R
     type: Button
-  - event_bindings: {click: modif}
+  - event_bindings: {}
     layout_properties: {grid_position: 'XBDNDJ,PXVEIA'}
     name: button_nom
     properties: {align: left, font_size: 10, foreground: 'theme:On Primary', spacing_above: none, spacing_below: none, text: Nom}
     type: Button
-  - event_bindings: {click: modif}
+  - event_bindings: {}
     layout_properties: {grid_position: 'XBDNDJ,GFWPIJ'}
     name: button_prenom
     properties:
@@ -32,7 +32,7 @@ components:
       spacing_below: none
       text: Prénom
     type: Button
-  - event_bindings: {click: modif}
+  - event_bindings: {}
     layout_properties: {grid_position: 'XBDNDJ,YMHEQP'}
     name: button_email
     properties:
@@ -45,10 +45,12 @@ components:
       spacing_below: none
       text: Mail
     type: Button
-  - layout_properties: {grid_position: 'XBDNDJ,WZJNHG'}
+  - event_bindings: {change: check_box_conf_mail_change}
+    layout_properties: {grid_position: 'XBDNDJ,WZJNHG'}
     name: check_box_conf_mail
     properties:
       align: center
+      checked: false
       font_size: null
       foreground: theme:On Primary
       spacing:
@@ -57,7 +59,8 @@ components:
       spacing_below: none
       text: ''
     type: CheckBox
-  - layout_properties: {grid_position: 'XBDNDJ,JAFFGJ'}
+  - event_bindings: {change: check_box_conf_mail_change}
+    layout_properties: {grid_position: 'XBDNDJ,JAFFGJ'}
     name: check_box_cpt_enabled
     properties:
       align: center
@@ -72,14 +75,14 @@ components:
   - event_bindings: {click: button_modif_click}
     layout_properties: {grid_position: 'XBDNDJ,KZZTQJ'}
     name: button_modif
-    properties: {background: 'theme:Error', enabled: true, foreground: 'theme:Tertiary', text: Modif, visible: false}
+    properties: {background: 'theme:Error', enabled: true, font: '', font_size: 10, foreground: 'theme:Tertiary', text: Modif, visible: false}
     type: Button
   layout_properties: {}
   name: column_panel_1
   properties:
     background: theme:On Primary Container
     col_spacing: tiny
-    col_widths: '{"GWYFOG":2,"PXVEIA":5,"GFWPIJ":5,"YMHEQP":5,"WZJNHG":2,"JAFFGJ":7,"KZZTQJ":34}'
+    col_widths: '{"GWYFOG":2,"PXVEIA":5,"GFWPIJ":5,"YMHEQP":5,"WZJNHG":5,"JAFFGJ":4,"KZZTQJ":34}'
     role: elevated-card
     spacing:
       margin: ['0', null, '4', null]
