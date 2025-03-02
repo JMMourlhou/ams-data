@@ -814,7 +814,7 @@ db_schema:
     - admin_ui: {order: 0, width: 199}
       name: email
       type: string
-    - admin_ui: {order: 0.5, width: 94}
+    - admin_ui: {order: 0.5, width: 65}
       name: role
       type: string
     - admin_ui: {order: 0.25, width: 99}
@@ -835,13 +835,13 @@ db_schema:
     - admin_ui: {width: 104}
       name: password_hash
       type: string
-    - admin_ui: {width: 88}
+    - admin_ui: {order: 3.5, width: 115}
       name: api_key
       type: string
     - admin_ui: {width: 200}
       name: n_password_failures
       type: number
-    - admin_ui: {order: 5, width: 139}
+    - admin_ui: {order: 0.125, width: 139}
       name: confirmed_email
       type: bool
     - admin_ui: {order: 10.5, width: 232}
@@ -892,9 +892,6 @@ db_schema:
     - admin_ui: {order: 23.25, width: 200}
       name: temp_for_stage
       type: number
-    - admin_ui: {order: 0.75, width: 200}
-      name: last_stage
-      type: string
     - admin_ui: {order: 1.125, width: 200}
       name: dico_menu
       type: simpleObject

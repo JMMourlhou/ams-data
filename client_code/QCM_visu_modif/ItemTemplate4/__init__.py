@@ -33,6 +33,8 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        self.f = get_open_form()   # pour arrêter le timer 1
+        
         global max_points
         max_points = 0
         global points
@@ -460,6 +462,13 @@ class ItemTemplate4(ItemTemplate4Template):
         else:                       # ======================================Calcul nb bonnes réponses en MODE UTILISATION QCM
             self.button_modif.enabled = False   # on ne peut plus modi la ligne
             self.button_modif.visible = False
+
+            # Après validation, je ne permets plus de mofifier la réponse
+            self.rep1.enabled = False
+            self.rep2.enabled = False
+            self.rep3.enabled = False
+            self.rep4.enabled = False
+            self.rep5.enabled = False
             
             global nb_bonnes_rep
             global max_points
@@ -570,7 +579,7 @@ class ItemTemplate4(ItemTemplate4Template):
             user=anvil.users.get_user()
             if user:
                 result = anvil.server.call("qcm_result", user, int(self.vrai_numero_qcm), nb_bonnes_rep, max_points, points, reponses)  
-                if result == False :
+                if result is False :
                     alert("QCM non enregisté !")
                     
             # affichage des résultats   
@@ -697,7 +706,9 @@ class ItemTemplate4(ItemTemplate4Template):
                 from ...Plot import Plot
                 self.column_panel_plot.add_component(Plot(user,int(self.vrai_numero_qcm), False))   # nb:num de qcm   True:afficher la légende
                 # Le dernier plot vivualisé du stagiaire ne sera sauvé en table qcm_result qu'avec BG task à partir de "main" form
-                 
+
+                # kill the task
+                
         
     def button_enregistrer_et_sortir_click(self, **event_args):
         """This method is called when the button is clicked"""

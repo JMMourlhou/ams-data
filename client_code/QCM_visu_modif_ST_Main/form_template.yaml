@@ -1,5 +1,10 @@
 components:
 - components:
+  - event_bindings: {tick: timer_1_tick}
+    layout_properties: {grid_position: 'NXTDKC,NYATTY'}
+    name: timer_1
+    properties: {interval: 300}
+    type: Timer
   - layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
     name: label_3
     properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: Création / MAJ du QCM, tooltip: '', underline: false, visible: true}

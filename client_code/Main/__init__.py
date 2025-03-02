@@ -34,8 +34,8 @@ class Main(MainTemplate):
         # Any code you write here will run before the form opens.
         
         # renseignements user 
-        self.user = anvil.users.get_user(q.fetch_only("nom","prenom","role","email"))
-
+        self.user = anvil.users.get_user(q.fetch_only("nom","prenom","role","email","enabled"))
+        
         """
         self.bt_se_deconnecter.visible = False
         self.bt_user_mail.enabled = False
@@ -168,6 +168,11 @@ class Main(MainTemplate):
     """ ***********************************************************************************************"""
     def display_admin_or_other_buttons(self, **event_args):
         if self.user:
+            if self.user["enabled"] is False:
+                alert("Not 'enabled' in table users")
+                self.bt_sign_in.visible = False
+                return
+
             self.bt_sign_in.visible = False
             self.bt_user_mail.enabled = True
             self.button_qcm.visible = True

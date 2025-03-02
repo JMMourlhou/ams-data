@@ -63,7 +63,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         qcm_row = self.drop_down_qcm_row.selected_value          #qcm description row
-        if qcm_row == None:
+        if qcm_row is None:
             alert("Choisissez un QCM !")
             return
         
@@ -146,6 +146,12 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             liste.append(valeur)
         
         return liste
+
+    def timer_1_tick(self, **event_args):
+        """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+        with anvil.server.no_loading_indicator:
+            result = anvil.server.call("ping")
+        print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
 
 
 
