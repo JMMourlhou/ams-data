@@ -401,11 +401,11 @@ class Main(MainTemplate):
         with anvil.server.no_loading_indicator:
             result = anvil.server.call("ping")
         print(f"ping on server to prevent 'session expired' every 5 min, server answer:{result}")
-        
-    """
-    ==============================================================
+
+    
+    #==============================================================
     # Les UTILITAIRES suivants sont à TRANSFERER DS UTILITAIRES POUR alléger module MAIN
-    ==============================================================
+    #==============================================================
 
     # ENVOI EN MODULE z_loop_on_tables pour plusieurs utilitaires
     def button_loop_click(self, **event_args):
@@ -463,7 +463,8 @@ class Main(MainTemplate):
         else:
             alert("pas de fin normale")
             
-    """
+
+   
 
 
 
