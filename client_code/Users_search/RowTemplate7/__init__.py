@@ -57,6 +57,13 @@ class RowTemplate7(RowTemplate7Template):
         self.sov_raison_modif = "enabled"
         self.button_modif.visible = True
 
+    def button_role_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ...Saisie_info_apres_visu import Saisie_info_apres_visu
+        open_form('Saisie_info_apres_visu', self.item['email'])
+
+
+
 
   
 

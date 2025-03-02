@@ -131,7 +131,7 @@ components:
       type: TextBox
     layout_properties: {grid_position: 'HYNVZO,MASFBI'}
     name: column_panel_recherche
-    properties: {col_spacing: tiny, col_widths: '{"AASIVP":4,"JOXHON":7,"IDAWHI":7,"QLSWSS":15,"TXCMYJ":11,"UFXMMK":18,"KFLHLU":20,"RLLRUJ":30}', visible: true}
+    properties: {col_spacing: tiny, col_widths: '{"AASIVP":5,"JOXHON":13,"IDAWHI":14,"QLSWSS":10,"TXCMYJ":18,"UFXMMK":10,"KFLHLU":16,"RLLRUJ":26}', visible: true}
     type: ColumnPanel
   layout_properties: {grid_position: 'IXQCMR,DJOSII'}
   name: column_panel_0

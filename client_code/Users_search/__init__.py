@@ -5,7 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from datetime import datetime
+
 
 class Users_search(Users_searchTemplate):
     def __init__(self, modif="", **properties):   # modif si reviens de modif from Template7
@@ -107,14 +107,8 @@ class Users_search(Users_searchTemplate):
         self.check_box_enabled.checked = False
         self.text_box_connexion.text = ""
 
-        from datetime import datetime
-
-        date_str = self.text_box_sign_up.text
-        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-
-        critere = date_obj + "%"            #  wildcard search on date
-        liste = app_tables.users.search(tables.order_by("nom", ascending=True),
-                                       )                                                )
+        liste = app_tables.users.search(tables.order_by("signed_up", ascending=False),
+                                        enabled=True)  
         self.repeating_panel_1.items=liste   
 
     def text_box_connexion_focus(self, **event_args):
@@ -127,10 +121,8 @@ class Users_search(Users_searchTemplate):
         self.check_box_enabled.checked = False
         self.text_box_sign_up.text = ""
 
-        critere = self.text_box_connexion.text + "%"            #  wildcard search on date
-        liste = app_tables.users.search(tables.order_by("nom", ascending=True),
-                                        last_login=critere
-                                                )
+        liste = app_tables.users.search(tables.order_by("last_login", ascending=False),
+                                        enabled=True)  
         self.repeating_panel_1.items=liste  
     
     def check_box_confirmed_mail_change(self, **event_args):
