@@ -115,3 +115,8 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..Users_search import Users_search
         open_form('Users_search')
+
+    def button_types_evenements_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Evenements_types import Evenements_types
+        open_form('Evenements_types')

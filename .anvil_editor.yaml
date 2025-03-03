@@ -18,6 +18,8 @@ unique_ids:
   forms:
     Alert: '1698080420847437755022731.54675'
     Evenements: '1733210050019402314629740.7769'
+    Evenements_MAJ_table: '1741018454353317191859534.476'
+    Evenements_MAJ_table.ItemTemplate24: '1741018856747829208126605.3623'
     Evenements_visu_modif_del: '1733928440263290720923474.62683'
     Evenements_visu_modif_del.RowTemplate5: '1734363482243108598712754.73343'
     Formulaire_par_type_stage: '1740337781980705095224357.0809'
