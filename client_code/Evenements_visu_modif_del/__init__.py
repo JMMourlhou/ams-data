@@ -44,12 +44,16 @@ class Evenements_visu_modif_del(Evenements_visu_modif_delTemplate):
 
     def drop_down_event_change(self, **event_args):
         """This method is called when an item is selected"""
+      
         # Acquisition du choix d'évenements à afficher
         self.text_box_date.text = ""
         self.text_box_lieu.text = ""
         self.text_box_mot_clef.text = ""
         
         self.type_row = self.drop_down_event.selected_value   
+        if self.type_row is None:
+            return
+            
         # CREATION D'UN NOUVEL EVENEMNT "Nouvel évenemnt"
         if self.type_row['code'] == 0:                        
             from ..Evenements import Evenements

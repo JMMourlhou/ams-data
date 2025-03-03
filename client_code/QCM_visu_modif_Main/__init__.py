@@ -301,10 +301,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         
     def text_box_destination_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
-        # La destination de ce qcm existe-t-elle déjà ?
+        # La destination de ce qcm existe-t-elle déjà en dehors d'elle ?
         test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
         if len(test)==1 and self.text_box_destination.text != self.sov_destination:
-            
             alert("La description du QCM existe déjà, changez la !")
             self.text_box_destination.focus()
             return 

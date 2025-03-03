@@ -128,7 +128,7 @@ def add_type_evnt(type_evnt,             # text
 
 
 # =========================================================================================
-# appelé par form Evenements_MAJ_table    
+# appelé par form Evenements_MAJ_table  
 # Création d'un nouveau type d'évenemnts
 @anvil.server.callable 
 def modif_type_evnt(row,
@@ -150,4 +150,18 @@ def modif_type_evnt(row,
                 )
     valid = True
     return valid
+
+# =========================================================================================
+# appelé par form Evenements_MAJ_table
+# Effacement d'un type d'Evenement (Réunion, Incident, ...)
+@anvil.server.callable 
+def del_type_evnt(row):
+    id = row.get_id()
+    result=False
+    row.delete()
     
+    #relecture
+    test = app_tables.event_types.get_by_id(id)
+    if not test:
+        result=True
+    return result

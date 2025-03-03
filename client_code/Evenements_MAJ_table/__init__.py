@@ -13,16 +13,16 @@ class Evenements_MAJ_table(Evenements_MAJ_tableTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.text_box_1.placeholder = "Nouveau type d'évenement"
-        self.text_box_3.placeholder = "1er message dans le drop down"
-        self.text_box_4.placeholder = "2eme message dans le drop down"
+        self.text_box_1.placeholder = "Nom du nouveau type d'évenement"
+        self.text_box_3.placeholder = "1er message ex: 'Nouvel xxx'"
+        self.text_box_4.placeholder = "2eme message ex: 'Voir un xxx'"
         self.text_area_1.placeholder = "Texte initial"
         # search de tous les pré-requis existants et affichage
         liste_tous = app_tables.event_types.search(
             tables.order_by("code", ascending=True),
         )
         self.nb = len(liste_tous)
-        self.text_box_2.text = str(self.nb + 1)
+        self.text_box_2.text = str(self.nb)  # le premier code commencant à 0, je n'ai pas à incrémenter += 1
         self.check_box_1.checked = False
         self.repeating_panel_1.items = liste_tous
 
@@ -43,7 +43,7 @@ class Evenements_MAJ_table(Evenements_MAJ_tableTemplate):
             self.text_box_1.focus()
             return
         # Text_box_2 (code) non vide
-        if self.text_box_2.text == "" or int(self.text_box_2.text) < (self.nb+1):
+        if self.text_box_2.text == "" or int(self.text_box_2.text) < (self.nb):
             alert("Entrez un code valide !")
             self.text_box_2.focus()
             return

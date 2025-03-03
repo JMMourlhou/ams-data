@@ -3,7 +3,7 @@ components:
   - event_bindings: {change: text_box_1_change}
     layout_properties: {width: 68.353759765625}
     name: text_box_2
-    properties: {background: 'theme:Primary', foreground: 'theme:On Primary', role: outlined}
+    properties: {background: 'theme:Primary', enabled: false, foreground: 'theme:On Primary', role: outlined}
     type: TextBox
   - layout_properties: {}
     name: spacer_1
