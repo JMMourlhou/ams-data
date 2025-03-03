@@ -25,9 +25,7 @@ class Lieux_MAJ_table(Lieux_MAJ_tableTemplate):
         )
         self.repeating_panel_2.items = liste_tous
 
-        # réaffichage des pré requis
-        # open_form("Table_Pre_R_MAJ")
-
+ 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Parametres import Parametres
@@ -46,7 +44,7 @@ class Lieux_MAJ_table(Lieux_MAJ_tableTemplate):
             return
         # Text_box_2 non vide
         if self.text_box_2.text == "" or len(self.text_box_2.text) < 6:
-            alert("Entrez une adreese supérieure à 5 caractères !")
+            alert("Entrez une adresse supérieure à 5 caractères !")
             self.text_box_2.focus()
             return
         # Text_box_3 non vide

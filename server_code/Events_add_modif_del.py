@@ -98,3 +98,56 @@ def del_event_bt_retour(id):
     if not test:
         result=True
     return result
+
+# =========================================================================================
+# appelé par form Evenements_MAJ_table    
+# Création d'un nouveau type d'évenemnts
+@anvil.server.callable 
+def add_type_evnt(type_evnt,             # text
+                  code,                  # NUMBER
+                  msg_0,                  # text
+                  msg_1,                  # text
+                  text_initial,          # text
+                  mot_clef_avec_date     # True / False
+                 ):
+    new_row=app_tables.event_types.add_row(
+                                            type =           type_evnt,             # text
+                                            code =           code,                  # NUMBER 
+                                            msg_0 =          msg_0,                  # text
+                                            msg_1 =          msg_1,                  # text
+                                            text_initial =   text_initial,          # text
+                                            mot_clef_setup = mot_clef_avec_date     # True / False    
+                                        )
+    id = new_row.get_id()  # en création de l'évènement, je sauve l'id pour pouvoir le modifier en sauvegrde auto ou sauvegarde finale (bt Validation)
+    re_read_row = app_tables.event_types.get_by_id(id)
+    if re_read_row:
+        valid=True
+    else:
+        valid=False
+    return valid
+
+
+# =========================================================================================
+# appelé par form Evenements_MAJ_table    
+# Création d'un nouveau type d'évenemnts
+@anvil.server.callable 
+def modif_type_evnt(row,
+                  type_evnt,             # text
+                  code,                  # NUMBER
+                  msg_0,                  # text
+                  msg_1,                  # text
+                  text_initial,          # text
+                  mot_clef_avec_date     # True / False
+                 ):
+    valid= False
+    row.update(
+                type =           type_evnt,             # text
+                code =           code,                  # NUMBER 
+                msg_0 =          msg_0,                  # text
+                msg_1 =          msg_1,                  # text
+                text_initial =   text_initial,          # text
+                mot_clef_setup = mot_clef_avec_date     # True / False    
+                )
+    valid = True
+    return valid
+    

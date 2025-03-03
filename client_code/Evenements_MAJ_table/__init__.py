@@ -9,31 +9,26 @@ from anvil.tables import app_tables
 
 
 class Evenements_MAJ_table(Evenements_MAJ_tableTemplate):
-    def __init__(
-        self, **properties
-    ):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
+    def __init__(self, **properties):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.text_box_1.placeholder = "Type"
-        self.text_box_2.placeholder = "Code"
+        self.text_box_1.placeholder = "Nouveau type d'évenement"
         self.text_box_3.placeholder = "1er message dans le drop down"
         self.text_box_4.placeholder = "2eme message dans le drop down"
-        self.text_box_5.placeholder = "Texte initial"
+        self.text_area_1.placeholder = "Texte initial"
         # search de tous les pré-requis existants et affichage
-        liste_tous = app_tables.lieux.search(
-            q.fetch_only("lieu", "adresse"),
-            tables.order_by("lieu", ascending=True),
+        liste_tous = app_tables.event_types.search(
+            tables.order_by("code", ascending=True),
         )
-        self.repeating_panel_2.items = liste_tous
-
-        # réaffichage des pré requis
-        # open_form("Table_Pre_R_MAJ")
+        self.nb = len(liste_tous)
+        self.text_box_2.text = str(self.nb + 1)
+        self.check_box_1.checked = False
+        self.repeating_panel_1.items = liste_tous
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Parametres import Parametres
-
         open_form("Parametres")
 
     def button_add_click(self, **event_args):
@@ -42,47 +37,55 @@ class Evenements_MAJ_table(Evenements_MAJ_tableTemplate):
 
     def button_valid_click(self, **event_args):
         """This method is called when the button is clicked"""
-        # Text_box_1 non vide
-        if self.text_box_1.text == "" or len(self.text_box_1.text) < 3:
-            alert("Entrez un lieu valide!")
+        # Text_box_1 (type evnt) non vide
+        if self.text_box_1.text == "" or len(self.text_box_1.text) < 5:
+            alert("Entrez un type d'évenement clair (> à 5 caractères")
             self.text_box_1.focus()
             return
-        # Text_box_2 non vide
-        if self.text_box_2.text == "" or len(self.text_box_2.text) < 6:
-            alert("Entrez une adreese supérieure à 5 caractères !")
+        # Text_box_2 (code) non vide
+        if self.text_box_2.text == "" or int(self.text_box_2.text) < (self.nb+1):
+            alert("Entrez un code valide !")
             self.text_box_2.focus()
             return
-        # Text_box_3 non vide
-        """
+        
+        # Text_box_3 (msg 0)non vide
         if self.text_box_3.text == "" or len(self.text_box_3.text) < 6:
-            alert("Entrez un commentaire supérieur à 5 caractères !")
+            alert("Entrez le message qui apparaîtra dans le menu ! (au moins 6 caractères)")
             self.text_box_3.focus()
             return
-        """
+            
+        # Text_box_4 (msg 1)non vide
+        if self.text_box_4.text == "" or len(self.text_box_4.text) < 6:
+            alert("Entrez le message qui apparaîtra dans le 2eme menu ! (au moins 6 caractères)")
+            self.text_box_4.focus()
+            return   
+        
         # Code existant ?
-        row = app_tables.pre_requis.get(code_pre_requis=self.text_box_1.text)
+        nb = int(self.text_box_2.text)
+        row = app_tables.event_types.get(code = nb)
         if row:
-            alert("Ce lieu existe déjà !")
-            self.text_box_1.focus()
+            alert("Ce code est déjà pris !")
+            self.text_box_2.focus()
             return
-        r = alert(
-            "Voulez-vous vraiment ajouter ce Lieu ?",
-            dismissible=False,
-            buttons=[("oui", True), ("non", False)],
-        )
+            
+        r = alert("Voulez-vous vraiment ajouter ce Type d'évenement ?", dismissible=False, buttons=[("oui", True), ("non", False)],)
         if r:  # oui
+            nb = int(self.text_box_2.text)
             result = anvil.server.call(
-                "add_lieu",
-                self.text_box_1.text,
-                self.text_box_2.text,
-                self.text_box_3.text,
+                "add_type_evnt",
+                self.text_box_1.text,     # type devnt
+                nb,                       # code (numérique)
+                self.text_box_3.text,     # msg_1
+                self.text_box_4.text,     # msg_2
+                self.text_area_1.text,     # text_initial
+                self.check_box_1.checked  # mot clé daté ?  True/ False
             )
             if result is not True:
                 alert("ERREUR, Ajout non effectué !")
                 return
             alert("Création effectuée !")
         self.column_panel_add.visible = False
-        open_form("Lieux_MAJ_table")
+        open_form("Evenements_MAJ_table")
 
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""

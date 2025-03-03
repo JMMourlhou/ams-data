@@ -118,5 +118,5 @@ class Parametres(ParametresTemplate):
 
     def button_types_evenements_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Evenements_types import Evenements_types
-        open_form('Evenements_types')
+        from ..Evenements_MAJ_table import Evenements_MAJ_table
+        open_form('Evenements_MAJ_table')
