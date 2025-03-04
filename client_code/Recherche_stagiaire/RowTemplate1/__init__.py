@@ -56,9 +56,9 @@ class RowTemplate1(RowTemplate1Template):
             e = tel[8:10]
             self.button_3.text = a+"-"+b+"-"+c+"-"+d+"-"+e    
             
-        # Si ADMINISTRATEUR je visualise le BT del (effacement d'un stagiaire, formateur, tuteur)
+        # Si ADMINISTRATEUR ou BUREAUX je visualise le BT del (effacement d'un stagiaire, formateur, tuteur)
         user = anvil.users.get_user()
-        if user["role"] == "A":
+        if user["role"] == "A" or user["role"] == "B":
             self.button_del.visible = True
             
         # Drop down stages inscrits du stagiaire pour les pré-requis du stage sélectionnés
@@ -286,7 +286,7 @@ class RowTemplate1(RowTemplate1Template):
         """This method is called when the button is clicked"""
         # Effacement du stgiaire/formateur si pas ds un stage et si je suis l'administrateur
         user = anvil.users.get_user()
-        if user["role"] == "A":   # seul,l'administrateur peut effacer definitivement un stagiaire ou formateur ou tuteur
+        if user["role"] == "A" or user["role"]=="B":   # seul,l'administrateur et bureaux peuvent effacer definitivement un stagiaire ou formateur ou tuteur
             # Cette personne est-elle inscrite ds un ou plusieurs stages ?
             list = app_tables.stagiaires_inscrits.search(user_email=self.email_pour_del)
             detail =""
