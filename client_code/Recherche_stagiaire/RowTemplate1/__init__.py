@@ -20,11 +20,12 @@ class RowTemplate1(RowTemplate1Template):
         self.repeating_panel_1.visible = False  #qcm non visibles tant que pas de click sur bt Qcm
         self.user_initial_color()
         try: # *********************************          Liste à partir table users
+            self.email_pour_del = self.item 
             if self.item['prenom'] is not None:    # si prénom None, erreur
                 self.button_1.text = self.item['nom']+" "+self.item['prenom']
          
                 self.button_role.text = self.item['role']
-                self.email_pour_del = self.item   
+                  
             else:
                 self.button_1.text = self.item['nom']
                 
@@ -284,7 +285,7 @@ class RowTemplate1(RowTemplate1Template):
 
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
-        # Effacement du stgiaire/formateur si pas ds un stage et si je suis l'administrateur
+        # Effacement du stagiaire/formateur si pas ds un stage et si je suis l'administrateur
         user = anvil.users.get_user()
         if user["role"] == "A" or user["role"]=="B":   # seul,l'administrateur et bureaux peuvent effacer definitivement un stagiaire ou formateur ou tuteur
             # Cette personne est-elle inscrite ds un ou plusieurs stages ?

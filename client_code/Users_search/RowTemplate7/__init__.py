@@ -1,7 +1,6 @@
 from ._anvil_designer import RowTemplate7Template
 from anvil import *
 import anvil.server
-import stripe.checkout
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -20,10 +19,12 @@ class RowTemplate7(RowTemplate7Template):
         self.button_prenom.text = self.item['prenom']
         self.button_email.text = self.item['email']
         
+        self.text_box_nb_pw_failures.text = self.item['n_password_failures']
         self.check_box_conf_mail.checked = self.item['confirmed_email']
         self.check_box_cpt_enabled.checked = self.item['enabled']
         self.sov_old_conf_mail = self.item['confirmed_email']
         self.sov_old_enabled = self.item['enabled']
+        self.sov_old_pw = self.item['n_password_failures']
         
         self.button_sign_up.text = self.item['signed_up']
         self.button_last_login.text = self.item['last_login']
@@ -32,10 +33,12 @@ class RowTemplate7(RowTemplate7Template):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment modifier cette ligne ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
+            nb = int(self.text_box_nb_pw_failures.text)
             result=anvil.server.call('modify_users_from_parameters',
                                      self.item,
                                      self.check_box_conf_mail.checked,
-                                     self.check_box_cpt_enabled.checked
+                                     self.check_box_cpt_enabled.checked,
+                                     nb
                                     )
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
@@ -44,6 +47,7 @@ class RowTemplate7(RowTemplate7Template):
         else:   # non
             self.check_box_conf_mail.checked = self.sov_old_conf_mail
             self.check_box_cpt_enabled.checked = self.sov_old_enabled
+            self.text_box_nb_pw_failures.text = self.sov_old_pw
             self.button_modif.visible = False
         self.button_modif.visible = False
 
@@ -61,6 +65,11 @@ class RowTemplate7(RowTemplate7Template):
         """This method is called when the button is clicked"""
         from ...Saisie_info_apres_visu import Saisie_info_apres_visu
         open_form('Saisie_info_apres_visu', self.item['email'])
+
+    def text_box_nb_pw_failures_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        
+        self.button_modif.visible = True
 
 
 

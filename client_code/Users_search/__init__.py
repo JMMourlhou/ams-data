@@ -25,9 +25,6 @@ class Users_search(Users_searchTemplate):
             self.check_box_confirmed_mail.checked = True
             self.check_box_confirmed_mail_change()
             
-   
-        
-        
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main
@@ -38,6 +35,7 @@ class Users_search(Users_searchTemplate):
         self.text_box_nom.text = ""
         self.text_box_prenom.text = ""
         self.text_box_mail.text = ""
+        self.text_box_pw_failure.text = ""
         self.check_box_confirmed_mail.checked = False
         self.check_box_enabled.checked = False
         self.text_box_sign_up.text = ""
@@ -54,6 +52,7 @@ class Users_search(Users_searchTemplate):
         self.text_box_role.text = ""
         self.text_box_prenom.text = ""
         self.text_box_mail.text = ""
+        self.text_box_pw_failure.text = ""
         self.check_box_confirmed_mail.checked = False
         self.check_box_enabled.checked = False
         self.text_box_sign_up.text = ""
@@ -70,6 +69,7 @@ class Users_search(Users_searchTemplate):
         self.text_box_role.text = ""
         self.text_box_nom.text = ""
         self.text_box_mail.text = ""
+        self.text_box_pw_failure.text = ""
         self.check_box_confirmed_mail.checked = False
         self.check_box_enabled.checked = False
         self.text_box_sign_up.text = ""
@@ -86,6 +86,7 @@ class Users_search(Users_searchTemplate):
         self.text_box_role.text = ""
         self.text_box_nom.text = ""
         self.text_box_prenom.text = ""
+        self.text_box_pw_failure.text = ""
         self.check_box_confirmed_mail.checked = False
         self.check_box_enabled.checked = False
         self.text_box_sign_up.text = ""
@@ -97,12 +98,28 @@ class Users_search(Users_searchTemplate):
                                                 )
         self.repeating_panel_1.items=liste   
 
+    def text_box_pw_failure_focus(self, **event_args):
+        """This method is called when the TextBox gets focus"""
+        self.text_box_role.text = ""
+        self.text_box_nom.text = ""
+        self.text_box_prenom.text = ""
+        self.text_box_mail.text = ""
+        self.check_box_confirmed_mail.checked = False
+        self.check_box_enabled.checked = False
+        self.text_box_sign_up.text = ""
+        self.text_box_connexion.text = ""
+        
+        liste = app_tables.users.search(tables.order_by("n_password_failures", ascending=False),
+                                       enabled=True)        
+        self.repeating_panel_1.items=liste   
+
     def text_box_sign_up_focus(self, **event_args):
         """This method is called when the TextBox gets focus"""
         self.text_box_role.text = ""
         self.text_box_nom.text = ""
         self.text_box_prenom.text = ""
         self.text_box_mail.text = ""
+        self.text_box_pw_failure.text = ""
         self.check_box_confirmed_mail.checked = False
         self.check_box_enabled.checked = False
         self.text_box_connexion.text = ""
@@ -131,6 +148,7 @@ class Users_search(Users_searchTemplate):
         self.text_box_nom.text = ""
         self.text_box_prenom.text = ""
         self.text_box_mail.text = ""
+        self.text_box_pw_failure.text = ""
         self.check_box_enabled.checked = False
         self.text_box_sign_up.text = ""
         self.text_box_connexion.text = ""
@@ -159,6 +177,7 @@ class Users_search(Users_searchTemplate):
         self.text_box_nom.text = ""
         self.text_box_prenom.text = ""
         self.text_box_mail.text = ""
+        self.text_box_pw_failure.text = ""
         self.check_box_confirmed_mail.checked = False
         self.text_box_sign_up.text = ""
         self.text_box_connexion.text = ""
@@ -179,6 +198,8 @@ class Users_search(Users_searchTemplate):
             self.repeating_panel_1.items=liste
         else:
             self.text_box_nom_focus()
+
+   
 
   
 
