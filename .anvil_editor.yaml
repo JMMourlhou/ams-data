@@ -30,6 +30,7 @@ unique_ids:
     Mail_subject_attach_txt.ItemTemplate15: '1718887468288494998764751.1149'
     Mail_subject_attach_txt.ItemTemplate16: '1719077732896813355487767.9452'
     Mail_to_old_stagiaires: '1720538813119898279408990.1387'
+    Mail_to_old_stagiaires.ItemTemplate25: '1741368352528272784381774.49994'
     Mail_to_old_stagiaires.RowTemplate6: '1722265157624218370746207.4056'
     Main: '1692001550829414745039213.1715'
     Parametres: '1723133071881395757046502.5388'
