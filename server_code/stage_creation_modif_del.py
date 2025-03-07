@@ -13,13 +13,12 @@ from anvil import *  #pour les alertes
 def add_type_stage(code,     # row codes_stage concernée
               intitule,
               type_stage):
-    pass
     new_row=app_tables.codes_stages.add_row(
                                                 code=code,     # row codes_stage concernée
                                                 intitulé=intitule,
                                                 type_stage=type_stage
                                                     )
-    row = app_tables.lieux.search(lieu=new_row['code'])
+    row = app_tables.codes_stages.search(code=new_row['code'])
     if len(row)>0:
         valid=True
     else:

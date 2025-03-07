@@ -123,5 +123,5 @@ class Parametres(ParametresTemplate):
 
     def button_types_stages_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Stages_MAJ_table import Stages_MAJ_table
-        open_form('Stages_MAJ_table')
+        from ..Stage_MAJ_Table import Stage_MAJ_Table
+        open_form('Stage_MAJ_Table')

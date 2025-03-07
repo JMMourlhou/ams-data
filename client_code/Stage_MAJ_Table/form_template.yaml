@@ -28,21 +28,26 @@ components:
       name: label_1
       properties: {align: center, bold: true, font_size: 16, italic: true, text: Ajout d'un type de stage}
       type: Label
-    - event_bindings: {change: text_box_1_change}
-      layout_properties: {grid_position: 'RDYUBQ,QHGNCR'}
-      name: text_box_1
-      properties: {foreground: 'theme:On Primary Container', hide_text: false}
-      type: TextBox
-    - event_bindings: {change: text_box_2_change}
-      layout_properties: {grid_position: 'RDYUBQ,NABRMO'}
-      name: text_box_2
-      properties: {foreground: 'theme:On Primary Container'}
-      type: TextBox
-    - event_bindings: {change: text_box_3_change}
-      layout_properties: {grid_position: 'XHSWKY,LNNRCP'}
-      name: text_box_3
-      properties: {foreground: 'theme:On Primary Container', visible: false}
-      type: TextBox
+    - components:
+      - event_bindings: {change: text_box_1_change}
+        layout_properties: {grid_position: 'QXRCRS,VIIYEI'}
+        name: text_box_1
+        properties: {foreground: 'theme:On Primary Container', hide_text: false}
+        type: TextBox
+      - event_bindings: {change: text_box_2_change}
+        layout_properties: {grid_position: 'QXRCRS,HTWPTP'}
+        name: text_box_2
+        properties: {foreground: 'theme:On Primary Container'}
+        type: TextBox
+      - event_bindings: {change: text_box_3_change}
+        layout_properties: {grid_position: 'QXRCRS,FVBIEO'}
+        name: text_box_3
+        properties: {align: center, foreground: 'theme:On Primary Container', visible: true}
+        type: TextBox
+      layout_properties: {grid_position: 'ZKOGHE,FDBFWZ'}
+      name: column_panel_2
+      properties: {col_widths: '{"VIIYEI":10,"HTWPTP":40,"FVBIEO":10}'}
+      type: ColumnPanel
     - event_bindings: {click: button_valid_click}
       layout_properties: {grid_position: 'FFZODD,MTGGFP'}
       name: button_valid
@@ -50,7 +55,7 @@ components:
       type: Button
     layout_properties: {grid_position: 'ILDBPC,VJCJIP'}
     name: column_panel_add
-    properties: {background: 'theme:Olive', foreground: 'theme:On Primary', role: outlined-card, visible: false}
+    properties: {background: 'theme:Olive', col_widths: '{}', foreground: 'theme:On Primary', role: outlined-card, visible: false}
     type: ColumnPanel
   layout_properties: {grid_position: 'XNKXTY,IRJVEO'}
   name: column_panel_header
@@ -63,10 +68,12 @@ components:
   layout_properties: {grid_position: 'WBCMUZ,WQXHXD'}
   name: data_grid_1
   properties:
+    auto_header: false
     columns:
-    - {data_key: column_1, id: JKSDUP, title: Column 1}
-    - {data_key: column_2, id: VJQQOR, title: Column 2}
-    - {data_key: column_3, id: OJLQEN, title: Column 3}
+    - {data_key: column_1, expand: false, id: JKSDUP, title: '                                              Code stage', width: 276.8328552246094}
+    - {data_key: column_2, expand: false, id: VJQQOR, title: Intitulé, width: 322.6595458984375}
+    - {data_key: column_3, id: OJLQEN, title: Type}
+    show_page_controls: false
   type: DataGrid
 container: {type: ColumnPanel}
 is_package: true

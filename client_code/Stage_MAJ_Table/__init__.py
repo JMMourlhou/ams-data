@@ -77,7 +77,7 @@ class Stage_MAJ_Table(Stage_MAJ_TableTemplate):
                 return
             alert("Création effectuée !")
         self.column_panel_add.visible = False
-        open_form("Stages_MAJ_table")
+        open_form("Stage_MAJ_Table")
 
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
