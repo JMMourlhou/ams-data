@@ -1,6 +1,5 @@
-from ._anvil_designer import Stages_MAJ_tableTemplate
+from ._anvil_designer import RowTemplate8Template
 from anvil import *
-import stripe.checkout
 import anvil.server
 import anvil.users
 import anvil.tables as tables
@@ -8,12 +7,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Stages_MAJ_table(Stages_MAJ_tableTemplate):
-    def __init__(
-        self, **properties
-    ):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
+class RowTemplate8(RowTemplate8Template):
+    def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+
         # Any code you write here will run before the form opens.
         self.text_box_1.placeholder = "Code stage"
         self.text_box_2.placeholder = "Intitulé"
@@ -55,19 +53,20 @@ class Stages_MAJ_table(Stages_MAJ_tableTemplate):
             return
         """
         # Code existant ?
-        row = app_tables.pre_requis.get(code_pre_requis=self.text_box_1.text)
+        row = app_tables.codes_stages.get(code=self.text_box_1.text)
         if row:
-            alert("Ce lieu existe déjà !")
+            alert("Ce stage existe déjà !")
             self.text_box_1.focus()
             return
+            
         r = alert(
-            "Voulez-vous vraiment ajouter ce Lieu ?",
+            "Voulez-vous vraiment ajouter ce stage ?",
             dismissible=False,
             buttons=[("oui", True), ("non", False)],
         )
         if r:  # oui
             result = anvil.server.call(
-                "add_lieu",
+                "add_type_stage",
                 self.text_box_1.text,
                 self.text_box_2.text,
                 self.text_box_3.text,
@@ -77,7 +76,7 @@ class Stages_MAJ_table(Stages_MAJ_tableTemplate):
                 return
             alert("Création effectuée !")
         self.column_panel_add.visible = False
-        open_form("Lieux_MAJ_table")
+        open_form("Stages_MAJ_table")
 
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""

@@ -50,7 +50,7 @@ components:
       properties: {border: 3px solid yellow, col_widths: '{"PKNJRG":24,"ZUJMOI":30,"OAUTUT":26}', role: null, wrap_on: never}
       type: ColumnPanel
     - components:
-      - event_bindings: {click: button_mails_click}
+      - event_bindings: {click: button_types_stages_click}
         layout_properties: {grid_position: 'ESYQSX,XMTFPN'}
         name: button_types_stages
         properties: {background: 'theme:Primary', foreground: 'theme:Error', text: Types de stages, visible: true}

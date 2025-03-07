@@ -8,6 +8,26 @@ from anvil.tables import app_tables
 import anvil.server
 from anvil import *  #pour les alertes
 
+#Création d'un nouveau type de stage
+@anvil.server.callable 
+def add_type_stage(code,     # row codes_stage concernée
+              intitule,
+              type_stage):
+    pass
+    new_row=app_tables.codes_stages.add_row(
+                                                code=code,     # row codes_stage concernée
+                                                intitulé=intitule,
+                                                type_stage=type_stage
+                                                    )
+    row = app_tables.lieux.search(lieu=new_row['code'])
+    if len(row)>0:
+        valid=True
+    else:
+        valid=False
+    return valid
+
+
+
 #Création d'un nouveau stage
 @anvil.server.callable 
 def add_stage(code_stage,     # row codes_stage concernée
