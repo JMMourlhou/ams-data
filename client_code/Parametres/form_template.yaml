@@ -53,7 +53,7 @@ components:
       - event_bindings: {click: button_types_stages_click}
         layout_properties: {grid_position: 'ESYQSX,XMTFPN'}
         name: button_types_stages
-        properties: {background: 'theme:Primary', foreground: 'theme:Error', text: Types de stages, visible: true}
+        properties: {background: 'theme:Primary', foreground: 'theme:On Primary', text: Types de stages, visible: true}
         type: Button
       layout_properties: {grid_position: 'TJWBZJ,QQRCNT'}
       name: column_panel_8

@@ -727,7 +727,7 @@ db_schema:
       name: stage
       target: stages
       type: link_single
-    - admin_ui: {width: 96}
+    - admin_ui: {order: 0.5, width: 207}
       name: stage_txt
       type: string
     - admin_ui: {order: 0.75, width: 81}

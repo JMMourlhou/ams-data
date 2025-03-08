@@ -51,24 +51,23 @@ def modif_type_stage(row_code,    # row type de stage
     if nb > 0:
         for stage in list:
             stage.update(
-                code_txt=intitule,
+                code=row_code,   # code_stage row
+                code_txt=code,
                 type_stage=type_stage
                 )
+            # recherche des stagiaiares de ce stage
+            list1=app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt"),
+                                                stage=stage)                     # recherche dans table à partir du old intitul
+            nb1 = len(list1)
+            print(f"nb stagiaires du stage {stage['numero']}; {nb1}")
+            if nb1 > 0:
+                for stagiaire in list1:
+                    stagiaire.update(
+                        stage_txt=code,       # modif avec l'intitul nouveau
+                        )
     valid_2=True
     
-    # modif des stagiaires impliqués
-    valid_3=False
-    list=app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt"),
-                                    stage_txt=old_intitul)                     # recherche dans table à partir du old intitul
-    nb = len(list)
-    if nb > 0:
-        for stage in list:
-            stage.update(
-                stage_txt=intitule,       # modif avec l'intitul nouveau
-                )
-    valid_3=True
-    
-    if valid_1 is True and valid_2 is True and valid_3 is True:
+    if valid_1 is True and valid_2 is True:
         return True
     else:
         return False
