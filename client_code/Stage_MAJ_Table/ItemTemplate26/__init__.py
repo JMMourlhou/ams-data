@@ -1,18 +1,18 @@
-from ._anvil_designer import RowTemplate8Template
+from ._anvil_designer import ItemTemplate26Template
 from anvil import *
 import anvil.server
+import stripe.checkout
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
-class RowTemplate8(RowTemplate8Template):
+class ItemTemplate26(ItemTemplate26Template):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
-        # Any code you write here will run before the form opens.
+         # Any code you write here will run before the form opens.
         self.text_box_2.text = self.item['intitulé']
         self.text_box_1.text = self.item['code']
         self.text_box_3.text = self.item['type_stage']
@@ -23,16 +23,21 @@ class RowTemplate8(RowTemplate8Template):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous vraiment effacer ce lieu ?",dismissible=False,buttons=[("oui",True),("non",False)])
+        # vérif si des stages existent
+        list=app_tables.stages.search(code=self.item)
+        nb = len(list)
+        if nb > 0:
+            detail=[]
+            for stage in list:
+                detail.append(stage['numero'])
+            alert(f"Effacement non effectué, ce type de stage est utilisé dans {nb} stage(s) :\nStage(s): {detail}")
+            return
+        
+        r=alert("Voulez-vous vraiment effacer ce type de stage ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
-            result,nb,liste = anvil.server.call("del_lieu", self.item, self.item['code'])
+            result = anvil.server.call("del_type_stage", self.item)
             if result is not True:
-                detail=[]
-                for stage in liste:
-                    detail.append(stage['numero'])
-                alert(f"Effacement non effectué, ce lieu est utilisé dans {nb} stage(s) :\nStage(s): {detail}")
-                return
-            alert("Effacement effectué !")
+                alert("Effacement de ce type de stage non effectué !")
         open_form("Stage_MAJ_Table")
 
     def text_box_2_change(self, **event_args):
@@ -47,8 +52,8 @@ class RowTemplate8(RowTemplate8Template):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment modifier ce type de stage ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
-            # 1 modif ds les lieux stages 
-            result = anvil.server.call("modif_lieu", self.item, self.text_box_1.text, self.text_box_2.text, sov_old_lieu)
+            # 1 modif ds les stages 
+            result = anvil.server.call("modif_type_stage", self.item, self.text_box_1.text, self.text_box_2.text, self.text_box_3.text, self.sov_old_intitul)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
                 return

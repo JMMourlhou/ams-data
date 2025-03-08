@@ -23,7 +23,7 @@ class Stage_MAJ_Table(Stage_MAJ_TableTemplate):
             q.fetch_only("code", "intitulé", "type_stage"),
             tables.order_by("code", ascending=True),
         )
-        self.repeating_panel_1.items = liste_tous
+        self.repeating_panel_2.items = liste_tous
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""

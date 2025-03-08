@@ -574,7 +574,7 @@ db_schema:
       name: code
       target: codes_stages
       type: link_single
-    - admin_ui: {order: 0.5, width: 92}
+    - admin_ui: {order: 0.5, width: 218}
       name: code_txt
       type: string
     - admin_ui: {order: -1, width: 119.17}

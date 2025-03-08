@@ -8,11 +8,13 @@ from anvil.tables import app_tables
 import anvil.server
 from anvil import *  #pour les alertes
 
+# ------------------------------------------------------------------------------------------- MAJ Table type de stages   (Form Stage_MAJ_Table)
 #Création d'un nouveau type de stage
 @anvil.server.callable 
-def add_type_stage(code,     # row codes_stage concernée
-              intitule,
-              type_stage):
+def add_type_stage( code,     # row codes_stage concernée
+                    intitule,
+                    type_stage):
+    
     new_row=app_tables.codes_stages.add_row(
                                                 code=code,     # row codes_stage concernée
                                                 intitulé=intitule,
@@ -25,7 +27,64 @@ def add_type_stage(code,     # row codes_stage concernée
         valid=False
     return valid
 
+# ==========================================================================================
+@anvil.server.callable           #modif d'un type de stage 
+def modif_type_stage(row_code,    # row type de stage
+                    code,
+                    intitule,
+                    type_stage,
+                    old_intitul):     # permet de rechercher ce vieux code ds la stagiaires inscrits
+    
+    valid_1=False
+    row_code.update(
+                    code=code,     # row codes_stage concernée
+                    intitulé=intitule,
+                    type_stage=type_stage
+                    )
+    valid_1=True
+    
+    # modif des stages impliqués
+    valid_2=False
+    list=app_tables.stages.search(q.fetch_only("code", "code_txt","type_stage"),
+                                    code=row_code)
+    nb = len(list)
+    if nb > 0:
+        for stage in list:
+            stage.update(
+                code_txt=intitule,
+                type_stage=type_stage
+                )
+    valid_2=True
+    
+    # modif des stagiaires impliqués
+    valid_3=False
+    list=app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt"),
+                                    stage_txt=old_intitul)                     # recherche dans table à partir du old intitul
+    nb = len(list)
+    if nb > 0:
+        for stage in list:
+            stage.update(
+                stage_txt=intitule,       # modif avec l'intitul nouveau
+                )
+    valid_3=True
+    
+    if valid_1 is True and valid_2 is True and valid_3 is True:
+        return True
+    else:
+        return False
+    
 
+
+                
+# ==========================================================================================
+#Effact d'un type de stage existant (si pas de stages), le test a été effectué en client side
+@anvil.server.callable 
+def del_type_stage(type_stage_row):   # stage_num: num de stage en txt
+    result = False
+    if type_stage_row:
+        type_stage_row.delete()
+        result = True
+    return result
 
 #Création d'un nouveau stage
 @anvil.server.callable 
@@ -192,11 +251,6 @@ def efface_com_pour_un_stage(stage_row):   # stage_row : 1 row table 'stages'
                       display_com = False
                         )
     return
-
-
-
-
-
 
     
 # ==========================================================================================
