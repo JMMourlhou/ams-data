@@ -49,16 +49,22 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
-        
         qcm_row = self.drop_down_qcm_row.selected_value
+        self.drop_down_qcm_row.visible = False
         user=anvil.users.get_user()
 
-        # test s'il est le propriétaire
-        if qcm_row["qcm_owner"] != user["email"] and user["role"] != "B" and user["role"] != "A":
+        # test s'il est le propriétaire et soit A B F
+        if qcm_row["qcm_owner"] != user["email"] and user["role"] != "B" and user["role"] != "A" and user["role"] != "F":
             alert("Vous n'êtes pas le propriétaire de ce QCM, \nVous ne pouvez pas le modifier !")
-            return
+            # Réinitialisation
+            open_form("QCM_visu_modif_Main", None)
+            
+        # Si je suis l'admin, je peux MAJ le num du qcm, au cas où ...
+        if user["role"] == "A":
+            self.text_box_num_qcm.enabled = True
         # __________________________________________________________ CREATION QCM   /   MODIF INTITULE ou propriétaire
         self.text_box_num_qcm.text = qcm_row["qcm_nb"]
+        self.sov_num_qcm = qcm_row["qcm_nb"]
         self.text_box_destination.text = qcm_row["destination"]
         self.sov_destination = qcm_row["destination"]  # pour test si 2 destinations identiques en modif 
         self.drop_down_owner.selected_value = qcm_row["qcm_owner"]
@@ -228,8 +234,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             type = "V/F"       # rep1 ou rep2 peuvent être vrai
         else:
             type = "Multi"     # rep1 et rep2 peuvent être vrai 
-        # param
+            
+        # param (descro du QCM)
         param = self.drop_down_qcm_row.selected_value["destination"]
+                    
         # je récupère mes variables globales  question, reponse, bareme
         result = anvil.server.call("add_ligne_qcm", num, question, correction, reponse, bareme, image, qcm_nb, type, param)         #num du stage  de la ligne
         if result:
@@ -295,13 +303,31 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.button_del.visible = False
         self.drop_down_qcm_row.visible = False
         
-        # initialisation du nx num de QCM en lisant tous les QCM dispo et en ajoutant 1
-        nb_qcm = app_tables.qcm_description.search()
-        self.text_box_num_qcm.text=len(nb_qcm)+1
+        # initialisation du nx num de QCM en lisant le plus grand nb + 1
+        plus_grand_row = app_tables.qcm_description.search(tables.order_by("qcm_nb", ascending=False))[0]
+        nb_qcm = plus_grand_row['qcm_nb']
+        self.text_box_num_qcm.text=nb_qcm+1
+    
+    def text_box_num_lost_focus(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_del.visible = False
+        num = int(self.text_box_num_qcm.text)
+        test = app_tables.qcm_description.search(qcm_nb=num)
+        if len(test)==1 and self.text_box_num_qcm.text != str(self.sov_num_qcm):
+            alert("Ce numéro de Qcm existe déjà, changez le !")
+            self.text_box_num_qcm.focus()
+            return 
+        self.button_valid.visible = True
+
+    def text_box_num_qcm_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        self.button_del.visible = False
+        self.button_valid.visible = True
         
     def text_box_destination_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
         # La destination de ce qcm existe-t-elle déjà en dehors d'elle ?
+        self.button_del.visible = False
         test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
         if len(test)==1 and self.text_box_destination.text != self.sov_destination:
             alert("La description du QCM existe déjà, changez la !")
@@ -353,8 +379,10 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                     alert("Création du Qcm non effectué !")
                     self.button_valid.visible = False
                     return
-                else:          
-                    self.column_panel_question.visible = True
+                
+                # Je sors pour réinitiliser la drop down QCM avec ce nx QCM
+                open_form("QCM_visu_modif_Main")
+        
         # ECRITURE DANS LA TABLE   _________________________________ Modification      
         if choix=="Editer un QCM existant":
             # Modification:  envoi en modif si validation   
@@ -375,18 +403,39 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                 else:
                     alert("Modification du Qcm effectuée !") 
                     self.button_valid.visible = False
+                    
     # Effacement d'un qcm
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
         qcm_row = self.drop_down_qcm_row.selected_value
-        r=alert("Confirmez l'effacement complet de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
-        if r :   # oui
-            result = anvil.server.call("qcm_del", qcm_row)
-        if result is not True:
-            alert("Effacement du Qcm non effectué !")
-            return
-        else:
-            alert("Effacement du Qcm effectué !")         
+        # Test si déjà utilisé par un stage
+        # lecture de la table codes_stage
+        liste = app_tables.codes_stages.search()
+        liste_presence_qcm = []
+        key_searched = str(qcm_row["qcm_nb"])   # je recherche ce qcm
+        #alert(key_searched)
+        for stage in liste:
+            dico_qcm = stage['droit_qcm']
+            # si ce qcm est dans ce stage, je sauve le stage dans une liste
+            test = None
+            test = dico_qcm.get(key_searched)
+            if test is not None:
+                liste_presence_qcm.append(stage["code"])
+        nb_stages_avec_qcm = len(liste_presence_qcm)
+        if nb_stages_avec_qcm > 0:
+            alert(f"Effacer ce QCM est impossible,\nCar {nb_stages_avec_qcm} stage(s) l'utilise(nt) !\nDétail:\n{liste_presence_qcm}")
+            self.button_annuler_click()
+        else: 
+            # Confirmation par l'utilisateur
+            r=alert("Confirmez l'effacement complet de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
+            if r :   # oui
+                result = anvil.server.call("qcm_del", qcm_row)
+                if result is not True:
+                    alert("Effacement du Qcm non effectué !")
+                    return
+                else:
+                    alert("Effacement du Qcm effectué !")      
+            open_form("QCM_visu_modif_Main")
             
     def drop_down_menu_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -406,8 +455,15 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
     def button_quitter_click(self, **event_args):
         """This method is called when the button is clicked"""
-        self.button_annuler_click()
+        open_form("QCM_visu_modif_Main")
 
+    
+
+   
+
+
+
+    
    
     
 

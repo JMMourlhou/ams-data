@@ -723,7 +723,7 @@ db_schema:
   stagiaires_inscrits:
     client: search
     columns:
-    - admin_ui: {width: 98}
+    - admin_ui: {order: 0, width: 128}
       name: stage
       target: stages
       type: link_single

@@ -46,8 +46,12 @@ class ItemTemplate19(ItemTemplate19Template):
         # self.visible contient la col "visu_qcm_par_stage" de table qcm descro ...
         #   ... pour la création de la clé des qcm pour un stage et s'il faut le visualiser ou pas 
         #   ... le qcm est visibleou pas dès l'accès du stgiaire au menu QCM
-        anvil.server.call("del_qcm_stage", qcm_num,stage) 
-        
+        result = anvil.server.call("del_qcm_stage", qcm_num,stage) 
+        if result is True:
+            alert("Modification des Qcm pour ce stage effectuée\n... et\nRépercution sur les stagiaires impliqués")
+        else:
+            alert("Erreur pour la modification des Qcm de ce stage !")
+            
         self.button_del.visible = False
         self.f.drop_down_types_stages_change()
 

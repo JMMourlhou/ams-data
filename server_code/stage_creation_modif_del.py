@@ -43,7 +43,7 @@ def modif_type_stage(row_code,    # row type de stage
                     )
     valid_1=True
     
-    # modif des stages impliqués
+    # modif des droits aux qcm pour les stagiaires impliqués
     valid_2=False
     list=app_tables.stages.search(q.fetch_only("code", "code_txt","type_stage"),
                                     code=row_code)

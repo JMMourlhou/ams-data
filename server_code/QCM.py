@@ -54,7 +54,6 @@ def qcm_del(qcm_row):                # qcm_owner: user row     qcm_nb text
     return valid
 
 
-
 @anvil.server.callable
 def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb, type, param):
     # qcm_nb est la row venant du dropdown choix du qcm
@@ -272,6 +271,8 @@ def create_qcm_plot_pdf(user, nb, visu_next_qcm = False, visu_legend=False):    
 # ajout d'un droit au qcm pour un stage, table codes_stages, appelé en paramètres par QCM_par_stage / template 18
 @anvil.server.callable
 def modif_qcm_stage(nb, qcm_descro, stage, visible): # nb: int, num du qcm    stage: stage row ds table  codes_stages    visible: Qcm visible ? True / False
+
+    valid_1=False
     # préparation de l'option visible ou pas ds la valeur de la clé
     if visible is True:  # la valeur est "True", le qcm est visible dès l'accès du stgiaire au menu QCM
         visu = "True"
@@ -291,15 +292,37 @@ def modif_qcm_stage(nb, qcm_descro, stage, visible): # nb: int, num du qcm    st
      # ajout du qcm ds le dictionaire
     dict[cle]=valeur
     
-    # sauvegarde du dict
+    # sauvegarde du dict des droits aux qcm ds table 'codes_stages' dans la ligne de ce stage 
     stage.update(droit_qcm=dict)
+    valid_1=True
+    
+    # répercution sur les stagiaires de ce type de stage
+    valid_2=False
+      # recherche des stagiaiares de ce type de stage
+    list1=app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt","droits_stagiaire_qcms"),
+                                        stage_txt=stage["code"])                     # recherche dans table à partir du code du stage en table codes_stages
+    nb1 = len(list1)
+    print(f"nb stagiaires impliqués pour ce type de stage {stage['code']}; {nb1}")
+    if nb1 > 0:
+        for stagiaire in list1:
+            stagiaire.update(
+                droits_stagiaire_qcms=dict,       # écriture du nouveau dictionaire des qcm pour ce stage
+                )
+            
+    valid_2=True
+
+    if valid_1 is True and valid_2 is True:
+        return True
+    else:
+        return False
+        
     
 
 # ------------------------------------------------------------------------------------------------------------------
 # effact d'un droit au qcm pour un stage, table codes_stages, appelé en paramètres par QCM_par_stage / template 19
 @anvil.server.callable
 def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table  codes_stages   
-    
+    valid_1=False
     # création de la clé 
     cle = str(nb) # clé du QCM doit être str
 
@@ -310,9 +333,30 @@ def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table
      # del du qcm ds le dictionaire
     del dict[cle]
     
-    # sauvegarde du dict
+    # sauvegarde du dict des droits aux QCM en table codes_stage
     stage.update(droit_qcm=dict)
+    valid_1=True
+    
+    # répercution sur les stagiaires de ce type de stage
+    valid_2=False
+      # recherche des stagiaiares de ce type de stage
+    list1=app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt","droits_stagiaire_qcms"),
+                                        stage_txt=stage["code"])                     # recherche dans table à partir du code du stage en table codes_stages
+    nb1 = len(list1)
+    print(f"nb stagiaires impliqués pour ce type de stage {stage['code']}; {nb1}")
+    if nb1 > 0:
+        for stagiaire in list1:
+            stagiaire.update(
+                droits_stagiaire_qcms=dict,       # écriture du nouveau dictionaire des qcm pour ce stage
+                )
+    valid_2=True
 
+    if valid_1 is True and valid_2 is True:
+        return True
+    else:
+        return False
+
+        
 # ------------------------------------------------------------------------------------------------------------------
 # modif table qcm descro, qcm d'un stage sélectionné
 @anvil.server.callable
