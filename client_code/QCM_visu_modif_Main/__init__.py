@@ -290,8 +290,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             result = anvil.server.call("modify_users_temp2", user, None)   # je remets temp2 à vide
 
 
-
-        
+       
     #   _________________________________________________________________________________________________________
     #                             CREATION D'UN QCM
     #   _________________________________________________________________________________________________________
@@ -424,7 +423,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         nb_stages_avec_qcm = len(liste_presence_qcm)
         if nb_stages_avec_qcm > 0:
             alert(f"Effacer ce QCM est impossible,\nCar {nb_stages_avec_qcm} stage(s) l'utilise(nt) !\nDétail:\n{liste_presence_qcm}")
-            self.button_annuler_click()
+            alert("Pour effacer ce QCM, il vous faut d'abord ne plus l'affecter à un stage.")
+            from ..QCM_par_stage import QCM_par_stage
+            open_form("QCM_par_stage")
         else: 
             # Confirmation par l'utilisateur
             r=alert("Confirmez l'effacement complet de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
