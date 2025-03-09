@@ -316,6 +316,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             alert("Ce numéro de Qcm existe déjà, changez le !")
             self.text_box_num_qcm.focus()
             return 
+        alert("Ne changer le code du QCM que s'il n'a pas été affecté à un stage !")
         self.button_valid.visible = True
 
     def text_box_num_qcm_change(self, **event_args):
@@ -458,6 +459,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         """This method is called when the button is clicked"""
         open_form("QCM_visu_modif_Main")
 
+ 
     
 
    
