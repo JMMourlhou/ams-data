@@ -469,6 +469,8 @@ class ItemTemplate4(ItemTemplate4Template):
             self.rep3.enabled = False
             self.rep4.enabled = False
             self.rep5.enabled = False
+            # j'affiche la correction
+            self.text_box_correction.visible = True
             
             global nb_bonnes_rep
             global max_points
