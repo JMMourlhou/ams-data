@@ -130,3 +130,7 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..Qcm_exam import Qcm_exam
         open_form('Qcm_exam')
+
+    def button_types_financement_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
