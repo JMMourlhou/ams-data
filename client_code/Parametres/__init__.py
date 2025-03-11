@@ -133,4 +133,5 @@ class Parametres(ParametresTemplate):
 
     def button_types_financement_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
+        from ..Mode_Financement_MAJ_Table import Mode_Financement_MAJ_Table
+        open_form('Mode_Financement_MAJ_Table')
