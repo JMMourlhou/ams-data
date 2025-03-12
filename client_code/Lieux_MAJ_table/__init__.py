@@ -8,9 +8,7 @@ from anvil.tables import app_tables
 
 
 class Lieux_MAJ_table(Lieux_MAJ_tableTemplate):
-    def __init__(
-        self, **properties
-    ):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
+    def __init__(self, **properties):  # row stagiaire inscrit, vient de pré_requis_pour stagiaire admin
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
