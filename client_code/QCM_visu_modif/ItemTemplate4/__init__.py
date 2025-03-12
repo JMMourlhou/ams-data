@@ -491,6 +491,7 @@ class ItemTemplate4(ItemTemplate4Template):
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
                 self.text_box_correction.background = "Green"
+                self.text_box_correction.foreground = "White"
             else:
                 self.text_box_correction.background = "Orange"
    
@@ -668,6 +669,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                                     # comparaison et affichage
                                                     if rep1_stagiaire != rep1_correction:
                                                         rep.background = "Orange"
+                                                    
                                                     else:
                                                         rep.background = "green"
                                                         
@@ -676,32 +678,40 @@ class ItemTemplate4(ItemTemplate4Template):
                                                         # comparaison et affichage
                                                         if rep2_stagiaire != rep2_correction:
                                                             rep.background = "Orange"
+                                                    
                                                         else:
                                                             rep.background = "green"
+                                            
         
                                                 if nb_options > 2:
                                                     if rep.tag.nom == "rep3":
                                                         # comparaison et affichage
                                                         if rep3_stagiaire != rep3_correction:
                                                             rep.background = "Orange"
+                                                            
                                                         else:
                                                             rep.background = "green"
+                                                        
                                                 
                                                 if nb_options > 3:
                                                     if rep.tag.nom == "rep4":
                                                         # comparaison et affichage
                                                         if rep4_stagiaire != rep4_correction:
                                                             rep.background = "Orange"
+                                                        
                                                         else:
                                                             rep.background = "green"
+                                                        
         
                                                 if nb_options > 4:
                                                     if rep.tag.nom == "rep5":
                                                         # comparaison et affichage
                                                         if rep5_stagiaire != rep5_correction:
                                                             rep.background = "Orange"
+                                                         
                                                         else:
                                                             rep.background = "green"
+                                                            
                 # Affichage du plot
                 self.column_panel_plot.clear()
                 #print("self.qcm_nb: ", self.qcm_nb)
