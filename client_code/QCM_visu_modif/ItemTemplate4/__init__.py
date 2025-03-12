@@ -490,6 +490,9 @@ class ItemTemplate4(ItemTemplate4Template):
             if rep_multi_stagiaire == self.item["rep_multi"]:
                 nb_bonnes_rep += 1
                 points = points + int(bareme)
+                self.text_box_correction.background = "Green"
+            else:
+                self.text_box_correction.background = "Orange"
    
             if num == int(self.label_nb_questions.text):
                 self.button_fin_qcm.visible = True
@@ -664,7 +667,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                                 if rep.tag.nom == "rep1-true":   
                                                     # comparaison et affichage
                                                     if rep1_stagiaire != rep1_correction:
-                                                        rep.background = "red"
+                                                        rep.background = "Orange"
                                                     else:
                                                         rep.background = "green"
                                                         
@@ -672,7 +675,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                                     if rep.tag.nom == "rep2-false":
                                                         # comparaison et affichage
                                                         if rep2_stagiaire != rep2_correction:
-                                                            rep.background = "red"
+                                                            rep.background = "Orange"
                                                         else:
                                                             rep.background = "green"
         
@@ -680,7 +683,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                                     if rep.tag.nom == "rep3":
                                                         # comparaison et affichage
                                                         if rep3_stagiaire != rep3_correction:
-                                                            rep.background = "red"
+                                                            rep.background = "Orange"
                                                         else:
                                                             rep.background = "green"
                                                 
@@ -688,7 +691,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                                     if rep.tag.nom == "rep4":
                                                         # comparaison et affichage
                                                         if rep4_stagiaire != rep4_correction:
-                                                            rep.background = "red"
+                                                            rep.background = "Orange"
                                                         else:
                                                             rep.background = "green"
         
@@ -696,7 +699,7 @@ class ItemTemplate4(ItemTemplate4Template):
                                                     if rep.tag.nom == "rep5":
                                                         # comparaison et affichage
                                                         if rep5_stagiaire != rep5_correction:
-                                                            rep.background = "red"
+                                                            rep.background = "Orange"
                                                         else:
                                                             rep.background = "green"
                 # Affichage du plot
