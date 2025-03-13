@@ -5,7 +5,7 @@ components:
     properties: {height: 32}
     type: Spacer
   - event_bindings: {change: text_box_2_change}
-    layout_properties: {width: 151.86052685546875}
+    layout_properties: {width: 85.84506225585938}
     name: text_box_2
     properties: {background: 'theme:Primary', foreground: 'theme:On Tertiary', role: outlined}
     type: TextBox

@@ -25,7 +25,7 @@ class ItemTemplate28(ItemTemplate28Template):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous vraiment effacer ce lieu ?",dismissible=False,buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous vraiment effacer ce mode de financement ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
             result,nb,liste = anvil.server.call("del_lieu", self.item, self.item['lieu'])
             if result is not True:
