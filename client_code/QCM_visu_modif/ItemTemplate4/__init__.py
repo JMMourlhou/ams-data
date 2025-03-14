@@ -33,8 +33,7 @@ class ItemTemplate4(ItemTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.f = get_open_form()   # pour arrêter le timer 1
-        
+        self.f = get_open_form()   # pour arrêter le timer 1  ou atteindre le propriétaire du qcm en QCM_visu_modif_main
         global max_points
         max_points = 0
         global points
@@ -48,11 +47,14 @@ class ItemTemplate4(ItemTemplate4Template):
   
         # lecture  user: si user role diff S: mode création 
         user=anvil.users.get_user()
+        
         if user:
             self.vrai_numero_qcm = user['temp3']
             if user['temp2']!="test":            # si le concepteur du qcm a demandé un test (bt 'test' en QCM_visu_modif_Main) 
                 self.admin = user['role']
-                if self.admin[0:1]=="A":         # si Admin
+                owner = self.f.drop_down_qcm_row.selected_value["qcm_owner"]["email"]   # obtenir le propriétaire en form QCM_visu_modif_main
+                    
+                if self.admin[0:1]=="A" or self.admin[0:1]=="B" or user["email"]==owner:    # ---------------------    # si Admin ou Bureaux ou propriétaire du qcm
                     self.mode= "creation"        # "creation" = mode création/MAJ pas de test stagiaire
                 else:
                     self.mode = "test"

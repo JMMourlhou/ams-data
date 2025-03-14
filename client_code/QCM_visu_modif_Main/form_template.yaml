@@ -12,7 +12,7 @@ components:
       background: theme:Tertiary
       foreground: theme:On Primary Container
       include_placeholder: true
-      items: [Créer un nouveau QCM, Editer un QCM existant, Affecter un QCM à un stage, Quitter]
+      items: [Créer un nouveau QCM, Editer un QCM existant, Affecter un QCM à un stage]
       placeholder: Que voulez-vous faire ?
     type: DropDown
   - event_bindings: {change: drop_down_qcm_row_change}
@@ -38,6 +38,11 @@ components:
       underline: false
       visible: false
     type: DropDown
+  - event_bindings: {click: button_quitter_click}
+    layout_properties: {grid_position: 'ENSNKY,CMFMDK'}
+    name: button_quitter2
+    properties: {align: center, background: 'theme:On Primary Container', foreground: 'theme:On Primary', text: Quitter, visible: true}
+    type: Button
   layout_properties:
     col_widths: {}
     grid_position: DGXGMW,VQVVNA
@@ -75,11 +80,6 @@ components:
       layout_properties: {}
       name: button_del
       properties: {align: center, background: 'theme:Error', foreground: 'theme:On Primary Container', text: Effacer ce QCM, visible: false}
-      type: Button
-    - event_bindings: {click: button_quitter_click}
-      layout_properties: {}
-      name: button_quitter
-      properties: {align: center, background: 'theme:Error', foreground: 'theme:On Primary Container', text: Quitter, visible: true}
       type: Button
     layout_properties: {grid_position: 'CMLBND,CUSTHP'}
     name: flow_panel_7
@@ -266,6 +266,10 @@ components:
   name: column_panel_question
   properties: {background: 'theme:On Primary Container', border: '', col_spacing: medium, col_widths: '{}', foreground: '', role: outlined-card, spacing_above: none, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}
   type: ColumnPanel
+- layout_properties: {grid_position: 'ADHYQN,GXUJHU'}
+  name: repeating_panel_1
+  properties: {item_template: QCM_visu_modif_Main.ItemTemplate29}
+  type: RepeatingPanel
 - layout_properties: {grid_position: 'JKQKWS,BTYCFD'}
   name: column_panel_content
   properties: {background: '', border: '', col_spacing: medium, col_widths: '', foreground: '', role: null, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}

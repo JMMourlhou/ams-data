@@ -49,31 +49,32 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
-        qcm_row = self.drop_down_qcm_row.selected_value
+        self.qcm_row = self.drop_down_qcm_row.selected_value
         self.drop_down_qcm_row.visible = False
-        user=anvil.users.get_user()
+        self.user=anvil.users.get_user()
 
-        # test s'il est le propriétaire et soit A B F
-        if qcm_row["qcm_owner"] != user["email"] and user["role"] != "B" and user["role"] != "A" and user["role"] != "F":
+        # test s'il est le propriétaire ou A ou B
+
+        if self.qcm_row["qcm_owner"]["email"] != self.user["email"] and self.user["role"] != "B" and self.user["role"] != "A" :
             alert("Vous n'êtes pas le propriétaire de ce QCM, \nVous ne pouvez pas le modifier !")
             # Réinitialisation
             open_form("QCM_visu_modif_Main", None)
             
         # Si je suis l'admin, je peux MAJ le num du qcm, au cas où ...
-        if user["role"] == "A":
+        if self.user["role"] == "A":
             self.text_box_num_qcm.enabled = True
         # __________________________________________________________ CREATION QCM   /   MODIF INTITULE ou propriétaire
-        self.text_box_num_qcm.text = qcm_row["qcm_nb"]
-        self.sov_num_qcm = qcm_row["qcm_nb"]
-        self.text_box_destination.text = qcm_row["destination"]
-        self.sov_destination = qcm_row["destination"]  # pour test si 2 destinations identiques en modif 
-        self.drop_down_owner.selected_value = qcm_row["qcm_owner"]
-        self.check_box_visible.checked = qcm_row["visible"]
+        self.text_box_num_qcm.text = self.qcm_row["qcm_nb"]
+        self.sov_num_qcm = self.qcm_row["qcm_nb"]
+        self.text_box_destination.text = self.qcm_row["destination"]
+        self.sov_destination = self.qcm_row["destination"]  # pour test si 2 destinations identiques en modif 
+        self.drop_down_owner.selected_value = self.qcm_row["qcm_owner"]
+        self.check_box_visible.checked = self.qcm_row["visible"]
         self.column_panel_creation_qcm.visible = True
         # _______________________________________________________________________________
         # Pour les lignes QCM déjà crées du qcm choisi
         global liste
-        liste = list(app_tables.qcm.search(qcm_nb=qcm_row))
+        liste = list(app_tables.qcm.search(qcm_nb=self.qcm_row))
         nb_questions = len(liste)
         print("nb questions: ", nb_questions)
         #num_question = str(nb_questions + 1)
@@ -81,7 +82,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
         # modif du user's temp (nb de questions de son qcm)
         
-        r = anvil.server.call("temp_user_qcm", user, nb_questions,qcm_row["qcm_nb"])
+        r = anvil.server.call("temp_user_qcm", self.user, nb_questions, self.qcm_row["qcm_nb"])
         if r is False:
             alert("user non MAJ")
             return
@@ -89,12 +90,19 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Affiche button Test si au moins 1 question existe déjà
         if nb_questions > 1:
             self.button_test.visible = True
-            
-         # affiches les lignes du qcm
-        self.label_3.text = "Mise à jour du Q.C.M " + qcm_row["destination"]
-        self.column_panel_question.visible = True
-        self.affiche_lignes_qcm(liste)
 
+        # Si ce qcm est de type examen, je n'affiche pas le colomn panel des questions
+        if  self.qcm_row["exam"] is not True:  
+            # affiches les lignes du qcm
+            self.label_3.text = "Mise à jour du Q.C.M " + self.qcm_row["destination"]
+            self.column_panel_question.visible = True
+            self.affiche_lignes_qcm(liste)
+        else:
+            # j'affiche les qcm liés s'ils existent déjà dans le dict de la colonne QCM_source 
+            dict = self.qcm_row["qcm_source"]
+            if dict is not None and dict != {}:
+                # lecture des clés du dict et constitution de la liste pour le control panel des qcm enfants
+                pass
 
     def affiche_lignes_qcm(self, l=[]):
         global liste
@@ -337,6 +345,12 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             
     def drop_down_owner_change(self, **event_args):
         """This method is called when an item is selected"""
+        # je permet le changement s'il est le propriétaire ou admin ou bureau
+        # test s'il est le propriétaire et soit A B 
+        if self.qcm_row["qcm_owner"]["email"] != self.user["email"] and self.user["role"] != "B" and self.user["role"] != "A" :
+            alert("Vous n'êtes pas le propriétaire de ce QCM, \nVous ne pouvez pas le modifier !")
+            # Réinitialisation
+            open_form("QCM_visu_modif_Main", None)
         self.button_valid.visible = True
 
     def check_box_visible_change(self, **event_args):
@@ -452,12 +466,14 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         if choix=="Affecter un QCM à un stage":
             from ..QCM_par_stage import QCM_par_stage
             open_form("QCM_par_stage")
-        if choix=="Quitter":
-            self.button_annuler_click()
 
     def button_quitter_click(self, **event_args):
         """This method is called when the button is clicked"""
-        open_form("QCM_visu_modif_Main")
+        from ..Main import Main
+        open_form('Main',99) 
+        
+
+
 
  
     
