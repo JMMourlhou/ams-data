@@ -16,7 +16,7 @@ def file_reading():
     question_txt = ""    # la question incluant l'intitilé et les options
     rep =""              # dernier caractère d'une option 1 si vrai, 0 si faux
     nb_de_choix = 0      # nb d'options ex: A, B, C  = 3 options
-    f = open(data_files['qcm2.txt'])              # <-----------------------------------------------------  à modifier      fichier text entré en assets
+    f = open(data_files['qcm_2_14_mars_2025.txt'])              # <-----------------------------------------------------  à modifier      fichier text entré en assets
     x = True
     n="" # 1er caractère à tester pour savoir si la ligne est une question
     while x:
