@@ -91,7 +91,7 @@ components:
         type: Button
       layout_properties: {grid_position: 'LJKLUL,FATFDQ'}
       name: column_panel_tools_jm
-      properties: {visible: true}
+      properties: {visible: false}
       type: ColumnPanel
     - components:
       - event_bindings: {click: bt_gestion_stages_click}
