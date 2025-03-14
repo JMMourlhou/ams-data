@@ -419,7 +419,7 @@ db_schema:
     - admin_ui: {width: 138}
       name: correction
       type: string
-    - admin_ui: {order: 6, width: 102}
+    - admin_ui: {order: 6, width: 232}
       name: param
       type: string
     server: full

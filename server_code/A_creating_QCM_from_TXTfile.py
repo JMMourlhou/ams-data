@@ -70,7 +70,7 @@ def resume(cpt, nb_de_choix, question_txt, rep):
     # Préparation de l'intertion ds table QCM
     param = "BNSSA 2 'Diplômes, compétences et obligations'"                     # <-----------------------------------------------------  à modifier
     bareme = "1"
-    qcm_nb = 5
+    qcm_nb = 21
     # Lecture du fichier qcm descro pour obtenir le row
     qcm_descro_row=app_tables.qcm_description.get(qcm_nb=qcm_nb)
     if qcm_descro_row:
