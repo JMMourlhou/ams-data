@@ -12,11 +12,11 @@ from anvil import *  #pour les alertes
 @anvil.server.callable 
 def add_mode_fi(code_mode_fi, intitule):
     new_row=app_tables.mode_financement.add_row(
-                              mode_fi=code_mode_fi,
+                              code_fi=code_mode_fi,
                               intitule_fi=intitule
                              )
                  
-    row = app_tables.lieux.search(mode_fi=new_row['mode_fi'])
+    row = app_tables.mode_financement.search(code_fi=new_row['code_fi'])
     if len(row)>0:
         valid=True
     else:
@@ -24,11 +24,11 @@ def add_mode_fi(code_mode_fi, intitule):
     return valid
 
 # ==========================================================================================
-@anvil.server.callable           #Del d'un lieu (si pas utilisé en table stagiaire inscrits)
-def del_mode_fi(mode_fi_row, code_mode_fi, intitule):
+@anvil.server.callable           #Del d'un mode de fi (si pas utilisé en table stagiaire inscrits)
+def del_mode_fi(mode_fi_row, code_mode_fi):
     valid = False
     # del des PR stagiaires existants
-    liste = app_tables.stages.search(mode_fi=code_mode_fi)
+    liste = app_tables.stagiaires_inscrits.search(financement=mode_fi_row)
     if len(liste)==0:
         mode_fi_row.delete()
         valid = True
@@ -36,11 +36,10 @@ def del_mode_fi(mode_fi_row, code_mode_fi, intitule):
     return valid, len(liste), liste
 
 # ==========================================================================================
-@anvil.server.callable           #modif d'un lieu et adresse 
-def modif_mode_fi(lieu_row, adresse, lieu, old_lieu):
+@anvil.server.callable           #modif d'un mode de fi et intitulé
+def modif_mode_fi(mode_fi_row, code_fi, intitule_fi, old_mode):
     valid = False
-    lieu_row.update(adresse = adresse,
-                   lieu=lieu)
+    mode_fi_row.update(code_fi=code_fi,
+                        intitule_fi=intitule_fi)
     valid = True
-            
     return valid

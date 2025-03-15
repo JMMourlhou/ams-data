@@ -16,8 +16,6 @@ class ItemTemplate28(ItemTemplate28Template):
         # Any code you write here will run before the form opens.
         self.init_components(**properties)
 
-        # Any code you write here will run before the form opens.
-        # Any code you write here will run before the form opens.
         self.text_box_2.text = self.item['code_fi']
         self.text_box_1.text = self.item['intitule_fi']
         self.sov_old_code = self.item['code_fi']
@@ -27,15 +25,15 @@ class ItemTemplate28(ItemTemplate28Template):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment effacer ce mode de financement ?",dismissible=False,buttons=[("oui",True),("non",False)])
         if r :   # oui
-            result,nb,liste = anvil.server.call("del_lieu", self.item, self.item['lieu'])
+            result,nb,liste = anvil.server.call("del_mode_fi", self.item, self.item['code_fi'])
             if result is not True:
                 detail=[]
-                for stage in liste:
-                    detail.append(stage['numero'])
-                alert(f"Effacement non effectué, ce lieu est utilisé dans {nb} stage(s) :\nStage(s): {detail}")
+                for stagiaire in liste:
+                    detail.append((stagiaire['numero'],stagiaire['name'],stagiaire['prenom']))
+                alert(f"Effacement non effectué, ce mode de finacement est utilisé par {nb} stagiaire(s) :\nStagiaires(s): {detail}")
                 return
             alert("Effacement effectué !")
-        open_form("Lieux_MAJ_table")
+        open_form("Mode_Financement_MAJ_Table")
 
     def text_box_2_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
@@ -47,10 +45,10 @@ class ItemTemplate28(ItemTemplate28Template):
 
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert("Voulez-vous vraiment modifier ce Lieu ?",buttons=[("oui",True),("non",False)])
+        r=alert("Voulez-vous vraiment modifier ce Mode de Financement ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
             # 1 modif ds les lieux stages 
-            result = anvil.server.call("modif_lieu", self.item, self.text_box_1.text, self.text_box_2.text, sov_old_lieu)
+            result = anvil.server.call("modif_mode_fi", self.item, self.text_box_2.text, self.text_box_1.text, self.sov_old_intitule)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
                 return
