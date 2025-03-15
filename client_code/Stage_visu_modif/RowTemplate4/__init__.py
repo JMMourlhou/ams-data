@@ -20,6 +20,7 @@ class RowTemplate4(RowTemplate4Template):
         self.text_box_3.text = self.item['name'].capitalize()+" "+self.stagiaire_row["prenom"].capitalize()
         self.text_box_1.text = self.item['user_email']['email']
         self.text_box_2.text = self.stagiaire_row['tel']
+        self.text_box_4.text = self.item['financement']['code_fi']
         self.check_box_form_satis.checked = self.item['enquete_satisf']
         self.check_box_form_suivi.checked = self.item['enquete_suivi']
    
