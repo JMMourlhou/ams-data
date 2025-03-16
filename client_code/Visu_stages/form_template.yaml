@@ -54,6 +54,10 @@ components:
     spacing:
       padding: ['5', null, '5', null]
   type: ColumnPanel
+- layout_properties: {grid_position: 'JHIUKA,PMJUXX'}
+  name: drop_down_mode_fi
+  properties: {visible: false}
+  type: DropDown
 - components:
   - layout_properties: {pinned: false}
     name: repeating_panel_1

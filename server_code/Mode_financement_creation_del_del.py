@@ -42,4 +42,5 @@ def modif_mode_fi(mode_fi_row, code_fi, intitule_fi, old_mode):
     mode_fi_row.update(code_fi=code_fi,
                         intitule_fi=intitule_fi)
     valid = True
+
     return valid

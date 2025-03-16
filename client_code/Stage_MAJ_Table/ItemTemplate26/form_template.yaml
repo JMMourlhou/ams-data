@@ -63,9 +63,12 @@ components:
   name: flow_panel_1
   properties:
     align: center
+    gap: small
     spacing:
       margin: ['1', null, '0', null]
       padding: [null, null, '0', null]
+    spacing_above: none
+    spacing_below: none
   type: FlowPanel
 container: {type: ColumnPanel}
 is_package: true

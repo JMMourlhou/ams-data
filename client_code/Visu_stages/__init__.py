@@ -22,10 +22,13 @@ class Visu_stages(Visu_stagesTemplate):
         
         # Initilisation de la liste des stages à afficher
         
-        self.repeating_panel_1.items = app_tables.stages.search(tables.order_by("date_debut", ascending=False),
-                                                               )
+        # drop_down mode fi pour le repeat_panel de Stage_visu_modif
+        self.drop_down_mode_fi.items = [(r['code_fi'], r) for r in app_tables.mode_financement.search(tables.order_by("code_fi", ascending=True))]
         
-        
+        self.repeating_panel_1.items = app_tables.stages.search(q.fetch_only("numero", "type_stage"),
+                                                                tables.order_by("date_debut", ascending=False)
+                                                               )   
+            
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Main import Main

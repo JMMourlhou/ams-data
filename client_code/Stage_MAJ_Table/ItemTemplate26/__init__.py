@@ -1,7 +1,6 @@
 from ._anvil_designer import ItemTemplate26Template
 from anvil import *
 import anvil.server
-import stripe.checkout
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -60,6 +59,8 @@ class ItemTemplate26(ItemTemplate26Template):
             alert("Modification effectuée !")
             
         else:   # non
-            self.text_box_1.text = self.sov_old_adresse
-            self.text_box_2.text = self.sov_old_lieu
+            self.text_box_1.text = self.sov_old_code
+            self.text_box_2.text = self.sov_old_intitul
+            self.text_box_3.text = self.sov_old_type_st
+            
         self.button_modif.visible = False

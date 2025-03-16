@@ -45,9 +45,15 @@ class ItemTemplate28(ItemTemplate28Template):
 
     def button_modif_click(self, **event_args):
         """This method is called when the button is clicked"""
+        # vérif si ce code de financement existe déjà ?
+        test = app_tables.mode_financement.search(code_fi=self.text_box_2.text)
+        if len(test)==1 and self.text_box_2.text != self.sov_old_code:
+            alert("Ce code existe déjà !")
+            self.text_box_2.focus()
+            return
         r=alert("Voulez-vous vraiment modifier ce Mode de Financement ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
-            # 1 modif ds les lieux stages 
+            # modif du mode de fi 
             result = anvil.server.call("modif_mode_fi", self.item, self.text_box_2.text, self.text_box_1.text, self.sov_old_intitule)
             if result is not True:
                 alert("ERREUR, Modification non effectuée !")
@@ -55,6 +61,6 @@ class ItemTemplate28(ItemTemplate28Template):
             alert("Modification effectuée !")
             
         else:   # non
-            self.text_box_1.text = self.sov_old_adresse
-            self.text_box_2.text = self.sov_old_lieu
+            self.text_box_1.text = self.sov_old_intitule
+            self.text_box_2.text = self.sov_old_code
         self.button_modif.visible = False

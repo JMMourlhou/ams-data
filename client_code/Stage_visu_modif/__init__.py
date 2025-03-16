@@ -23,7 +23,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
       
         # Any code you write here will run before the form opens.
         if num_stage == 0:
-            alert("Numéro de stage non trouvé")
+            #alert("Numéro de stage non trouvé")
             return
         
         # Drop down codes stages
@@ -31,14 +31,15 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
+
+        
         
         #lecture du stage
         stage_row=app_tables.stages.get(numero=int(num_stage))
         self.stage_row = stage_row
         
         #lecture des stagiaires inscrits
-        liste_stagiaires = app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", 
-                                                                    user_email=q.fetch_only("email", "tel")),
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", "financement", user_email=q.fetch_only("email", "tel")),
                                                                     tables.order_by("name", ascending=True),
                                                                     stage=stage_row
                                                                            )

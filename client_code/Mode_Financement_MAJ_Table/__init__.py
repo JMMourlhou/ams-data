@@ -33,12 +33,13 @@ class Mode_Financement_MAJ_Table(Mode_Financement_MAJ_TableTemplate):
     def button_add_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.column_panel_add.visible = True
+        self.text_box_1.focus()
 
     def button_valid_click(self, **event_args):
         """This method is called when the button is clicked"""
         # Text_box_1 non vide
-        if self.text_box_1.text == "" or len(self.text_box_1.text) < 3:
-            alert("Entrez un code de mode de financement valide!")
+        if self.text_box_1.text == "" or len(self.text_box_1.text) < 2:
+            alert("Entrez un code de mode de financement correct (2 caractères minimum)")
             self.text_box_1.focus()
             return
         # Text_box_2 non vide

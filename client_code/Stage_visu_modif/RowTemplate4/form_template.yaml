@@ -15,10 +15,11 @@ components:
     name: text_box_2
     properties: {align: center, background: 'theme:Primary', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: null, spacing_above: small, spacing_below: none, text: '', tooltip: '', type: text, underline: false, visible: true}
     type: TextBox
-  - layout_properties: {width: 71.648466796875}
-    name: text_box_4
-    properties: {background: 'theme:Primary', font_size: 12, foreground: 'theme:On Primary'}
-    type: TextBox
+  - event_bindings: {change: drop_down_mode_fi_change}
+    layout_properties: {width: 57.5433689453125}
+    name: drop_down_mode_fi
+    properties: {background: 'theme:Primary', foreground: 'theme:On Primary'}
+    type: DropDown
   - event_bindings: {change: check_box_form_satis_change}
     layout_properties: {}
     name: check_box_form_satis

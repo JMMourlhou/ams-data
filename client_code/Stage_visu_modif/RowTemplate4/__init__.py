@@ -13,16 +13,13 @@ class RowTemplate4(RowTemplate4Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        #lecture fichier users, à partir du mail, pour avoir le prénom, mail, tel
-        self.stagiaire_row=app_tables.users.get(q.fetch_only("nom","prenom","email","tel"),
-                                            email=self.item['user_email']['email']
-                                            )
-        self.text_box_3.text = self.item['name'].capitalize()+" "+self.stagiaire_row["prenom"].capitalize()
+        
+        self.text_box_3.text = self.item['name'].capitalize()+" "+ self.item['user_email']["prenom"].capitalize()
         self.text_box_1.text = self.item['user_email']['email']
-        self.text_box_2.text = self.stagiaire_row['tel']
-        self.text_box_4.text = self.item['financement']['code_fi']
+        self.text_box_2.text = self.item['user_email']['tel']
         self.check_box_form_satis.checked = self.item['enquete_satisf']
         self.check_box_form_suivi.checked = self.item['enquete_suivi']
+        self.init_drop_down_mode_fi()  
    
     def text_box_3_focus(self, **event_args):
         """This method is called when the text area gets focus"""
@@ -63,4 +60,27 @@ class RowTemplate4(RowTemplate4Template):
         txt_msg = anvil.server.call("init_formulaire_suivi_stagiaire", stagiaire_row, self.check_box_form_suivi.checked)   # module serveur "add_stagiaire"
         alert(txt_msg)
         
-     
+    def init_drop_down_mode_fi(self):
+        self.f = get_open_form()   # récupération de la forme mère pour revenir ds la forme appelante
+        liste =[]
+        for x in self.f.drop_down_mode_fi.items:
+            liste.append((x[0],x[1])) 
+        self.drop_down_mode_fi.items = liste
+        self.drop_down_mode_fi.selected_value = self.item["financement"]
+
+    def drop_down_mode_fi_change(self, **event_args):
+        """This method is called when an item is selected"""
+        # sauvegarde du mode de fi si ok 
+        nom_p = self.item["name"].capitalize() + " " + self.item["prenom"].capitalize()
+        r = alert(
+            f"Voulez-vous vraiment Changer le mode de financement pour {nom_p} ?",
+            dismissible=False,
+            buttons=[("oui", True), ("non", False)],
+        )
+        if r:  # oui
+            stagiaire_row=self.item   # Changement du mode de fi
+            result = anvil.server.call(
+                "modif_m", stagiaire_row, self.drop_down_mode_fi.selected_value)
+        else:
+            self.drop_down_mode_fi.selected_value = self.item["financement"]
+        
