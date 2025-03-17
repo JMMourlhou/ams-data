@@ -10,12 +10,13 @@ from anvil.pdf import PDFRenderer
 
 # Création d'un QCM
 @anvil.server.callable
-def qcm_création(qcm_nb, destination, qcm_owner, visible):                # qcm_owner: user row     qcm_nb text
+def qcm_création(qcm_nb, destination, qcm_owner, visible, examen):                # qcm_owner: user row     qcm_nb text
     new_row=app_tables.qcm_description.add_row(
                                                 qcm_nb=int(qcm_nb),
                                                 destination=destination,
                                                 qcm_owner=qcm_owner,   # user row
-                                                visible=visible
+                                                visible=visible,
+                                                exam=examen
                                                     )
     qcm_row = app_tables.qcm_description.search(qcm_nb = new_row["qcm_nb"])
     if qcm_row:
@@ -26,12 +27,13 @@ def qcm_création(qcm_nb, destination, qcm_owner, visible):                # qcm
 
 # modif description d'un QCM
 @anvil.server.callable
-def qcm_modif(qcm_row, qcm_nb, destination, qcm_owner, visible):                # qcm_owner: user row     qcm_nb text
+def qcm_modif(qcm_row, qcm_nb, destination, qcm_owner, visible, examen):                # qcm_owner: user row     qcm_nb text
     qcm_row.update(
                     qcm_nb=int(qcm_nb),
                     destination=destination,
                     qcm_owner=qcm_owner,   # user row
-                    visible=visible
+                    visible=visible,
+                    exam=examen
                         )
     qcm_row = app_tables.qcm_description.search(qcm_nb = int(qcm_nb))
     if qcm_row:
@@ -52,6 +54,13 @@ def qcm_del(qcm_row):                # qcm_owner: user row     qcm_nb text
     else:
         valid=False
     return valid
+
+
+# ajout d'un qcm enfant au dictionaire source d'un qcm exam
+@anvil.server.callable
+def add_qcm_enfant(qcm_parent_row, dico):                # ajout ds dico colonne qcm_source de la table QCM_description
+    qcm_parent_row.update(qcm_source=dico)
+
 
 
 @anvil.server.callable

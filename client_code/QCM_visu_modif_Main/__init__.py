@@ -47,6 +47,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
 
+    # L'utilisateur a cliqué sur un QCM à éditer, affichage de ses caractéristiques
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         self.qcm_row = self.drop_down_qcm_row.selected_value
@@ -63,13 +64,14 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Si je suis l'admin, je peux MAJ le num du qcm, au cas où ...
         if self.user["role"] == "A":
             self.text_box_num_qcm.enabled = True
-        # __________________________________________________________ CREATION QCM   /   MODIF INTITULE ou propriétaire
+        # __________________________________________________________ CREATION QCM   /   MODIF INTITULE, owner, visible, examen
         self.text_box_num_qcm.text = self.qcm_row["qcm_nb"]
         self.sov_num_qcm = self.qcm_row["qcm_nb"]
         self.text_box_destination.text = self.qcm_row["destination"]
         self.sov_destination = self.qcm_row["destination"]  # pour test si 2 destinations identiques en modif 
         self.drop_down_owner.selected_value = self.qcm_row["qcm_owner"]
         self.check_box_visible.checked = self.qcm_row["visible"]
+        self.check_box_examen.checked = self.qcm_row["exam"]           # EXAM ? si oui ne pas afficher le colomn panel question, afficher col panel des enfants qcm exam
         self.column_panel_creation_qcm.visible = True
         # _______________________________________________________________________________
         # Pour les lignes QCM déjà crées du qcm choisi
@@ -97,12 +99,40 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             self.label_3.text = "Mise à jour du Q.C.M " + self.qcm_row["destination"]
             self.column_panel_question.visible = True
             self.affiche_lignes_qcm(liste)
-        else:
-            # j'affiche les qcm liés s'ils existent déjà dans le dict de la colonne QCM_source 
-            dict = self.qcm_row["qcm_source"]
-            if dict is not None and dict != {}:
-                # lecture des clés du dict et constitution de la liste pour le control panel des qcm enfants
-                pass
+        else: # QCM exam: je n'affiche pas de lignes questions qcm mais les qcm enfants potentiels
+            self.column_panel_question.visible = False
+            self.dict = self.qcm_row["qcm_source"]
+            
+            # Tous les qcm
+            self.liste_qcm_descro = app_tables.qcm_description.search(tables.order_by("destination", ascending=True))  
+            
+            # panel des qcms disponibles (MOINS LES QCM enfants DEJA SELECTIONNES POUR CE STAGE)
+            if self.dict is not None and self.dict != {}:     # ni None, ni {}
+                # Enlever les qcm déjà sélectionnés
+                liste_qcm_dispos = []
+                liste_qcm_selectionnes = []
+                for qcm in self.liste_qcm_descro:
+                    clef_search = self.dict.get(str(qcm['qcm_nb']))   # recherche sur le num du qcm (doit être str)
+                    if clef_search is None:  
+                        # ce qcm n'est pas ds le dict du stage, je l'affiche ds panel 1, qcm dispos
+                        print(qcm['destination'])
+                        liste_qcm_dispos.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
+                    else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
+                        liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], clef_search[0]))
+                    
+            else: # si pas de dict, j'affiche ts les qcm
+                liste_qcm_dispos = self.liste_qcm_descro
+                liste_qcm_selectionnes = []
+
+            self.column_panel_exam.visible = True
+            print(f"Nb de qcm dipos: {len(liste_qcm_dispos)}")
+            #self.repeating_panel_1.visible = True
+            self.repeating_panel_1.items = liste_qcm_dispos
+    
+            print(f"Nb de qcm sélectionnés: {len(liste_qcm_selectionnes)}") 
+            #self.repeating_panel_2.visible = True
+            self.repeating_panel_2.items = liste_qcm_selectionnes
+                        
 
     def affiche_lignes_qcm(self, l=[]):
         global liste
@@ -387,7 +417,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                 result = anvil.server.call("qcm_création", self.text_box_num_qcm.text,
                                                                     self.text_box_destination.text,
                                                                     self.drop_down_owner.selected_value,   # user row
-                                                                    self.check_box_visible.checked
+                                                                    self.check_box_visible.checked,
+                                                                    self.check_box_examen.checked
                                                 )
                 if result is not True:
                     alert("Création du Qcm non effectué !")
@@ -400,8 +431,6 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # ECRITURE DANS LA TABLE   _________________________________ Modification      
         if choix=="Editer un QCM existant":
             # Modification:  envoi en modif si validation   
-            
-
             qcm_row = self.drop_down_qcm_row.selected_value
             r=alert("Confirmez la modification de la description de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
             if r :   # oui
@@ -409,7 +438,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                                                         self.text_box_num_qcm.text,
                                                         self.text_box_destination.text,
                                                         self.drop_down_owner.selected_value,   # user row
-                                                        self.check_box_visible.checked
+                                                        self.check_box_visible.checked,
+                                                        self.check_box_examen.checked
                                                 )
                 if result is not True:
                     alert("Modification du Qcm non effectuée !")
@@ -471,7 +501,19 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         """This method is called when the button is clicked"""
         from ..Main import Main
         open_form('Main',99) 
+
+    def check_box_examen_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_examen.checked is True:
+            r=alert("Ce Qcm sera basé sur d'autres Qcm !",dismissible=False,buttons=[("oui",True),("non",False)])
+            if not r :   # non
+                self.check_box_examen.checked = False
+                return
+        alert("Validez les caractéristiques de ce QCM examen !")
+        self.column_panel_question.visible = False
+        self.button_valid.visible = True
         
+        # C'est un QCM de type examen, j'affiche 
 
 
 
