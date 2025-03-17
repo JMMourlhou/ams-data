@@ -17,6 +17,9 @@ class ItemTemplate29(ItemTemplate29Template):
         #                              0             1              2                 3
         #                              qcm_exam_row    , qcm enfant nb, qcm_destination,  nb de questions
         self.button_qcm_enfant.text = str(self.item[1]) + " - " + self.item[2] 
-        nb_questions_qcm_enfant = 
-        self.text_box_nb_questions.text = self.item[3]
+        nb_questions_qcm_enfant = self.item[3]
+        if nb_questions_qcm_enfant == "0":
+            self.text_box_nb_questions.background = "red"
+            self.text_box_nb_questions.foreground = "yellow"
+        self.text_box_nb_questions.text = nb_questions_qcm_enfant
         
