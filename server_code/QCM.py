@@ -56,12 +56,22 @@ def qcm_del(qcm_row):                # qcm_owner: user row     qcm_nb text
     return valid
 
 
-# ajout d'un qcm enfant au dictionaire source d'un qcm exam
+# modif dictionaire source d'un qcm exam
 @anvil.server.callable
-def add_qcm_enfant(qcm_parent_row, dico):                # ajout ds dico colonne qcm_source de la table QCM_description
+def qcm_enfant(qcm_parent_row, qcm_enfant_nb, nb_questions):                # ajout ds dico colonne qcm_source de la table QCM_description
+    # lecture du qcm à partir de son numero
+    result = False
+    dico=qcm_parent_row['qcm_source']
+    if dico is None or dico == {}:
+        dico ={}
+    key = str(qcm_enfant_nb)
+    value = str(nb_questions)
+    dico[key]=value
+    print(dico)    
+   
     qcm_parent_row.update(qcm_source=dico)
-
-
+    result = True
+    return result
 
 @anvil.server.callable
 def add_ligne_qcm(num_question, question, correction, rep, bareme, image, qcm_nb, type, param):

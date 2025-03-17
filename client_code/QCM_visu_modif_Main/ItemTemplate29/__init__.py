@@ -14,6 +14,9 @@ class ItemTemplate29(ItemTemplate29Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        self.button_qcm_enfant.text = str(self.item[0]) + " - " + self.item[1]   # la liste a été construite car qcm existant
-        self.text_box_nb_questions.text = self.item[2]
+        #                              0             1              2                 3
+        #                              qcm_exam_row    , qcm enfant nb, qcm_destination,  nb de questions
+        self.button_qcm_enfant.text = str(self.item[1]) + " - " + self.item[2] 
+        nb_questions_qcm_enfant = 
+        self.text_box_nb_questions.text = self.item[3]
         

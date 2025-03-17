@@ -107,23 +107,27 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             self.liste_qcm_descro = app_tables.qcm_description.search(tables.order_by("destination", ascending=True))  
             
             # panel des qcms disponibles (MOINS LES QCM enfants DEJA SELECTIONNES POUR CE STAGE)
+            liste_qcm_dispos = []
+            liste_qcm_selectionnes = []
             if self.dict is not None and self.dict != {}:     # ni None, ni {}
                 # Enlever les qcm déjà sélectionnés
-                liste_qcm_dispos = []
-                liste_qcm_selectionnes = []
                 for qcm in self.liste_qcm_descro:
-                    clef_search = self.dict.get(str(qcm['qcm_nb']))   # recherche sur le num du qcm (doit être str)
-                    if clef_search is None:  
+                    valeur = self.dict.get(str(qcm['qcm_nb']))   # recherche sur le num du qcm (doit être str)
+                    if valeur is None:  
                         # ce qcm n'est pas ds le dict du stage, je l'affiche ds panel 1, qcm dispos
                         print(qcm['destination'])
-                        liste_qcm_dispos.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
+                        #                        0             1              2                   
+                        #                        qcm_exam    , qcm enfant nb, qcm_destination,   
+                        liste_qcm_dispos.append((self.qcm_row, qcm['qcm_nb'], qcm['destination']))
                     else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
-                        liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], clef_search[0]))
-                    
+                        #                              0             1              2                 3
+                        #                              qcm_exam_row    , qcm enfant nb, qcm_destination,  nb de questions
+                        liste_qcm_selectionnes.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], valeur[0]))      
             else: # si pas de dict, j'affiche ts les qcm
-                liste_qcm_dispos = self.liste_qcm_descro
-                liste_qcm_selectionnes = []
-
+                for qcm in self.liste_qcm_descro:
+                    liste_qcm_dispos.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
+                    liste_qcm_selectionnes = []
+                    
             self.column_panel_exam.visible = True
             print(f"Nb de qcm dipos: {len(liste_qcm_dispos)}")
             #self.repeating_panel_1.visible = True

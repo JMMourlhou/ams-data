@@ -13,13 +13,7 @@ class ItemTemplate27(ItemTemplate27Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        try:
-            self.button_descro.text = str(self.item[0]) + " - " + self.item[1]   # si la liste a été construite car qcm existant
-            self.sov_qcm_nb = str(self.item[0])
-        except:
-            # si la liste a été directement copiée de la table 
-            self.button_descro.text = str(self.item['qcm_nb']) + " - " +  self.item["destination"]      # (dict du stage choisi était encore vide)
-            self.sov_qcm_nb = str(self.item['qcm_nb'])
+        self.button_descro.text = str(self.item[1]) + " - " + self.item[2]   # si la liste a été construite car qcm existant
             
     def button_descro_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -32,3 +26,13 @@ class ItemTemplate27(ItemTemplate27Template):
         """This method is called when the button is clicked"""
         # écriture du nouveau qcm enfant dans le dictionaire
         # self.sov_qcm_nb contient le qcm à ajouter dans le dico
+        #                                        qcm_exam_row,    qcm_enfant_nb,        nb_questions
+        result = anvil.server.call("qcm_enfant", self.item[0],    str(self.item[1]),      0)    # qcm_exam_row
+        if result is True:
+            alert("Ajout du qcm enfant effectué!\n\nAjoutez le nb de questions allouées à ce Qcm enfant")
+            # réaffichage après maj du dico avec le row du Qcm sur lequel je travaille
+            open_form('QCM_visu_modif_Main', self.item[0])
+        else:
+            alert("Ajout du qcm enfant effectué!")
+            return
+            
