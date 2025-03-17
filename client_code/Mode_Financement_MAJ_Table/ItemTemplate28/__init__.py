@@ -30,7 +30,7 @@ class ItemTemplate28(ItemTemplate28Template):
                 detail=[]
                 for stagiaire in liste:
                     detail.append((stagiaire['numero'],stagiaire['name'],stagiaire['prenom']))
-                alert(f"Effacement non effectué, ce mode de finacement est utilisé par {nb} stagiaire(s) :\nStagiaires(s): {detail}")
+                alert(f"Effacement non effectué, ce mode de financement est utilisé par {nb} stagiaire(s) :\nStagiaires(s): {detail}")
                 return
             alert("Effacement effectué !")
         open_form("Mode_Financement_MAJ_Table")

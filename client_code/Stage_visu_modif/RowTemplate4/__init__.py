@@ -52,7 +52,6 @@ class RowTemplate4(RowTemplate4Template):
         stagiaire_row=self.item    # formulaire de satisf rempli T/F
         txt_msg = anvil.server.call("init_formulaire_satis_stagiaire", stagiaire_row, self.check_box_form_satis.checked)   # module serveur "add_stagiaire"
         alert(txt_msg)
-        
    
     def check_box_form_suivi_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
@@ -79,8 +78,11 @@ class RowTemplate4(RowTemplate4Template):
         )
         if r:  # oui
             stagiaire_row=self.item   # Changement du mode de fi
-            result = anvil.server.call(
-                "modif_m", stagiaire_row, self.drop_down_mode_fi.selected_value)
+            result = anvil.server.call("modif_mode_fi_1_stagiaire", stagiaire_row, self.drop_down_mode_fi.selected_value)
+            if result:
+                alert("Modification du mode de financemnt effectuée !")
+            else:
+                alert("Modification du mode de financemnt NON effectuée !")
         else:
             self.drop_down_mode_fi.selected_value = self.item["financement"]
         

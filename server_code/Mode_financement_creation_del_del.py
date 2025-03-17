@@ -44,3 +44,12 @@ def modif_mode_fi(mode_fi_row, code_fi, intitule_fi, old_mode):
     valid = True
 
     return valid
+
+# ==========================================================================================
+@anvil.server.callable           # modif du mode de financement d'un stagiaire, table stagiaire inscris, appelé par Stage_visu_modif, Template4
+def modif_mode_fi_1_stagiaire(stagiaire_row, mode_fi_row):
+    valid = False
+    stagiaire_row.update(financement=mode_fi_row)
+    valid = True
+
+    return valid
