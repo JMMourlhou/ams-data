@@ -11,7 +11,7 @@ components:
     properties: {align: full, foreground: 'theme:On Primary', text: button_descro}
     type: Button
   - components:
-    - event_bindings: {lost_focus: text_box_p_pass_pressed_enter, pressed_enter: text_box_p_pass_pressed_enter}
+    - event_bindings: {lost_focus: text_box_nb_questions_lost_focus}
       layout_properties: {width: 74.65875}
       name: text_box_nb_questions
       properties: {background: 'theme:Primary', font_size: 12, foreground: 'theme:On Primary', placeholder: Nb q°}

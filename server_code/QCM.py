@@ -55,20 +55,37 @@ def qcm_del(qcm_row):                # qcm_owner: user row     qcm_nb text
         valid=False
     return valid
 
-
-# modif dictionaire source d'un qcm exam
+# modif dictionaire source d'un qcm exam, appelé par Qcm_visu_modif_main, template 27
 @anvil.server.callable
-def qcm_enfant(qcm_parent_row, qcm_enfant_nb, nb_questions):                # ajout ds dico colonne qcm_source de la table QCM_description
+def qcm_enfant_add(qcm_parent_row, qcm_enfant_nb, nb_questions):                # ajout ds dico colonne qcm_source de la table QCM_description
     # lecture du qcm à partir de son numero
     result = False
     dico=qcm_parent_row['qcm_source']
+    # éviter l'erreur si pas de dico source
     if dico is None or dico == {}:
         dico ={}
+    # On efface l'ancienne clé si elle existe (quand on modifie le nb de questions)
+    try:
+        del dico[str(qcm_enfant_nb)]
+    except:
+        print("Nouvelle clé")
+    # ajout au dico source
     key = str(qcm_enfant_nb)
     value = str(nb_questions)
     dico[key]=value
-    print(dico)    
-   
+    # modif en table qcm_description, colonne qcm_source
+    qcm_parent_row.update(qcm_source=dico)
+    result = True
+    return result
+
+# ellever un qcm du dictionaire source d'un qcm exam, appelé par Qcm_visu_modif_main, template 29
+@anvil.server.callable
+def qcm_enfant_del(qcm_parent_row, qcm_enfant_nb):  
+    result = False
+    dico=qcm_parent_row['qcm_source']
+    # on enleve la clé du qcm enfant du dico source
+    del dico[str(qcm_enfant_nb)]
+    # modif en table qcm_description, colonne qcm_source
     qcm_parent_row.update(qcm_source=dico)
     result = True
     return result

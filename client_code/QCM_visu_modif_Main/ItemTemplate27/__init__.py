@@ -1,7 +1,6 @@
 from ._anvil_designer import ItemTemplate27Template
 from anvil import *
 import anvil.server
-import stripe.checkout
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -27,12 +26,12 @@ class ItemTemplate27(ItemTemplate27Template):
         # écriture du nouveau qcm enfant dans le dictionaire
         # self.sov_qcm_nb contient le qcm à ajouter dans le dico
         #                                        qcm_exam_row,    qcm_enfant_nb,        nb_questions
-        result = anvil.server.call("qcm_enfant", self.item[0],    str(self.item[1]),      0)    # qcm_exam_row
+        result = anvil.server.call("qcm_enfant_add", self.item[0],    str(self.item[1]),      0)    # qcm_exam_row
         if result is True:
             alert("Ajout du qcm enfant effectué!\n\nAjoutez le nb de questions allouées à ce Qcm enfant")
             # réaffichage après maj du dico avec le row du Qcm sur lequel je travaille
             open_form('QCM_visu_modif_Main', self.item[0])
         else:
-            alert("Ajout du qcm enfant effectué!")
+            alert("Ajout du qcm enfant non effectué!")
             return
             
