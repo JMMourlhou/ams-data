@@ -12,7 +12,7 @@ components:
       background: theme:Tertiary
       foreground: theme:On Primary Container
       include_placeholder: true
-      items: [Créer un nouveau QCM, Editer un QCM existant, Affecter un QCM à un stage]
+      items: []
       placeholder: Que voulez-vous faire ?
     type: DropDown
   - event_bindings: {change: drop_down_qcm_row_change}
@@ -30,7 +30,7 @@ components:
       include_placeholder: true
       italic: false
       items: []
-      placeholder: QCM à éditer
+      placeholder: QCM à modifier
       role: outlined
       spacing_above: small
       spacing_below: small

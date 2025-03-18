@@ -47,7 +47,7 @@ components:
         type: Button
       layout_properties: {grid_position: 'TJWBZJ,QEVRYB'}
       name: column_panel_7
-      properties: {border: 3px solid yellow, col_widths: '{"PKNJRG":24,"ZUJMOI":30,"OAUTUT":26}', role: null, wrap_on: never}
+      properties: {border: 3px solid green, col_widths: '{"PKNJRG":24,"ZUJMOI":30,"OAUTUT":26}', role: null, wrap_on: never}
       type: ColumnPanel
     - components:
       - event_bindings: {click: button_types_stages_click}
@@ -186,16 +186,6 @@ components:
       type: Button
     layout_properties: {grid_position: 'LMVKER,QURMBI'}
     name: column_panel_5
-    properties: {background: 'theme:On Primary', role: outlined-card}
-    type: ColumnPanel
-  - components:
-    - event_bindings: {click: button_qcm_exams_click}
-      layout_properties: {grid_position: 'TJWBZJ,QQRCNT'}
-      name: button_qcm_exams
-      properties: {background: 'theme:Primary', foreground: 'theme:Error', text: QCM examen, visible: true}
-      type: Button
-    layout_properties: {grid_position: 'JDLCYI,ZNMWHM'}
-    name: column_panel_9_copy
     properties: {background: 'theme:On Primary', role: outlined-card}
     type: ColumnPanel
   layout_properties: {grid_position: 'KFOKKY,UXGOQU'}

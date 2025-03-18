@@ -57,4 +57,22 @@ class ItemTemplate29(ItemTemplate29Template):
         else:
             alert("Modif du nb de questions du Qcm enfant non effectué!")
             return
+
+    def text_box_nb_questions_change(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_valid.visible=True
+
+    def button_valid_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        # écriture du nb de questions du qcm enfant dans le dictionaire
+        # self.sov_qcm_nb contient le qcm à ajouter dans le dico
+        #                                        qcm_exam_row,    qcm_enfant_nb,              nb_questions
+        result = anvil.server.call("qcm_enfant_add", self.item[0],    str(self.item[1]),      self.text_box_nb_questions.text)    # qcm_exam_row
+        if result is True:
+            alert("Modification du nb de questions qcm enfant effectué! ")
+            # réaffichage après maj du dico avec le row du Qcm sur lequel je travaille
+            open_form('QCM_visu_modif_Main', self.item[0])
+        else:
+            alert("Modif du nb de questions du Qcm enfant non effectué!")
+            return
         

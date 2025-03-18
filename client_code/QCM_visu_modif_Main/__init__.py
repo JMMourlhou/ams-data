@@ -15,6 +15,13 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
         self.column_panel_question.visible = False
+        # initilisation du drop down menu (voir lignes 500)
+        self.drop_down_menu.items=([("Créer un nouveau QCM 'standard'", 0),
+                                    ("Créer un nouveau QCM 'examen'", 1),
+                                    ("Modifier un QCM", 2),
+                                    ("Effacer un QCM", 3),
+                                    ("Affecter un QCM à un stage", 4),
+                                   ])
     
         #initialisation des drop down des qcm créés et barêmes
         self.image_1.source = None
@@ -332,17 +339,21 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             result = anvil.server.call("modify_users_temp2", user, None)   # je remets temp2 à vide
 
 
-       
+
+
+    # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    
     #   _________________________________________________________________________________________________________
     #                             CREATION D'UN QCM
     #   _________________________________________________________________________________________________________
-    def button_creation_click(self, **event_args):
+    def button_creation(self, **event_args):
         """This method is called when the button is clicked"""
         self.column_panel_creation_qcm.visible = True
         self.column_panel_question.visible = False
         self.column_panel_content.visible = False
         self.button_del.visible = False
         self.drop_down_qcm_row.visible = False
+        self.check_box_examen.enabled = False
+        self.text_box_destination.focus()
         
         # initialisation du nx num de QCM en lisant le plus grand nb + 1
         plus_grand_row = app_tables.qcm_description.search(tables.order_by("qcm_nb", ascending=False))[0]
@@ -407,7 +418,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
         # ECRITURE DANS LA TABLE   _________________________________CREATION
         choix = self.drop_down_menu.selected_value
-        if choix=="Créer un nouveau QCM":
+        if choix==0 or choix==1:    # créer qcm
             # CREATION:  envoi en écriture si validation
             # La destination de ce nouveau qcm existe-t-elle déjà ?
             test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
@@ -433,7 +444,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                 open_form("QCM_visu_modif_Main")
         
         # ECRITURE DANS LA TABLE   _________________________________ Modification      
-        if choix=="Editer un QCM existant":
+        if choix==2:    # modif qcm
             # Modification:  envoi en modif si validation   
             qcm_row = self.drop_down_qcm_row.selected_value
             r=alert("Confirmez la modification de la description de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
@@ -489,15 +500,26 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             
     def drop_down_menu_change(self, **event_args):
         """This method is called when an item is selected"""
-        choix = self.drop_down_menu.selected_value
-        if choix=="Créer un nouveau QCM":
-            self.button_creation_click()
+        self.choix = self.drop_down_menu.selected_value
+
+        if self.choix==0:   # "Créer un nouveau QCM standard"
             self.drop_down_menu.visible = False
-        if choix=="Editer un QCM existant":
+            self.check_box_examen.checked = False
+            self.button_creation()
+        if self.choix==1:   # "Créer un nouveau QCM exam"
+            self.drop_down_menu.visible = False
+            self.check_box_examen.checked = True
+            self.button_creation()   
+        if self.choix==2:    # "Modif un QCM existant":
+            self.drop_down_qcm_row.visible = True
+            self.drop_down_menu.visible = False
+            self.button_del.visible = False
+        if self.choix==3:    # "Effacer un QCM"
             self.drop_down_qcm_row.visible = True
             self.drop_down_menu.visible = False
             self.button_del.visible = True
-        if choix=="Affecter un QCM à un stage":
+            self.drop_down_qcm_row.placeholder = "QCM à Effacer"
+        if self.choix==4:    # "Affecter un QCM à un stage":
             from ..QCM_par_stage import QCM_par_stage
             open_form("QCM_par_stage")
 
@@ -509,6 +531,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
     def check_box_examen_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         if self.check_box_examen.checked is True:
+            
             r=alert("Ce Qcm sera basé sur d'autres Qcm !",dismissible=False,buttons=[("oui",True),("non",False)])
             if not r :   # non
                 self.check_box_examen.checked = False
