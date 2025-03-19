@@ -54,7 +54,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
 
-    # L'utilisateur a cliqué sur un QCM à éditer, affichage de ses caractéristiques
+    # L'utilisateur a cliqué sur un QCM à modifier, affichage de ses caractéristiques
     def drop_down_qcm_row_change(self, **event_args):
         """This method is called when an item is selected"""
         self.qcm_row = self.drop_down_qcm_row.selected_value
@@ -100,6 +100,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         if nb_questions > 1:
             self.button_test.visible = True
 
+        # Je ne permetspas de modif du type de qcm: exam ou pas
+        self.check_box_examen.enabled = False
         # Si ce qcm est de type examen, je n'affiche pas le colomn panel des questions
         if  self.qcm_row["exam"] is not True:  
             # affiches les lignes du qcm
@@ -129,8 +131,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                     else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
                         #                              0             1              2                 3
                         #                              qcm_exam_row    , qcm enfant nb, qcm_destination,  nb de questions
-                        liste_qcm_selectionnes.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], valeur[0])) 
-                        alert(f"valeur 0: {valeur[0]}")
+                        liste_qcm_selectionnes.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], valeur)) 
             else: # si pas de dict, j'affiche ts les qcm
                 for qcm in self.liste_qcm_descro:
                     liste_qcm_dispos.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
