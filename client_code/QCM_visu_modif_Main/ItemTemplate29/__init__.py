@@ -75,5 +75,5 @@ class ItemTemplate29(ItemTemplate29Template):
             open_form('QCM_visu_modif_Main', self.item[0])
         else:
             alert("Modif du nb de questions du Qcm enfant non effectué!")
-            return
+            
         

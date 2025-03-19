@@ -419,8 +419,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             return
 
         # ECRITURE DANS LA TABLE   _________________________________CREATION
-        choix = self.drop_down_menu.selected_value
-        if choix==0 or choix==1:    # créer qcm
+        menu = self.drop_down_menu.selected_value
+        alert(f"menu: {menu}")
+        if menu==0 or menu==1:    # créer qcm
             # CREATION:  envoi en écriture si validation
             # La destination de ce nouveau qcm existe-t-elle déjà ?
             test = app_tables.qcm_description.search(destination=self.text_box_destination.text)
@@ -446,7 +447,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                 open_form("QCM_visu_modif_Main")
         
         # ECRITURE DANS LA TABLE   _________________________________ Modification      
-        if choix==2:    # modif qcm
+        if menu==2:    # modif qcm
             # Modification:  envoi en modif si validation   
             qcm_row = self.drop_down_qcm_row.selected_value
             r=alert("Confirmez la modification de la description de ce QCM ?",dismissible=False,buttons=[("oui",True),("non",False)])
