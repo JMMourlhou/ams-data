@@ -51,8 +51,11 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             self.qcm_nb = qcm_descro_nb # je sauve le row du qcm sur lesquel je suis en train de travailler
             # j'affiche le drop down du qcm
             self.drop_down_qcm_row.selected_value = qcm_descro_nb
+            # j'initialise le drop_down_menu à 2 (modif d'un QCM)
+            self.drop_down_menu.selected_value = 2
             # j'envoie en drop_down_qcm_row_change
             self.drop_down_qcm_row_change()
+        
 
     # L'utilisateur a cliqué sur un QCM à modifier, affichage de ses caractéristiques
     def drop_down_qcm_row_change(self, **event_args):
@@ -62,7 +65,6 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.user=anvil.users.get_user()
 
         # test s'il est le propriétaire ou A ou B
-
         if self.qcm_row["qcm_owner"]["email"] != self.user["email"] and self.user["role"] != "B" and self.user["role"] != "A" :
             alert("Vous n'êtes pas le propriétaire de ce QCM, \nVous ne pouvez pas le modifier !")
             # Réinitialisation
@@ -420,7 +422,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
         # ECRITURE DANS LA TABLE   _________________________________CREATION
         menu = self.drop_down_menu.selected_value
-        alert(f"menu: {menu}")
+        #alert(f"menu: {menu}")
         if menu==0 or menu==1:    # créer qcm
             # CREATION:  envoi en écriture si validation
             # La destination de ce nouveau qcm existe-t-elle déjà ?
@@ -444,7 +446,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                     return
                 
                 # Je sors pour réinitiliser la drop down QCM avec ce nx QCM
-                open_form("QCM_visu_modif_Main")
+                open_form("QCM_visu_modif_Main", self.text_box_num_qcm.text)
         
         # ECRITURE DANS LA TABLE   _________________________________ Modification      
         if menu==2:    # modif qcm
@@ -518,8 +520,11 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             self.drop_down_menu.visible = False
             self.button_del.visible = False
         if self.choix==3:    # "Effacer un QCM"
-            self.drop_down_qcm_row.visible = True
+            self.drop_down_qcm_row.selected_value = None # initialiser le drop down choix du qcm
+            self.drop_down_qcm_row.visible = True        #             le rendre visible             
             self.drop_down_menu.visible = False
+            self.column_panel_creation_qcm.visible = False
+            self.column_panel_exam.visible = False
             self.button_del.visible = True
             self.drop_down_qcm_row.placeholder = "QCM à Effacer"
         if self.choix==4:    # "Affecter un QCM à un stage":
@@ -543,7 +548,6 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         self.column_panel_question.visible = False
         self.button_valid.visible = True
         
-        # C'est un QCM de type examen, j'affiche 
 
 
 

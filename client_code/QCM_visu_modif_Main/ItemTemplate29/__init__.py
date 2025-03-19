@@ -76,4 +76,3 @@ class ItemTemplate29(ItemTemplate29Template):
         else:
             alert("Modif du nb de questions du Qcm enfant non effectué!")
             
-        
