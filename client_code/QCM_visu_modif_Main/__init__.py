@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..Main import Main
 from ..QCM_visu_modif import QCM_visu_modif
 global liste
 liste = []
@@ -102,7 +103,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         if nb_questions > 1:
             self.button_test.visible = True
 
-        # Je ne permetspas de modif du type de qcm: exam ou pas
+        # Je ne permets pas de modif du type de qcm: exam ou pas
         self.check_box_examen.enabled = False
         # Si ce qcm est de type examen, je n'affiche pas le colomn panel des questions
         if  self.qcm_row["exam"] is not True:  
@@ -114,8 +115,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
             self.column_panel_question.visible = False
             self.dict = self.qcm_row["qcm_source"]
             
-            # Tous les qcm
-            self.liste_qcm_descro = app_tables.qcm_description.search(tables.order_by("destination", ascending=True))  
+            # Tous les qcm qui ne sont pas exam
+            self.liste_qcm_descro = app_tables.qcm_description.search(tables.order_by("destination", ascending=True),
+                                                                     exam=False)  
             
             # panel des qcms disponibles (MOINS LES QCM enfants DEJA SELECTIONNES POUR CE STAGE)
             liste_qcm_dispos = []
@@ -168,6 +170,7 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
     def drop_down_nb_options_change(self, **event_args):
         """This method is called when an item is selected"""
+        self.drop_down_menu.visible = False  # effacer le menu si pas fait
         self.rep1.checked = False
         self.rep2.checked = False
         self.rep3.checked = False
@@ -445,8 +448,9 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                     self.button_valid.visible = False
                     return
                 
-                # Je sors pour réinitiliser la drop down QCM avec ce nx QCM
-                open_form("QCM_visu_modif_Main", self.text_box_num_qcm.text)
+                # Je sors pour réinitiliser entierrement ce processus
+                open_form('Main',99)
+                
         
         # ECRITURE DANS LA TABLE   _________________________________ Modification      
         if menu==2:    # modif qcm
@@ -533,7 +537,6 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
 
     def button_quitter_click(self, **event_args):
         """This method is called when the button is clicked"""
-        from ..Main import Main
         open_form('Main',99) 
 
     def check_box_examen_change(self, **event_args):
