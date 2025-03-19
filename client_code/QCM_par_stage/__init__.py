@@ -14,6 +14,7 @@ class QCM_par_stage(QCM_par_stageTemplate):
 
         # Any code you write here will run before the form opens.
         self.f = get_open_form()
+        
         # Drop down codes types de stages
         liste = [(r['code'], r) for r in app_tables.codes_stages.search(tables.order_by("code", ascending=True))]   
         self.drop_down_types_stages.items = liste
@@ -50,7 +51,8 @@ class QCM_par_stage(QCM_par_stageTemplate):
                     print(qcm['destination'])
                     liste_qcm_dispos.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
                 else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
-                    liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage'],qcm['visible'], qcm['taux_success'], qcm['next_qcm']))
+                    #              item            0              1                   2                         3               4                    5                6 
+                    liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage'],qcm['visible'], qcm['taux_success'], qcm['next_qcm'], self.stage_row))
                     
         else: # si pas de dict, j'affiche ts les qcm
             liste_qcm_dispos = self.liste_qcm_descro

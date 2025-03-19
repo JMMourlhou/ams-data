@@ -13,23 +13,12 @@ class ItemTemplate19(ItemTemplate19Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.
-        """
-        try:
-            self.button_descro.text = str(self.item[0]) + " - " + self.item[1]   # si la liste a été construite car qcm existant
-            self.check_box_visu.checked = self.item[3]
-            self.text_box_p_pass.text = self.item[4]
-            self.text_box_next.text = self.item[5]
-        except:
-            self.button_descro.text = self.item["destination"]   # si la liste a été directement copiée de la table
-            self.check_box_visu.checked = self.item["visible"]
-            self.text_box_p_pass.text = self.item["taux_success"]
-            self.text_box_next.text = self.item["next_qcm"]
-        """
         self.button_descro.text = str(self.item[0]) + " - " + self.item[1]   # la liste a été construite car qcm existant
         self.check_box_visu.checked = self.item[3]
         self.text_box_p_pass.text = self.item[4]
         self.text_box_next.text = self.item[5]
         self.check_box_start_visu.checked = self.item[2]
+        self.type_stage_row = self.item[6]    # Row TYPE DE STAGE from table codes_stages 
         
     def button_del_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -68,6 +57,9 @@ class ItemTemplate19(ItemTemplate19Template):
             r=alert("Ce QCM ne sera pas visible, est-ce OK ?",dismissible=False, buttons=[("oui",True),("non",False)])
             if not r :   #Non
                 return
+        else:
+            alert("Ce Qcm sera visible")
+            # répercution 
         self.save_qcm()
 
     def text_box_p_pass_pressed_enter(self, **event_args):
@@ -119,8 +111,8 @@ class ItemTemplate19(ItemTemplate19Template):
         self.save_qcm()
     
     def save_qcm(self): 
-        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text, self.check_box_start_visu.checked)
-
+        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text, self.check_box_start_visu.checked, self.type_stage_row)
+        
 
 
  

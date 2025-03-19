@@ -394,9 +394,9 @@ def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table
 
         
 # ------------------------------------------------------------------------------------------------------------------
-# modif table qcm descro, qcm d'un stage sélectionné
+# modif table qcm descro, qcm d'un stage sélectionné, appelé par QCM_par_stage
 @anvil.server.callable
-def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_start): # nb: int, num du qcm    stage: stage row ds table  codes_stages   
+def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_start, row_type_stage): # nb: int, num du qcm    row_type_stage: stage row ds table  codes_stages   
     
     # lecture du qcm row, table qcm descro
     qcm_row = app_tables.qcm_description.get(qcm_nb=nb)
@@ -421,3 +421,15 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_sta
                         next_qcm = next_qcm,
                         visu_qcm_par_stage = visu_start
                         )
+
+        # quand visible est checked: Répercution sur : 1) table codes_stages, visible T/F    2) tous les stagiaires de ce type de stage
+
+        # 1) Répercution sur table codes_stages, visible T/F
+        # row_type_stage doit être modifiée
+        dico_droits_qcm = row_type_stage['droit_qcm']
+        # recherche de la clé du stage
+
+        
+        # 2) Répercution de ce dico sur tous les stagiaires de ce type de stage
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(stage_txt=row_type_stage['code'])
+        
