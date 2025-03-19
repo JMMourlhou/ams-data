@@ -11,7 +11,7 @@ components:
     properties: {align: full, foreground: 'theme:On Primary', text: button_descro}
     type: Button
   - event_bindings: {change: text_box_nb_questions_change, pressed_enter: text_box_nb_questions_change}
-    layout_properties: {width: 114.3954404296875}
+    layout_properties: {width: 82.41952685546875}
     name: text_box_nb_questions
     properties: {background: 'theme:Primary', font_size: 12, foreground: 'theme:On Primary', placeholder: Nb q°, text: '', type: text}
     type: TextBox

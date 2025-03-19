@@ -129,7 +129,8 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
                     else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
                         #                              0             1              2                 3
                         #                              qcm_exam_row    , qcm enfant nb, qcm_destination,  nb de questions
-                        liste_qcm_selectionnes.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], valeur[0]))      
+                        liste_qcm_selectionnes.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], valeur[0])) 
+                        alert(f"valeur 0: {valeur[0]}")
             else: # si pas de dict, j'affiche ts les qcm
                 for qcm in self.liste_qcm_descro:
                     liste_qcm_dispos.append((self.qcm_row, qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
