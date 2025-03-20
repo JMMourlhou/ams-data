@@ -44,6 +44,7 @@ class ItemTemplate19(ItemTemplate19Template):
         self.button_del.visible = False
         self.f.drop_down_types_stages_change()
 
+    # si click sur descro, j'affiche le bouton del
     def button_descro_click(self, **event_args):
         """This method is called when the button is clicked"""
         if self.button_del.visible is False:
@@ -51,6 +52,8 @@ class ItemTemplate19(ItemTemplate19Template):
         else:
             self.button_del.visible = False
 
+            
+    # Click sur les autres components:
     # ------------------------------------------------------------------------------
     def check_box_visu_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
@@ -64,18 +67,14 @@ class ItemTemplate19(ItemTemplate19Template):
         self.button_valid.visible = True    
         # self.save_qcm()
 
-
-    # -----------------------------------------------------------
     def text_box_p_pass_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_valid.visible = True  
 
-    # -----------------------------------------------------------------------------------------
     def text_box_next_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_valid.visible = True
         
-    # ---------------------------------------------------------------------------------------------
     def check_box_start_visu_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         if self.check_box_start_visu.checked is False:
@@ -84,7 +83,6 @@ class ItemTemplate19(ItemTemplate19Template):
                 return
         self.button_valid.visible = True
 
-    # -----------------------------------------------------------------------------------------------
     def button_valid_click(self, **event_args):
         """This method is called when the button is clicked"""
         # Taux de succès
@@ -92,11 +90,13 @@ class ItemTemplate19(ItemTemplate19Template):
             test = int(self.text_box_p_pass.text)   # simple test 
         except:
             alert("Le taux de succès doit être un chiffre !")
+            self.button_valid.visible = False
             return
             
         self.taux = int(self.text_box_p_pass.text)   
         if self.taux <50 or self.taux >100:
             alert("Le taux de succès doit être un entier compris entre 50 et 100 !")
+            self.button_valid.visible = False
             return
 
         # next qcm
@@ -106,23 +106,22 @@ class ItemTemplate19(ItemTemplate19Template):
             test = int(self.text_box_next.text)
         except:
             alert("Le numéro du prochain QCM doit être un chiffre !")
+            self.button_valid.visible = False
             return
             
         self.next_qcm = int(self.text_box_next.text)
         if self.next_qcm <0 or self.next_qcm > nb_qcm:
             alert(f"Le numéro du prochain QCM doit être un entier compris entre 0 (pas de prochain) et {nb_qcm} !") 
+            self.button_valid.visible = False
             return
 
         self.button_valid.visible = True
-        
-
-        
-        
-
-    def save_qcm(self): 
-        #                                                   qcm_nb       visible T/F                  Taux succès                prochain qcm             visu_initiale                      pour stage:          
-        anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text, self.check_box_start_visu.checked, self.type_stage_row)
-        
-
+        #                                                           qcm_nb        visible T/F                  Taux succès                prochain qcm             visu_initiale                      pour stage:          
+        result = anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text, self.check_box_start_visu.checked, self.type_stage_row)
+        if result:   #  True
+            alert(f"Mise à jour du QCM {self.item[0]} effectuée !")
+        else: 
+            alert(f"Mise à jour du QCM {self.item[0]} non effectuée !")
+        self.button_valid.visible = False
 
  

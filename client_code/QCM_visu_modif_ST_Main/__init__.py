@@ -24,7 +24,7 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
             if rol=="S" or rol=="T" or rol=="J":         # si stagiaire
                self.label_3.text = "Q.C.M"
         
-        #initialisation du drop down des qcm créés et barêmes, n'affiche que les qcm visibles ET ds dict d'autorisations du stqgiaire (stagiaires inscrits)
+        #initialisation du drop down des qcm créés et barêmes, n'affiche que les qcm visibles ET ds dict d'autorisations du stagiaire (table 'stagiaires inscrits')
         dict = {}  # dict contenant en clef le num qcm autorisé 
         
         #lecture du ou des dictionaires du stagiaire (il peut être inscrit à plusieurs stages)
@@ -36,9 +36,11 @@ class QCM_visu_modif_ST_Main(QCM_visu_modif_ST_MainTemplate):
                     droits_stagiaire = stage['droits_stagiaire_qcms']
                     # je boucle sur ce dictionaire des qcm authorisés pour ce stage et rempli dict 
                     for clef, valeur in droits_stagiaire.items():   #clef=numqcm   valeur=("intitulé", "TRUE/False")   True si on le montre
-                        print(clef,valeur)
+                        print(f"clé: {clef},valeur: {valeur[1]}")
                         if valeur[1]=="True":
                             dict[clef]= valeur  # num_qcm:intitulé 
+                            print(f"Mise en dico de : {clef}")
+                    
         # J'initialise la liste en transformant le "dict" des qcm authorisés en liste
         # boucle de "dict"
         liste_qcm_rows=[]   # liste des qcm lus

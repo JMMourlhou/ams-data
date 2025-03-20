@@ -5,6 +5,10 @@ components:
     name: button_del
     properties: {foreground: 'theme:Error', icon: 'fa:arrow-left', icon_align: right, text: '', visible: false}
     type: Button
+  - event_bindings: {click: button_valid_click}
+    name: button_valid
+    properties: {background: 'theme:Error', foreground: 'theme:On Primary', text: validation, visible: false}
+    type: Button
   - event_bindings: {click: button_descro_click}
     layout_properties: {expand: true, width: 107.5643701171875}
     name: button_descro
@@ -31,11 +35,6 @@ components:
       name: check_box_start_visu
       properties: {background: 'theme:On Primary Container', foreground: 'theme:On Primary Container', text: ''}
       type: CheckBox
-    - event_bindings: {click: button_valid_click}
-      layout_properties: {}
-      name: button_valid
-      properties: {background: 'theme:Error', foreground: 'theme:On Primary', text: validation, visible: false}
-      type: Button
     name: flow_panel_2
     properties: {align: right}
     type: FlowPanel

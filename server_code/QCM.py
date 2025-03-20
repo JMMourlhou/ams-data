@@ -336,7 +336,7 @@ def modif_qcm_stage(nb, qcm_descro, stage, visible): # nb: int, num du qcm    st
     valid_2=False
       # recherche des stagiaiares de ce type de stage
     list1=app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt","droits_stagiaire_qcms"),
-                                        stage_txt=stage["code"])                     # recherche dans table à partir du code du stage en table codes_stages
+                                                stage_txt=stage["code"])                     # recherche dans table à partir du code du stage en table codes_stages
     nb1 = len(list1)
     print(f"nb stagiaires impliqués pour ce type de stage {stage['code']}; {nb1}")
     if nb1 > 0:
@@ -366,7 +366,7 @@ def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table
     dict={}  
     dict = stage["droit_qcm"]
     
-     # del du qcm ds le dictionaire
+     # del du qcm ds le dictionnaire
     del dict[cle]
     
     # sauvegarde du dict des droits aux QCM en table codes_stage
@@ -375,7 +375,7 @@ def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table
     
     # répercution sur les stagiaires de ce type de stage
     valid_2=False
-      # recherche des stagiaiares de ce type de stage
+      # recherche des stagiaires de ce type de stage
     list1=app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt","droits_stagiaire_qcms"),
                                         stage_txt=stage["code"])                     # recherche dans table à partir du code du stage en table codes_stages
     nb1 = len(list1)
@@ -394,13 +394,13 @@ def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table
 
         
 # ------------------------------------------------------------------------------------------------------------------
-# modif table qcm descro, qcm d'un stage sélectionné, appelé par QCM_par_stage
+# modif table qcm descro, qcm d'un stage sélectionné, appelé par QCM_par_stage, Template 19, qd on modifie QCM visible, tx de réussite, next QCM, ...
 @anvil.server.callable
 def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_start, row_type_stage): # nb: int, num du qcm    row_type_stage: stage row ds table  codes_stages   
-    
-    # lecture du qcm row, table qcm descro
+    valid_1 = False
+    valid_2 = False
+    # lecture du qcm row, table qcm description
     qcm_row = app_tables.qcm_description.get(qcm_nb=nb)
-    
     if len(str(qcm_row))>0:
         # test si next_qcm est vide
         if next_qcm == "":
@@ -434,7 +434,26 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_sta
         dico_droits_qcm[str(nb)] = [valeur[0],visible]
         # sauvegarde du 'row_type_stage' en table codes_stages 
         row_type_stage.update(droit_qcm=dico_droits_qcm)
+        valid_1 = True
         
         # 2) Répercution de ce dico sur tous les stagiaires de ce type de stage
-        liste_stagiaires = app_tables.stagiaires_inscrits.search(stage_txt=row_type_stage['code'])
+        # recherche des stagiaires de ce type de stage
+        list1 = app_tables.stagiaires_inscrits.search(q.fetch_only("stage_txt","droits_stagiaire_qcms"),
+                                                                stage_txt=row_type_stage['code'])
+
+        # 2) Répercution de ce dico sur tous les stagiaires de ce type de stage
+        nb1 = len(list1)
+        print(f"nb stagiaires impliqués pour ce type de stage {row_type_stage['code']}; {nb1}")
+        if nb1 > 0:
+            for stagiaire in list1:
+                stagiaire.update(
+                    droits_stagiaire_qcms=dico_droits_qcm      # écriture du nouveau dictionaire des qcm pour ce stage
+                    )
+        valid_2=True
+    
+        if valid_1 is True and valid_2 is True:
+            return True
+        else:
+            return False
+        
         
