@@ -397,6 +397,7 @@ def del_qcm_stage(nb, stage): # nb: int, num du qcm    stage: stage row ds table
 # modif table qcm descro, qcm d'un stage sélectionné, appelé par QCM_par_stage, Template 19, qd on modifie QCM visible, tx de réussite, next QCM, ...
 @anvil.server.callable
 def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_start, row_type_stage): # nb: int, num du qcm    row_type_stage: stage row ds table  codes_stages   
+    print("------------------------------------------------- visible=", visible)
     valid_1 = False
     valid_2 = False
     # lecture du qcm row, table qcm description
@@ -430,8 +431,14 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_sta
         # recherche de la clé du stage
         valeur = dico_droits_qcm.get(str(nb))
         print(f"'modif_qcm_descro_pour_un_stage', valeur du dico pour qcm n°{nb} :{valeur[0]}, {valeur[1]}")
-        # modification de la valeur pour cette clé
-        dico_droits_qcm[str(nb)] = [valeur[0],visible]
+        # Effacement de cette clé
+        del dico_droits_qcm[str(nb)]
+        # ajout de la valeur pour cette clé
+        if visible is True:
+            v1="True"
+        else:
+            v1="False"
+        dico_droits_qcm[str(nb)] = [valeur[0],v1]
         # sauvegarde du 'row_type_stage' en table codes_stages 
         row_type_stage.update(droit_qcm=dico_droits_qcm)
         valid_1 = True

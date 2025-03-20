@@ -57,6 +57,7 @@ class ItemTemplate19(ItemTemplate19Template):
     # ------------------------------------------------------------------------------
     def check_box_visu_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        self.button_del.visible=False
         if self.check_box_visu.checked is False:
             r=alert("Ce QCM ne sera pas visible, est-ce OK ?",dismissible=False, buttons=[("oui",True),("non",False)])
             if not r :   #Non
@@ -65,18 +66,20 @@ class ItemTemplate19(ItemTemplate19Template):
             alert("Ce Qcm sera visible")
             
         self.button_valid.visible = True    
-        # self.save_qcm()
 
     def text_box_p_pass_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_valid.visible = True  
+        self.button_del.visible=False
 
     def text_box_next_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
         self.button_valid.visible = True
+        self.button_del.visible=False
         
     def check_box_start_visu_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
+        self.button_del.visible=False
         if self.check_box_start_visu.checked is False:
             r=alert("Ce QCM sera visible quand le stagiare aura validé les qcm précédants, est-ce OK ?",dismissible=False, buttons=[("oui",True),("non",False)])
             if not r :   #Non
@@ -105,7 +108,7 @@ class ItemTemplate19(ItemTemplate19Template):
         try:
             test = int(self.text_box_next.text)
         except:
-            alert("Le numéro du prochain QCM doit être un chiffre !")
+            alert("Le numéro du prochain QCM doit être un chiffre !\n (0 si pas de prochain QCM)")
             self.button_valid.visible = False
             return
             
@@ -116,6 +119,7 @@ class ItemTemplate19(ItemTemplate19Template):
             return
 
         self.button_valid.visible = True
+
         #                                                           qcm_nb        visible T/F                  Taux succès                prochain qcm             visu_initiale                      pour stage:          
         result = anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text, self.check_box_start_visu.checked, self.type_stage_row)
         if result:   #  True
