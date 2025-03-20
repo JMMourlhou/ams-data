@@ -44,7 +44,7 @@ class ItemTemplate18(ItemTemplate18Template):
         # self.visible contient la col "visu_qcm_par_stage" de table qcm descro ...
         #   ... pour la création de la clé des qcm pour un stage et s'il faut le visualiser ou pas 
         #   ... le qcm est visible ou pas dès l'accès du stgiaire au menu QCM
-        result = anvil.server.call("modif_qcm_stage", qcm_num, self.button_descro.text ,stage, self.visu) 
+        result = anvil.server.call("modif_qcm_stage", qcm_num, self.item[1] ,stage, self.visu) 
         if result is True:
             alert("Modification des Qcm pour ce stage effectuée\n... et\nRépercution sur les stagiaires impliqués")
         else:

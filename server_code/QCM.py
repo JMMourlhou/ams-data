@@ -414,7 +414,7 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_sta
         else:
             taux_success = int(taux_success)
             
-        # sauvegarde du qcm
+        # sauvegarde du qcm description
         qcm_row.update(
                         visible=visible,
                         taux_success = taux_success,
@@ -428,7 +428,12 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_sta
         # row_type_stage doit être modifiée
         dico_droits_qcm = row_type_stage['droit_qcm']
         # recherche de la clé du stage
-
+        valeur = dico_droits_qcm.get(str(nb))
+        print(f"'modif_qcm_descro_pour_un_stage', valeur du dico pour qcm n°{nb} :{valeur[0]}, {valeur[1]}")
+        # modification de la valeur pour cette clé
+        dico_droits_qcm[str(nb)] = [valeur[0],visible]
+        # sauvegarde du 'row_type_stage' en table codes_stages 
+        row_type_stage.update(droit_qcm=dico_droits_qcm)
         
         # 2) Répercution de ce dico sur tous les stagiaires de ce type de stage
         liste_stagiaires = app_tables.stagiaires_inscrits.search(stage_txt=row_type_stage['code'])

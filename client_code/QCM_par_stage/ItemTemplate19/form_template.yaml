@@ -16,21 +16,26 @@ components:
       name: check_box_visu
       properties: {text: ''}
       type: CheckBox
-    - event_bindings: {lost_focus: text_box_p_pass_pressed_enter, pressed_enter: text_box_p_pass_pressed_enter}
+    - event_bindings: {change: text_box_p_pass_change}
       layout_properties: {width: 58.56368798828125}
       name: text_box_p_pass
       properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: '% '}
       type: TextBox
-    - event_bindings: {lost_focus: text_box_next_pressed_enter, pressed_enter: text_box_next_pressed_enter}
+    - event_bindings: {change: text_box_next_change}
       layout_properties: {width: 95.235091015625}
       name: text_box_next
-      properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: ''}
+      properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: '', text: next}
       type: TextBox
     - event_bindings: {change: check_box_start_visu_change}
       layout_properties: {}
       name: check_box_start_visu
       properties: {background: 'theme:On Primary Container', foreground: 'theme:On Primary Container', text: ''}
       type: CheckBox
+    - event_bindings: {click: button_valid_click}
+      layout_properties: {}
+      name: button_valid
+      properties: {background: 'theme:Error', foreground: 'theme:On Primary', text: validation, visible: false}
+      type: Button
     name: flow_panel_2
     properties: {align: right}
     type: FlowPanel

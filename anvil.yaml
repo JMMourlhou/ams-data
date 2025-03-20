@@ -427,7 +427,7 @@ db_schema:
   qcm_description:
     client: search
     columns:
-    - admin_ui: {order: 0, width: 120}
+    - admin_ui: {order: 0, width: 123}
       name: qcm_nb
       type: number
     - admin_ui: {width: 288}

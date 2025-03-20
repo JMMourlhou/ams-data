@@ -51,6 +51,7 @@ class ItemTemplate19(ItemTemplate19Template):
         else:
             self.button_del.visible = False
 
+    # ------------------------------------------------------------------------------
     def check_box_visu_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
         if self.check_box_visu.checked is False:
@@ -59,15 +60,33 @@ class ItemTemplate19(ItemTemplate19Template):
                 return
         else:
             alert("Ce Qcm sera visible")
-            # répercution 
-        self.save_qcm()
+            
+        self.button_valid.visible = True    
+        # self.save_qcm()
 
-    def text_box_p_pass_pressed_enter(self, **event_args):
+
+    # -----------------------------------------------------------
+    def text_box_p_pass_change(self, **event_args):
         """This method is called when the user presses Enter in this text box"""
-        self.text_box_p_pass_lost_focus()
+        self.button_valid.visible = True  
+
+    # -----------------------------------------------------------------------------------------
+    def text_box_next_change(self, **event_args):
+        """This method is called when the user presses Enter in this text box"""
+        self.button_valid.visible = True
         
-    def text_box_p_pass_lost_focus(self, **event_args):
-        """This method is called when the user presses Enter in this text box"""
+    # ---------------------------------------------------------------------------------------------
+    def check_box_start_visu_change(self, **event_args):
+        """This method is called when this checkbox is checked or unchecked"""
+        if self.check_box_start_visu.checked is False:
+            r=alert("Ce QCM sera visible quand le stagiare aura validé les qcm précédants, est-ce OK ?",dismissible=False, buttons=[("oui",True),("non",False)])
+            if not r :   #Non
+                return
+        self.button_valid.visible = True
+
+    # -----------------------------------------------------------------------------------------------
+    def button_valid_click(self, **event_args):
+        """This method is called when the button is clicked"""
         # Taux de succès
         try:
             test = int(self.text_box_p_pass.text)   # simple test 
@@ -79,14 +98,7 @@ class ItemTemplate19(ItemTemplate19Template):
         if self.taux <50 or self.taux >100:
             alert("Le taux de succès doit être un entier compris entre 50 et 100 !")
             return
-        self.save_qcm()   
-            
-    def text_box_next_pressed_enter(self, **event_args):
-        """This method is called when the user presses Enter in this text box"""
-        self.text_box_next_lost_focus()
-        
-    def text_box_next_lost_focus(self, **event_args):
-        """This method is called when the user presses Enter in this text box"""
+
         # next qcm
         self.f = get_open_form()
         nb_qcm = self.f.label_nb_qcm.text
@@ -100,17 +112,15 @@ class ItemTemplate19(ItemTemplate19Template):
         if self.next_qcm <0 or self.next_qcm > nb_qcm:
             alert(f"Le numéro du prochain QCM doit être un entier compris entre 0 (pas de prochain) et {nb_qcm} !") 
             return
-        self.save_qcm()
+
+        self.button_valid.visible = True
         
-    def check_box_start_visu_change(self, **event_args):
-        """This method is called when this checkbox is checked or unchecked"""
-        if self.check_box_start_visu.checked is False:
-            r=alert("Ce QCM sera visible quand le stagiare aura validé les qcm précédants, est-ce OK ?",dismissible=False, buttons=[("oui",True),("non",False)])
-            if not r :   #Non
-                return
-        self.save_qcm()
-    
+
+        
+        
+
     def save_qcm(self): 
+        #                                                   qcm_nb       visible T/F                  Taux succès                prochain qcm             visu_initiale                      pour stage:          
         anvil.server.call("modif_qcm_descro_pour_un_stage",self.item[0], self.check_box_visu.checked, self.text_box_p_pass.text, self.text_box_next.text, self.check_box_start_visu.checked, self.type_stage_row)
         
 
