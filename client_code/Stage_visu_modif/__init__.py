@@ -32,14 +32,16 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         # Drop down codes lieux
         self.drop_down_lieux.items = [(r['lieu'], r) for r in app_tables.lieux.search()]
 
-        
+        # drop_down mode fi pour le repeat_panel de Stage_visu_modif (si je clique sur l'historique, je vais visualise le stage)
+        # comme j'utilise le get_open_form() en stage_visu_modif, je dois insérer ici en recherche ET en Stage_visu_modif le drop down des modees de fi
+        self.drop_down_mode_fi.items = [(r['code_fi'], r) for r in app_tables.mode_financement.search(tables.order_by("code_fi", ascending=True))]
         
         #lecture du stage
         stage_row=app_tables.stages.get(numero=int(num_stage))
         self.stage_row = stage_row
         
         #lecture des stagiaires inscrits
-        liste_stagiaires = app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", "financement", user_email=q.fetch_only("email", "tel")),
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", "financement", "numero", user_email=q.fetch_only("email", "tel")),
                                                                     tables.order_by("name", ascending=True),
                                                                     stage=stage_row
                                                                            )

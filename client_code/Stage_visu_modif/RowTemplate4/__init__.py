@@ -41,11 +41,12 @@ class RowTemplate4(RowTemplate4Template):
         """This method is called when the button is clicked"""
         r=alert("Enlever ce stagiaire de ce stage ?",dismissible=False,buttons=[("Non",False),("Oui",True)])
         if r :   #oui   
-            stagiaire_row = self.item
-            txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_row)   # module serveur "add_stagiaire"
+            stagiaire_row = self.item['user_email']
+            stage_num = self.item['numero']
+            txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_num)   # module serveur "add_stagiaire"
             alert(txt_msg)
             # réaffichage par initialisation de la forme mère 
-            open_form('Stage_visu_modif', stage_row['numero']) # réinitialisation de la fenêtre
+            open_form('Stage_visu_modif', self.item['numero']) # réinitialisation de la fenêtre
 
     def check_box_form_satis_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
@@ -60,7 +61,7 @@ class RowTemplate4(RowTemplate4Template):
         alert(txt_msg)
         
     def init_drop_down_mode_fi(self):
-        self.f = get_open_form()   # récupération de la forme mère pour revenir ds la forme appelante
+        self.f = get_open_form()   # récupération de la forme mère (Stage_visu_modif) ou (Recherche_stagiaire) pour revenir ds la forme appelante
         liste =[]
         for x in self.f.drop_down_mode_fi.items:
             liste.append((x[0],x[1])) 

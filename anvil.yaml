@@ -350,7 +350,7 @@ db_schema:
   pre_requis_stagiaire:
     client: full
     columns:
-    - admin_ui: {width: 99}
+    - admin_ui: {order: -1, width: 112}
       name: stage_num
       target: stages
       type: link_single
@@ -733,7 +733,7 @@ db_schema:
     - admin_ui: {order: 0.5, width: 120}
       name: stage_txt
       type: string
-    - admin_ui: {order: 0.75, width: 81}
+    - admin_ui: {order: 0.75, width: 127}
       name: numero
       type: number
     - admin_ui: {order: 1, width: 275}

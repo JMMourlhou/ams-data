@@ -172,11 +172,11 @@ def add_1_pre_requis(stage_row, user, pr_row):
 # =========================================================================================================================================
 @anvil.server.callable           #DEL d'1 stagiaire du stage
 @anvil.tables.in_transaction
-def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users row      stage_row = table stages row
+def del_stagiaire(stagiaire_row, stage_num):     # stagiaire_row = table users row      stage_numero = table stagiaire inscrit, colonne numero (int)
     valid=""
     # DECREMENTATION nb de stagiaires ds ce stage
     # lecture fichier père stages
-    stage_r = app_tables.stages.get(numero=int(stage_row['numero']))
+    stage_r = app_tables.stages.get(numero=stage_num)
     if not stage_r :
         valid="Stage non trouvé ds table stages !"
         return valid
@@ -187,7 +187,7 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
     #effacement des pré-requis du stagiaire
     #lecture des rows à effacer ds pre requis
     liste_pr = app_tables.pre_requis_stagiaire.search(stagiaire_email = stagiaire_row,
-                                                      stage_num = stage_row
+                                                      stage_num = stage_r
                                                   )
     if len(liste_pr) > 0:
         for pr in liste_pr:
@@ -195,7 +195,7 @@ def del_stagiaire(stagiaire_row, stage_row):     # stagiaire_row = table users r
 
     # Lecture table stagiaires inscrits à ce stage pour effacement du stagiaire
     row = app_tables.stagiaires_inscrits.get(user_email=stagiaire_row,       # ce user
-                                                 stage=stage_row)            # ET pour ce stage
+                                            numero=stage_num)            # ET pour ce stage
     if not row :
         valid="Stagiaire à enlever du stage non trouvé ds table stagiaires inscrits !"
         return valid
