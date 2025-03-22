@@ -40,22 +40,23 @@ class QCM_par_stage(QCM_par_stageTemplate):
         self.dict = self.stage_row["droit_qcm"] 
         
         # panel des qcms (MOINS LES QCM DEJA SELECTIONNE POUR CE STAGE)
+        liste_qcm_dispos = []
+        liste_qcm_selectionnes = []
         if self.dict is not None and self.dict != {}:     # ni None, ni {}
             # Enlever les qcm déjà sélectionnés
-            liste_qcm_dispos = []
-            liste_qcm_selectionnes = []
             for qcm in self.liste_qcm_descro:
                 clef_search = self.dict.get(str(qcm['qcm_nb']))   # recherche sur le num du qcm (doit être str)
                 if clef_search is None:  
                     # ce qcm n'est pas ds le dict du stage, je l'affiche ds panel 1, qcm dispos
                     print(qcm['destination'])
+                    #              item      0               1                  2                           
                     liste_qcm_dispos.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
                 else: # ce qcm est ds le dict du stage, je l'affiche ds panel 2, qcm selectionnés
                     #              item            0              1                   2                         3               4                    5                6 
-                    liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage'],qcm['visible'], qcm['taux_success'], qcm['next_qcm'], self.stage_row))
-                    
+                    liste_qcm_selectionnes.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage'],qcm['visible'], qcm['taux_success'], qcm['next_qcm'], self.stage_row))  
         else: # si pas de dict, j'affiche ts les qcm
-            liste_qcm_dispos = self.liste_qcm_descro
+            for qcm in self.liste_qcm_descro:
+                liste_qcm_dispos.append((qcm['qcm_nb'], qcm['destination'], qcm['visu_qcm_par_stage']))
             liste_qcm_selectionnes = []
             
         print(f"Nb de qcm dipos: {len(liste_qcm_dispos)}")
