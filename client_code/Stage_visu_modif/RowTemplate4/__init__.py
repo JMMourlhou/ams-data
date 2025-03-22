@@ -41,8 +41,8 @@ class RowTemplate4(RowTemplate4Template):
         """This method is called when the button is clicked"""
         r=alert("Enlever ce stagiaire de ce stage ?",dismissible=False,buttons=[("Non",False),("Oui",True)])
         if r :   #oui   
-            stage_row = self.item["stage"]
-            txt_msg = anvil.server.call("del_stagiaire", self.stagiaire_row, stage_row)   # module serveur "add_stagiaire"
+            stagiaire_row = self.item
+            txt_msg = anvil.server.call("del_stagiaire", stagiaire_row, stage_row)   # module serveur "add_stagiaire"
             alert(txt_msg)
             # réaffichage par initialisation de la forme mère 
             open_form('Stage_visu_modif', stage_row['numero']) # réinitialisation de la fenêtre
