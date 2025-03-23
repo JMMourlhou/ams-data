@@ -462,5 +462,18 @@ def modif_qcm_descro_pour_un_stage(nb, visible, taux_success, next_qcm, visu_sta
             return True
         else:
             return False
-        
+
+# ------------------------------------------------------------------------------------------------------------------
+# modif table qcm descro, colonne source, appelé par QCM_visu_modif_Main, verif effectuée 1) si la col source est None et 2)si nb de questions à afficher pour le qcm est correct 
+@anvil.server.callable
+def change_source_qcm(qcm_descro_row, nb_questions_real):
+    valid = False
+    dico = {}
+    cle = str(qcm_descro_row['qcm_nb'])
+    valeur = nb_questions_real
+    dico[cle]=valeur
+    
+    qcm_descro_row.update(qcm_source=dico)
+    valid = True
+    return valid   
         

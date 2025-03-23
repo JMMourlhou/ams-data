@@ -15,19 +15,31 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        # A mettre en BG task: Vérif des qcm_sources en table Qcm desco
+        
+        # ----------------------------------------------------A mettre en BG task: Vérif des qcm_sources en table Qcm desco
         liste_sources = app_tables.qcm_description.search()
         for qcm in liste_sources:
-            if qcm['qcm_source'] is None:
-                # création du source
-                cle = str(qcm['qcm_nb'])
+            tag_sov = False
+            if qcm['exam'] is False:
                 # valeur est le nb de questions
-                valeur_nb = len(app_tables.qcm.search(qcm_nb=qcm))
-                print(f"cle; {cle} valeur: {valeur_nb}")       
-                dico_source = {}
-                dico_source[cle]=valeur_nb
-                # envoi en écriture
-                
+                cle = str(qcm['qcm_nb'])
+                nb_questions_real = str(len(app_tables.qcm.search(qcm_nb=qcm)))
+                if qcm['qcm_source'] is None:
+                    print(f"création, cle; {cle} valeur: {nb_questions_real}")       
+                    tag_sov = True
+                else:
+                    # Il y a déjà une colonne source pour ce qcm: Vérif si nb de questions à jour 
+                    dico = qcm['qcm_source']
+                    nb_questions_dico = dico[cle]
+                    if nb_questions_dico != nb_questions_real:
+                        tag_sov = True
+                        print(f"modif , cle; {cle} nb questions réelles: {nb_questions_real}, anciennement: {nb_questions_dico} ")      
+                if tag_sov is True:
+                    # envoi en écriture
+                    r = anvil.server.call("change_source_qcm", qcm, nb_questions_real)
+                    if not r:
+                        alert(f"Erreur en MAJ du source du Qcm {cle}")
+                        return
         # initialisations
         self.column_panel_question.visible = False
         # initilisation du drop down menu (voir lignes 500)
