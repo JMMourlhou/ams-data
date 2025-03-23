@@ -15,6 +15,20 @@ class QCM_visu_modif_Main(QCM_visu_modif_MainTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
+        # A mettre en BG task: Vérif des qcm_sources en table Qcm desco
+        liste_sources = app_tables.qcm_description.search()
+        for qcm in liste_sources:
+            if qcm['qcm_source'] is None:
+                # création du source
+                cle = str(qcm['qcm_nb'])
+                # valeur est le nb de questions
+                valeur_nb = len(app_tables.qcm.search(qcm_nb=qcm))
+                print(f"cle; {cle} valeur: {valeur_nb}")       
+                dico_source = {}
+                dico_source[cle]=valeur_nb
+                # envoi en écriture
+                
+        # initialisations
         self.column_panel_question.visible = False
         # initilisation du drop down menu (voir lignes 500)
         self.drop_down_menu.items=([("Créer un nouveau QCM 'standard'", 0),
