@@ -5,6 +5,10 @@ components:
     name: button_del
     properties: {foreground: 'theme:Error', icon: 'fa:arrow-left', icon_align: right, text: '', visible: false}
     type: Button
+  - event_bindings: {click: button_valid_click}
+    name: button_valid
+    properties: {background: 'theme:Error', enabled: true, foreground: 'theme:On Primary', text: Modif, visible: false}
+    type: Button
   - event_bindings: {click: button_descro_click}
     layout_properties: {expand: true, width: 107.5643701171875}
     name: button_qcm_enfant
@@ -15,11 +19,6 @@ components:
     name: text_box_nb_questions
     properties: {align: right, background: 'theme:Primary', font_size: 12, foreground: 'theme:On Primary', placeholder: Nb q°, text: '', type: text}
     type: TextBox
-  - event_bindings: {click: button_valid_click}
-    layout_properties: {}
-    name: button_valid
-    properties: {background: 'theme:Error', enabled: true, foreground: 'theme:On Primary', text: Modif, visible: false}
-    type: Button
   layout_properties: {grid_position: 'OZRSMU,CXSYXW'}
   name: flow_panel_1
   properties: {align: left, foreground: 'theme:On Primary'}

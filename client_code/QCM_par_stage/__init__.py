@@ -26,7 +26,9 @@ class QCM_par_stage(QCM_par_stageTemplate):
     def drop_down_types_stages_change(self, **event_args):
         """This method is called when an item is selected"""
         self.stage_row = self.drop_down_types_stages.selected_value
-        
+        if self.stage_row is None:
+            return
+            
         # Tous les qcm
         self.liste_qcm_descro = app_tables.qcm_description.search(tables.order_by("destination", ascending=True))  
 
