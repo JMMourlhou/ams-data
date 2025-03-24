@@ -10,9 +10,9 @@ components:
     properties: {background: 'theme:Error', foreground: 'theme:On Primary', text: validation, visible: false}
     type: Button
   - event_bindings: {click: button_descro_click}
-    layout_properties: {expand: true, width: 107.5643701171875}
+    layout_properties: {width: 143.36493896484376}
     name: button_descro
-    properties: {align: full, foreground: 'theme:On Primary', text: button_descro}
+    properties: {align: left, foreground: 'theme:On Primary', text: button_descro}
     type: Button
   - components:
     - event_bindings: {change: check_box_visu_change}
@@ -26,7 +26,7 @@ components:
       properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: '% '}
       type: TextBox
     - event_bindings: {change: text_box_next_change}
-      layout_properties: {width: 95.235091015625}
+      layout_properties: {width: 51.558951953125}
       name: text_box_next
       properties: {background: 'theme:Primary', foreground: 'theme:On Primary', placeholder: '', text: next}
       type: TextBox
@@ -35,12 +35,15 @@ components:
       name: check_box_start_visu
       properties: {background: 'theme:On Primary Container', foreground: 'theme:On Primary Container', text: ''}
       type: CheckBox
+    layout_properties: {width: 302.4517099609375}
     name: flow_panel_2
     properties: {align: right}
     type: FlowPanel
   layout_properties: {grid_position: 'BQROYE,FHMSIV'}
   name: flow_panel_1
-  properties: {align: right, foreground: 'theme:On Primary'}
+  properties: {align: justify, foreground: 'theme:On Primary'}
   type: FlowPanel
-container: {type: ColumnPanel}
+container:
+  properties: {spacing_above: small, spacing_below: large}
+  type: ColumnPanel
 is_package: true
