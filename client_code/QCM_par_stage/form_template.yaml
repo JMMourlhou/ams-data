@@ -2,7 +2,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'VXFMPQ,MCGGHR'}
     name: label_1
-    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: Affectation d'un QCM à un stage, tooltip: '', underline: false, visible: true}
+    properties: {align: center, background: 'theme:Tertiary', bold: true, border: '', font: '', font_size: 16, foreground: 'theme:On Tertiary', icon: '', icon_align: left, italic: false, role: null, spacing_above: none, spacing_below: none, text: Affectation de QCM à un stage, tooltip: '', underline: false, visible: true}
     type: Label
   - event_bindings: {click: button_annuler_click}
     layout_properties: {grid_position: 'LCWPJH,PPLFWV'}
@@ -52,7 +52,7 @@ components:
     type: Label
   - layout_properties: {grid_position: 'RMZQQL,QEUNAM'}
     name: label_3
-    properties: {align: left, bold: true, foreground: 'theme:On Primary', text: ' Qcm:              Visible ?         % Réussite       Next-Qcm       1er Qcm ? '}
+    properties: {align: center, bold: true, foreground: 'theme:On Primary', text: ' Visible ?         % Réussite       Next-Qcm       1er Qcm ? '}
     type: Label
   layout_properties: {grid_position: 'QBXXPQ,XRGKEE'}
   name: column_panel_2
@@ -61,15 +61,15 @@ components:
 - components:
   - layout_properties: {grid_position: 'GNFEAU,MCTALU'}
     name: repeating_panel_1
-    properties: {background: 'theme:Primary', border: 3px solid blue, item_template: QCM_par_stage.ItemTemplate18, role: elevated-card, visible: false}
+    properties: {background: 'theme:Primary', border: 1px solid blue, item_template: QCM_par_stage.ItemTemplate18, role: elevated-card, visible: false}
     type: RepeatingPanel
   - layout_properties: {grid_position: 'GNFEAU,HVMFEL'}
     name: repeating_panel_2
-    properties: {background: 'theme:Primary', border: 3px solid blue, item_template: QCM_par_stage.ItemTemplate19, role: elevated-card, spacing_above: small, visible: false}
+    properties: {background: 'theme:On Primary Container', border: 1px solid blue, item_template: QCM_par_stage.ItemTemplate19, role: elevated-card, spacing_above: small, spacing_below: small, visible: false}
     type: RepeatingPanel
   layout_properties: {grid_position: 'EGIUGV,ALMVVI'}
   name: column_panel_1
-  properties: {background: 'theme:Primary', col_widths: '{"MCTALU":19,"HVMFEL":41}', spacing_above: none, visible: true, wrap_on: never}
+  properties: {background: 'theme:Primary', col_spacing: tiny, col_widths: '{"MCTALU":20,"HVMFEL":40}', spacing_above: none, visible: true, wrap_on: never}
   type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true
