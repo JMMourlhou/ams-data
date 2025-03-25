@@ -3,7 +3,7 @@ components:
   - event_bindings: {click: button_descro_click}
     layout_properties: {expand: true}
     name: button_descro
-    properties: {align: center, foreground: 'theme:On Primary', role: filled-button, text: button_descro}
+    properties: {align: full, foreground: 'theme:On Primary', role: filled-button, text: button_descro}
     type: Button
   - event_bindings: {click: button_send_click}
     name: button_send
@@ -11,7 +11,7 @@ components:
     type: Button
   layout_properties: {grid_position: 'EWSSTI,EYQDFR'}
   name: flow_panel_1
-  properties: {align: center}
+  properties: {align: right}
   type: FlowPanel
 container:
   properties: {wrap_on: never}
