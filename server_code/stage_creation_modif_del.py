@@ -190,10 +190,11 @@ def modif_stage(code,    # row stage
         valid=True
     return valid
 
-# Appelé par Stage_visu_modif
+# Appelé par Stage_visu_modif, click sur self.check_box_allow_satisf.checked = TRUE
 # Inclure pour tous les stagiaires du stage_num les formulaires de satisfaction quand on a créé ou maj ce formulaire 
 @anvil.server.callable
 def update_satisf_pour_un_stage(stage_row, satis_dico2_q_ouv, satis_dico1_q_ferm):   # stage_row : 1 row table 'stages' 
+    print(f"dico ouvert en serveur: {satis_dico2_q_ouv}")
     stage_row.update( satis_dico1_q_ferm = satis_dico1_q_ferm,
                       satis_dico2_q_ouv = satis_dico2_q_ouv,
                       saisie_satisf_ok = True
