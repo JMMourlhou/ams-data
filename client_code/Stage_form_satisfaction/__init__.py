@@ -997,7 +997,7 @@ class Stage_form_satisfaction(Stage_form_satisfactionTemplate):
                                                                     date_time
                                    )
         if result is True:
-            alert("Merci pour vos réponses ! \n \n Ce formulaire est sauvé, \n (ANONYMEMENT)")
+            alert("Merci pour vos réponses ! \n \n Ce formulaire est sauvé !")
             self.button_annuler_click()
         else:
             alert("Le formulaire n'a pas été enregistré correctement !")
