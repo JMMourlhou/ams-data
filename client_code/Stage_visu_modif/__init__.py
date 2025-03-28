@@ -162,56 +162,11 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             alert("Le numéro de stage n'existe pas !")
             self.button_annuler_click()
 
-        # si chck box F_suivi validé: test si un dict de suivi existe pour ce stage 
-        if self.check_box_allow_suivi.checked is True:
-            if self.stage_row['suivi_dico1_q_ferm'] is None: # si pas de dict de form de satisf question ferm pour ce stage
-
-                # lecture de table mère 'code_stage' pour verif si un dict template existant
-                code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
-                if code_stage_row['suivi_stage_q_ferm_template'] is not None:
-                    r=alert("voulez-vous copier le formulaire de suivi existant pour ce type de stage pour les stagiaires de ce stage ?", dismissible=False ,buttons=[("oui",True),("non",False)])
-                    if r :   # Oui
-                        # copie dans table stage pour ce stage
-                        anvil.server.call("update_suivi_pour_un_stage",self.stage_row, code_stage_row['suivi_stage_q_ouv_template'], code_stage_row['suivi_stage_q_ferm_template'])
-                else:
-                    alert("Attention, créez d'abord un formulaire de suivi pour ce type de stage !")
-                    self.check_box_allow_suivi.checked = False
-        else:
-            # effacement du formulaire de com (permet la future mise à jour si nécessaire)
-            anvil.server.call("efface_suivi_pour_un_stage",self.stage_row)
+        
                     
         
-        # si check box F_satisf validé: test si un dict de satisf existe pour ce stage 
-        if self.check_box_allow_satisf.checked is True:
-            # lecture de table mère 'code_stage' pour verif si un dict template existant
-            code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
-            if code_stage_row['satisf_q_ferm_template'] != {}:
-                r=alert(f"Voulez-vous authoriser l'utilisation du formulaire de satisfaction {self.stage_row['code']['code']} existant pour les stagiaires de ce stage ?", dismissible=False ,buttons=[("oui",True),("non",False)])
-                if r :   # Oui
-                    # copie du formulaire de satisfaction de table code_stages vers la table stage pour ce stage
-                    alert(code_stage_row['satisf_q_ouv_template'])
-                    anvil.server.call("update_satisf_pour_un_stage",self.stage_row, code_stage_row['satisf_q_ouv_template'], code_stage_row['satisf_q_ferm_template'])
-            else:
-                alert(f"Attention, pas de formulaires de satisfaction {self.stage_row['code']['code']} encore créés !\n\nCréez d'abord un formulaire de satisfaction pour ce type de stage (Dans les Paramètres)")
-                self.button_validation.visible = False
-                return
 
-        # si check box F_com validé: test si un dict de com existe pour ce stage 
-        if self.check_box_allow_com.checked is True:
-            if self.stage_row['com_ferm'] is None: # si pas de dict de form de com question ferm pour ce stage
-                # lecture de table mère 'code_stage' pour verif si un dict template existant
-                code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
-                if code_stage_row['com_ferm'] != {}:
-                    r=alert("voulez-vous copier le formulaire de communication existant pour ce type de stage pour les stagiaires de ce stage ?", dismissible=False ,buttons=[("oui",True),("non",False)])
-                    if r :   # Oui
-                        # copie dans table stage pour ce stage
-                        anvil.server.call("update_com_pour_un_stage",self.stage_row, code_stage_row['com_ouv'], code_stage_row['com_ferm'])
-                else:
-                    alert("Attention, créez d'abord un formulaire de communication pour ce type de stage !")
-                    self.check_box_allow_com.checked = False 
-        else:
-            # effacement du formulaire de com (permet la future mise à jour si nécessaire)
-            anvil.server.call("efface_com_pour_un_stage",self.stage_row)
+        
             
         # ! modif du  num de stage possible !!!
         result = anvil.server.call("modif_stage", row,
@@ -261,15 +216,63 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def check_box_allow_satisf_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        self.button_validation.visible = True
+        # si check box F_satisf validé: test si un dict de satisf existe pour ce stage 
+        if self.check_box_allow_satisf.checked is True:
+            # lecture de table mère 'code_stage' pour verif si un dict template existant
+            code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
+            if code_stage_row['satisf_q_ferm_template'] != {}:
+                r=alert(f"Voulez-vous authoriser l'utilisation du formulaire de satisfaction {self.stage_row['code']['code']} existant pour les stagiaires de ce stage ?", dismissible=False ,buttons=[("oui",True),("non",False)])
+                if r :   # Oui
+                    # copie du formulaire de satisfaction de table code_stages vers la table stage pour ce stage
+                    anvil.server.call("update_satisf_pour_un_stage",self.stage_row, code_stage_row['satisf_q_ouv_template'], code_stage_row['satisf_q_ferm_template'])
+            else:
+                alert(f"Attention, pas de formulaire de satisfaction {self.stage_row['code']['code']} encore créé !\n\nCréez d'abord un formulaire de satisfaction pour ce type de stage (Dans les Paramètres)")
+                self.check_box_allow_satisf.checked = False
+                self.button_validation.visible = False
+                return
+        else:
+            self.button_validation.visible = True
+            self.column_panel_header.scroll_into_view()
 
     def check_box_allow_suivi_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        self.button_validation.visible = True
+        # si chck box F_suivi validé: test si un dict de suivi existe pour ce stage 
+        if self.check_box_allow_suivi.checked is True:
+            # lecture de table mère 'code_stage' pour verif si un dict template existant
+            code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
+            if code_stage_row['suivi_stage_q_ferm_template'] != {}:
+                r=alert(f"Voulez-vous authoriser l'utilisation du formulaire de suivi {self.stage_row['code']['code']} existant pour les stagiaires de ce stage ?", dismissible=False ,buttons=[("oui",True),("non",False)])
+                if r :   # Oui
+                    # copie du formulaire de suivi de table code_stages vers la table stage pour ce stage
+                    anvil.server.call("update_suivi_pour_un_stage",self.stage_row, code_stage_row['suivi_stage_q_ouv_template'], code_stage_row['suivi_stage_q_ferm_template'])
+            else:
+                alert(f"Attention, pas de formulaire de suivi {self.stage_row['code']['code']} encore créé !\n\nCréez d'abord un formulaire de suivi pour ce type de stage (Dans les Paramètres)")
+                self.check_box_allow_suivi.checked = False
+                self.button_validation.visible = False
+                return
+        else:
+            self.button_validation.visible = True
+            self.column_panel_header.scroll_into_view()
 
     def check_box_allow_com_change(self, **event_args):
         """This method is called when this checkbox is checked or unchecked"""
-        self.button_validation.visible = True
+        # si check box F_com validé: test si un dict de com existe pour ce stage 
+        if self.check_box_allow_com.checked is True:
+            # lecture de table mère 'code_stage' pour verif si un dict template existant
+            code_stage_row = app_tables.codes_stages.get(code=self.stage_row['code']['code'])
+            if code_stage_row['com_ferm'] != {}:
+                r=alert(f"Voulez-vous authoriser l'utilisation du formulaire de communication {self.stage_row['code']['code']} existant pour les stagiaires de ce stage ?", dismissible=False ,buttons=[("oui",True),("non",False)])
+                if r :   # Oui
+                    # copie du formulaire de communication de table code_stages vers la table stage pour ce stage
+                    anvil.server.call("update_com_pour_un_stage",self.stage_row, code_stage_row['com_ouv'], code_stage_row['com_ferm'])
+            else:
+                alert(f"Attention, pas de formulaire de communication {self.stage_row['code']['code']} encore créé !\n\nCréez d'abord un formulaire de com pour ce type de stage (Dans les Paramètres)")
+                self.check_box_allow_com.checked = False 
+                self.button_validation.visible = False
+                return
+        else:
+            self.button_validation.visible = True
+            self.column_panel_header.scroll_into_view()
 
     def button_trombi_click(self, **event_args):
         """This method is called when the button is clicked"""

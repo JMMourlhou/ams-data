@@ -200,7 +200,7 @@ class Formulaire_par_type_stage(Formulaire_par_type_stageTemplate):
                                     valeur[1]    
                                     ]
         except:
-            alert("La colonne du dict est 'Null': on la modifie en {} !")
+            pass
             
             # initilistaion du dico_formulaire ds TABLE TEMP    
             table_temp = app_tables.temp.search()[0]  # sauvegarde du dico ds TABLE TEMP

@@ -184,14 +184,14 @@ def modif_stage(code,    # row stage
                     commentaires = commentaires,
                     allow_bgt_generation = allow_bgt_generation,
                     saisie_satisf_ok =allow_form_satisf,         # formulaire de satisf autorisé ? T/F
-                    saisie_suivi_ok = allow_form_suivi,           # formulaire de suivi autorisé ? T/F
-                    display_com = allow_form_com                    # formulaire de communication autorisé ? T/F
+                    saisie_suivi_ok = allow_form_suivi,          # formulaire de suivi autorisé ? T/F
+                    display_com = allow_form_com                 # formulaire de communication autorisé ? T/F
                     )
         valid=True
     return valid
 
 # Appelé par Stage_visu_modif, click sur self.check_box_allow_satisf.checked = TRUE
-# Inclure pour tous les stagiaires du stage_num les formulaires de satisfaction quand on a créé ou maj ce formulaire 
+# Inclure pour tous les stagiaires du stage_num les formulaires de satisfaction de la table code_stages
 @anvil.server.callable
 def update_satisf_pour_un_stage(stage_row, satis_dico2_q_ouv, satis_dico1_q_ferm):   # stage_row : 1 row table 'stages' 
     print(f"dico ouvert en serveur: {satis_dico2_q_ouv}")
@@ -202,18 +202,7 @@ def update_satisf_pour_un_stage(stage_row, satis_dico2_q_ouv, satis_dico1_q_ferm
     return
 
 # Appelé par Stage_visu_modif   
-# Le check box allow satisf a été décoché, j'efface le formulaire satisf
-@anvil.server.callable
-def efface_satisf_pour_un_stage(stage_row):   # stage_row : 1 row table 'stages' 
-    stage_row.update( satis_dico1_q_ferm = None,
-                      satis_dico2_q_ouv = None,
-                      saisie_satisf_ok = False
-                        )
-    return
-
-
-# Appelé par Stage_visu_modif   
-# Inclure pour tous les stagiaires du stage_num les formulaires de suivi quand on a créé ou maj ce formulaire
+# Inclure pour tous les stagiaires du stage_num les formulaires de suivi de la table code_stages
 @anvil.server.callable
 def update_suivi_pour_un_stage(stage_row, suivi_dico2_q_ouv, suivi_dico1_q_ferm):   # stage_row : 1 row table 'stages' 
     stage_row.update( suivi_dico1_q_ferm = suivi_dico1_q_ferm,
@@ -222,18 +211,9 @@ def update_suivi_pour_un_stage(stage_row, suivi_dico2_q_ouv, suivi_dico1_q_ferm)
                         )
     return
 
-# Appelé par Stage_visu_modif   
-# Le check box allow suivi a été décoché, j'efface le formulaire de suivi
-@anvil.server.callable
-def efface_suivi_pour_un_stage(stage_row):   # stage_row : 1 row table 'stages' 
-    stage_row.update( suivi_dico1_q_ferm = None,
-                      suivi_dico2_q_ouv = None,
-                      saisie_suivi_ok = False
-                        )
-    return
 
-# Appelé par Stage_visu_modif   
-# Inclure pour tous les stagiaires du stage_num les formulaires de com quand on a créé ou maj ce formulaire
+# Appelé par Stage_visu_modif   click sur self.check_box_allow_com.checked = TRUE
+# Inclure pour tous les stagiaires du stage_num les formulaires de com de la table code_stages
 @anvil.server.callable
 def update_com_pour_un_stage(stage_row, com_ouv, com_ferm):   # stage_row : 1 row table 'stages' 
     stage_row.update( com_ferm = com_ferm,
@@ -242,15 +222,7 @@ def update_com_pour_un_stage(stage_row, com_ouv, com_ferm):   # stage_row : 1 ro
                         )
     return
 
-# Appelé par Stage_visu_modif   
-# Le check box allow com a été décoché, j'efface le formulaire com
-@anvil.server.callable
-def efface_com_pour_un_stage(stage_row):   # stage_row : 1 row table 'stages' 
-    stage_row.update( com_ferm = None,
-                      com_ouv = None,
-                      display_com = False
-                        )
-    return
+
 
     
 # ==========================================================================================

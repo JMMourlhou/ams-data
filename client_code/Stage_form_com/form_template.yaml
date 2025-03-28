@@ -70,7 +70,7 @@ components:
       include_placeholder: true
       italic: false
       items: []
-      placeholder: Choix du BP ...
+      placeholder: Choix du stage ...
       role: null
       spacing_above: small
       spacing_below: small
