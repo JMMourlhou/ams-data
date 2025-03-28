@@ -506,7 +506,8 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                     liste_rep.append(quest)
                     
                 #rajout de la réponse de ce formulaire à la liste de réponses
-                liste_rep.append(rep)
+                text_rep = formulaire['nom']+' '+formulaire['prenom']+': '+rep
+                liste_rep.append(text_rep)
                 
                 #réecriture de la question et de ses réponses ds le dictionaires des réponses
                 q_rep[cle_num_question]=liste_rep
