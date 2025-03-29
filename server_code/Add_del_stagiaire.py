@@ -227,7 +227,7 @@ def init_formulaire_suivi_stagiaire(stagiaire_row, bool):
         return valid
     
     # modif
-    stagiaire_row.update(enquete_satisf = bool)
+    stagiaire_row.update(enquete_suivi = bool)
     valid="Formulaire de suivi modifié pour ce stagiaire !"
    
     return valid
