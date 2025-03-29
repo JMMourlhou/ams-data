@@ -1001,6 +1001,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                             try:
                                 if objet.tag == "label":
                                     question = objet.text
+                                    alert(question)
                                 if objet.tag == "fp":
                                     cpt = 0
                                     rep = ""
@@ -1011,6 +1012,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                                 num_question
                                             )  # la clé doit être str qd j'envoie le dico en server-side
                                             valeur = (question, rep)
+                                            alert(valeur)
                                             dico_rep_q_ferm[clef] = valeur
                                             break
                                         else:
