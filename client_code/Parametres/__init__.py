@@ -78,11 +78,15 @@ class Parametres(ParametresTemplate):
         from ..Text_formulaires_MAJ_table import Text_formulaires_MAJ_table
         open_form("Text_formulaires_MAJ_table")
   
-
     def button_gestion_formulaires_click(self, **event_args):
         """This method is called when the button is clicked"""
         from ..Formulaire_par_type_stage import Formulaire_par_type_stage
         open_form("Formulaire_par_type_stage")
+
+    def button_del_form_suivi_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Formulaires_suivi import Formulaires_suivi
+        open_form("Formulaires_suivi")
 
     def text_box_num_stages_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
@@ -131,3 +135,5 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..Mode_Financement_MAJ_Table import Mode_Financement_MAJ_Table
         open_form('Mode_Financement_MAJ_Table')
+
+    
