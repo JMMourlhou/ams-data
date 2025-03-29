@@ -993,9 +993,7 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
         dico_rep_q_ouv = {}  #     clé:num question   valeur: = question txt,reponse (txt)
         # Questions fermées 
         for cp in self.get_components():  # column panels in form self
-            
-            #if (cp.tag != 0 and cp.tag != "header" and cp.tag != "q_ouvertes" and type(cp.tag) == "int"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
-            if (cp.tag != 0 and cp.tag != "header" and cp.tag != "q_ouvertes"):  # si pas les col panel du haut de la forme, ce sont des cp des questions
+            if cp.tag != 0 and cp.tag != "header" and cp.tag != "q_ouvertes" and type(cp.tag) is int:  # si pas les col panel du haut de la forme, ce sont des cp des questions
                 num_question = cp.tag
                 if num_question <= nb_questions_ferm:
                     try:
@@ -1003,7 +1001,6 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                             try:
                                 if objet.tag == "label":
                                     question = objet.text
-                                    alert(question)
                                 if objet.tag == "fp":
                                     cpt = 0
                                     rep = ""
@@ -1014,7 +1011,6 @@ class Stage_form_suivi(Stage_form_suiviTemplate):
                                                 num_question
                                             )  # la clé doit être str qd j'envoie le dico en server-side
                                             valeur = (question, rep)
-                                            alert(valeur)
                                             dico_rep_q_ferm[clef] = valeur
                                             break
                                         else:
