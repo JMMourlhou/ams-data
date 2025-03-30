@@ -219,15 +219,26 @@ def init_formulaire_satis_stagiaire(stagiaire_row, bool):
    
     return valid
 
-# =========================================================================================================================================
-@anvil.server.callable           #Réinitilisation Saisie du formulaire de suivi d'1 stagiaire du stage
-def init_formulaire_suivi_stagiaire(stagiaire_row, bool):
-    if not stagiaire_row :
-        valid="Le formulaire de suivi n'a pas pu être modifié !"
-        return valid
     
-    # modif
+#Réinitilisation check box d'indicateur de saisie du formulaire de suivi d'1 stagiaire du stage, appelé par Stage_visu_modif / S.RowTemplate4
+# =========================================================================================================================================
+@anvil.server.callable           
+def init_formulaire_suivi_stagiaire(stagiaire_row, bool):  #stagiaire_inscrit row
+    valid="La ligne du stagiaire n'a pas pu être modifiée !"
+    if not stagiaire_row :
+        return valid
+        
+    valid=False
+    # modif du row stagiaire_inscrit
     stagiaire_row.update(enquete_suivi = bool)
-    valid="Formulaire de suivi modifié pour ce stagiaire !"
-   
+    
+    # SI BOOL False, recherche et effacement du formulaire de suivi en table Stage_suivi si existant
+    if bool is False: # si l'utilisateur a modifié l'indicateur du formulaire de suivi à False, et a confrmé annuler le formulaire pour permettre une ressaisie d'un autre formulaire
+        stage_suivi_row = app_tables.stage_suivi.get(stage_row= stagiaire_row['stage'],
+                                        user_email=stagiaire_row['user_email']['email'])
+        if stage_suivi_row is not None: # si le formulaire existe, on l'efface
+            # Effacement du row du formulaire table Stage_suivi
+            stage_suivi_row.delete()
+        valid=True  
+    
     return valid

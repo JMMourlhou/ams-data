@@ -85,6 +85,11 @@ class Parametres(ParametresTemplate):
 
     def button_del_form_suivi_click(self, **event_args):
         """This method is called when the button is clicked"""
+        from ..Formulaires_satisf import Formulaires_satisf
+        open_form("Formulaires_satisf")
+
+    def button_del_form_satisf_click(self, **event_args):
+        """This method is called when the button is clicked"""
         from ..Formulaires_suivi import Formulaires_suivi
         open_form("Formulaires_suivi")
 
@@ -135,5 +140,7 @@ class Parametres(ParametresTemplate):
         """This method is called when the button is clicked"""
         from ..Mode_Financement_MAJ_Table import Mode_Financement_MAJ_Table
         open_form('Mode_Financement_MAJ_Table')
+
+   
 
     

@@ -157,7 +157,12 @@ components:
     - event_bindings: {click: button_del_form_suivi_click}
       layout_properties: {grid_position: 'KMQESA,YINQPY'}
       name: button_del_form_suivi
-      properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Del Form Suivi, tooltip: '', underline: false, visible: true}
+      properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Annulation d'un Form. de satisfaction, tooltip: '', underline: false, visible: true}
+      type: Button
+    - event_bindings: {click: button_del_form_satisf_click}
+      layout_properties: {grid_position: 'KMQESA,ZFQRJN'}
+      name: button_del_form_satisf
+      properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:On Primary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: small, spacing_below: small, text: Annulation d'un Form. de suivi, tooltip: '', underline: false, visible: true}
       type: Button
     layout_properties: {grid_position: 'SGYOSF,GZNTEG'}
     name: column_panel_6
