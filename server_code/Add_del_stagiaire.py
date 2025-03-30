@@ -209,14 +209,22 @@ def del_stagiaire(stagiaire_row, stage_num):     # stagiaire_row = table users r
 # =========================================================================================================================================
 @anvil.server.callable           #Réinitilisation Saisie du formulaire de satisfaction d'1 stagiaire du stage
 def init_formulaire_satis_stagiaire(stagiaire_row, bool):
+    valid=False
     if not stagiaire_row :
-        valid="Le formulaire de satisfaction n'a pas pu être modifié !"
         return valid
     
-    # modif
+    # modif du row stagiaire_inscrit
     stagiaire_row.update(enquete_satisf = bool)
-    valid="Formulaire de satisfaction modifié pour ce stagiaire !"
-   
+    
+    # SI BOOL False, recherche et effacement du formulaire de satisf en table Stage_suivi si existant
+    if bool is False: # si l'utilisateur a modifié l'indicateur du formulaire de satisf à False, et a confrmé annuler le formulaire pour permettre une ressaisie d'un autre formulaire
+        stage_satis_row = app_tables.stage_satisf.get(stage_row= stagiaire_row['stage'],
+                                        user_email=stagiaire_row['user_email'])
+        if stage_satis_row is not None: # si le formulaire existe, on l'efface
+            # Effacement du row du formulaire table Stage_suivi
+            stage_satis_row.delete()
+        valid=True  
+        
     return valid
 
     
@@ -224,11 +232,10 @@ def init_formulaire_satis_stagiaire(stagiaire_row, bool):
 # =========================================================================================================================================
 @anvil.server.callable           
 def init_formulaire_suivi_stagiaire(stagiaire_row, bool):  #stagiaire_inscrit row
-    valid="La ligne du stagiaire n'a pas pu être modifiée !"
+    valid=False
     if not stagiaire_row :
         return valid
         
-    valid=False
     # modif du row stagiaire_inscrit
     stagiaire_row.update(enquete_suivi = bool)
     

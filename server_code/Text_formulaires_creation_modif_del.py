@@ -103,7 +103,7 @@ def del_formulaire_suivi(code_row):
 # maj  enquete_suivi=False, de table stagiaire inscrit, stage concerné, stagiaire concerné
 # appelé par Formulaire_suivi / F.RowTemplate2
 # ==========================================================================================
-@anvil.server.callable           #modif d'un lieu et adresse 
+@anvil.server.callable           
 def del_formulaire_satisf(code_row):
     valid = False
     
@@ -114,6 +114,7 @@ def del_formulaire_satisf(code_row):
     # lecture du row table stagiaire inscrit
     row_stagiaire_inscrit = app_tables.stagiaires_inscrits.get(stage=code_row['stage_row'],
                                             user_email=row_user)
+
     row_stagiaire_inscrit.update(enquete_satisf=False)
 
     # Effacement du row du formulaire table Stage_suivi
