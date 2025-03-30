@@ -21,5 +21,8 @@ class RowTemplate2(RowTemplate2Template):
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
-        pass
-        
+        result = anvil.server.call('del_formulaire_suivi', self.item)
+        if not result:
+            alert("Effacement du formulaire non effectué !")
+            return
+        open_form("Formulaires_suivi")

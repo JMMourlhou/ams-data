@@ -4,12 +4,12 @@ components:
     name: spacer_1
     properties: {height: 32}
     type: Spacer
-  - event_bindings: {change: text_box_1_change}
+  - event_bindings: {}
     layout_properties: {width: 86.661982421875}
     name: text_box_1
     properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: false, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: outlined, spacing_above: small, spacing_below: small, text: '', tooltip: '', type: text, underline: false, visible: true}
     type: TextBox
-  - event_bindings: {change: text_box_1_change}
+  - event_bindings: {}
     layout_properties: {width: 98.19371691894531}
     name: text_box_2
     properties: {background: 'theme:Primary', enabled: false, foreground: 'theme:On Primary', role: outlined}
@@ -18,17 +18,17 @@ components:
     name: spacer_4
     properties: {height: 32}
     type: Spacer
-  - event_bindings: {change: text_box_1_change}
+  - event_bindings: {}
     layout_properties: {width: 65.94951450195313}
     name: text_box_3
     properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: false, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: outlined, spacing_above: small, spacing_below: small, text: '', tooltip: '', type: text, underline: false, visible: true}
     type: TextBox
-  - event_bindings: {change: text_box_1_change}
+  - event_bindings: {}
     layout_properties: {width: 237.2013525390625}
     name: text_box_4
     properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: false, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: outlined, spacing_above: small, spacing_below: small, text: '', tooltip: '', type: text, underline: false, visible: true}
     type: TextBox
-  - event_bindings: {change: text_box_1_change}
+  - event_bindings: {}
     layout_properties: {}
     name: text_box_5
     properties: {align: left, background: 'theme:Primary', bold: false, border: '', enabled: false, font: '', font_size: null, foreground: 'theme:On Primary', hide_text: false, italic: false, placeholder: '', role: outlined, spacing_above: small, spacing_below: small, text: '', tooltip: '', type: text, underline: false, visible: true}

@@ -76,3 +76,15 @@ def modif_text_formulaire(code_row, code, text, obligation):
                     )
     valid = True
     return valid
+
+# ==========================================================================================
+@anvil.server.callable           #modif d'un lieu et adresse 
+def del_formulaire_suivi(code_row):
+    valid = False
+    # code_row.delete()
+    print("effacement simulé pour tests")
+    valid = True
+    # remise à False dans table stagiaire inscrit, stage concerné, stagiaire concerné
+    # pour qu'il puisse ré effectuer le formulaire de suivi
+    
+    return valid
