@@ -78,7 +78,7 @@ def modif_text_formulaire(code_row, code, text, obligation):
     return valid
 
    
-# remise  enquete_suivi=False, table stagiaire inscrit, stage concerné, stagiaire concerné
+# maj  enquete_suivi=False, de table stagiaire inscrit, stage concerné, stagiaire concerné
 # appelé par Formulaire_suivi / F.RowTemplate2
 # ==========================================================================================
 @anvil.server.callable           #modif d'un lieu et adresse 
@@ -93,6 +93,28 @@ def del_formulaire_suivi(code_row):
     row_stagiaire_inscrit = app_tables.stagiaires_inscrits.get(stage=code_row['stage_row'],
                                             user_email=row_user)
     row_stagiaire_inscrit.update(enquete_suivi=False)
+
+    # Effacement du row du formulaire table Stage_suivi
+    code_row.delete()
+
+    valid = True
+    return valid
+
+# maj  enquete_suivi=False, de table stagiaire inscrit, stage concerné, stagiaire concerné
+# appelé par Formulaire_suivi / F.RowTemplate2
+# ==========================================================================================
+@anvil.server.callable           #modif d'un lieu et adresse 
+def del_formulaire_satisf(code_row):
+    valid = False
+    
+    # remise  enquete_suivi=False, table stagiaire inscrit, stage concerné, stagiaire concerné
+    # pour qu'il puisse ré effectuer le formulaire de suivi:
+    # lecture du row user
+    row_user = app_tables.users.get(email=code_row['user_email']['email'])
+    # lecture du row table stagiaire inscrit
+    row_stagiaire_inscrit = app_tables.stagiaires_inscrits.get(stage=code_row['stage_row'],
+                                            user_email=row_user)
+    row_stagiaire_inscrit.update(enquete_satisf=False)
 
     # Effacement du row du formulaire table Stage_suivi
     code_row.delete()
