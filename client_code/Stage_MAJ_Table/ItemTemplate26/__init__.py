@@ -11,7 +11,7 @@ class ItemTemplate26(ItemTemplate26Template):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
 
-         # Any code you write here will run before the form opens.
+        # Any code you write here will run before the form opens.
         self.text_box_2.text = self.item['intitulé']
         self.text_box_1.text = self.item['code']
         self.text_box_3.text = self.item['type_stage']

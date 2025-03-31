@@ -25,6 +25,16 @@ components:
     properties: {background: 'theme:On Primary', role: outlined-card}
     type: ColumnPanel
   - components:
+    - event_bindings: {click: button_var_globales_click}
+      layout_properties: {grid_position: 'TJWBZJ,QQRCNT'}
+      name: button_var_globales
+      properties: {background: 'theme:Primary', foreground: 'theme:Tertiary', text: 'Variables Globales ', visible: true}
+      type: Button
+    layout_properties: {grid_position: 'CXEDEC,DOKADQ'}
+    name: column_panel_3_copy
+    properties: {background: 'theme:On Primary', role: outlined-card}
+    type: ColumnPanel
+  - components:
     - components:
       - layout_properties: {grid_position: 'GDFDHH,OAUTUT'}
         name: label_1

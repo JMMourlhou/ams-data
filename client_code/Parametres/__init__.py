@@ -141,6 +141,11 @@ class Parametres(ParametresTemplate):
         from ..Mode_Financement_MAJ_Table import Mode_Financement_MAJ_Table
         open_form('Mode_Financement_MAJ_Table')
 
+    def button_var_globales_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        from ..Global_Variables_MAJ_table import Global_Variables_MAJ_table
+        open_form('Global_Variables_MAJ_table')
+
    
 
     
