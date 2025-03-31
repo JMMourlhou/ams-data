@@ -32,21 +32,21 @@ components:
       - event_bindings: {change: text_box_1_change}
         layout_properties: {grid_position: 'QXRCRS,VIIYEI'}
         name: text_box_1
-        properties: {foreground: 'theme:On Primary Container', hide_text: false}
+        properties: {font_size: 12, foreground: 'theme:On Primary Container', hide_text: false}
         type: TextBox
       - event_bindings: {change: text_box_2_change}
         layout_properties: {grid_position: 'QXRCRS,HTWPTP'}
         name: text_box_2
-        properties: {foreground: 'theme:On Primary Container'}
+        properties: {font_size: 12, foreground: 'theme:On Primary Container'}
         type: TextBox
       - event_bindings: {change: text_box_3_change}
         layout_properties: {grid_position: 'QXRCRS,FVBIEO'}
         name: text_box_3
-        properties: {align: center, foreground: 'theme:On Primary Container', visible: true}
+        properties: {align: left, font_size: 12, foreground: 'theme:On Primary Container', visible: true}
         type: TextBox
       layout_properties: {grid_position: 'ZKOGHE,FDBFWZ'}
       name: column_panel_2
-      properties: {col_widths: '{"VIIYEI":10,"HTWPTP":40,"FVBIEO":10}'}
+      properties: {col_widths: '{"VIIYEI":10,"HTWPTP":30,"FVBIEO":20}'}
       type: ColumnPanel
     - event_bindings: {click: button_valid_click}
       layout_properties: {grid_position: 'FFZODD,MTGGFP'}
@@ -63,7 +63,7 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'HLCLPG,IZTWGZ'}
   name: repeating_panel_1
-  properties: {item_template: Global_Variables_MAJ_table.ItemTemplate30}
+  properties: {item_template: Global_Variables_MAJ_table.ItemTemplate30, role: elevated-card}
   type: RepeatingPanel
 container: {type: ColumnPanel}
 is_package: true

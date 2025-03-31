@@ -57,6 +57,7 @@ class Stage_MAJ_Table(Stage_MAJ_TableTemplate):
         row = app_tables.codes_stages.get(code=self.text_box_1.text)
         if row:
             alert("Ce stage existe déjà !")
+            self.button_valid.visible = False
             self.text_box_1.focus()
             return
             
@@ -74,6 +75,7 @@ class Stage_MAJ_Table(Stage_MAJ_TableTemplate):
             )
             if result is not True:
                 alert("ERREUR, Ajout non effectué !")
+                self.button_valid.visible = False
                 return
             alert("Création effectuée !")
         self.column_panel_add.visible = False

@@ -33,7 +33,7 @@ def modif_type_stage(row_code,    # row type de stage
                     code,
                     intitule,
                     type_stage,
-                    old_intitul):     # permet de rechercher ce vieux code ds la stagiaires inscrits
+                    old_intitul):     # permet de rechercher ce vieux code ds la table stagiaires_inscrits
     
     valid_1=False
     row_code.update(
@@ -72,8 +72,6 @@ def modif_type_stage(row_code,    # row type de stage
     else:
         return False
     
-
-
                 
 # ==========================================================================================
 #Effact d'un type de stage existant (si pas de stages), le test a été effectué en client side
@@ -84,6 +82,8 @@ def del_type_stage(type_stage_row):   # stage_num: num de stage en txt
         type_stage_row.delete()
         result = True
     return result
+
+#=====================================================================================================================================================
 
 #Création d'un nouveau stage
 @anvil.server.callable 
