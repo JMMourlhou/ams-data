@@ -63,5 +63,5 @@ class ItemTemplate2(ItemTemplate2Template):
         # variable globale "nb_fiche_stagiaire_pdf" (module public variables_globales)   VOIR IMPORT EN HAUT
 
         #nb_fiche_stagiaire_pdf = anvil.server.call('get_variable_value', "nb_fiche_stagiaire_pdf")
-        if (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf == cpt and cpt != 0:          # ts les 1 ou 5 stagiaires, selon param global
+        if (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf == cpt and cpt != 0 :          # ts les 1 ou 5 stagiaires, selon param global
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les n stagiares 
