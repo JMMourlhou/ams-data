@@ -11,7 +11,8 @@ from ... import French_zone # calcul tps traitement
 from ..._Constant_parameters_public_ok import nb_fiche_stagiaire_pdf   # pour param nb de fiches à imprimer 
 from anvil_extras.PageBreak import PageBreak
 global cpt  # Cpt le nb d'images imprimées
-cpt = -1
+cpt=2
+#cpt = -1
 
 # Repeating panel appelée par Visu_liste_1_stage, affichage des fiches stagiaires
 class ItemTemplate2(ItemTemplate2Template):
@@ -20,6 +21,23 @@ class ItemTemplate2(ItemTemplate2Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.      
+        stage_row=self.item['stage']
+        liste = app_tables.stagiaires_inscrits.search(stage=stage_row)
+        nb_stagiaires = len(liste)
+        global cpt
+        if nb_stagiaires < 5:
+            cpt=5
+        if nb_stagiaires == 5 or nb_stagiaires == 10 or nb_stagiaires == 15 or nb_stagiaires == 20 or nb_stagiaires == 25:
+            cpt=1    
+        if nb_stagiaires == 6 or nb_stagiaires == 11 or nb_stagiaires == 16 or nb_stagiaires == 21 or nb_stagiaires == 26:
+            cpt=2
+        if nb_stagiaires == 7 or nb_stagiaires == 12 or nb_stagiaires == 17 or nb_stagiaires == 22 or nb_stagiaires == 27:
+            cpt=3
+        if nb_stagiaires == 8 or nb_stagiaires == 13 or nb_stagiaires == 18 or nb_stagiaires == 23 or nb_stagiaires == 28:
+            cpt=4
+        if nb_stagiaires == 9 or nb_stagiaires == 14 or nb_stagiaires == 19 or nb_stagiaires == 24 or nb_stagiaires == 29:
+            cpt=5
+        
         #lecture fichier users à partir du mail
         mel=self.item["user_email"]['email']
         stagiaire = app_tables.users.get(   q.fetch_only("photo", 'date_naissance', 'nom', 'prenom', 'email', 'tel', 'ville_naissance','code_postal_naissance','pays_naissance','adresse_rue','adresse_code_postal','adresse_ville'),
@@ -56,12 +74,16 @@ class ItemTemplate2(ItemTemplate2Template):
         #This method is called when the Image is shown on the screen
     
         global cpt  # Cpt le nb d'images imprimées
-        cpt += 1
+        cpt -= 1
         mail = self.item["user_email"]['email']
-        test = (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf
+        test = (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf   # variable globale "nb_fiche_stagiaire_pdf" (module public variables_globales)   VOIR IMPORT EN HAUT
         print(f"{cpt}: {mail} / {test}")
-        # variable globale "nb_fiche_stagiaire_pdf" (module public variables_globales)   VOIR IMPORT EN HAUT
+       
 
         #nb_fiche_stagiaire_pdf = anvil.server.call('get_variable_value', "nb_fiche_stagiaire_pdf")
-        if (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf == cpt and cpt != 0 :          # ts les 1 ou 5 stagiaires, selon param global
+        # nb de stagiaires du stage à afficher:
+        
+        #if (cpt // nb_fiche_stagiaire_pdf) * nb_fiche_stagiaire_pdf == cpt and cpt != 0 :          # ts les 1 ou 5 stagiaires, selon param global
+        if cpt == 0 :          # ts les 1 ou 5 stagiaires, selon param global
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les n stagiares 
+           cpt = 5

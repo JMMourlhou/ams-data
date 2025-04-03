@@ -19,10 +19,6 @@ components:
     name: column_panel_boutons
     properties: {}
     type: ColumnPanel
-  - layout_properties: {grid_position: 'KWBLGN,XCYGJN'}
-    name: label_len_list
-    properties: {visible: true}
-    type: Label
   layout_properties: {grid_position: 'GUJKVN,OHOFYT'}
   name: column_panel_header
   properties: {background: '', border: '', col_spacing: medium, col_widths: '{"MCGGHR":44}', foreground: '', role: outlined-card, spacing_above: small, spacing_below: small, tooltip: '', visible: true, wrap_on: mobile}

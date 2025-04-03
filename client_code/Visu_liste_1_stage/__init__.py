@@ -19,7 +19,6 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        self.f = get_open_form()
         
         self.num_stage = num_stage
         self.intitule = intitule
@@ -39,7 +38,7 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
                                                                     stage=stage_row
                                                                 )
         self.repeating_panel_1.items = stagiaires_liste
-        self.label_len_list.text = len(stagiaires_liste)
+       
         """ Je peux créer une liste à partir de l'objet créé par search ( avec list() )
              et accéder ensuite à chaque row et column:
              
