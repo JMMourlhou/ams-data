@@ -79,6 +79,8 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         thumb_pic = anvil.image.generate_thumbnail(file, 640)
         self.image_photo.source = thumb_pic
         self.button_validation.visible = True
+        self.button_validation_copy.visible = True
+        
 
     def button_validation_click(self, **event_args):
         """This method is called when the button is clicked"""
