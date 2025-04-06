@@ -8,7 +8,7 @@ from anvil.tables import app_tables
 
 from ... import French_zone # calcul tps traitement
 
-from ..._Constant_parameters_public_ok import nb_fiche_stagiaire_pdf   # pour param nb de fiches à imprimer 
+#from ..._Constant_parameters_public_ok import nb_fiche_stagiaire_pdf   # pour param nb de fiches à imprimer 
 from anvil_extras.PageBreak import PageBreak
 global cpt      # ATTENTION, si j'utilise self.cpt, le décrément ne s'effectue pas
 cpt = 0
@@ -20,11 +20,28 @@ class ItemTemplate2(ItemTemplate2Template):
         self.init_components(**properties)
 
         # Any code you write here will run before the form opens.      
-    
+        # lecture de la table des variables globales, paramètre 'nb_fiche_stagiaire_pdf'
+        row_glob_var = app_tables.global_variables.get(name="nb_fiche_stagiaire_pdf")
+        if row_glob_var:
+            self.nb_fiche_stagiaire_pdf = int(row_glob_var['value']) 
+            print("self.nb_fiche_stagiaire_pdf: ", self.nb_fiche_stagiaire_pdf)
+        else:
+            print("lecture de la table des variables globales, paramètre 'nb_fiche_stagiaire_pdf' a échoué")
+            return
+            
+        # initialisation du nb de stagiares
+        nb_stagiaires=self.item['stage']['nb_stagiaires_deb']
+        print("nb_stagiaires: ", nb_stagiaires)
+        
         global cpt
-        # Ex: si nb stagiaires = 5, j'initialise le compteur d'image de la page à 5. Qd fonction image_1_show s'exécute, self.cpt sera décrémenté de 1
-        #  donc, au bout de 5 stgiaires affichés le cpt = 0, donc saut de page  (voir fonction image_1_show)
-        cpt=nb_fiche_stagiaire_pdf
+        if nb_stagiaires <= self.nb_fiche_stagiaire_pdf:
+            # si le nb de stgiaires est inf aux param globaux (nb_fiche_stagiaire_pdf) 
+            #   j'élève le cpt pour qu'il n'y ai pas de saut de page
+            cpt=5
+        else:    
+            # Ex: si nb stagiaires = 5, j'initialise le compteur d'image de la page à 5. Qd fonction image_1_show s'exécute, self.cpt sera décrémenté de 1
+            #  donc, au bout de 5 stagiaires affichés le cpt = 0, donc saut de page  (voir fonction image_1_show)
+            cpt=self.nb_fiche_stagiaire_pdf
         
         #lecture fichier users à partir du mail
         mel=self.item["user_email"]['email']
@@ -61,7 +78,9 @@ class ItemTemplate2(ItemTemplate2Template):
     def image_1_show(self, **event_args):
         #This method is called when the Image is shown on the screen
         global cpt        # nb d'images imprimées
+        print("cpt: ", cpt)
         cpt -= 1       
-        if cpt == 0 :          # ts les 1 ou 5 stagiaires, selon param global nb_fiche_stagiaire_pdf
+        if cpt == 0:          # ts les 1 ou 5 stagiaires, selon param global nb_fiche_stagiaire_pdf
            self.add_component(PageBreak())      # si en création de pdf, je saute une page ts les n stagiares 
-           cpt = nb_fiche_stagiaire_pdf    # réinitialisation du nb de fiche par page avec le param global
+           print("break") 
+           cpt = self.nb_fiche_stagiaire_pdf    # réinitialisation du nb de fiche par page avec le param global

@@ -32,7 +32,7 @@ components:
       properties:
         background: theme:Primary
         font_size: 12
-        foreground: theme:On Tertiary
+        foreground: theme:On Primary
         margin: ['2', null, '2', null]
         role: outlined
       type: TextBox
@@ -42,7 +42,7 @@ components:
       properties:
         background: theme:Primary
         font_size: 12
-        foreground: theme:On Tertiary
+        foreground: theme:On Primary
         margin: ['2', null, '2', null]
         role: outlined
       type: TextBox
@@ -63,9 +63,9 @@ components:
         text: Modif
         visible: false
       type: Button
-    layout_properties: {width: 739.8830703125}
+    layout_properties: {width: 903.1101591796875}
     name: column_panel_1
-    properties: {col_spacing: tiny, col_widths: '{"GDJRPQ":16,"OHJQMY":21,"OFXKLQ":18,"FCNGTZ":7,"LTUBLV":5}', spacing_above: none, spacing_below: none, wrap_on: never}
+    properties: {col_spacing: tiny, col_widths: '{"GDJRPQ":16,"OHJQMY":23,"OFXKLQ":19,"FCNGTZ":4,"LTUBLV":5}', spacing_above: none, spacing_below: none, wrap_on: never}
     type: ColumnPanel
   layout_properties: {grid_position: 'NDHDEE,HKAFYB'}
   name: flow_panel_1
