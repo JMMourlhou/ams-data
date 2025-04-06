@@ -33,6 +33,7 @@ class ItemTemplate2(ItemTemplate2Template):
         nb_stagiaires=self.item['stage']['nb_stagiaires_deb']
         print("nb_stagiaires: ", nb_stagiaires)
         
+        # initialisation du cpt de fiche par page
         global cpt
         if nb_stagiaires <= self.nb_fiche_stagiaire_pdf:
             # si le nb de stgiaires est inf aux param globaux (nb_fiche_stagiaire_pdf) 
