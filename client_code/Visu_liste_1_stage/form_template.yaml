@@ -15,6 +15,11 @@ components:
       name: button_annuler
       properties: {align: center, background: 'theme:On Primary Container', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: '', icon_align: left, italic: false, role: elevated-button, spacing_above: none, spacing_below: none, text: Retour, tooltip: '', underline: false, visible: true}
       type: Button
+    - event_bindings: {click: button_fiche_pdf_click}
+      layout_properties: {grid_position: 'QQPLQY,GBFZMD'}
+      name: button_fiche_pdf
+      properties: {align: center, background: 'theme:Primary', bold: true, border: '', enabled: true, font: '', font_size: null, foreground: 'theme:Tertiary', icon: 'fa:download', icon_align: left, italic: false, role: null, spacing_above: small, spacing_below: small, text: '', tooltip: '', underline: false, visible: true}
+      type: Button
     layout_properties: {grid_position: 'WTDYBN,JMMSJB'}
     name: column_panel_boutons
     properties: {}

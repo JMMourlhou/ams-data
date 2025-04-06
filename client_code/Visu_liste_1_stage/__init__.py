@@ -14,46 +14,30 @@ pdf_mode=False
 # appelera V.ItemTemplate2
 
 class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
-    def __init__(self, num_stage, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
-        print("pdf_mode ", pdf_mode)
+    def __init__(self, stage_num, intitule, pdf_mode=False, **properties):    #si pdf_mode=True ouverture pour pdf
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run before the form opens.
-        
-        self.num_stage = num_stage
+        self.f = get_open_form()
+        self.num_stage = stage_num
         self.intitule = intitule
         self.pdf_mode = pdf_mode
         if self.pdf_mode is True:                 # mode pdf renderer
             self.column_panel_boutons.visible = False
             self.button_annuler.visible = False
             self.button_trombi.visible = False
-        
-        #lecture du fichier père stages
-        stage_row = app_tables.stages.get(  q.fetch_only("code_txt"),
-                                            numero=int(num_stage))    
-
-        stagiaires_liste =  app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", 
+            
+        stagiaires_liste =  app_tables.stagiaires_inscrits.search(  q.fetch_only("name", "prenom", "stage", 
                                                                                 user_email=q.fetch_only()),
                                                                     tables.order_by("name", ascending=True),
-                                                                    stage=stage_row
+                                                                    numero=int(self.num_stage)
                                                                 )
         self.repeating_panel_1.items = stagiaires_liste
-       
-        """ Je peux créer une liste à partir de l'objet créé par search ( avec list() )
-             et accéder ensuite à chaque row et column:
-             
-        list1=list(app_tables.stagiaires_inscrits.search(
-            tables.order_by("name", ascending=True),
-            stage=stage_row
-        ))
-        
-        print(list1)
-        print(list1[0]['name'])     row 1, column 'nom'
-        """
-
-        cod = stage_row["code_txt"]
-        date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
-        self.label_titre.text = "Fiches stagiaires " + cod + " du " + date + "   (num " +num_stage+")"
+        self.stage_row = stagiaires_liste[0]['stage']
+        # nom de la forme       
+        cod = self.stage_row["code_txt"]
+        date = str(self.stage_row["date_debut"].strftime("%d/%m/%Y"))
+        self.label_titre.text = "Fiches stagiaires " + cod + " du " + date + "   (num " + str(self.num_stage) +")"
 
     def button_annuler_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -63,4 +47,15 @@ class Visu_liste_1_stage(Visu_liste_1_stageTemplate):
         """This method is called when the button is clicked"""
         from ..Visu_trombi import Visu_trombi
         open_form('Visu_trombi',self.num_stage, self.intitule)
+
+    def button_fiche_pdf_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        stage_row = app_tables.stages.get(numero=int(self.num_stage))
+        pdf = stage_row["list_media"]
+        if pdf:
+            anvil.media.download(pdf)
+            alert("Fiches téléchargées")
+        else:
+            alert("Pdf des fiches non trouvé")
+
 

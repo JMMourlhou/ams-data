@@ -8,9 +8,6 @@ from anvil.tables import app_tables
 from datetime import datetime
 from .. import French_zone
 
-global intitul
-intitul=""
-
 class Stage_visu_modif(Stage_visu_modifTemplate):
     def __init__(self, num_stage=0, bg_task=False, **properties):     # bg_task True: je crée les bg task en entrée de stage visu modif
         # Set Form properties and Data Bindings.
@@ -37,13 +34,13 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
         self.drop_down_mode_fi.items = [(r['code_fi'], r) for r in app_tables.mode_financement.search(tables.order_by("code_fi", ascending=True))]
         
         #lecture du stage
-        stage_row=app_tables.stages.get(numero=int(num_stage))
-        self.stage_row = stage_row
+        self.stage_row=app_tables.stages.get(numero=int(num_stage))
+        
         
         #lecture des stagiaires inscrits
         liste_stagiaires = app_tables.stagiaires_inscrits.search(   q.fetch_only("name", "prenom", "financement", "numero", user_email=q.fetch_only("email", "tel")),
                                                                     tables.order_by("name", ascending=True),
-                                                                    stage=stage_row
+                                                                    stage=self.stage_row
                                                                            )
         if len(liste_stagiaires) > 0:                      # des stagiaires sont déjà inscrits ds stage
             self.repeating_panel_1.items = liste_stagiaires
@@ -54,7 +51,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.button_visu_fiches_stagiaires.visible = False
 
         # si option stable cochée, true, on lancera les bgt du trombi et fiches
-        if stage_row['allow_bgt_generation'] is False:
+        if self.stage_row['allow_bgt_generation'] is False:
             self.button_fiches_stagiaires.visible = False
             self.button_trombi_pdf.visible = False
         else:
@@ -62,30 +59,29 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             self.button_trombi_pdf.visible = True
             
         #lecture intitulé stage
-        global intitul
-        intitul = stage_row['code']['code']
-        type_row = app_tables.codes_stages.get(code=intitul)
+        self.intitul = self.stage_row['code']['code']
+        type_row = app_tables.codes_stages.get(code=self.intitul)
         if type_row:
             intit = type_row['intitulé']
         else:
             alert("intitulé du stage non trouvé !")
             return
         
-        if stage_row:
-            self.text_box_num_stage.text = stage_row['numero']
-            self.drop_down_code_stage.selected_value = stage_row['code']
+        if self.stage_row:
+            self.text_box_num_stage.text = self.stage_row['numero']
+            self.drop_down_code_stage.selected_value = self.stage_row['code']
             self.text_box_intitule.text = intit
-            self.date_picker_from.date = stage_row['date_debut']
-            self.text_box_nb_stagiaires_deb.text = stage_row['nb_stagiaires_deb']
-            self.date_picker_to.date = stage_row['date_fin']
-            self.text_box_nb_stagiaires_fin.text = stage_row['nb_stagiaires_fin']
-            self.text_box_nb_stagiaires_diplom.text = stage_row['nb_stagiaires_diplomes']
-            self.text_area_commentaires.text = stage_row['commentaires']
-            self.drop_down_lieux.selected_value = stage_row['lieu']
-            self.check_box_allow_bg_task.checked = stage_row['allow_bgt_generation']
-            self.check_box_allow_satisf.checked = stage_row['saisie_satisf_ok']
-            self.check_box_allow_suivi.checked = stage_row['saisie_suivi_ok']
-            self.check_box_allow_com.checked = stage_row['display_com']
+            self.date_picker_from.date = self.stage_row['date_debut']
+            self.text_box_nb_stagiaires_deb.text = self.stage_row['nb_stagiaires_deb']
+            self.date_picker_to.date = self.stage_row['date_fin']
+            self.text_box_nb_stagiaires_fin.text = self.stage_row['nb_stagiaires_fin']
+            self.text_box_nb_stagiaires_diplom.text = self.stage_row['nb_stagiaires_diplomes']
+            self.text_area_commentaires.text = self.stage_row['commentaires']
+            self.drop_down_lieux.selected_value = self.stage_row['lieu']
+            self.check_box_allow_bg_task.checked = self.stage_row['allow_bgt_generation']
+            self.check_box_allow_satisf.checked = self.stage_row['saisie_satisf_ok']
+            self.check_box_allow_suivi.checked = self.stage_row['saisie_suivi_ok']
+            self.check_box_allow_com.checked = self.stage_row['display_com']
             
             
             """ *************************************************************************"""
@@ -93,7 +89,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             """ ***********************************************************************"""            
             if self.check_box_allow_bg_task.checked is False or self.bg_task is True:     # ex: en retour de trombi, pas besoin de re-générer les listes
                 students_rows = list(app_tables.stagiaires_inscrits.search( q.fetch_only(),
-                                                                            stage=stage_row))
+                                                                            stage=self.stage_row))
                 #alert(len(students_rows))
                 if students_rows:    # stagiaires existants
                     with anvil.server.no_loading_indicator:
@@ -162,12 +158,6 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
             alert("Le numéro de stage n'existe pas !")
             self.button_annuler_click()
 
-        
-                    
-        
-
-        
-            
         # ! modif du  num de stage possible !!!
         result = anvil.server.call("modif_stage", row,
                                                 self.text_box_num_stage.text,  # num du stage  de la ligne  
@@ -311,8 +301,7 @@ class Stage_visu_modif(Stage_visu_modifTemplate):
 
     def button_visu_fiches_stagiaires_click(self, **event_args):
         """This method is called when the button is clicked"""
-        global intitul
-        open_form('Visu_liste_1_stage',str(self.num_stage), intitul, False)
+        open_form('Visu_liste_1_stage',self.stage_row['numero'], self.intitul, False)
 
     def timer_1_tick(self, **event_args):
         """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""

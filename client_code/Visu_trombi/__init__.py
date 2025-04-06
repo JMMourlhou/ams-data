@@ -46,7 +46,7 @@ class Visu_trombi(Visu_trombiTemplate):
         stage_row = app_tables.stages.get(numero=int(num_stage))    
         cod = stage_row["code"]['code']
         date = str(stage_row["date_debut"].strftime("%d/%m/%Y"))
-        self.label_titre.text = "Trombi stagiaires, " + cod + " du " + date + ".   (Stage num " +num_stage+")"
+        self.label_titre.text = "Trombi stagiaires, " + cod + " du " + date + ".   (Stage num " + str(num_stage)+ ")"
         
         # extraction de la liste (fonction list())
         rows = list(app_tables.stagiaires_inscrits.search(
