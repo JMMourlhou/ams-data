@@ -42,14 +42,18 @@ class ItemTemplate2(ItemTemplate2Template):
         else:    
             # Ex: si nb stagiaires = 5, j'initialise le compteur d'image de la page à 5. Qd fonction image_1_show s'exécute, self.cpt sera décrémenté de 1
             #  donc, au bout de 5 stagiaires affichés le cpt = 0, donc saut de page  (voir fonction image_1_show)
-            # si nb de stgiares multiple de 5 et diff de 5 (10,15,20,25,30 ...)
-            if  (nb_stagiaires // 5) - (nb_stagiaires / 5) == 0 and nb_stagiaires != 5:  #
+            # si nb de stgiares multiple de 5 (10,15,20,25,30 ...)
+            if  nb_stagiaires in (10,15,20,25,30,35,40):  # ok
+                cpt = 1
+            # si nb de stagiares multiple de 4
+            if  nb_stagiaires in (9,14,19,24,29,34,39):  # ok
                 cpt = 5
-            # si nb de stgiares multiple de 4
-            if  (nb_stagiaires // 5) - (nb_stagiaires / 5) == 0:  #
-                cpt = 5
-            cpt=self.nb_fiche_stagiaire_pdf
-        
+            if  nb_stagiaires in (8,13,18,23,28,33,38):  # ok
+                cpt = 4
+            if  nb_stagiaires in (7,12,17,22,27,32,37):  # ok
+                cpt = 3
+            if  nb_stagiaires in (6,11,16,21,26,31,36):  # ok
+                cpt = 2
         #lecture fichier users à partir du mail
         mel=self.item["user_email"]['email']
         stagiaire = app_tables.users.get(   q.fetch_only("photo", 'date_naissance', 'nom', 'prenom', 'email', 'tel', 'ville_naissance','code_postal_naissance','pays_naissance','adresse_rue','adresse_code_postal','adresse_ville'),
