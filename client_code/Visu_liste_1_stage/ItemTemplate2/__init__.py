@@ -42,6 +42,12 @@ class ItemTemplate2(ItemTemplate2Template):
         else:    
             # Ex: si nb stagiaires = 5, j'initialise le compteur d'image de la page à 5. Qd fonction image_1_show s'exécute, self.cpt sera décrémenté de 1
             #  donc, au bout de 5 stagiaires affichés le cpt = 0, donc saut de page  (voir fonction image_1_show)
+            # si nb de stgiares multiple de 5 et diff de 5 (10,15,20,25,30 ...)
+            if  (nb_stagiaires // 5) - (nb_stagiaires / 5) == 0 and nb_stagiaires != 5:  #
+                cpt = 5
+            # si nb de stgiares multiple de 4
+            if  (nb_stagiaires // 5) - (nb_stagiaires / 5) == 0:  #
+                cpt = 5
             cpt=self.nb_fiche_stagiaire_pdf
         
         #lecture fichier users à partir du mail
