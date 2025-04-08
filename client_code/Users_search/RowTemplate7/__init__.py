@@ -33,7 +33,11 @@ class RowTemplate7(RowTemplate7Template):
         """This method is called when the button is clicked"""
         r=alert("Voulez-vous vraiment modifier cette ligne ?",buttons=[("oui",True),("non",False)])
         if r :   # oui
-            nb = int(self.text_box_nb_pw_failures.text)
+            try:
+                nb = int(self.text_box_nb_pw_failures.text)     # si self.text_box_nb_pw_failures.text est null
+            except:
+                nb = 0
+                
             result=anvil.server.call('modify_users_from_parameters',
                                      self.item,
                                      self.check_box_conf_mail.checked,
