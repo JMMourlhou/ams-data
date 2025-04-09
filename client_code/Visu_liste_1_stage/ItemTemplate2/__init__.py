@@ -48,7 +48,6 @@ class ItemTemplate2(ItemTemplate2Template):
             if self.nb_fiche_stagiaire_pdf==5:
                 if  nb_stagiaires in (10,15,20,25,30,35,40) :  # ok
                     cpt = 1
-                # si nb de stagiares multiple de 4
                 if  nb_stagiaires in (9,14,19,24,29,34,39) :  # ok
                     cpt = 5
                 if  nb_stagiaires in (8,13,18,23,28,33,38) :   # ok
@@ -56,6 +55,15 @@ class ItemTemplate2(ItemTemplate2Template):
                 if  nb_stagiaires in (7,12,17,22,27,32,37) :  # ok
                     cpt = 3
                 if  nb_stagiaires in (6,11,16,21,26,31,36) : # ok
+                    cpt = 2
+            if self.nb_fiche_stagiaire_pdf==4:   
+                if  nb_stagiaires in (8,12,16,20,24,28,32,36,40) :  # ok
+                    cpt = 1
+                if  nb_stagiaires in (7,11,15,19,23,27,31,35,39) :  # ok
+                    cpt = 4
+                if  nb_stagiaires in (6,10,14,18,22,26,30,34,38) :   # ok
+                    cpt = 3
+                if  nb_stagiaires in (5,9,13,17,21,25,29,33,37) :   # ok
                     cpt = 2
             if self.nb_fiche_stagiaire_pdf==3:
                 if  nb_stagiaires in (6,9,12,15,18,21,24,27,30,33,36,39) :  # ok
