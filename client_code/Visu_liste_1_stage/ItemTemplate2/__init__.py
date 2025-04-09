@@ -60,13 +60,16 @@ class ItemTemplate2(ItemTemplate2Template):
             if self.nb_fiche_stagiaire_pdf==3:
                 if  nb_stagiaires in (6,9,12,15,18,21,24,27,30,33,36,39) :  # ok
                     cpt = 1
-                # si nb de stagiares multiple de 4
                 if  nb_stagiaires in (5,8,11,14,17,20,23,26,29,32,35,38) :  # ok
                     cpt = 3
                 if  nb_stagiaires in (4,7,10,13,16,19,22,25,28,31,34,37) :   # ok
                     cpt = 2
-                
-                
+            if self.nb_fiche_stagiaire_pdf==2:
+                if  nb_stagiaires in (4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40) :  # ok
+                    cpt = 1
+                if  nb_stagiaires in (3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39) :  # ok
+                    cpt = 2
+               
                     
         #lecture fichier users à partir du mail
         mel=self.item["user_email"]['email']
