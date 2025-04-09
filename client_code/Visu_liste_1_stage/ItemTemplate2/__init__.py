@@ -43,17 +43,31 @@ class ItemTemplate2(ItemTemplate2Template):
             # Ex: si nb stagiaires = 5, j'initialise le compteur d'image de la page à 5. Qd fonction image_1_show s'exécute, self.cpt sera décrémenté de 1
             #  donc, au bout de 5 stagiaires affichés le cpt = 0, donc saut de page  (voir fonction image_1_show)
             # si nb de stgiares multiple de 5 (10,15,20,25,30 ...)
-            if  nb_stagiaires in (10,15,20,25,30,35,40) or self.nb_fiche_stagiaire_pdf==1 :  # ok
-                cpt = 1
-            # si nb de stagiares multiple de 4
-            if  nb_stagiaires in (9,14,19,24,29,34,39) or self.nb_fiche_stagiaire_pdf==5:  # ok
-                cpt = 5
-            if  nb_stagiaires in (8,13,18,23,28,33,38) or self.nb_fiche_stagiaire_pdf==4:  # ok
-                cpt = 4
-            if  nb_stagiaires in (7,12,17,22,27,32,37) or self.nb_fiche_stagiaire_pdf==3:  # ok
-                cpt = 3
-            if  nb_stagiaires in (6,11,16,21,26,31,36) or self.nb_fiche_stagiaire_pdf==2:  # ok
-                cpt = 2
+            if self.nb_fiche_stagiaire_pdf==1:
+                    cpt = 1
+            if self.nb_fiche_stagiaire_pdf==5:
+                if  nb_stagiaires in (10,15,20,25,30,35,40) :  # ok
+                    cpt = 1
+                # si nb de stagiares multiple de 4
+                if  nb_stagiaires in (9,14,19,24,29,34,39) :  # ok
+                    cpt = 5
+                if  nb_stagiaires in (8,13,18,23,28,33,38) :   # ok
+                    cpt = 4
+                if  nb_stagiaires in (7,12,17,22,27,32,37) :  # ok
+                    cpt = 3
+                if  nb_stagiaires in (6,11,16,21,26,31,36) : # ok
+                    cpt = 2
+            if self.nb_fiche_stagiaire_pdf==3:
+                if  nb_stagiaires in (6,9,12,15,18,21,24,27,30,33,36,39) :  # ok
+                    cpt = 1
+                # si nb de stagiares multiple de 4
+                if  nb_stagiaires in (5,8,11,14,17,20,23,26,29,32,35,38) :  # ok
+                    cpt = 3
+                if  nb_stagiaires in (4,7,10,13,16,19,22,25,28,31,34,37) :   # ok
+                    cpt = 2
+                
+                
+                    
         #lecture fichier users à partir du mail
         mel=self.item["user_email"]['email']
         stagiaire = app_tables.users.get(   q.fetch_only("photo", 'date_naissance', 'nom', 'prenom', 'email', 'tel', 'ville_naissance','code_postal_naissance','pays_naissance','adresse_rue','adresse_code_postal','adresse_ville'),
