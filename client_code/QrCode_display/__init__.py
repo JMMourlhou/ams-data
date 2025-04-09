@@ -20,7 +20,7 @@ class QrCode_display(QrCode_displayTemplate):
         
         if log_in is True:
             # si log_in =True, appel du qr_code pour que les stagiaires log in ds l'appli, donc pas de num stage
-            self.label_titre.text = "Flachez pour vous connecter à l'appli AMSdata "
+            self.label_titre.text = "Flashez pour vous connecter à l'appli AMSdata "
 
         # si log_in = False, appel du qr_code pour que les stagiaires s'inscrivent au stage
         if log_in is False:
@@ -49,7 +49,7 @@ class QrCode_display(QrCode_displayTemplate):
                 self.text_area_lien.visible = False
                 self.label_titre.text = "Choisir quel stage encadre le tuteur"
             else:
-                self.label_titre.text = "Flachez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
+                self.label_titre.text = "Flashez pour s'inscrire au "+ txt_stage + " du " + str(stage['date_debut'].strftime("%d/%m/%Y"))
                 self.link_creation(num_stage, 0)        
 
     def recup_time(self, **event_args): 
@@ -70,7 +70,7 @@ class QrCode_display(QrCode_displayTemplate):
         pour_stage_row = self.drop_down_num_stages.selected_value
         pour_stage_num = pour_stage_row['numero']
         self.text_area_lien.visible = False
-        self.label_titre.text = "Flachez pour inscrire les tuteurs du stage "+ pour_stage_row['code_txt'] + " du " + str(pour_stage_row['date_debut'].strftime("%d/%m/%Y"))
+        self.label_titre.text = "Flashez pour inscrire les tuteurs du stage "+ pour_stage_row['code_txt'] + " du " + str(pour_stage_row['date_debut'].strftime("%d/%m/%Y"))
         self.link_creation(1003, pour_stage_num)
     
     def link_creation(self, num_stage, pour_stage=0):

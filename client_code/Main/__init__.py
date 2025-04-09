@@ -128,7 +128,7 @@ class Main(MainTemplate):
         )
         return
 
-    # stage number in URL's Hash (le user vient de flacher le Qr code)
+    # stage number in URL's Hash (le user vient de flasher le Qr code)
     # je suis en sign in après flash du qr code par le stagiaire ou click du lien ds un mail 
     def qr_code(self, **event_args):
         num_stage = self.h["stage"]   
