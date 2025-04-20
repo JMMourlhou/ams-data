@@ -43,7 +43,7 @@ components:
           font_size: 12
           spacing:
             padding: ['12', null, null, null]
-          text: '# Prochain stage: '
+          text: '# Dernier stage: '
         type: Label
       - event_bindings: {change: text_box_num_stages_change}
         layout_properties: {grid_position: 'GDFDHH,PKNJRG'}
