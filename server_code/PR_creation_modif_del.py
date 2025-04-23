@@ -62,7 +62,7 @@ def modif_pr(pr_row, intitule, code, commentaire, old_code):
             dico[clef]= valeur
             # réécriture du row stage
             stage.update(pre_requis=dico)
-            valid=True
+        valid=True
     return valid, len(liste)
 
 # ==========================================================================================
