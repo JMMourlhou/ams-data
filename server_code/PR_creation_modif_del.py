@@ -29,10 +29,11 @@ def add_pr(code, intitule, commentaires):
 
 # ==========================================================================================
 @anvil.server.callable           #modif d'un intitulé pr et répercution ds la table pr_stgiaires ET Table Codes_stages, si le dictionnaire des pr pour un stage contient ce code
-def modif_pr(pr_row, intitule, code, old_code):
+def modif_pr(pr_row, intitule, code, commentaire, old_code):
     valid = False
     pr_row.update(requis = intitule,
-                 code_pre_requis=code)
+                 code_pre_requis = code,
+                 commentaires = commentaire)
     
     # modif du PR existant en table "pre_requis_stagiaire"
     liste = app_tables.pre_requis_stagiaire.search(item_requis=pr_row)

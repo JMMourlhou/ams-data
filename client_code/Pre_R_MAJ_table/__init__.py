@@ -48,11 +48,7 @@ class Pre_R_MAJ_table(Pre_R_MAJ_tableTemplate):
             alert("Entrez un intitulé supérieur à 5 caractères !")
             self.text_box_2.focus()
             return
-        # Text_box_3 non vide
-        if self.text_box_3.text == "" or len(self.text_box_3.text)<6:
-            alert("Entrez un commentaire supérieur à 5 caractères !")
-            self.text_box_3.focus()
-            return
+        
         # Code existant ?
         row = app_tables.pre_requis.get(code_pre_requis=self.text_box_1.text) 
         if row:
