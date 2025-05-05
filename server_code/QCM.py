@@ -197,7 +197,6 @@ def renumber_qcm(qcm_descro_row):
 # =====================================================================================================================
 # ENREGITREMENT, en fin de questions du QCM pour un stagiaire
 @anvil.server.callable 
-@anvil.tables.in_transaction
 def qcm_result(user, qcm_numero, nb_bonnes_rep, max_points, points, reponses):      # debut: debut de qcm, enregt du num et user
     import French_zone_server_side
     nb_questions = len(reponses)
