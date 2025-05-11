@@ -850,7 +850,7 @@ db_schema:
     - admin_ui: {order: 10.5, width: 232}
       name: photo
       type: media
-    - admin_ui: {order: 11, width: 102}
+    - admin_ui: {order: 11, width: 128}
       name: date_naissance
       type: date
     - admin_ui: {width: 200}
@@ -865,10 +865,10 @@ db_schema:
     - admin_ui: {width: 104}
       name: adresse_rue
       type: string
-    - admin_ui: {width: 80}
+    - admin_ui: {order: 15, width: 113}
       name: adresse_ville
       type: string
-    - admin_ui: {width: 57}
+    - admin_ui: {order: 16, width: 172}
       name: adresse_code_postal
       type: string
     - admin_ui: {width: 94}
