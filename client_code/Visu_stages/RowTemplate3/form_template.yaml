@@ -100,6 +100,11 @@ components:
         underline: false
         visible: true
       type: Button
+    - event_bindings: {click: button_1_click}
+      layout_properties: {}
+      name: button_1
+      properties: {foreground: 'theme:Tertiary', icon: 'fa:file-excel-o', text: Export}
+      type: Button
     layout_properties: {grid_position: 'EMGUXL,CUWCHL QWBTAT,PBHCUJ'}
     name: flow_panel_2
     properties: {align: center, gap: small}

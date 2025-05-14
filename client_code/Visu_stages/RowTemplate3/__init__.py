@@ -134,6 +134,10 @@ class RowTemplate3(RowTemplate3Template):
             # 'formul' indique l'origine, ici 'formulaire de satisfaction'
             open_form("Mail_subject_attach_txt",  liste_email, 'stagiaire_tous') 
 
+    def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        pass
+
   
 
 
