@@ -136,7 +136,11 @@ class RowTemplate3(RowTemplate3Template):
 
     def button_export_xls_click(self, **event_args):
         """This method is called when the button is clicked"""
-        message = anvil.server.call('export_xls',self.item['numero'])
+        liste_stagiaires = app_tables.stagiaires_inscrits.search(
+                                                                tables.order_by("name", ascending=True),
+                                                                numero=self.item['numero'])
+        # envoi vers pi5 par uplink du num_stage et de la liste des stgiaires
+        message = anvil.server.call('export_xls', self.item['numero'], self.item['code_txt'],liste_stagiaires)
         alert(message)
   
 
