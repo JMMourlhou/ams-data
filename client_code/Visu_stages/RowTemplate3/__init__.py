@@ -139,7 +139,14 @@ class RowTemplate3(RowTemplate3Template):
         liste_stagiaires = app_tables.stagiaires_inscrits.search(
                                                                 tables.order_by("name", ascending=True),
                                                                 numero=self.item['numero'])
-        # envoi vers pi5 par uplink du num_stage et de la liste des stgiaires
+        # envoi vers pi5 par uplink du mail saisi 
+        mail = "jmmourlhou@gmail.com"
+        result = anvil.server.call('get_mail_dest', mail)
+        if result is False:
+            alert("Le mail n'a pas le bon format !")
+            return
+            
+        # envoi vers pi5 par uplink du num_stage et de la liste des stagiaires
         message = anvil.server.call('export_xls', self.item['numero'], self.item['code_txt'], self.item['date_debut'] , liste_stagiaires, "jmmourlhou@gmail.com")
         alert(message)
   
