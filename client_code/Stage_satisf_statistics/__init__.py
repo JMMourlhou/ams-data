@@ -454,7 +454,7 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                 r4 = rep4_cumul["10"]
                 r5 = rep5_cumul["10"]
 
-            self.rich_text_info.content = f"Enquête lancée le {date}\nsur {len(liste_formulaires)} formulaires\n(Remplis anonynements, une seule fois.)"
+            self.rich_text_info.content = f"Enquête lancée le {date}\nsur {len(liste_formulaires)}  formulaires."
             self.column_panel_content.visible = True
             self.column_panel_content.add_component(Stage_satisf_histograms(qt,r0,r1,r2,r3,r4,r5))
         
