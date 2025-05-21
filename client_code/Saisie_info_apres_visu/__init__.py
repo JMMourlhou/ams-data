@@ -113,6 +113,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
         stagiaire=app_tables.users.get(email=self.mel)
         if stagiaire:
             result = anvil.server.call("modify_users_after_trombi", self.mel,
+                                                    self.text_box_mail.text,
                                                     self.text_box_nom.text,
                                                     self.text_box_prenom.text,
                                                     self.image_photo.source,
@@ -132,7 +133,7 @@ class Saisie_info_apres_visu(Saisie_info_apres_visuTemplate):
             if result is True :
                 self.button_validation_copy.visible = False
                 self.button_validation.visible = False
-                n=Notification("Modifications enregistées !",timeout=1)
+                n=Notification("Modifications enregistées !",timeout=0.5)
                 n.show()
             else :
                 alert("Renseignements non sauvés !", title="Erreur")

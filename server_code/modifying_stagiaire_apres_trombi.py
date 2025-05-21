@@ -12,6 +12,7 @@ import anvil.server
 @anvil.server.callable
 @anvil.tables.in_transaction
 def modify_users_after_trombi(mel,
+                     mail_modif,                
                      nom,
                      prenom,
                      photo,
@@ -34,7 +35,8 @@ def modify_users_after_trombi(mel,
         raise Exception("Erreur: stagiaire not found !")
         return False
     else:           
-        row.update(nom=nom,
+        row.update(email=mail_modif,
+                   nom=nom,
                    prenom=prenom,
                    photo = photo,
                    ville_naissance = ville_naissance,
