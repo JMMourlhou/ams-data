@@ -98,7 +98,8 @@ def send_mail_randomly(emails_list, subject_txt, rich_text, old_stagiaires=False
                 fichiers_attachés=fichiers_txt
             )
             # après envoi, délai aléatoire entre 30 et 300 secondes (30 sec à 5 minutes)
-            
+            pause = random.uniform(min_delay, max_delay)
+            sleep(pause)
         except Exception as e:
             print("Une exception a été déclenchée :", e)
             if old_stagiaires is True:
