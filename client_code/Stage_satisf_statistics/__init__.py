@@ -506,7 +506,10 @@ class Stage_satisf_statistics(Stage_satisf_statisticsTemplate):
                     liste_rep.append(quest)
                     
                 #rajout de la réponse de ce formulaire à la liste de réponses
-                text_rep = formulaire['nom']+' '+formulaire['prenom']+': '+rep
+                try:
+                    text_rep = formulaire['nom']+' '+formulaire['prenom']+': '+rep
+                except:
+                    text_rep = rep      # si le formulaire ancien, anonyme, donc nom et prénom vides
                 liste_rep.append(text_rep)
                 
                 #réecriture de la question et de ses réponses ds le dictionaires des réponses
