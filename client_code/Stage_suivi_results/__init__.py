@@ -8,7 +8,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .Stage_suivi_histograms import (Stage_suivi_histograms)  # Forme ajoutée pour questions fermées histogrammes (add component)
 from .Stage_suivi_rep_ouvertes import (Stage_suivi_rep_ouvertes)   #  Forme ajoutée pour questions ouvertes
-import fast_pdf
+#import fast_pdf
 
 
 class Stage_suivi_results(Stage_suivi_resultsTemplate):

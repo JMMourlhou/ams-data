@@ -904,9 +904,6 @@ dependencies:
 - dep_id: dep_tf2fn0r0pqdpmc
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
   version: {dev: false}
-- dep_id: dep_j1klhpbxdpr373
-  resolution_hints: {app_id: NRVII2QKUF7NSGEP, name: FastPDF, package_name: fast_pdf}
-  version: {dev: false}
 - dep_id: dep_7cjrxpuwlnf9l
   resolution_hints: {app_id: T2N6YY2X6Z3W26OE, name: Clone of InputBox, package_name: InputBox}
   version: {dev: false}
