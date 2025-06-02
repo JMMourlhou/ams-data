@@ -911,8 +911,8 @@ dependencies:
   resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_in_for_AMS_Data}
   version: {branch: master}
 metadata: {description: 'Gestion de données, pour AMSport', logo_img: 'asset:logo_fs_small.png', title: AMS Data}
-name: amsdata_v2
-package_name: amsdata_v2
+name: AMS Data
+package_name: AMS_Data
 renamed: true
 runtime_options:
   client_version: '3'
