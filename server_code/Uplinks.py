@@ -10,8 +10,8 @@ import anvil.server
 @anvil.server.callable
 def get_media_data_from_table(user_email):
     row = app_tables.users.get(email=user_email)
-    if row and row['image']:
-        media = row['image']
+    if row and row['photo']:
+        media = row['photo']
         return {
             "id": row.get_id(),
             "bytes": media.get_bytes(),
