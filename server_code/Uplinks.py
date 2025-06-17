@@ -4,9 +4,8 @@ import anvil.users
 import anvil.tables as tables
 from anvil.tables import app_tables
 import anvil.server
+import base64
 
-# Uplink: Pi5 appel ce module pour extraire les images de la table users
-#   et mettre à jour les img des users du Pi5 
 @anvil.server.callable
 def get_media_data_from_table(user_email):
     row = app_tables.users.get(email=user_email)
@@ -14,7 +13,7 @@ def get_media_data_from_table(user_email):
         media = row['photo']
         return {
             "id": row.get_id(),
-            "bytes": media.get_bytes(),
+            "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
             "name": media.name,
             "content_type": media.content_type
         }
