@@ -27,6 +27,7 @@ def create_trombi_pdf(num_stage, intitule):
                                scale = 0.60,
                                quality =  "default"
                               ).render_form('Visu_trombi',num_stage, intitule, True)
+
     
     #lecture du fichier stages sur le num de stage
     stage_row = app_tables.stages.get(numero=int(num_stage))
