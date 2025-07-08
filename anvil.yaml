@@ -903,7 +903,7 @@ db_schema:
 dependencies:
 - dep_id: dep_ioe9b76e3yz3me
   resolution_hints: {app_id: 2ERGGVOSXP234KTT, name: Sign_In for AMS_Data, package_name: sign_in_for_AMS_Data}
-  version: {branch: published}
+  version: {branch: master}
 - dep_id: dep_fx3b9ofzguwi99
   resolution_hints: {app_id: T2N6YY2X6Z3W26OE, name: Inputbox, package_name: Inputbox}
   version: {branch: master}
