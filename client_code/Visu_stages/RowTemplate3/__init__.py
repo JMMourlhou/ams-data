@@ -1,5 +1,7 @@
 from ._anvil_designer import RowTemplate3Template
 from anvil import *
+from ._anvil_designer import RowTemplate3Template
+from anvil import *
 import anvil.server
 import anvil.users
 import anvil.tables as tables
@@ -8,8 +10,8 @@ from anvil.tables import app_tables
 from .. import Visu_stages
 from anvil import open_form
 from ...Pre_R_pour_stagiaire_admin import Pre_R_pour_stagiaire_admin
-#from Inputbox.input_box import InputBox, alert2, input_box, multi_select_dropdown
-from Inputbox.input_box import input_box, InputBox, alert2
+from ...Recherche_stagiaire import Recherche_stagiaire
+
 #import anvil.js    # pour screen size
 from anvil.js import window # to gain access to the window object
 global screen_size
@@ -26,7 +28,7 @@ class RowTemplate3(RowTemplate3Template):
             self.button_inscription.visible = False
             self.button_del_stage.visible = False
         self.button_qcm.tag.stage = self.item['numero']  #numero de stage en tag du bouton self.button_qcm
-        
+
         # Affichage en fonction largeur écran
         if screen_size < 800:
             self.text_box_2.font_size = 12
@@ -42,7 +44,7 @@ class RowTemplate3(RowTemplate3Template):
             if self.item['date_debut'] is not None:
                 self.text_box_3.text = self.item['date_debut'].strftime("%d/%m/%Y")   # format date française avec fonction Python strftime
             self.button_qcm.text = "Résultats des QCM"
-        
+
         self.text_box_1.text = self.item['numero']
         stage = self.item['code']['code']
         stage = stage.strip()
@@ -56,41 +58,32 @@ class RowTemplate3(RowTemplate3Template):
             while espace+len(espace_caractère)<10:
                 espace_caractère = espace_caractère + " "
             self.text_box_2.text = self.item['code']['code'] + espace_caractère
-            
+
             #self.text_box_2.text = self.item['code']['code']
 
     # récupération par l'event:
     def text_box_3_click(self, **event_args):   # Click sur date
         """This method is called when the button is clicked"""
         self.text_box_1_click()
-        
+
     def text_box_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         num_stage = int(self.text_box_1.text)
         open_form('Stage_visu_modif', num_stage)   
-        
+
     def text_box_2_click(self, **event_args):
         """This method is called when the button is clicked"""
         self.text_box_1_click()
 
     def button_inscription_click(self, **event_args):
         """This method is called when the button is clicked"""
-        r=alert2('Si vous voulez effectuer une **inscription**:\n\n'
-               '```\n'
-               '1- Cliquez sur "Oui"\n'
-               '2- Recherchez le stagiaire\n'
-               '   à inscrire\n'
-               '3- Cliquez sur son nom\n'
-                '```\n' 
-                ,
-                buttons=['Oui', 'Non'],
-                default_button='Oui',     # si press return=Oui
-                large=True
-                )
-        if r== "Oui" :   
-            from ...Recherche_stagiaire import Recherche_stagiaire
-            num_stage = self.text_box_1.text        
-            open_form('Recherche_stagiaire',num_stage)
+        num_stage = self.text_box_1.text
+        if num_stage != "1003":
+            n = Notification("Recherchez le Stagiaire ou Formateur à inscrire", timeout=1)   # par défaut 2 secondes
+        else:
+            n = Notification("Recherchez le Tuteur à inscrire", timeout=1)   # par défaut 2 secondes
+        n.show()
+        open_form('Recherche_stagiaire',num_stage)
 
     def button_pr_requis_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -130,25 +123,25 @@ class RowTemplate3(RowTemplate3Template):
             liste_email = []
             for stagiaire in liste_stagiaires:
                 liste_email.append((stagiaire["user_email"]["email"], stagiaire["prenom"], ""))   # 3 infos given, "" indique qu'il ny a pas d'id (cas des olds stgiaires)
-            
+
             # 'formul' indique l'origine, ici 'formulaire de satisfaction'
             open_form("Mail_subject_attach_txt",  liste_email, 'stagiaire_tous') 
 
     def button_export_xls_click(self, **event_args):
         """This method is called when the button is clicked"""
         liste_stagiaires = app_tables.stagiaires_inscrits.search(
-                                                                tables.order_by("name", ascending=True),
-                                                                numero=self.item['numero'])
+            tables.order_by("name", ascending=True),
+            numero=self.item['numero'])
         # envoi vers pi5 par uplink du mail saisi 
         mail = "jmmourlhou@gmail.com"
         result = anvil.server.call('get_mail_dest', mail)
         if result is False:
             alert("Le mail n'a pas le bon format !")
             return
-            
+
         # envoi vers pi5 par uplink du num_stage et de la liste des stagiaires
         message = anvil.server.call('export_xls', self.item['numero'], self.item['code_txt'], self.item['date_debut'] , liste_stagiaires, "jmmourlhou@gmail.com")
         alert(message)
-  
+
 
 
