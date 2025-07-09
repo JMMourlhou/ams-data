@@ -322,7 +322,8 @@ class Evenements(EvenementsTemplate):
         type_row = self.drop_down_event.selected_value   # row du type d'évenemnts
         date = str(self.date1)[0:16]
         date=date.replace(" ", "-")
-        nom_img =type_row['type'] + "_" + date + "_"+ num_img_txt
+        nom_img = "evenement" + date + "_"+ num_img_txt
+        #nom_img =type_row['type'] + "_" + date + "_"+ num_img_txt
         return nom_img
 
     def button_visu_1_click(self, **event_args):
