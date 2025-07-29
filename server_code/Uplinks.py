@@ -7,7 +7,7 @@ import anvil.server
 import base64
 
 @anvil.server.callable
-def get_media_data_from_table(user_email):
+def get_media_data_from_table_users(user_email):
     row = app_tables.users.get(email=user_email)
     if row and row['photo']:
         media = row['photo']
