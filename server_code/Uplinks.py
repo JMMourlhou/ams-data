@@ -21,8 +21,10 @@ def get_media_data_from_table_users(user_email):
 
 @anvil.server.callable
 def get_media_data_from_table_qcm(qcm_link, num):
+    print("Module dans AMSDATA IDE : Lecture row ok")
     row = app_tables.qcm.get(qcm_nb=qcm_link,num=num)
     if row and row['photo']:
+        print("Module dans AMSDATA IDE : Lecture row ok")
         media = row['photo']
         return {
             "id": row.get_id(),
@@ -30,4 +32,5 @@ def get_media_data_from_table_qcm(qcm_link, num):
             "name": media.name,
             "content_type": media.content_type
         }
+    print("retour à None")    
     return None
