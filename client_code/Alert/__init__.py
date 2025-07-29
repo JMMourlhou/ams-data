@@ -19,3 +19,4 @@ class Alert(AlertTemplate):
         
         texte="Pour insérer ce stagiaire, choisissez le mode de financement"
         self.label_1.text = texte
+        

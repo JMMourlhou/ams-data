@@ -8,6 +8,9 @@ import base64
 
 """
 UPLINKS pour mise à jour des FICHIERS MEDIA ds tables du Pi5 distant
+        à partir de la base AMSDATA sur platforme Anvil
+Ces modules sont appelés par un script Python 'run_uplink_media' ds le ct Docker, voir:  
+        /mnt/ssd-prog/home/jmm/AMS_data/cmd-2-service-ct-uplink-amsdata.sh
 """
 
 @anvil.server.callable
@@ -22,7 +25,8 @@ def get_media_data_from_table_users(user_email):      # email doit être une don
             "content_type": media.content_type
         }
     return None
-
+    
+# 1 image à extraire / Table qcm
 @anvil.server.callable
 def get_media_data_from_table_qcm(qcm_nb, num):            #qcm_nb, num doivent être texte
     print("Module dans AMSDATA IDE : Lecture row ok")
@@ -40,16 +44,18 @@ def get_media_data_from_table_qcm(qcm_nb, num):            #qcm_nb, num doivent 
     print("retour à None")    
     return None
     
-# 2 images à extraire 
+# 2 images à extraire / Table pre_requis_stagiaire
 @anvil.server.callable
 def get_media_data_from_table_pre_requis(stage_num, email, requis):     # stage_num, email, requis num doivent être des données taxte ou num, pas de row en uplink
     stage_link = app_tables.stages.get(numero=stage_num)
     stagiaire_link = app_tables.users.get(email=email)
     requis_link = app_tables.pre_requis.get(code_pre_requis=requis)
     
+    # Initialisations par défaut
+    media_doc1 = media_thumb = None
+    
     row = app_tables.pre_requis_stagiaire.get(stage_num=stage_link, stagiaire_email=stagiaire_link, item_requis=requis_link)
     if row and row['doc1'] is not None:
-        #media_doc1 = {}
         media = row['doc1']
         media_doc1 = {
             "id": row.get_id(),
@@ -58,7 +64,6 @@ def get_media_data_from_table_pre_requis(stage_num, email, requis):     # stage_
             "content_type": media.content_type
         }
 
-        # media_thumb = {}
         media = row['thumb']
         media_thumb = {
             "id": row.get_id(),
@@ -69,4 +74,40 @@ def get_media_data_from_table_pre_requis(stage_num, email, requis):     # stage_
         return media_doc1, media_thumb 
     return None, None
 
+# 3 images à extraire / Table events
+@anvil.server.callable
+def get_media_data_from_table_events(date, name):     # date doit être une donnée taxte ou num, pas de row en uplink
+    row = app_tables.events.get(date=date, mot_clef=name)
+    
+    # Initialisations par défaut
+    media_img1 = media_img2 = media_img3 = None
+    
+    if row and row['img1'] is not None:
+        media = row['img1']
+        media_img1 = {
+            "id": row.get_id(),
+            "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+            "name": media.name,
+            "content_type": media.content_type
+        }
+        
+        if row['img2'] is not None:
+            media = row['img2']
+            media_img2 = {
+                "id": row.get_id(),
+                "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+                "name": media.name,
+                "content_type": media.content_type
+            }
+            
+        if row['img3'] is not None:
+            media = row['img3']
+            media_img3 = {
+                "id": row.get_id(),
+                "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+                "name": media.name,
+                "content_type": media.content_type
+            }
+        return media_img1, media_img2, media_img3 
+    return None, None, None
     
