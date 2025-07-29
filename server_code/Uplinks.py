@@ -18,3 +18,16 @@ def get_media_data_from_table_users(user_email):
             "content_type": media.content_type
         }
     return None
+
+@anvil.server.callable
+def get_media_data_from_table_qcm(qcm_link, num):
+    row = app_tables.qcm.get(qcm_nb=qcm_link,num=num)
+    if row and row['photo']:
+        media = row['photo']
+        return {
+            "id": row.get_id(),
+            "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+            "name": media.name,
+            "content_type": media.content_type
+        }
+    return None
