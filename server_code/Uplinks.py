@@ -6,8 +6,12 @@ from anvil.tables import app_tables
 import anvil.server
 import base64
 
+"""
+UPLINKS pour mise à jour des FICHIERS MEDIA ds tables du Pi5 distant
+"""
+
 @anvil.server.callable
-def get_media_data_from_table_users(user_email):
+def get_media_data_from_table_users(user_email):      # email doit être une donnée taxte ou num, pas de row en uplink
     row = app_tables.users.get(email=user_email)
     if row and row['photo']:
         media = row['photo']
@@ -20,7 +24,7 @@ def get_media_data_from_table_users(user_email):
     return None
 
 @anvil.server.callable
-def get_media_data_from_table_qcm(qcm_nb, num):
+def get_media_data_from_table_qcm(qcm_nb, num):            #qcm_nb, num doivent être texte
     print("Module dans AMSDATA IDE : Lecture row ok")
     qcm_link = app_tables.qcm_description.get(qcm_nb=qcm_nb)
     row = app_tables.qcm.get(qcm_nb=qcm_link,num=num)
@@ -35,3 +39,34 @@ def get_media_data_from_table_qcm(qcm_nb, num):
         }
     print("retour à None")    
     return None
+    
+# 2 images à extraire 
+@anvil.server.callable
+def get_media_data_from_table_pre_requis(stage_num, email, requis):     # stage_num, email, requis num doivent être des données taxte ou num, pas de row en uplink
+    stage_link = app_tables.stages.get(numero=stage_num)
+    stagiaire_link = app_tables.users.get(email=email)
+    requis_link = app_tables.pre_requis.get(code_pre_requis=requis)
+    
+    row = app_tables.pre_requis_stagiaire.get(stage_num=stage_link, stagiaire_email=stagiaire_link, item_requis=requis_link)
+    if row and row['doc1'] is not None:
+        #media_doc1 = {}
+        media = row['doc1']
+        media_doc1 = {
+            "id": row.get_id(),
+            "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+            "name": media.name,
+            "content_type": media.content_type
+        }
+
+        # media_thumb = {}
+        media = row['thumb']
+        media_thumb = {
+            "id": row.get_id(),
+            "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+            "name": media.name,
+            "content_type": media.content_type
+        }
+        return media_doc1, media_thumb 
+    return None, None
+
+    
