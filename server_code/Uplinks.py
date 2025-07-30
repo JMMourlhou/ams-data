@@ -194,4 +194,23 @@ def get_media_data_from_table_stages(numero):     # numero doit être une donné
             suivi_pdf = None
     return list_media, trombi_media, diplomes, satis_pdf, suivi_pdf 
         
-    
+# 1 image à extraire / Table stagiaires_inscrits
+@anvil.server.callable
+def get_media_data_from_table_stagiaires_inscrits(stage_num, email):     # stage_num, email, requis num doivent être des données taxte ou num, pas de row en uplink
+    stage_link = app_tables.stages.get(numero=stage_num)
+    stagiaire_link = app_tables.users.get(email=email)
+
+    # Initialisation par défaut
+    media = None
+    row = app_tables.stagiaires_inscrits.get(stage=stage_link, user_email=stagiaire_link)
+    if row and row['temp_pr_pdf_img'] is not None:
+        media = row['temp_pr_pdf_img']
+        media = {
+            "id": row.get_id(),
+            "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+            "name": media.name,
+            "content_type": media.content_type
+        }
+    else:
+        media = None
+    return media
