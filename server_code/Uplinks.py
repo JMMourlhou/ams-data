@@ -127,7 +127,7 @@ def get_media_data_from_table_files(position):      # position est une donnée n
         }
     return None
 
-    # 5 medias pdf à extraire / Table stages
+# 5 medias pdf à extraire / Table stages
 @anvil.server.callable
 def get_media_data_from_table_stages(numero):     # numero doit être une donnée taxte ou num, pas de row en uplink
 #def get_media_data_from_table_stages(numero:int) -> tuple:     # numero doit être une donnée taxte ou num, pas de row en uplink
@@ -192,7 +192,6 @@ def get_media_data_from_table_stages(numero):     # numero doit être une donné
             }
         else:
             suivi_pdf = None
-        
     return list_media, trombi_media, diplomes, satis_pdf, suivi_pdf 
         
     
