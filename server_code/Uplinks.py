@@ -126,4 +126,72 @@ def get_media_data_from_table_files(position):      # position est une donnée n
             "content_type": media.content_type
         }
     return None
+
+    # 5 medias pdf à extraire / Table stages
+@anvil.server.callable
+def get_media_data_from_table_stages(numero:int) -> tuple:     # numero doit être une donnée taxte ou num, pas de row en uplink
+    # tuple renvoyé par la fonction: list_media, trombi_media, diplomes, satis_pdf, suivi_pdf
+    row = app_tables.stages.get(numero=numero)
+
+    # Initialisations par défaut
+    list_media = trombi_media = diplomes = satis_pdf = suivi_pdf =None
+
+    if row:
+        if row['list_media'] is not None:
+            media = row['list_media']
+            list_media = {
+                "id": row.get_id(),
+                "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+                "name": media.name,
+                "content_type": media.content_type
+            }
+        else:
+            list_media = None
+            
+        if row['trombi_media'] is not None:
+            media = row['trombi_media']
+            trombi_media = {
+                "id": row.get_id(),
+                "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+                "name": media.name,
+                "content_type": media.content_type
+            }
+        else:
+            trombi_media = None
+
+        if row['diplomes'] is not None:
+            media = row['diplomes']
+            diplomes = {
+                "id": row.get_id(),
+                "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+                "name": media.name,
+                "content_type": media.content_type
+            }
+        else:
+            diplomes = None
+
+        if row['satis_pdf'] is not None:
+            media = row['satis_pdf']
+            satis_pdf = {
+                "id": row.get_id(),
+                "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+                "name": media.name,
+                "content_type": media.content_type
+            }
+        else:
+            satis_pdf = None
+
+        if row['suivi_pdf'] is not None:
+            media = row['suivi_pdf']
+            suivi_pdf = {
+                "id": row.get_id(),
+                "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+                "name": media.name,
+                "content_type": media.content_type
+            }
+        else:
+            suivi_pdf = None
+        
+    return list_media, trombi_media, diplomes, satis_pdf, suivi_pdf 
+        
     
