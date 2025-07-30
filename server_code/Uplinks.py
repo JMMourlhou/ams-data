@@ -110,4 +110,20 @@ def get_media_data_from_table_events(date, name):     # date doit être une donn
             }
         return media_img1, media_img2, media_img3 
     return None, None, None
+
+
+# var 'position' permet une lecture séqentielle du début à la fin de la table files
+# et de relire le bon row ici, sur base distante amsdata sur l'IDE Anvil
+@anvil.server.callable
+def get_media_data_from_table_files(position):      # position est une donnée num, pas de row en uplink
+    row = app_tables.files.search()[position]   # 0 = 1ere position, position du row dans la table, 
+    if row and row['file']:
+        media = row['file']
+        return {
+            "id": row.get_id(),
+            "bytes": base64.b64encode(media.get_bytes()).decode('utf-8'),  # ✅ encodé en texte
+            "name": media.name,
+            "content_type": media.content_type
+        }
+    return None
     
