@@ -129,7 +129,8 @@ def get_media_data_from_table_files(position):      # position est une donnée n
 
     # 5 medias pdf à extraire / Table stages
 @anvil.server.callable
-def get_media_data_from_table_stages(numero:int) -> tuple:     # numero doit être une donnée taxte ou num, pas de row en uplink
+def get_media_data_from_table_stages(numero):     # numero doit être une donnée taxte ou num, pas de row en uplink
+#def get_media_data_from_table_stages(numero:int) -> tuple:     # numero doit être une donnée taxte ou num, pas de row en uplink
     # tuple renvoyé par la fonction: list_media, trombi_media, diplomes, satis_pdf, suivi_pdf
     row = app_tables.stages.get(numero=numero)
 
