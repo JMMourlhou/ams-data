@@ -835,7 +835,7 @@ db_schema:
     - admin_ui: {width: 77}
       name: prenom
       type: string
-    - admin_ui: {width: 104}
+    - admin_ui: {order: 3, width: 447}
       name: password_hash
       type: string
     - admin_ui: {order: 3.5, width: 115}
